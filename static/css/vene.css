@@ -1,47 +1,80 @@
 @import url("boilerplate.css");
-
+html{
+	height: 100%;
+	overflow: -moz-scrollbars-vertical; /* Firefox */
+	overflow-y: scroll;
+}
 body {
-	margin: 0;
-	padding: 0;
+	font-family: "Alegreya" serif;
+	font-size: 18px;
+	height: 100%;
 	background-image: url('../images/pattern.gif');
 }
 
+/* Colors */
+
+a:link {color: #0F6F8B;}
+a:visited {color: #2F8FAB;}
+a:hover {color: #69BBD7;}
+a:active {color: #69BBD7 ;}
+/* Typography */
+
+ul, ol {
+	margin: 1.3333em 0;
+}
+p li {
+  font-size: 1em; /* 18px */
+  line-height: 1.3333em; /* 24px */
+  margin: 0 0 1.3333em 0;
+}
+
+.class-for-14px {
+  font-size: 0.875em; /* 14px */
+  line-height: 1.4286em; /* 20px */
+  margin-top: 1.4286em;
+  margin-bottom: 0em;
+}
+
+h1 {
+  font-size: 1.3333em; /* 24px */
+  line-height: 1em; /* 24px */
+  margin-top: 1em;
+  margin-bottom: 0em;
+}
+
+.class-for-72px {
+  font-size: 4em; /* 72px */
+  line-height: 1em; /* 72px */
+  margin-top: 0.3333em;
+  margin-bottom: 0em;
+}
+
 div#main{
-	width: 800px;
-	margin: 0 auto;
+	margin: 1.3333em auto;
 	padding: 0 10px;
+	min-height: 300px;
 	border-left: 14px solid #000;
 	border-right: 14px solid #000;
-	border-bottom: 20px solid #000;
+	border-top: 0.6666em solid #000;
+	border-bottom: 0.6666em solid #000;
 	background-color: #eee;
 }
-div#header{
-	margin: 0;
-	text-align: center;
-	font-size: 6em;
-	font-style: italic;
-}
-#message{
-	font-size: 2em;
-	font-style: italic;
-	text-align: justify;
-	letter-spacing: 0.5px;
-}
-#sidebar {
+div#container{
+	width: 960px;
+	height: 100%;
 	margin: 0 auto;
-	padding: 0;
+}
+div#header{
+	font-size: 4em; /* 64px */
+  	line-height: 1em; /* 80px */
+  	padding-top: 0.3333em;
+  	margin-bottom: 0em;
+	padding: 0 10px;
+	font-family: "Averia Gruesa Libre";
+	text-align: center;
+	border-left: 14px solid #000;
+	border-right: 14px solid #000;
+	border-bottom: 0.1666em solid #000;
+	background-color: #eee;
 }
 
-#sidebar ul{
-	text-align:center;
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-}
-
-#sidebar li{
-	margin 0;
-	display: inline;
-	padding: 0 20px;
-	font-size: 3em;
-}
