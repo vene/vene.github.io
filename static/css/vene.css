@@ -14,9 +14,10 @@ body {
 /* Colors */
 
 a:link {color: #0F6F8B;}
-a:visited {color: #2F8FAB;}
-a:hover {color: #69BBD7;}
+a, a:visited {color: #2F8FAB;}
+a:hover, a:focus {color: #69BBD7;}
 a:active {color: #69BBD7 ;}
+
 /* Typography */
 
 ul, ol {
@@ -29,12 +30,19 @@ p li {
 }
 
 .class-for-14px {
-  font-size: 0.875em; /* 14px */
-  line-height: 1.4286em; /* 20px */
-  margin-top: 1.4286em;
+  font-size: 0.7778em; /* 14px */
+  line-height: 1.7143em; /* 24px */
+  margin-top: 1.7143em;
   margin-bottom: 0em;
 }
 
+/* 16px - The quick brown fox jumps over the lazy dog */
+.class-for-16px {
+  font-size: 0.8889em; /* 16px */
+  line-height: 1.5em; /* 24px */
+  margin-top: 1.5em;
+  margin-bottom: 0em;
+}
 h1 {
   font-size: 1.3333em; /* 24px */
   line-height: 1em; /* 24px */
@@ -42,6 +50,12 @@ h1 {
   margin-bottom: 0em;
 }
 
+.class-for-36px {
+  font-size: 2em; /* 36px */
+  line-height: 1.3333em; /* 48px */
+  margin-top: 0.6667em;
+  margin-bottom: 0em;
+}
 .class-for-72px {
   font-size: 4em; /* 72px */
   line-height: 1em; /* 72px */

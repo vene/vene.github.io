@@ -21,4 +21,4 @@ title: Teaching | Vlad Niculae's personal website
 [Arbori partiali de cost minim (minimum spanning trees)](laborator4_AG.pdf),
 [McGill](http://cgm.cs.mcgill.ca/~avis/courses/251/2012/slides/04mst.pdf),
 [Union-Find](http://www.cs.cmu.edu/~avrim/451/lectures/lect1015.pdf),
-[Numpy implementation of Prim by Andy Mueller](http://peekaboo-vision.blogspot.com/2013/02/simplistic-minimum-spanning-tree-in.html)
+[Numpy implementation of Prim by Andy Mueller](http://peekaboo-vision.blogspot.com/2012/02/simplistic-minimum-spanning-tree-in.html)
