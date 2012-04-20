@@ -22,3 +22,8 @@ title: Teaching | Vlad Niculae's personal website
 [McGill](http://cgm.cs.mcgill.ca/~avis/courses/251/2012/slides/04mst.pdf),
 [Union-Find](http://www.cs.cmu.edu/~avrim/451/lectures/lect1015.pdf),
 [Numpy implementation of Prim by Andy Mueller](http://peekaboo-vision.blogspot.com/2012/02/simplistic-minimum-spanning-tree-in.html)
+
+* **Laborator 5:**
+[Drumuri de cost minim](laborator5_AG.pdf),
+[Dijkstra](dijkstra.pdf), [Floyd-Warshall](floyd.pdf),
+[Pseudocod F-W p11](http://www.cse.ust.hk/faculty/golin/COMP271Sp03/Notes/MyL15.pdf)
