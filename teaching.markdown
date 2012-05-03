@@ -27,3 +27,11 @@ title: Teaching | Vlad Niculae's personal website
 [Drumuri de cost minim](laborator5_AG.pdf),
 [Dijkstra](dijkstra.pdf), [Floyd-Warshall](floyd.pdf),
 [Pseudocod F-W p11](http://www.cse.ust.hk/faculty/golin/COMP271Sp03/Notes/MyL15.pdf)
+
+* **Laborator 6:**
+[Retele de transport](http://www.cs.uiuc.edu/class/fa08/cs473/Lectures/lecture16.pdf),
+[Algoritmul Ford-Fulkerson](http://www.cs.uiuc.edu/class/fa08/cs473/Lectures/lecture17.pdf),
+[Infoarena](http://infoarena.ro/problema/maxflow),
+[Descrierea algoritmului](labeling.pdf),
+[Arhiva cu cod](img-segmentation.zip),
+[Cuplaj maximale](cuplaj.pdf)
