@@ -26,4 +26,4 @@ Detection* (to appear) \[ [PDF](papers/eacl12w.pdf) \]
 
 * Iulia Danaila, Liviu P. Dinu, Vlad Niculae, Octavia-Maria Șulea, String
 distances for near-duplicate detection. In: *Proceedings of Cicling 2012*
-(to appear) \[ [PDF](papers/cicling12.pdf) \]
+(to appear) \[ [poster](papers/cicling12-poster.pdf) \]
