@@ -12,6 +12,7 @@ In: *Proceedings of RANLP 2011*: 539-544 \[ [PDF](http://www.aclweb.org/antholog
 * Liviu P. Dinu, Vlad Niculae and Octavia-Maria Șulea,
 The Romanian Neuter Examined Through A Two-Gender N-Gram Classification System,
 In: *Proceedings of LREC 2012* (to appear) \[ [PDF](papers/lrec12.pdf) \]
+\[ [poster](papers/lrec12-poster.pdf) \]
 
 * Liviu P. Dinu, Vlad Niculae and Octavia-Maria Șulea,
 Learning How to Conjugate the Romanian Verb. Rules for Regular and Partially
