@@ -26,8 +26,8 @@ interested in working together
 # What's on this site?
 
 You should take a look at the list of my [publications](papers.html). It's not
-much, but I try. For now I only have conference posters. For more details, I
-will upload an anonymized *curriculum vitae* here eventually.
+much, but I try. For now I only have conference posters. The materials for
+[talks](talks.html) that I've had the honour of giving are also available.
 
 If you can spare a minute, please go over to my [blog](http://blog.vene.ro/)
 even if it doesn't look as nice as this page for the moment. I try to keep it
