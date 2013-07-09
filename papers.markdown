@@ -5,6 +5,21 @@ title: Publications | Vlad Niculae's personal website
 
 # Publications
 
+* Liviu P. Dinu, Vlad Niculae, Octavia-Maria Șulea,
+Sequence tagging for verb conjugation in Romanian.  In: *Proceedings of
+RANLP 2013*, Hissar, Bulgaria. (to appear)
+
+* Alina Maria Ciobanu, Anca Dinu, Liviu P. Dinu, Vlad Niculae and Octavia-Maria
+Șulea, Temporal text classification for Romanian novels set in the past.  In:
+*Proceedings of RANLP 2013*, Hissar, Bulgaria. (to appear)
+
+* Alina Maria Ciobanu, Anca Dinu, Liviu P. Dinu, Vlad Niculae, and
+Octavia-Maria Șulea. Temporal classification for historical romanian texts. In
+*Proceedings of the 7th Workshop on Language Technology for Cultural Heritage,
+Social Sciences, and Humanities*. Sofia, Bulgaria, August 2013. Association for
+Computational Linguistics. (to appear)
+\[ [PDF](papers/latech13.pdf) \]
+
 * Vlad Niculae, Victoria Yaneva,
 Computational considerations of comparisons and similes. In: *Proceedings of ACL
 2013 Student Research Workshop* (to appear)
@@ -12,6 +27,7 @@ Computational considerations of comparisons and similes. In: *Proceedings of ACL
 
 * Liviu P. Dinu, Vlad Niculae and Octavia-Maria Șulea,
 Romanian Syllabication using Machine Learning. In: *TSD 2013* (to appear)
+\[ [PDF](papers/tsd13.pdf) \]
 
 * Liviu P. Dinu, Vlad Niculae and Octavia-Maria Șulea,
 Learning How to Conjugate the Romanian Verb. Rules for Regular and Partially
