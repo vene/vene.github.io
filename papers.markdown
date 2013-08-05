@@ -14,16 +14,16 @@ RANLP 2013*, Hissar, Bulgaria. (to appear)
 *Proceedings of RANLP 2013*, Hissar, Bulgaria. (to appear)
 
 * Alina Maria Ciobanu, Anca Dinu, Liviu P. Dinu, Vlad Niculae, and
-Octavia-Maria Șulea. Temporal classification for historical romanian texts. In
+Octavia-Maria Șulea. Temporal classification for historical Romanian texts. In
 *Proceedings of the 7th Workshop on Language Technology for Cultural Heritage,
-Social Sciences, and Humanities*. Sofia, Bulgaria, August 2013. Association for
-Computational Linguistics. (to appear)
+Social Sciences, and Humanities*, pp. 102-106.  Sofia, Bulgaria, August 2013.
+Association for Computational Linguistics.
 \[ [PDF](papers/latech13.pdf) \]
 
 * Vlad Niculae, Victoria Yaneva,
 Computational considerations of comparisons and similes. In: *Proceedings of ACL
-2013 Student Research Workshop* (to appear)
-\[ [PDF](papers/aclsrw13.pdf) \]
+2013 Student Research Workshop*, pp. 89-95. Sofia, Bulgaria, August 2013.
+\[ [PDF](papers/aclsrw13.pdf) \] \[ [poster](papers/aclsrw13-poster.pdf) \]
 
 * Liviu P. Dinu, Vlad Niculae and Octavia-Maria Șulea,
 Romanian Syllabication using Machine Learning. In: *TSD 2013* (to appear)
