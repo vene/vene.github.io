@@ -5,6 +5,15 @@ title: Publications | Vlad Niculae's personal website
 
 # Publications
 
+* Lars Buitinck, Gilles Louppe, Mathieu Blondel, Fabian Pedregosa, Andreas
+Müller, Olivier Grisel, Vlad Niculae, Peter Prettenhofer, Alexandre Gramfort,
+Jaques Grobler, Robert Layton, Jake Vanderplas, Arnaud Joly, Brian Holt and
+Gaël Varoquaux.
+API design for machine learning software: experiences from the scikit-learn
+project.  In: *ECML/PKDD 2013 Workshop: Languages for Data Mining and Machine
+Learning*, Prague, Czech Republic.
+\[ [PDF](http://orbi.ulg.ac.be/bitstream/2268/154357/1/paper.pdf) \]
+
 * Liviu P. Dinu, Vlad Niculae, Octavia-Maria Șulea,
 Sequence tagging for verb conjugation in Romanian.  In: *Proceedings of
 RANLP 2013*, Hissar, Bulgaria. (to appear)
