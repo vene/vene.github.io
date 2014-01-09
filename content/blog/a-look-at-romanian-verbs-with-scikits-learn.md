@@ -1,8 +1,8 @@
 Title: A look at Romanian verbs with scikits-learn
 Date: 2011-04-14 01:40
 Author: vene
-Category: nlp, scikit-learn
-Tags: alternations, computational linguistics, infinitives, pca, principal components analysis
+Category: nlp
+Tags: alternations, computational linguistics, infinitives, pca, principal components analysis, nlp, scikit-learn
 Slug: a-look-at-romanian-verbs-with-scikits-learn
 
 One of the problems we tackled here at my university is one as old as

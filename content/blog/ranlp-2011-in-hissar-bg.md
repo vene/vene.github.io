@@ -1,7 +1,8 @@
 Title: RANLP 2011 in Hissar, BG
 Date: 2011-09-20 14:17
 Author: vene
-Category: conferences, nlp
+Category: conferences
+Tags: conferences, nlp
 Slug: ranlp-2011-in-hissar-bg
 
 Last week was marked by the international RANLP (Recent Advances in

@@ -1,7 +1,8 @@
 Title: First thoughts on Orthogonal Matching Pursuit
 Date: 2011-05-30 13:02
 Author: vene
-Category: Uncategorized
+Category: scikit-learn
+Tags: Uncategorized, dictionary learning, omp, orthogonal matching pursuit
 Slug: first-thoughts-on-orthogonal-matching-pursuit
 
 I am working on implementing the Orthogonal Matching Pursuit (OMP)

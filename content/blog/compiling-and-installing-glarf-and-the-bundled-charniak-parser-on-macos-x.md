@@ -2,7 +2,7 @@ Title: Compiling and Installing GLARF and the bundled Charniak parser on MacOS X
 Date: 2012-06-21 12:32
 Author: vene
 Category: nlp
-Tags: bllip, charniak, glarf, installation, parser
+Tags: bllip, charniak, glarf, installation, parser, nlp
 Slug: compiling-and-installing-glarf-and-the-bundled-charniak-parser-on-macos-x
 
 It seems that I keep getting handed buggy code to install. These are

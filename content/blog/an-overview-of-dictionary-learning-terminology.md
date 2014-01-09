@@ -1,7 +1,8 @@
 Title: An overview of dictionary learning: Terminology
 Date: 2011-04-15 14:10
 Author: vene
-Category: dictionary learning, scikit-learn, Uncategorized
+Category: dictionary learning
+Tags: dictionary learning, scikit-learn, Uncategorized
 Slug: an-overview-of-dictionary-learning-terminology
 
 My GSoC proposal is titled "Dictionary learning in scikits.learn" and in

@@ -1,8 +1,8 @@
 Title: Nash-Williams theorem on the Hamiltonian property of some regular graphs
 Date: 2012-01-29 22:31
 Author: vene
-Category: Uncategorized
-Tags: graph, graph theory, hamiltonian, nash-williams
+Category: graph theory
+Tags: graph, graph theory, hamiltonian, nash-williams, Uncategorized
 Slug: nash-williams-theorem-on-the-hamiltonian-property-of-some-regular-graphs
 
 I have been digging on the internet for the proof of this theorem for

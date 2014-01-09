@@ -2,7 +2,7 @@ Title: Sampling Gamma random variates through the ratio-of-uniforms method
 Date: 2011-10-09 15:40
 Author: vene
 Category: python
-Tags: monte carlo, numpy, random sampling, ratio-of-uniforms, scipy
+Tags: monte carlo, numpy, random sampling, ratio-of-uniforms, scipy, python
 Slug: sampling-gamma-random-variates-through-the-ratio-of-uniforms-method
 
 One year ago I had the chance to take a class on Monte Carlo simulation

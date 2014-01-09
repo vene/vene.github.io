@@ -1,8 +1,8 @@
 Title: Scikit-learn-speed: An overview on the final day
 Date: 2012-08-20 02:44
 Author: vene
-Category: benchmarking, python, scikit-learn
-Tags: gsoc, optimization, scikit-learn-speed, speedup, summary, vbench
+Category: scikit-learn
+Tags: gsoc, optimization, scikit-learn-speed, speedup, summary, vbench, benchmarking, python, scikit-learn
 Slug: scikit-learn-speed-an-overview-on-the-final-day
 
 This summer, I was granted the project called *scikit-learn-speed*,

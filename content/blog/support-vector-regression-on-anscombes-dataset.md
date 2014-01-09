@@ -1,8 +1,8 @@
 Title: Support vector regression on Anscombe's dataset
 Date: 2012-05-27 21:59
 Author: vene
-Category: python, scikit-learn
-Tags: anscombe, outlier, robust regression, support vector regression, svm, svr
+Category: scikit-learn
+Tags: anscombe, outlier, robust regression, support vector regression, svm, svr, python, scikit-learn
 Slug: support-vector-regression-on-anscombes-dataset
 
 [Anscombe's quartet][] is a set of four toy datasets that look very

@@ -1,8 +1,8 @@
 Title: The nasty bug crawling in my Orthogonal Matching Pursuit code
 Date: 2011-11-18 20:51
 Author: vene
-Category: dictionary learning, scikit-learn
-Tags: bug, omp, orthogonal matching pursuit
+Category: scikit-learn
+Tags: bug, omp, orthogonal matching pursuit, dictionary learning, scikit-learn
 Slug: the-nasty-bug-crawling-in-my-orthogonal-matching-pursuit-code
 
 A while back, Bob L. Sturm blogged about a [similar implementation of

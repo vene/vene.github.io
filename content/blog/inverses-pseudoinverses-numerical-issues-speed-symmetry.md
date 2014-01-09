@@ -1,8 +1,8 @@
 Title: Inverses and pseudoinverses. Numerical issues, speed, symmetry.
 Date: 2012-08-18 19:41
 Author: vene
-Category: benchmarking, python
-Tags: inv, matrix inverse, numerical analysis, numerical methods, pinv, pinvh, positive semidefinite, pseudoinverse, symmetric
+Category: benchmarking
+Tags: inv, matrix inverse, numerical analysis, numerical methods, pinv, pinvh, positive semidefinite, pseudoinverse, symmetric, benchmarking, python
 Slug: inverses-pseudoinverses-numerical-issues-speed-symmetry
 
 The matrix inverse is a cornerstone of linear algebra, taught, along

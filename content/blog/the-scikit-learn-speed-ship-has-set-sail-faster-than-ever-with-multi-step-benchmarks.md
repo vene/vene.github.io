@@ -1,8 +1,8 @@
 Title: The scikit-learn-speed ship has set sail! Faster than ever, with multi-step benchmarks!
 Date: 2012-08-11 17:32
 Author: vene
-Category: benchmarking, python, scikit-learn
-Tags: multi-step, multistep, vbench
+Category: scikit-learn
+Tags: multi-step, multistep, vbench, benchmarking, python, scikit-learn
 Slug: the-scikit-learn-speed-ship-has-set-sail-faster-than-ever-with-multi-step-benchmarks
 
 I am pleased to announce that last night at 2:03 AM, the first fully

@@ -2,7 +2,7 @@ Title: Compiling MegaM on MacOS X
 Date: 2012-06-08 11:45
 Author: vene
 Category: nlp
-Tags: compile, install, maxent, megam
+Tags: compile, install, maxent, megam, nlp
 Slug: compiling-megam-on-macos-x
 
 [MegaM][] is Hal Daumé III's maxent (logistic regression, and much more)

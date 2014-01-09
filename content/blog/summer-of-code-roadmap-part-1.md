@@ -1,7 +1,8 @@
 Title: Summer of Code roadmap, part 1
 Date: 2011-06-12 14:28
 Author: vene
-Category: Uncategorized
+Category: scikit-learn
+Tags: gsoc, Uncategorized
 Slug: summer-of-code-roadmap-part-1
 
 After a little busy while, I have graduated and entered the summer

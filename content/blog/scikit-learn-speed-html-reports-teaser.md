@@ -1,8 +1,8 @@
 Title: Scikit-learn-speed HTML reports teaser
 Date: 2012-07-20 14:40
 Author: vene
-Category: benchmarking, python, scikit-learn
-Tags: gsoc, scikit-learn-speed, vbench
+Category: scikit-learn
+Tags: gsoc, scikit-learn-speed, vbench, benchmarking, python, scikit-learn
 Slug: scikit-learn-speed-html-reports-teaser
 
 EDIT: I made the plots a little more readable, check it out!

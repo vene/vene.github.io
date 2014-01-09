@@ -2,7 +2,7 @@ Title: Newton interpolation and numerical differentiation
 Date: 2011-04-15 13:34
 Author: vene
 Category: python
-Tags: differentiation, interpolation, matplotlib, newton, numerical, numpy
+Tags: differentiation, interpolation, matplotlib, newton, numerical, numpy, python
 Slug: newton-interpolation-and-numerical-differentiation
 
 I am sharing some Python code code that I wrote as a school assignment.

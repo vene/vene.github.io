@@ -2,7 +2,7 @@ Title: GSoC 2012 proposal: Need for scikit-learn speed
 Date: 2012-04-16 00:37
 Author: vene
 Category: scikit-learn
-Tags: gsoc, proposal
+Tags: gsoc, proposal, scikit-learn
 Slug: gsoc-2012-proposal-need-for-scikit-learn-speed
 
 This summer I hope to be able to put in another full-time amount of

@@ -1,8 +1,8 @@
 Title: Optimizing Orthogonal Matching Pursuit code in Numpy, part 1
 Date: 2011-08-07 20:50
 Author: vene
-Category: dictionary learning, python, scikit-learn
-Tags: efficient, numpy, omp, orthogonal matching pursuit, scipy
+Category: scikit-learn
+Tags: efficient, numpy, omp, orthogonal matching pursuit, scipy, dictionary learning, scikit-learn, python
 Slug: optimizing-orthogonal-matching-pursuit-code-in-numpy-part-1
 
 After intense code optimization work, my implementation of OMP finally

@@ -1,8 +1,8 @@
 Title: BibTeX-powered publications list for Pelican with pelican-bibtex
 Date: 2013-04-22 10:45
 Author: vene
-Category: Uncategorized
-Tags: bibtex, blog, citations, pelican, publications, pybtex, references, static blog, static website
+Category: python
+Tags: bibtex, blog, citations, pelican, publications, pybtex, references, static blog, static website, Uncategorized
 Slug: bibtex-powered-publications-list-for-pelican-with-pelican-bibtex
 
 Hook

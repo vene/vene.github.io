@@ -2,6 +2,7 @@ Title: Moving out
 Date: 2012-01-06 00:16
 Author: vene
 Category: Uncategorized
+Tags: Uncategorized
 Slug: moving-out
 
 Happy new year, friends!

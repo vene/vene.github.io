@@ -1,8 +1,8 @@
 Title: On why my %memit fails on OSX
 Date: 2012-07-04 12:49
 Author: vene
-Category: benchmarking, python
-Tags: IPython, magic, memit, mprun
+Category: benchmarking
+Tags: IPython, magic, memit, mprun, benchmarking, python
 Slug: on-why-my-memit-fails-on-osx
 
 In my [last post][] I mentioned that I'm not satisfied with the current

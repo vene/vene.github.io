@@ -1,8 +1,8 @@
 Title: Memory benchmarking with vbench
 Date: 2012-07-05 12:38
 Author: vene
-Category: benchmarking, python, scikit-learn
-Tags: memit, memory, vbench
+Category: benchmarking
+Tags: memit, memory, vbench, python, scikit-learn
 Slug: memory-benchmarking-with-vbench
 
 The [scikit-learn-speed project][] now has memory usage benchmarking!

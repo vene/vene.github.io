@@ -1,7 +1,8 @@
 Title: Customizing scikits.learn for a specific text analysis task
 Date: 2011-04-29 14:33
 Author: vene
-Category: nlp, scikit-learn
+Category: scikit-learn
+Tags: nlp, scikit-learn
 Slug: customizing-scikits-learn-for-a-specific-text-analysis-task
 
 Scikits.learn is a great general library, but machine learning has so

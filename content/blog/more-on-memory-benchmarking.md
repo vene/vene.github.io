@@ -1,8 +1,8 @@
 Title: More on memory benchmarking
 Date: 2012-07-02 11:27
 Author: vene
-Category: benchmarking, python
-Tags: IPython, magic, memit, memory, memory_profiler, mprun
+Category: benchmarking
+Tags: IPython, magic, memit, memory, memory_profiler, mprun, benchmarking, python
 Slug: more-on-memory-benchmarking
 
 Following up on my task to make it easier to benchmark memory usage in

@@ -1,7 +1,8 @@
 Title: Dictionary learning in scikit-learn 0.9
 Date: 2011-09-19 19:15
 Author: vene
-Category: dictionary learning, scikit-learn
+Category: scikit-learn
+Tags: dictionary learning, scikit-learn
 Slug: dictionary-learning-in-scikit-learn-0-9
 
 Thanks to Olivier, Gaël and Alex, who reviewed the code heavily the last

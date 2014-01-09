@@ -1,7 +1,8 @@
 Title: Long overdue update. EuroScipy and SSLST 2011
 Date: 2011-09-05 00:08
 Author: vene
-Category: Uncategorized
+Category: conferences
+Tags: Uncategorized
 Slug: long-overdue-update-euroscipy-and-sslst-2011
 
 Anybody reading my blog should have expected me to blog about the end of

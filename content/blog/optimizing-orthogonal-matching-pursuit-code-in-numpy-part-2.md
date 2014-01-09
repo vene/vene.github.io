@@ -1,8 +1,8 @@
 Title: Optimizing Orthogonal Matching Pursuit code in Numpy, part 2
 Date: 2011-08-11 19:39
 Author: vene
-Category: dictionary learning, python, scikit-learn
-Tags: blas, efficient, lapack, numpy, omp, orthogonal matching pursuit, potrs, scipy
+Category: scikit-learn
+Tags: blas, efficient, lapack, numpy, omp, orthogonal matching pursuit, potrs, scipy, dictionary learning, python, scikit-learn
 Slug: optimizing-orthogonal-matching-pursuit-code-in-numpy-part-2
 
 EDIT: There was a bug in the final version of the code presented here.

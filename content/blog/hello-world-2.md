@@ -2,6 +2,7 @@ Title: Hello world!
 Date: 2011-03-30 08:59
 Author: vene
 Category: Uncategorized
+Tags: Uncategorized
 Slug: hello-world-2
 
 This is the blog where I will post updates regarding my work

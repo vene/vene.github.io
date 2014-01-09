@@ -2,7 +2,7 @@ Title: Progress on Orthogonal Matching Pursuit
 Date: 2011-08-02 16:56
 Author: vene
 Category: scikit-learn
-Tags: omp, orthogonal matching pursuit
+Tags: omp, orthogonal matching pursuit, scikit-learn
 Slug: progress-on-orthogonal-matching-pursuit
 
 Since orthogonal matching pursuit (OMP) is an important part of signal

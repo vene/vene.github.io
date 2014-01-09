@@ -1,8 +1,8 @@
 Title: Quick memory usage benchmarking in IPython
 Date: 2012-06-30 08:53
 Author: vene
-Category: benchmarking, python
-Tags: benchmark, IPython, magic, memory, memory_profiler, profiling
+Category: benchmarking
+Tags: benchmark, IPython, magic, memory, memory_profiler, profiling, benchmarking, python
 Slug: quick-memory-usage-benchmarking-in-ipython
 
 Everybody loves `%timeit`, there's no doubt about it. So why not have

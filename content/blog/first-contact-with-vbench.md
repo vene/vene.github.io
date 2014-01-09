@@ -2,7 +2,7 @@ Title: First contact with vbench
 Date: 2012-05-29 12:57
 Author: vene
 Category: scikit-learn
-Tags: benchmarks, perf.py, performance, vbench
+Tags: benchmarks, perf.py, performance, vbench, scikit-learn
 Slug: first-contact-with-vbench
 
 With a slight delay caused by going to lovely lovely Istanbul for the

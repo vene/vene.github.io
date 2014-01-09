@@ -1,7 +1,8 @@
 Title: Romanian people and coffee
 Date: 2012-04-13 21:20
 Author: vene
-Category: Uncategorized
+Category: nlp
+Tags: Uncategorized, coffee, ngram
 Slug: romanian-people-and-coffee
 
 So I got my hands of the [Google N-gram data][] for the Romanian

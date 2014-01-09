@@ -1,8 +1,8 @@
 Title: Image denoising with dictionary learning
 Date: 2011-07-07 20:00
 Author: vene
-Category: dictionary learning, scikit-learn
-Tags: denoising, dictionary learning
+Category: scikit-learn
+Tags: denoising, dictionary learning, scikit-learn
 Slug: image-denoising-with-dictionary-learning
 
 I am presenting an image denoising example that fully runs under my

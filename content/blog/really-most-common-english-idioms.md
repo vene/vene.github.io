@@ -1,8 +1,8 @@
 Title: Really the most common english idioms?
 Date: 2013-02-11 16:50
 Author: vene
-Category: corpus linguistics, nlp
-Tags: bnc, british national corpus, corpus, fixed expression, fixed phrase, idioms, oec, oxford english corpus
+Category: nlp
+Tags: bnc, british national corpus, corpus, fixed expression, fixed phrase, idioms, oec, oxford english corpus, corpus linguistics, nlp
 Slug: really-most-common-english-idioms
 
 A while back I ran into [this blog post][] and it made me wonder. I'm

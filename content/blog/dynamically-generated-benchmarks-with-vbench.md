@@ -1,8 +1,8 @@
 Title: Dynamically generated benchmarks with vbench
 Date: 2012-06-07 01:57
 Author: vene
-Category: benchmarking, python, scikit-learn
-Tags: gsoc, vbench
+Category: scikit-learn
+Tags: gsoc, vbench, benchmarking, python
 Slug: dynamically-generated-benchmarks-with-vbench
 
 To construct a `vbench` benchmark you need a setup string and a code

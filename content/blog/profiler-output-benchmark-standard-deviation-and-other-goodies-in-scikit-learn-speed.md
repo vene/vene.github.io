@@ -1,8 +1,8 @@
 Title: Profiler output, benchmark standard deviation and other goodies in scikit-learn-speed
 Date: 2012-07-27 11:01
 Author: vene
-Category: benchmarking, python, scikit-learn
-Tags: gsoc, memory_profiler, scikit-learn-speed, vbench
+Category: scikit-learn
+Tags: gsoc, memory_profiler, scikit-learn-speed, vbench, benchmarking, python, scikit-learn
 Slug: profiler-output-benchmark-standard-deviation-and-other-goodies-in-scikit-learn-speed
 
 This post is about the [scikit-learn][]benchmarking project that I am

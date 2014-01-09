@@ -1,8 +1,8 @@
 Title: Sparse PCA
 Date: 2011-05-23 15:19
 Author: vene
-Category: dictionary learning, scikit-learn
-Tags: dictionary learning, pca, sparse pca, SparsePCA, spca
+Category: scikit-learn
+Tags: dictionary learning, pca, sparse pca, SparsePCA, spca, scikit-learn
 Slug: sparse-pca
 
 I have been working on the integration into the scikits.learn codebase

@@ -2,6 +2,7 @@ Title: Dictionary learning sneak peek
 Date: 2011-06-24 12:06
 Author: vene
 Category: Uncategorized
+Tags: Uncategorized
 Slug: dictionary-learning-sneak-peek
 
 Closing in on the goal of integrating J. Mairal's dictionary learning in

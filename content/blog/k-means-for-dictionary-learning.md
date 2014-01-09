@@ -1,8 +1,8 @@
 Title: K-Means for dictionary learning
 Date: 2011-07-10 14:27
 Author: vene
-Category: dictionary learning, scikit-learn, Uncategorized
-Tags: dictionary learning, k-means, scikit-learn, vq
+Category: scikit-learn
+Tags: dictionary learning, k-means, scikit-learn, vq, Uncategorized
 Slug: k-means-for-dictionary-learning
 
 [![Dictionary learned with K-Means on the LFW dataset with whitening
