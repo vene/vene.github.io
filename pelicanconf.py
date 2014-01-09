@@ -7,7 +7,7 @@ SITENAME = u"Vlad Niculae (~vene)"
 SITEURL = ''
 
 TIMEZONE = 'Europe/Paris'
-
+LOCALE = ('en_GB',)
 DEFAULT_LANG = u'en'
 
 # Feed generation is usually not desired when developing
