@@ -26,7 +26,8 @@ DEFAULT_PAGINATION = False
 
 # Uncomment following line if you want document-relative URLs when developing
 #RELATIVE_URLS = True
-
+DIRECT_TEMPLATES = ('blog',)
+PAGINATED_DIRECT_TEMPLATES = ('index', 'blog')
 TYPOGRIFY = True
 ARTICLE_DIR = 'blog'
 ARTICLE_URL = 'blog/{slug}.html'
@@ -42,3 +43,5 @@ BLOG_SAVE_AS = 'blog/index.html'
 DISPLAY_CATEGORIES_ON_MENU = False
 MENUITEMS = (('Publications', '/publications.html'),
              ('Blog', SITEURL + '/blog/'))
+
+THEME = 'themes/vene'
