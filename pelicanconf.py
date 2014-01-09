@@ -38,6 +38,8 @@ CATEGORY_URL = 'blog/category/{slug}.html'
 CATEGORY_SAVE_AS = 'blog/category/{slug}.html'
 TAG_URL = 'blog/tag/{slug}.html'
 TAG_SAVE_AS = 'blog/tag/{slug}.html'
+AUTHOR_URL = 'blog/author/{slug}.html'
+AUTHOR_SAVE_AS = 'blog/author/{slug}.html'
 BLOG_SAVE_AS = 'blog/index.html'
 
 DISPLAY_CATEGORIES_ON_MENU = False
