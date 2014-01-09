@@ -3,7 +3,7 @@
 from __future__ import unicode_literals
 
 AUTHOR = u'Vlad Niculae'
-SITENAME = u"Vlad Niculae's personal website"
+SITENAME = u"Vlad Niculae (~vene)"
 SITEURL = ''
 
 TIMEZONE = 'Europe/Paris'
@@ -16,13 +16,13 @@ CATEGORY_FEED_ATOM = None
 TRANSLATION_FEED_ATOM = None
 
 # Blogroll
-LINKS =  (('Pelican', 'http://getpelican.com/'),)
+LINKS = None
 
 # Social widget
 #SOCIAL = (('You can add links in your config file', '#'),
 #          ('Another social link', '#'),)
 
-DEFAULT_PAGINATION = False
+DEFAULT_PAGINATION = 5
 
 # Uncomment following line if you want document-relative URLs when developing
 #RELATIVE_URLS = True

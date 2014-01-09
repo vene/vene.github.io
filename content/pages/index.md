@@ -30,7 +30,7 @@ You should take a look at the list of my [publications](papers.html). It's not
 much, but I try. For now I only have conference posters. The materials for
 [talks](talks.html) that I've had the honour of giving are also available.
 
-If you can spare a minute, please go over to my [blog](http://blog.vene.ro/).
+If you can spare a minute, please go over to my [blog](blog/index.html).
 
 If you're (or were) in one of my classes, you can find links and stuff I
 collected for you in the [teaching](teaching.html) section.
