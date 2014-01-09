@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <title>K-Means for dictionary learning</title>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="http://vene.ro/theme/css/main.css" type="text/css" />
+                <link href="http://vene.ro/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Vlad Niculae (~vene) Atom Feed" />
+                        <link href='http://fonts.googleapis.com/css?family=Averia+Gruesa+Libre|Alegreya:400italic,400,700|Alegreya+SC&subset=latin-ext' rel='stylesheet' type='text/css'>
+
+        <!--[if IE]>
+                <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+        <!--[if lte IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="http://vene.ro/css/ie.css"/>
+                <script src="http://vene.ro/js/IE8.js" type="text/javascript"></script><![endif]-->
+
+        <!--[if lt IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="http://vene.ro/css/ie6.css"/><![endif]-->
+
+</head>
+
+<body id="index" class="home">
+<div id="container">
+        <header id="banner" class="body">
+                <div id="header">Vlad Niculae (~vene)</div>
+                <!--<nav><ul>
+                                                    <li><a href="http://vene.ro/fonts.html">Fonts</a></li>
+                                    <li><a href="http://vene.ro/papers.html">Publications</a></li>
+                                    <li><a href="http://vene.ro/talks.html">Talks</a></li>
+                                    <li><a href="http://vene.ro/teaching.html">Teaching</a></li>
+                                                                    <li><a href="/publications.html">Publications</a></li>
+                                    <li><a href="/blog/">Blog</a></li>
+                                                </ul></nav> -->
+        </header><!-- /#banner -->
+        <div id="main" role="main">
+        <section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="http://vene.ro/blog/k-means-for-dictionary-learning.html" rel="bookmark"
+           title="Permalink to K-Means for dictionary learning">K-Means for dictionary&nbsp;learning</a></h1>
+          </header>
+
+    <div class="entry-content">
+      <footer class="post-info">
+        <abbr class="published" title="2011-07-10T14:27:00">
+                Sun 10 July 2011
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="http://vene.ro/author/vene.html">vene</a>
+        </address>
+        <p>In <a href="http://vene.ro/blog/category/scikit-learn.html">scikit-learn</a>. </p>
+<p>tags: <a href="http://vene.ro/blog/tag/dictionary-learning.html">dictionary learning</a> <a href="http://vene.ro/blog/tag/k-means.html">k-means</a> <a href="http://vene.ro/blog/tag/scikit-learn.html">scikit-learn</a> <a href="http://vene.ro/blog/tag/vq.html">vq</a> <a href="http://vene.ro/blog/tag/uncategorized.html">Uncategorized</a> </p>
+</footer><!-- /.post-info -->      <p>[![Dictionary learned with K-Means on the <span class="caps">LFW</span> dataset with whitening
+<span class="caps">PCA</span>][]][][![Dictionary learned with K-Means on the <span class="caps">LFW</span> dataset without
+whitening&nbsp;<span class="caps">PCA</span>][]][]</p>
+<p>One of the simplest, and yet most heavily constrained form of matrix
+factorization, is vector quantization (<span class="caps">VQ</span>). Heavily used in image/video
+compression, the <span class="caps">VQ</span> problem is a factorization [latex] X=<span class="caps">WH</span>[/latex]
+where [latex] H[/latex] (our dictionary) is called the codebook and is
+designed to cover the cloud of data points effectively, and each line of
+[latex] W[/latex] is a unit&nbsp;vector.</p>
+<p>This means that each each data point [latex] x_i[/latex] is
+approximated as [latex] x_i \approx h_{k} = \sum_{j=1}\^{r}
+\delta_{kj}h_{j}[/latex]. In other words, the closest row vector
+(codeword/dictionary atom) [latex] h_k[/latex] of [latex] H[/latex] is
+chosen as an approximation, and this is encoded as a unit vector [latex]
+(\delta_{k1}, &#8230;, \delta_{kr})[/latex]. The data representation
+[latex] W[/latex] is composed of such&nbsp;vectors.</p>
+<p>There is a variation called gain-shape <span class="caps">VQ</span> where instead of approximating
+each point as one of the codewords, we allow a scalar multiplication
+invariance: [latex] x_i \approx \alpha_ih_k[/latex]. This model
+requires considerably more storage (each data point needs a floating
+point number and an unsigned index, as opposed to just the index), but
+it leads to a much better approximation.<br />
+Gain-shape <span class="caps">VQ</span> can equivalently be accomplished by normalizing each data
+vector prior to fitting the&nbsp;codebook.</p>
+<p>In order to fit a codebook [latex] H[/latex] for efficient <span class="caps">VQ</span> use, the
+K-Means Clustering [<a href="#footnote-1">1</a>] algorithm is a natural thought. K-means is an
+iterative algorithm that incrementally improves the dispersion of k
+cluster centers in the data space until convergence. The cluster centers
+are initialized in a random or procedural fashion, then, at each
+iteration, the data points are assigned to the closest cluster center,
+which is subsequently moved to the center of the points assigned to&nbsp;it.</p>
+<p>The <code>scikits.learn.decomposition.KMeansCoder</code> object from our
+work-in-progress dictionary learning toolkit can learn a dictionary from
+image patches using the K-Means algorithm, with optional local contrast
+normalization and a <span class="caps">PCA</span> whitening transform. Using a trained object to
+transform data points with orthogonal matching pursuit, with the
+parameter <code>n_atoms=1</code> is equivalent to gain-shape <span class="caps">VQ</span>. Of course you are
+free to use any method of sparse coding such as <span class="caps">LARS</span>. The code used to
+produce the example images on top of this post can be found in [<a href="#footnote-2">2</a>].</p>
+<p>Using K-Means for learning the dictionary does not optimize over linear
+combinations of dictionary atoms, like standard dictionary learning
+methods do. However, it&#8217;s considerably faster, and Adam Coates and
+Andrew Ng suggest in [<a href="#footnote-3">3</a>] that as long as the dictionary is filled
+with a large enough number of atoms and it covers well enough the cloud
+of data (and of future test data) points, then K-Means, or even random
+sampling of image patches, can perform remarkably well for some&nbsp;tasks.</p>
+<div id="footnote-1">
+[1] [Wikipedia article on K-Means clustering][]
+
+</div>
+
+<div id="footnote-2">
+[2] [K-Means Coder example][]
+
+</div>
+
+<div id="footnote-3">
+[3] [**The importance of encoding versus training with sparse coding and
+vector quantization**, Adam Coates and Andrew Y. Ng. In Proceedings of
+the Twenty-Eighth International Conference on Machine Learning, 2011.][]
+
+</div>
+
+<p>[Dictionary learned with K-Means on the <span class="caps">LFW</span> dataset with whitening
+  <span class="caps">PCA</span>]: http://localhost:8001/wp-content/uploads/2011/07/kmeans_w.png?w=250
+    &#8220;K-Means dictionary with whitening <span class="caps">PCA</span>&#8221;
+  [![Dictionary learned with K-Means on the <span class="caps">LFW</span> dataset with whitening
+  <span class="caps">PCA</span>][]]: http://localhost:8001/wp-content/uploads/2011/07/kmeans_w.png
+  [Dictionary learned with K-Means on the <span class="caps">LFW</span> dataset without whitening
+  <span class="caps">PCA</span>]: http://localhost:8001/wp-content/uploads/2011/07/kmeans_no_w.png?w=250
+    &#8220;K-Means dictionary without whitening <span class="caps">PCA</span>&#8221;
+  [![Dictionary learned with K-Means on the <span class="caps">LFW</span> dataset without
+  whitening <span class="caps">PCA</span>][]]: http://localhost:8001/wp-content/uploads/2011/07/kmeans_no_w.png
+  [<strong>The importance of encoding versus training with sparse coding and
+  vector quantization</strong>, Adam Coates and Andrew Y. Ng. In Proceedings of
+  the Twenty-Eighth International Conference on Machine Learning,
+  2011.]:&nbsp;http://ai.stanford.edu/~ang/papers/icml11-EncodingVsTraining.pdf</p>
+    </div><!-- /.entry-content -->
+    
+  </article>
+</section>
+        <section id="extras" class="body">
+                        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Go <a href="/">home</a>. 
+                Powered by <a href="http://getpelican.com/">Pelican</a>
+                </address><!-- /#about -->
+        </footer><!-- /#contentinfo -->
+        </div>
+</div>
+</body>
+</html>

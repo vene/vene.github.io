@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <title>Vlad Niculae (~vene) - dictionary learning</title>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="http://vene.ro/theme/css/main.css" type="text/css" />
+                <link href="http://vene.ro/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Vlad Niculae (~vene) Atom Feed" />
+                        <link href='http://fonts.googleapis.com/css?family=Averia+Gruesa+Libre|Alegreya:400italic,400,700|Alegreya+SC&subset=latin-ext' rel='stylesheet' type='text/css'>
+
+        <!--[if IE]>
+                <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+        <!--[if lte IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="http://vene.ro/css/ie.css"/>
+                <script src="http://vene.ro/js/IE8.js" type="text/javascript"></script><![endif]-->
+
+        <!--[if lt IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="http://vene.ro/css/ie6.css"/><![endif]-->
+
+</head>
+
+<body id="index" class="home">
+<div id="container">
+        <header id="banner" class="body">
+                <div id="header">Vlad Niculae (~vene)</div>
+                <!--<nav><ul>
+                                                    <li><a href="http://vene.ro/fonts.html">Fonts</a></li>
+                                    <li><a href="http://vene.ro/papers.html">Publications</a></li>
+                                    <li><a href="http://vene.ro/talks.html">Talks</a></li>
+                                    <li><a href="http://vene.ro/teaching.html">Teaching</a></li>
+                                                                    <li><a href="/publications.html">Publications</a></li>
+                                    <li><a href="/blog/">Blog</a></li>
+                                                </ul></nav> -->
+        </header><!-- /#banner -->
+        <div id="main" role="main">
+                
+            
+
+                            <aside id="featured" class="body">
+                <article>
+                    <h1 class="entry-title"><a href="http://vene.ro/blog/an-overview-of-dictionary-learning-terminology.html">An overview of dictionary learning:&nbsp;Terminology</a></h1> 
+                    <footer class="post-info">
+        <abbr class="published" title="2011-04-15T14:10:00">
+                Fri 15 April 2011
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="http://vene.ro/author/vene.html">vene</a>
+        </address>
+        <p>In <a href="http://vene.ro/blog/category/dictionary-learning.html">dictionary learning</a>. </p>
+<p>tags: <a href="http://vene.ro/blog/tag/dictionary-learning.html">dictionary learning</a> <a href="http://vene.ro/blog/tag/scikit-learn.html">scikit-learn</a> <a href="http://vene.ro/blog/tag/uncategorized.html">Uncategorized</a> </p>
+</footer><!-- /.post-info --><p>My GSoC proposal is titled &#8220;Dictionary learning in scikits.learn&#8221; and in
+the project, I plan to implement methods used in state of the art
+research and industry applications in signal and image processing. In
+this post, I want to clarify the terminology&nbsp;used.</p>
+<p>Usually the terms <em>dictionary learning</em> and <em>sparse coding</em> are used
+interchangably. Also my proposal contains methods such as Sparse <span class="caps">PCA</span>
+which are technically not <em>sparse coding</em> but closely related&nbsp;problems.</p>
+<p>The basic idea is the approximation of a signal vector [latex] x \in
+\mathbb{R}\^d[/latex] by a linear combination of components, as good as
+possible, under certain constraints. This can be formulated as a basic
+(unconstrained) loss function measuring the quality of the
+approximation: [latex] \mathcal{L}(x, D, \alpha) = \big|\big|x -
+D\alpha\big|\big|\^2_2, D \in \mathbb{R}\^{d \times r}, \alpha
+\in \mathbb{R}\^r[/latex], where [latex] r[/latex] is the dimension of
+the dictionary (the number of <em>components)</em>.</p>
+<p>When working with a dataset of more signal vectors, the overall basic
+loss for such an approximation is [latex] \mathcal{L}(X, D, A) =
+\sum_{i = 1}\^N \mathcal{L}(x_i, D, \alpha_i) = \big|\big|X -
+<span class="caps">DA</span>\big|\big|\^2_F[/latex]. Minimizing such a loss function amounts to
+finding the closest (in the Frobenius sense) matrix factorization
+[latex] <span class="caps">DA</span>[/latex] that approximates the data matrix [latex]&nbsp;X[/latex]</p>
+<p>This generic problem is called a <strong>matrix factorization problem</strong>. Many
+classical problems are matrix factorization problems with additional
+constraints. For example, <span class="caps">PCA</span> is a matrix factorization that constrains
+[latex] D[/latex] to be orthogonal. <span class="caps">NMF</span> constrains both [latex]
+D[/latex] and [latex] A[/latex] to have no negative elements. Sparse
+variants of these two decompositions are useful for getting local
+components, such as parts of faces. These are obtained by adding an
+aditional constraint on the dictionary&nbsp;columns.</p>
+<p>It can  be sometimes useful to consider the dictionary fixed. The signal
+processing community has introduced over the years many such
+dictionaries, for examples wavelets. These are used, for example, in the
+<span class="caps">JPEG2000</span> compression&nbsp;standard.</p>
+<p>A very useful represenation is when the dictionary is <em>overcomplete</em>
+([latex] r > d[/latex]). The wavelets are an example of this. Given
+such a dictionary, we are interested in an efficient encoding of a
+vector [latex] x[/latex], in the sense of sparseness: we want to use as
+few dictionary components as possible in our representation. Such a
+solution is the vector [latex]\alpha[/latex] minimizing [latex]
+\mathcal{L}(x, D, \alpha) +
+\lambda\big|\big|\alpha\big|\big|_1[/latex] but other
+sparsity-inducing constraints can be used. Such a vector is a <strong>sparse
+coding</strong> of [latex] x[/latex] and it can be solved using algorithms such
+as least-angle regression and orthogonal matching&nbsp;pursuit.</p>
+<p>However, we are not limited to using precomputed dictionaries. The term
+<strong>dictionary learning</strong> refers to methods of inferring, given [latex]
+X[/latex], a (usually overcomplete) dictionary that will perform good at
+sparsely encoding the data in [latex] X[/latex]. Such methods are more
+expensive than using precomputed dictionaries, but they perform better,
+since the dictionary is optimized for the current&nbsp;dataset.</p>
+<p>Because usually such loss functions are non-convex in [latex] D[/latex]
+and [latex] A[/latex] simultaneously, dictionary learning algorithms
+alternate between minimizing each while keeping the other fixed. The
+step that minimizes [latex] D[/latex] is sometimes called the
+<strong>dictionary update</strong> step, and the one minimizing [latex] A[/latex] is
+(similarily to the case where the dictionary is always fixed) the
+<strong>sparse coding</strong> step. Dictionary learning algorithms differ in the
+method used for each of this&nbsp;step.</p>
+<p>To resume, many problems can be posed as matrix factorization problems.
+Depending on the constraints imposed, the problem becomes interesting
+for different applications. Dictionary learning is very good for image
+reconstruction. Matrix decompositions with sparse undercomplete
+dictionaries such as Sparse <span class="caps">PCA</span> can be used to find local features that
+constitute the dataset, for example parts of faces, for a dataset of
+facial images. <span class="caps">NMF</span> can be used in both under and overcomplete settings
+and it offers a good model for additive data such as text or images. We
+are interested in these variants and they are planned for implementation
+in my GSoC&nbsp;proposal.</p>
+<p>Julien Mairal&#8217;s presentation of his work in this domain, available
+<a href="http://videolectures.net/icml09_mairal_odlsc/" title="Mairal dictionary learning">here</a>, shows the theoretical background of such methods, along with
+examples showing state of the art results in image&nbsp;processing.</p>                </article>
+                                    <p class="paginator">
+        Page 1 / 1
+    </p>
+                            </aside><!-- /#featured -->
+                                                </ol><!-- /#posts-list -->
+                        </section><!-- /#content -->
+                    <section id="extras" class="body">
+                        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Go <a href="/">home</a>. 
+                Powered by <a href="http://getpelican.com/">Pelican</a>
+                </address><!-- /#about -->
+        </footer><!-- /#contentinfo -->
+        </div>
+</div>
+</body>
+</html>

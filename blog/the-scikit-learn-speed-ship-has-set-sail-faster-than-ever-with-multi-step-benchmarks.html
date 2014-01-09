@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <title>The scikit-learn-speed ship has set sail! Faster than ever, with multi-step benchmarks!</title>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="http://vene.ro/theme/css/main.css" type="text/css" />
+                <link href="http://vene.ro/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Vlad Niculae (~vene) Atom Feed" />
+                        <link href='http://fonts.googleapis.com/css?family=Averia+Gruesa+Libre|Alegreya:400italic,400,700|Alegreya+SC&subset=latin-ext' rel='stylesheet' type='text/css'>
+
+        <!--[if IE]>
+                <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+        <!--[if lte IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="http://vene.ro/css/ie.css"/>
+                <script src="http://vene.ro/js/IE8.js" type="text/javascript"></script><![endif]-->
+
+        <!--[if lt IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="http://vene.ro/css/ie6.css"/><![endif]-->
+
+</head>
+
+<body id="index" class="home">
+<div id="container">
+        <header id="banner" class="body">
+                <div id="header">Vlad Niculae (~vene)</div>
+                <!--<nav><ul>
+                                                    <li><a href="http://vene.ro/fonts.html">Fonts</a></li>
+                                    <li><a href="http://vene.ro/papers.html">Publications</a></li>
+                                    <li><a href="http://vene.ro/talks.html">Talks</a></li>
+                                    <li><a href="http://vene.ro/teaching.html">Teaching</a></li>
+                                                                    <li><a href="/publications.html">Publications</a></li>
+                                    <li><a href="/blog/">Blog</a></li>
+                                                </ul></nav> -->
+        </header><!-- /#banner -->
+        <div id="main" role="main">
+        <section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="http://vene.ro/blog/the-scikit-learn-speed-ship-has-set-sail-faster-than-ever-with-multi-step-benchmarks.html" rel="bookmark"
+           title="Permalink to The scikit-learn-speed ship has set sail! Faster than ever, with multi-step benchmarks!">The scikit-learn-speed ship has set sail! Faster than ever, with multi-step&nbsp;benchmarks!</a></h1>
+          </header>
+
+    <div class="entry-content">
+      <footer class="post-info">
+        <abbr class="published" title="2012-08-11T17:32:00">
+                Sat 11 August 2012
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="http://vene.ro/author/vene.html">vene</a>
+        </address>
+        <p>In <a href="http://vene.ro/blog/category/scikit-learn.html">scikit-learn</a>. </p>
+<p>tags: <a href="http://vene.ro/blog/tag/multi-step.html">multi-step</a> <a href="http://vene.ro/blog/tag/multistep.html">multistep</a> <a href="http://vene.ro/blog/tag/vbench.html">vbench</a> <a href="http://vene.ro/blog/tag/benchmarking.html">benchmarking</a> <a href="http://vene.ro/blog/tag/python.html">python</a> <a href="http://vene.ro/blog/tag/scikit-learn.html">scikit-learn</a> </p>
+</footer><!-- /.post-info -->      <p>I am pleased to announce that last night at 2:03 <span class="caps">AM</span>, the first fully
+automated run of the scikit-learn-speed test suite has run on our
+Jenkins instance! You can admire it at <a href="http://jenkins-scikit-learn.github.com/scikit-learn-speed/">its temporary home</a> for now.
+As soon as we verify that everything is good, we will move this to the
+official scikit-learn&nbsp;page.</p>
+<p>I would like to take this opportunity to tell you about our latest
+changeset. We made running the benchmark suite tons simpler by adding a
+friendly Makefile. You can read more about its usage in the guide. But
+by far, our coolest new toy&nbsp;is:</p>
+<h2>Multi-step&nbsp;benchmarks</h2>
+<p>A standard vbench benchmark has three units of code, represented as
+strings: <code>code</code>, <code>setup</code> and <code>cleanup</code>. With the original timeit-based
+benchmarks, this means that for every run, the setup would be executed
+once. Then, the main loop runs <code>repeat</code> times, and within each
+iteration, the <code>code</code> is run <code>ncalls</code> times. Then <code>cleanup</code> happens, the
+best time is returned, and everybody is&nbsp;happy.</p>
+<p>In scikit-learn, most of our interesting objects go through a state
+change called <em>fitting</em>. This metaphor is right at home in the machine
+learning field, where we separate the learning phase for the prediction
+phase. The prediction step cannot be invoked on an object that hasn&#8217;t
+been&nbsp;fitted.</p>
+<p>For some algorithms, one of these steps is trivial. A brute force
+Nearest Neighbors classifier can be instantaneously fit, but prediction
+takes a while. On the opposite end we have linear models, with tons of
+complicated algorithms to fit them, but evaluation is a simple
+matrix-vector product that Numpy handles&nbsp;perfectly.</p>
+<p>But many of scikit-learn&#8217;s estimators have both steps interesting. Let&#8217;s
+take Non-negative Matrix Factorization. It has three interesting
+functions: The <code>fit</code> that computes \$latex X = <span class="caps">WH</span> \$, the <code>transform</code>
+that computes a non-negative projection on the components learned in
+<code>fit</code>, and <code>fit_transform</code> that takes advantage of the observation that
+when fitting, we also get the transformed \$latex X \$ for&nbsp;free.</p>
+<p>When benchmarking <span class="caps">NMF</span>, we initially had to design 3&nbsp;benchmarks:</p>
+<ul>
+<li><code>setup =</code>standard, <code>code = obj.fit(X)</code></li>
+<li><code>setup =</code>standard, <code>code = obj.fit_transform(X)</code></li>
+<li><code>setup =</code>standard<code>+ obj.fit(X)</code>, <code>code = obj.transform(X)</code></li>
+</ul>
+<h2>How much time were we&nbsp;wasting?</h2>
+<p>Let&#8217;s say it takes 10 seconds. For every benchmark, we time the code by
+running it 3 times. We run it once more to measure memory usage, once
+more for <code>cProfile</code> and one last time for <code>line_profiler</code>. This is a
+total of 6 times per benchmark. We need to multiply this by 2 again for
+running on two datasets. So when benchmarking <code>NMF</code>, because we need to
+fit before predicting, we do it 12 extra times. If a fit takes 5
+seconds, this means one minute wasted on benchmarking just one
+estimator. <em>Wouldn&#8217;t it be nice to <code>fit</code>, <code>fit_transform</code> and
+<code>transform</code> in a&nbsp;sequence?</em></p>
+<h2>Behind the&nbsp;scenes</h2>
+<p>We made the <code>PythonBenchmark code</code> parameter also support getting a
+sequence of strings, instead of just a string. On the database side,
+every benchmark result entry gets an extra component in the primary key,
+the number of the step it&nbsp;measures.</p>
+<p>In the benchmark description files, nothing is&nbsp;changed:</p>
+<p>[sourcecode lang=&#8221;python&#8221;]<br />
+{<br />
+&#8216;obj&#8217;: &#8216;<span class="caps">NMF</span>&#8217;,<br />
+&#8216;init_params&#8217;: {&#8216;n_components&#8217;: 2},<br />
+&#8216;datasets&#8217;: (&#8216;blobs&#8217;,),<br />
+&#8216;statements&#8217;: (&#8216;fit_unsup&#8217;, &#8216;transform_unsup&#8217;, &#8216;fit_transform&#8217;)<br />
+},<br />&nbsp;[/sourcecode]</p>
+<p>But before, we would take the cartesian product of datasets and
+statements, and build a <code>Benchmark</code> object for every pairing. Now, we
+just pass the tuple as it is, and vbench is smart enough to do the right
+thing.<br />
+We avoided the extra calls to <code>fit</code> in a lot of benchmarks. The whole
+suite now takes almost half the time to&nbsp;run!</p>
+<p><em>Note:</em> This trick is currently hosted in the
+<code>abstract_multistep_benchmarks</code> vbench branch in my&nbsp;fork.</p>
+    </div><!-- /.entry-content -->
+    
+  </article>
+</section>
+        <section id="extras" class="body">
+                        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Go <a href="/">home</a>. 
+                Powered by <a href="http://getpelican.com/">Pelican</a>
+                </address><!-- /#about -->
+        </footer><!-- /#contentinfo -->
+        </div>
+</div>
+</body>
+</html>

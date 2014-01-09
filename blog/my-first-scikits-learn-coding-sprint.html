@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <title>My first scikits.learn coding sprint</title>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="http://vene.ro/theme/css/main.css" type="text/css" />
+                <link href="http://vene.ro/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Vlad Niculae (~vene) Atom Feed" />
+                        <link href='http://fonts.googleapis.com/css?family=Averia+Gruesa+Libre|Alegreya:400italic,400,700|Alegreya+SC&subset=latin-ext' rel='stylesheet' type='text/css'>
+
+        <!--[if IE]>
+                <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+        <!--[if lte IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="http://vene.ro/css/ie.css"/>
+                <script src="http://vene.ro/js/IE8.js" type="text/javascript"></script><![endif]-->
+
+        <!--[if lt IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="http://vene.ro/css/ie6.css"/><![endif]-->
+
+</head>
+
+<body id="index" class="home">
+<div id="container">
+        <header id="banner" class="body">
+                <div id="header">Vlad Niculae (~vene)</div>
+                <!--<nav><ul>
+                                                    <li><a href="http://vene.ro/fonts.html">Fonts</a></li>
+                                    <li><a href="http://vene.ro/papers.html">Publications</a></li>
+                                    <li><a href="http://vene.ro/talks.html">Talks</a></li>
+                                    <li><a href="http://vene.ro/teaching.html">Teaching</a></li>
+                                                                    <li><a href="/publications.html">Publications</a></li>
+                                    <li><a href="/blog/">Blog</a></li>
+                                                </ul></nav> -->
+        </header><!-- /#banner -->
+        <div id="main" role="main">
+        <section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="http://vene.ro/blog/my-first-scikits-learn-coding-sprint.html" rel="bookmark"
+           title="Permalink to My first scikits.learn coding sprint">My first scikits.learn coding&nbsp;sprint</a></h1>
+          </header>
+
+    <div class="entry-content">
+      <footer class="post-info">
+        <abbr class="published" title="2011-04-02T20:12:00">
+                Sat 02 April 2011
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="http://vene.ro/author/vene.html">vene</a>
+        </address>
+        <p>In <a href="http://vene.ro/blog/category/scikit-learn.html">scikit-learn</a>. </p>
+<p>tags: <a href="http://vene.ro/blog/tag/coding-sprint.html">coding sprint</a> <a href="http://vene.ro/blog/tag/scikit-learn.html">scikit-learn</a> </p>
+</footer><!-- /.post-info -->      <p>The fifth <a href="http://scikit-learn.sourceforge.net/" title="scikits.learn">scikits.learn</a> coding sprint took place Friday, April 1st
+2011. For anyone who is not familiar with it, scikits.learn is a fast
+and easy to use machine learning toolkit for the pylab environment
+(Python, NumPy, SciPy,&nbsp;Matplotlib.)</p>
+<p>This was a good opportunity for me to get code reviews by the developers
+in order to bring my <span class="caps">NMF</span> code up to standards, so that it can be merged.
+Though I live far from every nucleus of scikits-learn developers, I
+efficiently participated via <span class="caps">IRC</span>. This way, I also got the chance to
+help out a bit on Mathieu Blondel&#8217;s Kernel <span class="caps">PCA</span> code, which will also be
+merged into&nbsp;main soon.</p>
+<h2>How it felt&nbsp;like</h2>
+<p>Short answer:&nbsp;awesome!</p>
+<p>Slightly longer answer: Everybody was very encouraging  and helpful.
+They gave me a lot of feedback from which I learned a lot, and they
+manifested the intention to merge soon. It is a pleasure to work on
+projects that you like and use, especially when the projects leaders and
+collaborators are so good to work&nbsp;with.</p>
+<p>But the main reason why it makes me feel so good is that I&#8217;m proud to
+able to contribute on a project that I consider very significant and the
+best in the field from many points of&nbsp;view.</p>
+<h2>What I got&nbsp;done</h2>
+<p>Most of my work was on the non-negative matrix factorization module that
+I began some while back, but only intermitently worked on. It is now a
+solid module with high test coverage, documentation, and a cool simple
+example showing a sparse set of features for the digits dataset in
+scikits.learn.  Apart from all the minor fixes in overall code quality
+and cleanliness, probably what is the most relevant is the improvement
+and the study of the initialization methods. I will look into this
+further and document it on this blog, the point is that the choice of
+initialization method greatly influences the speed of convergence, and
+in the case of a high-tolerance setting, also the error obtained. Some
+initializations are more fit for sparsity settings, while others are
+more fit for dense&nbsp;settings.</p>
+<p>I have a theory that I plan to test out, regarding the use of different
+initialization methods for components and for data in a sparse&nbsp;setting.</p>
+<h2>What I&nbsp;learned</h2>
+<p>I think my greatest improvement was in terms of workflow and efficiency.
+While my code was under review, I was receiving frequent comments on my
+git pull request, and eventually I ended up responding to some comments
+even before they were posted :). I sent small fixes as pull requests to
+help other developers as much as I could. Before scikits.learn I had
+never worked on a project with so many developers, and I think I handled
+it well, even though I asked once or twice on the <span class="caps">IRC</span> channel for pieces
+of&nbsp;git-fu.</p>
+<p>I learned that it&#8217;s difficult to tweak matplotlib subplots! I&#8217;m still
+staring at Alexandre Gramfort&#8217;s tweak in my example and I have no idea
+what he did to make it look so good. But I&#8217;ll figure it out soon, I&#8217;m&nbsp;sure.</p>
+<p>I also learned a lot more about the intricacies of the scikits.learn
+APIs, the philosophy of ease of use, and the project tree in&nbsp;general.</p>
+<p>In short, the coding sprint has been a great and rewarding experience,
+for which I thank all of you guys&nbsp;there!</p>
+    </div><!-- /.entry-content -->
+    
+  </article>
+</section>
+        <section id="extras" class="body">
+                        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Go <a href="/">home</a>. 
+                Powered by <a href="http://getpelican.com/">Pelican</a>
+                </address><!-- /#about -->
+        </footer><!-- /#contentinfo -->
+        </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <title>Vlad Niculae (~vene)</title>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="http://vene.ro/theme/css/main.css" type="text/css" />
+                <link href="http://vene.ro/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Vlad Niculae (~vene) Atom Feed" />
+                        <link href='http://fonts.googleapis.com/css?family=Averia+Gruesa+Libre|Alegreya:400italic,400,700|Alegreya+SC&subset=latin-ext' rel='stylesheet' type='text/css'>
+
+        <!--[if IE]>
+                <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+        <!--[if lte IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="http://vene.ro/css/ie.css"/>
+                <script src="http://vene.ro/js/IE8.js" type="text/javascript"></script><![endif]-->
+
+        <!--[if lt IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="http://vene.ro/css/ie6.css"/><![endif]-->
+
+</head>
+
+<body id="index" class="home">
+<div id="container">
+        <header id="banner" class="body">
+                <div id="header">Vlad Niculae (~vene)</div>
+                <!--<nav><ul>
+                                                    <li><a href="http://vene.ro/fonts.html">Fonts</a></li>
+                                    <li><a href="http://vene.ro/papers.html">Publications</a></li>
+                                    <li><a href="http://vene.ro/talks.html">Talks</a></li>
+                                    <li><a href="http://vene.ro/teaching.html">Teaching</a></li>
+                                                                    <li><a href="/publications.html">Publications</a></li>
+                                    <li><a href="/blog/">Blog</a></li>
+                                                </ul></nav> -->
+        </header><!-- /#banner -->
+        <div id="main" role="main">
+                
+            
+
+                            <aside id="featured" class="body">
+                <article>
+                    <h1 class="entry-title"><a href="http://vene.ro/blog/bibtex-powered-publications-list-for-pelican-with-pelican-bibtex.html">BibTeX-powered publications list for Pelican with&nbsp;pelican-bibtex</a></h1> 
+                    <footer class="post-info">
+        <abbr class="published" title="2013-04-22T10:45:00">
+                Mon 22 April 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="http://vene.ro/author/vene.html">vene</a>
+        </address>
+        <p>In <a href="http://vene.ro/blog/category/python.html">python</a>. </p>
+<p>tags: <a href="http://vene.ro/blog/tag/bibtex.html">bibtex</a> <a href="http://vene.ro/blog/tag/blog.html">blog</a> <a href="http://vene.ro/blog/tag/citations.html">citations</a> <a href="http://vene.ro/blog/tag/pelican.html">pelican</a> <a href="http://vene.ro/blog/tag/publications.html">publications</a> <a href="http://vene.ro/blog/tag/pybtex.html">pybtex</a> <a href="http://vene.ro/blog/tag/references.html">references</a> <a href="http://vene.ro/blog/tag/static-blog.html">static blog</a> <a href="http://vene.ro/blog/tag/static-website.html">static website</a> <a href="http://vene.ro/blog/tag/uncategorized.html">Uncategorized</a> </p>
+</footer><!-- /.post-info --><h2>Hook</h2>
+<p>Wouldn&#8217;t you like to manage your academic publications list easily
+within the context of your static website? Without resorting to external
+services, or to software like <em>bibtex2html</em>, which is very nice but will
+then require restyling to fit your&nbsp;templates?</p>
+<p>Look no more, with the help of <a href="https://github.com/vene/pelican-bibtex">pelican-bibtex</a> you can now manage
+your papers from within&nbsp;Pelican!</p>
+<h2>Backstory</h2>
+<p>At <a href="http://fseoane.net">Fabian</a>&#8216;s advice, I started playing around with <a href="http://getpelican.com">Pelican</a>, a
+static website/blog generator for Python. I like it better than the
+other generators I used before, so I chose it the next time I had to set
+up a website. I still didn&#8217;t make the courage to migrate my current
+website and blog to it, but I promise I&nbsp;will.</p>
+<p>Pelican has a public plugins repository, but they have a license
+constraint for all contributions. My plugin isn&#8217;t complicated, but I had
+to &#8220;reverse engineer&#8221; undocumented parts of the <a href="http://pybtex.sourceforge.net">pybtex</a> <span class="caps">API</span>. I think
+that maybe that code that I used to render citations programatically can
+be useful to others, so I don&#8217;t want to release it under a restrictive
+license. For this reason, I publish <a href="https://github.com/vene/pelican-bibtex">pelican-bibtex</a> in my personal
+GitHub&nbsp;account.</p>
+<p>You can see it in action in the <a href="https://github.com/nlp-unibuc/nlp-unibuc-website/">source code</a> for the website I am
+working on at the moment, the home page of my research group. Example
+output generated using pelican-bibtex can be seen <a href="http://nlp-unibuc.github.io/publications.html">here</a>.</p>
+<h2>Possible&nbsp;extensions</h2>
+<p>I have not dug in too deeply but I believe this plugin can be extended,
+with not much difficulty, to support referencing in Pelican blogs, and
+render BibTeX references at the end of every post. This idea was
+suggested by Avaris on #pelican, and I find it very cool. Since I don&#8217;t
+need this feature at the moment, it&#8217;s not a priority, but it&#8217;s something
+that I would like to see at some&nbsp;point.</p>                </article>
+                            </aside><!-- /#featured -->
+                            <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+                                                
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://vene.ro/blog/really-most-common-english-idioms.html" rel="bookmark"
+                           title="Permalink to Really the most common english idioms?">Really the most common english&nbsp;idioms?</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2013-02-11T16:50:00">
+                Mon 11 February 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="http://vene.ro/author/vene.html">vene</a>
+        </address>
+        <p>In <a href="http://vene.ro/blog/category/nlp.html">nlp</a>. </p>
+<p>tags: <a href="http://vene.ro/blog/tag/bnc.html">bnc</a> <a href="http://vene.ro/blog/tag/british-national-corpus.html">british national corpus</a> <a href="http://vene.ro/blog/tag/corpus.html">corpus</a> <a href="http://vene.ro/blog/tag/fixed-expression.html">fixed expression</a> <a href="http://vene.ro/blog/tag/fixed-phrase.html">fixed phrase</a> <a href="http://vene.ro/blog/tag/idioms.html">idioms</a> <a href="http://vene.ro/blog/tag/oec.html">oec</a> <a href="http://vene.ro/blog/tag/oxford-english-corpus.html">oxford english corpus</a> <a href="http://vene.ro/blog/tag/corpus-linguistics.html">corpus linguistics</a> <a href="http://vene.ro/blog/tag/nlp.html">nlp</a> </p>
+</footer><!-- /.post-info -->                <p>A while back I ran into <a href="http://voxy.com/blog/index.php/2012/02/top-10-most-common-idioms-in-english/">this blog post</a> and it made me wonder. I&#8217;m
+not a native speaker but the idiomatic phrases that they note as common
+don&#8217;t strike me as such. I don&#8217;t think I have ever encountered them very
+often in real&nbsp;dialogue.</p>
+<p>The ...</p>
+                <a class="readmore" href="http://vene.ro/blog/really-most-common-english-idioms.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://vene.ro/blog/scikit-learn-speed-an-overview-on-the-final-day.html" rel="bookmark"
+                           title="Permalink to Scikit-learn-speed: An overview on the final day">Scikit-learn-speed: An overview on the final&nbsp;day</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2012-08-20T02:44:00">
+                Mon 20 August 2012
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="http://vene.ro/author/vene.html">vene</a>
+        </address>
+        <p>In <a href="http://vene.ro/blog/category/scikit-learn.html">scikit-learn</a>. </p>
+<p>tags: <a href="http://vene.ro/blog/tag/gsoc.html">gsoc</a> <a href="http://vene.ro/blog/tag/optimization.html">optimization</a> <a href="http://vene.ro/blog/tag/scikit-learn-speed.html">scikit-learn-speed</a> <a href="http://vene.ro/blog/tag/speedup.html">speedup</a> <a href="http://vene.ro/blog/tag/summary.html">summary</a> <a href="http://vene.ro/blog/tag/vbench.html">vbench</a> <a href="http://vene.ro/blog/tag/benchmarking.html">benchmarking</a> <a href="http://vene.ro/blog/tag/python.html">python</a> <a href="http://vene.ro/blog/tag/scikit-learn.html">scikit-learn</a> </p>
+</footer><!-- /.post-info -->                <p>This summer, I was granted the project called <em>scikit-learn-speed</em>,
+consisting of developing a benchmarking platform for <em>scikit-learn</em> and
+using it to find potential speedups, and in the end, make the library go
+faster wherever I&nbsp;can.</p>
+<p>On the official closing day of this work, I&#8217;d like to take a ...</p>
+                <a class="readmore" href="http://vene.ro/blog/scikit-learn-speed-an-overview-on-the-final-day.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://vene.ro/blog/inverses-pseudoinverses-numerical-issues-speed-symmetry.html" rel="bookmark"
+                           title="Permalink to Inverses and pseudoinverses. Numerical issues, speed, symmetry.">Inverses and pseudoinverses. Numerical issues, speed,&nbsp;symmetry.</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2012-08-18T19:41:00">
+                Sat 18 August 2012
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="http://vene.ro/author/vene.html">vene</a>
+        </address>
+        <p>In <a href="http://vene.ro/blog/category/benchmarking.html">benchmarking</a>. </p>
+<p>tags: <a href="http://vene.ro/blog/tag/inv.html">inv</a> <a href="http://vene.ro/blog/tag/matrix-inverse.html">matrix inverse</a> <a href="http://vene.ro/blog/tag/numerical-analysis.html">numerical analysis</a> <a href="http://vene.ro/blog/tag/numerical-methods.html">numerical methods</a> <a href="http://vene.ro/blog/tag/pinv.html">pinv</a> <a href="http://vene.ro/blog/tag/pinvh.html">pinvh</a> <a href="http://vene.ro/blog/tag/positive-semidefinite.html">positive semidefinite</a> <a href="http://vene.ro/blog/tag/pseudoinverse.html">pseudoinverse</a> <a href="http://vene.ro/blog/tag/symmetric.html">symmetric</a> <a href="http://vene.ro/blog/tag/benchmarking.html">benchmarking</a> <a href="http://vene.ro/blog/tag/python.html">python</a> </p>
+</footer><!-- /.post-info -->                <p>The matrix inverse is a cornerstone of linear algebra, taught, along
+with its applications, since high school. The inverse of a matrix
+\$latex A\$, if it exists, is the matrix \$latex A\^{-1}\$ such that
+\$latex <span class="caps">AA</span>\^{-1} = A\^{-1}A = I_n\$. Based on the requirement that the
+left and ...</p>
+                <a class="readmore" href="http://vene.ro/blog/inverses-pseudoinverses-numerical-issues-speed-symmetry.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://vene.ro/blog/the-scikit-learn-speed-ship-has-set-sail-faster-than-ever-with-multi-step-benchmarks.html" rel="bookmark"
+                           title="Permalink to The scikit-learn-speed ship has set sail! Faster than ever, with multi-step benchmarks!">The scikit-learn-speed ship has set sail! Faster than ever, with multi-step&nbsp;benchmarks!</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2012-08-11T17:32:00">
+                Sat 11 August 2012
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="http://vene.ro/author/vene.html">vene</a>
+        </address>
+        <p>In <a href="http://vene.ro/blog/category/scikit-learn.html">scikit-learn</a>. </p>
+<p>tags: <a href="http://vene.ro/blog/tag/multi-step.html">multi-step</a> <a href="http://vene.ro/blog/tag/multistep.html">multistep</a> <a href="http://vene.ro/blog/tag/vbench.html">vbench</a> <a href="http://vene.ro/blog/tag/benchmarking.html">benchmarking</a> <a href="http://vene.ro/blog/tag/python.html">python</a> <a href="http://vene.ro/blog/tag/scikit-learn.html">scikit-learn</a> </p>
+</footer><!-- /.post-info -->                <p>I am pleased to announce that last night at 2:03 <span class="caps">AM</span>, the first fully
+automated run of the scikit-learn-speed test suite has run on our
+Jenkins instance! You can admire it at <a href="http://jenkins-scikit-learn.github.com/scikit-learn-speed/">its temporary home</a> for now.
+As soon as we verify that everything is good, we will move ...</p>
+                <a class="readmore" href="http://vene.ro/blog/the-scikit-learn-speed-ship-has-set-sail-faster-than-ever-with-multi-step-benchmarks.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            </ol><!-- /#posts-list -->
+                            <p class="paginator">
+        Page 1 / 9
+            <a href="http://vene.ro/blog/index2.html">&raquo;</a>
+    </p>
+                        </section><!-- /#content -->
+                    <section id="extras" class="body">
+                        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Go <a href="/">home</a>. 
+                Powered by <a href="http://getpelican.com/">Pelican</a>
+                </address><!-- /#about -->
+        </footer><!-- /#contentinfo -->
+        </div>
+</div>
+</body>
+</html>

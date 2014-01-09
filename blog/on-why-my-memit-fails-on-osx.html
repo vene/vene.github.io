@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <title>On why my %memit fails on OSX</title>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="http://vene.ro/theme/css/main.css" type="text/css" />
+                <link href="http://vene.ro/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Vlad Niculae (~vene) Atom Feed" />
+                        <link href='http://fonts.googleapis.com/css?family=Averia+Gruesa+Libre|Alegreya:400italic,400,700|Alegreya+SC&subset=latin-ext' rel='stylesheet' type='text/css'>
+
+        <!--[if IE]>
+                <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+        <!--[if lte IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="http://vene.ro/css/ie.css"/>
+                <script src="http://vene.ro/js/IE8.js" type="text/javascript"></script><![endif]-->
+
+        <!--[if lt IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="http://vene.ro/css/ie6.css"/><![endif]-->
+
+</head>
+
+<body id="index" class="home">
+<div id="container">
+        <header id="banner" class="body">
+                <div id="header">Vlad Niculae (~vene)</div>
+                <!--<nav><ul>
+                                                    <li><a href="http://vene.ro/fonts.html">Fonts</a></li>
+                                    <li><a href="http://vene.ro/papers.html">Publications</a></li>
+                                    <li><a href="http://vene.ro/talks.html">Talks</a></li>
+                                    <li><a href="http://vene.ro/teaching.html">Teaching</a></li>
+                                                                    <li><a href="/publications.html">Publications</a></li>
+                                    <li><a href="/blog/">Blog</a></li>
+                                                </ul></nav> -->
+        </header><!-- /#banner -->
+        <div id="main" role="main">
+        <section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="http://vene.ro/blog/on-why-my-memit-fails-on-osx.html" rel="bookmark"
+           title="Permalink to On why my %memit fails on OSX">On why my %memit fails on&nbsp;<span class="caps">OSX</span></a></h1>
+          </header>
+
+    <div class="entry-content">
+      <footer class="post-info">
+        <abbr class="published" title="2012-07-04T12:49:00">
+                Wed 04 July 2012
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="http://vene.ro/author/vene.html">vene</a>
+        </address>
+        <p>In <a href="http://vene.ro/blog/category/benchmarking.html">benchmarking</a>. </p>
+<p>tags: <a href="http://vene.ro/blog/tag/ipython.html">IPython</a> <a href="http://vene.ro/blog/tag/magic.html">magic</a> <a href="http://vene.ro/blog/tag/memit.html">memit</a> <a href="http://vene.ro/blog/tag/mprun.html">mprun</a> <a href="http://vene.ro/blog/tag/benchmarking.html">benchmarking</a> <a href="http://vene.ro/blog/tag/python.html">python</a> </p>
+</footer><!-- /.post-info -->      <p>In my <a href="http://localhost:8001/2012/07/02/more-on-memory-benchmarking/" title="More on memory benchmarking">last post</a> I mentioned that I&#8217;m not satisfied with the current
+state of <code>%memit</code>, because some more complicated numerical function
+calls make it crash. I will start this post with a reminder of a pretty
+important&nbsp;bug:</p>
+<p><strong>[On MacOS X (10.7 but maybe more), after forking a new process, there
+is a segfault in Grand Central Dispatch on the <span class="caps">BLAS</span> <span class="caps">DGEMM</span> function from
+Accelerate.][]<br />
+</strong></p>
+<p><strong><span class="caps">EDIT</span> 1:</strong> In a hurry, I forgot to mention how <a href="http://twitter.com/ogrisel/">Olivier Grisel</a> and
+<a href="https://github.com/cournape">David Cournapeau</a> spent some time narrowing down this issue, starting
+from an <a href="https://github.com/scikit-learn/scikit-learn/issues/636">odd testing bug in scikit-learn</a>. They reported it to Apple,
+but there was, as of the date of this post, no&nbsp;reaction.</p>
+<p><strong><span class="caps">EDIT</span> 2:</strong> MinRK <a href="https://twitter.com/minrk/status/228265246819774464" title="Min's tweet">confirms</a>, and I verified shortly after, that this
+bug is fixed in Mountain Lion (10.8). Still not sure how far back it
+goes, though, so feedback is&nbsp;welcome.</p>
+<p>When I first tried to make the <code>%memit</code> magic, I thought about simply
+measuring the current memory, running the command, and measuring the
+memory again. The problem is the results are not consistent, because
+Python <a href="http://effbot.org/pyfaq/why-doesnt-python-release-the-memory-when-i-delete-a-large-object.htm">tries to reuse already allocated memory whenever it can</a>.</p>
+<p>Using memory_profiler, here&#8217;s an example illustrating this elastic
+memory management:<br />
+[sourcecode lang=&#8221;python&#8221;]<br />
+# mem_test.py<br />
+import numpy as&nbsp;np</p>
+<p>def make_a_large_array():<br />
+return np.ones((1000,&nbsp;1000))</p>
+<p>def main():<br />
+make_a_large_array()<br />
+make_a_large_array()<br />&nbsp;make_a_large_array()</p>
+<p># in IPython:<br />
+In [1]: import&nbsp;mem_test</p>
+<p>In [2]: %mprun -f mem_test.main mem_test.main()<br />
+Filename:&nbsp;mem_test.py</p>
+<h1>Line # Mem usage Increment Line&nbsp;Contents</h1>
+<p>8 24.8477 <span class="caps">MB</span> 0.0000 <span class="caps">MB</span> def main():<br />
+9 24.8633 <span class="caps">MB</span> 0.0156 <span class="caps">MB</span> make_a_large_array()<br />
+10 32.4688 <span class="caps">MB</span> 7.6055 <span class="caps">MB</span> make_a_large_array()<br />
+11 32.4688 <span class="caps">MB</span> 0.0000 <span class="caps">MB</span> make_a_large_array()<br />&nbsp;[/sourcecode]</p>
+<p>If this was in an IPython environment, and one would like to see how
+much memory <code>make_a_large_array()</code> uses, you could say we can simply run
+it a few times and take the maximum. However, if you happened to
+accidentally call <code>main()</code> once before, you will no longer get a good&nbsp;result:</p>
+<p>[sourcecode lang=&#8221;python&#8221;]<br />
+In [3]: %mprun -f mem_test.main mem_test.main()<br />
+Filename:&nbsp;mem_test.py</p>
+<h1>Line # Mem usage Increment Line&nbsp;Contents</h1>
+<p>8 32.4922 <span class="caps">MB</span> 0.0000 <span class="caps">MB</span> def main():<br />
+9 32.5234 <span class="caps">MB</span> 0.0312 <span class="caps">MB</span> make_a_large_array()<br />
+10 32.5234 <span class="caps">MB</span> 0.0000 <span class="caps">MB</span> make_a_large_array()<br />
+11 32.5234 <span class="caps">MB</span> 0.0000 <span class="caps">MB</span> make_a_large_array()<br />&nbsp;[/sourcecode]</p>
+<p>So how can we get consistent results for the memory usage of an
+instruction? We could run it in a fresh, new process. I implemented this
+in %memit and it&nbsp;shows:</p>
+<p>[sourcecode lang=&#8221;python&#8221;]<br />
+In [5]: %memit mem_test.make_a_large_array()<br />
+maximum of 3: 8.039062 <span class="caps">MB</span> per&nbsp;loop</p>
+<p>In [6]: %memit mem_test.make_a_large_array()<br />
+maximum of 3: 8.035156 <span class="caps">MB</span> per&nbsp;loop</p>
+<p>In [7]: %memit mem_test.make_a_large_array()<br />
+maximum of 3: 8.042969 <span class="caps">MB</span> per loop<br />&nbsp;[/sourcecode]</p>
+<p>This way you can also realistically benchmark&nbsp;assignments:</p>
+<p>[sourcecode lang=&#8221;python&#8221;]<br />
+In [8]: %memit X = mem_test.make_a_large_array()<br />
+maximum of 3: 8.054688 <span class="caps">MB</span> per&nbsp;loop</p>
+<p>In [9]: %memit X = mem_test.make_a_large_array()<br />
+maximum of 3: 8.058594 <span class="caps">MB</span> per&nbsp;loop</p>
+<p>In [10]: %memit X = mem_test.make_a_large_array()<br />
+maximum of 3: 8.058594 <span class="caps">MB</span> per loop<br />&nbsp;[/sourcecode]</p>
+<p>If we don&#8217;t spawn a subprocess, <code>del</code> doesn&#8217;t help, but allocating new
+variables does:<br />
+[sourcecode lang=&#8221;python&#8221;]<br />
+In [11]: %memit -i X = mem_test.make_a_large_array()<br />
+maximum of 3: 7.632812 <span class="caps">MB</span> per&nbsp;loop</p>
+<p>In [12]: del&nbsp;X</p>
+<p>In [13]: %memit -i X = mem_test.make_a_large_array()<br />
+maximum of 3: 0.000000 <span class="caps">MB</span> per&nbsp;loop</p>
+<p>In [14]: %memit -i Y = mem_test.make_a_large_array()<br />
+maximum of 3: 7.632812 <span class="caps">MB</span> per&nbsp;loop</p>
+<p>In [15]: %memit -i Z = mem_test.make_a_large_array()<br />
+maximum of 3: 7.632812 <span class="caps">MB</span> per loop<br />&nbsp;[/sourcecode]</p>
+<p>Now, the problem is that when the function that you are benchmarking
+contains calls to <code>np.dot</code> (matrix multiplication), the subprocess will
+consistently fail with <span class="caps">SIGSEGV</span> on affected <span class="caps">OS</span> X systems. These are
+actually pretty much all the functions that I intended <code>%memit</code> for:
+numerical applications. For that reason, I have made <code>%memit</code> notify the
+user when all subprocesses fail, and to suggest the usage of the <code>-i</code>
+flag.</p>
+<p>I think that, with this update, <code>%memit</code> is flexible and usable enough
+for actual use, and therefore for merging into&nbsp;memory_profiler.</p>
+<p>[On MacOS X (10.7 but maybe more), after forking a new process, there
+  is a segfault in Grand Central Dispatch on the <span class="caps">BLAS</span> <span class="caps">DGEMM</span> function
+  from Accelerate.]:&nbsp;https://gist.github.com/2027412</p>
+    </div><!-- /.entry-content -->
+    
+  </article>
+</section>
+        <section id="extras" class="body">
+                        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Go <a href="/">home</a>. 
+                Powered by <a href="http://getpelican.com/">Pelican</a>
+                </address><!-- /#about -->
+        </footer><!-- /#contentinfo -->
+        </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <title>GSoC 2012 proposal: Need for scikit-learn speed</title>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="http://vene.ro/theme/css/main.css" type="text/css" />
+                <link href="http://vene.ro/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Vlad Niculae (~vene) Atom Feed" />
+                        <link href='http://fonts.googleapis.com/css?family=Averia+Gruesa+Libre|Alegreya:400italic,400,700|Alegreya+SC&subset=latin-ext' rel='stylesheet' type='text/css'>
+
+        <!--[if IE]>
+                <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+        <!--[if lte IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="http://vene.ro/css/ie.css"/>
+                <script src="http://vene.ro/js/IE8.js" type="text/javascript"></script><![endif]-->
+
+        <!--[if lt IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="http://vene.ro/css/ie6.css"/><![endif]-->
+
+</head>
+
+<body id="index" class="home">
+<div id="container">
+        <header id="banner" class="body">
+                <div id="header">Vlad Niculae (~vene)</div>
+                <!--<nav><ul>
+                                                    <li><a href="http://vene.ro/fonts.html">Fonts</a></li>
+                                    <li><a href="http://vene.ro/papers.html">Publications</a></li>
+                                    <li><a href="http://vene.ro/talks.html">Talks</a></li>
+                                    <li><a href="http://vene.ro/teaching.html">Teaching</a></li>
+                                                                    <li><a href="/publications.html">Publications</a></li>
+                                    <li><a href="/blog/">Blog</a></li>
+                                                </ul></nav> -->
+        </header><!-- /#banner -->
+        <div id="main" role="main">
+        <section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="http://vene.ro/blog/gsoc-2012-proposal-need-for-scikit-learn-speed.html" rel="bookmark"
+           title="Permalink to GSoC 2012 proposal: Need for scikit-learn speed">GSoC 2012 proposal: Need for scikit-learn&nbsp;speed</a></h1>
+          </header>
+
+    <div class="entry-content">
+      <footer class="post-info">
+        <abbr class="published" title="2012-04-16T00:37:00">
+                Mon 16 April 2012
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="http://vene.ro/author/vene.html">vene</a>
+        </address>
+        <p>In <a href="http://vene.ro/blog/category/scikit-learn.html">scikit-learn</a>. </p>
+<p>tags: <a href="http://vene.ro/blog/tag/gsoc.html">gsoc</a> <a href="http://vene.ro/blog/tag/proposal.html">proposal</a> <a href="http://vene.ro/blog/tag/scikit-learn.html">scikit-learn</a> </p>
+</footer><!-- /.post-info -->      <p>This summer I hope to be able to put in another full-time amount of
+effort into scikit-learn. After a successful Google Summer of Code
+project last year on dictionary learning, I now plan to do some
+low-level work. The title of my proposal is: &#8220;Need for scikit-learn
+speed&#8221; and, in a nutshell, will make the scikit go faster and will help
+it stay that&nbsp;way.</p>
+<p>Scikit-learn has always enforced standards of quality that kept all
+implementations at a non-trivial level (i.e. faster than using <a href="http://docs.scipy.org/doc/scipy/reference/optimize.html">the
+generic optimizers in scipy</a>). However, not all modules are equal:
+some have received more attention for speed than others (for example the
+<span class="caps">SGD</span> classes). I intend to raise the bar towards a more uniform&nbsp;level.</p>
+<h2>Are you crazy, can you really do&nbsp;this?</h2>
+<p>Well, of course. This might not the usual GSoC proposal, but I can show
+how I can do it and how it&#8217;s easily quantifiable. Actually, a very
+important part of the work will be to make scikit-learn&#8217;s speed easily&nbsp;measurable.</p>
+<p>As for the specific speed-ups, I have shown <a href="http://localhost:8001/2011/08/07/optimizing-orthogonal-matching-pursuit-code-in-numpy-part-1/" title="Optimizing Orthogonal Matching Pursuit code in Numpy, part 1">in</a> <a href="http://localhost:8001/2011/08/11/optimizing-orthogonal-matching-pursuit-code-in-numpy-part-2/" title="Optimizing Orthogonal Matching Pursuit code in Numpy, part 2">the</a> <a href="http://localhost:8001/2011/11/18/the-nasty-bug-crawling-in-my-orthogonal-matching-pursuit-code/" title="The nasty bug crawling in my Orthogonal Matching Pursuit code">past</a> that
+I can do algorithmic and memory layout optimizations in numerical code.
+There are parts in the scikit-learn that can benefit from such work: for
+example only recently Peter merged this <a href="https://github.com/scikit-learn/scikit-learn/pull/545">pull request</a> significantly
+improving SGDClassifier&#8217;s test time performance by switching the memory
+layout of the coefficients: they were laid out optimally for the
+training phase, not for the prediction&nbsp;phase.</p>
+<p>There are certainly more opportunities for such speed improvements in
+the scikit. Of course there is a lot of code that can&#8217;t reasonably be
+made any faster (I have a feeling that SGDClassifier is at the moment
+such a case, but we can&#8217;t know for sure without heavy profiling). But
+generally there are many speed fixes that could weigh a lot: for
+example, a <a href="http://cython.org/">Cython</a> implementation of the <code>euclidean_distances</code>
+function that is able to use preallocated memory will improve the
+performance of raw NearestNeighbours queries as well as of the KMeans
+and hierarchical clustering&nbsp;algorithms.</p>
+<h2>How will we be able to tell if you&nbsp;succeed?</h2>
+<p>A key part of the GSoC project is setting up a
+<abbr title="Continuous Integration"><span class="caps">CI</span></abbr>-style benchmark platform.
+The point is to be able to track how the speed of certain operations
+evolves in time. For such purposes, Wes McKinney developed the
+<a href="https://github.com/pydata/vbench">vbench</a> project, introduced in <a href="http://wesmckinney.com/blog/?p=373">this blog post</a>. The goal is for
+every scikit-learn module to have several such benchmarks, for
+differently shaped and structured&nbsp;data.</p>
+<p>Having such a benchmark suite available is the equivalent of a test
+suite, in terms of performance. It makes developers be extra conscious
+of the effect of their changes. It also makes it more fun to chase speed
+improvements, thanks to the positive reinforcement it&nbsp;gives.</p>
+<p>There are some static benchmarks comparing the performance of
+scikit-learn algorithms with other well-known libraries in the
+<a href="http://scikit-learn.sourceforge.net/ml-benchmarks/">ml-benchmarks</a> project. It would be very helpful to have such a
+benchmark suite that automatically keeps&nbsp;up-to-date.</p>
+<h2>Side&nbsp;effects</h2>
+<p>The cool thing about such a project is that it should raise the overall
+quality of the scikit. The refactoring will lead to an increase in test
+coverage, because the low-coverage modules are expected to be less
+optimized as well. Also, the benchmarks will lead to well-backed
+summaries in the documentation, such as <a href="http://scikit-learn.org/dev/modules/clustering.html#overview-of-clustering-methods">the one recently added in the
+clustering section</a>.</p>
+<p>Since the scikit is reaching a state where many well-known algorithms
+are available, the <strong>1.0</strong> release is slowly approaching. My Google
+Summer of Code project should bring the scikit significantly closer to
+that&nbsp;milestone.</p>
+    </div><!-- /.entry-content -->
+    
+  </article>
+</section>
+        <section id="extras" class="body">
+                        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Go <a href="/">home</a>. 
+                Powered by <a href="http://getpelican.com/">Pelican</a>
+                </address><!-- /#about -->
+        </footer><!-- /#contentinfo -->
+        </div>
+</div>
+</body>
+</html>

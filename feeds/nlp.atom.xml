@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Vlad Niculae (~vene)</title><link href="http://vene.ro/" rel="alternate"></link><link href="http://vene.ro/feeds/nlp.atom.xml" rel="self"></link><id>http://vene.ro/</id><updated>2013-02-11T16:50:00+01:00</updated><entry><title>Really the most common english idioms?</title><link href="http://vene.ro/blog/really-most-common-english-idioms.html" rel="alternate"></link><updated>2013-02-11T16:50:00+01:00</updated><author><name>vene</name></author><id>tag:vene.ro,2013-02-11:blog/really-most-common-english-idioms.html</id><summary type="html">&lt;p&gt;A while back I ran into &lt;a href="http://voxy.com/blog/index.php/2012/02/top-10-most-common-idioms-in-english/"&gt;this blog post&lt;/a&gt; and it made me wonder. I&amp;#8217;m
+not a native speaker but the idiomatic phrases that they note as common
+don&amp;#8217;t strike me as such. I don&amp;#8217;t think I have ever encountered them very
+often in real&amp;nbsp;dialogue.&lt;/p&gt;
+&lt;p&gt;The blog post lists the 10 most common idioms in English. &lt;strong&gt;Idioms&lt;/strong&gt;,
+also known less ambiguously as &lt;strong&gt;fixed expressions&lt;/strong&gt;, are units of
+language that span at least two words. Their meaning, relatively to the
+individual meaning of the parts of the phrase, are figurative. Despite
+this, fixed expressions don&amp;#8217;t classify as creative language, or
+exploitations. By definition most speakers will unequivocally be
+familiar with&amp;nbsp;them.&lt;/p&gt;
+&lt;p&gt;For example, they cite &lt;em&gt;piece of cake&lt;/em&gt; as the most common idiomatic
+expression. This refers to using the phrase to mean that something is
+easy, that it isn&amp;#8217;t challenging. An example of literal use, however,
+would be when ordering &lt;em&gt;a piece of cake&lt;/em&gt; for desert in a&amp;nbsp;restaurant.&lt;/p&gt;
+&lt;p&gt;Everyone knows that language is a perpetually changing thing, so to
+begin with it&amp;#8217;s even slightly misleading to discuss of the commonness of
+a phrase, without giving more context. The blog post doesn&amp;#8217;t justify the
+ranking with any numbers anyway, so let&amp;#8217;s take them one by one and find
+out how common they really&amp;nbsp;are!&lt;/p&gt;
+&lt;h2&gt;Corpus&amp;nbsp;Linguistics&lt;/h2&gt;
+&lt;p&gt;The approach we are taking here is known as corpus linguistics. The best
+way to argue that a certain phrase is common, that something is used
+with a specific meaning or that some constructions are normal is, under
+corpus linguistics, not to make up examples that seem reasonable, but to
+look at &lt;strong&gt;representative collections of text&lt;/strong&gt; (corpora) and trying to
+find the examples there. The conclusions you get this way are backed by
+real-world language&amp;nbsp;use.&lt;/p&gt;
+&lt;p&gt;An argument often brought against generative linguistics is that it
+focuses on the (hard) border between grammatical and not grammatical,
+and the border is usually defined by made-up examples. This is
+inappropriate for studying how the norms are exploited in real language
+use, for example. I refer the interested to the work of &lt;a href="http://www.patrickhanks.com/"&gt;Patrick
+Hanks&lt;/a&gt; [&lt;a href="#f1"&gt;1&lt;/a&gt;, &lt;a href="#f2"&gt;2&lt;/a&gt;].&lt;/p&gt;
+&lt;p&gt;Corpus linguistics is sensitive to the corpus used. For this example
+let&amp;#8217;s use two British English corpora: the &lt;a href="http://www.natcorp.ox.ac.uk/"&gt;British National Corpus&lt;/a&gt;
+and the &lt;a href="http://oxforddictionaries.com/words/the-oxford-english-corpus"&gt;Oxford English Corpus&lt;/a&gt;. Measuring by number of words, the
+latter is around 20 times bigger. The strong point of the &lt;span class="caps"&gt;BNC&lt;/span&gt; is the
+attention given to the mixing proportions of various domains. The &lt;span class="caps"&gt;OEC&lt;/span&gt;,
+on the other hand, is larger and more recent. I have a feeling (but I
+cannot strongly affirm) that the differences in the following results
+arise from the inclusion in the &lt;span class="caps"&gt;OEC&lt;/span&gt; of blogs dating from the&amp;nbsp;mid-2000s.&lt;/p&gt;
+&lt;h2&gt;Cognitive salience vs. social&amp;nbsp;salience&lt;/h2&gt;
+&lt;p&gt;One of the key ideas that motivate corpus approaches is the mismatch
+between these. The cognitive salience of something is the ease with
+which we can recall it. An example often used in language is the fixed
+expression &lt;em&gt;kicking the bucket&lt;/em&gt;. It is one of the standard examples of
+fixed expressions that people give very often when asked. It is supposed
+to mean &lt;em&gt;dying&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;However, big surprise: the &lt;span class="caps"&gt;BNC&lt;/span&gt; has only 18 instances of this phrase, out
+of which only 3 are idiomatic, the rest being either literal or
+metalinguistic. This is a nice example of the salience contrast, but we
+mustn&amp;#8217;t hurry to conclusions. The &lt;span class="caps"&gt;OEC&lt;/span&gt; has 193 examples (still few,
+relative to its size) but a lot more of them are idiomatic uses. To save
+the time I didn&amp;#8217;t look at all the examples, but took a random sample of
+size 18, to compare the relative frequencies to &lt;span class="caps"&gt;BNC&lt;/span&gt;. Here, 15 out of 18
+instances are idiomatic and none are meta. Quite a&amp;nbsp;difference!&lt;/p&gt;
+&lt;p&gt;This goes to show the importance of context when we draw conclusions
+about language use. Now let&amp;#8217;s tackle the list with a similar&amp;nbsp;analysis.&lt;/p&gt;
+&lt;h2&gt;The&amp;nbsp;idioms&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Piece of&amp;nbsp;cake&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;In &lt;span class="caps"&gt;BNC&lt;/span&gt;, this phrase occurs 51 times. 29 of these occurrences,
+however, the meaning is literal. In &lt;span class="caps"&gt;OEC&lt;/span&gt; we find 601 occurrences. In
+a random sample of size 51 we find 12 literal&amp;nbsp;uses.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Costing an arm and a&amp;nbsp;leg&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;For flexibility we search for the phrase &lt;em&gt;an arm and a leg&lt;/em&gt;. In &lt;span class="caps"&gt;BNC&lt;/span&gt;
+it can be found 29 times: one literal, four with the verb &lt;em&gt;to pay&lt;/em&gt;,
+and 16 with &lt;em&gt;to cost&lt;/em&gt;. In &lt;span class="caps"&gt;OEC&lt;/span&gt; it appears 228 times. We take, again,
+a sample of size 29 and find no literal uses, 16 with &lt;em&gt;to cost&lt;/em&gt;,
+four with &lt;em&gt;to pay&lt;/em&gt;, three with &lt;em&gt;to charge&lt;/em&gt; and a few different uses.
+The figurative meaning is the same in all cases: a lot of&amp;nbsp;money.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Break a leg&lt;/strong&gt;
+    &lt;p&gt;
+    &lt;span class="caps"&gt;BNC&lt;/span&gt;: 16, 13 of which are literal. &lt;span class="caps"&gt;OEC&lt;/span&gt;: 70 hits, 10/16&amp;nbsp;literal.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Hitting the&amp;nbsp;books&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class="caps"&gt;BNC&lt;/span&gt;: 1 occurrence of &lt;em&gt;hit the record books&lt;/em&gt;, which has a different
+meaning. The idiom is never used. &lt;span class="caps"&gt;OEC&lt;/span&gt;: 135, one of which&amp;nbsp;literal.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Letting the cat out of the&amp;nbsp;bag&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;We just looked for cooccurrences of &lt;em&gt;cat&lt;/em&gt; in the context of the
+phrase &lt;em&gt;out of the bag&lt;/em&gt;.&lt;br /&gt;
+&lt;span class="caps"&gt;BNC&lt;/span&gt;: 19, out of which 3 metalinguistic/literal. &lt;span class="caps"&gt;OEC&lt;/span&gt;: 298, and out
+of a sample of 19, all were&amp;nbsp;idiomatic.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Hitting the nail on the&amp;nbsp;head&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class="caps"&gt;BNC&lt;/span&gt;: 12 instances, all idiomatic. &lt;span class="caps"&gt;OEC&lt;/span&gt;: 484, and out of a sample of
+12 all were&amp;nbsp;idiomatic.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;When pigs fly&lt;/strong&gt;
+    &lt;p&gt;
+    We looked for the lemma &lt;em&gt;fly&lt;/em&gt; before the word &lt;em&gt;pigs&lt;/em&gt; therefore
+    catching multiple variations.&lt;br /&gt;
+    &lt;span class="caps"&gt;BNC&lt;/span&gt;: 17 hits, &lt;span class="caps"&gt;OEC&lt;/span&gt;:&amp;nbsp;240.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Judging a book by its&amp;nbsp;cover&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;We looked for the fixed phrase &lt;em&gt;book by its cover&lt;/em&gt;, because the
+leading verb might vary.&lt;br /&gt;
+In the &lt;span class="caps"&gt;BNC&lt;/span&gt;, 11 instances (1 of them with tell instead of judge). In
+&lt;span class="caps"&gt;OEC&lt;/span&gt;, 195 instances. Sampling 11, all were&amp;nbsp;idiomatic.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Biting off more than one can&amp;nbsp;chew&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class="caps"&gt;BNC&lt;/span&gt;: 16 occurences, one of which with &amp;#8220;to take&amp;#8221; instead of &amp;#8220;to
+bite&amp;#8221;. &lt;span class="caps"&gt;OEC&lt;/span&gt;: 231, all idiomatic after sampling&amp;nbsp;16.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Scratching one&amp;#8217;s&amp;nbsp;back&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class="caps"&gt;BNC&lt;/span&gt;: 23, out of which only 5 idiomatic. &lt;span class="caps"&gt;OEC&lt;/span&gt;: 756, 5/23&amp;nbsp;idiomatic.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;Recalculating the&amp;nbsp;rank&lt;/h2&gt;
+&lt;p&gt;
+We now have enough data to reorder the expressions and compare. The
+result will be more approximate for the &lt;span class="caps"&gt;OEC&lt;/span&gt; because of our use of small
+subsamples to estimate the frequencies, but hopefully it will still be
+interesting. The way we are estimating the counts for the &lt;span class="caps"&gt;OEC&lt;/span&gt; is as
+follows: take, for instance, *break a leg*. It was found 70 times, and
+out of a sample of 16, 10 were literal. The expected number of idiomatic
+uses is therefore:
+
+&lt;center&gt;
+[latex]n = &amp;#92;left ( 1 - &amp;#92;frac{10}{16} &amp;#92;right ) &amp;#92;cdot 70 =
+26.25[/latex]
+
+&lt;/center&gt;
+
+Repeating this computation and skipping a ton of steps leads to the
+following&amp;nbsp;rankings:
+
+&lt;/p&gt;
+
+&lt;div style="float: left; margin-left: 5em;"&gt;
+**In the British National&amp;nbsp;Corpus:**
+
+&lt;/p&gt;
+1.  Costing an arm and a leg
+2.  Piece of cake
+3.  When pigs fly
+4.  Letting the cat out of the bag
+5.  Biting off more than one can chew
+6.  Hitting the nail on the head
+7.  Judging a book by its cover
+8.  Scratching one’s back
+9.  Break a leg
+10. Hitting the books
+
+&lt;/div&gt;
+
+&lt;div style="float: right; margin-right: 5em;"&gt;
+**In the Oxford English&amp;nbsp;Corpus:**
+
+&lt;/p&gt;
+1.  Hitting the nail on the head
+2.  Piece of cake
+3.  Letting the cat out of the bag
+4.  When pigs fly
+5.  Biting off more than one can chew
+6.  Costing an arm and a leg
+7.  Judging a book by its cover
+8.  Scratching one’s back
+9.  Hitting the books
+10. Break a leg
+
+&lt;/div&gt;
+
+&lt;p&gt;We can see that apart from the apparent switching of &lt;em&gt;hitting the nail
+on the head&lt;/em&gt; with &lt;em&gt;costing an arm and a leg&lt;/em&gt;, the rankings are not too
+different. We can quantify this by using the &lt;strong&gt;Rank Distance&lt;/strong&gt;, a metric
+introduced by Liviu P. Dinu [&lt;a href="#f3"&gt;3&lt;/a&gt;, &lt;a href="#f4"&gt;4&lt;/a&gt;]. Here, all our 3 rankings are
+over the same domain: we are not looking for the most frequent idioms in
+the corpora, this would be very hard. We are just reordering the
+proposed rank according to the occurrences in &lt;span class="caps"&gt;BNC&lt;/span&gt; and &lt;span class="caps"&gt;OEC&lt;/span&gt;. In this
+simple case, Rank Distance reduces to [latex]\ell_1[/latex] distance
+over rank position vectors. The weighted Rank Distance, bounded on
+[latex][0, 1][/latex] is in this case given by a scaling factor of
+[latex]0.5k\^2[/latex] where &lt;em&gt;k&lt;/em&gt; is the length of the rankings (10 in
+our&amp;nbsp;case).&lt;/p&gt;
+&lt;p&gt;The computed distance between the original ranking and the &lt;span class="caps"&gt;BNC&lt;/span&gt;
+reordering is 0.52. Between the original and the &lt;span class="caps"&gt;OEC&lt;/span&gt; reordering, it is
+0.68. Our two reorderings are much closer: the distance is 0.28. This is
+mostly because that the permutations between the two reorderings affect
+the top position, and are therefore weighted&amp;nbsp;more.&lt;/p&gt;
+&lt;p&gt;It&amp;#8217;s also interesting to look at the ratio of the counts. Interestingly,
+they approximately differ by a constant factor not far from the relative
+size difference of the two corpora, as would be&amp;nbsp;expected.&lt;/p&gt;
+&lt;p&gt;We have to throw away &lt;em&gt;hitting the books&lt;/em&gt; because its &lt;span class="caps"&gt;BNC&lt;/span&gt; zero count
+leads to divisions by zero. After this step, the average of the relative
+counts of the idioms is 19.5, with a standard deviation of 10.1, while
+&lt;span class="caps"&gt;OED&lt;/span&gt; is supposed to have around 20 times more words than the&amp;nbsp;&lt;span class="caps"&gt;BNC&lt;/span&gt;.&lt;/p&gt;
+&lt;h2&gt;Conclusions&lt;/h2&gt;
+&lt;p&gt;Well, it seems people don&amp;#8217;t say &lt;em&gt;break a leg&lt;/em&gt; and &lt;em&gt;let&amp;#8217;s hit the books&lt;/em&gt;
+as often as the original author claims. The popularity of most of the
+cited idioms seems supported by the data, but we have no easy way to
+find other idioms that might turn out to be much more frequent. Corpus
+linguistics is a reliable way to measure the social salience of language
+patterns It should always be used to verify and back empty claims of the
+form &lt;em&gt;X is correct&lt;/em&gt;, &lt;em&gt;Y is frequent&lt;/em&gt; or &lt;em&gt;Nobody says Z&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;[&lt;span id="f1"&gt;1&lt;/span&gt;] Patrick Hanks, &lt;a href="http://www.patrickhanks.com/uploads/5/1/4/9/5149363/howpeopleusewordstomakemeanings.pdf"&gt;How people use words to make
+meanings&lt;/a&gt;.&lt;br /&gt;
+[&lt;span id="f2"&gt;2&lt;/span&gt;] Patrick Hanks, &lt;a href="http://www.amazon.com/Lexical-Analysis-Exploitations-Patrick-Hanks/dp/0262018578"&gt;Lexical Analysis: Norms and
+Exploitations&lt;/a&gt;. The &lt;span class="caps"&gt;MIT&lt;/span&gt; Press (January 25, 2013)&lt;br /&gt;
+[&lt;span id="f3"&gt;3&lt;/span&gt;] Liviu P. Dinu, Florin Manea. &lt;a href="http://dl.acm.org/citation.cfm?id=1167105"&gt;An efficient
+approach for the rank aggregation problem&lt;/a&gt;. In: Theoretical Computer
+Science, Volume 359 Issue 1, 14 August 2006. Pages 455 - 461.&lt;br /&gt;
+[&lt;span id="f4"&gt;4&lt;/span&gt;] Liviu P. Dinu, [On the Classification and
+Aggregation of Hierarchies with Different Constitutive Elements][].
+Fundam. Inform. 55(1): 39-50&amp;nbsp;(2003)&lt;/p&gt;
+&lt;p&gt;[On the Classification and Aggregation of Hierarchies with Different
+  Constitutive Elements]:&amp;nbsp;http://dl.acm.org/citation.cfm?id=937465&lt;/p&gt;</summary><category term="bnc"></category><category term="british national corpus"></category><category term="corpus"></category><category term="fixed expression"></category><category term="fixed phrase"></category><category term="idioms"></category><category term="oec"></category><category term="oxford english corpus"></category><category term="corpus linguistics"></category><category term="nlp"></category></entry><entry><title>Compiling and Installing GLARF and the bundled Charniak parser on MacOS X</title><link href="http://vene.ro/blog/compiling-and-installing-glarf-and-the-bundled-charniak-parser-on-macos-x.html" rel="alternate"></link><updated>2012-06-21T12:32:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2012-06-21:blog/compiling-and-installing-glarf-and-the-bundled-charniak-parser-on-macos-x.html</id><summary type="html">&lt;p&gt;It seems that I keep getting handed buggy code to install. These are
+cases of research software where the developers didn&amp;#8217;t make the effort
+to make sure their tool works on the platforms it&amp;nbsp;should.&lt;/p&gt;
+&lt;p&gt;[&lt;span class="caps"&gt;GLARF&lt;/span&gt;][] (Grammatical and Logical Argument Representation Framework)
+is, in their words, &amp;#8220;a typed feature structure framework for
+representing regularizations of parse trees&amp;#8221;. It is a processing
+pipeline from &lt;span class="caps"&gt;NYU&lt;/span&gt; with rich output including many types of structure in
+the given text. However, it is clearly a case of software whose
+maintenance was abandoned when it &amp;#8220;worked&amp;#8221; for them. The whole install
+and run procedure is pretty messy, but at least it&amp;#8217;s documented. The
+problem is, following it step by step doesn&amp;#8217;t work on my MacBook. As
+usual, I needed to hack through it a&amp;nbsp;bit.&lt;/p&gt;
+&lt;p&gt;The Charniak parser distributed with &lt;span class="caps"&gt;GLARF&lt;/span&gt; has now been superseded by
+the [&lt;span class="caps"&gt;BLLIP&lt;/span&gt; parser][]. The new one is tricky to compile as well, but I
+have yet to see if it plugs into &lt;span class="caps"&gt;GLARF&lt;/span&gt;, so I leave this for a future&amp;nbsp;post.&lt;/p&gt;
+&lt;p&gt;Here are the steps I needed to take to make &lt;span class="caps"&gt;GLARF&lt;/span&gt;&amp;nbsp;work:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+Download and unzip the &lt;span class="caps"&gt;GLARF&lt;/span&gt;&amp;nbsp;package.
+
+&lt;/li&gt;
+&lt;li&gt;
+Make sure you have `sbcl` in your path, and your `perl` is in (or linked
+from)&amp;nbsp;`/usr/bin/perl`
+
+&lt;/li&gt;
+&lt;li&gt;
+Set the environment variables. I like to make a shell script to set them
+so I don&amp;#8217;t have to do it every time. So I write something looking like
+this:
+
+[sourcecode lang=&amp;#8221;bash&amp;#8221;]  
+\# glarf\_env.sh
+
+export &lt;span class="caps"&gt;GLARF&lt;/span&gt;=/Users/vene/code/&lt;span class="caps"&gt;GLARF&lt;/span&gt;  
+export &lt;span class="caps"&gt;GLARF&lt;/span&gt;\_JET=\${&lt;span class="caps"&gt;GLARF&lt;/span&gt;}/&lt;span class="caps"&gt;JET&lt;/span&gt;  
+export &lt;span class="caps"&gt;PATH&lt;/span&gt;=\$&lt;span class="caps"&gt;PATH&lt;/span&gt;:.  
+[/sourcecode]
+
+&lt;p&gt;
+Then for every session when I want to use &lt;span class="caps"&gt;GLARF&lt;/span&gt;, I do
+`source&amp;nbsp;glarf_env.sh`.
+
+&lt;/li&gt;
+&lt;li&gt;
+Compile &lt;span class="caps"&gt;GLARF&lt;/span&gt; by running `$&lt;span class="caps"&gt;GLARF&lt;/span&gt;/commands-2010/compile-glarf`. *Note:*
+this only compiles the pipeline lisp&amp;nbsp;code.
+
+&lt;/li&gt;
+&lt;li&gt;
+Now, according to their instructions, you&amp;#8217;re done. However, if you try
+to run it, you&amp;#8217;d notice the output is incomplete. (It goes through the
+named entity extraction part, but it doesn&amp;#8217;t run the parser.) The reason
+for this is that they distribute the Charniak parser with a precompiled
+binary that runs on Linux, but not on the Mac. So we need to recompile
+it. So go to `$&lt;span class="caps"&gt;GLARF&lt;/span&gt;/charniak-parser-2005/parser05Aug16-static/&lt;span class="caps"&gt;PARSE2&lt;/span&gt; `,
+run `make clean` and roll up your&amp;nbsp;sleeves.
+
+&lt;/li&gt;
+&lt;li&gt;
+Obviously, simply running `make` doesn&amp;#8217;t work. [As documented by Pawel
+Mazur][], we need to edit `BchartSm.C` to add the line
+`#include&amp;nbsp;&amp;#8220;GotIter.h&amp;#8221;`
+
+&lt;/li&gt;
+&lt;li&gt;
+On my system this still isn&amp;#8217;t enough, and I get some linker errors. By
+poking through the Makefile, I noticed I could fix it by commenting out
+the 5th line:&amp;nbsp;`&lt;span class="caps"&gt;LDFLAGS&lt;/span&gt;=-static`.
+
+&lt;/li&gt;
+&lt;li&gt;
+Now run make and watch it work, hurrah!&amp;nbsp;&amp;#92;o/
+
+&lt;/li&gt;
+&lt;li&gt;
+To see if &lt;span class="caps"&gt;GLARF&lt;/span&gt; itself works now, go to
+`$&lt;span class="caps"&gt;GLARF&lt;/span&gt;/commands-2010/run-glarf/` and run
+`make-all-glarf-a sample-files-a N`. You should get beautiful, beautiful
+&lt;span class="caps"&gt;GLARF&lt;/span&gt; output&amp;nbsp;files.
+
+&lt;/li&gt;
+&lt;/ul&gt;
+Phew, now that was quite an effort!
+
+  [&lt;span class="caps"&gt;GLARF&lt;/span&gt;]: http://nlp.cs.nyu.edu/meyers/&lt;span class="caps"&gt;GLARF&lt;/span&gt;.html
+  [&lt;span class="caps"&gt;BLLIP&lt;/span&gt; parser]: https://github.com/&lt;span class="caps"&gt;BLLIP&lt;/span&gt;/bllip-parser
+  [As documented by Pawel Mazur]:&amp;nbsp;http://web.science.mq.edu.au/~mpawel/resources/notes/compilingCharniakJohnson.htm</summary><category term="bllip"></category><category term="charniak"></category><category term="glarf"></category><category term="installation"></category><category term="parser"></category><category term="nlp"></category></entry><entry><title>Compiling MegaM on MacOS X</title><link href="http://vene.ro/blog/compiling-megam-on-macos-x.html" rel="alternate"></link><updated>2012-06-08T11:45:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2012-06-08:blog/compiling-megam-on-macos-x.html</id><summary type="html">&lt;p&gt;&lt;a href="http://hal3.name/megam"&gt;MegaM&lt;/a&gt; is Hal Daumé &lt;span class="caps"&gt;III&lt;/span&gt;&amp;#8217;s maxent (logistic regression, and much more)
+modeling software written in OCaml. It is feature-packed and seems to be
+used a lot, despite being slightly dated. &lt;a href="http://nltk.org" title="Natural Language Toolkit"&gt;&lt;span class="caps"&gt;NLTK&lt;/span&gt;&lt;/a&gt; is able to use&amp;nbsp;it.&lt;/p&gt;
+&lt;p&gt;In order to compile it as of 2012, with the current version of OCaml, I
+had to do some tricks that I would like to document here. It&amp;#8217;s no big
+deal but it could save somebody precious&amp;nbsp;minutes.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Download and unpack the gzip&amp;nbsp;archive.&lt;/li&gt;
+&lt;li&gt;Install ocaml using macports: &lt;code&gt;sudo port install ocaml&lt;/code&gt;. &lt;em&gt;Note:&lt;/em&gt;
+    this installed version 3.12.1_5, &lt;span class="caps"&gt;YMMV&lt;/span&gt; with newer versions&amp;nbsp;later.&lt;/li&gt;
+&lt;li&gt;Point the compiler to the correct headers. First run &lt;code&gt;ocamlc -where&lt;/code&gt;
+    to find out the correct path. On my system it&amp;#8217;s
+    &lt;code&gt;/opt/local/lib/ocaml/caml&lt;/code&gt;. Change the &lt;code&gt;WITHCLIBS&lt;/code&gt; line (#73) in
+    the Makefile to point&amp;nbsp;there.&lt;/li&gt;
+&lt;li&gt;As of OCaml 3.12.0, the &lt;code&gt;-lstr&lt;/code&gt; compiler flag should be replaced
+    with &lt;code&gt;-lcamlstr&lt;/code&gt;. It occurs on line #62 within the definition of
+    &lt;code&gt;WITHSTR&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Run &lt;code&gt;make&lt;/code&gt; or &lt;code&gt;make opt&lt;/code&gt; and&amp;nbsp;enjoy.&lt;/li&gt;
+&lt;/ol&gt;</summary><category term="compile"></category><category term="install"></category><category term="maxent"></category><category term="megam"></category><category term="nlp"></category></entry><entry><title>Romanian people and coffee</title><link href="http://vene.ro/blog/romanian-people-and-coffee.html" rel="alternate"></link><updated>2012-04-13T21:20:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2012-04-13:blog/romanian-people-and-coffee.html</id><summary type="html">&lt;p&gt;So I got my hands of the &lt;a href="http://googleresearch.blogspot.com/2006/08/all-our-n-gram-are-belong-to-you.html" title="Google Research"&gt;Google N-gram data&lt;/a&gt; for the Romanian
+language. It&amp;#8217;s noisy as hell, has some other subtle issues too, but
+here&amp;#8217;s the first thing I&amp;nbsp;noticed:&lt;/p&gt;
+&lt;p&gt;The Romanian word for coffee is &lt;em&gt;cafea&lt;/em&gt;, and the more you crave it, the
+longer you pronunce the final &lt;em&gt;a&lt;/em&gt;: I really need some &lt;em&gt;cafeaaaa&lt;/em&gt; right&amp;nbsp;now.&lt;/p&gt;
+&lt;p&gt;Thanks to Google, here are the&amp;nbsp;numbers:&lt;/p&gt;
+&lt;p&gt;[![Distribution of the length of the final letter in the Romanian word
+for&amp;nbsp;coffee.][]][]&lt;/p&gt;
+&lt;p&gt;Post scriptum: I hope you like the theme: I installed the &lt;a href="http://www.huyng.com/posts/sane-color-scheme-for-matplotlib/" title="www.huyng.com/posts/sane-color-scheme-for-matplotlib"&gt;sane
+matplotlib color scheme&lt;/a&gt; from Huy&amp;nbsp;Nguyen.&lt;/p&gt;
+&lt;p&gt;[Distribution of the length of the final letter in the Romanian word
+  for coffee.]: http://localhost:8001/wp-content/uploads/2012/04/cafeaaa-300x218.png
+    &amp;#8220;cafeaaa&amp;#8221;
+  [![Distribution of the length of the final letter in the Romanian word
+  for coffee.][]]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2012/04/cafeaaa.png&lt;/p&gt;</summary><category term="Uncategorized"></category><category term="coffee"></category><category term="ngram"></category></entry><entry><title>A look at Romanian verbs with scikits-learn</title><link href="http://vene.ro/blog/a-look-at-romanian-verbs-with-scikits-learn.html" rel="alternate"></link><updated>2011-04-14T01:40:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-04-14:blog/a-look-at-romanian-verbs-with-scikits-learn.html</id><summary type="html">&lt;p&gt;One of the problems we tackled here at my university is one as old as
+the modern Romanian language. It is a problem for linguists, as well as
+for foreigners trying to learn the language. We call it the root
+alternations&amp;nbsp;problem.&lt;/p&gt;
+&lt;p&gt;Similar to French and other languages, Romanian verbs are split into
+four groups with different conjugation patterns. Except for the
+irregular verbs, this categorization is performed based on the suffix of
+the infinitive. However, the conjugation is not straightforward even
+within these classes, because many verbs exhibit alternations in their
+root. For example, the verb &lt;em&gt;a purta&lt;/em&gt; (to wear) becomes &lt;em&gt;eu port&lt;/em&gt; (I
+wear) but &lt;em&gt;el poartă&lt;/em&gt; (he wears). It can be seen that the letter &lt;em&gt;o&lt;/em&gt; in
+the root changes to &lt;em&gt;oa&lt;/em&gt; during conjugation. This makes learning the
+language quite difficult, because we have no rules to describe when
+these changes&amp;nbsp;occur.&lt;/p&gt;
+&lt;p&gt;Attempts to formalize such rules from a computer scientific point of
+view date back to &lt;span class="caps"&gt;G. C.&lt;/span&gt; Moisil in 1960. Such (incomplete) rules can be
+formulated as context-sensitive grammars, since the alternations are
+determined by the context in which certain characters&amp;nbsp;appear.&lt;/p&gt;
+&lt;p&gt;This leads to the idea of analyzing the verbs from a machine learning
+point of view: what can we find out by looking at n-gram representation
+of the&amp;nbsp;infinitives?&lt;/p&gt;
+&lt;p&gt;This is easy to do within scikits.learn. The &lt;code&gt;feature_extraction.text&lt;/code&gt;
+package contains all the necessary tools: the &lt;code&gt;CharNGramExtractor&lt;/code&gt;,
+which builds all the n-grams of a string, for n in an interval. Then, a
+&lt;code&gt;CountVectorizer&lt;/code&gt; is built on top of the extractor. Its purpose is to
+extract the features out of a list of documents and transform them into
+a matrix representation of token counts. By postprocessing this matrix
+we can obtain a binary representation, indicating only whether a token
+occurs in a document or not, instead of the&amp;nbsp;count.&lt;/p&gt;
+&lt;p&gt;In this case, documents are Romanian infinitives. This means we are
+limited to using short n-grams, because the documents are themselves
+short. There is also the question whether anything relevant can be found
+out of such a representation which does not encode a lot of&amp;nbsp;information.&lt;/p&gt;
+&lt;p&gt;After building the data matrix from the list of verbs, I plotted a 2D
+&lt;span class="caps"&gt;PCA&lt;/span&gt; projection and here are the results. I am only posting a teaser for
+now, but the results are&amp;nbsp;encouraging:&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="Romanian infinitives as 2D projection" src="http://localhost:8001/wp-content/uploads/2011/04/infinitives_pca.png" title="infinitives_pca" /&gt;][]&lt;/p&gt;
+&lt;p&gt;From the image it is clear that n-gram representations of the
+infinitives induce clusters. Further results suggest that for certain
+subclasses of the dataset, such a representation (or even a simpler one)
+is enough to clearly answer whether a verb does not exhibit
+alternations. This encourages further exploration of this path,
+especially supervised and semi-supervised&amp;nbsp;approaches.&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="Romanian infinitives as 2D projection" src="http://localhost:8001/wp-content/uploads/2011/04/infinitives_pca.png" title="infinitives_pca" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/04/infinitives_pca.png&lt;/p&gt;</summary><category term="alternations"></category><category term="computational linguistics"></category><category term="infinitives"></category><category term="pca"></category><category term="principal components analysis"></category><category term="nlp"></category><category term="scikit-learn"></category></entry></feed>

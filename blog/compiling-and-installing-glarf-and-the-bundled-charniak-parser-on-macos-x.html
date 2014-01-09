@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <title>Compiling and Installing GLARF and the bundled Charniak parser on MacOS X</title>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="http://vene.ro/theme/css/main.css" type="text/css" />
+                <link href="http://vene.ro/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Vlad Niculae (~vene) Atom Feed" />
+                        <link href='http://fonts.googleapis.com/css?family=Averia+Gruesa+Libre|Alegreya:400italic,400,700|Alegreya+SC&subset=latin-ext' rel='stylesheet' type='text/css'>
+
+        <!--[if IE]>
+                <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+        <!--[if lte IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="http://vene.ro/css/ie.css"/>
+                <script src="http://vene.ro/js/IE8.js" type="text/javascript"></script><![endif]-->
+
+        <!--[if lt IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="http://vene.ro/css/ie6.css"/><![endif]-->
+
+</head>
+
+<body id="index" class="home">
+<div id="container">
+        <header id="banner" class="body">
+                <div id="header">Vlad Niculae (~vene)</div>
+                <!--<nav><ul>
+                                                    <li><a href="http://vene.ro/fonts.html">Fonts</a></li>
+                                    <li><a href="http://vene.ro/papers.html">Publications</a></li>
+                                    <li><a href="http://vene.ro/talks.html">Talks</a></li>
+                                    <li><a href="http://vene.ro/teaching.html">Teaching</a></li>
+                                                                    <li><a href="/publications.html">Publications</a></li>
+                                    <li><a href="/blog/">Blog</a></li>
+                                                </ul></nav> -->
+        </header><!-- /#banner -->
+        <div id="main" role="main">
+        <section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="http://vene.ro/blog/compiling-and-installing-glarf-and-the-bundled-charniak-parser-on-macos-x.html" rel="bookmark"
+           title="Permalink to Compiling and Installing GLARF and the bundled Charniak parser on MacOS X">Compiling and Installing <span class="caps">GLARF</span> and the bundled Charniak parser on MacOS&nbsp;X</a></h1>
+          </header>
+
+    <div class="entry-content">
+      <footer class="post-info">
+        <abbr class="published" title="2012-06-21T12:32:00">
+                Thu 21 June 2012
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="http://vene.ro/author/vene.html">vene</a>
+        </address>
+        <p>In <a href="http://vene.ro/blog/category/nlp.html">nlp</a>. </p>
+<p>tags: <a href="http://vene.ro/blog/tag/bllip.html">bllip</a> <a href="http://vene.ro/blog/tag/charniak.html">charniak</a> <a href="http://vene.ro/blog/tag/glarf.html">glarf</a> <a href="http://vene.ro/blog/tag/installation.html">installation</a> <a href="http://vene.ro/blog/tag/parser.html">parser</a> <a href="http://vene.ro/blog/tag/nlp.html">nlp</a> </p>
+</footer><!-- /.post-info -->      <p>It seems that I keep getting handed buggy code to install. These are
+cases of research software where the developers didn&#8217;t make the effort
+to make sure their tool works on the platforms it&nbsp;should.</p>
+<p>[<span class="caps">GLARF</span>][] (Grammatical and Logical Argument Representation Framework)
+is, in their words, &#8220;a typed feature structure framework for
+representing regularizations of parse trees&#8221;. It is a processing
+pipeline from <span class="caps">NYU</span> with rich output including many types of structure in
+the given text. However, it is clearly a case of software whose
+maintenance was abandoned when it &#8220;worked&#8221; for them. The whole install
+and run procedure is pretty messy, but at least it&#8217;s documented. The
+problem is, following it step by step doesn&#8217;t work on my MacBook. As
+usual, I needed to hack through it a&nbsp;bit.</p>
+<p>The Charniak parser distributed with <span class="caps">GLARF</span> has now been superseded by
+the [<span class="caps">BLLIP</span> parser][]. The new one is tricky to compile as well, but I
+have yet to see if it plugs into <span class="caps">GLARF</span>, so I leave this for a future&nbsp;post.</p>
+<p>Here are the steps I needed to take to make <span class="caps">GLARF</span>&nbsp;work:</p>
+<ol>
+<li>
+Download and unzip the <span class="caps">GLARF</span>&nbsp;package.
+
+</li>
+<li>
+Make sure you have `sbcl` in your path, and your `perl` is in (or linked
+from)&nbsp;`/usr/bin/perl`
+
+</li>
+<li>
+Set the environment variables. I like to make a shell script to set them
+so I don&#8217;t have to do it every time. So I write something looking like
+this:
+
+[sourcecode lang=&#8221;bash&#8221;]  
+\# glarf\_env.sh
+
+export <span class="caps">GLARF</span>=/Users/vene/code/<span class="caps">GLARF</span>  
+export <span class="caps">GLARF</span>\_JET=\${<span class="caps">GLARF</span>}/<span class="caps">JET</span>  
+export <span class="caps">PATH</span>=\$<span class="caps">PATH</span>:.  
+[/sourcecode]
+
+<p>
+Then for every session when I want to use <span class="caps">GLARF</span>, I do
+`source&nbsp;glarf_env.sh`.
+
+</li>
+<li>
+Compile <span class="caps">GLARF</span> by running `$<span class="caps">GLARF</span>/commands-2010/compile-glarf`. *Note:*
+this only compiles the pipeline lisp&nbsp;code.
+
+</li>
+<li>
+Now, according to their instructions, you&#8217;re done. However, if you try
+to run it, you&#8217;d notice the output is incomplete. (It goes through the
+named entity extraction part, but it doesn&#8217;t run the parser.) The reason
+for this is that they distribute the Charniak parser with a precompiled
+binary that runs on Linux, but not on the Mac. So we need to recompile
+it. So go to `$<span class="caps">GLARF</span>/charniak-parser-2005/parser05Aug16-static/<span class="caps">PARSE2</span> `,
+run `make clean` and roll up your&nbsp;sleeves.
+
+</li>
+<li>
+Obviously, simply running `make` doesn&#8217;t work. [As documented by Pawel
+Mazur][], we need to edit `BchartSm.C` to add the line
+`#include&nbsp;&#8220;GotIter.h&#8221;`
+
+</li>
+<li>
+On my system this still isn&#8217;t enough, and I get some linker errors. By
+poking through the Makefile, I noticed I could fix it by commenting out
+the 5th line:&nbsp;`<span class="caps">LDFLAGS</span>=-static`.
+
+</li>
+<li>
+Now run make and watch it work, hurrah!&nbsp;&#92;o/
+
+</li>
+<li>
+To see if <span class="caps">GLARF</span> itself works now, go to
+`$<span class="caps">GLARF</span>/commands-2010/run-glarf/` and run
+`make-all-glarf-a sample-files-a N`. You should get beautiful, beautiful
+<span class="caps">GLARF</span> output&nbsp;files.
+
+</li>
+</ul>
+Phew, now that was quite an effort!
+
+  [<span class="caps">GLARF</span>]: http://nlp.cs.nyu.edu/meyers/<span class="caps">GLARF</span>.html
+  [<span class="caps">BLLIP</span> parser]: https://github.com/<span class="caps">BLLIP</span>/bllip-parser
+  [As documented by Pawel Mazur]:&nbsp;http://web.science.mq.edu.au/~mpawel/resources/notes/compilingCharniakJohnson.htm
+    </div><!-- /.entry-content -->
+    
+  </article>
+</section>
+        <section id="extras" class="body">
+                        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Go <a href="/">home</a>. 
+                Powered by <a href="http://getpelican.com/">Pelican</a>
+                </address><!-- /#about -->
+        </footer><!-- /#contentinfo -->
+        </div>
+</div>
+</body>
+</html>

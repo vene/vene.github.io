@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <title>On setuptools subpackages</title>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="http://vene.ro/theme/css/main.css" type="text/css" />
+                <link href="http://vene.ro/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Vlad Niculae (~vene) Atom Feed" />
+                        <link href='http://fonts.googleapis.com/css?family=Averia+Gruesa+Libre|Alegreya:400italic,400,700|Alegreya+SC&subset=latin-ext' rel='stylesheet' type='text/css'>
+
+        <!--[if IE]>
+                <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+        <!--[if lte IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="http://vene.ro/css/ie.css"/>
+                <script src="http://vene.ro/js/IE8.js" type="text/javascript"></script><![endif]-->
+
+        <!--[if lt IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="http://vene.ro/css/ie6.css"/><![endif]-->
+
+</head>
+
+<body id="index" class="home">
+<div id="container">
+        <header id="banner" class="body">
+                <div id="header">Vlad Niculae (~vene)</div>
+                <!--<nav><ul>
+                                                    <li><a href="http://vene.ro/fonts.html">Fonts</a></li>
+                                    <li><a href="http://vene.ro/papers.html">Publications</a></li>
+                                    <li><a href="http://vene.ro/talks.html">Talks</a></li>
+                                    <li><a href="http://vene.ro/teaching.html">Teaching</a></li>
+                                                                    <li><a href="/publications.html">Publications</a></li>
+                                    <li><a href="/blog/">Blog</a></li>
+                                                </ul></nav> -->
+        </header><!-- /#banner -->
+        <div id="main" role="main">
+        <section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="http://vene.ro/blog/on-setuptools-subpackages.html" rel="bookmark"
+           title="Permalink to On setuptools subpackages">On setuptools&nbsp;subpackages</a></h1>
+          </header>
+
+    <div class="entry-content">
+      <footer class="post-info">
+        <abbr class="published" title="2011-04-04T15:01:00">
+                Mon 04 April 2011
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="http://vene.ro/author/vene.html">vene</a>
+        </address>
+        <p>In <a href="http://vene.ro/blog/category/python.html">python</a>. </p>
+<p>tags: <a href="http://vene.ro/blog/tag/python.html">python</a> <a href="http://vene.ro/blog/tag/setuptools.html">setuptools</a> </p>
+</footer><!-- /.post-info -->      <p>Today, I spent more than two hours trying to figure out why, despite
+things working out fine in my development scikits.learn folder,
+<code>python setup.py install</code> would completely ignore the module I
+refactored into a&nbsp;subpackage.</p>
+<p>I imagined that simply adding it to the parent <code>__init__.py __all__</code>
+attribute would do, I kind of thought that setuptools automatically
+finds the&nbsp;subpackages.</p>
+<p>At first I thought of looking in <code>setup.py</code>, but I only examined the one
+in the topmost directory, which, in the case of scikits.learn, is two
+degrees of separation away from the actual setup.py that takes care of
+subpackages (ie. I was looking at <code>/setup.py</code> instead of
+<code>/scikits/learn/setup.py</code>).  This had me fooled for a&nbsp;while.</p>
+<p>The steps to add a working and installable module to a python
+setuptools-based project are as&nbsp;follows:</p>
+<ol>
+<li>Add a <code>__init__.py</code> file in the folder (ie.
+    <code>/scikits/learn/decomposition/__init__.py</code>)</li>
+<li>If the module requires compiling or any special attention, add an
+    appropriate  <code>__setup__.py</code> file in the&nbsp;folder.</li>
+<li>Update the <code>__init__.py __all__</code> attribute in the parent folder (ie.
+    <code>/scikits/learn/__init__.py</code>)</li>
+<li>Update the <code>setup.py</code> in the parent folder (ie.
+    <code>/scikits/learn/setup.py</code>) by adding something like:<br />
+<code>config.add_subpackage('decomposition')</code></li>
+</ol>
+<p>Don&#8217;t forget to do the same for the tests&nbsp;subfolder!</p>
+<h2>Conclusions</h2>
+<p>While wasting so much time due to a simple beginner&#8217;s mistake is not
+very pleasant, I am not frustrated with setuptools. On the contrary, now
+that I understand it better I can appreciate its flexibility and
+clarity, when compared to, for example, MSBuild and Visual Studio
+project files. Just one more reason to love&nbsp;Python!</p>
+    </div><!-- /.entry-content -->
+    
+  </article>
+</section>
+        <section id="extras" class="body">
+                        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Go <a href="/">home</a>. 
+                Powered by <a href="http://getpelican.com/">Pelican</a>
+                </address><!-- /#about -->
+        </footer><!-- /#contentinfo -->
+        </div>
+</div>
+</body>
+</html>

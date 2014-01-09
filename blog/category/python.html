@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <title>Vlad Niculae (~vene) - python</title>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="http://vene.ro/theme/css/main.css" type="text/css" />
+                <link href="http://vene.ro/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Vlad Niculae (~vene) Atom Feed" />
+                        <link href='http://fonts.googleapis.com/css?family=Averia+Gruesa+Libre|Alegreya:400italic,400,700|Alegreya+SC&subset=latin-ext' rel='stylesheet' type='text/css'>
+
+        <!--[if IE]>
+                <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+        <!--[if lte IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="http://vene.ro/css/ie.css"/>
+                <script src="http://vene.ro/js/IE8.js" type="text/javascript"></script><![endif]-->
+
+        <!--[if lt IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="http://vene.ro/css/ie6.css"/><![endif]-->
+
+</head>
+
+<body id="index" class="home">
+<div id="container">
+        <header id="banner" class="body">
+                <div id="header">Vlad Niculae (~vene)</div>
+                <!--<nav><ul>
+                                                    <li><a href="http://vene.ro/fonts.html">Fonts</a></li>
+                                    <li><a href="http://vene.ro/papers.html">Publications</a></li>
+                                    <li><a href="http://vene.ro/talks.html">Talks</a></li>
+                                    <li><a href="http://vene.ro/teaching.html">Teaching</a></li>
+                                                                    <li><a href="/publications.html">Publications</a></li>
+                                    <li><a href="/blog/">Blog</a></li>
+                                                </ul></nav> -->
+        </header><!-- /#banner -->
+        <div id="main" role="main">
+                
+            
+
+                            <aside id="featured" class="body">
+                <article>
+                    <h1 class="entry-title"><a href="http://vene.ro/blog/bibtex-powered-publications-list-for-pelican-with-pelican-bibtex.html">BibTeX-powered publications list for Pelican with&nbsp;pelican-bibtex</a></h1> 
+                    <footer class="post-info">
+        <abbr class="published" title="2013-04-22T10:45:00">
+                Mon 22 April 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="http://vene.ro/author/vene.html">vene</a>
+        </address>
+        <p>In <a href="http://vene.ro/blog/category/python.html">python</a>. </p>
+<p>tags: <a href="http://vene.ro/blog/tag/bibtex.html">bibtex</a> <a href="http://vene.ro/blog/tag/blog.html">blog</a> <a href="http://vene.ro/blog/tag/citations.html">citations</a> <a href="http://vene.ro/blog/tag/pelican.html">pelican</a> <a href="http://vene.ro/blog/tag/publications.html">publications</a> <a href="http://vene.ro/blog/tag/pybtex.html">pybtex</a> <a href="http://vene.ro/blog/tag/references.html">references</a> <a href="http://vene.ro/blog/tag/static-blog.html">static blog</a> <a href="http://vene.ro/blog/tag/static-website.html">static website</a> <a href="http://vene.ro/blog/tag/uncategorized.html">Uncategorized</a> </p>
+</footer><!-- /.post-info --><h2>Hook</h2>
+<p>Wouldn&#8217;t you like to manage your academic publications list easily
+within the context of your static website? Without resorting to external
+services, or to software like <em>bibtex2html</em>, which is very nice but will
+then require restyling to fit your&nbsp;templates?</p>
+<p>Look no more, with the help of <a href="https://github.com/vene/pelican-bibtex">pelican-bibtex</a> you can now manage
+your papers from within&nbsp;Pelican!</p>
+<h2>Backstory</h2>
+<p>At <a href="http://fseoane.net">Fabian</a>&#8216;s advice, I started playing around with <a href="http://getpelican.com">Pelican</a>, a
+static website/blog generator for Python. I like it better than the
+other generators I used before, so I chose it the next time I had to set
+up a website. I still didn&#8217;t make the courage to migrate my current
+website and blog to it, but I promise I&nbsp;will.</p>
+<p>Pelican has a public plugins repository, but they have a license
+constraint for all contributions. My plugin isn&#8217;t complicated, but I had
+to &#8220;reverse engineer&#8221; undocumented parts of the <a href="http://pybtex.sourceforge.net">pybtex</a> <span class="caps">API</span>. I think
+that maybe that code that I used to render citations programatically can
+be useful to others, so I don&#8217;t want to release it under a restrictive
+license. For this reason, I publish <a href="https://github.com/vene/pelican-bibtex">pelican-bibtex</a> in my personal
+GitHub&nbsp;account.</p>
+<p>You can see it in action in the <a href="https://github.com/nlp-unibuc/nlp-unibuc-website/">source code</a> for the website I am
+working on at the moment, the home page of my research group. Example
+output generated using pelican-bibtex can be seen <a href="http://nlp-unibuc.github.io/publications.html">here</a>.</p>
+<h2>Possible&nbsp;extensions</h2>
+<p>I have not dug in too deeply but I believe this plugin can be extended,
+with not much difficulty, to support referencing in Pelican blogs, and
+render BibTeX references at the end of every post. This idea was
+suggested by Avaris on #pelican, and I find it very cool. Since I don&#8217;t
+need this feature at the moment, it&#8217;s not a priority, but it&#8217;s something
+that I would like to see at some&nbsp;point.</p>                </article>
+                            </aside><!-- /#featured -->
+                            <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+                                                
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://vene.ro/blog/sampling-gamma-random-variates-through-the-ratio-of-uniforms-method.html" rel="bookmark"
+                           title="Permalink to Sampling Gamma random variates through the ratio-of-uniforms method">Sampling Gamma random variates through the ratio-of-uniforms&nbsp;method</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2011-10-09T15:40:00">
+                Sun 09 October 2011
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="http://vene.ro/author/vene.html">vene</a>
+        </address>
+        <p>In <a href="http://vene.ro/blog/category/python.html">python</a>. </p>
+<p>tags: <a href="http://vene.ro/blog/tag/monte-carlo.html">monte carlo</a> <a href="http://vene.ro/blog/tag/numpy.html">numpy</a> <a href="http://vene.ro/blog/tag/random-sampling.html">random sampling</a> <a href="http://vene.ro/blog/tag/ratio-of-uniforms.html">ratio-of-uniforms</a> <a href="http://vene.ro/blog/tag/scipy.html">scipy</a> <a href="http://vene.ro/blog/tag/python.html">python</a> </p>
+</footer><!-- /.post-info -->                <p>One year ago I had the chance to take a class on Monte Carlo simulation
+with prof. Ion Văduva, and my assignment for the class was to implement
+exactly what it says in the title of the blog post. I am going to walk
+you through the idea behind&nbsp;this ...</p>
+                <a class="readmore" href="http://vene.ro/blog/sampling-gamma-random-variates-through-the-ratio-of-uniforms-method.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://vene.ro/blog/newton-interpolation-and-numerical-differentiation.html" rel="bookmark"
+                           title="Permalink to Newton interpolation and numerical differentiation">Newton interpolation and numerical&nbsp;differentiation</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2011-04-15T13:34:00">
+                Fri 15 April 2011
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="http://vene.ro/author/vene.html">vene</a>
+        </address>
+        <p>In <a href="http://vene.ro/blog/category/python.html">python</a>. </p>
+<p>tags: <a href="http://vene.ro/blog/tag/differentiation.html">differentiation</a> <a href="http://vene.ro/blog/tag/interpolation.html">interpolation</a> <a href="http://vene.ro/blog/tag/matplotlib.html">matplotlib</a> <a href="http://vene.ro/blog/tag/newton.html">newton</a> <a href="http://vene.ro/blog/tag/numerical.html">numerical</a> <a href="http://vene.ro/blog/tag/numpy.html">numpy</a> <a href="http://vene.ro/blog/tag/python.html">python</a> </p>
+</footer><!-- /.post-info -->                <p>I am sharing some Python code code that I wrote as a school assignment.
+This computes the Newton form of the interpolation polynomial of a given
+set of points, and allows for the evaluation of both the polynomial and
+its derivative, at a given point. This is an accurate way ...</p>
+                <a class="readmore" href="http://vene.ro/blog/newton-interpolation-and-numerical-differentiation.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://vene.ro/blog/tweaking-matplotlib-subplots-for-pretty-results.html" rel="bookmark"
+                           title="Permalink to Tweaking matplotlib subplots for pretty results">Tweaking matplotlib subplots for pretty&nbsp;results</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2011-04-04T20:53:00">
+                Mon 04 April 2011
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="http://vene.ro/author/vene.html">vene</a>
+        </address>
+        <p>In <a href="http://vene.ro/blog/category/python.html">python</a>. </p>
+<p>tags: <a href="http://vene.ro/blog/tag/matplotlib.html">matplotlib</a> <a href="http://vene.ro/blog/tag/python.html">python</a> </p>
+</footer><!-- /.post-info -->                <p>When plotting multiple subplots using matplotlib, the axes rarely look
+pretty with the default configuration. Since matplotlib figures are
+abstract objects, designed for consistency in print as well as on
+screen, tweaking their layout can get&nbsp;tricky.</p>
+<h3>An&nbsp;example</h3>
+<p>The following code is taken from the <a href="http://scikit-learn.sourceforge.net/auto_examples/applications/plot_face_recognition.html" title="face recognition example">face recognition example</a> in ...</p>
+                <a class="readmore" href="http://vene.ro/blog/tweaking-matplotlib-subplots-for-pretty-results.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://vene.ro/blog/on-setuptools-subpackages.html" rel="bookmark"
+                           title="Permalink to On setuptools subpackages">On setuptools&nbsp;subpackages</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2011-04-04T15:01:00">
+                Mon 04 April 2011
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="http://vene.ro/author/vene.html">vene</a>
+        </address>
+        <p>In <a href="http://vene.ro/blog/category/python.html">python</a>. </p>
+<p>tags: <a href="http://vene.ro/blog/tag/python.html">python</a> <a href="http://vene.ro/blog/tag/setuptools.html">setuptools</a> </p>
+</footer><!-- /.post-info -->                <p>Today, I spent more than two hours trying to figure out why, despite
+things working out fine in my development scikits.learn folder,
+<code>python setup.py install</code> would completely ignore the module I
+refactored into a&nbsp;subpackage.</p>
+<p>I imagined that simply adding it to the parent <code>__init__.py __all__</code>
+attribute ...</p>
+                <a class="readmore" href="http://vene.ro/blog/on-setuptools-subpackages.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            </ol><!-- /#posts-list -->
+                            <p class="paginator">
+        Page 1 / 1
+    </p>
+                        </section><!-- /#content -->
+                    <section id="extras" class="body">
+                        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Go <a href="/">home</a>. 
+                Powered by <a href="http://getpelican.com/">Pelican</a>
+                </address><!-- /#about -->
+        </footer><!-- /#contentinfo -->
+        </div>
+</div>
+</body>
+</html>

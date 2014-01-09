@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Vlad Niculae (~vene)</title><link href="http://vene.ro/" rel="alternate"></link><link href="http://vene.ro/feeds/conferences.atom.xml" rel="self"></link><id>http://vene.ro/</id><updated>2011-09-20T14:17:00+02:00</updated><entry><title>RANLP 2011 in Hissar, BG</title><link href="http://vene.ro/blog/ranlp-2011-in-hissar-bg.html" rel="alternate"></link><updated>2011-09-20T14:17:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-09-20:blog/ranlp-2011-in-hissar-bg.html</id><summary type="html">&lt;p&gt;Last week was marked by the international &lt;span class="caps"&gt;RANLP&lt;/span&gt; (Recent Advances in
+Natural Language Processing) conference, taking place in a nice spa in
+Hissar, Bulgaria. The excellent folks from the &lt;a href="http://clg.wlv.ac.uk/"&gt;computational
+linguistics group&lt;/a&gt; at the University of Wolverhampton were behind it,
+together with the &lt;a href="http://www.iict.bas.bg/EN/index.html"&gt;Institute of Information and Communication
+Technologies&lt;/a&gt; from the Bulgarian Academy of Sciences.&lt;br /&gt;
+[caption id=&amp;#8221;attachment_247&amp;#8221; align=&amp;#8221;alignleft&amp;#8221; width=&amp;#8221;225&amp;#8221; caption=&amp;#8221;
+&amp;#8220;][&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2011/09/319030_10150303323328171_677848170_8151131_1046590975_n1.jpg?w=225" title="Warm spring in Hissar" /&gt;][]&lt;/p&gt;
+&lt;p&gt;A fountain with warm mineral spring water in Hissarya. &lt;br /&gt;
+&lt;small&gt;Picture by &lt;a href="http://pers-www.wlv.ac.uk/~ex0233/" title="Miranda Chong"&gt;Miranda&lt;/a&gt;&lt;/small&gt;&lt;/p&gt;
+&lt;p&gt;[/caption]&lt;br /&gt;
+I must begin by thanking them: the organization was impeccable! I&amp;#8217;m not
+sure, but I think that at one point Ivelina was even running around
+buying routers to improve wifi coverage (which is already spectacular in
+Bulgaria &amp;#8212; I&amp;#8217;ve received reports from &lt;a href="http://pers-www.wlv.ac.uk/~ex0233/" title="Miranda Chong"&gt;Miranda&lt;/a&gt; that you can get wifi
+in the&amp;nbsp;mountains!)&lt;/p&gt;
+&lt;p&gt;The schedule was busy, with three tracks going in parallel, in order to
+cover a wide range of topics in computational linguistics. The student
+workshop should also be noted for the excellent quality of the works&amp;nbsp;there.&lt;/p&gt;
+&lt;p&gt;Of course it would be infeasible to write about all the great people I
+met and their high quality work. And if I were to write about all the
+fun we had, it would probably make this post look unprofessional :).
+This doesn&amp;#8217;t mean I forgot about any of you, and as soon as I get the
+chance to work on something related, I will most certainly write about
+it, and&amp;nbsp;you.&lt;/p&gt;
+&lt;p&gt;So, if I would have to summarize the trends and the ideas stated during
+the conference and especially during the keynotes, I would&amp;nbsp;say:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;When talking about word sense disambiguation, it&amp;#8217;s wrong to speak
+    about the different meanings of a word, but rather about the
+    potential a word has for bringing a certain meaning in a certain
+    context. See &lt;a href="http://www.patrickhanks.com/"&gt;Patrick Hanks&lt;/a&gt;&amp;#8216; &lt;a href="http://nlp.fi.muni.cz/projects/cpa/"&gt;Corpus Pattern Analysis&lt;/a&gt;. Without
+    something like this, to have good &lt;span class="caps"&gt;WSD&lt;/span&gt; you need to heavily adjust the
+    overlapping meanings from a Wordnet-style&amp;nbsp;ontology.&lt;/li&gt;
+&lt;li&gt;Certain relations, such as temporal and spacial ones, can naturally
+    be modeled by complex domain-specific logics (see [Inderjeet
+    Mani][]&amp;#8217;s new book, Interpreting Motion: Grounded Representations
+    for Spatial Language, that is due for publishing). But these only
+    appear in a small subset of human communication. The attempt to map
+    human language to a complete logic in which to do general-purpose
+    inference seems futile: &lt;a href="http://u.cs.biu.ac.il/~dagan/"&gt;Ido Dagan&lt;/a&gt; suggests textual entailment:
+    reasoning directly in natural language, and only abstracting away to
+    a formal logic system when need&amp;nbsp;arises.&lt;/li&gt;
+&lt;li&gt;If you have a large enough sample of n-gram frequency data, you can
+    eventually beat the performance you can get with a limited amount of
+    labeled data, and most importantly: it generalizes much better when
+    going out of the domain you trained on. Apparently the best tool for
+    this at the moment is the &lt;a href="http://ngrams.googlelabs.com/datasets"&gt;Google n-gram data&lt;/a&gt;, which has some
+    limitations. In time, we can easily extend this data by huge amounts
+    by mining n-grams from Wikipedia (which allegedly has a higher count
+    of distinct n-grams than the Google dataset), and more importantly,
+    by aligning multi-language data, making use of transliterations and
+    cognate&amp;nbsp;identification.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Please note that I may be (or most probably, am) ignorant of older
+instances of similar ideas, and I may have misunderstood certain claims.
+Please feel free to discuss in the comments whether you think I forgot
+about something important, or whether I am plain wrong about something.
+In particular, I seem to have been completely ignorant of the existence
+of the Google n-gram data, which has been around for quite a while, so I
+must have missed other important things as&amp;nbsp;well.&lt;/p&gt;
+&lt;p&gt;Take care, kind readers, and express your opinion!&lt;br /&gt;&amp;nbsp;V&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2011/09/319030_10150303323328171_677848170_8151131_1046590975_n1.jpg?w=225" title="Warm spring in Hissar" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/09/319030_10150303323328171_677848170_8151131_1046590975_n1.jpg&lt;/p&gt;</summary><category term="conferences"></category><category term="nlp"></category></entry><entry><title>Long overdue update. EuroScipy and SSLST 2011</title><link href="http://vene.ro/blog/long-overdue-update-euroscipy-and-sslst-2011.html" rel="alternate"></link><updated>2011-09-05T00:08:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-09-05:blog/long-overdue-update-euroscipy-and-sslst-2011.html</id><summary type="html">&lt;p&gt;Anybody reading my blog should have expected me to blog about the end of
+my GSoC. Sorry to disappoint, but I simply did not experience anything
+similar to an ending. On the contrary, I feel like things have barely
+started. Also, I apologize for one of the few posts here without pretty
+pictures!&amp;nbsp;:)&lt;/p&gt;
+&lt;p&gt;For the last two weeks, I&amp;#8217;ve been traveling. I attended the EuroScipy
+conference thanks to Fabian, who offered me a place to sleep during the
+week. We sprinted hard, we discussed tricky APIs, we drank a lot of
+coffee, beer, and ate well in lovely Paris. It was great to meet all of
+the celebrities, the people who keep the scientific Python globe&amp;nbsp;turning.&lt;/p&gt;
+&lt;p&gt;Many thanks to Gael and Emmanuelle, who worked very, very hard on
+organizing everything, so they weren&amp;#8217;t around and I didn&amp;#8217;t get to say
+goodbye when I ran to catch my plane last&amp;nbsp;Sunday.&lt;/p&gt;
+&lt;p&gt;I was in a hurry, heading to Tarragona, a beautiful city on the Catalan
+coast, where the public university organized the 2011 summer school in
+linguistics and speech technologies (&lt;span class="caps"&gt;SSLST&lt;/span&gt;). This was a great
+opportunity to meet many fellow young researchers working in
+computational linguistics. I will not go into details now, because I
+plan expand on this, but I would like to state a couple of things.
+Firsty, even though &lt;span class="caps"&gt;NLP&lt;/span&gt; seems to be mostly a Java-dominated affair (note
+for example &lt;a href="http://nlp.stanford.edu/software/index.shtml"&gt;Stanford&amp;#8217;s &lt;span class="caps"&gt;NLP&lt;/span&gt; toolkit&lt;/a&gt; and &lt;a href="http://gate.ac.uk/"&gt;Sheffield&amp;#8217;s &lt;span class="caps"&gt;GATE&lt;/span&gt;&lt;/a&gt;), the
+[computational linguistics and psycholinguistics research center
+(CLiPS)][] at the University of Antwerp actually briefly manifested its
+devotion to Python and &lt;span class="caps"&gt;NLTK&lt;/span&gt; via its research director, Walter&amp;nbsp;Daelemans.&lt;/p&gt;
+&lt;p&gt;It was good to see a little love for Python in this field. &lt;span class="caps"&gt;NLTK&lt;/span&gt; is very
+underrepresented in the SciPy community, I couldn&amp;#8217;t find anybody at the
+EuroScipy conference knowing too much about it or about the people
+behind&amp;nbsp;it.&lt;/p&gt;
+&lt;p&gt;Another lab that has done a lot of cool work is &lt;a href="http://www.uclouvain.be/cental"&gt;Cental&lt;/a&gt; at the
+Catholic University of Louvain, and they also use Python for natural
+language processing. Maybe in the coming years, we will see a Python for
+Computational Linguistics sattelite, along with Physics and
+Neuroscience. Doesn&amp;#8217;t it sound more fun?&amp;nbsp;:P&lt;/p&gt;
+&lt;p&gt;Secondly, I wish &lt;span class="caps"&gt;SSLST&lt;/span&gt; were organized by someone like Gael! As the
+discussion at dinner regarding who will organize next year&amp;#8217;s EuroScipy
+went, it is imperative that the organizers be actively involved in the
+community, and generally passionate about it. Even though I&amp;#8217;m comparing
+apples and oranges, Carlos Martin-Vide behaved in this context like a
+old, tired, emotionless academic, not taking into account even lunch
+breaks for the whole group, not to mention any sort of getting together
+or even a group photo (which, alas, we were not able to take, apart from
+small groups.) They said it couldn&amp;#8217;t be done. Of course it could, they
+just didn&amp;#8217;t want it hard&amp;nbsp;enough.&lt;/p&gt;
+&lt;p&gt;Finally, before signing off, I would like to announce that because the
+Romanian Ministry of Education failed to specify the allocated number of
+public positions for masters&amp;#8217; programmes, the admission exam at the
+University of Bucharest will be delayed by a couple of weeks. Luckily,
+this will allow me to attend &lt;a href="http://lml.bas.bg/ranlp2011/start3.php"&gt;&lt;span class="caps"&gt;RANLP&lt;/span&gt; 2011&lt;/a&gt; in Hissar, Bulgaria a week
+from now, where I will present my poster entitled:&lt;br /&gt;
+&amp;#8220;Can alternations be learned? A machine learning approach to Romanian
+verb conjugation&amp;#8221; by Liviu P. Dinu, Emil Ionescu, Vlad Niculae and
+Octavia-Maria Sulea. See you in&amp;nbsp;Hissar!&lt;/p&gt;
+&lt;p&gt;[computational linguistics and psycholinguistics research center
+  (CLiPS)]:&amp;nbsp;http://www.clips.ua.ac.be/&lt;/p&gt;</summary><category term="Uncategorized"></category></entry></feed>
