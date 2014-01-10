@@ -4,23 +4,19 @@ from __future__ import unicode_literals
 
 AUTHOR = u'vene'
 SITENAME = u"Vlad Niculae (~vene)"
-SITEURL = ''
+SITEURL = 'http://vene.ro'
 
 TIMEZONE = 'Europe/Paris'
 LOCALE = ('en_GB',)
 DEFAULT_LANG = u'en'
 
 # Feed generation is usually not desired when developing
-FEED_ALL_ATOM = None
+FEED_ALL_RSS = 'feed/all.rss.xml'
 CATEGORY_FEED_ATOM = None
 TRANSLATION_FEED_ATOM = None
 
 # Blogroll
 LINKS = None
-
-# Social widget
-#SOCIAL = (('You can add links in your config file', '#'),
-#          ('Another social link', '#'),)
 
 DEFAULT_PAGINATION = 5
 
@@ -57,3 +53,8 @@ STATIC_PATHS = ['papers',
 EXTRA_PATH_METADATA = {'extras/favicon.ico': {'path': 'favicon.ico'},
                        'extras/README.rst': {'path': 'README.rst'},
                        'extras/CNAME': {'path': 'CNAME'}}
+
+
+# Evil tracking
+GOOGLE_ANALYTICS = 'UA-47024389-1'
+DISQUS_SITENAME = 'vene'
