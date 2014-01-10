@@ -38,8 +38,63 @@
 
                             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="http://vene.ro/blog/bibtex-powered-publications-list-for-pelican-with-pelican-bibtex.html">BibTeX-powered publications list for Pelican with&nbsp;pelican-bibtex</a></h1> 
+                    <h1 class="entry-title"><a href="http://vene.ro/blog/site-move.html">Site&nbsp;move</a></h1> 
                     <footer class="post-info">
+        <abbr class="published" title="2014-01-10T12:00:00">
+                Fri 10 January 2014
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="http://vene.ro/blog/author/vene.html">vene</a>
+        </address>
+        <p>In <a href="http://vene.ro/blog/category/meta.html">meta</a>. </p>
+<p>tags: <a href="http://vene.ro/blog/tag/pelican.html">pelican</a> <a href="http://vene.ro/blog/tag/blog.html">blog</a> </p>
+</footer><!-- /.post-info --><p>I finally got around to moving my entire website, including the blog,
+to <a href="http://getpelican.com">Pelican</a>.  I probably would have gotten away with it
+too if it weren&#8217;t for those meddling kids who hacked my friend&#8217;s server and
+convinced me that it&#8217;s worth the effort to go&nbsp;static.</p>
+<p><strong>It only took 5 hours!</strong> I am more and more convinced that static websites
+allow for a better streamlined workflow that does wonders for&nbsp;productivity.</p>
+<p>The static part of my old website was made with Jekyll before, so I kept it
+almost identical, except for fixing some childish <span class="caps">CSS</span> bugs.  The same self-hate
+that comes with reading code that you wrote yourself years ago also comes from
+markup,&nbsp;apparently.</p>
+<p>The blog, however, was migrated thanks to Pelican&#8217;s Wordpress importer.  This
+means that the images are missing, the comments are missing (though I think
+they can be imported somehow) and the plugin-specific syntax such as Latex
+and source code is poorly rendered.  Luckily the images are there in the
+database dump, but I will need to go through the posts one by one to fix
+everything.  For now, my priority was to get it up and running and keep as many
+of the old links as&nbsp;possible.</p>
+<p>Unfortunately <a href="http://pages.github.com">GitHub Pages</a> doesn&#8217;t allow <span class="caps">URL</span>
+rewriting, but I use <a href="https://cloudflare.com">CloudFlare</a> for <span class="caps">DNS</span> and their
+free plan gives me the right to use three forwarding rules.  With just 3 rules
+I couldn&#8217;t save all of the old URLs, so I had to prioritize something.  I
+decided to rescue the links pointing directly to articles, which needed two
+rules, for links with and without trailing slashes, because the CloudFlare
+syntax has no way of specifying optional characters.  I used the third wish
+that the genie granted me to simply redirect the subdomain
+<code>blog.vene.ro</code> to the appropriate subfolder,
+<code>vene.ro/blog</code>.</p>
+<p>Best part about this is that I will now be able to migrate my <a href="/papers.html">personal list of
+papers</a> to
+<a href="https://github.com/vene/pelican-bibtex">pelican-bibtex</a>.</p>                </article>
+                            </aside><!-- /#featured -->
+                            <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+                                                
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://vene.ro/blog/bibtex-powered-publications-list-for-pelican-with-pelican-bibtex.html" rel="bookmark"
+                           title="Permalink to BibTeX-powered publications list for Pelican with pelican-bibtex">BibTeX-powered publications list for Pelican with&nbsp;pelican-bibtex</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
         <abbr class="published" title="2013-04-22T10:45:00">
                 Mon 22 April 2013
         </abbr>
@@ -49,42 +104,16 @@
         </address>
         <p>In <a href="http://vene.ro/blog/category/python.html">python</a>. </p>
 <p>tags: <a href="http://vene.ro/blog/tag/bibtex.html">bibtex</a> <a href="http://vene.ro/blog/tag/blog.html">blog</a> <a href="http://vene.ro/blog/tag/citations.html">citations</a> <a href="http://vene.ro/blog/tag/pelican.html">pelican</a> <a href="http://vene.ro/blog/tag/publications.html">publications</a> <a href="http://vene.ro/blog/tag/pybtex.html">pybtex</a> <a href="http://vene.ro/blog/tag/references.html">references</a> <a href="http://vene.ro/blog/tag/static-blog.html">static blog</a> <a href="http://vene.ro/blog/tag/static-website.html">static website</a> <a href="http://vene.ro/blog/tag/uncategorized.html">Uncategorized</a> </p>
-</footer><!-- /.post-info --><h2>Hook</h2>
+</footer><!-- /.post-info -->                <h2>Hook</h2>
 <p>Wouldn&#8217;t you like to manage your academic publications list easily
 within the context of your static website? Without resorting to external
 services, or to software like <em>bibtex2html</em>, which is very nice but will
 then require restyling to fit your&nbsp;templates?</p>
-<p>Look no more, with the help of <a href="https://github.com/vene/pelican-bibtex">pelican-bibtex</a> you can now manage
-your papers from within&nbsp;Pelican!</p>
-<h2>Backstory</h2>
-<p>At <a href="http://fseoane.net">Fabian</a>&#8216;s advice, I started playing around with <a href="http://getpelican.com">Pelican</a>, a
-static website/blog generator for Python. I like it better than the
-other generators I used before, so I chose it the next time I had to set
-up a website. I still didn&#8217;t make the courage to migrate my current
-website and blog to it, but I promise I&nbsp;will.</p>
-<p>Pelican has a public plugins repository, but they have a license
-constraint for all contributions. My plugin isn&#8217;t complicated, but I had
-to &#8220;reverse engineer&#8221; undocumented parts of the <a href="http://pybtex.sourceforge.net">pybtex</a> <span class="caps">API</span>. I think
-that maybe that code that I used to render citations programatically can
-be useful to others, so I don&#8217;t want to release it under a restrictive
-license. For this reason, I publish <a href="https://github.com/vene/pelican-bibtex">pelican-bibtex</a> in my personal
-GitHub&nbsp;account.</p>
-<p>You can see it in action in the <a href="https://github.com/nlp-unibuc/nlp-unibuc-website/">source code</a> for the website I am
-working on at the moment, the home page of my research group. Example
-output generated using pelican-bibtex can be seen <a href="http://nlp-unibuc.github.io/publications.html">here</a>.</p>
-<h2>Possible&nbsp;extensions</h2>
-<p>I have not dug in too deeply but I believe this plugin can be extended,
-with not much difficulty, to support referencing in Pelican blogs, and
-render BibTeX references at the end of every post. This idea was
-suggested by Avaris on #pelican, and I find it very cool. Since I don&#8217;t
-need this feature at the moment, it&#8217;s not a priority, but it&#8217;s something
-that I would like to see at some&nbsp;point.</p>                </article>
-                            </aside><!-- /#featured -->
-                            <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
-                                                
+<p>Look no more, with the help of <a href="https://github.com/vene/pelican-bibtex">pelican-bibtex ...</a></p>
+                <a class="readmore" href="http://vene.ro/blog/bibtex-powered-publications-list-for-pelican-with-pelican-bibtex.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            
 
                  
                         <li><article class="hentry">    
@@ -166,33 +195,6 @@ with its applications, since high school. The inverse of a matrix
 \$latex <span class="caps">AA</span>\^{-1} = A\^{-1}A = I_n\$. Based on the requirement that the
 left and ...</p>
                 <a class="readmore" href="http://vene.ro/blog/inverses-pseudoinverses-numerical-issues-speed-symmetry.html">read more</a>
-                                </div><!-- /.entry-content -->
-            </article></li>
-                            
-
-                 
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="http://vene.ro/blog/the-scikit-learn-speed-ship-has-set-sail-faster-than-ever-with-multi-step-benchmarks.html" rel="bookmark"
-                           title="Permalink to The scikit-learn-speed ship has set sail! Faster than ever, with multi-step benchmarks!">The scikit-learn-speed ship has set sail! Faster than ever, with multi-step&nbsp;benchmarks!</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2012-08-11T17:32:00">
-                Sat 11 August 2012
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="http://vene.ro/blog/author/vene.html">vene</a>
-        </address>
-        <p>In <a href="http://vene.ro/blog/category/scikit-learn.html">scikit-learn</a>. </p>
-<p>tags: <a href="http://vene.ro/blog/tag/multi-step.html">multi-step</a> <a href="http://vene.ro/blog/tag/multistep.html">multistep</a> <a href="http://vene.ro/blog/tag/vbench.html">vbench</a> <a href="http://vene.ro/blog/tag/benchmarking.html">benchmarking</a> <a href="http://vene.ro/blog/tag/python.html">python</a> <a href="http://vene.ro/blog/tag/scikit-learn.html">scikit-learn</a> </p>
-</footer><!-- /.post-info -->                <p>I am pleased to announce that last night at 2:03 <span class="caps">AM</span>, the first fully
-automated run of the scikit-learn-speed test suite has run on our
-Jenkins instance! You can admire it at <a href="http://jenkins-scikit-learn.github.com/scikit-learn-speed/">its temporary home</a> for now.
-As soon as we verify that everything is good, we will move ...</p>
-                <a class="readmore" href="http://vene.ro/blog/the-scikit-learn-speed-ship-has-set-sail-faster-than-ever-with-multi-step-benchmarks.html">read more</a>
                                 </div><!-- /.entry-content -->
             </article></li>
                             </ol><!-- /#posts-list -->

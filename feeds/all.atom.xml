@@ -1,5 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Vlad Niculae (~vene)</title><link href="http://vene.ro/" rel="alternate"></link><link href="http://vene.ro/feeds/all.atom.xml" rel="self"></link><id>http://vene.ro/</id><updated>2013-04-22T10:45:00+02:00</updated><entry><title>BibTeX-powered publications list for Pelican with pelican-bibtex</title><link href="http://vene.ro/blog/bibtex-powered-publications-list-for-pelican-with-pelican-bibtex.html" rel="alternate"></link><updated>2013-04-22T10:45:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2013-04-22:blog/bibtex-powered-publications-list-for-pelican-with-pelican-bibtex.html</id><summary type="html">&lt;h2&gt;Hook&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Vlad Niculae (~vene)</title><link href="http://vene.ro/" rel="alternate"></link><link href="http://vene.ro/feeds/all.atom.xml" rel="self"></link><id>http://vene.ro/</id><updated>2014-01-10T12:00:00+01:00</updated><entry><title>Site move</title><link href="http://vene.ro/blog/site-move.html" rel="alternate"></link><updated>2014-01-10T12:00:00+01:00</updated><author><name>vene</name></author><id>tag:vene.ro,2014-01-10:blog/site-move.html</id><summary type="html">&lt;p&gt;I finally got around to moving my entire website, including the blog,
+to &lt;a href="http://getpelican.com"&gt;Pelican&lt;/a&gt;.  I probably would have gotten away with it
+too if it weren&amp;#8217;t for those meddling kids who hacked my friend&amp;#8217;s server and
+convinced me that it&amp;#8217;s worth the effort to go&amp;nbsp;static.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;It only took 5 hours!&lt;/strong&gt; I am more and more convinced that static websites
+allow for a better streamlined workflow that does wonders for&amp;nbsp;productivity.&lt;/p&gt;
+&lt;p&gt;The static part of my old website was made with Jekyll before, so I kept it
+almost identical, except for fixing some childish &lt;span class="caps"&gt;CSS&lt;/span&gt; bugs.  The same self-hate
+that comes with reading code that you wrote yourself years ago also comes from
+markup,&amp;nbsp;apparently.&lt;/p&gt;
+&lt;p&gt;The blog, however, was migrated thanks to Pelican&amp;#8217;s Wordpress importer.  This
+means that the images are missing, the comments are missing (though I think
+they can be imported somehow) and the plugin-specific syntax such as Latex
+and source code is poorly rendered.  Luckily the images are there in the
+database dump, but I will need to go through the posts one by one to fix
+everything.  For now, my priority was to get it up and running and keep as many
+of the old links as&amp;nbsp;possible.&lt;/p&gt;
+&lt;p&gt;Unfortunately &lt;a href="http://pages.github.com"&gt;GitHub Pages&lt;/a&gt; doesn&amp;#8217;t allow &lt;span class="caps"&gt;URL&lt;/span&gt;
+rewriting, but I use &lt;a href="https://cloudflare.com"&gt;CloudFlare&lt;/a&gt; for &lt;span class="caps"&gt;DNS&lt;/span&gt; and their
+free plan gives me the right to use three forwarding rules.  With just 3 rules
+I couldn&amp;#8217;t save all of the old URLs, so I had to prioritize something.  I
+decided to rescue the links pointing directly to articles, which needed two
+rules, for links with and without trailing slashes, because the CloudFlare
+syntax has no way of specifying optional characters.  I used the third wish
+that the genie granted me to simply redirect the subdomain
+&lt;code&gt;blog.vene.ro&lt;/code&gt; to the appropriate subfolder,
+&lt;code&gt;vene.ro/blog&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Best part about this is that I will now be able to migrate my &lt;a href="/papers.html"&gt;personal list of
+papers&lt;/a&gt; to
+&lt;a href="https://github.com/vene/pelican-bibtex"&gt;pelican-bibtex&lt;/a&gt;.&lt;/p&gt;</summary><category term="pelican"></category><category term="blog"></category></entry><entry><title>BibTeX-powered publications list for Pelican with pelican-bibtex</title><link href="http://vene.ro/blog/bibtex-powered-publications-list-for-pelican-with-pelican-bibtex.html" rel="alternate"></link><updated>2013-04-22T10:45:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2013-04-22:blog/bibtex-powered-publications-list-for-pelican-with-pelican-bibtex.html</id><summary type="html">&lt;h2&gt;Hook&lt;/h2&gt;
 &lt;p&gt;Wouldn&amp;#8217;t you like to manage your academic publications list easily
 within the context of your static website? Without resorting to external
 services, or to software like &lt;em&gt;bibtex2html&lt;/em&gt;, which is very nice but will

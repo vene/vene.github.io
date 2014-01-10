@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <title>Vlad Niculae (~vene) - meta</title>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="http://vene.ro/theme/css/main.css" type="text/css" />
+                <link href="http://vene.ro/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Vlad Niculae (~vene) Atom Feed" />
+                        <link href='http://fonts.googleapis.com/css?family=Averia+Gruesa+Libre|Alegreya:400italic,400,700|Alegreya+SC&subset=latin-ext' rel='stylesheet' type='text/css'>
+
+        <!--[if IE]>
+                <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+        <!--[if lte IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="http://vene.ro/css/ie.css"/>
+                <script src="http://vene.ro/js/IE8.js" type="text/javascript"></script><![endif]-->
+
+        <!--[if lt IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="http://vene.ro/css/ie6.css"/><![endif]-->
+
+</head>
+
+<body id="index" class="home">
+<div id="container">
+        <header id="banner" class="body">
+                <div id="header">Vlad Niculae (~vene)</div>
+                <!--<nav><ul>
+                                                    <li><a href="http://vene.ro/fonts.html">Fonts</a></li>
+                                    <li><a href="http://vene.ro/papers.html">Publications</a></li>
+                                    <li><a href="http://vene.ro/talks.html">Talks</a></li>
+                                    <li><a href="http://vene.ro/teaching.html">Teaching</a></li>
+                                                                    <li><a href="/publications.html">Publications</a></li>
+                                    <li><a href="/blog/">Blog</a></li>
+                                                </ul></nav> -->
+        </header><!-- /#banner -->
+        <div id="main" role="main">
+                
+            
+
+                            <aside id="featured" class="body">
+                <article>
+                    <h1 class="entry-title"><a href="http://vene.ro/blog/site-move.html">Site&nbsp;move</a></h1> 
+                    <footer class="post-info">
+        <abbr class="published" title="2014-01-10T12:00:00">
+                Fri 10 January 2014
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="http://vene.ro/blog/author/vene.html">vene</a>
+        </address>
+        <p>In <a href="http://vene.ro/blog/category/meta.html">meta</a>. </p>
+<p>tags: <a href="http://vene.ro/blog/tag/pelican.html">pelican</a> <a href="http://vene.ro/blog/tag/blog.html">blog</a> </p>
+</footer><!-- /.post-info --><p>I finally got around to moving my entire website, including the blog,
+to <a href="http://getpelican.com">Pelican</a>.  I probably would have gotten away with it
+too if it weren&#8217;t for those meddling kids who hacked my friend&#8217;s server and
+convinced me that it&#8217;s worth the effort to go&nbsp;static.</p>
+<p><strong>It only took 5 hours!</strong> I am more and more convinced that static websites
+allow for a better streamlined workflow that does wonders for&nbsp;productivity.</p>
+<p>The static part of my old website was made with Jekyll before, so I kept it
+almost identical, except for fixing some childish <span class="caps">CSS</span> bugs.  The same self-hate
+that comes with reading code that you wrote yourself years ago also comes from
+markup,&nbsp;apparently.</p>
+<p>The blog, however, was migrated thanks to Pelican&#8217;s Wordpress importer.  This
+means that the images are missing, the comments are missing (though I think
+they can be imported somehow) and the plugin-specific syntax such as Latex
+and source code is poorly rendered.  Luckily the images are there in the
+database dump, but I will need to go through the posts one by one to fix
+everything.  For now, my priority was to get it up and running and keep as many
+of the old links as&nbsp;possible.</p>
+<p>Unfortunately <a href="http://pages.github.com">GitHub Pages</a> doesn&#8217;t allow <span class="caps">URL</span>
+rewriting, but I use <a href="https://cloudflare.com">CloudFlare</a> for <span class="caps">DNS</span> and their
+free plan gives me the right to use three forwarding rules.  With just 3 rules
+I couldn&#8217;t save all of the old URLs, so I had to prioritize something.  I
+decided to rescue the links pointing directly to articles, which needed two
+rules, for links with and without trailing slashes, because the CloudFlare
+syntax has no way of specifying optional characters.  I used the third wish
+that the genie granted me to simply redirect the subdomain
+<code>blog.vene.ro</code> to the appropriate subfolder,
+<code>vene.ro/blog</code>.</p>
+<p>Best part about this is that I will now be able to migrate my <a href="/papers.html">personal list of
+papers</a> to
+<a href="https://github.com/vene/pelican-bibtex">pelican-bibtex</a>.</p>                </article>
+                                    <p class="paginator">
+        Page 1 / 1
+    </p>
+                            </aside><!-- /#featured -->
+                                                </ol><!-- /#posts-list -->
+                        </section><!-- /#content -->
+                    <section id="extras" class="body">
+                        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Go <a href="/">home</a>. 
+                Powered by <a href="http://getpelican.com/">Pelican</a>
+                </address><!-- /#about -->
+        </footer><!-- /#contentinfo -->
+        </div>
+</div>
+</body>
+</html>
