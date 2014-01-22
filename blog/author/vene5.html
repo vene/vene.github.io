@@ -17,6 +17,35 @@
 
         <!--[if lt IE 7]>
                 <link rel="stylesheet" type="text/css" media="all" href="http://vene.ro/css/ie6.css"/><![endif]-->
+    <!-- MathJax configuration -->
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+      },
+      displayAlign: 'left', // Change this to 'center' to center equations.
+      "HTML-CSS": {
+        styles: {'.MathJax_Display': {"margin": 0}}
+      }
+    });
+    </script>
+    <!-- End of mathjax configuration -->
+
+    <script>
+    //  We wait for the onload function to load MathJax after the page is completely loaded.
+    //  MathJax is loaded 1 unit of time after the page is ready.
+    //  This hack prevent problems when you load multiple js files.
+
+    window.onload = function () {
+      setTimeout(function () {
+        var script = document.createElement("script");
+        script.type = "text/javascript";
+        script.src  = "https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS_HTML";
+        document.getElementsByTagName("head")[0].appendChild(script);
+      },1)
+    }
+    </script>
 
 </head>
 
@@ -40,6 +69,34 @@
                  
                             <section id="content" class="body">
                     <ol id="posts-list" class="hfeed" start="4">
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://vene.ro/blog/more-on-memory-benchmarking.html" rel="bookmark"
+                           title="Permalink to More on memory benchmarking">More on memory&nbsp;benchmarking</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2012-07-02T11:27:00">
+                Mon 02 July 2012
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="http://vene.ro/blog/author/vene.html">vene</a>
+        </address>
+        <p>In <a href="http://vene.ro/blog/category/benchmarking.html">benchmarking</a>. </p>
+<p>tags: <a href="http://vene.ro/blog/tag/ipython.html">IPython</a> <a href="http://vene.ro/blog/tag/magic.html">magic</a> <a href="http://vene.ro/blog/tag/memit.html">memit</a> <a href="http://vene.ro/blog/tag/memory.html">memory</a> <a href="http://vene.ro/blog/tag/memory_profiler.html">memory_profiler</a> <a href="http://vene.ro/blog/tag/mprun.html">mprun</a> <a href="http://vene.ro/blog/tag/benchmarking.html">benchmarking</a> <a href="http://vene.ro/blog/tag/python.html">python</a> </p>
+</footer><!-- /.post-info -->                <p>Following up on my task to make it easier to benchmark memory usage in
+Python, I updated Fabian&#8217;s [memory_profiler][] to include a couple of
+useful IPython magics. While in my <a href="http://localhost:8001/2012/06/30/quick-memory-usage-benchmarking-in-ipython/" title="Quick memory usage benchmarking in IPython">last post</a>, I used the new IPython
+0.13 syntax for defining magics, this time I used the
+backwards-compatible ...</p>
+                <a class="readmore" href="http://vene.ro/blog/more-on-memory-benchmarking.html">read more</a>
+                <p>There are <a href="http://vene.ro/blog/more-on-memory-benchmarking.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
                         <li><article class="hentry">    
                 <header>
                     <h1><a href="http://vene.ro/blog/moving-out.html" rel="bookmark"
@@ -148,39 +205,10 @@ its derivative, at a given point. This is an accurate way ...</p>
                 <a class="readmore" href="http://vene.ro/blog/newton-interpolation-and-numerical-differentiation.html">read more</a>
                 <p>There are <a href="http://vene.ro/blog/newton-interpolation-and-numerical-differentiation.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
-                            
-
-                 
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="http://vene.ro/blog/on-setuptools-subpackages.html" rel="bookmark"
-                           title="Permalink to On setuptools subpackages">On setuptools&nbsp;subpackages</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2011-04-04T15:01:00">
-                Mon 04 April 2011
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="http://vene.ro/blog/author/vene.html">vene</a>
-        </address>
-        <p>In <a href="http://vene.ro/blog/category/python.html">python</a>. </p>
-<p>tags: <a href="http://vene.ro/blog/tag/python.html">python</a> <a href="http://vene.ro/blog/tag/setuptools.html">setuptools</a> </p>
-</footer><!-- /.post-info -->                <p>Today, I spent more than two hours trying to figure out why, despite
-things working out fine in my development scikits.learn folder,
-<code>python setup.py install</code> would completely ignore the module I
-refactored into a&nbsp;subpackage.</p>
-<p>I imagined that simply adding it to the parent <code>__init__.py __all__</code>
-attribute ...</p>
-                <a class="readmore" href="http://vene.ro/blog/on-setuptools-subpackages.html">read more</a>
-                <p>There are <a href="http://vene.ro/blog/on-setuptools-subpackages.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
                             </ol><!-- /#posts-list -->
                             <p class="paginator">
                         <a href="http://vene.ro/blog/author/vene4.html">&laquo;</a>
-                Page 5 / 9
+                Page 5 / 10
             <a href="http://vene.ro/blog/author/vene6.html">&raquo;</a>
     </p>
                         </section><!-- /#content -->

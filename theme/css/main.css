@@ -28,7 +28,7 @@ ul, ol {
 p, li {
   font-size: 1em; /* 18px */
   line-height: 1.3333em; /* 24px */
-  margin: 0 0 1.3333em 0;
+  margin: 0 0 1.3333em 0 !important; /* needed because of silly ipynb */
 }
 
 .class-for-14px {
@@ -124,3 +124,9 @@ ol.hfeed {
 }
 
 .hentry {clear: both;}
+
+div.prompt {display: none !important;}
+.math {
+    color: black;
+    text-align: center !important;
+}

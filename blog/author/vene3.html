@@ -17,6 +17,35 @@
 
         <!--[if lt IE 7]>
                 <link rel="stylesheet" type="text/css" media="all" href="http://vene.ro/css/ie6.css"/><![endif]-->
+    <!-- MathJax configuration -->
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+      },
+      displayAlign: 'left', // Change this to 'center' to center equations.
+      "HTML-CSS": {
+        styles: {'.MathJax_Display': {"margin": 0}}
+      }
+    });
+    </script>
+    <!-- End of mathjax configuration -->
+
+    <script>
+    //  We wait for the onload function to load MathJax after the page is completely loaded.
+    //  MathJax is loaded 1 unit of time after the page is ready.
+    //  This hack prevent problems when you load multiple js files.
+
+    window.onload = function () {
+      setTimeout(function () {
+        var script = document.createElement("script");
+        script.type = "text/javascript";
+        script.src  = "https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS_HTML";
+        document.getElementsByTagName("head")[0].appendChild(script);
+      },1)
+    }
+    </script>
 
 </head>
 
@@ -182,7 +211,7 @@ are ranged&nbsp;0-256.)</p>
                             </ol><!-- /#posts-list -->
                             <p class="paginator">
                         <a href="http://vene.ro/blog/author/vene2.html">&laquo;</a>
-                Page 3 / 9
+                Page 3 / 10
             <a href="http://vene.ro/blog/author/vene4.html">&raquo;</a>
     </p>
                         </section><!-- /#content -->

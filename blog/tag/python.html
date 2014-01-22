@@ -17,6 +17,35 @@
 
         <!--[if lt IE 7]>
                 <link rel="stylesheet" type="text/css" media="all" href="http://vene.ro/css/ie6.css"/><![endif]-->
+    <!-- MathJax configuration -->
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+      },
+      displayAlign: 'left', // Change this to 'center' to center equations.
+      "HTML-CSS": {
+        styles: {'.MathJax_Display': {"margin": 0}}
+      }
+    });
+    </script>
+    <!-- End of mathjax configuration -->
+
+    <script>
+    //  We wait for the onload function to load MathJax after the page is completely loaded.
+    //  MathJax is loaded 1 unit of time after the page is ready.
+    //  This hack prevent problems when you load multiple js files.
+
+    window.onload = function () {
+      setTimeout(function () {
+        var script = document.createElement("script");
+        script.type = "text/javascript";
+        script.src  = "https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS_HTML";
+        document.getElementsByTagName("head")[0].appendChild(script);
+      },1)
+    }
+    </script>
 
 </head>
 
@@ -38,6 +67,18 @@
 <h2>All articles</h2>
 
 <ol id="post-list">
+        <li><article class="hentry">
+                <header> <h2 class="entry-title"><a href="http://vene.ro/blog/kemeny-young-optimal-rank-aggregation-in-python.html" rel="bookmark" title="Permalink to Kemeny-Young Optimal Rank Aggregation in Python">Kemeny-Young Optimal Rank Aggregation in&nbsp;Python</a></h2> </header>
+                <footer class="post-info">
+                    <abbr class="published" title="2014-01-22T18:00:00"> Wed 22 January 2014 </abbr>
+                    <address class="vcard author">By <a class="url fn" href="http://vene.ro/blog/author/vene.html">vene</a></address>                </footer><!-- /.post-info -->
+                <div class="entry-content"> <style type="text/css">.clearfix{*zoom:1;}.clearfix:before,.clearfix:after{display:table;content:&#8221;&#8220;;line-height:0;}
+.clearfix:after{clear:both;}
+.hide-text{font:0/0 a;color:transparent;text-shadow:none;background-color:transparent;border:0;}
+.input-block-level{display:block;width:100%;min-height:30px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+html{font-size:100%;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;}
+sub ...</style> </div><!-- /.entry-content -->
+        </article></li>
         <li><article class="hentry">
                 <header> <h2 class="entry-title"><a href="http://vene.ro/blog/scikit-learn-speed-an-overview-on-the-final-day.html" rel="bookmark" title="Permalink to Scikit-learn-speed: An overview on the final day">Scikit-learn-speed: An overview on the final&nbsp;day</a></h2> </header>
                 <footer class="post-info">
@@ -82,17 +123,6 @@ McKinney&#8217;s <a href="http://wesmckinney.com/blog/?p=373">vbench</a> framewo
 hope)&nbsp;additions.</p>
 <h2>What it looks like&nbsp;now</h2>
 <p>You ...</p> </div><!-- /.entry-content -->
-        </article></li>
-        <li><article class="hentry">
-                <header> <h2 class="entry-title"><a href="http://vene.ro/blog/scikit-learn-speed-html-reports-teaser.html" rel="bookmark" title="Permalink to Scikit-learn-speed HTML reports teaser">Scikit-learn-speed <span class="caps">HTML</span> reports&nbsp;teaser</a></h2> </header>
-                <footer class="post-info">
-                    <abbr class="published" title="2012-07-20T14:40:00"> Fri 20 July 2012 </abbr>
-                    <address class="vcard author">By <a class="url fn" href="http://vene.ro/blog/author/vene.html">vene</a></address>                </footer><!-- /.post-info -->
-                <div class="entry-content"> <p><span class="caps">EDIT</span>: I made the plots a little more readable, check it&nbsp;out!</p>
-<p>Last time, I teased you with a screenshot of local output. Now, I will
-tease you with the benchmarks run on a couple of recent commits, along
-with some from earlier this&nbsp;year.</p>
-<p>After some effort and bugfixes ...</p> </div><!-- /.entry-content -->
         </article></li>
 </ol><!-- /#posts-list -->
 <p class="paginator">
