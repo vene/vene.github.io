@@ -99,7 +99,7 @@ div#container{
 	height: 100%;
 	margin: 0 auto;
 }
-div#header{
+div#mainheader{
 	font-size: 4em; /* 64px */
   	line-height: 1em; /* 80px */
   	padding-top: 0.3333em;
