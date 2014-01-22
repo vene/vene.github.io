@@ -1885,7 +1885,11 @@ A Kemeny-Young aggregation with score 15 is: Ginny, Robin, Gwendolyn, Debbie, Al
 <p>The brute-force approach is, as you can see, simple to understand and quick to code. However, the number of total ranks of size <span class="math">\(n\)</span> is <span class="math">\(n!\)</span>, so this approach quickly becomes infeasible for real-world problems. Unfortunately, it turns out that this problem (along with many related problems in rank-world) is <span class="caps">NP</span>-hard even for only four voters [<a href="#note3">3</a>]. There have been quite a few approaches and approximations. In many cases, such as search results aggregation, approximations are good enough. For the cases where an exact solution is required, a formulation as a constrained integer program is given in [<a href="#note4">4</a>].</p>
 <p>We build a weighted directed graph <span class="math">\(G = (V, E)\)</span> with the candidates as vertices. The edges are defined as such: for every pair of candidates <span class="math">\(i, j\)</span>, let <span class="math">\(\#\{i &gt; j\}\)</span> denote the number of voters who rank <span class="math">\(i\)</span> higher than <span class="math">\(j\)</span>. Draw an edge <span class="math">\(e\)</span> between each <span class="math">\(i, j\)</span> with weight <span class="math">\(w_e = |\#\{i &gt; j\} - \#\{j &gt; i\}|\)</span> (if nonzero, of course). The orientation of the edge is from the less preferred to the more preferred&nbsp;node.</p>
 <p>The formulation is based on the alternative interpretation of the Kemeny optimal aggregation as the ranking that minimizes the weights of edges it disagrees&nbsp;with:</p>
-
+<p><span class="math">\[
+\operatorname{minimize} \sum_{e \in E} w_e x_e &#92;
+\operatorname{subject to} &#92;
+\forall i \neq j \in V, x_{ij} + x_{ji} = 1 &#92;
+\forall i \neq j \neq k \neq i \in V, x_{ij} + x_{jk} + x_{ki} \geq 1&nbsp;\]</span></p>
 <p>In the above problem, all variables are integer, and effectively binary under the other constraints. The interpretation is that <span class="math">\(x_{ij} = 1\)</span> if, in the aggregated rank, <span class="math">\(i\)</span> is ranked lower than <span class="math">\(j\)</span>.</p>
 <p>The constraints essentially impose that the variables define a total order. The first set of constraints enforce antisymmetry and totality: either <span class="math">\(i\)</span> is ranked lower than <span class="math">\(j\)</span> or the other way around. The second set of constraints enforce&nbsp;transitivity.</p>
 </div>
