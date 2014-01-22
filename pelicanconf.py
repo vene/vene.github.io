@@ -58,3 +58,8 @@ EXTRA_PATH_METADATA = {'extras/favicon.ico': {'path': 'favicon.ico'},
 # Evil tracking
 GOOGLE_ANALYTICS = 'UA-47024389-1'
 DISQUS_SITENAME = 'vene'
+
+# IPython Notebook plugin
+MARKUP = ('md', 'ipynb')
+PLUGIN_PATH = './plugins'
+PLUGINS = ['ipythonnb']
