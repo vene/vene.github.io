@@ -7,10 +7,6 @@ save_as: index.html
 Welcome, traveller, to my page. Enjoy your brief stay while you get to
 know me!
 
-**Update** Wenn Sie mein Personalausweis gefunden haben, bitte melden Sie
-(vlad<span style="display:none">...</span>@vene.ro).  Sie bekommen von mir eine
-Belohnung.
-
 My name is Vlad, I'm a scientific Python developer and a student researcher
 in natural language processing (NLP) and computational linguistics.  At the moment I am honoured to be a 6 month
 research fellow in the [Max Planck Institute for Software

@@ -3,6 +3,10 @@ Slug: papers
 
 # Publications
 
+* Vlad Niculae, Marcos Zampieri, Liviu P. Dinu, Alina Maria Ciobanu.
+Temporal Text Ranking and Automatic Dating of Texts. In: *EACL 2014*.
+\[ [PDF](papers/eacl14-temporal.pdf) \] \[ [Slides](papers/eacl14-temporal-slides.pdf) \]
+
 * Vlad Niculae. Comparison pattern matching and creative simile recognition. In:
 *Proceedings of the Joint Symposium on Semantic Processing. Textual Inference
 and Structures in Corpora.* Trento, Italy, November 2013. Association for

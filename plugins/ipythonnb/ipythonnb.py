@@ -53,6 +53,8 @@ div.input_area {
 
 def custom_highlighter(source, language='ipython', metadata=None):
     formatter = HtmlFormatter(cssclass='highlight-ipynb')
+    if language is None:
+        language = 'ipython'
     output = _pygments_highlight(source, formatter, language)
     output = output.replace('<pre>', '<pre class="ipynb">')
     return output
