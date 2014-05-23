@@ -8,10 +8,9 @@ Welcome, traveller, to my page. Enjoy your brief stay while you get to
 know me!
 
 My name is Vlad, I'm a scientific Python developer and a PhD student
-in natural language processing (NLP) and computational linguistics
-in the [Max Planck Institute for Software Systems](http://mpi-sws.org) in
+at the [Max Planck Institute for Software Systems](http://mpi-sws.org) in
 Saarbrücken, advised by [Cristian
-Danescu-Niculescu-Mizil](http://mpi-sws.org/~cristian/).I am collaborating
+Danescu-Niculescu-Mizil](http://mpi-sws.org/~cristian/). I am collaborating
 frequently with the [Centre for Computational Linguistics at the University of
 Bucharest](http://nlp.unibuc.ro/). You might know me from twitter as
 [@vnfrombucharest](https://www.twitter.com/vnfrombucharest) or from github as
