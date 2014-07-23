@@ -40,7 +40,7 @@ following conditions. The intuitive way to read them is as properties of
 &lt;ul&gt;
 &lt;li&gt;\$latex &lt;span class="caps"&gt;AA&lt;/span&gt;\^+A =&amp;nbsp;A\$&lt;/li&gt;
 &lt;li&gt;\$latex A\^+&lt;span class="caps"&gt;AA&lt;/span&gt;\^+ =&amp;nbsp;A\^+\$&lt;/li&gt;
-&lt;li&gt;\$latex (&lt;span class="caps"&gt;AA&lt;/span&gt;\^+)\^T =&amp;nbsp;&lt;span class="caps"&gt;AA&lt;/span&gt;\^+\$&lt;/li&gt;
+&lt;li&gt;\$latex (&lt;span class="caps"&gt;AA&lt;/span&gt;\^+)\^T = &lt;span class="caps"&gt;AA&lt;/span&gt;\^+\$&lt;/li&gt;
 &lt;li&gt;\$latex (A\^+A)\^T =&amp;nbsp;A\^+A\$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;These conditions do not however give us a way to get our hands on a
@@ -243,14 +243,14 @@ scikit-learn-speed powered by&amp;nbsp;vbench.[/caption]&lt;/p&gt;
 need to use the vbench from the &lt;a href="https://github.com/vene/vbench/tree/memory"&gt;memory branch on my fork&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Of course, there are some important caveats. I am running this on my
 laptop, which runs &lt;span class="caps"&gt;OS&lt;/span&gt; X Lion, so, under the effect of &lt;a href="http://localhost:8001/2012/07/04/on-why-my-memit-fails-on-osx/" title="On why my %memit fails on OSX"&gt;this
-bug&lt;/a&gt;, I hardcoded the &amp;#8216;&lt;code&gt;-i&lt;/code&gt;&amp;#8216; so the memory benchmarks are not
+bug&lt;/a&gt;, I hardcoded the &amp;#8216;&lt;code&gt;-i&lt;/code&gt;&lt;span class="quo"&gt;&amp;#8216;&lt;/span&gt; so the memory benchmarks are not
 realistic. Also, the y-range should probably be forced wider, because
 the plots look erratic, showing the very small noise at a&amp;nbsp;large-scale.&lt;/p&gt;
 &lt;p&gt;[A screenshot showing generated output from the scikit-learn-speed
   project, illustrating memory usage benchmarking.]: http://localhost:8001/wp-content/uploads/2012/07/vbench1.png
     &amp;#8220;Memory benchmarking in scikit-learn-speed powered by vbench.&amp;#8221;
   [![A screenshot showing generated output from the scikit-learn-speed
-  project, illustrating memory usage benchmarking.][]]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2012/07/vbench1.png&lt;/p&gt;</summary><category term="memit"></category><category term="memory"></category><category term="vbench"></category><category term="python"></category><category term="scikit-learn"></category></entry><entry><title>On why my %memit fails on OSX</title><link href="http://vene.ro/blog/on-why-my-memit-fails-on-osx.html" rel="alternate"></link><updated>2012-07-04T12:49:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2012-07-04:blog/on-why-my-memit-fails-on-osx.html</id><summary type="html">&lt;p&gt;In my &lt;a href="http://localhost:8001/2012/07/02/more-on-memory-benchmarking/" title="More on memory benchmarking"&gt;last post&lt;/a&gt; I mentioned that I&amp;#8217;m not satisfied with the current
+  project, illustrating memory usage benchmarking.][]]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2012/07/vbench1.png&lt;/p&gt;</summary><category term="memit"></category><category term="memory"></category><category term="vbench"></category><category term="python"></category><category term="scikit-learn"></category></entry><entry><title>On why my %memit fails on OSX</title><link href="http://vene.ro/blog/on-why-my-memit-fails-on-osx.html" rel="alternate"></link><updated>2012-07-04T12:49:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2012-07-04:blog/on-why-my-memit-fails-on-osx.html</id><summary type="html">&lt;p&gt;In my &lt;a href="http://localhost:8001/2012/07/02/more-on-memory-benchmarking/" title="More on memory benchmarking"&gt;last post&lt;/a&gt; I mentioned that I&amp;#8217;m not satisfied with the current
 state of &lt;code&gt;%memit&lt;/code&gt;, because some more complicated numerical function
 calls make it crash. I will start this post with a reminder of a pretty
 important&amp;nbsp;bug:&lt;/p&gt;

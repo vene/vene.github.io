@@ -286,7 +286,7 @@ from vbench.benchmark import&amp;nbsp;Benchmark&lt;/p&gt;
 from deps import&amp;nbsp;*&lt;/p&gt;
 &lt;p&gt;kwargs = %s&lt;br /&gt;
 X, y = make_regression(random_state=0, **kwargs)&lt;br /&gt;
-lr = LinearRegression()&lt;br /&gt;&amp;nbsp;&amp;#8221;&amp;#8220;&amp;#8221;&lt;/p&gt;
+lr = LinearRegression()&lt;br /&gt;&amp;nbsp;&amp;#8220;&amp;#8221;&amp;#8220;&lt;/p&gt;
 &lt;p&gt;_configurations = [&lt;br /&gt;
 (&amp;#8216;linear_regression_many_samples&amp;#8217;,&lt;br /&gt;
 {&amp;#8216;n_samples&amp;#8217;: 10000, &amp;#8216;n_features&amp;#8217;: 100}),&lt;br /&gt;
@@ -424,7 +424,7 @@ noise" src="http://localhost:8001/wp-content/uploads/2012/05/svr_noise.gif" titl
 &lt;p&gt;Here is the code you can use to play around with&amp;nbsp;this.&lt;/p&gt;
 &lt;p&gt;[gist&amp;nbsp;id=2815589]&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nl"&gt;http:&lt;/span&gt;&lt;span class="c1"&gt;//localhost:8001/wp-content/uploads/2012/05/svr.gif&lt;/span&gt;
-&lt;span class="s"&gt;&amp;quot;&lt;span class="caps"&gt;SVR&lt;/span&gt; on Anscombe&amp;#39;s dataset with no noise&amp;quot;&lt;/span&gt;
+&lt;span class="s"&gt;&amp;quot;SVR on Anscombe&amp;#39;s dataset with no noise&amp;quot;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -636,7 +636,7 @@ L[0, 0] =&amp;nbsp;1.&lt;/p&gt;
 lam = np.abs(np.dot(X.T, residual)).argmax()&lt;br /&gt;
 if lam &amp;lt; n_active or alpha[lam] ** 2 &amp;lt; min_float:&lt;br /&gt;
 # atom already selected or inner product too small&lt;br /&gt;
-warn(&amp;#8220;Stopping early&amp;#8221;)&lt;br /&gt;
+warn(&amp;quot;Stopping early&amp;quot;)&lt;br /&gt;
 break&lt;br /&gt;
 if n_active &amp;gt; 0:&lt;br /&gt;
 # Updates the Cholesky decomposition of X&amp;#8217; X&lt;br /&gt;
@@ -644,7 +644,7 @@ L[n_active, :n_active] = np.dot(X[:, idx].T, X[:, lam]&lt;br /&gt;
 solve_triangular(L[:n_active, :n_active], L[n_active, :n_active])&lt;br /&gt;
 d = np.dot(L[n_active, :n_active].T, L[n_active, :n_active])&lt;br /&gt;
 if 1 - d &amp;lt;= min_float: # selected atoms are dependent&lt;br /&gt;
-warn(&amp;#8220;Stopping early&amp;#8221;)&lt;br /&gt;
+warn(&amp;quot;Stopping early&amp;quot;)&lt;br /&gt;
 break&lt;br /&gt;
 L[n_active, n_active] = np.sqrt(1 - d)&lt;br /&gt;
 idx.append(lam)&lt;br /&gt;
@@ -663,7 +663,7 @@ profiler and see what the bottleneck is now. Python has excellent tools
 for this purpose. What solved the problem in this case was
 &lt;code&gt;line_profiler&lt;/code&gt; [&lt;a href="#footnote-2"&gt;2&lt;/a&gt;]. There is a great article by Olivier Grisel here
 &lt;a href="#footnote-2"&gt;2&lt;/a&gt; regarding how to use these profilers. I&amp;#8217;m just going to say that
-&lt;code&gt;line_profiler&lt;/code&gt;&amp;#8216;s output is very helpful, basically printing the time
+&lt;code&gt;line_profiler&lt;/code&gt;&lt;span class="quo"&gt;&amp;#8216;&lt;/span&gt;s output is very helpful, basically printing the time
 taken by each line of code next to that&amp;nbsp;line.&lt;/p&gt;
 &lt;p&gt;Running the profiler on this code, we found that 58% of the time is
 spent on line 14, 20.5% on line 21, and 20.5% on line 32, with the rest
@@ -721,7 +721,7 @@ L[0, 0] =&amp;nbsp;1.&lt;/p&gt;
 lam = np.abs(np.dot(X.T, residual)).argmax()&lt;br /&gt;
 if lam &amp;lt; n_active or alpha[lam] ** 2 &amp;lt; min_float:&lt;br /&gt;
 # atom already selected or inner product too small&lt;br /&gt;
-warn(&amp;#8220;Stopping early&amp;#8221;)&lt;br /&gt;
+warn(&amp;quot;Stopping early&amp;quot;)&lt;br /&gt;
 break&lt;br /&gt;
 if n_active &amp;gt; 0:&lt;br /&gt;
 # Updates the Cholesky decomposition of X&amp;#8217; X&lt;br /&gt;
@@ -729,7 +729,7 @@ L[n_active, :n_active] = np.dot(X[:, :n_active].T, X[:, lam])&lt;br /&gt;
 solve_triangular(L[:n_active, :n_active], L[n_active, :n_active])&lt;br /&gt;
 v = nrm2(L[n_active, :n_active]) ** 2&lt;br /&gt;
 if 1 - v &amp;lt;= min_float: # selected atoms are dependent&lt;br /&gt;
-warn(&amp;#8220;Stopping early&amp;#8221;)&lt;br /&gt;
+warn(&amp;quot;Stopping early&amp;quot;)&lt;br /&gt;
 break&lt;br /&gt;
 L[n_active, n_active] = np.sqrt(1 - v)&lt;br /&gt;
 X.T[n_active], X.T[lam] = swap(X.T[n_active], X.T[lam])&lt;br /&gt;
@@ -920,7 +920,7 @@ L[0, 0] =&amp;nbsp;1.&lt;/p&gt;
 lam = np.abs(np.dot(X.T, residual)).argmax()&lt;br /&gt;
 if lam \&amp;lt; n_active or alpha[lam] ** 2 &gt; min_float:&lt;br /&gt;
 # atom already selected or inner product too small&lt;br /&gt;
-warn(&amp;#8220;Stopping early&amp;#8221;)&lt;br /&gt;
+warn(&amp;quot;Stopping early&amp;quot;)&lt;br /&gt;
 break&lt;br /&gt;
 if n_active &amp;gt; 0:&lt;br /&gt;
 # Updates the Cholesky decomposition of X&amp;#8217; X&lt;br /&gt;
@@ -964,7 +964,7 @@ and beneath is initialized before access. Luckily, the
 &lt;code&gt;linalg.solve_triangular&lt;/code&gt; function ignores what it doesn&amp;#8217;t&amp;nbsp;need.&lt;/p&gt;
 &lt;p&gt;This is a robust implementation, but still a couple of times slower than
 least-angle regression. In the next part of the article we will see how
-we can make it beat&amp;nbsp;&lt;span class="caps"&gt;LARS&lt;/span&gt;.&lt;/p&gt;
+we can make it beat &lt;span class="caps"&gt;LARS&lt;/span&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;span id="footnote-1"&gt;&lt;a href="#footnote-1"&gt;1&lt;/a&gt;&lt;/span&gt; I always wanted to use this word in a
 serious context :P&lt;br /&gt;
 &lt;span id="footnote-2"&gt;&lt;a href="#footnote-2"&gt;2&lt;/a&gt;&lt;/span&gt; Rubinstein, R., Zibulevsky, M. and
@@ -975,7 +975,7 @@ Orthogonal Matching Pursuit][] Technical Report - &lt;span class="caps"&gt;CS&lt
 Matching Pursuit&lt;/a&gt; on this blog.&lt;br /&gt;
 &lt;span id="footnote-4"&gt;&lt;a href="#footnote-4"&gt;4&lt;/a&gt;&lt;/span&gt; &lt;a href="https://github.com/scikit-learn/scikit-learn/blob/master/scikits/learn/linear_model/omp.py"&gt;omp.py&lt;/a&gt; on&amp;nbsp;github.&lt;/p&gt;
 &lt;p&gt;[Efficient Implementation of the K-&lt;span class="caps"&gt;SVD&lt;/span&gt; Algorithm using Batch
-  Orthogonal Matching Pursuit]:&amp;nbsp;http://www.cs.technion.ac.il/~ronrubin/Publications/&lt;span class="caps"&gt;KSVD&lt;/span&gt;-&lt;span class="caps"&gt;OMP&lt;/span&gt;-v2.pdf&lt;/p&gt;</summary><category term="efficient"></category><category term="numpy"></category><category term="omp"></category><category term="orthogonal matching pursuit"></category><category term="scipy"></category><category term="dictionary learning"></category><category term="scikit-learn"></category><category term="python"></category></entry><entry><title>Progress on Orthogonal Matching Pursuit</title><link href="http://vene.ro/blog/progress-on-orthogonal-matching-pursuit.html" rel="alternate"></link><updated>2011-08-02T16:56:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-08-02:blog/progress-on-orthogonal-matching-pursuit.html</id><summary type="html">&lt;p&gt;Since orthogonal matching pursuit (&lt;span class="caps"&gt;OMP&lt;/span&gt;) is an important part of signal
+  Orthogonal Matching Pursuit]: http://www.cs.technion.ac.il/~ronrubin/Publications/&lt;span class="caps"&gt;KSVD&lt;/span&gt;-&lt;span class="caps"&gt;OMP&lt;/span&gt;-v2.pdf&lt;/p&gt;</summary><category term="efficient"></category><category term="numpy"></category><category term="omp"></category><category term="orthogonal matching pursuit"></category><category term="scipy"></category><category term="dictionary learning"></category><category term="scikit-learn"></category><category term="python"></category></entry><entry><title>Progress on Orthogonal Matching Pursuit</title><link href="http://vene.ro/blog/progress-on-orthogonal-matching-pursuit.html" rel="alternate"></link><updated>2011-08-02T16:56:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-08-02:blog/progress-on-orthogonal-matching-pursuit.html</id><summary type="html">&lt;p&gt;Since orthogonal matching pursuit (&lt;span class="caps"&gt;OMP&lt;/span&gt;) is an important part of signal
 processing and therefore crucial to the image processing aspect of
 dictionary learning, I am currently focusing on optimizing the &lt;span class="caps"&gt;OMP&lt;/span&gt; code
 and making sure it is stable. &lt;span class="caps"&gt;OMP&lt;/span&gt; is a forward method like least-angle
@@ -1002,7 +1002,7 @@ K-means&lt;/a&gt;, and the &lt;a href="http://scikit-learn.sourceforge.net/dev/m
 I invite you to take a&amp;nbsp;look!&lt;/p&gt;
 &lt;p&gt;[&lt;img alt="" src="http://scikit-learn.sourceforge.net/dev/_images/plot_digits_decomposition_4.png" title="Sparse PCA on images of the digit 3" /&gt;]:&amp;nbsp;http://scikit-learn.sourceforge.net/dev/_images/plot_digits_decomposition_4.png&lt;/p&gt;</summary><category term="pca"></category><category term="principal components analysis"></category><category term="scikit-learn"></category><category term="sparse pca"></category><category term="SparsePCA"></category><category term="spca"></category></entry><entry><title>K-Means for dictionary learning</title><link href="http://vene.ro/blog/k-means-for-dictionary-learning.html" rel="alternate"></link><updated>2011-07-10T14:27:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-07-10:blog/k-means-for-dictionary-learning.html</id><summary type="html">&lt;p&gt;[![Dictionary learned with K-Means on the &lt;span class="caps"&gt;LFW&lt;/span&gt; dataset with whitening
 &lt;span class="caps"&gt;PCA&lt;/span&gt;][]][][![Dictionary learned with K-Means on the &lt;span class="caps"&gt;LFW&lt;/span&gt; dataset without
-whitening&amp;nbsp;&lt;span class="caps"&gt;PCA&lt;/span&gt;][]][]&lt;/p&gt;
+whitening &lt;span class="caps"&gt;PCA&lt;/span&gt;][]][]&lt;/p&gt;
 &lt;p&gt;One of the simplest, and yet most heavily constrained form of matrix
 factorization, is vector quantization (&lt;span class="caps"&gt;VQ&lt;/span&gt;). Heavily used in image/video
 compression, the &lt;span class="caps"&gt;VQ&lt;/span&gt; problem is a factorization [latex] X=&lt;span class="caps"&gt;WH&lt;/span&gt;[/latex]
@@ -1157,7 +1157,7 @@ subject to }\big|\big|\gamma\big|\big|_0 \leq&amp;nbsp;m\$\$&lt;/p&gt;
 &lt;p&gt;The second formulation is interesting in that it gives one of the few
 algorithms for sparse coding that can control the actual number of
 non-zero entries in the solution. Some dictionary learning methods need
-this (I&amp;#8217;m thinking of&amp;nbsp;K-&lt;span class="caps"&gt;SVD&lt;/span&gt;).&lt;/p&gt;
+this (I&amp;#8217;m thinking of K-&lt;span class="caps"&gt;SVD&lt;/span&gt;).&lt;/p&gt;
 &lt;p&gt;Both problems are solved by the same algorithm, with a different
 stopping condition. The gist of it is to include at each iteration, the
 atom with the highest correlation to the current residual. However, as
@@ -1181,16 +1181,18 @@ the implementation is robust and ready for use, I will make some&amp;nbsp;benchm
 [&lt;img alt="Stem plot for sparse signals recovered by OMP" src="http://localhost:8001/wp-content/uploads/2011/06/omp.png" title="Orthogonal Matching Pursuit sparse signal recovery" /&gt;][]&lt;/p&gt;
 &lt;p&gt;Update 2: Here&amp;#8217;s a little benchmark:&lt;br /&gt;
 [&lt;img alt="Orthogonal Matching Pursuit benchmark" src="http://localhost:8001/wp-content/uploads/2011/06/omp_bench.png" title="OMP benchmark, time and error" /&gt;][]&lt;br /&gt;
-[1]&amp;nbsp;http://www.cs.technion.ac.il/\~ronrubin/Publications/&lt;span class="caps"&gt;KSVD&lt;/span&gt;-&lt;span class="caps"&gt;OMP&lt;/span&gt;-v2.pdf&lt;/p&gt;
+[1]
+http://www.cs.technion.ac.il/\~ronrubin/Publications/&lt;span class="caps"&gt;KSVD&lt;/span&gt;-&lt;span class="caps"&gt;OMP&lt;/span&gt;-v2.pdf&lt;/p&gt;
 &lt;p&gt;[&lt;img alt="Stem plot for sparse signals recovered by OMP" src="http://localhost:8001/wp-content/uploads/2011/06/omp.png" title="Orthogonal Matching Pursuit sparse signal recovery" /&gt;]: http://localhost:8001/wp-content/uploads/2011/06/omp.png
-  [&lt;img alt="Orthogonal Matching Pursuit benchmark" src="http://localhost:8001/wp-content/uploads/2011/06/omp_bench.png" title="OMP benchmark, time and error" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/06/omp_bench.png&lt;/p&gt;</summary><category term="Uncategorized"></category><category term="dictionary learning"></category><category term="omp"></category><category term="orthogonal matching pursuit"></category></entry><entry><title>Sparse PCA</title><link href="http://vene.ro/blog/sparse-pca.html" rel="alternate"></link><updated>2011-05-23T15:19:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-05-23:blog/sparse-pca.html</id><summary type="html">&lt;p&gt;I have been working on the integration into the scikits.learn codebase
+  [&lt;img alt="Orthogonal Matching Pursuit benchmark" src="http://localhost:8001/wp-content/uploads/2011/06/omp_bench.png" title="OMP benchmark, time and error" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/06/omp_bench.png&lt;/p&gt;</summary><category term="Uncategorized"></category><category term="dictionary learning"></category><category term="omp"></category><category term="orthogonal matching pursuit"></category></entry><entry><title>Sparse PCA</title><link href="http://vene.ro/blog/sparse-pca.html" rel="alternate"></link><updated>2011-05-23T15:19:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-05-23:blog/sparse-pca.html</id><summary type="html">&lt;p&gt;I have been working on the integration into the scikits.learn codebase
 of a sparse principal components analysis (SparsePCA) algorithm coded by
 Gaël and Alexandre and based on [[1]][]. Because the name &amp;#8220;sparse &lt;span class="caps"&gt;PCA&lt;/span&gt;&amp;#8221;
 has some inherent ambiguity, I will describe in greater depth what
 problem we are actually solving, and what it can be used&amp;nbsp;for.&lt;/p&gt;
 &lt;h1&gt;The&amp;nbsp;problem&lt;/h1&gt;
 &lt;p&gt;Mathematically, this implementation of Sparse &lt;span class="caps"&gt;PCA&lt;/span&gt;&amp;nbsp;solves:&lt;/p&gt;
-&lt;p&gt;\$latex (U\^*,&amp;nbsp;V\^*)=\underset{U,V}{\mathrm{argmin\,}}\frac{1}{2}||X-&lt;span class="caps"&gt;UV&lt;/span&gt;||_2\^2+\alpha||V||_1\$&lt;/p&gt;
+&lt;p&gt;\$latex (U\^*,
+V\^*)=\underset{U,V}{\mathrm{argmin\,}}\frac{1}{2}||X-&lt;span class="caps"&gt;UV&lt;/span&gt;||_2\^2+\alpha||V||_1\$&lt;/p&gt;
 &lt;p&gt;with \$latex || U_k ||_2 = 1\$ for all \$latex 0 \leq k \&amp;lt;&amp;nbsp;n_{atoms}\$&lt;/p&gt;
 &lt;p&gt;This looks really abstract so let&amp;#8217;s try to interpret it. We are looking
 for a matrix factorization \$latex &lt;span class="caps"&gt;UV&lt;/span&gt;\$ of \$latex X \in

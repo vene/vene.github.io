@@ -4,9 +4,9 @@
         <title>Optimizing Orthogonal Matching Pursuit code in Numpy, part 2</title>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="http://vene.ro/theme/css/main.css" type="text/css" />
-                <link href="http://vene.ro/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Vlad Niculae (~vene) Atom Feed" />
-                        <link href="http://vene.ro/feed/all.rss.xml" type="application/rss+xml" rel="alternate" title="Vlad Niculae (~vene) RSS Feed" />
-                <link href='http://fonts.googleapis.com/css?family=Averia+Gruesa+Libre|Alegreya:400italic,400,700|Alegreya+SC&subset=latin-ext' rel='stylesheet' type='text/css'>
+        <link href="http://vene.ro/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Vlad Niculae (~vene) Atom Feed" />
+        <link href="http://vene.ro/feed/all.rss.xml" type="application/rss+xml" rel="alternate" title="Vlad Niculae (~vene) RSS Feed" />
+        <link href='http://fonts.googleapis.com/css?family=Averia+Gruesa+Libre|Alegreya:400italic,400,700|Alegreya+SC&subset=latin-ext' rel='stylesheet' type='text/css'>
 
         <!--[if IE]>
                 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
@@ -54,33 +54,33 @@
         <header id="banner" class="body">
                 <div id="mainheader">Vlad Niculae (~vene)</div>
                 <!--<nav><ul>
-                                                    <li><a href="http://vene.ro/fonts.html">Fonts</a></li>
-                                    <li><a href="http://vene.ro/papers.html">Publications</a></li>
-                                    <li><a href="http://vene.ro/talks.html">Talks</a></li>
-                                    <li><a href="http://vene.ro/teaching.html">Teaching</a></li>
-                                                                    <li><a href="/publications.html">Publications</a></li>
-                                    <li><a href="http://vene.ro/blog/">Blog</a></li>
-                                                </ul></nav> -->
+                    <li><a href="http://vene.ro/fonts.html">Fonts</a></li>
+                    <li><a href="http://vene.ro/papers.html">Publications</a></li>
+                    <li><a href="http://vene.ro/talks.html">Talks</a></li>
+                    <li><a href="http://vene.ro/teaching.html">Teaching</a></li>
+                    <li><a href="/publications.html">Publications</a></li>
+                    <li><a href="http://vene.ro/blog/">Blog</a></li>
+                </ul></nav> -->
         </header><!-- /#banner -->
         <div id="main" role="main">
-        <section id="content" class="body">
+<section id="content" class="body">
   <article>
     <header>
       <h1 class="entry-title">
         <a href="http://vene.ro/blog/optimizing-orthogonal-matching-pursuit-code-in-numpy-part-2.html" rel="bookmark"
            title="Permalink to Optimizing Orthogonal Matching Pursuit code in Numpy, part 2">Optimizing Orthogonal Matching Pursuit code in Numpy, part&nbsp;2</a></h1>
-          </header>
+    </header>
 
     <div class="entry-content">
-      <footer class="post-info">
+<footer class="post-info">
         <abbr class="published" title="2011-08-11T19:39:00">
                 Thu 11 August 2011
         </abbr>
 
-                <address class="vcard author">
+        <address class="vcard author">
                 By <a class="url fn" href="http://vene.ro/blog/author/vene.html">vene</a>
         </address>
-        <p>In <a href="http://vene.ro/blog/category/scikit-learn.html">scikit-learn</a>. </p>
+<p>In <a href="http://vene.ro/blog/category/scikit-learn.html">scikit-learn</a>. </p>
 <p>tags: <a href="http://vene.ro/blog/tag/blas.html">blas</a> <a href="http://vene.ro/blog/tag/efficient.html">efficient</a> <a href="http://vene.ro/blog/tag/lapack.html">lapack</a> <a href="http://vene.ro/blog/tag/numpy.html">numpy</a> <a href="http://vene.ro/blog/tag/omp.html">omp</a> <a href="http://vene.ro/blog/tag/orthogonal-matching-pursuit.html">orthogonal matching pursuit</a> <a href="http://vene.ro/blog/tag/potrs.html">potrs</a> <a href="http://vene.ro/blog/tag/scipy.html">scipy</a> <a href="http://vene.ro/blog/tag/dictionary-learning.html">dictionary learning</a> <a href="http://vene.ro/blog/tag/python.html">python</a> <a href="http://vene.ro/blog/tag/scikit-learn.html">scikit-learn</a> </p>
 </footer><!-- /.post-info -->      <p><span class="caps">EDIT</span>: There was a bug in the final version of the code presented here.
 It is fixed now, for its backstory, check out <a href="http://venefrombucharest.wordpress.com/2011/11/18/the-nasty-bug-crawling-in-my-orthogonal-matching-pursuit-code/" title="The nasty bug crawling in my Orthogonal Matching Pursuit code">my blog post on it</a>.</p>
@@ -160,7 +160,7 @@ L[0, 0] =&nbsp;1.</p>
 lam = np.abs(np.dot(X.T, residual)).argmax()<br />
 if lam &lt; n_active or alpha[lam] ** 2 &lt; min_float:<br />
 # atom already selected or inner product too small<br />
-warn(&#8220;Stopping early&#8221;)<br />
+warn(&quot;Stopping early&quot;)<br />
 break<br />
 if n_active &gt; 0:<br />
 # Updates the Cholesky decomposition of X&#8217; X<br />
@@ -168,7 +168,7 @@ L[n_active, :n_active] = np.dot(X[:, idx].T, X[:, lam]<br />
 solve_triangular(L[:n_active, :n_active], L[n_active, :n_active])<br />
 d = np.dot(L[n_active, :n_active].T, L[n_active, :n_active])<br />
 if 1 - d &lt;= min_float: # selected atoms are dependent<br />
-warn(&#8220;Stopping early&#8221;)<br />
+warn(&quot;Stopping early&quot;)<br />
 break<br />
 L[n_active, n_active] = np.sqrt(1 - d)<br />
 idx.append(lam)<br />
@@ -187,7 +187,7 @@ profiler and see what the bottleneck is now. Python has excellent tools
 for this purpose. What solved the problem in this case was
 <code>line_profiler</code> [<a href="#footnote-2">2</a>]. There is a great article by Olivier Grisel here
 <a href="#footnote-2">2</a> regarding how to use these profilers. I&#8217;m just going to say that
-<code>line_profiler</code>&#8216;s output is very helpful, basically printing the time
+<code>line_profiler</code><span class="quo">&#8216;</span>s output is very helpful, basically printing the time
 taken by each line of code next to that&nbsp;line.</p>
 <p>Running the profiler on this code, we found that 58% of the time is
 spent on line 14, 20.5% on line 21, and 20.5% on line 32, with the rest
@@ -245,7 +245,7 @@ L[0, 0] =&nbsp;1.</p>
 lam = np.abs(np.dot(X.T, residual)).argmax()<br />
 if lam &lt; n_active or alpha[lam] ** 2 &lt; min_float:<br />
 # atom already selected or inner product too small<br />
-warn(&#8220;Stopping early&#8221;)<br />
+warn(&quot;Stopping early&quot;)<br />
 break<br />
 if n_active &gt; 0:<br />
 # Updates the Cholesky decomposition of X&#8217; X<br />
@@ -253,7 +253,7 @@ L[n_active, :n_active] = np.dot(X[:, :n_active].T, X[:, lam])<br />
 solve_triangular(L[:n_active, :n_active], L[n_active, :n_active])<br />
 v = nrm2(L[n_active, :n_active]) ** 2<br />
 if 1 - v &lt;= min_float: # selected atoms are dependent<br />
-warn(&#8220;Stopping early&#8221;)<br />
+warn(&quot;Stopping early&quot;)<br />
 break<br />
 L[n_active, n_active] = np.sqrt(1 - v)<br />
 X.T[n_active], X.T[lam] = swap(X.T[n_active], X.T[lam])<br />
@@ -273,7 +273,7 @@ regression! I hope you have enjoyed this short tour. See you next&nbsp;time!</p>
 <p><a href="https://github.com/scikit-learn/scikit-learn/blob/master/benchmarks/bench_plot_omp_lars.py" title="Orthogonal matching pursuit versus least-angle regression"><span id="footnote-1">1</span></a>[]<br />
 <a href="http://scikit-learn.sourceforge.net/dev/developers/performance.html#profiling-python-code" title="Profiling Python code"><span id="footnote-2">2</span></a>[]</p>
     </div><!-- /.entry-content -->
-        <div class="comments">
+    <div class="comments">
       <h2>Comments !</h2>
       <div id="disqus_thread"></div>
       <script type="text/javascript">
@@ -285,11 +285,11 @@ regression! I hope you have enjoyed this short tour. See you next&nbsp;time!</p>
         })();
       </script>
     </div>
-    
+
   </article>
 </section>
         <section id="extras" class="body">
-                        </section><!-- /#extras -->
+        </section><!-- /#extras -->
 
         <footer id="contentinfo" class="body">
                 <address id="about" class="vcard body">

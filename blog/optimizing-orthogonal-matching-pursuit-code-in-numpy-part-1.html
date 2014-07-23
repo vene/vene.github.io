@@ -4,9 +4,9 @@
         <title>Optimizing Orthogonal Matching Pursuit code in Numpy, part 1</title>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="http://vene.ro/theme/css/main.css" type="text/css" />
-                <link href="http://vene.ro/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Vlad Niculae (~vene) Atom Feed" />
-                        <link href="http://vene.ro/feed/all.rss.xml" type="application/rss+xml" rel="alternate" title="Vlad Niculae (~vene) RSS Feed" />
-                <link href='http://fonts.googleapis.com/css?family=Averia+Gruesa+Libre|Alegreya:400italic,400,700|Alegreya+SC&subset=latin-ext' rel='stylesheet' type='text/css'>
+        <link href="http://vene.ro/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Vlad Niculae (~vene) Atom Feed" />
+        <link href="http://vene.ro/feed/all.rss.xml" type="application/rss+xml" rel="alternate" title="Vlad Niculae (~vene) RSS Feed" />
+        <link href='http://fonts.googleapis.com/css?family=Averia+Gruesa+Libre|Alegreya:400italic,400,700|Alegreya+SC&subset=latin-ext' rel='stylesheet' type='text/css'>
 
         <!--[if IE]>
                 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
@@ -54,33 +54,33 @@
         <header id="banner" class="body">
                 <div id="mainheader">Vlad Niculae (~vene)</div>
                 <!--<nav><ul>
-                                                    <li><a href="http://vene.ro/fonts.html">Fonts</a></li>
-                                    <li><a href="http://vene.ro/papers.html">Publications</a></li>
-                                    <li><a href="http://vene.ro/talks.html">Talks</a></li>
-                                    <li><a href="http://vene.ro/teaching.html">Teaching</a></li>
-                                                                    <li><a href="/publications.html">Publications</a></li>
-                                    <li><a href="http://vene.ro/blog/">Blog</a></li>
-                                                </ul></nav> -->
+                    <li><a href="http://vene.ro/fonts.html">Fonts</a></li>
+                    <li><a href="http://vene.ro/papers.html">Publications</a></li>
+                    <li><a href="http://vene.ro/talks.html">Talks</a></li>
+                    <li><a href="http://vene.ro/teaching.html">Teaching</a></li>
+                    <li><a href="/publications.html">Publications</a></li>
+                    <li><a href="http://vene.ro/blog/">Blog</a></li>
+                </ul></nav> -->
         </header><!-- /#banner -->
         <div id="main" role="main">
-        <section id="content" class="body">
+<section id="content" class="body">
   <article>
     <header>
       <h1 class="entry-title">
         <a href="http://vene.ro/blog/optimizing-orthogonal-matching-pursuit-code-in-numpy-part-1.html" rel="bookmark"
            title="Permalink to Optimizing Orthogonal Matching Pursuit code in Numpy, part 1">Optimizing Orthogonal Matching Pursuit code in Numpy, part&nbsp;1</a></h1>
-          </header>
+    </header>
 
     <div class="entry-content">
-      <footer class="post-info">
+<footer class="post-info">
         <abbr class="published" title="2011-08-07T20:50:00">
                 Sun 07 August 2011
         </abbr>
 
-                <address class="vcard author">
+        <address class="vcard author">
                 By <a class="url fn" href="http://vene.ro/blog/author/vene.html">vene</a>
         </address>
-        <p>In <a href="http://vene.ro/blog/category/scikit-learn.html">scikit-learn</a>. </p>
+<p>In <a href="http://vene.ro/blog/category/scikit-learn.html">scikit-learn</a>. </p>
 <p>tags: <a href="http://vene.ro/blog/tag/efficient.html">efficient</a> <a href="http://vene.ro/blog/tag/numpy.html">numpy</a> <a href="http://vene.ro/blog/tag/omp.html">omp</a> <a href="http://vene.ro/blog/tag/orthogonal-matching-pursuit.html">orthogonal matching pursuit</a> <a href="http://vene.ro/blog/tag/scipy.html">scipy</a> <a href="http://vene.ro/blog/tag/dictionary-learning.html">dictionary learning</a> <a href="http://vene.ro/blog/tag/scikit-learn.html">scikit-learn</a> <a href="http://vene.ro/blog/tag/python.html">python</a> </p>
 </footer><!-- /.post-info -->      <p>After intense code optimization work, my implementation of <span class="caps">OMP</span> finally
 beat least-angle regression! This was the primary issue discussed during
@@ -255,7 +255,7 @@ L[0, 0] =&nbsp;1.</p>
 lam = np.abs(np.dot(X.T, residual)).argmax()<br />
 if lam \&lt; n_active or alpha[lam] ** 2 > min_float:<br />
 # atom already selected or inner product too small<br />
-warn(&#8220;Stopping early&#8221;)<br />
+warn(&quot;Stopping early&quot;)<br />
 break<br />
 if n_active &gt; 0:<br />
 # Updates the Cholesky decomposition of X&#8217; X<br />
@@ -299,7 +299,7 @@ and beneath is initialized before access. Luckily, the
 <code>linalg.solve_triangular</code> function ignores what it doesn&#8217;t&nbsp;need.</p>
 <p>This is a robust implementation, but still a couple of times slower than
 least-angle regression. In the next part of the article we will see how
-we can make it beat&nbsp;<span class="caps">LARS</span>.</p>
+we can make it beat <span class="caps">LARS</span>.</p>
 <p><span id="footnote-1"><a href="#footnote-1">1</a></span> I always wanted to use this word in a
 serious context :P<br />
 <span id="footnote-2"><a href="#footnote-2">2</a></span> Rubinstein, R., Zibulevsky, M. and
@@ -310,9 +310,9 @@ Orthogonal Matching Pursuit][] Technical Report - <span class="caps">CS</span> T
 Matching Pursuit</a> on this blog.<br />
 <span id="footnote-4"><a href="#footnote-4">4</a></span> <a href="https://github.com/scikit-learn/scikit-learn/blob/master/scikits/learn/linear_model/omp.py">omp.py</a> on&nbsp;github.</p>
 <p>[Efficient Implementation of the K-<span class="caps">SVD</span> Algorithm using Batch
-  Orthogonal Matching Pursuit]:&nbsp;http://www.cs.technion.ac.il/~ronrubin/Publications/<span class="caps">KSVD</span>-<span class="caps">OMP</span>-v2.pdf</p>
+  Orthogonal Matching Pursuit]: http://www.cs.technion.ac.il/~ronrubin/Publications/<span class="caps">KSVD</span>-<span class="caps">OMP</span>-v2.pdf</p>
     </div><!-- /.entry-content -->
-        <div class="comments">
+    <div class="comments">
       <h2>Comments !</h2>
       <div id="disqus_thread"></div>
       <script type="text/javascript">
@@ -324,11 +324,11 @@ Matching Pursuit</a> on this blog.<br />
         })();
       </script>
     </div>
-    
+
   </article>
 </section>
         <section id="extras" class="body">
-                        </section><!-- /#extras -->
+        </section><!-- /#extras -->
 
         <footer id="contentinfo" class="body">
                 <address id="about" class="vcard body">

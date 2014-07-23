@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <title>Sparse PCA</title>
+        <title>Sparse PCA</title>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="http://vene.ro/theme/css/main.css" type="text/css" />
-                <link href="http://vene.ro/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Vlad Niculae (~vene) Atom Feed" />
-                        <link href="http://vene.ro/feed/all.rss.xml" type="application/rss+xml" rel="alternate" title="Vlad Niculae (~vene) RSS Feed" />
-                <link href='http://fonts.googleapis.com/css?family=Averia+Gruesa+Libre|Alegreya:400italic,400,700|Alegreya+SC&subset=latin-ext' rel='stylesheet' type='text/css'>
+        <link href="http://vene.ro/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Vlad Niculae (~vene) Atom Feed" />
+        <link href="http://vene.ro/feed/all.rss.xml" type="application/rss+xml" rel="alternate" title="Vlad Niculae (~vene) RSS Feed" />
+        <link href='http://fonts.googleapis.com/css?family=Averia+Gruesa+Libre|Alegreya:400italic,400,700|Alegreya+SC&subset=latin-ext' rel='stylesheet' type='text/css'>
 
         <!--[if IE]>
                 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
@@ -54,33 +54,33 @@
         <header id="banner" class="body">
                 <div id="mainheader">Vlad Niculae (~vene)</div>
                 <!--<nav><ul>
-                                                    <li><a href="http://vene.ro/fonts.html">Fonts</a></li>
-                                    <li><a href="http://vene.ro/papers.html">Publications</a></li>
-                                    <li><a href="http://vene.ro/talks.html">Talks</a></li>
-                                    <li><a href="http://vene.ro/teaching.html">Teaching</a></li>
-                                                                    <li><a href="/publications.html">Publications</a></li>
-                                    <li><a href="http://vene.ro/blog/">Blog</a></li>
-                                                </ul></nav> -->
+                    <li><a href="http://vene.ro/fonts.html">Fonts</a></li>
+                    <li><a href="http://vene.ro/papers.html">Publications</a></li>
+                    <li><a href="http://vene.ro/talks.html">Talks</a></li>
+                    <li><a href="http://vene.ro/teaching.html">Teaching</a></li>
+                    <li><a href="/publications.html">Publications</a></li>
+                    <li><a href="http://vene.ro/blog/">Blog</a></li>
+                </ul></nav> -->
         </header><!-- /#banner -->
         <div id="main" role="main">
-        <section id="content" class="body">
+<section id="content" class="body">
   <article>
     <header>
       <h1 class="entry-title">
         <a href="http://vene.ro/blog/sparse-pca.html" rel="bookmark"
-           title="Permalink to Sparse PCA">Sparse&nbsp;<span class="caps">PCA</span></a></h1>
-          </header>
+           title="Permalink to Sparse PCA">Sparse <span class="caps">PCA</span></a></h1>
+    </header>
 
     <div class="entry-content">
-      <footer class="post-info">
+<footer class="post-info">
         <abbr class="published" title="2011-05-23T15:19:00">
                 Mon 23 May 2011
         </abbr>
 
-                <address class="vcard author">
+        <address class="vcard author">
                 By <a class="url fn" href="http://vene.ro/blog/author/vene.html">vene</a>
         </address>
-        <p>In <a href="http://vene.ro/blog/category/scikit-learn.html">scikit-learn</a>. </p>
+<p>In <a href="http://vene.ro/blog/category/scikit-learn.html">scikit-learn</a>. </p>
 <p>tags: <a href="http://vene.ro/blog/tag/dictionary-learning.html">dictionary learning</a> <a href="http://vene.ro/blog/tag/pca.html">pca</a> <a href="http://vene.ro/blog/tag/sparse-pca.html">sparse pca</a> <a href="http://vene.ro/blog/tag/sparsepca.html">SparsePCA</a> <a href="http://vene.ro/blog/tag/spca.html">spca</a> <a href="http://vene.ro/blog/tag/scikit-learn.html">scikit-learn</a> </p>
 </footer><!-- /.post-info -->      <p>I have been working on the integration into the scikits.learn codebase
 of a sparse principal components analysis (SparsePCA) algorithm coded by
@@ -89,7 +89,8 @@ has some inherent ambiguity, I will describe in greater depth what
 problem we are actually solving, and what it can be used&nbsp;for.</p>
 <h1>The&nbsp;problem</h1>
 <p>Mathematically, this implementation of Sparse <span class="caps">PCA</span>&nbsp;solves:</p>
-<p>\$latex (U\^*,&nbsp;V\^*)=\underset{U,V}{\mathrm{argmin\,}}\frac{1}{2}||X-<span class="caps">UV</span>||_2\^2+\alpha||V||_1\$</p>
+<p>\$latex (U\^*,
+V\^*)=\underset{U,V}{\mathrm{argmin\,}}\frac{1}{2}||X-<span class="caps">UV</span>||_2\^2+\alpha||V||_1\$</p>
 <p>with \$latex || U_k ||_2 = 1\$ for all \$latex 0 \leq k \&lt;&nbsp;n_{atoms}\$</p>
 <p>This looks really abstract so let&#8217;s try to interpret it. We are looking
 for a matrix factorization \$latex <span class="caps">UV</span>\$ of \$latex X \in
@@ -150,7 +151,7 @@ for handwritten digit classification, for my undergraduate&nbsp;thesis.</p>
 <p><span id="footnote_1">[1] <a href="http://www.di.ens.fr/sierra/pdfs/icml09.pdf">http://www.di.ens.fr/sierra/pdfs/icml09.pdf</a></span></p>
 <p>[[1]]:&nbsp;#footnote_1</p>
     </div><!-- /.entry-content -->
-        <div class="comments">
+    <div class="comments">
       <h2>Comments !</h2>
       <div id="disqus_thread"></div>
       <script type="text/javascript">
@@ -162,11 +163,11 @@ for handwritten digit classification, for my undergraduate&nbsp;thesis.</p>
         })();
       </script>
     </div>
-    
+
   </article>
 </section>
         <section id="extras" class="body">
-                        </section><!-- /#extras -->
+        </section><!-- /#extras -->
 
         <footer id="contentinfo" class="body">
                 <address id="about" class="vcard body">

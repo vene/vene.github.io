@@ -199,7 +199,7 @@ size difference of the two corpora, as would be&amp;nbsp;expected.&lt;/p&gt;
 &lt;p&gt;We have to throw away &lt;em&gt;hitting the books&lt;/em&gt; because its &lt;span class="caps"&gt;BNC&lt;/span&gt; zero count
 leads to divisions by zero. After this step, the average of the relative
 counts of the idioms is 19.5, with a standard deviation of 10.1, while
-&lt;span class="caps"&gt;OED&lt;/span&gt; is supposed to have around 20 times more words than the&amp;nbsp;&lt;span class="caps"&gt;BNC&lt;/span&gt;.&lt;/p&gt;
+&lt;span class="caps"&gt;OED&lt;/span&gt; is supposed to have around 20 times more words than the &lt;span class="caps"&gt;BNC&lt;/span&gt;.&lt;/p&gt;
 &lt;h2&gt;Conclusions&lt;/h2&gt;
 &lt;p&gt;Well, it seems people don&amp;#8217;t say &lt;em&gt;break a leg&lt;/em&gt; and &lt;em&gt;let&amp;#8217;s hit the books&lt;/em&gt;
 as often as the original author claims. The popularity of most of the
@@ -287,7 +287,7 @@ Mazur][], we need to edit `BchartSm.C` to add the line
 &lt;li&gt;
 On my system this still isn&amp;#8217;t enough, and I get some linker errors. By
 poking through the Makefile, I noticed I could fix it by commenting out
-the 5th line:&amp;nbsp;`&lt;span class="caps"&gt;LDFLAGS&lt;/span&gt;=-static`.
+the 5th line: `&lt;span class="caps"&gt;LDFLAGS&lt;/span&gt;=-static`.
 
 &lt;/li&gt;
 &lt;li&gt;

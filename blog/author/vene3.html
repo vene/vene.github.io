@@ -4,9 +4,9 @@
         <title>Vlad Niculae (~vene) - vene</title>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="http://vene.ro/theme/css/main.css" type="text/css" />
-                <link href="http://vene.ro/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Vlad Niculae (~vene) Atom Feed" />
-                        <link href="http://vene.ro/feed/all.rss.xml" type="application/rss+xml" rel="alternate" title="Vlad Niculae (~vene) RSS Feed" />
-                <link href='http://fonts.googleapis.com/css?family=Averia+Gruesa+Libre|Alegreya:400italic,400,700|Alegreya+SC&subset=latin-ext' rel='stylesheet' type='text/css'>
+        <link href="http://vene.ro/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Vlad Niculae (~vene) Atom Feed" />
+        <link href="http://vene.ro/feed/all.rss.xml" type="application/rss+xml" rel="alternate" title="Vlad Niculae (~vene) RSS Feed" />
+        <link href='http://fonts.googleapis.com/css?family=Averia+Gruesa+Libre|Alegreya:400italic,400,700|Alegreya+SC&subset=latin-ext' rel='stylesheet' type='text/css'>
 
         <!--[if IE]>
                 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
@@ -54,169 +54,167 @@
         <header id="banner" class="body">
                 <div id="mainheader">Vlad Niculae (~vene)</div>
                 <!--<nav><ul>
-                                                    <li><a href="http://vene.ro/fonts.html">Fonts</a></li>
-                                    <li><a href="http://vene.ro/papers.html">Publications</a></li>
-                                    <li><a href="http://vene.ro/talks.html">Talks</a></li>
-                                    <li><a href="http://vene.ro/teaching.html">Teaching</a></li>
-                                                                    <li><a href="/publications.html">Publications</a></li>
-                                    <li><a href="http://vene.ro/blog/">Blog</a></li>
-                                                </ul></nav> -->
+                    <li><a href="http://vene.ro/fonts.html">Fonts</a></li>
+                    <li><a href="http://vene.ro/papers.html">Publications</a></li>
+                    <li><a href="http://vene.ro/talks.html">Talks</a></li>
+                    <li><a href="http://vene.ro/teaching.html">Teaching</a></li>
+                    <li><a href="/publications.html">Publications</a></li>
+                    <li><a href="http://vene.ro/blog/">Blog</a></li>
+                </ul></nav> -->
         </header><!-- /#banner -->
         <div id="main" role="main">
-                
-            
+        
+        
 
-                 
-                            <section id="content" class="body">
+ 
+                <section id="content" class="body">
                     <ol id="posts-list" class="hfeed" start="4">
-                        <li><article class="hentry">    
+            <li><article class="hentry">    
                 <header>
-                    <h1><a href="http://vene.ro/blog/first-contact-with-vbench.html" rel="bookmark"
-                           title="Permalink to First contact with vbench">First contact with&nbsp;vbench</a></h1>
+                    <h1><a href="http://vene.ro/blog/on-why-my-memit-fails-on-osx.html" rel="bookmark"
+                           title="Permalink to On why my %memit fails on OSX">On why my %memit fails on <span class="caps">OSX</span></a></h1>
                 </header>
                 
                 <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2012-05-29T12:57:00">
-                Tue 29 May 2012
+<footer class="post-info">
+        <abbr class="published" title="2012-07-04T12:49:00">
+                Wed 04 July 2012
         </abbr>
 
-                <address class="vcard author">
+        <address class="vcard author">
                 By <a class="url fn" href="http://vene.ro/blog/author/vene.html">vene</a>
         </address>
-        <p>In <a href="http://vene.ro/blog/category/scikit-learn.html">scikit-learn</a>. </p>
-<p>tags: <a href="http://vene.ro/blog/tag/benchmarks.html">benchmarks</a> <a href="http://vene.ro/blog/tag/perfpy.html">perf.py</a> <a href="http://vene.ro/blog/tag/performance.html">performance</a> <a href="http://vene.ro/blog/tag/vbench.html">vbench</a> <a href="http://vene.ro/blog/tag/scikit-learn.html">scikit-learn</a> </p>
-</footer><!-- /.post-info -->                <p>With a slight delay caused by going to lovely lovely Istanbul for the
-<span class="caps">LREC</span> conference where I presented a <a href="http://vene.ro/papers/lrec12-poster.pdf">poster</a>, I am back to work on the
-Google Summer of Code project. By the way, this year&#8217;s logo and swag
-looks a lot nicer than last year&#8217;s, thank ...</p>
-                <a class="readmore" href="http://vene.ro/blog/first-contact-with-vbench.html">read more</a>
-                <p>There are <a href="http://vene.ro/blog/first-contact-with-vbench.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+<p>In <a href="http://vene.ro/blog/category/benchmarking.html">benchmarking</a>. </p>
+<p>tags: <a href="http://vene.ro/blog/tag/ipython.html">IPython</a> <a href="http://vene.ro/blog/tag/magic.html">magic</a> <a href="http://vene.ro/blog/tag/memit.html">memit</a> <a href="http://vene.ro/blog/tag/mprun.html">mprun</a> <a href="http://vene.ro/blog/tag/benchmarking.html">benchmarking</a> <a href="http://vene.ro/blog/tag/python.html">python</a> </p>
+</footer><!-- /.post-info -->                <p>In my <a href="http://localhost:8001/2012/07/02/more-on-memory-benchmarking/" title="More on memory benchmarking">last post</a> I mentioned that I&#8217;m not satisfied with the current
+state of <code>%memit</code>, because some more complicated numerical function
+calls make it crash. I will start this post with a reminder of a pretty
+important&nbsp;bug:</p>
+<p><strong>[On MacOS X (10.7 but maybe more), after forking ...</strong></p>
+                <a class="readmore" href="http://vene.ro/blog/on-why-my-memit-fails-on-osx.html">read more</a>
+<p>There are <a href="http://vene.ro/blog/on-why-my-memit-fails-on-osx.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
-                            
+        
 
-                 
-                        <li><article class="hentry">    
+ 
+            <li><article class="hentry">    
                 <header>
-                    <h1><a href="http://vene.ro/blog/first-thoughts-on-orthogonal-matching-pursuit.html" rel="bookmark"
-                           title="Permalink to First thoughts on Orthogonal Matching Pursuit">First thoughts on Orthogonal Matching&nbsp;Pursuit</a></h1>
+                    <h1><a href="http://vene.ro/blog/more-on-memory-benchmarking.html" rel="bookmark"
+                           title="Permalink to More on memory benchmarking">More on memory&nbsp;benchmarking</a></h1>
                 </header>
                 
                 <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2011-05-30T13:02:00">
-                Mon 30 May 2011
+<footer class="post-info">
+        <abbr class="published" title="2012-07-02T11:27:00">
+                Mon 02 July 2012
         </abbr>
 
-                <address class="vcard author">
+        <address class="vcard author">
                 By <a class="url fn" href="http://vene.ro/blog/author/vene.html">vene</a>
         </address>
-        <p>In <a href="http://vene.ro/blog/category/scikit-learn.html">scikit-learn</a>. </p>
-<p>tags: <a href="http://vene.ro/blog/tag/uncategorized.html">Uncategorized</a> <a href="http://vene.ro/blog/tag/dictionary-learning.html">dictionary learning</a> <a href="http://vene.ro/blog/tag/omp.html">omp</a> <a href="http://vene.ro/blog/tag/orthogonal-matching-pursuit.html">orthogonal matching pursuit</a> </p>
-</footer><!-- /.post-info -->                <p>I am working on implementing the Orthogonal Matching Pursuit (<span class="caps">OMP</span>)
-algorithm for the scikit. It is an elegant algorithm (that almost writes
-itself in Numpy!) to compute a greedy approximation to the solution of a
-sparse coding&nbsp;problem:</p>
-<p>\$\$ \text{argmin} \big|\big|\gamma\big|\big|_0 \text{ subject
-to }\big ...</p>
-                <a class="readmore" href="http://vene.ro/blog/first-thoughts-on-orthogonal-matching-pursuit.html">read more</a>
-                <p>There are <a href="http://vene.ro/blog/first-thoughts-on-orthogonal-matching-pursuit.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+<p>In <a href="http://vene.ro/blog/category/benchmarking.html">benchmarking</a>. </p>
+<p>tags: <a href="http://vene.ro/blog/tag/ipython.html">IPython</a> <a href="http://vene.ro/blog/tag/magic.html">magic</a> <a href="http://vene.ro/blog/tag/memit.html">memit</a> <a href="http://vene.ro/blog/tag/memory.html">memory</a> <a href="http://vene.ro/blog/tag/memory_profiler.html">memory_profiler</a> <a href="http://vene.ro/blog/tag/mprun.html">mprun</a> <a href="http://vene.ro/blog/tag/benchmarking.html">benchmarking</a> <a href="http://vene.ro/blog/tag/python.html">python</a> </p>
+</footer><!-- /.post-info -->                <p>Following up on my task to make it easier to benchmark memory usage in
+Python, I updated Fabian&#8217;s [memory_profiler][] to include a couple of
+useful IPython magics. While in my <a href="http://localhost:8001/2012/06/30/quick-memory-usage-benchmarking-in-ipython/" title="Quick memory usage benchmarking in IPython">last post</a>, I used the new IPython
+0.13 syntax for defining magics, this time I used the
+backwards-compatible ...</p>
+                <a class="readmore" href="http://vene.ro/blog/more-on-memory-benchmarking.html">read more</a>
+<p>There are <a href="http://vene.ro/blog/more-on-memory-benchmarking.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
-                            
+        
 
-                 
-                        <li><article class="hentry">    
+ 
+            <li><article class="hentry">    
                 <header>
-                    <h1><a href="http://vene.ro/blog/gsoc-2012-proposal-need-for-scikit-learn-speed.html" rel="bookmark"
-                           title="Permalink to GSoC 2012 proposal: Need for scikit-learn speed">GSoC 2012 proposal: Need for scikit-learn&nbsp;speed</a></h1>
+                    <h1><a href="http://vene.ro/blog/quick-memory-usage-benchmarking-in-ipython.html" rel="bookmark"
+                           title="Permalink to Quick memory usage benchmarking in IPython">Quick memory usage benchmarking in&nbsp;IPython</a></h1>
                 </header>
                 
                 <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2012-04-16T00:37:00">
-                Mon 16 April 2012
+<footer class="post-info">
+        <abbr class="published" title="2012-06-30T08:53:00">
+                Sat 30 June 2012
         </abbr>
 
-                <address class="vcard author">
+        <address class="vcard author">
                 By <a class="url fn" href="http://vene.ro/blog/author/vene.html">vene</a>
         </address>
-        <p>In <a href="http://vene.ro/blog/category/scikit-learn.html">scikit-learn</a>. </p>
-<p>tags: <a href="http://vene.ro/blog/tag/gsoc.html">gsoc</a> <a href="http://vene.ro/blog/tag/proposal.html">proposal</a> <a href="http://vene.ro/blog/tag/scikit-learn.html">scikit-learn</a> </p>
-</footer><!-- /.post-info -->                <p>This summer I hope to be able to put in another full-time amount of
-effort into scikit-learn. After a successful Google Summer of Code
-project last year on dictionary learning, I now plan to do some
-low-level work. The title of my proposal is: &#8220;Need for scikit-learn
-speed&#8221; and, in ...</p>
-                <a class="readmore" href="http://vene.ro/blog/gsoc-2012-proposal-need-for-scikit-learn-speed.html">read more</a>
-                <p>There are <a href="http://vene.ro/blog/gsoc-2012-proposal-need-for-scikit-learn-speed.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+<p>In <a href="http://vene.ro/blog/category/benchmarking.html">benchmarking</a>. </p>
+<p>tags: <a href="http://vene.ro/blog/tag/benchmark.html">benchmark</a> <a href="http://vene.ro/blog/tag/ipython.html">IPython</a> <a href="http://vene.ro/blog/tag/magic.html">magic</a> <a href="http://vene.ro/blog/tag/memory.html">memory</a> <a href="http://vene.ro/blog/tag/memory_profiler.html">memory_profiler</a> <a href="http://vene.ro/blog/tag/profiling.html">profiling</a> <a href="http://vene.ro/blog/tag/benchmarking.html">benchmarking</a> <a href="http://vene.ro/blog/tag/python.html">python</a> </p>
+</footer><!-- /.post-info -->                <p>Everybody loves <code>%timeit</code>, there&#8217;s no doubt about it. So why not have
+something like that, but for measuring how much memory your line takes?
+Well, now you can; grab a hold of the script in the following gist and
+run it like in the&nbsp;example.</p>
+<p>[gist&nbsp;id=3022718]</p>
+<p>Instead ...</p>
+                <a class="readmore" href="http://vene.ro/blog/quick-memory-usage-benchmarking-in-ipython.html">read more</a>
+<p>There are <a href="http://vene.ro/blog/quick-memory-usage-benchmarking-in-ipython.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
-                            
+        
 
-                 
-                        <li><article class="hentry">    
+ 
+            <li><article class="hentry">    
                 <header>
-                    <h1><a href="http://vene.ro/blog/hello-world-2.html" rel="bookmark"
-                           title="Permalink to Hello world!">Hello&nbsp;world!</a></h1>
+                    <h1><a href="http://vene.ro/blog/compiling-and-installing-glarf-and-the-bundled-charniak-parser-on-macos-x.html" rel="bookmark"
+                           title="Permalink to Compiling and Installing GLARF and the bundled Charniak parser on MacOS X">Compiling and Installing <span class="caps">GLARF</span> and the bundled Charniak parser on MacOS&nbsp;X</a></h1>
                 </header>
                 
                 <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2011-03-30T08:59:00">
-                Wed 30 March 2011
+<footer class="post-info">
+        <abbr class="published" title="2012-06-21T12:32:00">
+                Thu 21 June 2012
         </abbr>
 
-                <address class="vcard author">
+        <address class="vcard author">
                 By <a class="url fn" href="http://vene.ro/blog/author/vene.html">vene</a>
         </address>
-        <p>In <a href="http://vene.ro/blog/category/uncategorized.html">Uncategorized</a>. </p>
-<p>tags: <a href="http://vene.ro/blog/tag/uncategorized.html">Uncategorized</a> </p>
-</footer><!-- /.post-info -->                <p>This is the blog where I will post updates regarding my work
-on<a href="http://scikit-learn.sourceforge.net/" title="scikits-learn">scikits-learn.</a> I am applying as a GSoC 2011 student with the <span class="caps">PSF</span>
-for work on this machine learning&nbsp;library.</p>
-<p>I will also post related work that I do in the machine learning&nbsp;field.</p>
-<p>I hope to prove ...</p>
-                <a class="readmore" href="http://vene.ro/blog/hello-world-2.html">read more</a>
-                <p>There are <a href="http://vene.ro/blog/hello-world-2.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+<p>In <a href="http://vene.ro/blog/category/nlp.html">nlp</a>. </p>
+<p>tags: <a href="http://vene.ro/blog/tag/bllip.html">bllip</a> <a href="http://vene.ro/blog/tag/charniak.html">charniak</a> <a href="http://vene.ro/blog/tag/glarf.html">glarf</a> <a href="http://vene.ro/blog/tag/installation.html">installation</a> <a href="http://vene.ro/blog/tag/parser.html">parser</a> <a href="http://vene.ro/blog/tag/nlp.html">nlp</a> </p>
+</footer><!-- /.post-info -->                <p>It seems that I keep getting handed buggy code to install. These are
+cases of research software where the developers didn&#8217;t make the effort
+to make sure their tool works on the platforms it&nbsp;should.</p>
+<p>[<span class="caps">GLARF</span>][] (Grammatical and Logical Argument Representation Framework)
+is, in their words, &#8220;a typed feature ...</p>
+                <a class="readmore" href="http://vene.ro/blog/compiling-and-installing-glarf-and-the-bundled-charniak-parser-on-macos-x.html">read more</a>
+<p>There are <a href="http://vene.ro/blog/compiling-and-installing-glarf-and-the-bundled-charniak-parser-on-macos-x.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
-                            
+        
 
-                 
-                        <li><article class="hentry">    
+ 
+            <li><article class="hentry">    
                 <header>
-                    <h1><a href="http://vene.ro/blog/image-denoising-with-dictionary-learning.html" rel="bookmark"
-                           title="Permalink to Image denoising with dictionary learning">Image denoising with dictionary&nbsp;learning</a></h1>
+                    <h1><a href="http://vene.ro/blog/compiling-megam-on-macos-x.html" rel="bookmark"
+                           title="Permalink to Compiling MegaM on MacOS X">Compiling MegaM on MacOS&nbsp;X</a></h1>
                 </header>
                 
                 <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2011-07-07T20:00:00">
-                Thu 07 July 2011
+<footer class="post-info">
+        <abbr class="published" title="2012-06-08T11:45:00">
+                Fri 08 June 2012
         </abbr>
 
-                <address class="vcard author">
+        <address class="vcard author">
                 By <a class="url fn" href="http://vene.ro/blog/author/vene.html">vene</a>
         </address>
-        <p>In <a href="http://vene.ro/blog/category/scikit-learn.html">scikit-learn</a>. </p>
-<p>tags: <a href="http://vene.ro/blog/tag/denoising.html">denoising</a> <a href="http://vene.ro/blog/tag/dictionary-learning.html">dictionary learning</a> <a href="http://vene.ro/blog/tag/scikit-learn.html">scikit-learn</a> </p>
-</footer><!-- /.post-info -->                <p>I am presenting an image denoising example that fully runs under my
-local scikits-learn fork. Coming soon near&nbsp;you!</p>
-<p>The 400 square pixels area covering Lena&#8217;s face was distorted by
-additive gaussian noise with a standard deviation of 50 (pixel values
-are ranged&nbsp;0-256.)</p>
-<p>[<img alt="Lena image denoising using dictionary learning" src="http://localhost:8001/wp-content/uploads/2011/07/denoise3.png" title="Lena denoising" />][]</p>
-<p>The dictionary contains 100 atoms ...</p>
-                <a class="readmore" href="http://vene.ro/blog/image-denoising-with-dictionary-learning.html">read more</a>
-                <p>There are <a href="http://vene.ro/blog/image-denoising-with-dictionary-learning.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+<p>In <a href="http://vene.ro/blog/category/nlp.html">nlp</a>. </p>
+<p>tags: <a href="http://vene.ro/blog/tag/compile.html">compile</a> <a href="http://vene.ro/blog/tag/install.html">install</a> <a href="http://vene.ro/blog/tag/maxent.html">maxent</a> <a href="http://vene.ro/blog/tag/megam.html">megam</a> <a href="http://vene.ro/blog/tag/nlp.html">nlp</a> </p>
+</footer><!-- /.post-info -->                <p><a href="http://hal3.name/megam">MegaM</a> is Hal Daumé <span class="caps">III</span>&#8217;s maxent (logistic regression, and much more)
+modeling software written in OCaml. It is feature-packed and seems to be
+used a lot, despite being slightly dated. <a href="http://nltk.org" title="Natural Language Toolkit"><span class="caps">NLTK</span></a> is able to use&nbsp;it.</p>
+<p>In order to compile it as of 2012, with the current version of ...</p>
+                <a class="readmore" href="http://vene.ro/blog/compiling-megam-on-macos-x.html">read more</a>
+<p>There are <a href="http://vene.ro/blog/compiling-megam-on-macos-x.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
-                            </ol><!-- /#posts-list -->
-                            <p class="paginator">
-                        <a href="http://vene.ro/blog/author/vene2.html">&laquo;</a>
-                Page 3 / 10
-            <a href="http://vene.ro/blog/author/vene4.html">&raquo;</a>
-    </p>
-                        </section><!-- /#content -->
-                    <section id="extras" class="body">
-                        </section><!-- /#extras -->
+            </ol><!-- /#posts-list -->
+<p class="paginator">
+        <a href="http://vene.ro/blog/author/vene2.html">&laquo;</a>
+    Page 3 / 10
+        <a href="http://vene.ro/blog/author/vene4.html">&raquo;</a>
+</p>
+            </section><!-- /#content -->
+        <section id="extras" class="body">
+        </section><!-- /#extras -->
 
         <footer id="contentinfo" class="body">
                 <address id="about" class="vcard body">

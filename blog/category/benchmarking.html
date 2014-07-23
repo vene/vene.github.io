@@ -4,9 +4,9 @@
         <title>Vlad Niculae (~vene) - benchmarking</title>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="http://vene.ro/theme/css/main.css" type="text/css" />
-                <link href="http://vene.ro/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Vlad Niculae (~vene) Atom Feed" />
-                        <link href="http://vene.ro/feed/all.rss.xml" type="application/rss+xml" rel="alternate" title="Vlad Niculae (~vene) RSS Feed" />
-                <link href='http://fonts.googleapis.com/css?family=Averia+Gruesa+Libre|Alegreya:400italic,400,700|Alegreya+SC&subset=latin-ext' rel='stylesheet' type='text/css'>
+        <link href="http://vene.ro/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Vlad Niculae (~vene) Atom Feed" />
+        <link href="http://vene.ro/feed/all.rss.xml" type="application/rss+xml" rel="alternate" title="Vlad Niculae (~vene) RSS Feed" />
+        <link href='http://fonts.googleapis.com/css?family=Averia+Gruesa+Libre|Alegreya:400italic,400,700|Alegreya+SC&subset=latin-ext' rel='stylesheet' type='text/css'>
 
         <!--[if IE]>
                 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
@@ -54,30 +54,30 @@
         <header id="banner" class="body">
                 <div id="mainheader">Vlad Niculae (~vene)</div>
                 <!--<nav><ul>
-                                                    <li><a href="http://vene.ro/fonts.html">Fonts</a></li>
-                                    <li><a href="http://vene.ro/papers.html">Publications</a></li>
-                                    <li><a href="http://vene.ro/talks.html">Talks</a></li>
-                                    <li><a href="http://vene.ro/teaching.html">Teaching</a></li>
-                                                                    <li><a href="/publications.html">Publications</a></li>
-                                    <li><a href="http://vene.ro/blog/">Blog</a></li>
-                                                </ul></nav> -->
+                    <li><a href="http://vene.ro/fonts.html">Fonts</a></li>
+                    <li><a href="http://vene.ro/papers.html">Publications</a></li>
+                    <li><a href="http://vene.ro/talks.html">Talks</a></li>
+                    <li><a href="http://vene.ro/teaching.html">Teaching</a></li>
+                    <li><a href="/publications.html">Publications</a></li>
+                    <li><a href="http://vene.ro/blog/">Blog</a></li>
+                </ul></nav> -->
         </header><!-- /#banner -->
         <div id="main" role="main">
-                
-            
+        
+        
 
-                            <aside id="featured" class="body">
+            <aside id="featured" class="body">
                 <article>
                     <h1 class="entry-title"><a href="http://vene.ro/blog/inverses-pseudoinverses-numerical-issues-speed-symmetry.html">Inverses and pseudoinverses. Numerical issues, speed,&nbsp;symmetry.</a></h1> 
-                    <footer class="post-info">
+<footer class="post-info">
         <abbr class="published" title="2012-08-18T19:41:00">
                 Sat 18 August 2012
         </abbr>
 
-                <address class="vcard author">
+        <address class="vcard author">
                 By <a class="url fn" href="http://vene.ro/blog/author/vene.html">vene</a>
         </address>
-        <p>In <a href="http://vene.ro/blog/category/benchmarking.html">benchmarking</a>. </p>
+<p>In <a href="http://vene.ro/blog/category/benchmarking.html">benchmarking</a>. </p>
 <p>tags: <a href="http://vene.ro/blog/tag/inv.html">inv</a> <a href="http://vene.ro/blog/tag/matrix-inverse.html">matrix inverse</a> <a href="http://vene.ro/blog/tag/numerical-analysis.html">numerical analysis</a> <a href="http://vene.ro/blog/tag/numerical-methods.html">numerical methods</a> <a href="http://vene.ro/blog/tag/pinv.html">pinv</a> <a href="http://vene.ro/blog/tag/pinvh.html">pinvh</a> <a href="http://vene.ro/blog/tag/positive-semidefinite.html">positive semidefinite</a> <a href="http://vene.ro/blog/tag/pseudoinverse.html">pseudoinverse</a> <a href="http://vene.ro/blog/tag/symmetric.html">symmetric</a> <a href="http://vene.ro/blog/tag/benchmarking.html">benchmarking</a> <a href="http://vene.ro/blog/tag/python.html">python</a> </p>
 </footer><!-- /.post-info --><p>The matrix inverse is a cornerstone of linear algebra, taught, along
 with its applications, since high school. The inverse of a matrix
@@ -120,7 +120,7 @@ following conditions. The intuitive way to read them is as properties of
 <ul>
 <li>\$latex <span class="caps">AA</span>\^+A =&nbsp;A\$</li>
 <li>\$latex A\^+<span class="caps">AA</span>\^+ =&nbsp;A\^+\$</li>
-<li>\$latex (<span class="caps">AA</span>\^+)\^T =&nbsp;<span class="caps">AA</span>\^+\$</li>
+<li>\$latex (<span class="caps">AA</span>\^+)\^T = <span class="caps">AA</span>\^+\$</li>
 <li>\$latex (A\^+A)\^T =&nbsp;A\^+A\$</li>
 </ul>
 <p>These conditions do not however give us a way to get our hands on a
@@ -307,30 +307,30 @@ In [24]: timeit linalg.pinv2(a)<br />
 <p>In [26]: np.testing.assert_array_almost_equal(linalg.pinv2(a),
 linalg.pinvh(a))<br />&nbsp;[/sourcecode]</p>
 <p>[<img alt="" src="http://localhost:8001/wp-content/uploads/2012/08/pseudoinverses-300x218.png" title="Pseudoinverses" />]:&nbsp;http://localhost:8001/wp-content/uploads/2012/08/pseudoinverses.png</p><p>There are <a href="http://vene.ro/blog/inverses-pseudoinverses-numerical-issues-speed-symmetry.html#disqus_thread">comments</a>.</p>                </article>
-                            </aside><!-- /#featured -->
-                            <section id="content" class="body">
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
                     <h1>Other articles</h1>
                     <hr />
                     <ol id="posts-list" class="hfeed">
-                                                
+        
 
-                 
-                        <li><article class="hentry">    
+ 
+            <li><article class="hentry">    
                 <header>
                     <h1><a href="http://vene.ro/blog/memory-benchmarking-with-vbench.html" rel="bookmark"
                            title="Permalink to Memory benchmarking with vbench">Memory benchmarking with&nbsp;vbench</a></h1>
                 </header>
                 
                 <div class="entry-content">
-                <footer class="post-info">
+<footer class="post-info">
         <abbr class="published" title="2012-07-05T12:38:00">
                 Thu 05 July 2012
         </abbr>
 
-                <address class="vcard author">
+        <address class="vcard author">
                 By <a class="url fn" href="http://vene.ro/blog/author/vene.html">vene</a>
         </address>
-        <p>In <a href="http://vene.ro/blog/category/benchmarking.html">benchmarking</a>. </p>
+<p>In <a href="http://vene.ro/blog/category/benchmarking.html">benchmarking</a>. </p>
 <p>tags: <a href="http://vene.ro/blog/tag/memit.html">memit</a> <a href="http://vene.ro/blog/tag/memory.html">memory</a> <a href="http://vene.ro/blog/tag/vbench.html">vbench</a> <a href="http://vene.ro/blog/tag/python.html">python</a> <a href="http://vene.ro/blog/tag/scikit-learn.html">scikit-learn</a> </p>
 </footer><!-- /.post-info -->                <p>The <a href="https://github.com/vene/scikit-learn-speed">scikit-learn-speed project</a> now has memory usage&nbsp;benchmarking!</p>
 <p>This was accomplished by building on what I described in my recent
@@ -338,27 +338,27 @@ posts, specifically the extensions to Fabian&#8217;s [memory_profiler][] that
 you can find in <a href="https://github.com/vene/memory_profiler">my fork</a>, but they will be merged upstream soon. The
 key element is the <code>%magic_memit</code> function whose ...</p>
                 <a class="readmore" href="http://vene.ro/blog/memory-benchmarking-with-vbench.html">read more</a>
-                <p>There are <a href="http://vene.ro/blog/memory-benchmarking-with-vbench.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+<p>There are <a href="http://vene.ro/blog/memory-benchmarking-with-vbench.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
-                            
+        
 
-                 
-                        <li><article class="hentry">    
+ 
+            <li><article class="hentry">    
                 <header>
                     <h1><a href="http://vene.ro/blog/on-why-my-memit-fails-on-osx.html" rel="bookmark"
-                           title="Permalink to On why my %memit fails on OSX">On why my %memit fails on&nbsp;<span class="caps">OSX</span></a></h1>
+                           title="Permalink to On why my %memit fails on OSX">On why my %memit fails on <span class="caps">OSX</span></a></h1>
                 </header>
                 
                 <div class="entry-content">
-                <footer class="post-info">
+<footer class="post-info">
         <abbr class="published" title="2012-07-04T12:49:00">
                 Wed 04 July 2012
         </abbr>
 
-                <address class="vcard author">
+        <address class="vcard author">
                 By <a class="url fn" href="http://vene.ro/blog/author/vene.html">vene</a>
         </address>
-        <p>In <a href="http://vene.ro/blog/category/benchmarking.html">benchmarking</a>. </p>
+<p>In <a href="http://vene.ro/blog/category/benchmarking.html">benchmarking</a>. </p>
 <p>tags: <a href="http://vene.ro/blog/tag/ipython.html">IPython</a> <a href="http://vene.ro/blog/tag/magic.html">magic</a> <a href="http://vene.ro/blog/tag/memit.html">memit</a> <a href="http://vene.ro/blog/tag/mprun.html">mprun</a> <a href="http://vene.ro/blog/tag/benchmarking.html">benchmarking</a> <a href="http://vene.ro/blog/tag/python.html">python</a> </p>
 </footer><!-- /.post-info -->                <p>In my <a href="http://localhost:8001/2012/07/02/more-on-memory-benchmarking/" title="More on memory benchmarking">last post</a> I mentioned that I&#8217;m not satisfied with the current
 state of <code>%memit</code>, because some more complicated numerical function
@@ -366,27 +366,27 @@ calls make it crash. I will start this post with a reminder of a pretty
 important&nbsp;bug:</p>
 <p><strong>[On MacOS X (10.7 but maybe more), after forking ...</strong></p>
                 <a class="readmore" href="http://vene.ro/blog/on-why-my-memit-fails-on-osx.html">read more</a>
-                <p>There are <a href="http://vene.ro/blog/on-why-my-memit-fails-on-osx.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+<p>There are <a href="http://vene.ro/blog/on-why-my-memit-fails-on-osx.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
-                            
+        
 
-                 
-                        <li><article class="hentry">    
+ 
+            <li><article class="hentry">    
                 <header>
                     <h1><a href="http://vene.ro/blog/more-on-memory-benchmarking.html" rel="bookmark"
                            title="Permalink to More on memory benchmarking">More on memory&nbsp;benchmarking</a></h1>
                 </header>
                 
                 <div class="entry-content">
-                <footer class="post-info">
+<footer class="post-info">
         <abbr class="published" title="2012-07-02T11:27:00">
                 Mon 02 July 2012
         </abbr>
 
-                <address class="vcard author">
+        <address class="vcard author">
                 By <a class="url fn" href="http://vene.ro/blog/author/vene.html">vene</a>
         </address>
-        <p>In <a href="http://vene.ro/blog/category/benchmarking.html">benchmarking</a>. </p>
+<p>In <a href="http://vene.ro/blog/category/benchmarking.html">benchmarking</a>. </p>
 <p>tags: <a href="http://vene.ro/blog/tag/ipython.html">IPython</a> <a href="http://vene.ro/blog/tag/magic.html">magic</a> <a href="http://vene.ro/blog/tag/memit.html">memit</a> <a href="http://vene.ro/blog/tag/memory.html">memory</a> <a href="http://vene.ro/blog/tag/memory_profiler.html">memory_profiler</a> <a href="http://vene.ro/blog/tag/mprun.html">mprun</a> <a href="http://vene.ro/blog/tag/benchmarking.html">benchmarking</a> <a href="http://vene.ro/blog/tag/python.html">python</a> </p>
 </footer><!-- /.post-info -->                <p>Following up on my task to make it easier to benchmark memory usage in
 Python, I updated Fabian&#8217;s [memory_profiler][] to include a couple of
@@ -394,27 +394,27 @@ useful IPython magics. While in my <a href="http://localhost:8001/2012/06/30/qui
 0.13 syntax for defining magics, this time I used the
 backwards-compatible ...</p>
                 <a class="readmore" href="http://vene.ro/blog/more-on-memory-benchmarking.html">read more</a>
-                <p>There are <a href="http://vene.ro/blog/more-on-memory-benchmarking.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+<p>There are <a href="http://vene.ro/blog/more-on-memory-benchmarking.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
-                            
+        
 
-                 
-                        <li><article class="hentry">    
+ 
+            <li><article class="hentry">    
                 <header>
                     <h1><a href="http://vene.ro/blog/quick-memory-usage-benchmarking-in-ipython.html" rel="bookmark"
                            title="Permalink to Quick memory usage benchmarking in IPython">Quick memory usage benchmarking in&nbsp;IPython</a></h1>
                 </header>
                 
                 <div class="entry-content">
-                <footer class="post-info">
+<footer class="post-info">
         <abbr class="published" title="2012-06-30T08:53:00">
                 Sat 30 June 2012
         </abbr>
 
-                <address class="vcard author">
+        <address class="vcard author">
                 By <a class="url fn" href="http://vene.ro/blog/author/vene.html">vene</a>
         </address>
-        <p>In <a href="http://vene.ro/blog/category/benchmarking.html">benchmarking</a>. </p>
+<p>In <a href="http://vene.ro/blog/category/benchmarking.html">benchmarking</a>. </p>
 <p>tags: <a href="http://vene.ro/blog/tag/benchmark.html">benchmark</a> <a href="http://vene.ro/blog/tag/ipython.html">IPython</a> <a href="http://vene.ro/blog/tag/magic.html">magic</a> <a href="http://vene.ro/blog/tag/memory.html">memory</a> <a href="http://vene.ro/blog/tag/memory_profiler.html">memory_profiler</a> <a href="http://vene.ro/blog/tag/profiling.html">profiling</a> <a href="http://vene.ro/blog/tag/benchmarking.html">benchmarking</a> <a href="http://vene.ro/blog/tag/python.html">python</a> </p>
 </footer><!-- /.post-info -->                <p>Everybody loves <code>%timeit</code>, there&#8217;s no doubt about it. So why not have
 something like that, but for measuring how much memory your line takes?
@@ -423,15 +423,15 @@ run it like in the&nbsp;example.</p>
 <p>[gist&nbsp;id=3022718]</p>
 <p>Instead ...</p>
                 <a class="readmore" href="http://vene.ro/blog/quick-memory-usage-benchmarking-in-ipython.html">read more</a>
-                <p>There are <a href="http://vene.ro/blog/quick-memory-usage-benchmarking-in-ipython.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+<p>There are <a href="http://vene.ro/blog/quick-memory-usage-benchmarking-in-ipython.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
-                            </ol><!-- /#posts-list -->
-                            <p class="paginator">
-        Page 1 / 1
-    </p>
-                        </section><!-- /#content -->
-                    <section id="extras" class="body">
-                        </section><!-- /#extras -->
+            </ol><!-- /#posts-list -->
+<p class="paginator">
+    Page 1 / 1
+</p>
+            </section><!-- /#content -->
+        <section id="extras" class="body">
+        </section><!-- /#extras -->
 
         <footer id="contentinfo" class="body">
                 <address id="about" class="vcard body">

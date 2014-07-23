@@ -4,9 +4,9 @@
         <title>First thoughts on Orthogonal Matching Pursuit</title>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="http://vene.ro/theme/css/main.css" type="text/css" />
-                <link href="http://vene.ro/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Vlad Niculae (~vene) Atom Feed" />
-                        <link href="http://vene.ro/feed/all.rss.xml" type="application/rss+xml" rel="alternate" title="Vlad Niculae (~vene) RSS Feed" />
-                <link href='http://fonts.googleapis.com/css?family=Averia+Gruesa+Libre|Alegreya:400italic,400,700|Alegreya+SC&subset=latin-ext' rel='stylesheet' type='text/css'>
+        <link href="http://vene.ro/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Vlad Niculae (~vene) Atom Feed" />
+        <link href="http://vene.ro/feed/all.rss.xml" type="application/rss+xml" rel="alternate" title="Vlad Niculae (~vene) RSS Feed" />
+        <link href='http://fonts.googleapis.com/css?family=Averia+Gruesa+Libre|Alegreya:400italic,400,700|Alegreya+SC&subset=latin-ext' rel='stylesheet' type='text/css'>
 
         <!--[if IE]>
                 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
@@ -54,33 +54,33 @@
         <header id="banner" class="body">
                 <div id="mainheader">Vlad Niculae (~vene)</div>
                 <!--<nav><ul>
-                                                    <li><a href="http://vene.ro/fonts.html">Fonts</a></li>
-                                    <li><a href="http://vene.ro/papers.html">Publications</a></li>
-                                    <li><a href="http://vene.ro/talks.html">Talks</a></li>
-                                    <li><a href="http://vene.ro/teaching.html">Teaching</a></li>
-                                                                    <li><a href="/publications.html">Publications</a></li>
-                                    <li><a href="http://vene.ro/blog/">Blog</a></li>
-                                                </ul></nav> -->
+                    <li><a href="http://vene.ro/fonts.html">Fonts</a></li>
+                    <li><a href="http://vene.ro/papers.html">Publications</a></li>
+                    <li><a href="http://vene.ro/talks.html">Talks</a></li>
+                    <li><a href="http://vene.ro/teaching.html">Teaching</a></li>
+                    <li><a href="/publications.html">Publications</a></li>
+                    <li><a href="http://vene.ro/blog/">Blog</a></li>
+                </ul></nav> -->
         </header><!-- /#banner -->
         <div id="main" role="main">
-        <section id="content" class="body">
+<section id="content" class="body">
   <article>
     <header>
       <h1 class="entry-title">
         <a href="http://vene.ro/blog/first-thoughts-on-orthogonal-matching-pursuit.html" rel="bookmark"
            title="Permalink to First thoughts on Orthogonal Matching Pursuit">First thoughts on Orthogonal Matching&nbsp;Pursuit</a></h1>
-          </header>
+    </header>
 
     <div class="entry-content">
-      <footer class="post-info">
+<footer class="post-info">
         <abbr class="published" title="2011-05-30T13:02:00">
                 Mon 30 May 2011
         </abbr>
 
-                <address class="vcard author">
+        <address class="vcard author">
                 By <a class="url fn" href="http://vene.ro/blog/author/vene.html">vene</a>
         </address>
-        <p>In <a href="http://vene.ro/blog/category/scikit-learn.html">scikit-learn</a>. </p>
+<p>In <a href="http://vene.ro/blog/category/scikit-learn.html">scikit-learn</a>. </p>
 <p>tags: <a href="http://vene.ro/blog/tag/uncategorized.html">Uncategorized</a> <a href="http://vene.ro/blog/tag/dictionary-learning.html">dictionary learning</a> <a href="http://vene.ro/blog/tag/omp.html">omp</a> <a href="http://vene.ro/blog/tag/orthogonal-matching-pursuit.html">orthogonal matching pursuit</a> </p>
 </footer><!-- /.post-info -->      <p>I am working on implementing the Orthogonal Matching Pursuit (<span class="caps">OMP</span>)
 algorithm for the scikit. It is an elegant algorithm (that almost writes
@@ -94,7 +94,7 @@ subject to }\big|\big|\gamma\big|\big|_0 \leq&nbsp;m\$\$</p>
 <p>The second formulation is interesting in that it gives one of the few
 algorithms for sparse coding that can control the actual number of
 non-zero entries in the solution. Some dictionary learning methods need
-this (I&#8217;m thinking of&nbsp;K-<span class="caps">SVD</span>).</p>
+this (I&#8217;m thinking of K-<span class="caps">SVD</span>).</p>
 <p>Both problems are solved by the same algorithm, with a different
 stopping condition. The gist of it is to include at each iteration, the
 atom with the highest correlation to the current residual. However, as
@@ -118,11 +118,12 @@ the implementation is robust and ready for use, I will make some&nbsp;benchmarks
 [<img alt="Stem plot for sparse signals recovered by OMP" src="http://localhost:8001/wp-content/uploads/2011/06/omp.png" title="Orthogonal Matching Pursuit sparse signal recovery" />][]</p>
 <p>Update 2: Here&#8217;s a little benchmark:<br />
 [<img alt="Orthogonal Matching Pursuit benchmark" src="http://localhost:8001/wp-content/uploads/2011/06/omp_bench.png" title="OMP benchmark, time and error" />][]<br />
-[1]&nbsp;http://www.cs.technion.ac.il/\~ronrubin/Publications/<span class="caps">KSVD</span>-<span class="caps">OMP</span>-v2.pdf</p>
+[1]
+http://www.cs.technion.ac.il/\~ronrubin/Publications/<span class="caps">KSVD</span>-<span class="caps">OMP</span>-v2.pdf</p>
 <p>[<img alt="Stem plot for sparse signals recovered by OMP" src="http://localhost:8001/wp-content/uploads/2011/06/omp.png" title="Orthogonal Matching Pursuit sparse signal recovery" />]: http://localhost:8001/wp-content/uploads/2011/06/omp.png
   [<img alt="Orthogonal Matching Pursuit benchmark" src="http://localhost:8001/wp-content/uploads/2011/06/omp_bench.png" title="OMP benchmark, time and error" />]:&nbsp;http://localhost:8001/wp-content/uploads/2011/06/omp_bench.png</p>
     </div><!-- /.entry-content -->
-        <div class="comments">
+    <div class="comments">
       <h2>Comments !</h2>
       <div id="disqus_thread"></div>
       <script type="text/javascript">
@@ -134,11 +135,11 @@ the implementation is robust and ready for use, I will make some&nbsp;benchmarks
         })();
       </script>
     </div>
-    
+
   </article>
 </section>
         <section id="extras" class="body">
-                        </section><!-- /#extras -->
+        </section><!-- /#extras -->
 
         <footer id="contentinfo" class="body">
                 <address id="about" class="vcard body">
