@@ -46,13 +46,15 @@ THEME = 'themes/vene'
 
 STATIC_PATHS = ['papers',
                 'talks',
+                'figurative-comparisons',
                 'extras/favicon.ico',
                 'extras/README.rst',
                 'extras/CNAME']
 
-EXTRA_PATH_METADATA = {'extras/favicon.ico': {'path': 'favicon.ico'},
-                       'extras/README.rst': {'path': 'README.rst'},
-                       'extras/CNAME': {'path': 'CNAME'}}
+EXTRA_PATH_METADATA = {
+    'extras/favicon.ico': {'path': 'favicon.ico'},
+    'extras/README.rst': {'path': 'README.rst'},
+    'extras/CNAME': {'path': 'CNAME'}}
 
 
 # Evil tracking

@@ -1,0 +1,112 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #FFF2ED;
+    font: 18px/1.5 'Open Sans', Helvetica, Arial, sans-serif;
+}
+p, ul, blockquote {
+    font-size: 1em; /* 18px */
+    line-height: 1.5000em; /* 27px */
+    margin: 0 0 1.5000em 0;
+    font-weight: 300;}
+
+a:link {
+    /*color: #818A9E;*/
+    color: #7281A3;
+    font-weight: normal;
+}
+
+a:visited {
+    color: #90779E;
+    font-weight: normal;
+}
+header {
+    margin: 1.5em 0 0 0;
+    padding: 0 200px;
+    background: url('leaf.jpg') no-repeat center right #706060;
+    background-size: cover;
+    color: #FFF2ED;
+    font-family: 'Montserrat', Futura;
+}
+
+h1 {
+    font-weight: bold;
+    width: 900px;
+    font-size: 4em;
+    line-height: 1.125em;
+    letter-spacing: 2px;
+    margin-top: 0.3750em; margin-bottom: 0;
+    padding-top: 0.3750em; padding-bottom: 0;
+    word-spacing: 5px;
+}
+.readable{
+    width: 820px;
+    margin-left: -20px;
+    padding-left: 20px;
+    background-color: rgba(112, 96, 96, 0.66);
+}
+
+
+.gold {
+    color: gold;
+}
+h2 {
+    font-weight: normal;
+    width: 800px;
+    font-size: 2.66em;
+    letter-spacing: 1px;
+    word-spacing: 4px;
+    margin-top: 0.5625em; margin-bottom: 0;
+    padding-top: 0; padding-bottom: 0.5625em;
+}
+
+header h2: {margin-bottom: 0.5625em}
+
+div.authors {
+    font-style: italic;
+    text-align: right;
+}
+
+#content {
+    margin: 1em 200px;
+    max-width: 800px;
+}
+h3 {
+    font-family: 'Karla';
+    font-weight: bold;
+    font-size: 1.3333em; /* 24px */
+    line-height: 1.1250em; /* 27px */
+    margin-top: 1.1250em;
+    margin-bottom: 0.0000em;
+}
+
+.comingsoon {
+    text-align: center;
+    color: #9F0053;
+    font-weight: 700;
+    font-size: 1.3333em; /* 24px */
+    line-height: 1.1250em; /* 27px */
+    margin-top: 1.1250em;
+    margin-bottom: 0.0000em;
+}
+
+blockquote {
+text-indent: -1.1em;
+}
+
+blockquote:before {
+content: "\201C";
+font-family: "Montserrat";
+font-size: 2em;
+}
+
+blockquote:after {
+content: "";
+}
+
+blockquote footer {
+    text-align: right;
+}
+
+
+footer p { font-size: 0.6667em; /* 12px */ line-height: 2.2500em; /* 27px */ margin-top: 2.2500em; margin-bottom: 0.0000em; }
