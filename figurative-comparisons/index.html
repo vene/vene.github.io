@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <title>Brighter than Gold: Figurative Language in User-Generated Comparisons</title>
     <link rel="stylesheet" href="style.css">
-    <link href='http://fonts.googleapis.com/css?family=Karla:400,700,700italic,400italic|Open+Sans:400,600,300,300italic,400italic,600italic,700,700italic,800,800italic|Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=VT323|Karla:700|Open+Sans:400,300,300italic,400italic|Montserrat:400,700' rel='stylesheet' type='text/css'>
     <!--<script src="script.js"></script>-->
   </head>
   <body>
@@ -15,10 +15,10 @@
     </div>
     </header>
 <div id="content">
-<div class="authors"><p>EMNLP 2014 paper by <a href="http://vene.ro/">Vlad Niculae</a>
+<div class="authors"><p><a href="http://vene.ro/">Vlad Niculae</a>
     and <a href="http://mpi-sws.org/~cristian">Cristian
-        Danescu-Niculescu-Mizil</a>.</div>
-<div class="comingsoon"><p>Dataset and more information coming soon...</p></div>
+        Danescu-Niculescu-Mizil</a>. <br />
+EMNLP 2014 paper. [ <a href="#">pdf</a> ] [ <a href="#paper">cite</a> ] [ <a href="#dataset">data</a> ]</div>
 <!--
 <ul>
 <li>Get the <a href="#">data</a> (contains this <a href=#>readme</a>).</li>
@@ -31,8 +31,69 @@
     dark.
     <footer>&mdash;Terry Pratchett, <cite>Guards! Guards!</cite></footer>
 </blockquote>
-<h3>Abstract</h3>
+<h3>TL; DR</h3>
 <p>
+We studied comparisons in Amazon product reviews. We collected an 
+<a href="#dataset">annotated dataset</a> of figurative and literal comparisons.
+We find linguistic features that can classify the two with high accuracy.
+We observed significant correlations between the use of figurative
+comparisons and review rating and helpfulness.</p>
+
+<h3>What are comparisons and similes?</h3>
+<p>Comparisons are phrases that express the likeness of two things. 
+They are useful in introducing new concepts in terms
+of known, given ones. Here's how Terry Pratchett describes
+seeing a particularily ugly dragon for the first time (emphasis ours):</p>
+
+<blockquote>
+Something in its ancestry had given it <span class="topic">a pair of eyebrows</span> that were about the same size as <span class="vehicle">its stubby wings</span>, which could never have supported it in the air.
+<span class="topic">Its head</span> was the wrong shape, like <span class="vehicle">an anteater</span>.
+It had <span class="topic">nostrils</span> like <span class="vehicle">jet intakes</span>.
+If it ever managed to get airborne <span class="topic">the things</span> would have the drag of <span class="vehicle">twin parachutes</span>.
+<footer>&mdash;Terry Pratchett, <cite>Guards! Guards!</cite></footer>
+</blockquote>
+
+<p>Each sentence above contains a comparison.  While the first, between the dragon's
+eyebrows and its wings, is a matter-of-fact, literal comparison in terms of the size,
+the next sentences go a bit wild.  The rest of the comparisons suggest less
+direct likenessess, making them figurative in meaning. Such comparisons
+are called <em>similes</em>. </p>
+ 
+<h3>Why do they matter?</h3>
+<p>
+Figurative language is not just a way for authors to show off.  It turns out
+people use it a lot when describing stuff. 
+We find that
+about <strong>30% of the comparisons in Amazon reviews are figurative</strong>.</p>
+<p>The use of similes is strongly related to <strong>extreme opinion</strong>
+in terms of review ratings:</p>
+<img src="stars.png" />
+<p>Also, the comparisons in reviews found helpful by more people tend to be
+more literal:</p>
+<img src="helpful.png" />
+<h3 id="dataset">Dataset</h3>
+<p><strong>Download the <a href="#">dataset</a></strong> (contains this <a href="#">readme</a>).</p>
+<p>Short paragraph describing the data.
+Vivamus consectetur fringilla lorem, sed viverra felis laoreet eu.
+Etiam ac fermentum quam. <a href="http://www.colourlovers.com/palette/3428383/Expecto_Patronum">Nullam luctus varius</a> ligula ut porta. </p>
+
+<h3 id="paper">Paper</h3>
+<p><strong>Download the <a href="#">PDF</a></strong> (coming soon).</p>
+<p><strong>BibTeX entry:</strong><br />
+<pre class="bibtex">
+@inproceedings{Niculae+al-Brighter,
+  author    = {Vlad Niculae and Cristian Danescu-Niculescu-Mizil},
+  title     = {{Brighter than gold: Figurative language in user generated comparisons}},
+  booktitle = {Proceedings of EMNLP},
+  month     = {October},
+  year      = {2014},
+}
+</pre>
+</p>
+
+</p>
+
+<p><strong>Abstract. </strong> 
 Comparisons are common linguistic devices used to indicate the likeness of two things.  
 Often, this likeness is not meant in the literal sense&mdash;for example, "I slept like a log" does not imply that logs actually sleep.
 In this paper we propose a computational study of figurative comparisons, or <em>similes</em>
@@ -42,7 +103,6 @@ comparisons and reveal linguistic patterns indicative of this phenomenon.
 We operationalize these insights and apply them to a new task with high relevance to text understanding: distinguishing between figurative and literal comparisons.  
 Finally, we apply this framework to explore the social context in which figurative language is produced, showing that similes are more likely to accompany opinions showing extreme sentiment, and that they are uncommon in reviews deemed helpful.
 </p>
-
 <!--
 <h3> Maecenas egestas vehicula </h3>
 <p>Vivamus consectetur fringilla lorem, sed viverra felis laoreet eu.
