@@ -27,19 +27,45 @@ EMNLP 2014 paper. [ <a href="#">pdf</a> ] [ <a href="#paper">cite</a> ] [ <a hre
 </ul>
 -->
 <blockquote>
+    When you spend a large part of your life underground, you develop a very literal mind. 
     Dwarfs have no use for metaphor and simile. Rocks are hard, the darkness is
     dark.
+    Start messing around with descriptions like that and you’re in big trouble, is their motto.
     <footer>&mdash;Terry Pratchett, <cite>Guards! Guards!</cite></footer>
 </blockquote>
 <h3>TL; DR</h3>
 <p>
-We studied comparisons in Amazon product reviews. We collected an 
-<a href="#dataset">annotated dataset</a> of figurative and literal comparisons.
-We find linguistic features that can classify the two with high accuracy.
-We observed significant correlations between the use of figurative
-comparisons and review rating and helpfulness.</p>
+Unlike dwarfs, we humans love trouble, so we study figurative comparisons
+(similes) in the wild, from Amazon product reviews. We make available an 
+<a href="#dataset">annotated dataset</a>.
+We manage to detect figurativeness with high accuracy, using linguistic
+features.
+This puts us in the novel position of being able to investigate the interaction
+of figurative language use and social context: we show strong relationships 
+between figurative and review rating and helpfulness.</p>
 
 <h3>What are comparisons and similes?</h3>
+<p>Comparisons are phrases that express the likeness of two things. They
+are useful for communicating something potentially new, helping the audience
+picture it better and frame it better in relation to something known.</p>
+
+<p>Often, comparisons are not meant to be taken literally. Figurative
+comparisons are an important figure of speech called <em>simile</em>. The
+difference can be seen in the following examples, paraphrased from Amazon
+reviews:</p>
+
+<ul>
+<li><span class="topic">Sterling</span> is much cheaper than <span class="vehicle">gold</span>.</li>
+<li><span class="topic">Her voice</span> makes this song shine brighter than <span class="vehicle">gold</span>.</li>
+</ul>
+
+<p>
+There is no simple way to automatically tell whether a comparison is literal
+or figurative. Not even humans can do it without error.  Using linguistic and
+domain-specific cues, we manage to get within 10% of human performance on our
+data. 
+</p>
+<!--
 <p>Comparisons are phrases that express the likeness of two things. 
 They are useful in introducing new concepts in terms
 of known, given ones. Here's how Terry Pratchett describes
@@ -58,27 +84,30 @@ eyebrows and its wings, is a matter-of-fact, literal comparison in terms of the 
 the next sentences go a bit wild.  The rest of the comparisons suggest less
 direct likenessess, making them figurative in meaning. Such comparisons
 are called <em>similes</em>. </p>
- 
+--> 
 <h3>Why do they matter?</h3>
 <p>
-Figurative language is not just a way for authors to show off.  It turns out
-people use it a lot when describing stuff. 
+People like similes, as shown by the <a
+href="https://www.goodreads.com/quotes/tag/simile">popularity of the best ones
+on goodreads</a>!  But figurative language is not at all restricted to literature
+and poetic language.
+It turns out people use it a lot when describing stuff. 
 We find that
 about <strong>30% of the comparisons in Amazon reviews are figurative</strong>.</p>
 <p>The use of similes is strongly related to <strong>extreme opinion</strong>
 in terms of review ratings:</p>
-<img src="stars.png" />
+<div class="figure"> <img src="stars.png" /></div>
 <p>Also, the comparisons in reviews found helpful by more people tend to be
 more literal:</p>
-<img src="helpful.png" />
+<div class="figure"><img src="helpful.png" /></div>
 <h3 id="dataset">Dataset</h3>
-<p><strong>Download the <a href="#">dataset</a></strong> (contains this <a href="#">readme</a>).</p>
+<p><strong>Download the <a href="#">dataset</a></strong> (contains this <a href="#">readme</a>). <strong>(coming soon)</strong></p>
 <p>Short paragraph describing the data.
 Vivamus consectetur fringilla lorem, sed viverra felis laoreet eu.
 Etiam ac fermentum quam. <a href="http://www.colourlovers.com/palette/3428383/Expecto_Patronum">Nullam luctus varius</a> ligula ut porta. </p>
 
 <h3 id="paper">Paper</h3>
-<p><strong>Download the <a href="#">PDF</a></strong> (coming soon).</p>
+<p><strong>Download the <a href="#">PDF</a></strong> <strong>(coming soon)</strong>.</p>
 <p><strong>BibTeX entry:</strong><br />
 <pre class="bibtex">
 @inproceedings{Niculae+al-Brighter,
@@ -96,7 +125,7 @@ Etiam ac fermentum quam. <a href="http://www.colourlovers.com/palette/3428383/Ex
 <p><strong>Abstract. </strong> 
 Comparisons are common linguistic devices used to indicate the likeness of two things.  
 Often, this likeness is not meant in the literal sense&mdash;for example, "I slept like a log" does not imply that logs actually sleep.
-In this paper we propose a computational study of figurative comparisons, or <em>similes</em>
+In this paper we propose a computational study of figurative comparisons, or <em>similes</em>.
 Our starting point is a new large dataset of comparisons extracted from product reviews and annotated for figurativeness.
 We use this dataset to characterize figurative language in naturally occurring
 comparisons and reveal linguistic patterns indicative of this phenomenon.  
