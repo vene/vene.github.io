@@ -125,3 +125,8 @@ blockquote footer {
 
 
 footer p { font-size: 0.6667em; /* 12px */ line-height: 2.2500em; /* 27px */ margin-top: 2.2500em; margin-bottom: 0.0000em; }
+
+.figure {
+    margin: 0;
+    text-align: center;
+}
