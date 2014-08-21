@@ -1,0 +1,107 @@
+Dataset of figurative and literal comparisons
+============================================
+
+This dataset contains a collection of 1400 comparisons annotated for
+figurativeness together with the context in which they appeared.  The
+comparisons are extracted mostly from Amazon.com product reviews (1260
+comparisons) and from the general web (140 comparisons).
+
+URL: http://vene.ro/figurative-comparisons
+
+Authors: Vlad Niculae <vlad@vene.ro>
+         Cristian Danescu-Niculescu-Mizil <cristian@mpi-sws.org>
+
+Version: 1.0 (08/21/2014)
+
+The dataset is further described in our paper:
+    Vlad Niculae and Cristian Danescu-Niculescu-Mizil
+    Brighter than Gold: Figurative Language in User Generated Comparisons.
+    In: Proceedings of EMNLP 2014
+
+Description
+-----------
+
+We automatically extracted comparisons of the following forms:
+
+  * A is _ like B (example: the device works like a charm)
+  * A is as _ as B (example: the book is as good than the movie)
+  * A is _er than B (example: the song shines brighter than gold)
+
+The comparisons are first manually validated and then annotated for
+figurativeness, each step performed by three different Amazon Mechanical
+Turk workers (see the paper for more details).
+
+The constituents of the comparison are automatically extracted and marked as
+such:
+
+  * Topic: the logical subject
+  * Vehicle: the object of the comparison
+  * Property (optional): what the topic and vehicle are said to have in common
+  * Event: the governing verb setting the frame
+  * Comparator: the trigger word (in our data, either "like", "as", or "than")
+
+We constrain the Topic and Vehicle to be nouns and the Property, if present, to
+be an adjective.
+
+Files
+-----
+
+The dataset consists of two files: "amazon" and "wacky", consisting of
+sentences from Amazon product reviews [1] and the concatenation of WaCky and
+Wackypedia [2] respectively.
+
+The "amazon" file contains 1260 comparisons extracted from Amazon product
+reviews in the Books, Music, Electronics and Jewelry categories.  Relevant
+information about the reviews is kept.
+
+The "wacky" file contains 140 comparisons from WaCky and Wackypedia. 
+
+Data format
+-----------
+
+The data is in a variation of the CoNLL format. Each sentence is preceded by a
+metadata line in JSON preceded by an octothorpe.
+
+For "amazon", the metadata contains all information available about the review.
+Some interesting fields in the metadata dictionary are:
+
+  * "figurativeness": the figurativeness scores from the 3 annotators 
+  * "category": the main category for the product being reviewed
+  * "score": the number of stars given by the reviewer to the product
+  * "helpfulness": helpfulness ratings of the review.
+
+For "wacky", the metadata only contains:
+  * "figurativeness": the figurativeness scores from the 3 annotators 
+  * "source": either "wacky" or "wackypedia".
+
+The order of the columns is:
+    form, lemma, pos, id, head, deprel, comparison 
+
+The last column in the CoNLL format marks the head words of the comparison
+constituents found in the sentence: the TOPIC, VEHICLE, EVENT, PROPERTY
+(optional), and COMPARATOR.
+
+Data preprocessing
+------------------
+
+The preprocessing is not the same for "amazon" and "wacky".
+
+For "amazon", the reviews are tokenized and POS-tagged with TweetNLP [3] using
+the IRC model, then dependency parsed with the TurboParser standard model [4].
+Lemmatization is performed by Treex::Tool::EnglishMorpho::Lemmatizer [5].
+Sentence splitting is performed using the Stanford POS tagger [6]
+WordToSentence class with some custom settings [7]. 
+
+For "wacky", POS-tagging, lemmatization and dependency relations are available
+in the corpus, and kept as is.
+
+References
+----------
+
+[1] http://snap.stanford.edu/data/web-Amazon.html
+[2] http://wacky.sslmit.unibo.it/ 
+[3] http://www.ark.cs.cmu.edu/TweetNLP/
+[4] http://www.ark.cs.cmu.edu/TurboParser/
+[5] http://search.cpan.org/~tkr/Treex-EN-0.08171/lib/Treex/Tool/EnglishMorpho/Lemmatizer.pm
+[6] http://nlp.stanford.edu/software/tagger.shtml
+[7] https://gist.github.com/vene/a01592875282fb11843b
