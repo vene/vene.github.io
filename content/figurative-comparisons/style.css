@@ -106,13 +106,18 @@ pre.bibtex {
     line-height: 1.0227em;
 }
 blockquote {
-text-indent: -1.1em;
+/*text-indent: -1.1em;*/
 }
 
 blockquote:before {
 content: "\201C";
 font-family: "Montserrat";
-font-size: 2em;
+color: #333;
+display: block;
+float: left;
+font-size: 6em;
+margin-left: -0.4em;
+margin-top: 0.2em;
 }
 
 blockquote:after {
