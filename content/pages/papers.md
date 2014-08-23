@@ -5,7 +5,7 @@ Slug: papers
 
 * Vlad Niculae and Cristian Danescu-Niculescu-Mizil.
 *Brighter than Gold:* Figurative Language in User Generated Comparisons.
-In: Proc. of *EMNLP 2014*. To appear.
+In: Proc. of *EMNLP 2014*. \[ [Website](/figurative-comparisons) \]
 
 * Vlad Niculae, Marcos Zampieri, Liviu P. Dinu, Alina Maria Ciobanu.
 Temporal Text Ranking and Automatic Dating of Texts. In: *EACL 2014*.
