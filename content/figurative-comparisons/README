@@ -24,7 +24,7 @@ Description
 We automatically extracted comparisons of the following forms:
 
   * A is _ like B (example: the device works like a charm)
-  * A is as _ as B (example: the book is as good than the movie)
+  * A is as _ as B (example: the book is as good as the movie)
   * A is _er than B (example: the song shines brighter than gold)
 
 The comparisons are first manually validated and then annotated for
