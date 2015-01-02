@@ -4,15 +4,15 @@ URL:
 save_as: index.html
 
 # Allow me to introduce myself
+<img style="float: right" src="vlad-niculae.jpg" alt="Vlad Niculae" />
+
 Welcome, traveller, to my page. Enjoy your brief stay while you get to
 know me!
 
-My name is Vlad and I'm a  PhD student
-at the [Max Planck Institute for Software Systems](http://mpi-sws.org) in
-Saarbrücken, advised by [Cristian
+My name is Vlad and I'm a PhD student in Computer Science
+at [Cornell](http://www.cs.cornell.edu/), advised by [Cristian
 Danescu-Niculescu-Mizil](http://mpi-sws.org/~cristian/).
-I am also a
-scientific Python developer, sometimes contributing to the
+I am also a scientific Python developer, sometimes contributing to the
 [scikit-learn](http://scikit-learn.org) machine learning library.
 I am collaborating with the [Center for Computational Linguistics at
 the University of Bucharest](http://nlp.unibuc.ro/).
@@ -22,22 +22,27 @@ the University of Bucharest](http://nlp.unibuc.ro/).
   - Our paper, [*Brighter than Gold: Figurative Language in User Generated
   Comparisons*](/figurative-comparisons/), was accepted at EMNLP 2014.
 
+# Teaching
+
+  - TA for INFO/CS 4300 Spring 2015: Language and Information
+  - [older material](teaching.html)
+
+# Research
+
+You can take a look at the list of my [publications](papers.html).   The
+materials for [talks](talks.html) that I've had the honour of giving are also
+available.
+
 # Areas of interest 
 
 Social aspects of NLP.  Conventional and creative language patterns.
 Similes. Structured learning. Machine learning in general.  Elegant code that
 runs fast.  **Reproducible research**. **Open data**.
 
-# What's on this site?
+# Miscellanea
 
-You can take a look at the list of my [publications](papers.html).   The
-materials for [talks](talks.html) that I've had the honour of giving are also
-available.
-
-If you can spare a minute, please go over to my [blog](blog/index.html).
-
-If you're (or were) in one of my classes, you can find links and stuff I
-collected for you in the [teaching](teaching.html) section.
+Whenever I code something that I think is cool and could be useful,
+I [blog](blog/index.html) about it.
 
 You can read about the [fonts](fonts.html) I'm using on this page and I'm sure
 you'll find it interesting, especially if you're mathematically inclined. Then
