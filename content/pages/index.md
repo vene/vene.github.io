@@ -6,7 +6,7 @@ save_as: index.html
 # Allow me to introduce myself
 <img style="float: right" src="vlad-niculae.jpg" alt="Vlad Niculae" />
 
-Welcome, traveller, to my page. Enjoy your brief stay while you get to
+Welcome, traveler, to my page. Enjoy your brief stay while you get to
 know me!
 
 My name is Vlad and I'm a PhD student in Computer Science
@@ -30,7 +30,7 @@ the University of Bucharest](http://nlp.unibuc.ro/).
 # Research
 
 You can take a look at the list of my [publications](papers.html).   The
-materials for [talks](talks.html) that I've had the honour of giving are also
+materials for [talks](talks.html) that I've had the honor of giving are also
 available.
 
 # Areas of interest 
