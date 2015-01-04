@@ -11,7 +11,8 @@ know me!
 
 My name is Vlad and I'm a PhD student in Computer Science
 at [Cornell](http://www.cs.cornell.edu/), advised by [Cristian
-Danescu-Niculescu-Mizil](http://mpi-sws.org/~cristian/).
+<span style="white-space: nowrap;">Danescu-Niculescu-Mizil</span>
+](http://mpi-sws.org/~cristian/).
 I am also a scientific Python developer, sometimes contributing to the
 [scikit-learn](http://scikit-learn.org) machine learning library.
 I am collaborating with the [Center for Computational Linguistics at
