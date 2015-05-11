@@ -3,8 +3,16 @@ Slug: papers
 
 # Publications
 
+* Vlad Niculae, Srijan Kumar, Jordan Boyd-Graber, Cristian Danescu-Niculescu-Mizil. Linguistic harbingers of betrayal: A case study
+on an online strategy game. In: Proc. of *ACL 2015*. (Coming soon.)
+
+* Marcos Zampieri, Alina Maria Ciobanu, Vlad Niculae, Liviu P. Dinu.
+*AMBRA:* A ranking approach to temporal text classification. In: Proc. of *Semeval 2015*. \[ [code](http://github.com/vene/ambra) \] \[ [PDF](http://www.uni-koeln.de/~mzampier/papers/semeval2015.pdf) \]
+
+* Vlad Niculae\*, Caroline Suen\*, Justine Zhang\*, Cristian Danescu-Niculescu-Mizil, Jure Leskovec. *QUOTUS:* The structure of political media coverage as revealed by quoting patterns. In: Proc. of *WWW 2015*. \[ [Website](http://snap.stanford.edu/quotus/) \]
+
 * Vlad Niculae and Cristian Danescu-Niculescu-Mizil.
-*Brighter than Gold:* Figurative Language in User Generated Comparisons.
+*Brighter than Gold:* Figurative language in user generated comparisons.
 In: Proc. of *EMNLP 2014*. \[ [Website](/figurative-comparisons) \]
 
 * Vlad Niculae, Marcos Zampieri, Liviu P. Dinu, Alina Maria Ciobanu.
@@ -38,7 +46,7 @@ Learning*, Prague, Czech Republic.
 Sequence tagging for verb conjugation in Romanian.  
 In Proceedings of the International Conference Recent Advances in Natural
 Language Processing RANLP 2013, 215–220. Hissar, Bulgaria, September 2013.
-INCOMA Ltd. Shoumen, BULGARIA. 
+INCOMA Ltd. Shoumen, BULGARIA.
 \[ [PDF](http://aclweb.org/anthology/R/R13/R13-1028.pdf) \] \[ [slides](papers/ranlp13-verbs-slides.pdf) \]
 
 * Alina Maria Ciobanu, Anca Dinu, Liviu P. Dinu, Vlad Niculae and Octavia-Maria
@@ -75,7 +83,7 @@ In: *Proceedings of LREC 2012* \[ [PDF](papers/lrec12.pdf) \]
 \[ [poster](papers/lrec12-poster.pdf) \]
 
 * Liviu P. Dinu, Vlad Niculae and Maria-Octavia Șulea, Pastiche Detection Based
-on Stopword Rankings. Exposing Impersonators of a Romanian Writer. In: 
+on Stopword Rankings. Exposing Impersonators of a Romanian Writer. In:
 *EACL 2012 Workshop on Computational Approaches to Deception
 Detection* \[ [PDF](papers/eacl12w.pdf) \]
 \[ [poster](papers/eacl12w-poster.pdf) \]
@@ -84,6 +92,6 @@ Detection* \[ [PDF](papers/eacl12w.pdf) \]
 Distances For Near-duplicate Detection. In: *Polibits* Issue 45 (January-June 2012)
 p. 21 \[ [PDF](papers/cicling12.pdf) \]\[ [poster](papers/cicling12-poster.pdf) \]
 
-* Liviu Petrisor Dinu, Emil Ionescu, Vlad Niculae, Octavia-Maria Șulea, 
+* Liviu Petrisor Dinu, Emil Ionescu, Vlad Niculae, Octavia-Maria Șulea,
 Can Alternations Be Learned? A Machine Learning Approach To Romanian Verb Conjugation.
 In: *Proceedings of RANLP 2011*: 539-544 \[ [PDF](http://www.aclweb.org/anthology/R11-1075) \]

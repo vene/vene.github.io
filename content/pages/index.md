@@ -1,6 +1,6 @@
 Title: Vlad Niculae's  personal website
 Status: hidden
-URL: 
+URL:
 save_as: index.html
 
 # Allow me to introduce myself
@@ -19,13 +19,18 @@ I am collaborating with the [Center for Computational Linguistics at
 the University of Bucharest](http://nlp.unibuc.ro/).
 
 # News
-
+  - Our paper, "Linguistic Harbingers of Betrayal", studying the language
+  of alliances and betrayals between players of the strategy game *Diplomacy*,
+  was accepted at ACL 2015. (More details coming soon.)
+  - Our system for [temporal text classification with pairwise ranking
+  and interval labels (AMBRA)](http://github.com/vene/ambra) will be presented at Semeval 2015.
+  - Our paper, [QUOTUS: The Structure of Political Media Coverage as Revealed by Quoting Patterns](http://snap.stanford.edu/quotus/), was accepted at WWW 2015.
   - Our paper, [*Brighter than Gold: Figurative Language in User Generated
   Comparisons*](/figurative-comparisons/), was accepted at EMNLP 2014.
 
 # Teaching
 
-  - TA for INFO/CS 4300 Spring 2015: Language and Information
+  - TA for [INFO/CS 4300 Spring 2015: Language and Information](http://www.cs.cornell.edu/Courses/cs4300/2015sp/)
   - [older material](teaching.html)
 
 # Research
@@ -34,7 +39,7 @@ You can take a look at the list of my [publications](papers.html).   The
 materials for [talks](talks.html) that I've had the honor of giving are also
 available.
 
-# Areas of interest 
+# Areas of interest
 
 Social aspects of NLP.  Conventional and creative language patterns.
 Similes. Structured learning. Machine learning in general.  Elegant code that
