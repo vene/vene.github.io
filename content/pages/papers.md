@@ -9,7 +9,7 @@ on an online strategy game. In: Proc. of *ACL 2015*. (Coming soon.)
 * Marcos Zampieri, Alina Maria Ciobanu, Vlad Niculae, Liviu P. Dinu.
 *AMBRA:* A ranking approach to temporal text classification. In: Proc. of *Semeval 2015*. \[ [code](http://github.com/vene/ambra) \] \[ [PDF](http://www.uni-koeln.de/~mzampier/papers/semeval2015.pdf) \]
 
-* Vlad Niculae\*, Caroline Suen\*, Justine Zhang\*, Cristian Danescu-Niculescu-Mizil, Jure Leskovec. *QUOTUS:* The structure of political media coverage as revealed by quoting patterns. In: Proc. of *WWW 2015*. \[ [Website](http://snap.stanford.edu/quotus/) \]
+* Vlad Niculae\*, Caroline Suen\*, Justine Zhang\*, Cristian Danescu-Niculescu-Mizil, Jure Leskovec. *QUOTUS:* The structure of political media coverage as revealed by quoting patterns. In: Proc. of *WWW 2015*. \[ [Website](http://snap.stanford.edu/quotus/) \] \[ [Slides](papers/quotus-talk-vlad-web.pdf) \]
 
 * Vlad Niculae and Cristian Danescu-Niculescu-Mizil.
 *Brighter than Gold:* Figurative language in user generated comparisons.
