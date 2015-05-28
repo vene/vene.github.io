@@ -47,6 +47,7 @@ THEME = 'themes/vene'
 STATIC_PATHS = ['papers',
                 'talks',
                 'figurative-comparisons',
+                'betrayal',
                 'extras/favicon.ico',
                 'extras/vlad-niculae.jpg',
                 'extras/README.rst',
