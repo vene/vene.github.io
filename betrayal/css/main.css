@@ -1,11 +1,20 @@
 /*! HTML5 Boilerplate v5.0 | MIT License | http://h5bp.com/ */
 
 html {
-    color: #222;
+    color: #301D2F;
     font-size: 1em;
     line-height: 1.4;
 }
+a:link {color: #823E53;}
+a:visited {color: #635557;}
+p {
+    margin-top: 0;
+    margin-bottom: 1em;
+}
 
+h1, h2, h3, h4 {
+    font-family: 'Bitter', Helvetica, Arial, sans-serif;
+}
 ::-moz-selection {
     background: #b3d4fc;
     text-shadow: none;
@@ -57,28 +66,13 @@ textarea {
    ========================================================================== */
 
 body {
-    font: 16px/26px Helvetica, Helvetica Neue, Arial;
+    font: 16px/26px 'Arimo', Helvetica, Arial, sans-serif;
+    background-color: #EEEEE9;
 }
 
 .wrapper {
     width: 90%;
     margin: 0 5%;
-}
-
-/* ===================
-    ALL: Orange Theme
-   =================== */
-
-.header-container {
-}
-
-.footer-container,
-.main aside {
-}
-
-.header-container,
-.footer-container,
-.main aside {
 }
 
 .title h1 {
@@ -100,7 +94,7 @@ body {
    ============== */
 
 nav ul {
-    margin: 0;
+    margin: 10px 0;
     padding: 0;
     list-style-type: none;
 }
@@ -110,10 +104,7 @@ nav a:after {content: " ]";}
 
 nav a {
     display: block;
-    margin-bottom: 10px;
-    padding: 5px 0;
-
-    text-align: center;
+    text-align: left;
     text-decoration: none;
     font-weight: bold;
 
@@ -132,20 +123,35 @@ nav a:hover {
    ============== */
 
 .main {
-    padding: 30px 0;
 }
 
-.main article h1 {
+h2 {
     font-size: 1em;
 }
 
-.main aside {
-    color: white;
-    padding: 0px 5% 10px;
+h3 {
+    font-size: 1em;
 }
 
 .footer-container footer {
+    font-size: 0.8em;
     padding: 20px 0;
+    color: #AAA29A;
+}
+
+
+#wash {
+    display: none;
+}
+
+#wash_small {
+    width: 100%;
+    margin-bottom: 1em;
+}
+
+.plot {
+    width: 100%;
+    margin-bottom: 1em;
 }
 
 /* ===============
@@ -168,6 +174,11 @@ pre.bibtex {
    line-height: 1.0227em;
 }
 
+.name {
+    white-space: nowrap;
+}
+
+
 /* ==========================================================================
    Media Queries
    ========================================================================== */
@@ -182,8 +193,9 @@ pre.bibtex {
         float: left;
         width: 27%;
         margin: 0 1.7%;
-        padding: 25px 2%;
+        padding: 0;
         margin-bottom: 0;
+        text-align: center;
     }
 
     nav li:first-child a {
@@ -194,6 +206,23 @@ pre.bibtex {
         margin-right: 0;
     }
 
+    .header-container {
+        margin-bottom: 10px;
+    }
+
+    .main section h2 {
+        font-size: 1.5em;
+
+        margin: 0;
+        padding: 0;
+    }
+
+    .main section h3 {
+        font-size: 1.2em;
+        margin-top: 1em;
+        margin-bottom: 0;
+        padding: 0;
+    }
 /* ========================
     INTERMEDIATE: IE Fixes
    ======================== */
@@ -209,46 +238,33 @@ pre.bibtex {
 
 @media only screen and (min-width: 768px) {
 
-/* ====================
-    WIDE: CSS3 Effects
-   ==================== */
-
-   /*
-    .header-container,
-    .main aside {
-        -webkit-box-shadow: 0 5px 10px #aaa;
-           -moz-box-shadow: 0 5px 10px #aaa;
-                box-shadow: 0 5px 10px #aaa;
-    }*/
-
 /* ============
     WIDE: Menu
    ============ */
 
-    .title {
-        float: left;
-    }
 
-    nav {
-        float: right;
-        width: 38%;
-    }
 
 /* ============
     WIDE: Main
    ============ */
 
-    .main article {
+    #wash {
+        display: block;
         float: left;
-        width: 57%;
+        width: 300px;
+        margin-right: 20px;
+        margin-bottom: 1em;
     }
 
-    .main aside {
+    #wash_small {
+        display: none;
+    }
+
+
+    .plot {
+        width: 300px;
         float: right;
-        width: 28%;
     }
-
-
     .abstract {
         float: left;
         width: 60%;
@@ -261,11 +277,40 @@ pre.bibtex {
 /* ===============
     Maximal Width
    =============== */
+    .title {
+        float: left;
+    }
+
+    nav {
+        float: right;
+        width: 30%;
+        margin-top: 0.5em;
+    }
+    nav a {
+        float: left;
+        width: 100%;
+        text-align: right;
+        margin: 0; padding: 0;
+        margin-bottom: 0;
+    }
+    .header-container {
+        margin-bottom: 10px;
+    }
 
     #wash {
+        display: block;
         float: left;
         width: 400px;
         margin-right: 20px;
+    }
+
+    .plot {
+        width: 400px;
+        float: right;
+    }
+
+    #wash_small {
+        display: none;
     }
 
     .abstract {
