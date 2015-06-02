@@ -100,7 +100,7 @@ body {
    ============== */
 
 nav ul {
-    margin: 0;
+    margin: 10px 0;
     padding: 0;
     list-style-type: none;
 }
@@ -110,10 +110,7 @@ nav a:after {content: " ]";}
 
 nav a {
     display: block;
-    margin-bottom: 10px;
-    padding: 5px 0;
-
-    text-align: center;
+    text-align: left;
     text-decoration: none;
     font-weight: bold;
 
@@ -132,7 +129,6 @@ nav a:hover {
    ============== */
 
 .main {
-    padding: 30px 0;
 }
 
 .main article h1 {
@@ -146,6 +142,15 @@ nav a:hover {
 
 .footer-container footer {
     padding: 20px 0;
+}
+
+
+#wash {
+    display: none;
+}
+
+#wash_small {
+    width: 100%;
 }
 
 /* ===============
@@ -168,6 +173,10 @@ pre.bibtex {
    line-height: 1.0227em;
 }
 
+.name {
+    white-space: nowrap;
+}
+
 /* ==========================================================================
    Media Queries
    ========================================================================== */
@@ -182,8 +191,9 @@ pre.bibtex {
         float: left;
         width: 27%;
         margin: 0 1.7%;
-        padding: 25px 2%;
+        padding: 0;
         margin-bottom: 0;
+        text-align: center;
     }
 
     nav li:first-child a {
@@ -192,6 +202,10 @@ pre.bibtex {
 
     nav li:last-child a {
         margin-right: 0;
+    }
+
+    .header-container {
+        margin-bottom: 10px;
     }
 
 /* ========================
@@ -225,14 +239,7 @@ pre.bibtex {
     WIDE: Menu
    ============ */
 
-    .title {
-        float: left;
-    }
 
-    nav {
-        float: right;
-        width: 38%;
-    }
 
 /* ============
     WIDE: Main
@@ -248,6 +255,16 @@ pre.bibtex {
         width: 28%;
     }
 
+    #wash {
+        display: block;
+        float: left;
+        width: 300px;
+        margin-right: 20px;
+    }
+
+    #wash_small {
+        display: none;
+    }
 
     .abstract {
         float: left;
@@ -261,11 +278,35 @@ pre.bibtex {
 /* ===============
     Maximal Width
    =============== */
+    .title {
+        float: left;
+    }
+
+    nav {
+        float: right;
+        width: 30%;
+        margin-top: 0.5em;
+    }
+    nav a {
+        float: left;
+        width: 100%;
+        text-align: right;
+        margin: 0; padding: 0;
+        margin-bottom: 0;
+    }
+    .header-container {
+        margin-bottom: 10px;
+    }
 
     #wash {
+        display: block;
         float: left;
         width: 400px;
         margin-right: 20px;
+    }
+
+    #wash_small {
+        display: none;
     }
 
     .abstract {
