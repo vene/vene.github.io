@@ -154,6 +154,8 @@ h3 {
     margin-bottom: 1em;
 }
 
+
+
 /* ===============
     ALL: IE Fixes
    =============== */
@@ -176,6 +178,11 @@ pre.bibtex {
 
 .name {
     white-space: nowrap;
+}
+
+ul {
+    margin-left: 0;
+    padding-left: 0;
 }
 
 
@@ -263,8 +270,18 @@ pre.bibtex {
 
     .plot {
         width: 300px;
-        float: right;
     }
+
+    .right {
+        float: right;
+        margin-left: 20px;
+    }
+
+    .left {
+        float: left;
+        margin-right: 20px;
+    }
+
     .abstract {
         float: left;
         width: 60%;
@@ -299,14 +316,21 @@ pre.bibtex {
 
     #wash {
         display: block;
-        float: left;
         width: 400px;
-        margin-right: 20px;
     }
 
     .plot {
         width: 400px;
+    }
+
+    .right {
         float: right;
+        margin-left: 20px;
+    }
+
+    .left {
+        float: left;
+        margin-right: 20px;
     }
 
     #wash_small {
