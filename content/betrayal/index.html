@@ -1,8 +1,8 @@
 <!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -12,8 +12,6 @@
 
         <link rel="stylesheet" href="css/normalize.min.css">
         <link rel="stylesheet" href="css/main.css">
-        <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Bitter|Arimo|VT323">
-
     </head>
     <body>
 
@@ -33,6 +31,7 @@
                         <li><a href="#tldr">TL; DR</a></li>
                         <li><a href="#paper">Paper</a></li>
                         <li><a href="#data">Data</a></li>
+                        <li><a href="#coverage">Coverage</a></li>
                     </ul>
                 </nav>
             </header>
@@ -46,16 +45,18 @@
                 <img id="wash" class="left" src="wash.jpg" />
             </a>
             <img id="wash_small" src="wash_small.jpg" />
-            <h2>Curse your sudden but inevitable betrayal!</h2>
+            <h2>Curse your sudden but inevitable&nbsp;betrayal!</h2>
             <p>
                 In life, love, war, and planetary colonization, even
                 long-lasting friendships can end if one betrays the other's
                 trust for his own gain.  We studied the language of betrayal
                 by observing players of
                 <em><a href="http://en.wikipedia.org/wiki/Diplomacy_%28game%29">Diplomacy</a>,
-                the game that ruins friendships</em>. In this game, players can
+                the game that ruins friendships</em>. In this
+                <a href="http://www.thisamericanlife.org/radio-archives/episode/531/got-your-back">very popular</a>
+                game, players can
                 form alliances and try to conquer the world together.  These
-                friendships sometimes survive, but often end in backstabbing.
+                friend&shy;ships sometimes survive, but often end in backstabbing.
             </p>
             <!-- <p>
                 It turns out that there are subtle but consistent patterns in
@@ -68,9 +69,9 @@
             <p>
                 We found that there are subtle but consistent patterns in how
                 people communicate when they are going to betray. Our
-                computational approach, unlike the victims, managed to pick up
-                on these cues in spite of the betrayers' efforts to hide their
-                nefarious intentions.
+                computer-driven approach succeeded where the victims failed,
+                picking up on these cues in spite of the betrayers' efforts to
+                hide their nefarious intentions.
             </p>
             </section>
 
@@ -87,7 +88,8 @@
                studied are:</p>
                <ul>
                    <li><strong>Positive sentiment</strong>: the average number
-                   of positive sentences a player writes in a message.</li>
+                   of positive sentences a player writes
+                   <span class="orphan">in a message.</span></li>
                    <li><strong>Politeness</strong>: how
                    <a href="http://politeness.mpi-sws.org/">polite</a> a
                    player's requests are on average.</li>
@@ -144,16 +146,16 @@
 
                 <p> We reveal that subtle signs of imminent betrayal are
                 encoded in the conversational patterns of the dyad, even if the
-                victim is not aware of the relationship’s fate. In particular,
+                victim is not aware of the relationship’s fate. In particu&shy;lar,
                 we find that lasting friendships exhibit a form of balance that
                 manifests itself through language.  In contrast, sudden changes
-                in the balance of certain conversational attributes&mdash;such
+                in the balance of certain conversa&shy;tional attributes&mdash;such
                 as positive sentiment, politeness, or focus on future
                 planning&mdash;signal impending betrayal.</p>
                 </div>
-                <div class="">
-
-                <h3>Download the <a href="niculae15betrayal.pdf">PDF</a></h3>
+                <h3>Download the <a href="niculae15betrayal.pdf">PDF</a>
+                <span class="thin">(<a href="http://arxiv.org/abs/1506.04744">arXiv</a>)</span>
+                </h3>
                 <h3>Bibtex</h3>
                 <pre class="bibtex">@inproceedings{niculae15betrayal,
   author={Vlad Niculae and
@@ -163,23 +165,43 @@
   title={{Linguistic harbingers of betrayal:
     A case study on an online strategy game}},
   booktitle={Proceedings of ACL},
-  month={July},
-  year={2015},
+  month=July,
+  year=2015
 }</pre>
-                </div>
 
 
             </section>
-            <section id="data">
+            <section id="data" class="left">
                 <h2>Anonymized data</h2>
-                <p>(coming soon)</p>
+                <!--<p>Download v1.0 <a href="">ZIP</a>
+                    (<a href="">README</a>,
+                     <a href="">signature</a>).</p>
+                <p>License: <a href="http://opendatacommons.org/licenses/by/1.0/">ODC-By v1.0</a>.</p>
+                -->
+                <p>Download coming soon.</p>
+                <p>This dataset contains a collection of 500 interaction sequences between allies
+                in online Diplomacy games.</p>
+                <p>If you find our dataset useful, would like to be informed of
+                    future updates, or have any suggestions on how we can
+                    improve it, we would love to hear from you.</p>
             </section>
+
+            <section id="coverage">
+                <h2>We're in the news!</h2>
+                <ul>
+                    <li>Pacific Standard: "<a href="http://www.psmag.com/health-and-behavior/diplomacy-detecting-a-coming-betrayal">Detecting a Coming Betrayal</a>" by
+                    <a href="http://twitter.com/sciencenathan">
+                    Nathan Collins</a>.</li>
+                </ul>
+            </section>
+
             </div> <!-- #main -->
         </div> <!-- #main-container -->
 
         <div class="footer-container">
             <footer class="wrapper">
                 <p>Still from the TV show Firefly, under fair use.
+                Go <a href="/">home</a>. <a href="/privacy.html">Privacy policy.</a>
                 Layout helped by
                 <a href="http://necolas.github.io/normalize.css/">normalize.css</a>.
                 Color theme based on the color palettes
@@ -192,8 +214,6 @@
                 </p>
             </footer>
         </div>
-
-        <script src="js/main.js"></script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>

@@ -1,5 +1,7 @@
 /*! HTML5 Boilerplate v5.0 | MIT License | http://h5bp.com/ */
 
+@import url(https://fonts.googleapis.com/css?family=Bitter|Arimo|VT323);
+
 html {
     color: #301D2F;
     font-size: 1em;
@@ -10,6 +12,11 @@ a:visited {color: #635557;}
 p {
     margin-top: 0;
     margin-bottom: 1em;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    -ms-hyphens: auto;
+    -o-hyphens: auto;
+    hyphens: auto;
 }
 
 h1, h2, h3, h4 {
@@ -94,7 +101,7 @@ body {
    ============== */
 
 nav ul {
-    margin: 10px 0;
+    margin: 0;
     padding: 0;
     list-style-type: none;
 }
@@ -174,7 +181,7 @@ pre.bibtex {
    line-height: 1.0227em;
 }
 
-.name {
+.name, .orphan {
     white-space: nowrap;
 }
 
@@ -185,6 +192,10 @@ ul {
 
 .note {
     color: #AAA29A;
+}
+
+.thin {
+    font-weight: normal;
 }
 /* ==========================================================================
    Media Queries
@@ -198,7 +209,7 @@ ul {
 
     nav a {
         float: left;
-        width: 27%;
+        width: 22%;
         margin: 0 1.7%;
         padding: 0;
         margin-bottom: 0;
@@ -230,6 +241,11 @@ ul {
         margin-bottom: 0;
         padding: 0;
     }
+
+    pre.bibtex {
+        margin-bottom: 1em;
+    }
+
 /* ========================
     INTERMEDIATE: IE Fixes
    ======================== */
@@ -282,6 +298,10 @@ ul {
         margin-right: 20px;
     }
 
+    #data {
+        width: 300px;
+    }
+
     .abstract {
         float: left;
         width: 60%;
@@ -296,6 +316,10 @@ ul {
    =============== */
     .title {
         float: left;
+    }
+
+    .title h1 {
+        font-size: 2.5em;
     }
 
     nav {
@@ -320,6 +344,10 @@ ul {
     }
 
     .plot {
+        width: 400px;
+    }
+
+    #data {
         width: 400px;
     }
 
