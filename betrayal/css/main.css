@@ -12,6 +12,11 @@ a:hover {color: #5c2c3b;}
 a:visited {color: #635557;}
 a:visited:hover {color: #816f72;}
 
+/* Hide coverage section for now */
+#coverage, .coverage {
+    display: none;
+}
+
 p {
     margin-top: 0;
     margin-bottom: 1em;
@@ -212,7 +217,7 @@ ul {
 
     nav a {
         float: left;
-        width: 22%;
+        width: 27%; /* 22% for 4 items */
         margin: 0 1.7%;
         padding: 0;
         margin-bottom: 0;
