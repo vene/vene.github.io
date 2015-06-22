@@ -111,6 +111,7 @@ div#mainheader{
 	border-right: 14px solid #000;
 	border-bottom: 0.1666em solid #000;
 	background-color: #eee;
+	text-shadow: -0.04em 0px #F00, 0.04em 0px #0FF;
 }
 
 ol.hfeed {
