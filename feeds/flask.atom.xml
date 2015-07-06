@@ -64,8 +64,8 @@ connection code looks like&amp;nbsp;this:&lt;/p&gt;
         &amp;quot;connect timeout&amp;quot;: 5000
     }
 );
+&lt;/pre&gt;&lt;/div&gt;
 
-I had to reduce the connection timeout, for a better user experience.  I&amp;#39;m way
-out of my comfort zone here, so in case I missed a better solution, do let me
-know!
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="flask-socketio"></category><category term="flask"></category><category term="socketio"></category><category term="openshift"></category></entry></feed>
+
+&lt;p&gt;I had to reduce the connection timeout, for a better user experience.  I&amp;#8217;m way
+out of my comfort zone here, so in case I missed a better solution, do let me&amp;nbsp;know!&lt;/p&gt;</summary><category term="flask-socketio"></category><category term="flask"></category><category term="socketio"></category><category term="openshift"></category></entry></feed>

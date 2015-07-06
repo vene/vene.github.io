@@ -64,11 +64,11 @@ connection code looks like&amp;nbsp;this:&lt;/p&gt;
         &amp;quot;connect timeout&amp;quot;: 5000
     }
 );
+&lt;/pre&gt;&lt;/div&gt;
 
-I had to reduce the connection timeout, for a better user experience.  I&amp;#39;m way
-out of my comfort zone here, so in case I missed a better solution, do let me
-know!
-&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Sun, 07 Jun 2015 00:00:00 +0200</pubDate><guid>tag:vene.ro,2015-06-07:blog/flask-socketio-openshift-fallback-xhr-polling.html</guid><category>flask-socketio</category><category>flask</category><category>socketio</category><category>openshift</category></item><item><title>Kemeny-Young Optimal Rank Aggregation in Python</title><link>http://vene.ro/blog/kemeny-young-optimal-rank-aggregation-in-python.html</link><description>&lt;style type="text/css"&gt;.clearfix{*zoom:1}.clearfix:before,.clearfix:after{display:table;content:"";line-height:0}
+
+&lt;p&gt;I had to reduce the connection timeout, for a better user experience.  I&amp;#8217;m way
+out of my comfort zone here, so in case I missed a better solution, do let me&amp;nbsp;know!&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Sun, 07 Jun 2015 00:00:00 +0200</pubDate><guid>tag:vene.ro,2015-06-07:blog/flask-socketio-openshift-fallback-xhr-polling.html</guid><category>flask-socketio</category><category>flask</category><category>socketio</category><category>openshift</category></item><item><title>Kemeny-Young Optimal Rank Aggregation in Python</title><link>http://vene.ro/blog/kemeny-young-optimal-rank-aggregation-in-python.html</link><description>&lt;style type="text/css"&gt;.clearfix{*zoom:1}.clearfix:before,.clearfix:after{display:table;content:"";line-height:0}
 .clearfix:after{clear:both}
 .hide-text{font:0/0 a;color:transparent;text-shadow:none;background-color:transparent;border:0}
 .input-block-level{display:block;width:100%;min-height:30px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
