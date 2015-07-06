@@ -1,5 +1,5 @@
 Title: Flask-SocketIO on OpenShift: fallback on another port
-Date: 2015-06-07
+Date: 2015-07-06
 Author: vene
 Category: flask
 Tags: flask-socketio, flask, socketio, openshift
