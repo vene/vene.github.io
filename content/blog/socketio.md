@@ -86,8 +86,8 @@ var socket = io.connect(
         "connect timeout": 5000
     }
 );
+```
 
 I had to reduce the connection timeout, for a better user experience.  I'm way
 out of my comfort zone here, so in case I missed a better solution, do let me
 know!
-```
