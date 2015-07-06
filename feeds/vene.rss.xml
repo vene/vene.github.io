@@ -1,5 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Vlad Niculae (~vene)</title><link>http://vene.ro/</link><description></description><atom:link href="http://vene.ro/feeds/vene.rss.xml" rel="self"></atom:link><lastBuildDate>Wed, 22 Jan 2014 18:00:00 +0100</lastBuildDate><item><title>Kemeny-Young Optimal Rank Aggregation in Python</title><link>http://vene.ro/blog/kemeny-young-optimal-rank-aggregation-in-python.html</link><description>&lt;style type="text/css"&gt;.clearfix{*zoom:1}.clearfix:before,.clearfix:after{display:table;content:"";line-height:0}
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Vlad Niculae (~vene)</title><link>http://vene.ro/</link><description></description><atom:link href="http://vene.ro/feeds/vene.rss.xml" rel="self"></atom:link><lastBuildDate>Sun, 07 Jun 2015 00:00:00 +0200</lastBuildDate><item><title>Flask-SocketIO on OpenShift: fallback on another port</title><link>http://vene.ro/blog/flask-socketio-openshift-fallback-xhr-polling.html</link><description>&lt;h2&gt;&lt;span class="caps"&gt;TL&lt;/span&gt;; &lt;span class="caps"&gt;DR&lt;/span&gt;&lt;/h2&gt;
+&lt;p&gt;I hacked the &lt;a href="https://gist.github.com/vene/c0657d854ae74a4511d2"&gt;SocketIO client
+0.9.16&lt;/a&gt; to support
+specifying a special port (&lt;code&gt;wsport&lt;/code&gt;) to use only for the WebSocket protocol,
+while keeping all other traffic on the default port. This is required by setups
+such as OpenShift which require WebSocket traffic to come over a different port
+(say &lt;code&gt;8000&lt;/code&gt; rather than &lt;code&gt;80&lt;/code&gt;).&lt;/p&gt;
+&lt;h2&gt;The current state of&amp;nbsp;affairs&lt;/h2&gt;
+&lt;p&gt;I&amp;#8217;ve been trying to host an interactive web app with WebSockets on
+&lt;a href="https://www.openshift.com/"&gt;OpenShift&lt;/a&gt;. Since I&amp;#8217;m a poor student and this
+is a research app, I wanted a reasonably powerful free hosting&amp;nbsp;option.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://blog.openshift.com/paas-websockets/"&gt;OpenShift added WebSockets support over 2 years
+ago.&lt;/a&gt; But because of some
+internal limitations, the WebSocket traffic needs to go over different ports
+than usual (&lt;code&gt;8000&lt;/code&gt; for unsecured and &lt;code&gt;8443&lt;/code&gt; for secured&amp;nbsp;connections).&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://socket.io/"&gt;SocketIO&lt;/a&gt; is a cool library that allows event-driven
+bidirectional traffic in web apps.  It tries to use WebSockets if available,
+and falls back to other transport protocols (such as &lt;a href="https://en.wikipedia.org/wiki/Push_technology#Long_polling"&gt;&lt;span class="caps"&gt;XHR&lt;/span&gt; Long
+Polling&lt;/a&gt;)&amp;nbsp;otherwise.&lt;/p&gt;
+&lt;p&gt;Oh and to make matters worse, I&amp;#8217;m using Flask for this web app, and currently
+the best way to use SocketIO from Flask is with the &lt;a href="https://flask-socketio.readthedocs.org/en/latest/"&gt;Flask-SocketIO&lt;/a&gt; +
+&lt;a href="http://gevent-socketio.readthedocs.org/"&gt;gevent-socketio&lt;/a&gt; combo, which is,
+alas, incompatible with recent versions of SocketIO. According to the
+community, the most stable release is SocketIO&amp;nbsp;0.9.16.&lt;/p&gt;
+&lt;h2&gt;The problem in a&amp;nbsp;nutshell&lt;/h2&gt;
+&lt;p&gt;When debugging my app locally, I&amp;#8217;d connect with something&amp;nbsp;like&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;var socket = io.connect(
+    &amp;#39;http://&amp;#39; + document.domain + &amp;#39;:&amp;#39; + location.port + &amp;#39;/chat&amp;#39;
+);
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;When deploying on OpenShift, the &lt;code&gt;location.port&lt;/code&gt; is now different from the
+WebSocket port, so I used a Flask config that determines server-side where it&amp;#8217;s
+running&amp;nbsp;from:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="x"&gt;var wsport = &amp;#39;&lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt; &lt;span class="nv"&gt;config&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;WEBSOCKET_PORT&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="x"&gt;&amp;#39;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The app now runs great both when debugging locally or on OpenShift, except if
+for some reason the WebSocket connection fails (either if the browser is old
+or because of strict firewalls).  This happens because long polling uses normal
+&lt;span class="caps"&gt;HTTP&lt;/span&gt; requests and should be done over the default port, rather than the
+OpenShift-specific&amp;nbsp;one.&lt;/p&gt;
+&lt;h2&gt;Making things&amp;nbsp;work&lt;/h2&gt;
+&lt;p&gt;My first thought was to work around it by &lt;a href="http://stackoverflow.com/questions/8588689/node-js-socket-io-client-connect-failed-event"&gt;manually implementing the fallback
+client-side&lt;/a&gt;.  This, surprisingly, failed: it turns out that
+SocketIO 0.9.16 first attempts a handshake to find out what transports the
+server supports. If the initial connection is on port &lt;code&gt;8000&lt;/code&gt;, then the
+handshake will be attempted also on port &lt;code&gt;8000&lt;/code&gt;, so the &lt;code&gt;connect_failed&lt;/code&gt; event
+won&amp;#8217;t even be triggered.  The second cleanest solution I could think of was to
+add another parameter to the SocketIO options, &lt;code&gt;wsport&lt;/code&gt;, allowing the user to
+specify a different port over which to do WebSocket connections, while keeping
+all other traffic over the default port.  This works like a&amp;nbsp;charm!&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://gist.github.com/vene/c0657d854ae74a4511d2"&gt;My updated SocketIO client is available as a
+gist&lt;/a&gt;, and the client-side
+connection code looks like&amp;nbsp;this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;var socket = io.connect(
+    &amp;#39;http://&amp;#39; + document.domain + &amp;#39;/chat&amp;#39;,
+    {
+        port: location.port,
+        wsport: wsport || location.port,
+        &amp;quot;connect timeout&amp;quot;: 5000
+    }
+);
+
+I had to reduce the connection timeout, for a better user experience.  I&amp;#39;m way
+out of my comfort zone here, so in case I missed a better solution, do let me
+know!
+&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Sun, 07 Jun 2015 00:00:00 +0200</pubDate><guid>tag:vene.ro,2015-06-07:blog/flask-socketio-openshift-fallback-xhr-polling.html</guid><category>flask-socketio</category><category>flask</category><category>socketio</category><category>openshift</category></item><item><title>Kemeny-Young Optimal Rank Aggregation in Python</title><link>http://vene.ro/blog/kemeny-young-optimal-rank-aggregation-in-python.html</link><description>&lt;style type="text/css"&gt;.clearfix{*zoom:1}.clearfix:before,.clearfix:after{display:table;content:"";line-height:0}
 .clearfix:after{clear:both}
 .hide-text{font:0/0 a;color:transparent;text-shadow:none;background-color:transparent;border:0}
 .input-block-level{display:block;width:100%;min-height:30px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
