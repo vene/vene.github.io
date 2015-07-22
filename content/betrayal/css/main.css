@@ -12,10 +12,10 @@ a:hover {color: #5c2c3b;}
 a:visited {color: #635557;}
 a:visited:hover {color: #816f72;}
 
-/* Hide coverage section for now */
+/* Hide coverage section for now
 #coverage, .coverage {
     display: none;
-}
+} */
 
 p {
     margin-top: 0;
