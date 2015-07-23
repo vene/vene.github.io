@@ -19,10 +19,9 @@ I am collaborating with the [Center for Computational Linguistics at
 the University of Bucharest](http://nlp.unibuc.ro/).
 
 # News
+  - Read more about our ACL 2015 paper [*Linguistic Harbingers of
+  Betrayal*](/betrayal), in which we study the language of alliances and betrayals between players of the strategy game *Diplomacy*.
   - New blog post about [making Flask-SocketIO work on OpenShift]({filename}/blog/socketio.md).
-  - Our paper, *Linguistic Harbingers of Betrayal*, studying the language
-  of alliances and betrayals between players of the strategy game *Diplomacy*,
-  was accepted at ACL 2015. (More details coming soon.)
   - Our system for [temporal text classification with pairwise ranking
   and interval labels (AMBRA)](http://github.com/vene/ambra) will be presented at Semeval 2015.
   - Our paper, [*QUOTUS: The Structure of Political Media Coverage as Revealed by Quoting Patterns*](http://snap.stanford.edu/quotus/), was accepted at WWW 2015.
