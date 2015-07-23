@@ -63,4 +63,4 @@ You can find me on twitter as
 [g+](http://gplus.to/vladn).
 You can transmit your thoughts to me at vlad<span
 style="display:none">hunter2</span>@vene.ro.
-My public key is available from [Keybase](https://https://keybase.io/vladn).
+My public key is available from [Keybase](https://keybase.io/vladn).
