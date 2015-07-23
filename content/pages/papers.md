@@ -4,7 +4,8 @@ Slug: papers
 # Publications
 
 * Vlad Niculae, Srijan Kumar, Jordan Boyd-Graber, Cristian Danescu-Niculescu-Mizil. Linguistic harbingers of betrayal: A case study
-on an online strategy game. In: Proc. of *ACL 2015*. (Coming soon.)
+on an online strategy game. In: Proc. of *ACL 2015*.
+\[ [Website](/betrayal) \]
 
 * Marcos Zampieri, Alina Maria Ciobanu, Vlad Niculae, Liviu P. Dinu.
 *AMBRA:* A ranking approach to temporal text classification. In: Proc. of *Semeval 2015*. \[ [code](http://github.com/vene/ambra) \] \[ [PDF](http://www.uni-koeln.de/~mzampier/papers/semeval2015.pdf) \]
