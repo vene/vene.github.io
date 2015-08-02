@@ -217,7 +217,7 @@ ul {
 
     nav a {
         float: left;
-        width: 27%; /* 22% for 4 items */
+        width: 22%; /* 27% for 3 items */
         margin: 0 1.7%;
         padding: 0;
         margin-bottom: 0;
