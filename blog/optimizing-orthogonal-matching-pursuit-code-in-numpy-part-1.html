@@ -75,7 +75,7 @@
 
     <div class="entry-content">
 <footer class="post-info">
-        <abbr class="published" title="2011-08-07T20:50:00">
+        <abbr class="published" title="2011-08-07T20:50:00+02:00">
                 Sun 07 August 2011
         </abbr>
 
@@ -257,7 +257,7 @@ L[0, 0] =&nbsp;1.</p>
 lam = np.abs(np.dot(X.T, residual)).argmax()<br />
 if lam \&lt; n_active or alpha[lam] ** 2 > min_float:<br />
 # atom already selected or inner product too small<br />
-warn(&quot;Stopping early&quot;)<br />
+warn(&#8220;Stopping early&#8221;)<br />
 break<br />
 if n_active &gt; 0:<br />
 # Updates the Cholesky decomposition of X&#8217; X<br />

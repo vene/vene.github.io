@@ -75,7 +75,7 @@
 
     <div class="entry-content">
 <footer class="post-info">
-        <abbr class="published" title="2011-08-11T19:39:00">
+        <abbr class="published" title="2011-08-11T19:39:00+02:00">
                 Thu 11 August 2011
         </abbr>
 
@@ -162,7 +162,7 @@ L[0, 0] =&nbsp;1.</p>
 lam = np.abs(np.dot(X.T, residual)).argmax()<br />
 if lam &lt; n_active or alpha[lam] ** 2 &lt; min_float:<br />
 # atom already selected or inner product too small<br />
-warn(&quot;Stopping early&quot;)<br />
+warn(&#8220;Stopping early&#8221;)<br />
 break<br />
 if n_active &gt; 0:<br />
 # Updates the Cholesky decomposition of X&#8217; X<br />
@@ -170,7 +170,7 @@ L[n_active, :n_active] = np.dot(X[:, idx].T, X[:, lam]<br />
 solve_triangular(L[:n_active, :n_active], L[n_active, :n_active])<br />
 d = np.dot(L[n_active, :n_active].T, L[n_active, :n_active])<br />
 if 1 - d &lt;= min_float: # selected atoms are dependent<br />
-warn(&quot;Stopping early&quot;)<br />
+warn(&#8220;Stopping early&#8221;)<br />
 break<br />
 L[n_active, n_active] = np.sqrt(1 - d)<br />
 idx.append(lam)<br />
@@ -247,7 +247,7 @@ L[0, 0] =&nbsp;1.</p>
 lam = np.abs(np.dot(X.T, residual)).argmax()<br />
 if lam &lt; n_active or alpha[lam] ** 2 &lt; min_float:<br />
 # atom already selected or inner product too small<br />
-warn(&quot;Stopping early&quot;)<br />
+warn(&#8220;Stopping early&#8221;)<br />
 break<br />
 if n_active &gt; 0:<br />
 # Updates the Cholesky decomposition of X&#8217; X<br />
@@ -255,7 +255,7 @@ L[n_active, :n_active] = np.dot(X[:, :n_active].T, X[:, lam])<br />
 solve_triangular(L[:n_active, :n_active], L[n_active, :n_active])<br />
 v = nrm2(L[n_active, :n_active]) ** 2<br />
 if 1 - v &lt;= min_float: # selected atoms are dependent<br />
-warn(&quot;Stopping early&quot;)<br />
+warn(&#8220;Stopping early&#8221;)<br />
 break<br />
 L[n_active, n_active] = np.sqrt(1 - v)<br />
 X.T[n_active], X.T[lam] = swap(X.T[n_active], X.T[lam])<br />
