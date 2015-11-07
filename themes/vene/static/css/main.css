@@ -187,3 +187,7 @@ div.prompt {display: none !important;}
     color: black;
     text-align: center !important;
 }
+
+article img {
+	max-width: 100%;
+}
