@@ -170,7 +170,7 @@ Joint post with the awesome <a href="http://matthewkusner.com">Matt Kusner</a>!<
 <p>One way out of this conundrum is the word mover&#8217;s distance (<span class="caps">WMD</span>), introduced in 
 <a href="http://mkusner.github.io/publications/WMD.pdf"><em>From Word Embeddings To Document Distances</em></a>,
 (Matt J. Kusner, Yu Sun, Nicholas I. Kolkin, Kilian Q. Weinberger, <span class="caps">ICML</span> 2015).
-<span class="caps">WMD</span> adapts the <a href="https://en.wikipedia.org/wiki/Earth_mover%27s_distance">earth mover&#8217;s distance</a> to the space of documents: the distance between two texts is given by the total amount of &#8220;mass&#8221; needed to move the words from one side into the other. So, starting from a measure of the distance between different words, we can get a principled document-level distance. Here is a visualisation of the idea, from the <span class="caps">ICML</span>&nbsp;slides:</p>
+<span class="caps">WMD</span> adapts the <a href="https://en.wikipedia.org/wiki/Earth_mover%27s_distance">earth mover&#8217;s distance</a> to the space of documents: the distance between two texts is given by the total amount of &#8220;mass&#8221; needed to move the words from one side into the other, multiplied by the distance the words need to move. So, starting from a measure of the distance between different words, we can get a principled document-level distance. Here is a visualisation of the idea, from the <span class="caps">ICML</span>&nbsp;slides:</p>
 <p><img src="/images/wmd-obama.png" alt="WMD example from Matt&#x27;s slides"></p>
 
 </div>
@@ -894,7 +894,9 @@ d(addresses, chicago) = 1.37
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Comparison-with-other-models">Comparison with other models<a class="anchor-link" href="#Comparison-with-other-models">&#182;</a></h3>
+<h3 id="Comparison-with-other-models">Comparison with other models<a class="anchor-link" href="#Comparison-with-other-models">&#182;</a></h3><p>Now let&#8217;s see how <span class="caps">WMD</span> compares with some common approaches, on bag of words features.  The most apples-to-apples comparison would be
+K nearest neighbors with a cosine similarity metric. This approach performs worse than using <span class="caps">WMD</span>. (All scores are&nbsp;accuracies.)</p>
+
 </div>
 </div>
 </div>
@@ -945,6 +947,18 @@ Test score: 0.22
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Another common method for text classification is the linear support vector machine on bag of words.
+This performs a bit better than vanilla cosine <span class="caps">KNN</span>, but worse than using <span class="caps">WMD</span> in this setting.  In our experience,
+this seems to depend on the amount of training data&nbsp;available.</p>
+
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
