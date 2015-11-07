@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <title>Vlad Niculae (~vene) - python</title>
+        <title>Vlad Niculae (~vene) - earth mover's distance</title>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="/theme/css/main.css" type="text/css" />
@@ -65,73 +65,31 @@
                 </ul></nav> -->
         </header><!-- /#banner -->
         <div id="main" role="main">
-        
-        
+<section id="content">
+<h2>All articles</h2>
 
- 
-                <section id="content" class="body">
-                    <ol id="posts-list" class="hfeed" start="4">
-            <li><article class="hentry">    
-                <header>
-                    <h1><a href="http://vene.ro/blog/tweaking-matplotlib-subplots-for-pretty-results.html" rel="bookmark"
-                           title="Permalink to Tweaking matplotlib subplots for pretty results">Tweaking matplotlib subplots for pretty&nbsp;results</a></h1>
-                </header>
-                
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2011-04-04T20:53:00+02:00">
-                Mon 04 April 2011
-        </abbr>
-
-        <address class="vcard author">
-                By <a class="url fn" href="http://vene.ro/blog/author/vene.html">vene</a>
-        </address>
-<p>In <a href="http://vene.ro/blog/category/python.html">python</a>. </p>
-<p>tags: <a href="http://vene.ro/blog/tag/matplotlib.html">matplotlib</a> <a href="http://vene.ro/blog/tag/python.html">python</a> </p>
-</footer><!-- /.post-info -->                <p>When plotting multiple subplots using matplotlib, the axes rarely look
-pretty with the default configuration. Since matplotlib figures are
-abstract objects, designed for consistency in print as well as on
-screen, tweaking their layout can get&nbsp;tricky.</p>
-<h3>An&nbsp;example</h3>
-<p>The following code is taken from the <a href="http://scikit-learn.sourceforge.net/auto_examples/applications/plot_face_recognition.html" title="face recognition example">face recognition example</a> in ...</p>
-                <a class="readmore" href="http://vene.ro/blog/tweaking-matplotlib-subplots-for-pretty-results.html">read more</a>
-<p>There are <a href="http://vene.ro/blog/tweaking-matplotlib-subplots-for-pretty-results.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-        
-
- 
-            <li><article class="hentry">    
-                <header>
-                    <h1><a href="http://vene.ro/blog/on-setuptools-subpackages.html" rel="bookmark"
-                           title="Permalink to On setuptools subpackages">On setuptools&nbsp;subpackages</a></h1>
-                </header>
-                
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2011-04-04T15:01:00+02:00">
-                Mon 04 April 2011
-        </abbr>
-
-        <address class="vcard author">
-                By <a class="url fn" href="http://vene.ro/blog/author/vene.html">vene</a>
-        </address>
-<p>In <a href="http://vene.ro/blog/category/python.html">python</a>. </p>
-<p>tags: <a href="http://vene.ro/blog/tag/python.html">python</a> <a href="http://vene.ro/blog/tag/setuptools.html">setuptools</a> </p>
-</footer><!-- /.post-info -->                <p>Today, I spent more than two hours trying to figure out why, despite
-things working out fine in my development scikits.learn folder,
-<code>python setup.py install</code> would completely ignore the module I
-refactored into a&nbsp;subpackage.</p>
-<p>I imagined that simply adding it to the parent <code>__init__.py __all__</code>
-attribute ...</p>
-                <a class="readmore" href="http://vene.ro/blog/on-setuptools-subpackages.html">read more</a>
-<p>There are <a href="http://vene.ro/blog/on-setuptools-subpackages.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-            </ol><!-- /#posts-list -->
-<p class="paginator">
-        <a href="http://vene.ro/blog/category/python.html">&laquo;</a>
-    Page 2 / 2
-</p>
-            </section><!-- /#content -->
+<ol id="post-list">
+        <li><article class="hentry">
+                <header> <h2 class="entry-title"><a href="http://vene.ro/blog/word-movers-distance-in-python.html" rel="bookmark" title="Permalink to Word Mover’s Distance in Python">Word Mover&#8217;s Distance in&nbsp;Python</a></h2> </header>
+                <footer class="post-info">
+                    <abbr class="published" title="2015-11-07T12:00:00+01:00"> Sat 07 November 2015 </abbr>
+                    <address class="vcard author">By
+                        <a class="url fn" href="http://vene.ro/blog/author/vene-matt-kusner.html">vene & Matt Kusner</a>
+                    </address>
+                </footer><!-- /.post-info -->
+                <div class="entry-content"> 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Word-mover&#x27;s-distance-classification-in-Python">Word mover&#8217;s distance classification in Python<a class="anchor-link" href="#Word-mover&#x27;s-distance-classification-in-Python">&#182;</a></h1><p><em>A guide to scikit-learn compatible nearest neighbors classification using the recently introduced word mover&#8217;s distance (<span class="caps">WMD</span>). </em>
+Joint post with the awesome <a href="http://matthewkusner.com">Matt Kusner</a>!</p>
+<p><a href="http://nbviewer.jupyter.org/github/vene/vene.github.io/blob/pelican/content/blog/word-movers-distance-in-python.ipynb">Source of this Jupyter&nbsp;notebook.</a></p>
+<p>In document classification and other natural language processing applications, having a good measure of the similarity of two texts can be a valuable building block.   Ideally, such a measure would capture semantic information.  Cosine similarity on bag-of-words vectors is known to do well in practice, but it inherently cannot capture when documents say the same thing in completely different&nbsp;words.</p> </div><!-- /.entry-content -->
+        </article></li>
+</ol><!-- /#posts-list -->
+</section><!-- /#content -->
         <section id="extras" class="body">
         </section><!-- /#extras -->
 
