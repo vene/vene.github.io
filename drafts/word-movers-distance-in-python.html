@@ -435,7 +435,7 @@ d(addresses, chicago) = 1.37
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">docs_train</span><span class="p">,</span> <span class="n">docs_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">docs</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span>
-                                                          <span class="n">train_size</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>  <span class="c"># subsample</span>
+                                                          <span class="n">train_size</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
                                                           <span class="n">test_size</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span>
                                                           <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
@@ -512,246 +512,246 @@ d(addresses, chicago) = 1.37
 <div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="o">%%</span><span class="k">file</span> word_movers_knn.py
+<div class=" highlight hl-ipython3"><pre><span class="sd">&quot;&quot;&quot;%%file word_movers_knn.py&quot;&quot;&quot;</span>
 
-# Authors: Vlad Niculae, Matt Kusner
-# License: Simplified BSD
+<span class="c"># Authors: Vlad Niculae, Matt Kusner</span>
+<span class="c"># License: Simplified BSD</span>
 
-import numpy as np
-from sklearn.metrics import euclidean_distances
-from sklearn.externals.joblib import Parallel, delayed
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.utils import check_array
-from sklearn.cross_validation import check_cv
-from sklearn.metrics.scorer import check_scoring
-from sklearn.preprocessing import normalize
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">euclidean_distances</span>
+<span class="kn">from</span> <span class="nn">sklearn.externals.joblib</span> <span class="k">import</span> <span class="n">Parallel</span><span class="p">,</span> <span class="n">delayed</span>
+<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="k">import</span> <span class="n">KNeighborsClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.utils</span> <span class="k">import</span> <span class="n">check_array</span>
+<span class="kn">from</span> <span class="nn">sklearn.cross_validation</span> <span class="k">import</span> <span class="n">check_cv</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics.scorer</span> <span class="k">import</span> <span class="n">check_scoring</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <span class="n">normalize</span>
 
-from pyemd import emd
+<span class="kn">from</span> <span class="nn">pyemd</span> <span class="k">import</span> <span class="n">emd</span>
 
 
-class WordMoversKNN(KNeighborsClassifier):
-    &quot;&quot;&quot;K nearest neighbors classifier using the Word Mover&#39;s Distance.
+<span class="k">class</span> <span class="nc">WordMoversKNN</span><span class="p">(</span><span class="n">KNeighborsClassifier</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;K nearest neighbors classifier using the Word Mover&#39;s Distance.</span>
 
-    Parameters
-    ----------
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    </span>
+<span class="sd">    W_embed : array, shape: (vocab_size, embed_size)</span>
+<span class="sd">        Precomputed word embeddings between vocabulary items.</span>
+<span class="sd">        Row indices should correspond to the columns in the bag-of-words input.</span>
+
+<span class="sd">    n_neighbors : int, optional (default = 5)</span>
+<span class="sd">        Number of neighbors to use by default for :meth:`k_neighbors` queries.</span>
+
+<span class="sd">    n_jobs : int, optional (default = 1)</span>
+<span class="sd">        The number of parallel jobs to run for Word Mover&#39;s Distance computation.</span>
+<span class="sd">        If ``-1``, then the number of jobs is set to the number of CPU cores.</span>
+<span class="sd">    </span>
+<span class="sd">    verbose : int, optional</span>
+<span class="sd">        Controls the verbosity; the higher, the more messages. Defaults to 0.</span>
+<span class="sd">        </span>
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    </span>
+<span class="sd">    Matt J. Kusner, Yu Sun, Nicholas I. Kolkin, Kilian Q. Weinberger</span>
+<span class="sd">    From Word Embeddings To Document Distances</span>
+<span class="sd">    The International Conference on Machine Learning (ICML), 2015</span>
+<span class="sd">    http://mkusner.github.io/publications/WMD.pdf</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_pairwise</span> <span class="o">=</span> <span class="k">False</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">W_embed</span><span class="p">,</span> <span class="n">n_neighbors</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="k">False</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">W_embed</span> <span class="o">=</span> <span class="n">W_embed</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="n">verbose</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">WordMoversKNN</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="n">n_neighbors</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">,</span>
+                                            <span class="n">metric</span><span class="o">=</span><span class="s">&#39;precomputed&#39;</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="s">&#39;brute&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_wmd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">X_train</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Compute the WMD between training sample i and given test row.</span>
+<span class="sd">        </span>
+<span class="sd">        Assumes that `row` and train samples are sparse BOW vectors summing to 1.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">union_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">union1d</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">indices</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">indices</span><span class="p">)</span>
+        <span class="n">W_minimal</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">W_embed</span><span class="p">[</span><span class="n">union_idx</span><span class="p">]</span>
+        <span class="n">W_dist</span> <span class="o">=</span> <span class="n">euclidean_distances</span><span class="p">(</span><span class="n">W_minimal</span><span class="p">)</span>
+        <span class="n">bow_i</span> <span class="o">=</span> <span class="n">X_train</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">union_idx</span><span class="p">]</span><span class="o">.</span><span class="n">A</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+        <span class="n">bow_j</span> <span class="o">=</span> <span class="n">row</span><span class="p">[:,</span> <span class="n">union_idx</span><span class="p">]</span><span class="o">.</span><span class="n">A</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">emd</span><span class="p">(</span><span class="n">bow_i</span><span class="p">,</span> <span class="n">bow_j</span><span class="p">,</span> <span class="n">W_dist</span><span class="p">)</span>
     
-    W_embed : array, shape: (vocab_size, embed_size)
-        Precomputed word embeddings between vocabulary items.
-        Row indices should correspond to the columns in the bag-of-words input.
+    <span class="k">def</span> <span class="nf">_wmd_row</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">X_train</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Wrapper to compute the WMD of a row with all training samples.</span>
+<span class="sd">        </span>
+<span class="sd">        Assumes that `row` and train samples are sparse BOW vectors summing to 1.</span>
+<span class="sd">        Useful for parallelization.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">n_samples_train</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_wmd</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">X_train</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_samples_train</span><span class="p">)]</span>
 
-    n_neighbors : int, optional (default = 5)
-        Number of neighbors to use by default for :meth:`k_neighbors` queries.
-
-    n_jobs : int, optional (default = 1)
-        The number of parallel jobs to run for Word Mover&#39;s Distance computation.
-        If ``-1``, then the number of jobs is set to the number of CPU cores.
-    
-    verbose : int, optional
-        Controls the verbosity; the higher, the more messages. Defaults to 0.
+    <span class="k">def</span> <span class="nf">_pairwise_wmd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">X_train</span><span class="o">=</span><span class="k">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Computes the word mover&#39;s distance between all train and test points.</span>
+<span class="sd">        </span>
+<span class="sd">        Parallelized over rows of X_test.</span>
+<span class="sd">        </span>
+<span class="sd">        Assumes that train and test samples are sparse BOW vectors summing to 1.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        X_test: scipy.sparse matrix, shape: (n_test_samples, vocab_size)</span>
+<span class="sd">            Test samples.</span>
+<span class="sd">        </span>
+<span class="sd">        X_train: scipy.sparse matrix, shape: (n_train_samples, vocab_size)</span>
+<span class="sd">            Training samples. If `None`, uses the samples the estimator was fit with.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dist : array, shape: (n_test_samples, n_train_samples)</span>
+<span class="sd">            Distances between all test samples and all train samples.</span>
+<span class="sd">        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">n_samples_test</span> <span class="o">=</span> <span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         
-    References
-    ----------
-    
-    Matt J. Kusner, Yu Sun, Nicholas I. Kolkin, Kilian Q. Weinberger
-    From Word Embeddings To Document Distances
-    The International Conference on Machine Learning (ICML), 2015
-    http://mkusner.github.io/publications/WMD.pdf
-    
-    &quot;&quot;&quot;
-    _pairwise = False
+        <span class="k">if</span> <span class="n">X_train</span> <span class="ow">is</span> <span class="k">None</span><span class="p">:</span>
+            <span class="n">X_train</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fit_X</span>
 
-    def __init__(self, W_embed, n_neighbors=1, n_jobs=1, verbose=False):
-        self.W_embed = W_embed
-        self.verbose = verbose
-        super(WordMoversKNN, self).__init__(n_neighbors=n_neighbors, n_jobs=n_jobs,
-                                            metric=&#39;precomputed&#39;, algorithm=&#39;brute&#39;)
+        <span class="n">dist</span> <span class="o">=</span> <span class="n">Parallel</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">n_jobs</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">)(</span>
+            <span class="n">delayed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_wmd_row</span><span class="p">)(</span><span class="n">test_sample</span><span class="p">,</span> <span class="n">X_train</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">test_sample</span> <span class="ow">in</span> <span class="n">X_test</span><span class="p">)</span>
 
-    def _wmd(self, i, row, X_train):
-        &quot;&quot;&quot;Compute the WMD between training sample i and given test row.
-        
-        Assumes that `row` and train samples are sparse BOW vectors summing to 1.
-        &quot;&quot;&quot;
-        union_idx = np.union1d(X_train[i].indices, row.indices)
-        W_minimal = self.W_embed[union_idx]
-        W_dist = euclidean_distances(W_minimal)
-        bow_i = X_train[i, union_idx].A.ravel()
-        bow_j = row[:, union_idx].A.ravel()
-        return emd(bow_i, bow_j, W_dist)
-    
-    def _wmd_row(self, row, X_train):
-        &quot;&quot;&quot;Wrapper to compute the WMD of a row with all training samples.
-        
-        Assumes that `row` and train samples are sparse BOW vectors summing to 1.
-        Useful for parallelization.
-        &quot;&quot;&quot;
-        n_samples_train = X_train.shape[0]
-        return [self._wmd(i, row, X_train) for i in range(n_samples_train)]
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">dist</span><span class="p">)</span>
 
-    def _pairwise_wmd(self, X_test, X_train=None):
-        &quot;&quot;&quot;Computes the word mover&#39;s distance between all train and test points.
-        
-        Parallelized over rows of X_test.
-        
-        Assumes that train and test samples are sparse BOW vectors summing to 1.
-        
-        Parameters
-        ----------
-        X_test: scipy.sparse matrix, shape: (n_test_samples, vocab_size)
-            Test samples.
-        
-        X_train: scipy.sparse matrix, shape: (n_train_samples, vocab_size)
-            Training samples. If `None`, uses the samples the estimator was fit with.
-        
-        Returns
-        -------
-        dist : array, shape: (n_test_samples, n_train_samples)
-            Distances between all test samples and all train samples.
-        
-        &quot;&quot;&quot;
-        n_samples_test = X_test.shape[0]
-        
-        if X_train is None:
-            X_train = self._fit_X
+    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Fit the model using X as training data and y as target values</span>
 
-        dist = Parallel(n_jobs=self.n_jobs, verbose=self.verbose)(
-            delayed(self._wmd_row)(test_sample, X_train)
-            for test_sample in X_test)
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        X : scipy sparse matrix, shape: (n_samples, n_features)</span>
+<span class="sd">            Training data. </span>
 
-        return np.array(dist)
+<span class="sd">        y : {array-like, sparse matrix}</span>
+<span class="sd">            Target values of shape = [n_samples] or [n_samples, n_outputs]</span>
 
-    def fit(self, X, y):
-        &quot;&quot;&quot;Fit the model using X as training data and y as target values
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="n">check_array</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">accept_sparse</span><span class="o">=</span><span class="s">&#39;csr&#39;</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="k">True</span><span class="p">)</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="n">normalize</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="s">&#39;l1&#39;</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="k">False</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">WordMoversKNN</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 
-        Parameters
-        ----------
-        X : scipy sparse matrix, shape: (n_samples, n_features)
-            Training data. 
+    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Predict the class labels for the provided data</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        X : scipy.sparse matrix, shape (n_test_samples, vocab_size)</span>
+<span class="sd">            Test samples.</span>
 
-        y : {array-like, sparse matrix}
-            Target values of shape = [n_samples] or [n_samples, n_outputs]
-
-        &quot;&quot;&quot;
-        X = check_array(X, accept_sparse=&#39;csr&#39;, copy=True)
-        X = normalize(X, norm=&#39;l1&#39;, copy=False)
-        return super(WordMoversKNN, self).fit(X, y)
-
-    def predict(self, X):
-        &quot;&quot;&quot;Predict the class labels for the provided data
-        Parameters
-        ----------
-        X : scipy.sparse matrix, shape (n_test_samples, vocab_size)
-            Test samples.
-
-        Returns
-        -------
-        y : array of shape [n_samples]
-            Class labels for each data sample.
-        &quot;&quot;&quot;
-        X = check_array(X, accept_sparse=&#39;csr&#39;, copy=True)
-        X = normalize(X, norm=&#39;l1&#39;, copy=False)
-        dist = self._pairwise_wmd(X)
-        return super(WordMoversKNN, self).predict(dist)
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        y : array of shape [n_samples]</span>
+<span class="sd">            Class labels for each data sample.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="n">check_array</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">accept_sparse</span><span class="o">=</span><span class="s">&#39;csr&#39;</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="k">True</span><span class="p">)</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="n">normalize</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="s">&#39;l1&#39;</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="k">False</span><span class="p">)</span>
+        <span class="n">dist</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pairwise_wmd</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">WordMoversKNN</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">dist</span><span class="p">)</span>
     
     
-class WordMoversKNNCV(WordMoversKNN):
-    &quot;&quot;&quot;Cross-validated KNN classifier using the Word Mover&#39;s Distance.
+<span class="k">class</span> <span class="nc">WordMoversKNNCV</span><span class="p">(</span><span class="n">WordMoversKNN</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Cross-validated KNN classifier using the Word Mover&#39;s Distance.</span>
 
-    Parameters
-    ----------
-    W_embed : array, shape: (vocab_size, embed_size)
-        Precomputed word embeddings between vocabulary items.
-        Row indices should correspond to the columns in the bag-of-words input.
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    W_embed : array, shape: (vocab_size, embed_size)</span>
+<span class="sd">        Precomputed word embeddings between vocabulary items.</span>
+<span class="sd">        Row indices should correspond to the columns in the bag-of-words input.</span>
 
-    n_neighbors_try : sequence, optional
-        List of ``n_neighbors`` values to try.
-        If None, tries 1-5 neighbors.
+<span class="sd">    n_neighbors_try : sequence, optional</span>
+<span class="sd">        List of ``n_neighbors`` values to try.</span>
+<span class="sd">        If None, tries 1-5 neighbors.</span>
 
-    scoring : string, callable or None, optional, default: None
-        A string (see model evaluation documentation) or
-        a scorer callable object / function with signature
-        ``scorer(estimator, X, y)``.
+<span class="sd">    scoring : string, callable or None, optional, default: None</span>
+<span class="sd">        A string (see model evaluation documentation) or</span>
+<span class="sd">        a scorer callable object / function with signature</span>
+<span class="sd">        ``scorer(estimator, X, y)``.</span>
 
-    cv : int, cross-validation generator or an iterable, optional
-        Determines the cross-validation splitting strategy.
-        Possible inputs for cv are:
-          - None, to use the default 3-fold cross-validation,
-          - integer, to specify the number of folds.
-          - An object to be used as a cross-validation generator.
-          - An iterable yielding train/test splits.
-        For integer/None inputs, StratifiedKFold is used.
+<span class="sd">    cv : int, cross-validation generator or an iterable, optional</span>
+<span class="sd">        Determines the cross-validation splitting strategy.</span>
+<span class="sd">        Possible inputs for cv are:</span>
+<span class="sd">          - None, to use the default 3-fold cross-validation,</span>
+<span class="sd">          - integer, to specify the number of folds.</span>
+<span class="sd">          - An object to be used as a cross-validation generator.</span>
+<span class="sd">          - An iterable yielding train/test splits.</span>
+<span class="sd">        For integer/None inputs, StratifiedKFold is used.</span>
 
-    n_jobs : int, optional (default = 1)
-        The number of parallel jobs to run for Word Mover&#39;s Distance computation.
-        If ``-1``, then the number of jobs is set to the number of CPU cores.
+<span class="sd">    n_jobs : int, optional (default = 1)</span>
+<span class="sd">        The number of parallel jobs to run for Word Mover&#39;s Distance computation.</span>
+<span class="sd">        If ``-1``, then the number of jobs is set to the number of CPU cores.</span>
 
-    verbose : int, optional
-        Controls the verbosity; the higher, the more messages. Defaults to 0.
+<span class="sd">    verbose : int, optional</span>
+<span class="sd">        Controls the verbosity; the higher, the more messages. Defaults to 0.</span>
 
-    Attributes
-    ----------
-    cv_scores_ : array, shape (n_folds, len(n_neighbors_try))
-        Test set scores for each fold.
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    cv_scores_ : array, shape (n_folds, len(n_neighbors_try))</span>
+<span class="sd">        Test set scores for each fold.</span>
 
-    n_neighbors_ : int,
-        The best `n_neighbors` value found.
+<span class="sd">    n_neighbors_ : int,</span>
+<span class="sd">        The best `n_neighbors` value found.</span>
 
-    References
-    ----------
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
 
-    Matt J. Kusner, Yu Sun, Nicholas I. Kolkin, Kilian Q. Weinberger
-    From Word Embeddings To Document Distances
-    The International Conference on Machine Learning (ICML), 2015
-    http://mkusner.github.io/publications/WMD.pdf
-    
-    &quot;&quot;&quot;
-    def __init__(self, W_embed, n_neighbors_try=None, scoring=None, cv=3,
-                 n_jobs=1, verbose=False):
-        self.cv = cv
-        self.n_neighbors_try = n_neighbors_try
-        self.scoring = scoring
-        super(WordMoversKNNCV, self).__init__(W_embed,
-                                              n_neighbors=None,
-                                              n_jobs=n_jobs,
-                                              verbose=verbose)
+<span class="sd">    Matt J. Kusner, Yu Sun, Nicholas I. Kolkin, Kilian Q. Weinberger</span>
+<span class="sd">    From Word Embeddings To Document Distances</span>
+<span class="sd">    The International Conference on Machine Learning (ICML), 2015</span>
+<span class="sd">    http://mkusner.github.io/publications/WMD.pdf</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">W_embed</span><span class="p">,</span> <span class="n">n_neighbors_try</span><span class="o">=</span><span class="k">None</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="k">None</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                 <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="k">False</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cv</span> <span class="o">=</span> <span class="n">cv</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_neighbors_try</span> <span class="o">=</span> <span class="n">n_neighbors_try</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scoring</span> <span class="o">=</span> <span class="n">scoring</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">WordMoversKNNCV</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">W_embed</span><span class="p">,</span>
+                                              <span class="n">n_neighbors</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
+                                              <span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">,</span>
+                                              <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
 
-    def fit(self, X, y):
-        &quot;&quot;&quot;Fit KNN model by choosing the best `n_neighbors`.
-        
-        Parameters
-        -----------
-        X : scipy.sparse matrix, (n_samples, vocab_size)
-            Data
-        y : ndarray, shape (n_samples,) or (n_samples, n_targets)
-            Target
-        &quot;&quot;&quot;
-        if self.n_neighbors_try is None:
-            n_neighbors_try = range(1, 6)
-        else:
-            n_neighbors_try = self.n_neighbors_try
+    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Fit KNN model by choosing the best `n_neighbors`.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        -----------</span>
+<span class="sd">        X : scipy.sparse matrix, (n_samples, vocab_size)</span>
+<span class="sd">            Data</span>
+<span class="sd">        y : ndarray, shape (n_samples,) or (n_samples, n_targets)</span>
+<span class="sd">            Target</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_neighbors_try</span> <span class="ow">is</span> <span class="k">None</span><span class="p">:</span>
+            <span class="n">n_neighbors_try</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">n_neighbors_try</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_neighbors_try</span>
 
-        X = check_array(X, accept_sparse=&#39;csr&#39;, copy=True)
-        X = normalize(X, norm=&#39;l1&#39;, copy=False)
+        <span class="n">X</span> <span class="o">=</span> <span class="n">check_array</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">accept_sparse</span><span class="o">=</span><span class="s">&#39;csr&#39;</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="k">True</span><span class="p">)</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="n">normalize</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="s">&#39;l1&#39;</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="k">False</span><span class="p">)</span>
 
-        cv = check_cv(self.cv, X, y)
-        knn = KNeighborsClassifier(metric=&#39;precomputed&#39;, algorithm=&#39;brute&#39;)
-        scorer = check_scoring(knn, scoring=self.scoring)
+        <span class="n">cv</span> <span class="o">=</span> <span class="n">check_cv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cv</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="n">knn</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">metric</span><span class="o">=</span><span class="s">&#39;precomputed&#39;</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="s">&#39;brute&#39;</span><span class="p">)</span>
+        <span class="n">scorer</span> <span class="o">=</span> <span class="n">check_scoring</span><span class="p">(</span><span class="n">knn</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">scoring</span><span class="p">)</span>
 
-        scores = []
-        for train_ix, test_ix in cv:
-            dist = self._pairwise_wmd(X[test_ix], X[train_ix])
-            knn.fit(X[train_ix], y[train_ix])
-            scores.append([
-                scorer(knn.set_params(n_neighbors=k), dist, y[test_ix])
-                for k in n_neighbors_try
-            ])
-        scores = np.array(scores)
-        self.cv_scores_ = scores
+        <span class="n">scores</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">train_ix</span><span class="p">,</span> <span class="n">test_ix</span> <span class="ow">in</span> <span class="n">cv</span><span class="p">:</span>
+            <span class="n">dist</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pairwise_wmd</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">test_ix</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="n">train_ix</span><span class="p">])</span>
+            <span class="n">knn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">train_ix</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">train_ix</span><span class="p">])</span>
+            <span class="n">scores</span><span class="o">.</span><span class="n">append</span><span class="p">([</span>
+                <span class="n">scorer</span><span class="p">(</span><span class="n">knn</span><span class="o">.</span><span class="n">set_params</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="n">k</span><span class="p">),</span> <span class="n">dist</span><span class="p">,</span> <span class="n">y</span><span class="p">[</span><span class="n">test_ix</span><span class="p">])</span>
+                <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">n_neighbors_try</span>
+            <span class="p">])</span>
+        <span class="n">scores</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cv_scores_</span> <span class="o">=</span> <span class="n">scores</span>
 
-        best_k_ix = np.argmax(np.mean(scores, axis=0))
-        best_k = n_neighbors_try[best_k_ix]
-        self.n_neighbors = self.n_neighbors_ = best_k
+        <span class="n">best_k_ix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">scores</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+        <span class="n">best_k</span> <span class="o">=</span> <span class="n">n_neighbors_try</span><span class="p">[</span><span class="n">best_k_ix</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_neighbors</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_neighbors_</span> <span class="o">=</span> <span class="n">best_k</span>
 
-        return super(WordMoversKNNCV, self).fit(X, y)
+        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">WordMoversKNNCV</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -769,19 +769,6 @@ class WordMoversKNNCV(WordMoversKNN):
 </div>
 </div>
 
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="kn">from</span> <span class="nn">word_movers_knn</span> <span class="k">import</span> <span class="n">WordMoversKNNCV</span>
-</pre></div>
-
-</div>
 </div>
 </div>
 
@@ -954,14 +941,6 @@ Test score: 0.22
 </div>
 </div>
 
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/vlad/github/scikit-learn/sklearn/cross_validation.py:531: Warning: The least populated class in y has only 1 members, which is too few. The minimum number of labels for any class cannot be less than n_folds=3.
-  % (min_labels, self.n_folds)), Warning)
-</pre>
-</div>
-</div>
-
 </div>
 </div>
 
@@ -991,14 +970,6 @@ Test score: 0.22
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>CV score: 0.35
 Test score: 0.27
-</pre>
-</div>
-</div>
-
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/vlad/github/scikit-learn/sklearn/cross_validation.py:531: Warning: The least populated class in y has only 1 members, which is too few. The minimum number of labels for any class cannot be less than n_folds=3.
-  % (min_labels, self.n_folds)), Warning)
 </pre>
 </div>
 </div>
