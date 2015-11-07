@@ -86,7 +86,7 @@ Joint post with the awesome &lt;a href="http://matthewkusner.com"&gt;Matt Kusner
 &lt;a href="http://mkusner.github.io/publications/WMD.pdf"&gt;&lt;em&gt;From Word Embeddings To Document Distances&lt;/em&gt;&lt;/a&gt;,
 (Matt J. Kusner, Yu Sun, Nicholas I. Kolkin, Kilian Q. Weinberger, &lt;span class="caps"&gt;ICML&lt;/span&gt; 2015).
 &lt;span class="caps"&gt;WMD&lt;/span&gt; adapts the &lt;a href="https://en.wikipedia.org/wiki/Earth_mover%27s_distance"&gt;earth mover&amp;#8217;s distance&lt;/a&gt; to the space of documents: the distance between two texts is given by the total amount of &amp;#8220;mass&amp;#8221; needed to move the words from one side into the other, multiplied by the distance the words need to move. So, starting from a measure of the distance between different words, we can get a principled document-level distance. Here is a visualisation of the idea, from the &lt;span class="caps"&gt;ICML&lt;/span&gt;&amp;nbsp;slides:&lt;/p&gt;
-&lt;p&gt;&lt;img src="/images/wmd-obama.png" alt="WMD example from Matt&amp;#x27;s slides"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://vene.ro/images/wmd-obama.png" alt="WMD example from Matt&amp;#x27;s slides"&gt;&lt;/p&gt;
 
 &lt;/div&gt;
 &lt;/div&gt;
