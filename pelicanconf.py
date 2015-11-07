@@ -68,4 +68,4 @@ DISQUS_SITENAME = 'vene'
 # IPython Notebook plugin
 MARKUP = ('md', 'ipynb')
 PLUGIN_PATH = './plugins'
-PLUGINS = ['ipythonnb']
+PLUGINS = ['pelican-ipynb']
