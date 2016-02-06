@@ -95,8 +95,10 @@
 .highlight .err { border: 1px solid #<span class="caps">FF0000</span> } /* Error */
 .highlight .k { color: #008000; font-weight: bold } /* Keyword */
 .highlight .o { color: #666666 } /* Operator */
+.highlight .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
 .highlight .cm { color: #408080; font-style: italic } /* Comment.Multiline */
 .highlight .cp { color: #<span class="caps">BC7A00</span> } /* Comment.Preproc */
+.highlight .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
 .highlight .c1 { color: #408080; font-style: italic } /* Comment.Single */
 .highlight .cs { color: #408080; font-style: italic } /* Comment.Special */
 .highlight .gd { color: #A00000 } /* Generic.Deleted */
@@ -210,8 +212,8 @@
 <div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="c"># columns in order of appearance:</span>
-<span class="n">cols</span> <span class="o">=</span> <span class="s">&quot;Alicia Ginny Gwendolyn Robin Debbie&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># columns in order of appearance:</span>
+<span class="n">cols</span> <span class="o">=</span> <span class="s2">&quot;Alicia Ginny Gwendolyn Robin Debbie&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
 <span class="n">ranks</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
                   <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
                   <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
@@ -278,8 +280,8 @@
 <div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="nb">print</span><span class="p">(</span><span class="s">&#39;d(athletic_wizard, prophet) = {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">kendalltau_dist</span><span class="p">(</span><span class="n">ranks</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ranks</span><span class="p">[</span><span class="mi">1</span><span class="p">])))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s">&#39;d(athletic_wizard, seeker) = {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">kendalltau_dist</span><span class="p">(</span><span class="n">ranks</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ranks</span><span class="p">[</span><span class="mi">3</span><span class="p">])))</span>
+<div class=" highlight hl-ipython3"><pre><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;d(athletic_wizard, prophet) = {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">kendalltau_dist</span><span class="p">(</span><span class="n">ranks</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ranks</span><span class="p">[</span><span class="mi">1</span><span class="p">])))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;d(athletic_wizard, seeker) = {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">kendalltau_dist</span><span class="p">(</span><span class="n">ranks</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ranks</span><span class="p">[</span><span class="mi">3</span><span class="p">])))</span>
 </pre></div>
 
 </div>
@@ -323,7 +325,7 @@ $$ \sum_i d(\hat\tau, \tau_i) \leq \sum_i d(\tau, \tau_i) \text{ for all } \tau&
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="k">def</span> <span class="nf">rankaggr_brute</span><span class="p">(</span><span class="n">ranks</span><span class="p">):</span>
     <span class="n">min_dist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span>
-    <span class="n">best_rank</span> <span class="o">=</span> <span class="k">None</span>
+    <span class="n">best_rank</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">n_voters</span><span class="p">,</span> <span class="n">n_candidates</span> <span class="o">=</span> <span class="n">ranks</span><span class="o">.</span><span class="n">shape</span>
     <span class="k">for</span> <span class="n">candidate_rank</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n_candidates</span><span class="p">)):</span>
         <span class="n">dist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">kendalltau_dist</span><span class="p">(</span><span class="n">candidate_rank</span><span class="p">,</span> <span class="n">rank</span><span class="p">)</span> <span class="k">for</span> <span class="n">rank</span> <span class="ow">in</span> <span class="n">ranks</span><span class="p">)</span>
@@ -344,9 +346,9 @@ $$ \sum_i d(\hat\tau, \tau_i) \leq \sum_i d(\tau, \tau_i) \text{ for all } \tau&
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">dist</span><span class="p">,</span> <span class="n">aggr</span> <span class="o">=</span> <span class="n">rankaggr_brute</span><span class="p">(</span><span class="n">ranks</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s">&quot;A Kemeny-Young aggregation with score {} is: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A Kemeny-Young aggregation with score {} is: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
     <span class="n">dist</span><span class="p">,</span>
-    <span class="s">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cols</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">aggr</span><span class="p">))))</span>
+    <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cols</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">aggr</span><span class="p">))))</span>
 </pre></div>
 
 </div>
@@ -397,8 +399,8 @@ $$<p>In the above problem, all variables are integer, and effectively binary und
     <span class="n">edge_weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_candidates</span><span class="p">,</span> <span class="n">n_candidates</span><span class="p">))</span>
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">combinations</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n_candidates</span><span class="p">),</span> <span class="mi">2</span><span class="p">):</span>
         <span class="n">preference</span> <span class="o">=</span> <span class="n">ranks</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">ranks</span><span class="p">[:,</span> <span class="n">j</span><span class="p">]</span>
-        <span class="n">h_ij</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">preference</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>  <span class="c"># prefers i to j</span>
-        <span class="n">h_ji</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">preference</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>  <span class="c"># prefers j to i</span>
+        <span class="n">h_ij</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">preference</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># prefers i to j</span>
+        <span class="n">h_ji</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">preference</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># prefers j to i</span>
         <span class="k">if</span> <span class="n">h_ij</span> <span class="o">&gt;</span> <span class="n">h_ji</span><span class="p">:</span>
             <span class="n">edge_weights</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">h_ij</span> <span class="o">-</span> <span class="n">h_ji</span>
         <span class="k">elif</span> <span class="n">h_ij</span> <span class="o">&lt;</span> <span class="n">h_ji</span><span class="p">:</span>
@@ -453,20 +455,20 @@ $$<p>In the above problem, all variables are integer, and effectively binary und
 
     <span class="n">n_voters</span><span class="p">,</span> <span class="n">n_candidates</span> <span class="o">=</span> <span class="n">ranks</span><span class="o">.</span><span class="n">shape</span>
     
-    <span class="c"># maximize c.T * x</span>
+    <span class="c1"># maximize c.T * x</span>
     <span class="n">edge_weights</span> <span class="o">=</span> <span class="n">_build_graph</span><span class="p">(</span><span class="n">ranks</span><span class="p">)</span>
     <span class="n">c</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span> <span class="o">*</span> <span class="n">edge_weights</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>  
 
     <span class="n">idx</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="n">n_candidates</span> <span class="o">*</span> <span class="n">i</span> <span class="o">+</span> <span class="n">j</span>
 
-    <span class="c"># constraints for every pair</span>
+    <span class="c1"># constraints for every pair</span>
     <span class="n">pairwise_constraints</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(((</span><span class="n">n_candidates</span> <span class="o">*</span> <span class="p">(</span><span class="n">n_candidates</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
                                      <span class="n">n_candidates</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span>
     <span class="k">for</span> <span class="n">row</span><span class="p">,</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">pairwise_constraints</span><span class="p">,</span>
                            <span class="n">combinations</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n_candidates</span><span class="p">),</span> <span class="mi">2</span><span class="p">)):</span>
         <span class="n">row</span><span class="p">[[</span><span class="n">idx</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">),</span> <span class="n">idx</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">)]]</span> <span class="o">=</span> <span class="mi">1</span>
 
-    <span class="c"># and for every cycle of length 3</span>
+    <span class="c1"># and for every cycle of length 3</span>
     <span class="n">triangle_constraints</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(((</span><span class="n">n_candidates</span> <span class="o">*</span> <span class="p">(</span><span class="n">n_candidates</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span>
                                      <span class="p">(</span><span class="n">n_candidates</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)),</span>
                                      <span class="n">n_candidates</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span>
@@ -477,8 +479,8 @@ $$<p>In the above problem, all variables are integer, and effectively binary und
     <span class="n">constraints</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">pairwise_constraints</span><span class="p">,</span> <span class="n">triangle_constraints</span><span class="p">])</span>
     <span class="n">constraint_rhs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pairwise_constraints</span><span class="p">)),</span>
                                 <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">triangle_constraints</span><span class="p">))])</span>
-    <span class="n">constraint_signs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pairwise_constraints</span><span class="p">)),</span>  <span class="c"># ==</span>
-                                  <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">triangle_constraints</span><span class="p">))])</span>  <span class="c"># &gt;=</span>
+    <span class="n">constraint_signs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pairwise_constraints</span><span class="p">)),</span>  <span class="c1"># ==</span>
+                                  <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">triangle_constraints</span><span class="p">))])</span>  <span class="c1"># &gt;=</span>
 
     <span class="n">obj</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">duals</span> <span class="o">=</span> <span class="n">lp_solve</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">constraints</span><span class="p">,</span> <span class="n">constraint_rhs</span><span class="p">,</span> <span class="n">constraint_signs</span><span class="p">,</span>
                              <span class="n">xint</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">n_candidates</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span>
@@ -501,9 +503,9 @@ $$<p>In the above problem, all variables are integer, and effectively binary und
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">_</span><span class="p">,</span> <span class="n">aggr</span> <span class="o">=</span> <span class="n">rankaggr_lp</span><span class="p">(</span><span class="n">ranks</span><span class="p">)</span>
 <span class="n">score</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">kendalltau_dist</span><span class="p">(</span><span class="n">aggr</span><span class="p">,</span> <span class="n">rank</span><span class="p">)</span> <span class="k">for</span> <span class="n">rank</span> <span class="ow">in</span> <span class="n">ranks</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s">&quot;A Kemeny-Young aggregation with score {} is: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A Kemeny-Young aggregation with score {} is: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
     <span class="n">score</span><span class="p">,</span>
-    <span class="s">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cols</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">aggr</span><span class="p">))))</span>
+    <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cols</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">aggr</span><span class="p">))))</span>
 </pre></div>
 
 </div>
@@ -543,7 +545,7 @@ $$<p>In the above problem, all variables are integer, and effectively binary und
 <div class=" highlight hl-ipython3"><pre><span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">time</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
-<span class="n">timings</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s">&quot;method rank_len n_ranks time&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+<span class="n">timings</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s2">&quot;method rank_len n_ranks time&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
 <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">rank_len</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">9</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">n_ranks</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">20</span><span class="p">):</span>
@@ -551,31 +553,31 @@ $$<p>In the above problem, all variables are integer, and effectively binary und
         <span class="n">ranks</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">ranks</span><span class="p">)</span>
         <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
         <span class="n">brute_score</span><span class="p">,</span> <span class="n">brute_aggr</span> <span class="o">=</span> <span class="n">rankaggr_brute</span><span class="p">(</span><span class="n">ranks</span><span class="p">)</span>
-        <span class="n">timings</span> <span class="o">=</span> <span class="n">timings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s">&quot;brute&quot;</span><span class="p">,</span>
+        <span class="n">timings</span> <span class="o">=</span> <span class="n">timings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;brute&quot;</span><span class="p">,</span>
                                       <span class="n">rank_len</span><span class="o">=</span><span class="n">rank_len</span><span class="p">,</span>
                                       <span class="n">n_ranks</span><span class="o">=</span><span class="n">n_ranks</span><span class="p">,</span>
                                       <span class="n">time</span><span class="o">=</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">),</span>
-                                 <span class="n">ignore_index</span><span class="o">=</span><span class="k">True</span><span class="p">)</span>
+                                 <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
         <span class="n">_</span><span class="p">,</span> <span class="n">lp_aggr</span> <span class="o">=</span> <span class="n">rankaggr_lp</span><span class="p">(</span><span class="n">ranks</span><span class="p">)</span>
-        <span class="n">timings</span> <span class="o">=</span> <span class="n">timings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s">&quot;lp&quot;</span><span class="p">,</span>
+        <span class="n">timings</span> <span class="o">=</span> <span class="n">timings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;lp&quot;</span><span class="p">,</span>
                                       <span class="n">rank_len</span><span class="o">=</span><span class="n">rank_len</span><span class="p">,</span>
                                       <span class="n">n_ranks</span><span class="o">=</span><span class="n">n_ranks</span><span class="p">,</span>
                                       <span class="n">time</span><span class="o">=</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">),</span>
-                                 <span class="n">ignore_index</span><span class="o">=</span><span class="k">True</span><span class="p">)</span>
+                                 <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="k">assert</span> <span class="p">(</span><span class="n">brute_score</span> <span class="o">==</span>
                 <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">kendalltau_dist</span><span class="p">(</span><span class="n">lp_aggr</span><span class="p">,</span> <span class="n">rank</span><span class="p">)</span> <span class="k">for</span> <span class="n">rank</span> <span class="ow">in</span> <span class="n">ranks</span><span class="p">))</span>
 
-<span class="c"># lp is much faster, let&#39;s run it for longer rankings.</span>
+<span class="c1"># lp is much faster, let&#39;s run it for longer rankings.</span>
 <span class="k">for</span> <span class="n">rank_len</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">16</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">n_ranks</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">20</span><span class="p">):</span>
         <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
         <span class="n">_</span><span class="p">,</span> <span class="n">lp_aggr</span> <span class="o">=</span> <span class="n">rankaggr_lp</span><span class="p">(</span><span class="n">ranks</span><span class="p">)</span>
-        <span class="n">timings</span> <span class="o">=</span> <span class="n">timings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s">&quot;lp&quot;</span><span class="p">,</span>
+        <span class="n">timings</span> <span class="o">=</span> <span class="n">timings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;lp&quot;</span><span class="p">,</span>
                                       <span class="n">rank_len</span><span class="o">=</span><span class="n">rank_len</span><span class="p">,</span>
                                       <span class="n">n_ranks</span><span class="o">=</span><span class="n">n_ranks</span><span class="p">,</span>
                                       <span class="n">time</span><span class="o">=</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">),</span>
-                                 <span class="n">ignore_index</span><span class="o">=</span><span class="k">True</span><span class="p">)</span>
+                                 <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -595,13 +597,13 @@ $$<p>In the above problem, all variables are integer, and effectively binary und
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">16</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">16</span><span class="p">))</span>
 <span class="k">for</span> <span class="n">subplot</span><span class="p">,</span> <span class="n">n_ranks</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span> <span class="mi">20</span><span class="p">)):</span>
-    <span class="k">for</span> <span class="n">method</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;brute&#39;</span><span class="p">,</span> <span class="s">&#39;lp&#39;</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">method</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;brute&#39;</span><span class="p">,</span> <span class="s1">&#39;lp&#39;</span><span class="p">):</span>
         <span class="n">this_rows</span> <span class="o">=</span> <span class="n">timings</span><span class="p">[(</span><span class="n">timings</span><span class="o">.</span><span class="n">n_ranks</span> <span class="o">==</span> <span class="n">n_ranks</span><span class="p">)</span> <span class="o">&amp;</span>
                             <span class="p">(</span><span class="n">timings</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="n">method</span><span class="p">)]</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">this_rows</span><span class="o">.</span><span class="n">rank_len</span><span class="p">,</span> <span class="n">this_rows</span><span class="o">.</span><span class="n">time</span><span class="p">,</span>
-                     <span class="n">label</span><span class="o">=</span><span class="s">&quot;{} n={}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">n_ranks</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s">&quot;upper left&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s">&quot;Ranking size vs. log time to solve&quot;</span><span class="p">)</span>
+                     <span class="n">label</span><span class="o">=</span><span class="s2">&quot;{} n={}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">n_ranks</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper left&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Ranking size vs. log time to solve&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 

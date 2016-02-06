@@ -95,8 +95,10 @@
 .highlight .err { border: 1px solid #<span class="caps">FF0000</span> } /* Error */
 .highlight .k { color: #008000; font-weight: bold } /* Keyword */
 .highlight .o { color: #666666 } /* Operator */
+.highlight .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
 .highlight .cm { color: #408080; font-style: italic } /* Comment.Multiline */
 .highlight .cp { color: #<span class="caps">BC7A00</span> } /* Comment.Preproc */
+.highlight .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
 .highlight .c1 { color: #408080; font-style: italic } /* Comment.Single */
 .highlight .cs { color: #408080; font-style: italic } /* Comment.Special */
 .highlight .gd { color: #A00000 } /* Generic.Deleted */
@@ -209,21 +211,21 @@ Joint post with the awesome <a href="http://matthewkusner.com">Matt Kusner</a>!<
 <div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s">&quot;data/embed.dat&quot;</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s">&quot;Caching word embeddings in memmapped format...&quot;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">&quot;data/embed.dat&quot;</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Caching word embeddings in memmapped format...&quot;</span><span class="p">)</span>
     <span class="kn">from</span> <span class="nn">gensim.models.word2vec</span> <span class="k">import</span> <span class="n">Word2Vec</span>
     <span class="n">wv</span> <span class="o">=</span> <span class="n">Word2Vec</span><span class="o">.</span><span class="n">load_word2vec_format</span><span class="p">(</span>
-        <span class="s">&quot;data/GoogleNews-vectors-negative300.bin.gz&quot;</span><span class="p">,</span>
-        <span class="n">binary</span><span class="o">=</span><span class="k">True</span><span class="p">)</span>
-    <span class="n">fp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">memmap</span><span class="p">(</span><span class="s">&quot;data/embed.dat&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">double</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s">&#39;w+&#39;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">wv</span><span class="o">.</span><span class="n">syn0norm</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+        <span class="s2">&quot;data/GoogleNews-vectors-negative300.bin.gz&quot;</span><span class="p">,</span>
+        <span class="n">binary</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">fp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">memmap</span><span class="p">(</span><span class="s2">&quot;data/embed.dat&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">double</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;w+&#39;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">wv</span><span class="o">.</span><span class="n">syn0norm</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
     <span class="n">fp</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">wv</span><span class="o">.</span><span class="n">syn0norm</span><span class="p">[:]</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;data/embed.vocab&quot;</span><span class="p">,</span> <span class="s">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;data/embed.vocab&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">((</span><span class="n">voc</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">word</span><span class="p">)</span> <span class="k">for</span> <span class="n">word</span><span class="p">,</span> <span class="n">voc</span> <span class="ow">in</span> <span class="n">wv</span><span class="o">.</span><span class="n">vocab</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
     <span class="k">del</span> <span class="n">fp</span><span class="p">,</span> <span class="n">wv</span>
 
-<span class="n">W</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">memmap</span><span class="p">(</span><span class="s">&quot;data/embed.dat&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">double</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s">&quot;r&quot;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">3000000</span><span class="p">,</span> <span class="mi">300</span><span class="p">))</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;data/embed.vocab&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="n">W</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">memmap</span><span class="p">(</span><span class="s2">&quot;data/embed.dat&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">double</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">3000000</span><span class="p">,</span> <span class="mi">300</span><span class="p">))</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;data/embed.vocab&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">vocab_list</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">strip</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">())</span>
 </pre></div>
 
@@ -259,11 +261,11 @@ Joint post with the awesome <a href="http://matthewkusner.com">Matt Kusner</a>!<
 <div class="prompt input_prompt">In&nbsp;[33]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="n">d1</span> <span class="o">=</span> <span class="s">&quot;Obama speaks to the media in Illinois&quot;</span>
-<span class="n">d2</span> <span class="o">=</span> <span class="s">&quot;The President addresses the press in Chicago&quot;</span>
+<div class=" highlight hl-ipython3"><pre><span class="n">d1</span> <span class="o">=</span> <span class="s2">&quot;Obama speaks to the media in Illinois&quot;</span>
+<span class="n">d2</span> <span class="o">=</span> <span class="s2">&quot;The President addresses the press in Chicago&quot;</span>
 
-<span class="n">vect</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">stop_words</span><span class="o">=</span><span class="s">&quot;english&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">([</span><span class="n">d1</span><span class="p">,</span> <span class="n">d2</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="s">&quot;Features:&quot;</span><span class="p">,</span>  <span class="s">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">vect</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">()))</span>
+<span class="n">vect</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">stop_words</span><span class="o">=</span><span class="s2">&quot;english&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">([</span><span class="n">d1</span><span class="p">,</span> <span class="n">d2</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Features:&quot;</span><span class="p">,</span>  <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">vect</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">()))</span>
 </pre></div>
 
 </div>
@@ -305,7 +307,7 @@ Joint post with the awesome <a href="http://matthewkusner.com">Matt Kusner</a>!<
 <span class="n">v_1</span> <span class="o">=</span> <span class="n">v_1</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
 <span class="n">v_2</span> <span class="o">=</span> <span class="n">v_2</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">v_1</span><span class="p">,</span> <span class="n">v_2</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s">&quot;cosine(doc_1, doc_2) = {:.2f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cosine</span><span class="p">(</span><span class="n">v_1</span><span class="p">,</span> <span class="n">v_2</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;cosine(doc_1, doc_2) = {:.2f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cosine</span><span class="p">(</span><span class="n">v_1</span><span class="p">,</span> <span class="n">v_2</span><span class="p">)))</span>
 </pre></div>
 
 </div>
@@ -336,8 +338,8 @@ cosine(doc_1, doc_2) = 1.00
 <div class=" highlight hl-ipython3"><pre><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">euclidean_distances</span>
 <span class="n">W_</span> <span class="o">=</span> <span class="n">W</span><span class="p">[[</span><span class="n">vocab_dict</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">vect</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">()]]</span>
 <span class="n">D_</span> <span class="o">=</span> <span class="n">euclidean_distances</span><span class="p">(</span><span class="n">W_</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s">&quot;d(addresses, speaks) = {:.2f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">D_</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">7</span><span class="p">]))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s">&quot;d(addresses, chicago) = {:.2f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">D_</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;d(addresses, speaks) = {:.2f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">D_</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">7</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;d(addresses, chicago) = {:.2f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">D_</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]))</span>
 </pre></div>
 
 </div>
@@ -377,14 +379,14 @@ d(addresses, chicago) = 1.37
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="kn">from</span> <span class="nn">pyemd</span> <span class="k">import</span> <span class="n">emd</span>
 
-<span class="c"># pyemd needs double precision input</span>
+<span class="c1"># pyemd needs double precision input</span>
 <span class="n">v_1</span> <span class="o">=</span> <span class="n">v_1</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">double</span><span class="p">)</span>
 <span class="n">v_2</span> <span class="o">=</span> <span class="n">v_2</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">double</span><span class="p">)</span>
 <span class="n">v_1</span> <span class="o">/=</span> <span class="n">v_1</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 <span class="n">v_2</span> <span class="o">/=</span> <span class="n">v_2</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 <span class="n">D_</span> <span class="o">=</span> <span class="n">D_</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">double</span><span class="p">)</span>
-<span class="n">D_</span> <span class="o">/=</span> <span class="n">D_</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>  <span class="c"># just for comparison purposes</span>
-<span class="nb">print</span><span class="p">(</span><span class="s">&quot;d(doc_1, doc_2) = {:.2f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">emd</span><span class="p">(</span><span class="n">v_1</span><span class="p">,</span> <span class="n">v_2</span><span class="p">,</span> <span class="n">D_</span><span class="p">)))</span>
+<span class="n">D_</span> <span class="o">/=</span> <span class="n">D_</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>  <span class="c1"># just for comparison purposes</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;d(doc_1, doc_2) = {:.2f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">emd</span><span class="p">(</span><span class="n">v_1</span><span class="p">,</span> <span class="n">v_2</span><span class="p">,</span> <span class="n">D_</span><span class="p">)))</span>
 </pre></div>
 
 </div>
@@ -461,7 +463,7 @@ d(addresses, chicago) = 1.37
 <div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="n">vect</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">stop_words</span><span class="o">=</span><span class="s">&quot;english&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">docs_train</span> <span class="o">+</span> <span class="n">docs_test</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span class="n">vect</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">stop_words</span><span class="o">=</span><span class="s2">&quot;english&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">docs_train</span> <span class="o">+</span> <span class="n">docs_test</span><span class="p">)</span>
 <span class="n">common</span> <span class="o">=</span> <span class="p">[</span><span class="n">word</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">vect</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">()</span> <span class="k">if</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">vocab_dict</span><span class="p">]</span>
 <span class="n">W_common</span> <span class="o">=</span> <span class="n">W</span><span class="p">[[</span><span class="n">vocab_dict</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">common</span><span class="p">]]</span>
 </pre></div>
@@ -515,8 +517,8 @@ d(addresses, chicago) = 1.37
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="sd">&quot;&quot;&quot;%%file word_movers_knn.py&quot;&quot;&quot;</span>
 
-<span class="c"># Authors: Vlad Niculae, Matt Kusner</span>
-<span class="c"># License: Simplified BSD</span>
+<span class="c1"># Authors: Vlad Niculae, Matt Kusner</span>
+<span class="c1"># License: Simplified BSD</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">euclidean_distances</span>
@@ -559,13 +561,13 @@ d(addresses, chicago) = 1.37
 <span class="sd">    http://mkusner.github.io/publications/WMD.pdf</span>
 <span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">_pairwise</span> <span class="o">=</span> <span class="k">False</span>
+    <span class="n">_pairwise</span> <span class="o">=</span> <span class="kc">False</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">W_embed</span><span class="p">,</span> <span class="n">n_neighbors</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="k">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">W_embed</span><span class="p">,</span> <span class="n">n_neighbors</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">W_embed</span> <span class="o">=</span> <span class="n">W_embed</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="n">verbose</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">WordMoversKNN</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="n">n_neighbors</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">,</span>
-                                            <span class="n">metric</span><span class="o">=</span><span class="s">&#39;precomputed&#39;</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="s">&#39;brute&#39;</span><span class="p">)</span>
+                                            <span class="n">metric</span><span class="o">=</span><span class="s1">&#39;precomputed&#39;</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="s1">&#39;brute&#39;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_wmd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">X_train</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Compute the WMD between training sample i and given test row.</span>
@@ -588,7 +590,7 @@ d(addresses, chicago) = 1.37
         <span class="n">n_samples_train</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_wmd</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">X_train</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_samples_train</span><span class="p">)]</span>
 
-    <span class="k">def</span> <span class="nf">_pairwise_wmd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">X_train</span><span class="o">=</span><span class="k">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_pairwise_wmd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">X_train</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Computes the word mover&#39;s distance between all train and test points.</span>
 <span class="sd">        </span>
 <span class="sd">        Parallelized over rows of X_test.</span>
@@ -611,7 +613,7 @@ d(addresses, chicago) = 1.37
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">n_samples_test</span> <span class="o">=</span> <span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         
-        <span class="k">if</span> <span class="n">X_train</span> <span class="ow">is</span> <span class="k">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">X_train</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">X_train</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fit_X</span>
 
         <span class="n">dist</span> <span class="o">=</span> <span class="n">Parallel</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">n_jobs</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">)(</span>
@@ -632,8 +634,8 @@ d(addresses, chicago) = 1.37
 <span class="sd">            Target values of shape = [n_samples] or [n_samples, n_outputs]</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">X</span> <span class="o">=</span> <span class="n">check_array</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">accept_sparse</span><span class="o">=</span><span class="s">&#39;csr&#39;</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="k">True</span><span class="p">)</span>
-        <span class="n">X</span> <span class="o">=</span> <span class="n">normalize</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="s">&#39;l1&#39;</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="k">False</span><span class="p">)</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="n">check_array</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">accept_sparse</span><span class="o">=</span><span class="s1">&#39;csr&#39;</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="n">normalize</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="s1">&#39;l1&#39;</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">WordMoversKNN</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
@@ -648,8 +650,8 @@ d(addresses, chicago) = 1.37
 <span class="sd">        y : array of shape [n_samples]</span>
 <span class="sd">            Class labels for each data sample.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">X</span> <span class="o">=</span> <span class="n">check_array</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">accept_sparse</span><span class="o">=</span><span class="s">&#39;csr&#39;</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="k">True</span><span class="p">)</span>
-        <span class="n">X</span> <span class="o">=</span> <span class="n">normalize</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="s">&#39;l1&#39;</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="k">False</span><span class="p">)</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="n">check_array</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">accept_sparse</span><span class="o">=</span><span class="s1">&#39;csr&#39;</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="n">normalize</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="s1">&#39;l1&#39;</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="n">dist</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pairwise_wmd</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">WordMoversKNN</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">dist</span><span class="p">)</span>
     
@@ -705,13 +707,13 @@ d(addresses, chicago) = 1.37
 <span class="sd">    http://mkusner.github.io/publications/WMD.pdf</span>
 <span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">W_embed</span><span class="p">,</span> <span class="n">n_neighbors_try</span><span class="o">=</span><span class="k">None</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="k">None</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
-                 <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="k">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">W_embed</span><span class="p">,</span> <span class="n">n_neighbors_try</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                 <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cv</span> <span class="o">=</span> <span class="n">cv</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">n_neighbors_try</span> <span class="o">=</span> <span class="n">n_neighbors_try</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">scoring</span> <span class="o">=</span> <span class="n">scoring</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">WordMoversKNNCV</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">W_embed</span><span class="p">,</span>
-                                              <span class="n">n_neighbors</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
+                                              <span class="n">n_neighbors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                               <span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">,</span>
                                               <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
 
@@ -725,16 +727,16 @@ d(addresses, chicago) = 1.37
 <span class="sd">        y : ndarray, shape (n_samples,) or (n_samples, n_targets)</span>
 <span class="sd">            Target</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_neighbors_try</span> <span class="ow">is</span> <span class="k">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_neighbors_try</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">n_neighbors_try</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">n_neighbors_try</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_neighbors_try</span>
 
-        <span class="n">X</span> <span class="o">=</span> <span class="n">check_array</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">accept_sparse</span><span class="o">=</span><span class="s">&#39;csr&#39;</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="k">True</span><span class="p">)</span>
-        <span class="n">X</span> <span class="o">=</span> <span class="n">normalize</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="s">&#39;l1&#39;</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="k">False</span><span class="p">)</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="n">check_array</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">accept_sparse</span><span class="o">=</span><span class="s1">&#39;csr&#39;</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="n">normalize</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="s1">&#39;l1&#39;</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
         <span class="n">cv</span> <span class="o">=</span> <span class="n">check_cv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cv</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-        <span class="n">knn</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">metric</span><span class="o">=</span><span class="s">&#39;precomputed&#39;</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="s">&#39;brute&#39;</span><span class="p">)</span>
+        <span class="n">knn</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">metric</span><span class="o">=</span><span class="s1">&#39;precomputed&#39;</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="s1">&#39;brute&#39;</span><span class="p">)</span>
         <span class="n">scorer</span> <span class="o">=</span> <span class="n">check_scoring</span><span class="p">(</span><span class="n">knn</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">scoring</span><span class="p">)</span>
 
         <span class="n">scores</span> <span class="o">=</span> <span class="p">[]</span>
@@ -829,7 +831,7 @@ d(addresses, chicago) = 1.37
 <div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="nb">print</span><span class="p">(</span><span class="s">&quot;CV score: {:.2f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">knn_cv</span><span class="o">.</span><span class="n">cv_scores_</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()))</span>
+<div class=" highlight hl-ipython3"><pre><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;CV score: {:.2f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">knn_cv</span><span class="o">.</span><span class="n">cv_scores_</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()))</span>
 </pre></div>
 
 </div>
@@ -856,7 +858,7 @@ d(addresses, chicago) = 1.37
 <div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="nb">print</span><span class="p">(</span><span class="s">&quot;Test score: {:.2f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">knn_cv</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)))</span>
+<div class=" highlight hl-ipython3"><pre><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test score: {:.2f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">knn_cv</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)))</span>
 </pre></div>
 
 </div>
@@ -920,12 +922,12 @@ K nearest neighbors with a cosine similarity metric. This approach performs wors
 <div class="prompt input_prompt">In&nbsp;[21]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="n">knn_grid</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">metric</span><span class="o">=</span><span class="s">&#39;cosine&#39;</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="s">&#39;brute&#39;</span><span class="p">),</span>
+<div class=" highlight hl-ipython3"><pre><span class="n">knn_grid</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">metric</span><span class="o">=</span><span class="s1">&#39;cosine&#39;</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="s1">&#39;brute&#39;</span><span class="p">),</span>
                         <span class="nb">dict</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">))),</span>
                         <span class="n">cv</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="n">knn_grid</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s">&quot;CV score: {:.2f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">knn_grid</span><span class="o">.</span><span class="n">best_score_</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s">&quot;Test score: {:.2f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">knn_grid</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;CV score: {:.2f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">knn_grid</span><span class="o">.</span><span class="n">best_score_</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test score: {:.2f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">knn_grid</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)))</span>
 </pre></div>
 
 </div>
@@ -969,8 +971,8 @@ this seems to depend on the amount of training data&nbsp;available.</p>
                         <span class="nb">dict</span><span class="p">(</span><span class="n">C</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="n">base</span><span class="o">=</span><span class="mi">2</span><span class="p">)),</span>
                         <span class="n">cv</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="n">svc_grid</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s">&quot;CV score: {:.2f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">svc_grid</span><span class="o">.</span><span class="n">best_score_</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s">&quot;Test score: {:.2f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">svc_grid</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;CV score: {:.2f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">svc_grid</span><span class="o">.</span><span class="n">best_score_</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test score: {:.2f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">svc_grid</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)))</span>
 </pre></div>
 
 </div>
