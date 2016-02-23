@@ -18,7 +18,7 @@ Authors: Vlad Niculae <vlad@cs.cornell.edu>
          Jordan Boyd-Graber <Jordan.Boyd.Graber@colorado.edu>
          Cristian Danescu-Niculescu-Mizil <cristian@cs.cornell.edu>
 
-Version: 0.99 (02/22/2016)
+Version: 1.0 (02/23/2016)
 
 The dataset is further described in our paper:
     Vlad Niculae, Srijan Kumar, Jordan Boyd-Graber
