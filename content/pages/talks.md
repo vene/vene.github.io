@@ -3,6 +3,11 @@ Slug: talks
 
 # Talks that I gave
 
+## ADSA Data Summit at UIUC, February 2015
+
+* NLP-centric scikit-learn tutorial \[ [github](https://github.com/vene/adsa_uiuc_sklearn_tutorial) \]
+* Lessons learned from scikit-learn (and how they helped me in research & life) \[ [pdf](talks/LessonsLearned.pdf) \] \[ [pptx](talks/LessonsLearned.pptx) \]
+
 ## University of Wolverhampton, February 2013
 
 * Recognizing similes \[ [html](talks/simile-first_slides.html) \] \[ [ipynb](talks/simile-first.ipynb) \] 
