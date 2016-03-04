@@ -19,6 +19,7 @@ I am collaborating with the [Center for Computational Linguistics at
 the University of Bucharest](http://nlp.unibuc.ro/).
 
 # News
+  - Chenhao and I wrote a [blog post]({filename}/blog/winning_arguments.ipynb) about our WWW 2016 paper with [Cristian](http://www.cs.cornell.edu/~cristian/) and [Lillian](http://www.cs.cornell.edu/home/llee/), [*Winning Arguments: Interaction Dynamics and Persuasion Strategies in Good-faith Online Discussions*](https://chenhaot.com/pages/changemyview.html).
   - Read more about our ACL 2015 paper [*Linguistic Harbingers of
   Betrayal*](/betrayal), in which we study the language of alliances and betrayals between players of the strategy game *Diplomacy*.
   - New blog post about [making Flask-SocketIO work on OpenShift]({filename}/blog/socketio.md).
