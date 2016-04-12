@@ -424,10 +424,12 @@ ul {
         width: 60%;
         margin-right: 20px;
     }
+
     .wrapper {
         width: 1026px; /* 1140px - 10% for margins */
         margin: 0 auto;
     }
+    
     .wideonly {
         display: inline;
     }
