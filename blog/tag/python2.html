@@ -70,20 +70,6 @@
 
 <ol id="post-list">
         <li><article class="hentry">
-                <header> <h2 class="entry-title"><a href="http://vene.ro/blog/scikit-learn-speed-html-reports-teaser.html" rel="bookmark" title="Permalink to Scikit-learn-speed HTML reports teaser">Scikit-learn-speed <span class="caps">HTML</span> reports&nbsp;teaser</a></h2> </header>
-                <footer class="post-info">
-                    <abbr class="published" title="2012-07-20T14:40:00+02:00"> Fri 20 July 2012 </abbr>
-                    <address class="vcard author">By
-                        <a class="url fn" href="http://vene.ro/blog/author/vene.html">vene</a>
-                    </address>
-                </footer><!-- /.post-info -->
-                <div class="entry-content"> <p><span class="caps">EDIT</span>: I made the plots a little more readable, check it&nbsp;out!</p>
-<p>Last time, I teased you with a screenshot of local output. Now, I will
-tease you with the benchmarks run on a couple of recent commits, along
-with some from earlier this&nbsp;year.</p>
-<p>After some effort and bugfixes ...</p> </div><!-- /.entry-content -->
-        </article></li>
-        <li><article class="hentry">
                 <header> <h2 class="entry-title"><a href="http://vene.ro/blog/memory-benchmarking-with-vbench.html" rel="bookmark" title="Permalink to Memory benchmarking with vbench">Memory benchmarking with&nbsp;vbench</a></h2> </header>
                 <footer class="post-info">
                     <abbr class="published" title="2012-07-05T12:38:00+02:00"> Thu 05 July 2012 </abbr>
@@ -139,6 +125,20 @@ Well, now you can; grab a hold of the script in the following gist and
 run it like in the&nbsp;example.</p>
 <p>[gist&nbsp;id=3022718]</p>
 <p>Instead ...</p> </div><!-- /.entry-content -->
+        </article></li>
+        <li><article class="hentry">
+                <header> <h2 class="entry-title"><a href="http://vene.ro/blog/dynamically-generated-benchmarks-with-vbench.html" rel="bookmark" title="Permalink to Dynamically generated benchmarks with vbench">Dynamically generated benchmarks with&nbsp;vbench</a></h2> </header>
+                <footer class="post-info">
+                    <abbr class="published" title="2012-06-07T01:57:00+02:00"> Thu 07 June 2012 </abbr>
+                    <address class="vcard author">By
+                        <a class="url fn" href="http://vene.ro/blog/author/vene.html">vene</a>
+                    </address>
+                </footer><!-- /.post-info -->
+                <div class="entry-content"> <p>To construct a <code>vbench</code> benchmark you need a setup string and a code
+string. The constructor&#8217;s signature&nbsp;is:  </p>
+<p><code>Benchmark(self, code, setup, ncalls=None, repeat=3, cleanup=None, name=None, description=None, start_date=None, logy=False)</code>.</p>
+<h2>Why generate benchmarks&nbsp;dynamically?</h2>
+<p>For most <code>scikit-learn</code> purposes, the <code>code</code> string will be ...</p> </div><!-- /.entry-content -->
         </article></li>
 </ol><!-- /#posts-list -->
 <p class="paginator">
