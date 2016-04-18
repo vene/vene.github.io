@@ -107,7 +107,7 @@ alas, incompatible with recent versions of SocketIO. According to the
 community, the most stable release is SocketIO&nbsp;0.9.16.</p>
 <h2>The problem in a&nbsp;nutshell</h2>
 <p>When debugging my app locally, I&#8217;d connect with something&nbsp;like</p>
-<div class="highlight"><pre>var socket = io.connect(
+<div class="highlight"><pre><span></span>var socket = io.connect(
     &#39;http://&#39; + document.domain + &#39;:&#39; + location.port + &#39;/chat&#39;
 );
 </pre></div>
@@ -116,7 +116,7 @@ community, the most stable release is SocketIO&nbsp;0.9.16.</p>
 <p>When deploying on OpenShift, the <code>location.port</code> is now different from the
 WebSocket port, so I used a Flask config that determines server-side where it&#8217;s
 running&nbsp;from:</p>
-<div class="highlight"><pre><span class="x">var wsport = &#39;</span><span class="cp">{{</span> <span class="nv">config</span><span class="o">[</span><span class="s1">&#39;WEBSOCKET_PORT&#39;</span><span class="o">]</span> <span class="cp">}}</span><span class="x">&#39;;</span>
+<div class="highlight"><pre><span></span><span class="x">var wsport = &#39;</span><span class="cp">{{</span> <span class="nv">config</span><span class="o">[</span><span class="s1">&#39;WEBSOCKET_PORT&#39;</span><span class="o">]</span> <span class="cp">}}</span><span class="x">&#39;;</span>
 </pre></div>
 
 
@@ -138,7 +138,7 @@ all other traffic over the default port.  This works like a&nbsp;charm!</p>
 <p><a href="https://gist.github.com/vene/c0657d854ae74a4511d2">My updated SocketIO client is available as a
 gist</a>, and the client-side
 connection code looks like&nbsp;this:</p>
-<div class="highlight"><pre>var socket = io.connect(
+<div class="highlight"><pre><span></span>var socket = io.connect(
     &#39;http://&#39; + document.domain + &#39;/chat&#39;,
     {
         port: location.port,
@@ -156,6 +156,37 @@ out of my comfort zone here, so in case I missed a better solution, do let me&nb
                     <h1>Other articles</h1>
                     <hr />
                     <ol id="posts-list" class="hfeed">
+        
+
+ 
+            <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://vene.ro/blog/kemeny-young-optimal-rank-aggregation-in-python.html" rel="bookmark"
+                           title="Permalink to Kemeny-Young Optimal Rank Aggregation in Python">Kemeny-Young Optimal Rank Aggregation in&nbsp;Python</a></h1>
+                </header>
+                
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2014-01-22T18:00:00+01:00">
+                Wed 22 January 2014
+        </abbr>
+
+        <address class="vcard author">
+                By <a class="url fn" href="http://vene.ro/blog/author/vene.html">vene</a>
+        </address>
+<p>In <a href="http://vene.ro/blog/category/python.html">python</a>. </p>
+<p>tags: <a href="http://vene.ro/blog/tag/python.html">python</a> <a href="http://vene.ro/blog/tag/rank-aggregation.html">rank aggregation</a> <a href="http://vene.ro/blog/tag/kendall.html">kendall</a> <a href="http://vene.ro/blog/tag/tau.html">tau</a> <a href="http://vene.ro/blog/tag/kemeny.html">kemeny</a> <a href="http://vene.ro/blog/tag/kemeny-young.html">kemeny-young</a> <a href="http://vene.ro/blog/tag/voting-theory.html">voting theory</a> </p>
+</footer><!-- /.post-info -->                
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Rank aggregation is a problem with many important applications and naive approaches to it go wrong in subtle&nbsp;ways.</p>
+<p>Let&#8217;s say that your national Quidditch league is dominated by five major wizard sports newspapers. Yes, the ones with moving images and everything.  Every week after the games, each of them publishes a ranking of the star players.  For now, let&#8217;s suppose that the set of players under investigation is always the same, as the problem becomes a bit more complicated&nbsp;otherwise.</p>
+                <a class="readmore" href="http://vene.ro/blog/kemeny-young-optimal-rank-aggregation-in-python.html">read more</a>
+<p>There are <a href="http://vene.ro/blog/kemeny-young-optimal-rank-aggregation-in-python.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
         
 
  
@@ -240,34 +271,6 @@ often in real&nbsp;dialogue.</p>
 <p>The ...</p>
                 <a class="readmore" href="http://vene.ro/blog/really-most-common-english-idioms.html">read more</a>
 <p>There are <a href="http://vene.ro/blog/really-most-common-english-idioms.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-        
-
- 
-            <li><article class="hentry">    
-                <header>
-                    <h1><a href="http://vene.ro/blog/scikit-learn-speed-an-overview-on-the-final-day.html" rel="bookmark"
-                           title="Permalink to Scikit-learn-speed: An overview on the final day">Scikit-learn-speed: An overview on the final&nbsp;day</a></h1>
-                </header>
-                
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2012-08-20T02:44:00+02:00">
-                Mon 20 August 2012
-        </abbr>
-
-        <address class="vcard author">
-                By <a class="url fn" href="http://vene.ro/blog/author/vene.html">vene</a>
-        </address>
-<p>In <a href="http://vene.ro/blog/category/scikit-learn.html">scikit-learn</a>. </p>
-<p>tags: <a href="http://vene.ro/blog/tag/gsoc.html">gsoc</a> <a href="http://vene.ro/blog/tag/optimization.html">optimization</a> <a href="http://vene.ro/blog/tag/scikit-learn-speed.html">scikit-learn-speed</a> <a href="http://vene.ro/blog/tag/speedup.html">speedup</a> <a href="http://vene.ro/blog/tag/summary.html">summary</a> <a href="http://vene.ro/blog/tag/vbench.html">vbench</a> <a href="http://vene.ro/blog/tag/benchmarking.html">benchmarking</a> <a href="http://vene.ro/blog/tag/python.html">python</a> <a href="http://vene.ro/blog/tag/scikit-learn.html">scikit-learn</a> </p>
-</footer><!-- /.post-info -->                <p>This summer, I was granted the project called <em>scikit-learn-speed</em>,
-consisting of developing a benchmarking platform for <em>scikit-learn</em> and
-using it to find potential speedups, and in the end, make the library go
-faster wherever I&nbsp;can.</p>
-<p>On the official closing day of this work, I&#8217;d like to take a ...</p>
-                <a class="readmore" href="http://vene.ro/blog/scikit-learn-speed-an-overview-on-the-final-day.html">read more</a>
-<p>There are <a href="http://vene.ro/blog/scikit-learn-speed-an-overview-on-the-final-day.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
             </ol><!-- /#posts-list -->
 <p class="paginator">

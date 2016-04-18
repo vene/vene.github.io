@@ -107,7 +107,7 @@ alas, incompatible with recent versions of SocketIO. According to the
 community, the most stable release is SocketIO&nbsp;0.9.16.</p>
 <h2>The problem in a&nbsp;nutshell</h2>
 <p>When debugging my app locally, I&#8217;d connect with something&nbsp;like</p>
-<div class="highlight"><pre>var socket = io.connect(
+<div class="highlight"><pre><span></span>var socket = io.connect(
     &#39;http://&#39; + document.domain + &#39;:&#39; + location.port + &#39;/chat&#39;
 );
 </pre></div>
@@ -116,7 +116,7 @@ community, the most stable release is SocketIO&nbsp;0.9.16.</p>
 <p>When deploying on OpenShift, the <code>location.port</code> is now different from the
 WebSocket port, so I used a Flask config that determines server-side where it&#8217;s
 running&nbsp;from:</p>
-<div class="highlight"><pre><span class="x">var wsport = &#39;</span><span class="cp">{{</span> <span class="nv">config</span><span class="o">[</span><span class="s1">&#39;WEBSOCKET_PORT&#39;</span><span class="o">]</span> <span class="cp">}}</span><span class="x">&#39;;</span>
+<div class="highlight"><pre><span></span><span class="x">var wsport = &#39;</span><span class="cp">{{</span> <span class="nv">config</span><span class="o">[</span><span class="s1">&#39;WEBSOCKET_PORT&#39;</span><span class="o">]</span> <span class="cp">}}</span><span class="x">&#39;;</span>
 </pre></div>
 
 
@@ -138,7 +138,7 @@ all other traffic over the default port.  This works like a&nbsp;charm!</p>
 <p><a href="https://gist.github.com/vene/c0657d854ae74a4511d2">My updated SocketIO client is available as a
 gist</a>, and the client-side
 connection code looks like&nbsp;this:</p>
-<div class="highlight"><pre>var socket = io.connect(
+<div class="highlight"><pre><span></span>var socket = io.connect(
     &#39;http://&#39; + document.domain + &#39;/chat&#39;,
     {
         port: location.port,

@@ -25,7 +25,7 @@ alas, incompatible with recent versions of SocketIO. According to the
 community, the most stable release is SocketIO&amp;nbsp;0.9.16.&lt;/p&gt;
 &lt;h2&gt;The problem in a&amp;nbsp;nutshell&lt;/h2&gt;
 &lt;p&gt;When debugging my app locally, I&amp;#8217;d connect with something&amp;nbsp;like&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;var socket = io.connect(
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;var socket = io.connect(
     &amp;#39;http://&amp;#39; + document.domain + &amp;#39;:&amp;#39; + location.port + &amp;#39;/chat&amp;#39;
 );
 &lt;/pre&gt;&lt;/div&gt;
@@ -34,7 +34,7 @@ community, the most stable release is SocketIO&amp;nbsp;0.9.16.&lt;/p&gt;
 &lt;p&gt;When deploying on OpenShift, the &lt;code&gt;location.port&lt;/code&gt; is now different from the
 WebSocket port, so I used a Flask config that determines server-side where it&amp;#8217;s
 running&amp;nbsp;from:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="x"&gt;var wsport = &amp;#39;&lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt; &lt;span class="nv"&gt;config&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;WEBSOCKET_PORT&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="x"&gt;&amp;#39;;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;var wsport = &amp;#39;&lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt; &lt;span class="nv"&gt;config&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;WEBSOCKET_PORT&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="x"&gt;&amp;#39;;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -56,7 +56,7 @@ all other traffic over the default port.  This works like a&amp;nbsp;charm!&lt;/
 &lt;p&gt;&lt;a href="https://gist.github.com/vene/c0657d854ae74a4511d2"&gt;My updated SocketIO client is available as a
 gist&lt;/a&gt;, and the client-side
 connection code looks like&amp;nbsp;this:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;var socket = io.connect(
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;var socket = io.connect(
     &amp;#39;http://&amp;#39; + document.domain + &amp;#39;/chat&amp;#39;,
     {
         port: location.port,
