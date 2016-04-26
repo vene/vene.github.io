@@ -3,6 +3,13 @@ Slug: papers
 
 # Publications
 
+* Vlad Niculae and Cristian Danescu-Niculescu-Mizil.
+Conversational markers of constructive discussions. In: Proc. of *NAACL-HLT 2016*. \[ [Website](/constructive) \]
+
+* Chenhao Tan, Vlad Niculae, Cristian Danescu-Niculescu-Mizil, Lillian Lee.
+Winning Arguments: Interaction Dynamics and Persuasion Strategies in Good-faith Online Discussions. In: Proc. of *WWW 2016*.
+\[ [Website](https://chenhaot.com/pages/changemyview.html) \]
+
 * Vlad Niculae, Srijan Kumar, Jordan Boyd-Graber, Cristian Danescu-Niculescu-Mizil. Linguistic harbingers of betrayal: A case study
 on an online strategy game. In: Proc. of *ACL 2015*.
 \[ [Website](/betrayal) \]
