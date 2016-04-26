@@ -19,6 +19,7 @@ I am collaborating with the [Center for Computational Linguistics at
 the University of Bucharest](http://nlp.unibuc.ro/).
 
 # News
+  - Our paper, [*Conversational markers of constructive discussions*](/constructive), was accepted at NAACL 2016.
   - Chenhao and I wrote a [blog post]({filename}/blog/winning_arguments.ipynb) about our WWW 2016 paper with [Cristian](http://www.cs.cornell.edu/~cristian/) and [Lillian](http://www.cs.cornell.edu/home/llee/), [*Winning Arguments: Interaction Dynamics and Persuasion Strategies in Good-faith Online Discussions*](https://chenhaot.com/pages/changemyview.html).
   - Read more about our ACL 2015 paper [*Linguistic Harbingers of
   Betrayal*](/betrayal), in which we study the language of alliances and betrayals between players of the strategy game *Diplomacy*.
@@ -26,8 +27,6 @@ the University of Bucharest](http://nlp.unibuc.ro/).
   - Our system for [temporal text classification with pairwise ranking
   and interval labels (AMBRA)](http://github.com/vene/ambra) will be presented at Semeval 2015.
   - Our paper, [*QUOTUS: The Structure of Political Media Coverage as Revealed by Quoting Patterns*](http://snap.stanford.edu/quotus/), was accepted at WWW 2015.
-  - Our paper, [*Brighter than Gold: Figurative Language in User Generated
-  Comparisons*](/figurative-comparisons/), was accepted at EMNLP 2014.
 
 # Teaching
 
