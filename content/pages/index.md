@@ -10,16 +10,15 @@ Welcome, traveler, to my page. Enjoy your brief stay while you get to
 know me!
 
 My name is Vlad and I'm a PhD student in Computer Science
-at [Cornell](http://www.cs.cornell.edu/), advised by [Cristian
-<span style="white-space: nowrap;">Danescu-Niculescu-Mizil</span>
-](http://mpi-sws.org/~cristian/).
+at [Cornell](http://www.cs.cornell.edu/), advised by [Claire
+Cardie](http://www.cs.cornell.edu/home/cardie/).
 I am also a scientific Python developer, sometimes contributing to the
 [scikit-learn](http://scikit-learn.org) machine learning library.
 I am collaborating with the [Center for Computational Linguistics at
 the University of Bucharest](http://nlp.unibuc.ro/).
 
 # News
-  - Our paper, [*Conversational markers of constructive discussions*](/constructive), was accepted at NAACL 2016.
+  - Released the dataset for our NAACL 2016 paper, [*Conversational markers of constructive discussions*](/constructive).
   - Chenhao and I wrote a [blog post]({filename}/blog/winning_arguments.ipynb) about our WWW 2016 paper with [Cristian](http://www.cs.cornell.edu/~cristian/) and [Lillian](http://www.cs.cornell.edu/home/llee/), [*Winning Arguments: Interaction Dynamics and Persuasion Strategies in Good-faith Online Discussions*](https://chenhaot.com/pages/changemyview.html).
   - Read more about our ACL 2015 paper [*Linguistic Harbingers of
   Betrayal*](/betrayal), in which we study the language of alliances and betrayals between players of the strategy game *Diplomacy*.
@@ -38,12 +37,6 @@ the University of Bucharest](http://nlp.unibuc.ro/).
 You can take a look at the list of my [publications](papers.html).   The
 materials for [talks](talks.html) that I've had the honor of giving are also
 available.
-
-# Areas of interest
-
-Social aspects of NLP.  Conventional and creative language patterns.
-Similes. Structured learning. Machine learning in general.  Elegant code that
-runs fast.  **Reproducible research**. **Open data**.
 
 # Miscellanea
 
