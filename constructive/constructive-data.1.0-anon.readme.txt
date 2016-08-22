@@ -1,0 +1,244 @@
+Cornell Constructive Conversations Corpus
+=========================================
+
+Description:
+	This dataset contains 1450 team discussions, collected from the
+	StreetCrowd geographical puzzle game [1].  Each team, consisting of 2 to 4
+    players, provides individual guesses, and then, following a discussion, a
+    single final guess.
+
+	This release is *anonymized* by replacing player nicknames with unique
+    identifiers, and removing infrequent words.  We provide extracted features
+    that take into account the hidden words.
+
+	See below for a reference of the files and fields therein.
+
+URL:
+	https://vene.ro/constructive
+
+License:
+	 Open Data Commons Attribution (ODC-By 1.0)
+     Summary: http://opendatacommons.org/licenses/by/summary/
+     See LICENSE.txt for more details.
+
+Version: 
+	1.0-anon (06/13/2016)
+
+Authors:
+	Vlad Niculae <vlad@cs.cornell.edu>
+	Cristian Danescu-Niculescu-Mizil <cristian@cs.cornell.edu>
+
+Reference paper:
+	Vlad Niculae and Cristian Danescu-Niculescu-Mizil,
+	Conversational markers of constructive discussions.
+	In: Proceedings of NAACL-HLT, 2016.
+
+Reference:
+	
+	File list
+	=========
+
+	File name             Contents
+	---------             --------
+	teams.json            metadata about each team game
+	indivs.json           metadata about the players in each game
+	chats.json            messages exchanged in each game
+	reasons.json          players' reasons for individual guesses
+	marker_moves.json     log of team shared marker control
+	coarse_features.json  conversation-level features
+	fine_features.json    message- & reason- level features
+
+	Each file is a json dictionary with the same set of keys, each key the
+	unique identifier of a team game.  The values stored in the dictionary
+	are dictionaries of fields, **except for chats and reasons**.  Fields are
+	described below.
+
+
+	teams.json
+	==========
+
+	Field name              Description
+	----------              -----------
+	started                 timestamp of the game start time
+	place                   semicolon-separated coordinates of true answer
+	lat                     latitude of final team guess
+	lng                     longitude of final team guess
+	enough_agreed           whether at least 2 players agreed by end of game
+	score                   distance (in km) between final guess and true answer
+	mean_indiv              arithmetic mean of individual player scores
+	min_indiv               individual score of the worst player
+	max_indiv               individual score of the best player
+	constructiveness        c_avg in paper (score - mean_indiv)
+	scaled_constructiveness c_avg scaled to unit variance
+	is_constr               (c_avg > 0)
+	ifb                     c_best, improvement from best (score - max_indiv)
+	scaled_ifb              c_best scaled to unit variance
+	is_ifb                  (c_best > 0)
+	ifw                     c_worst, improvement from worst (score - min_indiv)
+	scaled_ifw              c_worst scaled to unit variance
+	is_ifw                  (c_worst > 0)
+
+
+    indivs.json
+    ===========
+
+    Field name              Description
+    ----------              -----------
+                             
+    user                    player's nickname (anonymized)
+    lat                     latitude of individual guess
+    lng                     longitude of individual guess
+    score                   distance (in km) between guess and true answer
+    confidence              self-rated confidence, 0-100
+    connected_on_team_start whether player actually joined the game at the start
+    connected_on_team_end   whether player was still connected at the end
+    agreed_on_team_end      whether player explicitly agreed to final team guess
+
+
+    chats.json
+    ==========
+    For each team game, this file contains a list of records, one record per
+    chat message sent in the game.  The record fields are in the order below.
+
+    Field name  Description
+    ----------  -----------
+    user        nickname of player sending the message
+    tokens      space-separated tokens, as split by TweetNLP [2]
+                (infrequent words replaced with ***)
+    tags        space-separated part-of-speech tags, as inferred by TweetNLP [2]
+                (tags of infrequent words replaced with *)
+    timestamp   timestamp when the message was sent
+
+
+    reasons.json
+    ============
+    For each team game, this file contains a list of records, one record per
+    player in the game, containing the explanation given by the player for their
+    individual answer, before discussing with the team.
+
+    Field name  Description
+    ----------  -----------
+    user        nickname of player 
+    tokens      space-separated tokens, as split by TweetNLP [2]
+                (infrequent words replaced with ***)
+    tags        space-separated part-of-speech tags, as inferred by TweetNLP [2]
+                (tags of infrequent words replaced with *)
+
+    marker_moves.json
+    =================
+
+    For each team game, this file contains a list of dictionaries, one for
+    every time any of the players moved the shared marker controlling the team's
+    guess.
+
+    Field name    Description
+    ----------    -----------
+    user          nickname of the player
+    lat           latitude of the new marker position
+    lng           longitude of the new marker position
+    timestamp     timestamp when the move occurs
+
+
+    coarse_features.json
+    ====================
+
+    Field names are prefixed by feature type: baseline, linguistic and
+    interaction.
+
+    Field name
+    ----------
+    (baseline)
+    duration              seconds between first and last team activity     
+    msgs_per_player       average number of messages sent by a player
+    n_players             number of players in team
+
+    (linguistic)
+    certain               ratio of words from the certainty lexicon
+    concreteness          average concreteness rating of content words
+    exclam                ratio of exclamation punctuation
+    geo                   ratio of words from the geography lexicon
+    hedge                 ratio of words from the hedge lexicon
+    meta                  ratio of words from the metalinguistic lexicon
+    n_reason_words        average number of tokens in players' reasons
+    period                ratio of periods (punctuation)
+    pron_3rd              ratio of words that are third person pronouns
+    pron_me               ratio of " " first person singular pronouns
+    pron_we               ratio of " " first person plural pronouns
+    pron_you              ratio of " " second person pronouns
+    question              ratio of question marks
+    ttr                   overall type-token ratio
+    words_per_message     average number of tokens per message
+
+    (interaction)
+    accom_content         overall content word coordination (see paper)
+    accom_pos             overall part-of-speech bigram coordination
+    accom_stop            overall stopword coordination
+    max_accom_content     content word coordination between maximal player pair
+    max_accom_pos         part-of-speech bigram coordination of max. pair
+    max_accom_stop        stopword coordionation between maximal player pair
+    all_chat              do all players send at least one message?
+    all_move              do all players move the marker at least once?
+    atleast_2_move        do at least two players move the marker?
+    avg_dmove             average distance between consecutive marker positions
+    avg_dmove_diff_user   like above, but only for guesses by different players
+    ent_confidence        entropy of player confidence (see paper)
+    ent_moves             entropy of number of marker moves per player
+    ent_msgs              entropy of number of messages per player
+    ent_u_ideas           entropy of ideas introduced per player
+    ent_wordspm           entropy of player verbosity (words per message)
+    idea_certain          number of ideas adopted with certainty words
+    idea_hedge            number of ideas adopted with hedges
+    max_u_ideas           number of ideas introduced by the maximal player
+    mean_confidence       average confidence of players
+    mean_gap              average gap, in seconds, between conversation turns
+    n_ideas               total number of ideas adopted (by at least a player)
+    n_ideas_all           number of ideas adopted by all players
+    n_turns               number of turns in conversation
+    total_agree           number of turns expressing agreement
+    total_disagree        number of turns expressing disagreement
+
+    fine_features.json
+    ==================
+
+    Fine-grained features extracted at message-, reason- and turn- level.
+    For each team, this contains a dict with keys 'msg', 'reason' and 'turn'
+    corresponding to the three levels.  The values for each key are lists with
+    one dictionary per message/reason/turn respectively.
+
+    Field name               Description
+    ----------               -----------
+    (message-level)
+    certain                  number of words from the certainty lexicon
+    geo                      number of words from the geography lexicon
+    hedge                    number of words from the hedge lexicon
+    meta                     number of words from the metalinguistic lexicon
+    n_adopted                number of ideas adopted in this message
+    n_adopted_w_certain      number of (adoption, certainty words) pairs
+    n_adopted_w_hedge        number of (adoption, hedge words) pairs
+    n_introduced             number of ideas introduced in this message
+    n_introduced_w_certain   number of (introduction, certainty words) pairs
+    n_introduced_w_hedge     number of (introduction, certainty words) pairs
+    n_words                  length of message, in tokens
+    pron_3rd                 number of third person pronouns in message
+    pron_me                  number of first person singular pronouns
+    pron_we                  number of first person plural pronouns
+    pron_you                 number of second person pronouns in message
+
+
+    (reason-level)
+    (same features, except the n_adopted* ones: reasons are written before
+     any interaction with other players, so adopting ideas is not possible.)
+
+    (turn-level)
+    agree                    does this turn manifest agreement?
+    disagree                 does this turn manifest disagreement?
+    gap                      time (s) passed from previous turn
+    n_repeated_content       number of content words repeated from prev. turn
+    n_repeated_pos_bigram    number of part-of-speech bigrams repeated " "
+    n_repeated_stop          number of stopwords repeated from prev. turn
+
+
+References:
+
+    [1] http://streetcrowd.us/start
+    [2] http://www.cs.cmu.edu/~ark/TweetNLP/

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Vlad Niculae (~vene)</title><link>http://vene.ro/</link><description></description><atom:link href="http://vene.ro/feeds/vene.rss.xml" rel="self"></atom:link><lastBuildDate>Mon, 06 Jul 2015 00:00:00 +0200</lastBuildDate><item><title>Flask-SocketIO on OpenShift: fallback on another port</title><link>http://vene.ro/blog/flask-socketio-openshift-fallback-xhr-polling.html</link><description>&lt;h2&gt;&lt;span class="caps"&gt;TL&lt;/span&gt;; &lt;span class="caps"&gt;DR&lt;/span&gt;&lt;/h2&gt;
+<rss version="2.0"><channel><title>Vlad Niculae (~vene)</title><link>http://vene.ro/</link><description></description><lastBuildDate>Mon, 06 Jul 2015 00:00:00 +0200</lastBuildDate><item><title>Flask-SocketIO on OpenShift: fallback on another port</title><link>http://vene.ro/blog/flask-socketio-openshift-fallback-xhr-polling.html</link><description>&lt;h2&gt;&lt;span class="caps"&gt;TL&lt;/span&gt;; &lt;span class="caps"&gt;DR&lt;/span&gt;&lt;/h2&gt;
 &lt;p&gt;I hacked the &lt;a href="https://gist.github.com/vene/c0657d854ae74a4511d2"&gt;SocketIO client
 0.9.16&lt;/a&gt; to support
 specifying a special port (&lt;code&gt;wsport&lt;/code&gt;) to use only for the WebSocket protocol,
@@ -68,876 +68,11 @@ connection code looks like&amp;nbsp;this:&lt;/p&gt;
 
 
 &lt;p&gt;I had to reduce the connection timeout, for a better user experience.  I&amp;#8217;m way
-out of my comfort zone here, so in case I missed a better solution, do let me&amp;nbsp;know!&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Mon, 06 Jul 2015 00:00:00 +0200</pubDate><guid>tag:vene.ro,2015-07-06:blog/flask-socketio-openshift-fallback-xhr-polling.html</guid><category>flask-socketio</category><category>flask</category><category>socketio</category><category>openshift</category></item><item><title>Kemeny-Young Optimal Rank Aggregation in Python</title><link>http://vene.ro/blog/kemeny-young-optimal-rank-aggregation-in-python.html</link><description>&lt;style type="text/css"&gt;/*!
+out of my comfort zone here, so in case I missed a better solution, do let me&amp;nbsp;know!&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Mon, 06 Jul 2015 00:00:00 +0200</pubDate><guid isPermaLink="false">tag:vene.ro,2015-07-06:blog/flask-socketio-openshift-fallback-xhr-polling.html</guid><category>flask-socketio</category><category>flask</category><category>socketio</category><category>openshift</category></item><item><title>Kemeny-Young Optimal Rank Aggregation in Python</title><link>http://vene.ro/blog/kemeny-young-optimal-rank-aggregation-in-python.html</link><description>&lt;style type="text/css"&gt;/*!
 *
 * IPython notebook
 *
-*/
-/* &lt;span class="caps"&gt;CSS&lt;/span&gt; font colors for translated &lt;span class="caps"&gt;ANSI&lt;/span&gt; colors. */
-.ansibold {
-  font-weight: bold;
-}
-/* use dark versions for foreground, to improve visibility */
-.ansiblack {
-  color: black;
-}
-.ansired {
-  color: darkred;
-}
-.ansigreen {
-  color: darkgreen;
-}
-.ansiyellow {
-  color: #c4a000;
-}
-.ansiblue {
-  color: darkblue;
-}
-.ansipurple {
-  color: darkviolet;
-}
-.ansicyan {
-  color: steelblue;
-}
-.ansigray {
-  color: gray;
-}
-/* and light for background, for the same reason */
-.ansibgblack {
-  background-color: black;
-}
-.ansibgred {
-  background-color: red;
-}
-.ansibggreen {
-  background-color: green;
-}
-.ansibgyellow {
-  background-color: yellow;
-}
-.ansibgblue {
-  background-color: blue;
-}
-.ansibgpurple {
-  background-color: magenta;
-}
-.ansibgcyan {
-  background-color: cyan;
-}
-.ansibggray {
-  background-color: gray;
-}
-div.cell {
-  /* Old browsers */
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-box-align: stretch;
-  display: -moz-box;
-  -moz-box-orient: vertical;
-  -moz-box-align: stretch;
-  display: box;
-  box-orient: vertical;
-  box-align: stretch;
-  /* Modern browsers */
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  border-radius: 2px;
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  border-width: 1px;
-  border-style: solid;
-  border-color: transparent;
-  width: 100%;
-  padding: 5px;
-  /* This acts as a spacer between cells, that is outside the border */
-  margin: 0px;
-  outline: none;
-  border-left-width: 1px;
-  padding-left: 5px;
-  background: linear-gradient(to right, transparent -40px, transparent 1px, transparent 1px, transparent 100%);
-}
-div.cell.jupyter-soft-selected {
-  border-left-color: #&lt;span class="caps"&gt;90CAF9&lt;/span&gt;;
-  border-left-color: #&lt;span class="caps"&gt;E3F2FD&lt;/span&gt;;
-  border-left-width: 1px;
-  padding-left: 5px;
-  border-right-color: #&lt;span class="caps"&gt;E3F2FD&lt;/span&gt;;
-  border-right-width: 1px;
-  background: #&lt;span class="caps"&gt;E3F2FD&lt;/span&gt;;
-}
-@media print {
-  div.cell.jupyter-soft-selected {
-    border-color: transparent;
-  }
-}
-div.cell.selected {
-  border-color: #ababab;
-  border-left-width: 0px;
-  padding-left: 6px;
-  background: linear-gradient(to right, #&lt;span class="caps"&gt;42A5F5&lt;/span&gt; -40px, #&lt;span class="caps"&gt;42A5F5&lt;/span&gt; 5px, transparent 5px, transparent 100%);
-}
-@media print {
-  div.cell.selected {
-    border-color: transparent;
-  }
-}
-div.cell.selected.jupyter-soft-selected {
-  border-left-width: 0;
-  padding-left: 6px;
-  background: linear-gradient(to right, #&lt;span class="caps"&gt;42A5F5&lt;/span&gt; -40px, #&lt;span class="caps"&gt;42A5F5&lt;/span&gt; 7px, #&lt;span class="caps"&gt;E3F2FD&lt;/span&gt; 7px, #&lt;span class="caps"&gt;E3F2FD&lt;/span&gt; 100%);
-}
-.edit_mode div.cell.selected {
-  border-color: #&lt;span class="caps"&gt;66BB6A&lt;/span&gt;;
-  border-left-width: 0px;
-  padding-left: 6px;
-  background: linear-gradient(to right, #&lt;span class="caps"&gt;66BB6A&lt;/span&gt; -40px, #&lt;span class="caps"&gt;66BB6A&lt;/span&gt; 5px, transparent 5px, transparent 100%);
-}
-@media print {
-  .edit_mode div.cell.selected {
-    border-color: transparent;
-  }
-}
-.prompt {
-  /* This needs to be wide enough for 3 digit prompt numbers: In[100]: */
-  min-width: 14ex;
-  /* This padding is tuned to match the padding on the CodeMirror editor. */
-  padding: 0.4em;
-  margin: 0px;
-  font-family: monospace;
-  text-align: right;
-  /* This has to match that of the the CodeMirror class line-height below */
-  line-height: 1.21429em;
-  /* Don't highlight prompt number selection */
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  /* Use default cursor */
-  cursor: default;
-}
-@media (max-width: 540px) {
-  .prompt {
-    text-align: left;
-  }
-}
-div.inner_cell {
-  /* Old browsers */
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-box-align: stretch;
-  display: -moz-box;
-  -moz-box-orient: vertical;
-  -moz-box-align: stretch;
-  display: box;
-  box-orient: vertical;
-  box-align: stretch;
-  /* Modern browsers */
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  /* Old browsers */
-  -webkit-box-flex: 1;
-  -moz-box-flex: 1;
-  box-flex: 1;
-  /* Modern browsers */
-  flex: 1;
-}
-@-moz-document url-prefix() {
-  div.inner_cell {
-    overflow-x: hidden;
-  }
-}
-/* input_area and input_prompt must match in top border and margin for alignment */
-div.input_area {
-  border: 1px solid #cfcfcf;
-  border-radius: 2px;
-  background: #f7f7f7;
-  line-height: 1.21429em;
-}
-/* This is needed so that empty prompt areas can collapse to zero height when there
-   is no content in the output_subarea and the prompt. The main purpose of this is
-   to make sure that empty JavaScript output_subareas have no height. */
-div.prompt:empty {
-  padding-top: 0;
-  padding-bottom: 0;
-}
-div.unrecognized_cell {
-  padding: 5px 5px 5px 0px;
-  /* Old browsers */
-  display: -webkit-box;
-  -webkit-box-orient: horizontal;
-  -webkit-box-align: stretch;
-  display: -moz-box;
-  -moz-box-orient: horizontal;
-  -moz-box-align: stretch;
-  display: box;
-  box-orient: horizontal;
-  box-align: stretch;
-  /* Modern browsers */
-  display: flex;
-  flex-direction: row;
-  align-items: stretch;
-}
-div.unrecognized_cell .inner_cell {
-  border-radius: 2px;
-  padding: 5px;
-  font-weight: bold;
-  color: red;
-  border: 1px solid #cfcfcf;
-  background: #eaeaea;
-}
-div.unrecognized_cell .inner_cell a {
-  color: inherit;
-  text-decoration: none;
-}
-div.unrecognized_cell .inner_cell a:hover {
-  color: inherit;
-  text-decoration: none;
-}
-@media (max-width: 540px) {
-  div.unrecognized_cell &gt; div.prompt {
-    display: none;
-  }
-}
-div.code_cell {
-  /* avoid page breaking on code cells when printing */
-}
-@media print {
-  div.code_cell {
-    page-break-inside: avoid;
-  }
-}
-/* any special styling for code cells that are currently running goes here */
-div.input {
-  page-break-inside: avoid;
-  /* Old browsers */
-  display: -webkit-box;
-  -webkit-box-orient: horizontal;
-  -webkit-box-align: stretch;
-  display: -moz-box;
-  -moz-box-orient: horizontal;
-  -moz-box-align: stretch;
-  display: box;
-  box-orient: horizontal;
-  box-align: stretch;
-  /* Modern browsers */
-  display: flex;
-  flex-direction: row;
-  align-items: stretch;
-}
-@media (max-width: 540px) {
-  div.input {
-    /* Old browsers */
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-box-align: stretch;
-    display: -moz-box;
-    -moz-box-orient: vertical;
-    -moz-box-align: stretch;
-    display: box;
-    box-orient: vertical;
-    box-align: stretch;
-    /* Modern browsers */
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-  }
-}
-/* input_area and input_prompt must match in top border and margin for alignment */
-div.input_prompt {
-  color: #&lt;span class="caps"&gt;303F9F&lt;/span&gt;;
-  border-top: 1px solid transparent;
-}
-div.input_area &gt; div.highlight {
-  margin: 0.4em;
-  border: none;
-  padding: 0px;
-  background-color: transparent;
-}
-div.input_area &gt; div.highlight &gt; pre {
-  margin: 0px;
-  border: none;
-  padding: 0px;
-  background-color: transparent;
-}
-/* The following gets added to the &lt;head&gt; if it is detected that the user has a
- * monospace font with inconsistent normal/bold/italic height.  See
- * notebookmain.js.  Such fonts will have keywords vertically offset with
- * respect to the rest of the text.  The user should select a better font.
- * See: https://github.com/ipython/ipython/issues/1503
- *
- * .CodeMirror span {
- *      vertical-align: bottom;
- * }
- */
-.CodeMirror {
-  line-height: 1.21429em;
-  /* Changed from 1em to our global default */
-  font-size: 14px;
-  height: auto;
-  /* Changed to auto to autogrow */
-  background: none;
-  /* Changed from white to allow our bg to show through */
-}
-.CodeMirror-scroll {
-  /*  The CodeMirror docs are a bit fuzzy on if overflow-y should be hidden or visible.*/
-  /*  We have found that if it is visible, vertical scrollbars appear with font size changes.*/
-  overflow-y: hidden;
-  overflow-x: auto;
-}
-.CodeMirror-lines {
-  /* In &lt;span class="caps"&gt;CM2&lt;/span&gt;, this used to be 0.4em, but in &lt;span class="caps"&gt;CM3&lt;/span&gt; it went to 4px. We need the em value because */
-  /* we have set a different line-height and want this to scale with that. */
-  padding: 0.4em;
-}
-.CodeMirror-linenumber {
-  padding: 0 8px 0 4px;
-}
-.CodeMirror-gutters {
-  border-bottom-left-radius: 2px;
-  border-top-left-radius: 2px;
-}
-.CodeMirror pre {
-  /* In &lt;span class="caps"&gt;CM3&lt;/span&gt; this went to 4px from 0 in &lt;span class="caps"&gt;CM2&lt;/span&gt;. We need the 0 value because of how we size */
-  /* .CodeMirror-lines */
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-}
-/*
-
-Original style from softwaremaniacs.org (c) Ivan Sagalaev &lt;Maniac@SoftwareManiacs.Org&gt;
-Adapted from GitHub theme
-
-*/
-.highlight-base {
-  color: #000;
-}
-.highlight-variable {
-  color: #000;
-}
-.highlight-variable-2 {
-  color: #1a1a1a;
-}
-.highlight-variable-3 {
-  color: #333333;
-}
-.highlight-string {
-  color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt;;
-}
-.highlight-comment {
-  color: #408080;
-  font-style: italic;
-}
-.highlight-number {
-  color: #080;
-}
-.highlight-atom {
-  color: #88F;
-}
-.highlight-keyword {
-  color: #008000;
-  font-weight: bold;
-}
-.highlight-builtin {
-  color: #008000;
-}
-.highlight-error {
-  color: #f00;
-}
-.highlight-operator {
-  color: #&lt;span class="caps"&gt;AA22FF&lt;/span&gt;;
-  font-weight: bold;
-}
-.highlight-meta {
-  color: #&lt;span class="caps"&gt;AA22FF&lt;/span&gt;;
-}
-/* previously not defined, copying from default codemirror */
-.highlight-def {
-  color: #00f;
-}
-.highlight-string-2 {
-  color: #f50;
-}
-.highlight-qualifier {
-  color: #555;
-}
-.highlight-bracket {
-  color: #997;
-}
-.highlight-tag {
-  color: #170;
-}
-.highlight-attribute {
-  color: #00c;
-}
-.highlight-header {
-  color: blue;
-}
-.highlight-quote {
-  color: #090;
-}
-.highlight-link {
-  color: #00c;
-}
-/* apply the same style to codemirror */
-.cm-s-ipython span.cm-keyword {
-  color: #008000;
-  font-weight: bold;
-}
-.cm-s-ipython span.cm-atom {
-  color: #88F;
-}
-.cm-s-ipython span.cm-number {
-  color: #080;
-}
-.cm-s-ipython span.cm-def {
-  color: #00f;
-}
-.cm-s-ipython span.cm-variable {
-  color: #000;
-}
-.cm-s-ipython span.cm-operator {
-  color: #&lt;span class="caps"&gt;AA22FF&lt;/span&gt;;
-  font-weight: bold;
-}
-.cm-s-ipython span.cm-variable-2 {
-  color: #1a1a1a;
-}
-.cm-s-ipython span.cm-variable-3 {
-  color: #333333;
-}
-.cm-s-ipython span.cm-comment {
-  color: #408080;
-  font-style: italic;
-}
-.cm-s-ipython span.cm-string {
-  color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt;;
-}
-.cm-s-ipython span.cm-string-2 {
-  color: #f50;
-}
-.cm-s-ipython span.cm-meta {
-  color: #&lt;span class="caps"&gt;AA22FF&lt;/span&gt;;
-}
-.cm-s-ipython span.cm-qualifier {
-  color: #555;
-}
-.cm-s-ipython span.cm-builtin {
-  color: #008000;
-}
-.cm-s-ipython span.cm-bracket {
-  color: #997;
-}
-.cm-s-ipython span.cm-tag {
-  color: #170;
-}
-.cm-s-ipython span.cm-attribute {
-  color: #00c;
-}
-.cm-s-ipython span.cm-header {
-  color: blue;
-}
-.cm-s-ipython span.cm-quote {
-  color: #090;
-}
-.cm-s-ipython span.cm-link {
-  color: #00c;
-}
-.cm-s-ipython span.cm-error {
-  color: #f00;
-}
-.cm-s-ipython span.cm-tab {
-  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAMCAYAAAAkuj5RAAAAAXNSR0IArs4c6QAAAGFJREFUSMft1LsRQFAQheHPowAKoACx3IgEKtaEHujDjORSgWTH/ZOdnZOcM/sgk/kFFWY0qV8foQwS4MKBCS3qR6ixBJvElOobYAtivseIE120FaowJPN75GMu8j/LfMwNjh4HUpwg4LUAAAAASUVORK5CYII=);
-  background-position: right;
-  background-repeat: no-repeat;
-}
-div.output_wrapper {
-  /* this position must be relative to enable descendents to be absolute within it */
-  position: relative;
-  /* Old browsers */
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-box-align: stretch;
-  display: -moz-box;
-  -moz-box-orient: vertical;
-  -moz-box-align: stretch;
-  display: box;
-  box-orient: vertical;
-  box-align: stretch;
-  /* Modern browsers */
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  z-index: 1;
-}
-/* class for the output area when it should be height-limited */
-div.output_scroll {
-  /* ideally, this would be max-height, but &lt;span class="caps"&gt;FF&lt;/span&gt; barfs all over that */
-  height: 24em;
-  /* &lt;span class="caps"&gt;FF&lt;/span&gt; needs this *and the wrapper* to specify full width, or it will shrinkwrap */
-  width: 100%;
-  overflow: auto;
-  border-radius: 2px;
-  -webkit-box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
-  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
-  display: block;
-}
-/* output div while it is collapsed */
-div.output_collapsed {
-  margin: 0px;
-  padding: 0px;
-  /* Old browsers */
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-box-align: stretch;
-  display: -moz-box;
-  -moz-box-orient: vertical;
-  -moz-box-align: stretch;
-  display: box;
-  box-orient: vertical;
-  box-align: stretch;
-  /* Modern browsers */
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-}
-div.out_prompt_overlay {
-  height: 100%;
-  padding: 0px 0.4em;
-  position: absolute;
-  border-radius: 2px;
-}
-div.out_prompt_overlay:hover {
-  /* use inner shadow to get border that is computed the same on WebKit/&lt;span class="caps"&gt;FF&lt;/span&gt; */
-  -webkit-box-shadow: inset 0 0 1px #000;
-  box-shadow: inset 0 0 1px #000;
-  background: rgba(240, 240, 240, 0.5);
-}
-div.output_prompt {
-  color: #D84315;
-}
-/* This class is the outer container of all output sections. */
-div.output_area {
-  padding: 0px;
-  page-break-inside: avoid;
-  /* Old browsers */
-  display: -webkit-box;
-  -webkit-box-orient: horizontal;
-  -webkit-box-align: stretch;
-  display: -moz-box;
-  -moz-box-orient: horizontal;
-  -moz-box-align: stretch;
-  display: box;
-  box-orient: horizontal;
-  box-align: stretch;
-  /* Modern browsers */
-  display: flex;
-  flex-direction: row;
-  align-items: stretch;
-}
-div.output_area .MathJax_Display {
-  text-align: left !important;
-}
-div.output_area 
-div.output_area 
-div.output_area img,
-div.output_area svg {
-  max-width: 100%;
-  height: auto;
-}
-div.output_area img.unconfined,
-div.output_area svg.unconfined {
-  max-width: none;
-}
-/* This is needed to protect the pre formating from global settings such
-   as that of bootstrap */
-.output {
-  /* Old browsers */
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-box-align: stretch;
-  display: -moz-box;
-  -moz-box-orient: vertical;
-  -moz-box-align: stretch;
-  display: box;
-  box-orient: vertical;
-  box-align: stretch;
-  /* Modern browsers */
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-}
-@media (max-width: 540px) {
-  div.output_area {
-    /* Old browsers */
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-box-align: stretch;
-    display: -moz-box;
-    -moz-box-orient: vertical;
-    -moz-box-align: stretch;
-    display: box;
-    box-orient: vertical;
-    box-align: stretch;
-    /* Modern browsers */
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-  }
-}
-div.output_area pre {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  vertical-align: baseline;
-  color: black;
-  background-color: transparent;
-  border-radius: 0;
-}
-/* This class is for the output subarea inside the output_area and after
-   the prompt div. */
-div.output_subarea {
-  overflow-x: auto;
-  padding: 0.4em;
-  /* Old browsers */
-  -webkit-box-flex: 1;
-  -moz-box-flex: 1;
-  box-flex: 1;
-  /* Modern browsers */
-  flex: 1;
-  max-width: calc(100% - 14ex);
-}
-div.output_scroll div.output_subarea {
-  overflow-x: visible;
-}
-/* The rest of the output_* classes are for special styling of the different
-   output types */
-/* all text output has this class: */
-div.output_text {
-  text-align: left;
-  color: #000;
-  /* This has to match that of the the CodeMirror class line-height below */
-  line-height: 1.21429em;
-}
-/* stdout/stderr are 'text' as well as 'stream', but execute_result/error are *not* streams */
-div.output_stderr {
-  background: #fdd;
-  /* very light red background for stderr */
-}
-div.output_latex {
-  text-align: left;
-}
-/* Empty output_javascript divs should have no height */
-div.output_javascript:empty {
-  padding: 0;
-}
-.js-error {
-  color: darkred;
-}
-/* raw_input styles */
-div.raw_input_container {
-  line-height: 1.21429em;
-  padding-top: 5px;
-}
-pre.raw_input_prompt {
-  /* nothing needed here. */
-}
-input.raw_input {
-  font-family: monospace;
-  font-size: inherit;
-  color: inherit;
-  width: auto;
-  /* make sure input baseline aligns with prompt */
-  vertical-align: baseline;
-  /* padding + margin = 0.5em between prompt and cursor */
-  padding: 0em 0.25em;
-  margin: 0em 0.25em;
-}
-input.raw_input:focus {
-  box-shadow: none;
-}
-p.p-space {
-  margin-bottom: 10px;
-}
-div.output_unrecognized {
-  padding: 5px;
-  font-weight: bold;
-  color: red;
-}
-div.output_unrecognized a {
-  color: inherit;
-  text-decoration: none;
-}
-div.output_unrecognized a:hover {
-  color: inherit;
-  text-decoration: none;
-}
-.rendered_html {
-  color: #000;
-  /* any extras will just be numbers: */
-}
-
-
-
-.rendered_html :link {
-  text-decoration: underline;
-}
-.rendered_html :visited {
-  text-decoration: underline;
-}
-
-
-
-
-
-
-.rendered_html h1:first-child {
-  margin-top: 0.538em;
-}
-.rendered_html h2:first-child {
-  margin-top: 0.636em;
-}
-.rendered_html h3:first-child {
-  margin-top: 0.777em;
-}
-.rendered_html h4:first-child {
-  margin-top: 1em;
-}
-.rendered_html h5:first-child {
-  margin-top: 1em;
-}
-.rendered_html h6:first-child {
-  margin-top: 1em;
-}
-
-
-
-
-
-
-
-
-.rendered_html * + ul {
-  margin-top: 1em;
-}
-.rendered_html * + ol {
-  margin-top: 1em;
-}
-
-
-.rendered_html pre,
-
-
-
-.rendered_html tr,
-.rendered_html th,
-
-.rendered_html td,
-
-
-.rendered_html * + table {
-  margin-top: 1em;
-}
-
-.rendered_html * + p {
-  margin-top: 1em;
-}
-
-.rendered_html * + img {
-  margin-top: 1em;
-}
-.rendered_html img,
-
-.rendered_html img.unconfined,
-
-div.text_cell {
-  /* Old browsers */
-  display: -webkit-box;
-  -webkit-box-orient: horizontal;
-  -webkit-box-align: stretch;
-  display: -moz-box;
-  -moz-box-orient: horizontal;
-  -moz-box-align: stretch;
-  display: box;
-  box-orient: horizontal;
-  box-align: stretch;
-  /* Modern browsers */
-  display: flex;
-  flex-direction: row;
-  align-items: stretch;
-}
-@media (max-width: 540px) {
-  div.text_cell &gt; div.prompt {
-    display: none;
-  }
-}
-div.text_cell_render {
-  /*font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;*/
-  outline: none;
-  resize: none;
-  width: inherit;
-  border-style: none;
-  padding: 0.5em 0.5em 0.5em 0.4em;
-  color: #000;
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-}
-a.anchor-link:link {
-  text-decoration: none;
-  padding: 0px 20px;
-  visibility: hidden;
-}
-h1:hover .anchor-link,
-h2:hover .anchor-link,
-h3:hover .anchor-link,
-h4:hover .anchor-link,
-h5:hover .anchor-link,
-h6:hover .anchor-link {
-  visibility: visible;
-}
-.text_cell.rendered .input_area {
-  display: none;
-}
-.text_cell.rendered 
-.text_cell.unrendered .text_cell_render {
-  display: none;
-}
-.cm-header-1,
-.cm-header-2,
-.cm-header-3,
-.cm-header-4,
-.cm-header-5,
-.cm-header-6 {
-  font-weight: bold;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-.cm-header-1 {
-  font-size: 185.7%;
-}
-.cm-header-2 {
-  font-size: 157.1%;
-}
-.cm-header-3 {
-  font-size: 128.6%;
-}
-.cm-header-4 {
-  font-size: 110%;
-}
-.cm-header-5 {
-  font-size: 100%;
-  font-style: italic;
-}
-.cm-header-6 {
-  font-size: 100%;
-  font-style: italic;
-}
-&lt;/style&gt;
+*/.ansibold{font-weight:700}.ansiblack{}.ansired{color:#8b0000}.ansigreen{6400}.ansiyellow{color:#c4a000}.ansiblue{8b}.ansipurple{color:#9400d3}.ansicyan{color:#4682b4}.ansigray{color:gray}.ansibgblack{background-}.ansibgred{background-color:red}.ansibggreen{background-color:green}.ansibgyellow{background-color:#ff0}.ansibgblue{background-f}.ansibgpurple{background-color:#ff00ff}.ansibgcyan{background-ff}.ansibggray{background-color:gray}div.cell{border:1px solid transparent;display:-webkit-box;-webkit-box-orient:vertical;display:-moz-box;-moz-box-orient:vertical;display:box;box-orient:vertical;box-align:stretch;display:flex;flex-direction:column;align-items:stretch;border-radius:2px;box-sizing:border-box;-moz-box-sizing:border-box;border-width:thin;border-style:solid;width:100%;padding:5px;margin:0;outline:0}div.cell.selected{border-color:#ababab}@media print{div.cell.selected{border-color:transparent}}.edit_mode div.cell.selected{border-color:green}.prompt{min-width:14ex;padding:.4em;margin:0;font-family:monospace;text-align:right;line-height:1.21429em}div.inner_cell{display:-webkit-box;-webkit-box-orient:vertical;display:-moz-box;-moz-box-orient:vertical;display:box;box-orient:vertical;box-align:stretch;display:flex;flex-direction:column;align-items:stretch;-webkit-box-flex:1;-moz-box-flex:1;box-flex:1;flex:1}@-moz-document url-prefix(){div.inner_cell{overflow-x:hidden}}div.input_area{border:1px solid #cfcfcf;border-radius:2px;background:#f7f7f7;line-height:1.21429em}div.prompt:empty{padding-top:0;padding-bottom:0}div.unrecognized_cell{padding:5px 5px 5px 0;display:-webkit-box;-webkit-box-orient:horizontal;display:-moz-box;-moz-box-orient:horizontal;display:box;box-orient:horizontal;box-align:stretch;display:flex;flex-direction:row;align-items:stretch}div.unrecognized_cell .inner_cell{border-radius:2px;padding:5px;font-weight:700;color:red;border:1px solid #cfcfcf;background:#eaeaea}div.unrecognized_cell .inner_cell a,div.unrecognized_cell .inner_cell a:hover{color:inherit;text-decoration:none}@media (max-width:540px){.prompt{text-align:left}div.unrecognized_cell&gt;div.prompt{display:none}}div.code_cell{}div.input{page-break-inside:avoid;display:-webkit-box;-webkit-box-orient:horizontal;display:-moz-box;-moz-box-orient:horizontal;display:box;box-orient:horizontal;box-align:stretch;display:flex;flex-direction:row;align-items:stretch}@media (max-width:540px){div.input{-webkit-box-orient:vertical;-moz-box-orient:vertical;box-orient:vertical;box-align:stretch;display:flex;flex-direction:column;align-items:stretch}}div.input_prompt{color:navy;border-top:1px solid transparent}div.input_area&gt;div.highlight{margin:.4em;border:none;padding:0;background-color:transparent}div.input_area&gt;div.highlight&gt;pre{margin:0;border:none;padding:0;background-color:transparent}.CodeMirror{line-height:1.21429em;font-size:14px;height:auto;background:0 0}.CodeMirror-scroll{overflow-y:hidden;overflow-x:auto}.CodeMirror-lines{padding:.4em}.CodeMirror-linenumber{padding:0 8px 0 4px}.CodeMirror-gutters{border-bottom-left-radius:2px;border-top-left-radius:2px}.CodeMirror pre{padding:0;border:0;border-radius:0}.highlight-base,.highlight-variable{}.highlight-variable-2{color:#1a1a1a}.highlight-variable-3{color:#333}.highlight-string{color:#&lt;span class="caps"&gt;BA2121&lt;/span&gt;}.highlight-comment{color:#408080;font-style:italic}.highlight-number{80}.highlight-atom{color:#88F}.highlight-keyword{color:green;font-weight:700}.highlight-builtin{color:green}.highlight-error{color:red}.highlight-operator{color:#&lt;span class="caps"&gt;A2F&lt;/span&gt;;font-weight:700}.highlight-meta{color:#&lt;span class="caps"&gt;A2F&lt;/span&gt;}.highlight-def{f}.highlight-string-2{color:#f50}.highlight-qualifier{color:#555}.highlight-bracket{color:#997}.highlight-tag{color:#170}.highlight-attribute{c}.highlight-header{f}.highlight-quote{90}.highlight-link{c}.cm-s-ipython span.cm-keyword{color:green;font-weight:700}.cm-s-ipython span.cm-atom{color:#88F}.cm-s-ipython span.cm-number{80}.cm-s-ipython span.cm-def{f}.cm-s-ipython span.cm-variable{}.cm-s-ipython span.cm-operator{color:#&lt;span class="caps"&gt;A2F&lt;/span&gt;;font-weight:700}.cm-s-ipython span.cm-variable-2{color:#1a1a1a}.cm-s-ipython span.cm-variable-3{color:#333}.cm-s-ipython span.cm-comment{color:#408080;font-style:italic}.cm-s-ipython span.cm-string{color:#&lt;span class="caps"&gt;BA2121&lt;/span&gt;}.cm-s-ipython span.cm-string-2{color:#f50}.cm-s-ipython span.cm-meta{color:#&lt;span class="caps"&gt;A2F&lt;/span&gt;}.cm-s-ipython span.cm-qualifier{color:#555}.cm-s-ipython span.cm-builtin{color:green}.cm-s-ipython span.cm-bracket{color:#997}.cm-s-ipython span.cm-tag{color:#170}.cm-s-ipython span.cm-attribute{c}.cm-s-ipython span.cm-header{f}.cm-s-ipython span.cm-quote{90}.cm-s-ipython span.cm-link{c}.cm-s-ipython span.cm-error{color:red}.cm-s-ipython span.cm-tab{background:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAMCAYAAAAkuj5RAAAAAXNSR0IArs4c6QAAAGFJREFUSMft1LsRQFAQheHPowAKoACx3IgEKtaEHujDjORSgWTH/ZOdnZOcM/sgk/kFFWY0qV8foQwS4MKBCS3qR6ixBJvElOobYAtivseIE120FaowJPN75GMu8j/LfMwNjh4HUpwg4LUAAAAASUVORK5CYII=')right no-repeat}div.output_wrapper{display:-webkit-box;-webkit-box-align:stretch;display:-moz-box;-moz-box-align:stretch;display:box;box-orient:vertical;box-align:stretch;display:flex;flex-direction:column;align-items:stretch;z-index:1}div.output_scroll{height:24em;width:100%;overflow:auto;border-radius:2px;-webkit-box-shadow:inset 0 2px 8px rgba(0,0,0,.8);box-shadow:inset 0 2px 8px rgba(0,0,0,.8);display:block}div.output_collapsed{margin:0;padding:0;display:-webkit-box;-webkit-box-orient:vertical;display:-moz-box;-moz-box-orient:vertical;display:box;box-orient:vertical;box-align:stretch;display:flex;flex-direction:column;align-items:stretch}div.out_prompt_overlay{height:100%;padding:0 .4em;position:absolute;border-radius:2px}div.out_prompt_overlay:hover{-webkit-box-shadow:inset 0 0 1px #000;box-shadow:inset 0 0 1px #000;background:rgba(240,240,240,.5)}div.output_prompt{color:#8b0000}div.output_area{padding:0;page-break-inside:avoid;display:-webkit-box;-webkit-box-orient:horizontal;display:-moz-box;-moz-box-orient:horizontal;display:box;box-orient:horizontal;box-align:stretch;display:flex;flex-direction:row;align-items:stretch}div.output_area .MathJax_Display{text-align:left!important}div.output_area div.output_area img,div.output_area svg{max-width:100%;height:auto}div.output_area img.unconfined,div.output_area svg.unconfined{max-width:none}.output{display:-webkit-box;-webkit-box-orient:vertical;display:-moz-box;-moz-box-orient:vertical;display:box;box-orient:vertical;box-align:stretch;display:flex;flex-direction:column;align-items:stretch}@media (max-width:540px){div.output_area{-webkit-box-orient:vertical;-moz-box-orient:vertical;box-orient:vertical;box-align:stretch;display:flex;flex-direction:column;align-items:stretch}}div.output_area pre{margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;border-radius:0}div.output_subarea{overflow-x:auto;padding:.4em;-webkit-box-flex:1;-moz-box-flex:1;box-flex:1;flex:1;max-width:calc(100% - 14ex)}div.output_text{text-align:left;line-height:1.21429em}div.output_stderr{background:#fdd}div.output_latex{text-align:left}div.output_javascript:empty{padding:0}.js-error{color:#8b0000}div.raw_input_container{font-family:monospace;padding-top:5px}span.raw_input_prompt{}input.raw_input{font-family:inherit;font-size:inherit;color:inherit;width:auto;vertical-align:baseline;padding:0 .25em;margin:0 .25em}input.raw_input:focus{box-shadow:none}p.p-space{margin-bottom:10px}div.output_unrecognized{padding:5px;font-weight:700;color:red}div.output_unrecognized a,div.output_unrecognized a:hover{color:inherit;text-decoration:none}.rendered_html{}.rendered_html :link,.rendered_html :visited,.rendered_html h1:first-child{margin-top:.538em}.rendered_html h2:first-child{margin-top:.636em}.rendered_html h3:first-child{margin-top:.777em}.rendered_html h4:first-child,.rendered_html h5:first-child,.rendered_html h6:first-child{margin-top:1em}.rendered_html *+ol,.rendered_html *+ul{margin-top:1em}.rendered_html *+table{margin-top:1em}.rendered_html *+p{margin-top:1em}.rendered_html *+img{margin-top:1em}div.text_cell{display:-webkit-box;-webkit-box-orient:horizontal;display:-moz-box;-moz-box-orient:horizontal;display:box;box-orient:horizontal;box-align:stretch;display:flex;flex-direction:row;align-items:stretch}@media (max-width:540px){div.text_cell&gt;div.prompt{display:none}}div.text_cell_render{outline:0;resize:none;width:inherit;border-style:none;padding:.5em .5em .5em .4em;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box}a.anchor-link:link{text-decoration:none;padding:0 20px;visibility:hidden}h1:hover .anchor-link,h2:hover .anchor-link,h3:hover .anchor-link,h4:hover .anchor-link,h5:hover .anchor-link,h6:hover .anchor-link{visibility:visible}.text_cell.rendered .input_area{display:none}.text_cell.rendered .text_cell.unrendered .text_cell_render{display:none}.cm-header-1,.cm-header-2,.cm-header-3,.cm-header-4,.cm-header-5,.cm-header-6{font-weight:700;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif}.cm-header-1{font-size:185.7%}.cm-header-2{font-size:157.1%}.cm-header-3{font-size:128.6%}.cm-header-4{font-size:110%}.cm-header-5,.cm-header-6{font-size:100%;font-style:italic}&lt;/style&gt;
 &lt;style type="text/css"&gt;.highlight .hll { background-color: #ffffcc }
 .highlight  { background: #f8f8f8; }
 .highlight .c { color: #408080; font-style: italic } /* Comment */
@@ -1003,43 +138,6 @@ h6:hover .anchor-link {
 .highlight .vg { color: #19177C } /* Name.Variable.Global */
 .highlight .vi { color: #19177C } /* Name.Variable.Instance */
 .highlight .il { color: #666666 } /* Literal.Number.Integer.Long */&lt;/style&gt;
-&lt;style type="text/css"&gt;
-/* Temporary definitions which will become obsolete with Notebook release 5.0 */
-.ansi-black-fg { color: #&lt;span class="caps"&gt;3E424D&lt;/span&gt;; }
-.ansi-black-bg { background-color: #&lt;span class="caps"&gt;3E424D&lt;/span&gt;; }
-.ansi-black-intense-fg { color: #282C36; }
-.ansi-black-intense-bg { background-color: #282C36; }
-.ansi-red-fg { color: #&lt;span class="caps"&gt;E75C58&lt;/span&gt;; }
-.ansi-red-bg { background-color: #&lt;span class="caps"&gt;E75C58&lt;/span&gt;; }
-.ansi-red-intense-fg { color: #&lt;span class="caps"&gt;B22B31&lt;/span&gt;; }
-.ansi-red-intense-bg { background-color: #&lt;span class="caps"&gt;B22B31&lt;/span&gt;; }
-.ansi-green-fg { color: #00A250; }
-.ansi-green-bg { background-color: #00A250; }
-.ansi-green-intense-fg { color: #007427; }
-.ansi-green-intense-bg { background-color: #007427; }
-.ansi-yellow-fg { color: #&lt;span class="caps"&gt;DDB62B&lt;/span&gt;; }
-.ansi-yellow-bg { background-color: #&lt;span class="caps"&gt;DDB62B&lt;/span&gt;; }
-.ansi-yellow-intense-fg { color: #&lt;span class="caps"&gt;B27D12&lt;/span&gt;; }
-.ansi-yellow-intense-bg { background-color: #&lt;span class="caps"&gt;B27D12&lt;/span&gt;; }
-.ansi-blue-fg { color: #&lt;span class="caps"&gt;208FFB&lt;/span&gt;; }
-.ansi-blue-bg { background-color: #&lt;span class="caps"&gt;208FFB&lt;/span&gt;; }
-.ansi-blue-intense-fg { color: #&lt;span class="caps"&gt;0065CA&lt;/span&gt;; }
-.ansi-blue-intense-bg { background-color: #&lt;span class="caps"&gt;0065CA&lt;/span&gt;; }
-.ansi-magenta-fg { color: #&lt;span class="caps"&gt;D160C4&lt;/span&gt;; }
-.ansi-magenta-bg { background-color: #&lt;span class="caps"&gt;D160C4&lt;/span&gt;; }
-.ansi-magenta-intense-fg { color: #A03196; }
-.ansi-magenta-intense-bg { background-color: #A03196; }
-.ansi-cyan-fg { color: #&lt;span class="caps"&gt;60C6C8&lt;/span&gt;; }
-.ansi-cyan-bg { background-color: #&lt;span class="caps"&gt;60C6C8&lt;/span&gt;; }
-.ansi-cyan-intense-fg { color: #&lt;span class="caps"&gt;258F8F&lt;/span&gt;; }
-.ansi-cyan-intense-bg { background-color: #&lt;span class="caps"&gt;258F8F&lt;/span&gt;; }
-.ansi-white-fg { color: #&lt;span class="caps"&gt;C5C1B4&lt;/span&gt;; }
-.ansi-white-bg { background-color: #&lt;span class="caps"&gt;C5C1B4&lt;/span&gt;; }
-.ansi-white-intense-fg { color: #&lt;span class="caps"&gt;A1A6B2&lt;/span&gt;; }
-.ansi-white-intense-bg { background-color: #&lt;span class="caps"&gt;A1A6B2&lt;/span&gt;; }
-
-.ansi-bold { font-weight: bold; }
-&lt;/style&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;
 &lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
@@ -1054,7 +152,7 @@ h6:hover .anchor-link {
 &lt;strong&gt;The Quibbler&lt;/strong&gt;: Debbie, Ginny, Robin, Gwendolyn, Alicia &lt;br /&gt;&lt;/p&gt;
 &lt;p&gt;As you can see, there&amp;#8217;s quite a bit of disagreement and personal taste involved. You didn&amp;#8217;t get to watch all of the games, but you&amp;#8217;d like to make a decision on who the best players were, by somehow aggregating the opinions of the popular newspapers.  An easy option would be to pretend that each newspaper &lt;em&gt;votes&lt;/em&gt; for the player that they rank #1, and ignore the rest.  As Alicia Spinnet is the only player getting &lt;em&gt;two&lt;/em&gt; nominations for best player, she should win best player,&amp;nbsp;right?&lt;/p&gt;
 &lt;p&gt;Upon closer inspection, Alicia seems very controversial, loved by two but hated by five of the newspaper.  Ginny, on the other hand, didn&amp;#8217;t stand out as best player to anybody, but she was &lt;em&gt;uniformly&lt;/em&gt; considered runner-up.  There should be some way to account for this. It would be nice if we would have a method of finding an &lt;em&gt;optimal&lt;/em&gt; ranking that maximizes some sort of agreement with the opinions we are trying to&amp;nbsp;aggregate.&lt;/p&gt;
-&lt;h2 id="Kendall's-Tau-distance"&gt;Kendall&amp;#8217;s Tau distance&lt;a class="anchor-link" href="#Kendall's-Tau-distance"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;One of the most interesting ways to measure disagreement between rankings is the Tau statistic introduced by Kendall.  It essentially measures the number of pairwise disagreements between two rankings.  Since you can think of it as the number of flips you need to perform on a ranking to turn it into the other, it is sometimes called &lt;em&gt;bubble-sort distance&lt;/em&gt;.&lt;/p&gt;
+&lt;h2 id="Kendall&amp;#x27;s-Tau-distance"&gt;Kendall&amp;#8217;s Tau distance&lt;a class="anchor-link" href="#Kendall&amp;#x27;s-Tau-distance"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;One of the most interesting ways to measure disagreement between rankings is the Tau statistic introduced by Kendall.  It essentially measures the number of pairwise disagreements between two rankings.  Since you can think of it as the number of flips you need to perform on a ranking to turn it into the other, it is sometimes called &lt;em&gt;bubble-sort distance&lt;/em&gt;.&lt;/p&gt;
 &lt;p&gt;While the closely-related Tau correlation coefficient is implemented in Scipy as &lt;a href="http://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.kendalltau.html"&gt;&lt;code&gt;scipy.stats.kendalltau&lt;/code&gt;&lt;/a&gt;, let&amp;#8217;s code it ourselves in a simpler&amp;nbsp;way.&lt;/p&gt;
 
 &lt;/div&gt;
@@ -1976,7 +1074,7 @@ EEIIIYQQQgghhBBCCCGEEEIIIYQQQgghhBBCCDEP/D/tC1tkXuJ7LgAAAABJRU5ErkJggg==
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
 &lt;/script&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Wed, 22 Jan 2014 18:00:00 +0100</pubDate><guid>tag:vene.ro,2014-01-22:blog/kemeny-young-optimal-rank-aggregation-in-python.html</guid><category>python</category><category>rank aggregation</category><category>kendall</category><category>tau</category><category>kemeny</category><category>kemeny-young</category><category>voting theory</category></item><item><title>Site move</title><link>http://vene.ro/blog/site-move.html</link><description>&lt;p&gt;I finally got around to moving my entire website, including the blog,
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Wed, 22 Jan 2014 18:00:00 +0100</pubDate><guid isPermaLink="false">tag:vene.ro,2014-01-22:blog/kemeny-young-optimal-rank-aggregation-in-python.html</guid><category>python</category><category>rank aggregation</category><category>kendall</category><category>tau</category><category>kemeny</category><category>kemeny-young</category><category>voting theory</category></item><item><title>Site move</title><link>http://vene.ro/blog/site-move.html</link><description>&lt;p&gt;I finally got around to moving my entire website, including the blog,
 to &lt;a href="http://getpelican.com"&gt;Pelican&lt;/a&gt;.  I probably would have gotten away with it
 too if it weren&amp;#8217;t for those meddling kids who hacked my friend&amp;#8217;s server and
 convinced me that it&amp;#8217;s worth the effort to go&amp;nbsp;static.&lt;/p&gt;
@@ -2005,7 +1103,7 @@ that the genie granted me to simply redirect the subdomain
 &lt;code&gt;vene.ro/blog&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Best part about this is that I will now be able to migrate my &lt;a href="/papers.html"&gt;personal list of
 papers&lt;/a&gt; to
-&lt;a href="https://github.com/vene/pelican-bibtex"&gt;pelican-bibtex&lt;/a&gt;.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Fri, 10 Jan 2014 12:00:00 +0100</pubDate><guid>tag:vene.ro,2014-01-10:blog/site-move.html</guid><category>pelican</category><category>blog</category></item><item><title>BibTeX-powered publications list for Pelican with pelican-bibtex</title><link>http://vene.ro/blog/bibtex-powered-publications-list-for-pelican-with-pelican-bibtex.html</link><description>&lt;h2&gt;Hook&lt;/h2&gt;
+&lt;a href="https://github.com/vene/pelican-bibtex"&gt;pelican-bibtex&lt;/a&gt;.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Fri, 10 Jan 2014 12:00:00 +0100</pubDate><guid isPermaLink="false">tag:vene.ro,2014-01-10:blog/site-move.html</guid><category>pelican</category><category>blog</category></item><item><title>BibTeX-powered publications list for Pelican with pelican-bibtex</title><link>http://vene.ro/blog/bibtex-powered-publications-list-for-pelican-with-pelican-bibtex.html</link><description>&lt;h2&gt;Hook&lt;/h2&gt;
 &lt;p&gt;Wouldn&amp;#8217;t you like to manage your academic publications list easily
 within the context of your static website? Without resorting to external
 services, or to software like &lt;em&gt;bibtex2html&lt;/em&gt;, which is very nice but will
@@ -2034,7 +1132,7 @@ with not much difficulty, to support referencing in Pelican blogs, and
 render BibTeX references at the end of every post. This idea was
 suggested by Avaris on #pelican, and I find it very cool. Since I don&amp;#8217;t
 need this feature at the moment, it&amp;#8217;s not a priority, but it&amp;#8217;s something
-that I would like to see at some&amp;nbsp;point.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Mon, 22 Apr 2013 10:45:00 +0200</pubDate><guid>tag:vene.ro,2013-04-22:blog/bibtex-powered-publications-list-for-pelican-with-pelican-bibtex.html</guid><category>bibtex</category><category>blog</category><category>citations</category><category>pelican</category><category>publications</category><category>pybtex</category><category>references</category><category>static blog</category><category>static website</category><category>Uncategorized</category></item><item><title>Really the most common english idioms?</title><link>http://vene.ro/blog/really-most-common-english-idioms.html</link><description>&lt;p&gt;A while back I ran into &lt;a href="http://voxy.com/blog/index.php/2012/02/top-10-most-common-idioms-in-english/"&gt;this blog post&lt;/a&gt; and it made me wonder. I&amp;#8217;m
+that I would like to see at some&amp;nbsp;point.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Mon, 22 Apr 2013 10:45:00 +0200</pubDate><guid isPermaLink="false">tag:vene.ro,2013-04-22:blog/bibtex-powered-publications-list-for-pelican-with-pelican-bibtex.html</guid><category>bibtex</category><category>blog</category><category>citations</category><category>pelican</category><category>publications</category><category>pybtex</category><category>references</category><category>static blog</category><category>static website</category><category>Uncategorized</category></item><item><title>Really the most common english idioms?</title><link>http://vene.ro/blog/really-most-common-english-idioms.html</link><description>&lt;p&gt;A while back I ran into &lt;a href="http://voxy.com/blog/index.php/2012/02/top-10-most-common-idioms-in-english/"&gt;this blog post&lt;/a&gt; and it made me wonder. I&amp;#8217;m
 not a native speaker but the idiomatic phrases that they note as common
 don&amp;#8217;t strike me as such. I don&amp;#8217;t think I have ever encountered them very
 often in real&amp;nbsp;dialogue.&lt;/p&gt;
@@ -2254,7 +1352,7 @@ Science, Volume 359 Issue 1, 14 August 2006. Pages 455 - 461.&lt;br /&gt;
 Aggregation of Hierarchies with Different Constitutive Elements][].
 Fundam. Inform. 55(1): 39-50&amp;nbsp;(2003)&lt;/p&gt;
 &lt;p&gt;[On the Classification and Aggregation of Hierarchies with Different
-  Constitutive Elements]:&amp;nbsp;http://dl.acm.org/citation.cfm?id=937465&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Mon, 11 Feb 2013 16:50:00 +0100</pubDate><guid>tag:vene.ro,2013-02-11:blog/really-most-common-english-idioms.html</guid><category>bnc</category><category>british national corpus</category><category>corpus</category><category>fixed expression</category><category>fixed phrase</category><category>idioms</category><category>oec</category><category>oxford english corpus</category><category>corpus linguistics</category><category>nlp</category></item><item><title>Scikit-learn-speed: An overview on the final day</title><link>http://vene.ro/blog/scikit-learn-speed-an-overview-on-the-final-day.html</link><description>&lt;p&gt;This summer, I was granted the project called &lt;em&gt;scikit-learn-speed&lt;/em&gt;,
+  Constitutive Elements]:&amp;nbsp;http://dl.acm.org/citation.cfm?id=937465&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Mon, 11 Feb 2013 16:50:00 +0100</pubDate><guid isPermaLink="false">tag:vene.ro,2013-02-11:blog/really-most-common-english-idioms.html</guid><category>bnc</category><category>british national corpus</category><category>corpus</category><category>fixed expression</category><category>fixed phrase</category><category>idioms</category><category>oec</category><category>oxford english corpus</category><category>corpus linguistics</category><category>nlp</category></item><item><title>Scikit-learn-speed: An overview on the final day</title><link>http://vene.ro/blog/scikit-learn-speed-an-overview-on-the-final-day.html</link><description>&lt;p&gt;This summer, I was granted the project called &lt;em&gt;scikit-learn-speed&lt;/em&gt;,
 consisting of developing a benchmarking platform for &lt;em&gt;scikit-learn&lt;/em&gt; and
 using it to find potential speedups, and in the end, make the library go
 faster wherever I&amp;nbsp;can.&lt;/p&gt;
@@ -2390,7 +1488,7 @@ large number of speed-ups, but a few considerable ones nonetheless. And
 I venture the claim that the &lt;em&gt;scikit-learn-speed&lt;/em&gt; tool will prove useful
 over time, and that the efforts deployed during this project have
 stretched beyond the boundary of the &lt;em&gt;scikit-learn&lt;/em&gt;.&lt;/p&gt;
-&lt;p&gt;[&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2012/08/skl-speed-300x163.png" title="skl-speed" /&gt;]:&amp;nbsp;http://jenkins-scikit-learn.github.com/scikit-learn-speed/&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Mon, 20 Aug 2012 02:44:00 +0200</pubDate><guid>tag:vene.ro,2012-08-20:blog/scikit-learn-speed-an-overview-on-the-final-day.html</guid><category>gsoc</category><category>optimization</category><category>scikit-learn-speed</category><category>speedup</category><category>summary</category><category>vbench</category><category>benchmarking</category><category>python</category><category>scikit-learn</category></item><item><title>Inverses and pseudoinverses. Numerical issues, speed, symmetry.</title><link>http://vene.ro/blog/inverses-pseudoinverses-numerical-issues-speed-symmetry.html</link><description>&lt;p&gt;The matrix inverse is a cornerstone of linear algebra, taught, along
+&lt;p&gt;[&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2012/08/skl-speed-300x163.png" title="skl-speed" /&gt;]:&amp;nbsp;http://jenkins-scikit-learn.github.com/scikit-learn-speed/&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Mon, 20 Aug 2012 02:44:00 +0200</pubDate><guid isPermaLink="false">tag:vene.ro,2012-08-20:blog/scikit-learn-speed-an-overview-on-the-final-day.html</guid><category>gsoc</category><category>optimization</category><category>scikit-learn-speed</category><category>speedup</category><category>summary</category><category>vbench</category><category>benchmarking</category><category>python</category><category>scikit-learn</category></item><item><title>Inverses and pseudoinverses. Numerical issues, speed, symmetry.</title><link>http://vene.ro/blog/inverses-pseudoinverses-numerical-issues-speed-symmetry.html</link><description>&lt;p&gt;The matrix inverse is a cornerstone of linear algebra, taught, along
 with its applications, since high school. The inverse of a matrix
 \$latex A\$, if it exists, is the matrix \$latex A\^{-1}\$ such that
 \$latex &lt;span class="caps"&gt;AA&lt;/span&gt;\^{-1} = A\^{-1}A = I_n\$. Based on the requirement that the
@@ -2617,7 +1715,7 @@ In [24]: timeit linalg.pinv2(a)&lt;br /&gt;
 1 loops, best of 3: 621 ms per&amp;nbsp;loop&lt;/p&gt;
 &lt;p&gt;In [26]: np.testing.assert_array_almost_equal(linalg.pinv2(a),
 linalg.pinvh(a))&lt;br /&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
-&lt;p&gt;[&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2012/08/pseudoinverses-300x218.png" title="Pseudoinverses" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2012/08/pseudoinverses.png&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Sat, 18 Aug 2012 19:41:00 +0200</pubDate><guid>tag:vene.ro,2012-08-18:blog/inverses-pseudoinverses-numerical-issues-speed-symmetry.html</guid><category>inv</category><category>matrix inverse</category><category>numerical analysis</category><category>numerical methods</category><category>pinv</category><category>pinvh</category><category>positive semidefinite</category><category>pseudoinverse</category><category>symmetric</category><category>benchmarking</category><category>python</category></item><item><title>The scikit-learn-speed ship has set sail! Faster than ever, with multi-step benchmarks!</title><link>http://vene.ro/blog/the-scikit-learn-speed-ship-has-set-sail-faster-than-ever-with-multi-step-benchmarks.html</link><description>&lt;p&gt;I am pleased to announce that last night at 2:03 &lt;span class="caps"&gt;AM&lt;/span&gt;, the first fully
+&lt;p&gt;[&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2012/08/pseudoinverses-300x218.png" title="Pseudoinverses" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2012/08/pseudoinverses.png&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Sat, 18 Aug 2012 19:41:00 +0200</pubDate><guid isPermaLink="false">tag:vene.ro,2012-08-18:blog/inverses-pseudoinverses-numerical-issues-speed-symmetry.html</guid><category>inv</category><category>matrix inverse</category><category>numerical analysis</category><category>numerical methods</category><category>pinv</category><category>pinvh</category><category>positive semidefinite</category><category>pseudoinverse</category><category>symmetric</category><category>benchmarking</category><category>python</category></item><item><title>The scikit-learn-speed ship has set sail! Faster than ever, with multi-step benchmarks!</title><link>http://vene.ro/blog/the-scikit-learn-speed-ship-has-set-sail-faster-than-ever-with-multi-step-benchmarks.html</link><description>&lt;p&gt;I am pleased to announce that last night at 2:03 &lt;span class="caps"&gt;AM&lt;/span&gt;, the first fully
 automated run of the scikit-learn-speed test suite has run on our
 Jenkins instance! You can admire it at &lt;a href="http://jenkins-scikit-learn.github.com/scikit-learn-speed/"&gt;its temporary home&lt;/a&gt; for now.
 As soon as we verify that everything is good, we will move this to the
@@ -2685,7 +1783,7 @@ thing.&lt;br /&gt;
 We avoided the extra calls to &lt;code&gt;fit&lt;/code&gt; in a lot of benchmarks. The whole
 suite now takes almost half the time to&amp;nbsp;run!&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Note:&lt;/em&gt; This trick is currently hosted in the
-&lt;code&gt;abstract_multistep_benchmarks&lt;/code&gt; vbench branch in my&amp;nbsp;fork.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Sat, 11 Aug 2012 17:32:00 +0200</pubDate><guid>tag:vene.ro,2012-08-11:blog/the-scikit-learn-speed-ship-has-set-sail-faster-than-ever-with-multi-step-benchmarks.html</guid><category>multi-step</category><category>multistep</category><category>vbench</category><category>benchmarking</category><category>python</category><category>scikit-learn</category></item><item><title>Profiler output, benchmark standard deviation and other goodies in scikit-learn-speed</title><link>http://vene.ro/blog/profiler-output-benchmark-standard-deviation-and-other-goodies-in-scikit-learn-speed.html</link><description>&lt;p&gt;This post is about the &lt;a href="http://scikit-learn.org"&gt;scikit-learn&lt;/a&gt;benchmarking project that I am
+&lt;code&gt;abstract_multistep_benchmarks&lt;/code&gt; vbench branch in my&amp;nbsp;fork.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Sat, 11 Aug 2012 17:32:00 +0200</pubDate><guid isPermaLink="false">tag:vene.ro,2012-08-11:blog/the-scikit-learn-speed-ship-has-set-sail-faster-than-ever-with-multi-step-benchmarks.html</guid><category>multi-step</category><category>multistep</category><category>vbench</category><category>benchmarking</category><category>python</category><category>scikit-learn</category></item><item><title>Profiler output, benchmark standard deviation and other goodies in scikit-learn-speed</title><link>http://vene.ro/blog/profiler-output-benchmark-standard-deviation-and-other-goodies-in-scikit-learn-speed.html</link><description>&lt;p&gt;This post is about the &lt;a href="http://scikit-learn.org"&gt;scikit-learn&lt;/a&gt;benchmarking project that I am
 working on, called &lt;a href="https://github.com/vene/scikit-learn-speed"&gt;scikit-learn-speed&lt;/a&gt;. This is a continuous
 benchmarking suite that runs and generates &lt;span class="caps"&gt;HTML&lt;/span&gt; reports using Wes
 McKinney&amp;#8217;s &lt;a href="http://wesmckinney.com/blog/?p=373"&gt;vbench&lt;/a&gt; framework, to which I had to make some (useful, I
@@ -2726,7 +1824,7 @@ Our &lt;code&gt;SklBenchmark&lt;/code&gt; class is defined in scikit-learn-speed
 &lt;/ul&gt;
 &lt;p&gt;The database is not flexible enough to adapt to arbitrary benchmark
 structure right now, so if anybody would like to help the effort, it
-would be very&amp;nbsp;appreciated.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Fri, 27 Jul 2012 11:01:00 +0200</pubDate><guid>tag:vene.ro,2012-07-27:blog/profiler-output-benchmark-standard-deviation-and-other-goodies-in-scikit-learn-speed.html</guid><category>gsoc</category><category>memory_profiler</category><category>scikit-learn-speed</category><category>vbench</category><category>benchmarking</category><category>python</category><category>scikit-learn</category></item><item><title>Scikit-learn-speed HTML reports teaser</title><link>http://vene.ro/blog/scikit-learn-speed-html-reports-teaser.html</link><description>&lt;p&gt;&lt;span class="caps"&gt;EDIT&lt;/span&gt;: I made the plots a little more readable, check it&amp;nbsp;out!&lt;/p&gt;
+would be very&amp;nbsp;appreciated.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Fri, 27 Jul 2012 11:01:00 +0200</pubDate><guid isPermaLink="false">tag:vene.ro,2012-07-27:blog/profiler-output-benchmark-standard-deviation-and-other-goodies-in-scikit-learn-speed.html</guid><category>gsoc</category><category>memory_profiler</category><category>scikit-learn-speed</category><category>vbench</category><category>benchmarking</category><category>python</category><category>scikit-learn</category></item><item><title>Scikit-learn-speed HTML reports teaser</title><link>http://vene.ro/blog/scikit-learn-speed-html-reports-teaser.html</link><description>&lt;p&gt;&lt;span class="caps"&gt;EDIT&lt;/span&gt;: I made the plots a little more readable, check it&amp;nbsp;out!&lt;/p&gt;
 &lt;p&gt;Last time, I teased you with a screenshot of local output. Now, I will
 tease you with the benchmarks run on a couple of recent commits, along
 with some from earlier this&amp;nbsp;year.&lt;/p&gt;
@@ -2746,7 +1844,7 @@ One is the possibility to overlay related benchmarks on the same plot
 this could be useful to spot patterns. A second one is some query /
 sorting support: see what are the most expensive benchmarks, see what
 benchmarks show the biggest jump in performance (but this could become a
-historical wall of fame or&amp;nbsp;shame).&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Fri, 20 Jul 2012 14:40:00 +0200</pubDate><guid>tag:vene.ro,2012-07-20:blog/scikit-learn-speed-html-reports-teaser.html</guid><category>gsoc</category><category>scikit-learn-speed</category><category>vbench</category><category>benchmarking</category><category>python</category><category>scikit-learn</category></item><item><title>Memory benchmarking with vbench</title><link>http://vene.ro/blog/memory-benchmarking-with-vbench.html</link><description>&lt;p&gt;The &lt;a href="https://github.com/vene/scikit-learn-speed"&gt;scikit-learn-speed project&lt;/a&gt; now has memory usage&amp;nbsp;benchmarking!&lt;/p&gt;
+historical wall of fame or&amp;nbsp;shame).&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Fri, 20 Jul 2012 14:40:00 +0200</pubDate><guid isPermaLink="false">tag:vene.ro,2012-07-20:blog/scikit-learn-speed-html-reports-teaser.html</guid><category>gsoc</category><category>scikit-learn-speed</category><category>vbench</category><category>benchmarking</category><category>python</category><category>scikit-learn</category></item><item><title>Memory benchmarking with vbench</title><link>http://vene.ro/blog/memory-benchmarking-with-vbench.html</link><description>&lt;p&gt;The &lt;a href="https://github.com/vene/scikit-learn-speed"&gt;scikit-learn-speed project&lt;/a&gt; now has memory usage&amp;nbsp;benchmarking!&lt;/p&gt;
 &lt;p&gt;This was accomplished by building on what I described in my recent
 posts, specifically the extensions to Fabian&amp;#8217;s [memory_profiler][] that
 you can find in &lt;a href="https://github.com/vene/memory_profiler"&gt;my fork&lt;/a&gt;, but they will be merged upstream soon. The
@@ -2770,7 +1868,7 @@ the plots look erratic, showing the very small noise at a&amp;nbsp;large-scale.&
   project, illustrating memory usage benchmarking.]: http://localhost:8001/wp-content/uploads/2012/07/vbench1.png
     &amp;#8220;Memory benchmarking in scikit-learn-speed powered by vbench.&amp;#8221;
   [![A screenshot showing generated output from the scikit-learn-speed
-  project, illustrating memory usage benchmarking.][]]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2012/07/vbench1.png&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Thu, 05 Jul 2012 12:38:00 +0200</pubDate><guid>tag:vene.ro,2012-07-05:blog/memory-benchmarking-with-vbench.html</guid><category>memit</category><category>memory</category><category>vbench</category><category>python</category><category>scikit-learn</category></item><item><title>On why my %memit fails on OSX</title><link>http://vene.ro/blog/on-why-my-memit-fails-on-osx.html</link><description>&lt;p&gt;In my &lt;a href="http://localhost:8001/2012/07/02/more-on-memory-benchmarking/" title="More on memory benchmarking"&gt;last post&lt;/a&gt; I mentioned that I&amp;#8217;m not satisfied with the current
+  project, illustrating memory usage benchmarking.][]]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2012/07/vbench1.png&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Thu, 05 Jul 2012 12:38:00 +0200</pubDate><guid isPermaLink="false">tag:vene.ro,2012-07-05:blog/memory-benchmarking-with-vbench.html</guid><category>memit</category><category>memory</category><category>vbench</category><category>python</category><category>scikit-learn</category></item><item><title>On why my %memit fails on OSX</title><link>http://vene.ro/blog/on-why-my-memit-fails-on-osx.html</link><description>&lt;p&gt;In my &lt;a href="http://localhost:8001/2012/07/02/more-on-memory-benchmarking/" title="More on memory benchmarking"&gt;last post&lt;/a&gt; I mentioned that I&amp;#8217;m not satisfied with the current
 state of &lt;code&gt;%memit&lt;/code&gt;, because some more complicated numerical function
 calls make it crash. I will start this post with a reminder of a pretty
 important&amp;nbsp;bug:&lt;/p&gt;
@@ -2861,7 +1959,7 @@ flag.&lt;/p&gt;
 for actual use, and therefore for merging into&amp;nbsp;memory_profiler.&lt;/p&gt;
 &lt;p&gt;[On MacOS X (10.7 but maybe more), after forking a new process, there
   is a segfault in Grand Central Dispatch on the &lt;span class="caps"&gt;BLAS&lt;/span&gt; &lt;span class="caps"&gt;DGEMM&lt;/span&gt; function
-  from Accelerate.]:&amp;nbsp;https://gist.github.com/2027412&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Wed, 04 Jul 2012 12:49:00 +0200</pubDate><guid>tag:vene.ro,2012-07-04:blog/on-why-my-memit-fails-on-osx.html</guid><category>IPython</category><category>magic</category><category>memit</category><category>mprun</category><category>benchmarking</category><category>python</category></item><item><title>More on memory benchmarking</title><link>http://vene.ro/blog/more-on-memory-benchmarking.html</link><description>&lt;p&gt;Following up on my task to make it easier to benchmark memory usage in
+  from Accelerate.]:&amp;nbsp;https://gist.github.com/2027412&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Wed, 04 Jul 2012 12:49:00 +0200</pubDate><guid isPermaLink="false">tag:vene.ro,2012-07-04:blog/on-why-my-memit-fails-on-osx.html</guid><category>IPython</category><category>magic</category><category>memit</category><category>mprun</category><category>benchmarking</category><category>python</category></item><item><title>More on memory benchmarking</title><link>http://vene.ro/blog/more-on-memory-benchmarking.html</link><description>&lt;p&gt;Following up on my task to make it easier to benchmark memory usage in
 Python, I updated Fabian&amp;#8217;s [memory_profiler][] to include a couple of
 useful IPython magics. While in my &lt;a href="http://localhost:8001/2012/06/30/quick-memory-usage-benchmarking-in-ipython/" title="Quick memory usage benchmarking in IPython"&gt;last post&lt;/a&gt;, I used the new IPython
 0.13 syntax for defining magics, this time I used the
@@ -2956,7 +2054,7 @@ c.TerminalIPythonApp.extensions = [&lt;br /&gt;
 c.InteractiveShellApp.extensions = [&lt;br /&gt;
 &amp;#8216;memory_profiler_ext&amp;#8217;,&lt;br /&gt;
 ]&lt;br /&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
-&lt;p&gt;Now launch IPython and you can use the new magics like in the examples&amp;nbsp;above.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Mon, 02 Jul 2012 11:27:00 +0200</pubDate><guid>tag:vene.ro,2012-07-02:blog/more-on-memory-benchmarking.html</guid><category>IPython</category><category>magic</category><category>memit</category><category>memory</category><category>memory_profiler</category><category>mprun</category><category>benchmarking</category><category>python</category></item><item><title>Quick memory usage benchmarking in IPython</title><link>http://vene.ro/blog/quick-memory-usage-benchmarking-in-ipython.html</link><description>&lt;p&gt;Everybody loves &lt;code&gt;%timeit&lt;/code&gt;, there&amp;#8217;s no doubt about it. So why not have
+&lt;p&gt;Now launch IPython and you can use the new magics like in the examples&amp;nbsp;above.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Mon, 02 Jul 2012 11:27:00 +0200</pubDate><guid isPermaLink="false">tag:vene.ro,2012-07-02:blog/more-on-memory-benchmarking.html</guid><category>IPython</category><category>magic</category><category>memit</category><category>memory</category><category>memory_profiler</category><category>mprun</category><category>benchmarking</category><category>python</category></item><item><title>Quick memory usage benchmarking in IPython</title><link>http://vene.ro/blog/quick-memory-usage-benchmarking-in-ipython.html</link><description>&lt;p&gt;Everybody loves &lt;code&gt;%timeit&lt;/code&gt;, there&amp;#8217;s no doubt about it. So why not have
 something like that, but for measuring how much memory your line takes?
 Well, now you can; grab a hold of the script in the following gist and
 run it like in the&amp;nbsp;example.&lt;/p&gt;
@@ -2966,7 +2064,7 @@ decided to delegate this to Fabian&amp;#8217;s simple but very good
 [&lt;code&gt;memory_profiler&lt;/code&gt;][]. There is also &lt;a href="http://guppy-pe.sourceforge.net/"&gt;Guppy&lt;/a&gt; available, but its design
 seems a bit and overkill for this&amp;nbsp;task.&lt;/p&gt;
 &lt;p&gt;Please contact me if you find problems with this implementation, this is
-a preliminary, quick hack-y version.&amp;nbsp;:)&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Sat, 30 Jun 2012 08:53:00 +0200</pubDate><guid>tag:vene.ro,2012-06-30:blog/quick-memory-usage-benchmarking-in-ipython.html</guid><category>benchmark</category><category>IPython</category><category>magic</category><category>memory</category><category>memory_profiler</category><category>profiling</category><category>benchmarking</category><category>python</category></item><item><title>Compiling and Installing GLARF and the bundled Charniak parser on MacOS X</title><link>http://vene.ro/blog/compiling-and-installing-glarf-and-the-bundled-charniak-parser-on-macos-x.html</link><description>&lt;p&gt;It seems that I keep getting handed buggy code to install. These are
+a preliminary, quick hack-y version.&amp;nbsp;:)&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Sat, 30 Jun 2012 08:53:00 +0200</pubDate><guid isPermaLink="false">tag:vene.ro,2012-06-30:blog/quick-memory-usage-benchmarking-in-ipython.html</guid><category>benchmark</category><category>IPython</category><category>magic</category><category>memory</category><category>memory_profiler</category><category>profiling</category><category>benchmarking</category><category>python</category></item><item><title>Compiling and Installing GLARF and the bundled Charniak parser on MacOS X</title><link>http://vene.ro/blog/compiling-and-installing-glarf-and-the-bundled-charniak-parser-on-macos-x.html</link><description>&lt;p&gt;It seems that I keep getting handed buggy code to install. These are
 cases of research software where the developers didn&amp;#8217;t make the effort
 to make sure their tool works on the platforms it&amp;nbsp;should.&lt;/p&gt;
 &lt;p&gt;[&lt;span class="caps"&gt;GLARF&lt;/span&gt;][] (Grammatical and Logical Argument Representation Framework)
@@ -3053,7 +2151,7 @@ Phew, now that was quite an effort!
 
   [&lt;span class="caps"&gt;GLARF&lt;/span&gt;]: http://nlp.cs.nyu.edu/meyers/&lt;span class="caps"&gt;GLARF&lt;/span&gt;.html
   [&lt;span class="caps"&gt;BLLIP&lt;/span&gt; parser]: https://github.com/&lt;span class="caps"&gt;BLLIP&lt;/span&gt;/bllip-parser
-  [As documented by Pawel Mazur]:&amp;nbsp;http://web.science.mq.edu.au/~mpawel/resources/notes/compilingCharniakJohnson.htm</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Thu, 21 Jun 2012 12:32:00 +0200</pubDate><guid>tag:vene.ro,2012-06-21:blog/compiling-and-installing-glarf-and-the-bundled-charniak-parser-on-macos-x.html</guid><category>bllip</category><category>charniak</category><category>glarf</category><category>installation</category><category>parser</category><category>nlp</category></item><item><title>Compiling MegaM on MacOS X</title><link>http://vene.ro/blog/compiling-megam-on-macos-x.html</link><description>&lt;p&gt;&lt;a href="http://hal3.name/megam"&gt;MegaM&lt;/a&gt; is Hal Daumé &lt;span class="caps"&gt;III&lt;/span&gt;&amp;#8217;s maxent (logistic regression, and much more)
+  [As documented by Pawel Mazur]:&amp;nbsp;http://web.science.mq.edu.au/~mpawel/resources/notes/compilingCharniakJohnson.htm</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Thu, 21 Jun 2012 12:32:00 +0200</pubDate><guid isPermaLink="false">tag:vene.ro,2012-06-21:blog/compiling-and-installing-glarf-and-the-bundled-charniak-parser-on-macos-x.html</guid><category>bllip</category><category>charniak</category><category>glarf</category><category>installation</category><category>parser</category><category>nlp</category></item><item><title>Compiling MegaM on MacOS X</title><link>http://vene.ro/blog/compiling-megam-on-macos-x.html</link><description>&lt;p&gt;&lt;a href="http://hal3.name/megam"&gt;MegaM&lt;/a&gt; is Hal Daumé &lt;span class="caps"&gt;III&lt;/span&gt;&amp;#8217;s maxent (logistic regression, and much more)
 modeling software written in OCaml. It is feature-packed and seems to be
 used a lot, despite being slightly dated. &lt;a href="http://nltk.org" title="Natural Language Toolkit"&gt;&lt;span class="caps"&gt;NLTK&lt;/span&gt;&lt;/a&gt; is able to use&amp;nbsp;it.&lt;/p&gt;
 &lt;p&gt;In order to compile it as of 2012, with the current version of OCaml, I
@@ -3071,7 +2169,7 @@ deal but it could save somebody precious&amp;nbsp;minutes.&lt;/p&gt;
     with &lt;code&gt;-lcamlstr&lt;/code&gt;. It occurs on line #62 within the definition of
     &lt;code&gt;WITHSTR&lt;/code&gt;.&lt;/li&gt;
 &lt;li&gt;Run &lt;code&gt;make&lt;/code&gt; or &lt;code&gt;make opt&lt;/code&gt; and&amp;nbsp;enjoy.&lt;/li&gt;
-&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Fri, 08 Jun 2012 11:45:00 +0200</pubDate><guid>tag:vene.ro,2012-06-08:blog/compiling-megam-on-macos-x.html</guid><category>compile</category><category>install</category><category>maxent</category><category>megam</category><category>nlp</category></item><item><title>Dynamically generated benchmarks with vbench</title><link>http://vene.ro/blog/dynamically-generated-benchmarks-with-vbench.html</link><description>&lt;p&gt;To construct a &lt;code&gt;vbench&lt;/code&gt; benchmark you need a setup string and a code
+&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Fri, 08 Jun 2012 11:45:00 +0200</pubDate><guid isPermaLink="false">tag:vene.ro,2012-06-08:blog/compiling-megam-on-macos-x.html</guid><category>compile</category><category>install</category><category>maxent</category><category>megam</category><category>nlp</category></item><item><title>Dynamically generated benchmarks with vbench</title><link>http://vene.ro/blog/dynamically-generated-benchmarks-with-vbench.html</link><description>&lt;p&gt;To construct a &lt;code&gt;vbench&lt;/code&gt; benchmark you need a setup string and a code
 string. The constructor&amp;#8217;s signature&amp;nbsp;is:  &lt;/p&gt;
 &lt;p&gt;&lt;code&gt;Benchmark(self, code, setup, ncalls=None, repeat=3, cleanup=None, name=None, description=None, start_date=None, logy=False)&lt;/code&gt;.&lt;/p&gt;
 &lt;h2&gt;Why generate benchmarks&amp;nbsp;dynamically?&lt;/h2&gt;
@@ -3134,7 +2232,7 @@ lr = LinearRegression()&lt;br /&gt;
 string. But man, was it hard to debug! Also, in this example, the bug
 led to a refactoring that made the whole thing nicer and more direct.
 Hopefully, my experience with vbench will lead to some improvements to
-this cool and highly useful piece of&amp;nbsp;software.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Thu, 07 Jun 2012 01:57:00 +0200</pubDate><guid>tag:vene.ro,2012-06-07:blog/dynamically-generated-benchmarks-with-vbench.html</guid><category>gsoc</category><category>vbench</category><category>benchmarking</category><category>python</category></item><item><title>First contact with vbench</title><link>http://vene.ro/blog/first-contact-with-vbench.html</link><description>&lt;p&gt;With a slight delay caused by going to lovely lovely Istanbul for the
+this cool and highly useful piece of&amp;nbsp;software.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Thu, 07 Jun 2012 01:57:00 +0200</pubDate><guid isPermaLink="false">tag:vene.ro,2012-06-07:blog/dynamically-generated-benchmarks-with-vbench.html</guid><category>gsoc</category><category>vbench</category><category>benchmarking</category><category>python</category></item><item><title>First contact with vbench</title><link>http://vene.ro/blog/first-contact-with-vbench.html</link><description>&lt;p&gt;With a slight delay caused by going to lovely lovely Istanbul for the
 &lt;span class="caps"&gt;LREC&lt;/span&gt; conference where I presented a &lt;a href="http://vene.ro/papers/lrec12-poster.pdf"&gt;poster&lt;/a&gt;, I am back to work on the
 Google Summer of Code project. By the way, this year&amp;#8217;s logo and swag
 looks a lot nicer than last year&amp;#8217;s, thank you Google!&lt;br /&gt;
@@ -3194,7 +2292,7 @@ features from &lt;code&gt;perf.py&lt;/code&gt;). While I continue exploring this
 to hear feedback from people who had to do with similar issues. As for
 the GSoC timeline, I plan to join forces with Immanuel and design a
 solid benchmark suite for the linear models over the next 2&amp;nbsp;weeks.&lt;/p&gt;
-&lt;p&gt;[&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2012/05/P5280194-300x225.jpg" title="GSoC swag" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2012/05/P5280194.jpg&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Tue, 29 May 2012 12:57:00 +0200</pubDate><guid>tag:vene.ro,2012-05-29:blog/first-contact-with-vbench.html</guid><category>benchmarks</category><category>perf.py</category><category>performance</category><category>vbench</category><category>scikit-learn</category></item><item><title>Support vector regression on Anscombe’s dataset</title><link>http://vene.ro/blog/support-vector-regression-on-anscombes-dataset.html</link><description>&lt;p&gt;&lt;a href="http://en.wikipedia.org/wiki/Anscombe's_quartet" title="Anscombe's quartet"&gt;Anscombe&amp;#8217;s quartet&lt;/a&gt; is a set of four toy datasets that look very
+&lt;p&gt;[&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2012/05/P5280194-300x225.jpg" title="GSoC swag" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2012/05/P5280194.jpg&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Tue, 29 May 2012 12:57:00 +0200</pubDate><guid isPermaLink="false">tag:vene.ro,2012-05-29:blog/first-contact-with-vbench.html</guid><category>benchmarks</category><category>perf.py</category><category>performance</category><category>vbench</category><category>scikit-learn</category></item><item><title>Support vector regression on Anscombe’s dataset</title><link>http://vene.ro/blog/support-vector-regression-on-anscombes-dataset.html</link><description>&lt;p&gt;&lt;a href="http://en.wikipedia.org/wiki/Anscombe's_quartet" title="Anscombe's quartet"&gt;Anscombe&amp;#8217;s quartet&lt;/a&gt; is a set of four toy datasets that look very
 different, but many of their statistics coincide. They were developed by
 Francis Anscombe as a striking visual to show that even for small
 datasets, blindly examining their statistical properties without
@@ -3238,7 +2336,7 @@ noise" src="http://localhost:8001/wp-content/uploads/2012/05/svr_noise.gif" titl
 &lt;p&gt;[![Support vector regression on Anscombe&amp;#8217;s third dataset with no
   noise][]]: http://localhost:8001/wp-content/uploads/2012/05/svr.gif
   [![Support vector regression on Anscombe&amp;#8217;s third dataset with
-  noise][]]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2012/05/svr_noise.gif&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Sun, 27 May 2012 21:59:00 +0200</pubDate><guid>tag:vene.ro,2012-05-27:blog/support-vector-regression-on-anscombes-dataset.html</guid><category>anscombe</category><category>outlier</category><category>robust regression</category><category>support vector regression</category><category>svm</category><category>svr</category><category>python</category><category>scikit-learn</category></item><item><title>GSoC 2012 proposal: Need for scikit-learn speed</title><link>http://vene.ro/blog/gsoc-2012-proposal-need-for-scikit-learn-speed.html</link><description>&lt;p&gt;This summer I hope to be able to put in another full-time amount of
+  noise][]]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2012/05/svr_noise.gif&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Sun, 27 May 2012 21:59:00 +0200</pubDate><guid isPermaLink="false">tag:vene.ro,2012-05-27:blog/support-vector-regression-on-anscombes-dataset.html</guid><category>anscombe</category><category>outlier</category><category>robust regression</category><category>support vector regression</category><category>svm</category><category>svr</category><category>python</category><category>scikit-learn</category></item><item><title>GSoC 2012 proposal: Need for scikit-learn speed</title><link>http://vene.ro/blog/gsoc-2012-proposal-need-for-scikit-learn-speed.html</link><description>&lt;p&gt;This summer I hope to be able to put in another full-time amount of
 effort into scikit-learn. After a successful Google Summer of Code
 project last year on dictionary learning, I now plan to do some
 low-level work. The title of my proposal is: &amp;#8220;Need for scikit-learn
@@ -3295,7 +2393,7 @@ clustering section&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Since the scikit is reaching a state where many well-known algorithms
 are available, the &lt;strong&gt;1.0&lt;/strong&gt; release is slowly approaching. My Google
 Summer of Code project should bring the scikit significantly closer to
-that&amp;nbsp;milestone.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Mon, 16 Apr 2012 00:37:00 +0200</pubDate><guid>tag:vene.ro,2012-04-16:blog/gsoc-2012-proposal-need-for-scikit-learn-speed.html</guid><category>gsoc</category><category>proposal</category><category>scikit-learn</category></item><item><title>Romanian people and coffee</title><link>http://vene.ro/blog/romanian-people-and-coffee.html</link><description>&lt;p&gt;So I got my hands of the &lt;a href="http://googleresearch.blogspot.com/2006/08/all-our-n-gram-are-belong-to-you.html" title="Google Research"&gt;Google N-gram data&lt;/a&gt; for the Romanian
+that&amp;nbsp;milestone.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Mon, 16 Apr 2012 00:37:00 +0200</pubDate><guid isPermaLink="false">tag:vene.ro,2012-04-16:blog/gsoc-2012-proposal-need-for-scikit-learn-speed.html</guid><category>gsoc</category><category>proposal</category><category>scikit-learn</category></item><item><title>Romanian people and coffee</title><link>http://vene.ro/blog/romanian-people-and-coffee.html</link><description>&lt;p&gt;So I got my hands of the &lt;a href="http://googleresearch.blogspot.com/2006/08/all-our-n-gram-are-belong-to-you.html" title="Google Research"&gt;Google N-gram data&lt;/a&gt; for the Romanian
 language. It&amp;#8217;s noisy as hell, has some other subtle issues too, but
 here&amp;#8217;s the first thing I&amp;nbsp;noticed:&lt;/p&gt;
 &lt;p&gt;The Romanian word for coffee is &lt;em&gt;cafea&lt;/em&gt;, and the more you crave it, the
@@ -3309,7 +2407,7 @@ matplotlib color scheme&lt;/a&gt; from Huy&amp;nbsp;Nguyen.&lt;/p&gt;
   for coffee.]: http://localhost:8001/wp-content/uploads/2012/04/cafeaaa-300x218.png
     &amp;#8220;cafeaaa&amp;#8221;
   [![Distribution of the length of the final letter in the Romanian word
-  for coffee.][]]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2012/04/cafeaaa.png&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Fri, 13 Apr 2012 21:20:00 +0200</pubDate><guid>tag:vene.ro,2012-04-13:blog/romanian-people-and-coffee.html</guid><category>Uncategorized</category><category>coffee</category><category>ngram</category></item><item><title>Nash-Williams theorem on the Hamiltonian property of some regular graphs</title><link>http://vene.ro/blog/nash-williams-theorem-on-the-hamiltonian-property-of-some-regular-graphs.html</link><description>&lt;p&gt;I have been digging on the internet for the proof of this theorem for
+  for coffee.][]]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2012/04/cafeaaa.png&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Fri, 13 Apr 2012 21:20:00 +0200</pubDate><guid isPermaLink="false">tag:vene.ro,2012-04-13:blog/romanian-people-and-coffee.html</guid><category>Uncategorized</category><category>coffee</category><category>ngram</category></item><item><title>Nash-Williams theorem on the Hamiltonian property of some regular graphs</title><link>http://vene.ro/blog/nash-williams-theorem-on-the-hamiltonian-property-of-some-regular-graphs.html</link><description>&lt;p&gt;I have been digging on the internet for the proof of this theorem for
 the last couple of days without success. The result was published by Sir
 Crispin Nash-Williams as &lt;em&gt;Valency Sequences which force graphs to have
 Hamiltonian Circuits&lt;/em&gt;. Interim Rep, University of Waterloo Res Rep.,
@@ -3368,11 +2466,11 @@ even vertex, by placing it in the middle and building a cycle around it,
 it follows that every even vertex is adjacent to all the odd vertices.
 But there are [latex]n+1[/latex] even indices, so it follows that the
 degree of any odd vertex is at least [latex]n+1[/latex], contradicting
-the initial conditions of the theorem.&amp;nbsp;[latex]\square[/latex]&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Sun, 29 Jan 2012 22:31:00 +0100</pubDate><guid>tag:vene.ro,2012-01-29:blog/nash-williams-theorem-on-the-hamiltonian-property-of-some-regular-graphs.html</guid><category>graph</category><category>graph theory</category><category>hamiltonian</category><category>nash-williams</category><category>Uncategorized</category></item><item><title>Moving out</title><link>http://vene.ro/blog/moving-out.html</link><description>&lt;p&gt;Happy new year,&amp;nbsp;friends!&lt;/p&gt;
+the initial conditions of the theorem.&amp;nbsp;[latex]\square[/latex]&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Sun, 29 Jan 2012 22:31:00 +0100</pubDate><guid isPermaLink="false">tag:vene.ro,2012-01-29:blog/nash-williams-theorem-on-the-hamiltonian-property-of-some-regular-graphs.html</guid><category>graph</category><category>graph theory</category><category>hamiltonian</category><category>nash-williams</category><category>Uncategorized</category></item><item><title>Moving out</title><link>http://vene.ro/blog/moving-out.html</link><description>&lt;p&gt;Happy new year,&amp;nbsp;friends!&lt;/p&gt;
 &lt;p&gt;I&amp;#8217;ve made a New Year&amp;#8217;s resolution to build a better web presence and
 make better use of the domain that I previously only used for&amp;nbsp;mail.&lt;/p&gt;
 &lt;p&gt;This has prompted me to move my blog over to http://localhost:8001 which
-hopefully is shorter, better, faster and&amp;nbsp;stronger!&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Fri, 06 Jan 2012 00:16:00 +0100</pubDate><guid>tag:vene.ro,2012-01-06:blog/moving-out.html</guid><category>Uncategorized</category></item><item><title>The nasty bug crawling in my Orthogonal Matching Pursuit code</title><link>http://vene.ro/blog/the-nasty-bug-crawling-in-my-orthogonal-matching-pursuit-code.html</link><description>&lt;p&gt;A while back, Bob L. Sturm blogged about a &lt;a href="http://media.aau.dk/null_space_pursuits/2011/10/efficient-omp.html"&gt;similar implementation of
+hopefully is shorter, better, faster and&amp;nbsp;stronger!&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Fri, 06 Jan 2012 00:16:00 +0100</pubDate><guid isPermaLink="false">tag:vene.ro,2012-01-06:blog/moving-out.html</guid><category>Uncategorized</category></item><item><title>The nasty bug crawling in my Orthogonal Matching Pursuit code</title><link>http://vene.ro/blog/the-nasty-bug-crawling-in-my-orthogonal-matching-pursuit-code.html</link><description>&lt;p&gt;A while back, Bob L. Sturm blogged about a &lt;a href="http://media.aau.dk/null_space_pursuits/2011/10/efficient-omp.html"&gt;similar implementation of
 &lt;span class="caps"&gt;OMP&lt;/span&gt;&lt;/a&gt; to the one in scikit-learn. Instead of using the Cholesky
 decomposition like we did, his Matlab code uses the &lt;span class="caps"&gt;QR&lt;/span&gt; decomposition, to
 a similar (or maybe even identical) outcome, in theory. So lucky that
@@ -3420,7 +2518,7 @@ assert_equal(np.flatnonzero(gamma_hat), [0, 21])&lt;br /&gt;
 assert_equal(np.flatnonzero(gamma_hat_gram), [0, 21])&lt;br /&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
 &lt;p&gt;Note that this bug has been fixed for a while, but I didn&amp;#8217;t get the free
 time to write this post until now. Good news is: we fixed it, and did so
-very quickly after the report. So you can still trust me, I&amp;nbsp;guess!&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Fri, 18 Nov 2011 20:51:00 +0100</pubDate><guid>tag:vene.ro,2011-11-18:blog/the-nasty-bug-crawling-in-my-orthogonal-matching-pursuit-code.html</guid><category>bug</category><category>omp</category><category>orthogonal matching pursuit</category><category>dictionary learning</category><category>scikit-learn</category></item><item><title>Sampling Gamma random variates through the ratio-of-uniforms method</title><link>http://vene.ro/blog/sampling-gamma-random-variates-through-the-ratio-of-uniforms-method.html</link><description>&lt;p&gt;One year ago I had the chance to take a class on Monte Carlo simulation
+very quickly after the report. So you can still trust me, I&amp;nbsp;guess!&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Fri, 18 Nov 2011 20:51:00 +0100</pubDate><guid isPermaLink="false">tag:vene.ro,2011-11-18:blog/the-nasty-bug-crawling-in-my-orthogonal-matching-pursuit-code.html</guid><category>bug</category><category>omp</category><category>orthogonal matching pursuit</category><category>dictionary learning</category><category>scikit-learn</category></item><item><title>Sampling Gamma random variates through the ratio-of-uniforms method</title><link>http://vene.ro/blog/sampling-gamma-random-variates-through-the-ratio-of-uniforms-method.html</link><description>&lt;p&gt;One year ago I had the chance to take a class on Monte Carlo simulation
 with prof. Ion Văduva, and my assignment for the class was to implement
 exactly what it says in the title of the blog post. I am going to walk
 you through the idea behind&amp;nbsp;this.&lt;/p&gt;
@@ -3560,7 +2658,7 @@ Trans. Math. Softw. 24, 3 (September 1998), 341-350.
 &lt;p&gt;[&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2011/10/regiunea.png" title="The accepting set C" /&gt;]: http://localhost:8001/wp-content/uploads/2011/10/regiunea.png
   [&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2011/10/hist1.png" title="Histogram for nu=6" /&gt;]: http://localhost:8001/wp-content/uploads/2011/10/hist1.png
   [&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2011/10/hist2.png" title="Histogram for nu=100" /&gt;]: http://localhost:8001/wp-content/uploads/2011/10/hist2.png
-  [&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2011/10/hist3.png" title="Histogram for nu=0.66" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/10/hist3.png&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Sun, 09 Oct 2011 15:40:00 +0200</pubDate><guid>tag:vene.ro,2011-10-09:blog/sampling-gamma-random-variates-through-the-ratio-of-uniforms-method.html</guid><category>monte carlo</category><category>numpy</category><category>random sampling</category><category>ratio-of-uniforms</category><category>scipy</category><category>python</category></item><item><title>RANLP 2011 in Hissar, BG</title><link>http://vene.ro/blog/ranlp-2011-in-hissar-bg.html</link><description>&lt;p&gt;Last week was marked by the international &lt;span class="caps"&gt;RANLP&lt;/span&gt; (Recent Advances in
+  [&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2011/10/hist3.png" title="Histogram for nu=0.66" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/10/hist3.png&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Sun, 09 Oct 2011 15:40:00 +0200</pubDate><guid isPermaLink="false">tag:vene.ro,2011-10-09:blog/sampling-gamma-random-variates-through-the-ratio-of-uniforms-method.html</guid><category>monte carlo</category><category>numpy</category><category>random sampling</category><category>ratio-of-uniforms</category><category>scipy</category><category>python</category></item><item><title>RANLP 2011 in Hissar, BG</title><link>http://vene.ro/blog/ranlp-2011-in-hissar-bg.html</link><description>&lt;p&gt;Last week was marked by the international &lt;span class="caps"&gt;RANLP&lt;/span&gt; (Recent Advances in
 Natural Language Processing) conference, taking place in a nice spa in
 Hissar, Bulgaria. The excellent folks from the &lt;a href="http://clg.wlv.ac.uk/"&gt;computational
 linguistics group&lt;/a&gt; at the University of Wolverhampton were behind it,
@@ -3622,7 +2720,7 @@ In particular, I seem to have been completely ignorant of the existence
 of the Google n-gram data, which has been around for quite a while, so I
 must have missed other important things as&amp;nbsp;well.&lt;/p&gt;
 &lt;p&gt;Take care, kind readers, and express your opinion!&lt;br /&gt;&amp;nbsp;V&lt;/p&gt;
-&lt;p&gt;[&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2011/09/319030_10150303323328171_677848170_8151131_1046590975_n1.jpg?w=225" title="Warm spring in Hissar" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/09/319030_10150303323328171_677848170_8151131_1046590975_n1.jpg&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Tue, 20 Sep 2011 14:17:00 +0200</pubDate><guid>tag:vene.ro,2011-09-20:blog/ranlp-2011-in-hissar-bg.html</guid><category>conferences</category><category>nlp</category></item><item><title>Dictionary learning in scikit-learn 0.9</title><link>http://vene.ro/blog/dictionary-learning-in-scikit-learn-0-9.html</link><description>&lt;p&gt;Thanks to Olivier, Gaël and Alex, who reviewed the code heavily the last
+&lt;p&gt;[&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2011/09/319030_10150303323328171_677848170_8151131_1046590975_n1.jpg?w=225" title="Warm spring in Hissar" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/09/319030_10150303323328171_677848170_8151131_1046590975_n1.jpg&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Tue, 20 Sep 2011 14:17:00 +0200</pubDate><guid isPermaLink="false">tag:vene.ro,2011-09-20:blog/ranlp-2011-in-hissar-bg.html</guid><category>conferences</category><category>nlp</category></item><item><title>Dictionary learning in scikit-learn 0.9</title><link>http://vene.ro/blog/dictionary-learning-in-scikit-learn-0-9.html</link><description>&lt;p&gt;Thanks to Olivier, Gaël and Alex, who reviewed the code heavily the last
 couple of days, and with apologies for my lack of activity during a
 sequence of conferences, Dictionary learning has officially been merged
 into scikit-learn master, and just in time for the new scikit-learn 0.9
@@ -3644,7 +2742,7 @@ can think of me and smile when&amp;nbsp;installing!&lt;/p&gt;
   pursuit]: http://localhost:8001/wp-content/uploads/2011/09/plot_image_denoising_44.png
     &amp;#8220;Image denoising with Dictionary learning and Orthogonal matching pursuit&amp;#8221;
   [![Image denoising with Dictionary learning and Orthogonal matching
-  pursuit][]]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/09/plot_image_denoising_44.png&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Mon, 19 Sep 2011 19:15:00 +0200</pubDate><guid>tag:vene.ro,2011-09-19:blog/dictionary-learning-in-scikit-learn-0-9.html</guid><category>dictionary learning</category><category>scikit-learn</category></item><item><title>Long overdue update. EuroScipy and SSLST 2011</title><link>http://vene.ro/blog/long-overdue-update-euroscipy-and-sslst-2011.html</link><description>&lt;p&gt;Anybody reading my blog should have expected me to blog about the end of
+  pursuit][]]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/09/plot_image_denoising_44.png&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Mon, 19 Sep 2011 19:15:00 +0200</pubDate><guid isPermaLink="false">tag:vene.ro,2011-09-19:blog/dictionary-learning-in-scikit-learn-0-9.html</guid><category>dictionary learning</category><category>scikit-learn</category></item><item><title>Long overdue update. EuroScipy and SSLST 2011</title><link>http://vene.ro/blog/long-overdue-update-euroscipy-and-sslst-2011.html</link><description>&lt;p&gt;Anybody reading my blog should have expected me to blog about the end of
 my GSoC. Sorry to disappoint, but I simply did not experience anything
 similar to an ending. On the contrary, I feel like things have barely
 started. Also, I apologize for one of the few posts here without pretty
@@ -3697,7 +2795,7 @@ from now, where I will present my poster entitled:&lt;br /&gt;
 verb conjugation&amp;#8221; by Liviu P. Dinu, Emil Ionescu, Vlad Niculae and
 Octavia-Maria Sulea. See you in&amp;nbsp;Hissar!&lt;/p&gt;
 &lt;p&gt;[computational linguistics and psycholinguistics research center
-  (CLiPS)]:&amp;nbsp;http://www.clips.ua.ac.be/&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Mon, 05 Sep 2011 00:08:00 +0200</pubDate><guid>tag:vene.ro,2011-09-05:blog/long-overdue-update-euroscipy-and-sslst-2011.html</guid><category>Uncategorized</category></item><item><title>Optimizing Orthogonal Matching Pursuit code in Numpy, part 2</title><link>http://vene.ro/blog/optimizing-orthogonal-matching-pursuit-code-in-numpy-part-2.html</link><description>&lt;p&gt;&lt;span class="caps"&gt;EDIT&lt;/span&gt;: There was a bug in the final version of the code presented here.
+  (CLiPS)]:&amp;nbsp;http://www.clips.ua.ac.be/&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Mon, 05 Sep 2011 00:08:00 +0200</pubDate><guid isPermaLink="false">tag:vene.ro,2011-09-05:blog/long-overdue-update-euroscipy-and-sslst-2011.html</guid><category>Uncategorized</category></item><item><title>Optimizing Orthogonal Matching Pursuit code in Numpy, part 2</title><link>http://vene.ro/blog/optimizing-orthogonal-matching-pursuit-code-in-numpy-part-2.html</link><description>&lt;p&gt;&lt;span class="caps"&gt;EDIT&lt;/span&gt;: There was a bug in the final version of the code presented here.
 It is fixed now, for its backstory, check out &lt;a href="http://venefrombucharest.wordpress.com/2011/11/18/the-nasty-bug-crawling-in-my-orthogonal-matching-pursuit-code/" title="The nasty bug crawling in my Orthogonal Matching Pursuit code"&gt;my blog post on it&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;When we last saw our hero, he was fighting with the dreaded
 implementation of least-angle regression, knowing full well that it was
@@ -3886,7 +2984,7 @@ elif n_active == max_features:&lt;br /&gt;&amp;nbsp;break&lt;/p&gt;
 &lt;p&gt;Now, the benchmark at [&lt;a href="#footnote-1"&gt;1&lt;/a&gt;] indicates victory over least-angle
 regression! I hope you have enjoyed this short tour. See you next&amp;nbsp;time!&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://github.com/scikit-learn/scikit-learn/blob/master/benchmarks/bench_plot_omp_lars.py" title="Orthogonal matching pursuit versus least-angle regression"&gt;&lt;span id="footnote-1"&gt;1&lt;/span&gt;&lt;/a&gt;[]&lt;br /&gt;
-&lt;a href="http://scikit-learn.sourceforge.net/dev/developers/performance.html#profiling-python-code" title="Profiling Python code"&gt;&lt;span id="footnote-2"&gt;2&lt;/span&gt;&lt;/a&gt;[]&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Thu, 11 Aug 2011 19:39:00 +0200</pubDate><guid>tag:vene.ro,2011-08-11:blog/optimizing-orthogonal-matching-pursuit-code-in-numpy-part-2.html</guid><category>blas</category><category>efficient</category><category>lapack</category><category>numpy</category><category>omp</category><category>orthogonal matching pursuit</category><category>potrs</category><category>scipy</category><category>dictionary learning</category><category>python</category><category>scikit-learn</category></item><item><title>Optimizing Orthogonal Matching Pursuit code in Numpy, part 1</title><link>http://vene.ro/blog/optimizing-orthogonal-matching-pursuit-code-in-numpy-part-1.html</link><description>&lt;p&gt;After intense code optimization work, my implementation of &lt;span class="caps"&gt;OMP&lt;/span&gt; finally
+&lt;a href="http://scikit-learn.sourceforge.net/dev/developers/performance.html#profiling-python-code" title="Profiling Python code"&gt;&lt;span id="footnote-2"&gt;2&lt;/span&gt;&lt;/a&gt;[]&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Thu, 11 Aug 2011 19:39:00 +0200</pubDate><guid isPermaLink="false">tag:vene.ro,2011-08-11:blog/optimizing-orthogonal-matching-pursuit-code-in-numpy-part-2.html</guid><category>blas</category><category>efficient</category><category>lapack</category><category>numpy</category><category>omp</category><category>orthogonal matching pursuit</category><category>potrs</category><category>scipy</category><category>dictionary learning</category><category>python</category><category>scikit-learn</category></item><item><title>Optimizing Orthogonal Matching Pursuit code in Numpy, part 1</title><link>http://vene.ro/blog/optimizing-orthogonal-matching-pursuit-code-in-numpy-part-1.html</link><description>&lt;p&gt;After intense code optimization work, my implementation of &lt;span class="caps"&gt;OMP&lt;/span&gt; finally
 beat least-angle regression! This was the primary issue discussed during
 the pull request, so once performance was taken care of, the code was
 ready for merge. Orthogonal matching pursuit is now available in
@@ -4114,7 +3212,7 @@ Orthogonal Matching Pursuit][] Technical Report - &lt;span class="caps"&gt;CS&lt
 Matching Pursuit&lt;/a&gt; on this blog.&lt;br /&gt;
 &lt;span id="footnote-4"&gt;&lt;a href="#footnote-4"&gt;4&lt;/a&gt;&lt;/span&gt; &lt;a href="https://github.com/scikit-learn/scikit-learn/blob/master/scikits/learn/linear_model/omp.py"&gt;omp.py&lt;/a&gt; on&amp;nbsp;github.&lt;/p&gt;
 &lt;p&gt;[Efficient Implementation of the K-&lt;span class="caps"&gt;SVD&lt;/span&gt; Algorithm using Batch
-  Orthogonal Matching Pursuit]: http://www.cs.technion.ac.il/~ronrubin/Publications/&lt;span class="caps"&gt;KSVD&lt;/span&gt;-&lt;span class="caps"&gt;OMP&lt;/span&gt;-v2.pdf&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Sun, 07 Aug 2011 20:50:00 +0200</pubDate><guid>tag:vene.ro,2011-08-07:blog/optimizing-orthogonal-matching-pursuit-code-in-numpy-part-1.html</guid><category>efficient</category><category>numpy</category><category>omp</category><category>orthogonal matching pursuit</category><category>scipy</category><category>dictionary learning</category><category>scikit-learn</category><category>python</category></item><item><title>Progress on Orthogonal Matching Pursuit</title><link>http://vene.ro/blog/progress-on-orthogonal-matching-pursuit.html</link><description>&lt;p&gt;Since orthogonal matching pursuit (&lt;span class="caps"&gt;OMP&lt;/span&gt;) is an important part of signal
+  Orthogonal Matching Pursuit]: http://www.cs.technion.ac.il/~ronrubin/Publications/&lt;span class="caps"&gt;KSVD&lt;/span&gt;-&lt;span class="caps"&gt;OMP&lt;/span&gt;-v2.pdf&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Sun, 07 Aug 2011 20:50:00 +0200</pubDate><guid isPermaLink="false">tag:vene.ro,2011-08-07:blog/optimizing-orthogonal-matching-pursuit-code-in-numpy-part-1.html</guid><category>efficient</category><category>numpy</category><category>omp</category><category>orthogonal matching pursuit</category><category>scipy</category><category>dictionary learning</category><category>scikit-learn</category><category>python</category></item><item><title>Progress on Orthogonal Matching Pursuit</title><link>http://vene.ro/blog/progress-on-orthogonal-matching-pursuit.html</link><description>&lt;p&gt;Since orthogonal matching pursuit (&lt;span class="caps"&gt;OMP&lt;/span&gt;) is an important part of signal
 processing and therefore crucial to the image processing aspect of
 dictionary learning, I am currently focusing on optimizing the &lt;span class="caps"&gt;OMP&lt;/span&gt; code
 and making sure it is stable. &lt;span class="caps"&gt;OMP&lt;/span&gt; is a forward method like least-angle
@@ -4124,7 +3222,7 @@ preallocating the array to store the Cholesky decomposition. Also, using
 the &lt;span class="caps"&gt;LAPACK&lt;/span&gt; &lt;code&gt;potrs&lt;/code&gt; function in order to solve a system of the shape
 \$latex &lt;span class="caps"&gt;LL&lt;/span&gt;&amp;#8217;x=y\$ is faster than using &lt;code&gt;solve_triangular&lt;/code&gt; twice.&lt;/p&gt;
 &lt;p&gt;I am still trying to optimize the code. We are working hard to make sure
-that scikits.learn contributions are up to standards before&amp;nbsp;merging.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Tue, 02 Aug 2011 16:56:00 +0200</pubDate><guid>tag:vene.ro,2011-08-02:blog/progress-on-orthogonal-matching-pursuit.html</guid><category>omp</category><category>orthogonal matching pursuit</category><category>scikit-learn</category></item><item><title>SparsePCA in scikits.learn-git</title><link>http://vene.ro/blog/sparsepca-in-scikits-learn-git.html</link><description>&lt;p&gt;I am happy to announce that the Sparse &lt;span class="caps"&gt;PCA&lt;/span&gt; code has been reviewed and
+that scikits.learn contributions are up to standards before&amp;nbsp;merging.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Tue, 02 Aug 2011 16:56:00 +0200</pubDate><guid isPermaLink="false">tag:vene.ro,2011-08-02:blog/progress-on-orthogonal-matching-pursuit.html</guid><category>omp</category><category>orthogonal matching pursuit</category><category>scikit-learn</category></item><item><title>SparsePCA in scikits.learn-git</title><link>http://vene.ro/blog/sparsepca-in-scikits-learn-git.html</link><description>&lt;p&gt;I am happy to announce that the Sparse &lt;span class="caps"&gt;PCA&lt;/span&gt; code has been reviewed and
 merged into the main &lt;code&gt;scikits.learn&lt;/code&gt; repository.&lt;/p&gt;
 &lt;p&gt;You can use it if you install the bleeding edge &lt;code&gt;scikits.learn&lt;/code&gt; git
 version, by first downloading the source code as explained in the
@@ -4139,7 +3237,7 @@ implemented at the&amp;nbsp;moment.&lt;/p&gt;
 contributors, such as support for sparse matrices in &lt;a href="http://scikit-learn.sourceforge.net/dev/modules/clustering.html#mini-batch-k-means" title="minibatch K-means"&gt;minibatch
 K-means&lt;/a&gt;, and the &lt;a href="http://scikit-learn.sourceforge.net/dev/modules/mixture.html#infinite-gaussian-mixtures-dpgmm-classifier" title="variational infinite gaussian mixture model"&gt;variational infinite gaussian mixture model&lt;/a&gt;, so
 I invite you to take a&amp;nbsp;look!&lt;/p&gt;
-&lt;p&gt;[&lt;img alt="" src="http://scikit-learn.sourceforge.net/dev/_images/plot_digits_decomposition_4.png" title="Sparse PCA on images of the digit 3" /&gt;]:&amp;nbsp;http://scikit-learn.sourceforge.net/dev/_images/plot_digits_decomposition_4.png&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Tue, 19 Jul 2011 12:01:00 +0200</pubDate><guid>tag:vene.ro,2011-07-19:blog/sparsepca-in-scikits-learn-git.html</guid><category>pca</category><category>principal components analysis</category><category>scikit-learn</category><category>sparse pca</category><category>SparsePCA</category><category>spca</category></item><item><title>K-Means for dictionary learning</title><link>http://vene.ro/blog/k-means-for-dictionary-learning.html</link><description>&lt;p&gt;[![Dictionary learned with K-Means on the &lt;span class="caps"&gt;LFW&lt;/span&gt; dataset with whitening
+&lt;p&gt;[&lt;img alt="" src="http://scikit-learn.sourceforge.net/dev/_images/plot_digits_decomposition_4.png" title="Sparse PCA on images of the digit 3" /&gt;]:&amp;nbsp;http://scikit-learn.sourceforge.net/dev/_images/plot_digits_decomposition_4.png&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Tue, 19 Jul 2011 12:01:00 +0200</pubDate><guid isPermaLink="false">tag:vene.ro,2011-07-19:blog/sparsepca-in-scikits-learn-git.html</guid><category>pca</category><category>principal components analysis</category><category>scikit-learn</category><category>sparse pca</category><category>SparsePCA</category><category>spca</category></item><item><title>K-Means for dictionary learning</title><link>http://vene.ro/blog/k-means-for-dictionary-learning.html</link><description>&lt;p&gt;[![Dictionary learned with K-Means on the &lt;span class="caps"&gt;LFW&lt;/span&gt; dataset with whitening
 &lt;span class="caps"&gt;PCA&lt;/span&gt;][]][][![Dictionary learned with K-Means on the &lt;span class="caps"&gt;LFW&lt;/span&gt; dataset without
 whitening &lt;span class="caps"&gt;PCA&lt;/span&gt;][]][]&lt;/p&gt;
 &lt;p&gt;One of the simplest, and yet most heavily constrained form of matrix
@@ -4215,7 +3313,7 @@ the Twenty-Eighth International Conference on Machine Learning, 2011.][]
   [&lt;strong&gt;The importance of encoding versus training with sparse coding and
   vector quantization&lt;/strong&gt;, Adam Coates and Andrew Y. Ng. In Proceedings of
   the Twenty-Eighth International Conference on Machine Learning,
-  2011.]:&amp;nbsp;http://ai.stanford.edu/~ang/papers/icml11-EncodingVsTraining.pdf&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Sun, 10 Jul 2011 14:27:00 +0200</pubDate><guid>tag:vene.ro,2011-07-10:blog/k-means-for-dictionary-learning.html</guid><category>dictionary learning</category><category>k-means</category><category>scikit-learn</category><category>vq</category><category>Uncategorized</category></item><item><title>Image denoising with dictionary learning</title><link>http://vene.ro/blog/image-denoising-with-dictionary-learning.html</link><description>&lt;p&gt;I am presenting an image denoising example that fully runs under my
+  2011.]:&amp;nbsp;http://ai.stanford.edu/~ang/papers/icml11-EncodingVsTraining.pdf&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Sun, 10 Jul 2011 14:27:00 +0200</pubDate><guid isPermaLink="false">tag:vene.ro,2011-07-10:blog/k-means-for-dictionary-learning.html</guid><category>dictionary learning</category><category>k-means</category><category>scikit-learn</category><category>vq</category><category>Uncategorized</category></item><item><title>Image denoising with dictionary learning</title><link>http://vene.ro/blog/image-denoising-with-dictionary-learning.html</link><description>&lt;p&gt;I am presenting an image denoising example that fully runs under my
 local scikits-learn fork. Coming soon near&amp;nbsp;you!&lt;/p&gt;
 &lt;p&gt;The 400 square pixels area covering Lena&amp;#8217;s face was distorted by
 additive gaussian noise with a standard deviation of 50 (pixel values
@@ -4253,7 +3351,7 @@ the Twenty-Eighth International Conference on Machine Learning, 2011.][]
   [&lt;strong&gt;The importance of encoding versus training with sparse coding and
   vector quantization&lt;/strong&gt;, Adam Coates and Andrew Y. Ng. In Proceedings of
   the Twenty-Eighth International Conference on Machine Learning,
-  2011.]:&amp;nbsp;http://ai.stanford.edu/~ang/papers/icml11-EncodingVsTraining.pdf&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Thu, 07 Jul 2011 20:00:00 +0200</pubDate><guid>tag:vene.ro,2011-07-07:blog/image-denoising-with-dictionary-learning.html</guid><category>denoising</category><category>dictionary learning</category><category>scikit-learn</category></item><item><title>Dictionary learning sneak peek</title><link>http://vene.ro/blog/dictionary-learning-sneak-peek.html</link><description>&lt;p&gt;Closing in on the goal of integrating J. Mairal&amp;#8217;s dictionary learning in
+  2011.]:&amp;nbsp;http://ai.stanford.edu/~ang/papers/icml11-EncodingVsTraining.pdf&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Thu, 07 Jul 2011 20:00:00 +0200</pubDate><guid isPermaLink="false">tag:vene.ro,2011-07-07:blog/image-denoising-with-dictionary-learning.html</guid><category>denoising</category><category>dictionary learning</category><category>scikit-learn</category></item><item><title>Dictionary learning sneak peek</title><link>http://vene.ro/blog/dictionary-learning-sneak-peek.html</link><description>&lt;p&gt;Closing in on the goal of integrating J. Mairal&amp;#8217;s dictionary learning in
 the scikit, I stitched together a couple of&amp;nbsp;examples.&lt;/p&gt;
 &lt;p&gt;The code is not yet integrated according to our standards, but here is
 the kind of results you can&amp;nbsp;expect.&lt;/p&gt;
@@ -4271,7 +3369,7 @@ better result. This is just a sneak peek and pretty soon you will see
 better&amp;nbsp;stuff!&lt;/p&gt;
 &lt;p&gt;[&lt;img alt="Denoising Lena with dictionary learning and OMP" src="http://localhost:8001/wp-content/uploads/2011/06/denoise.png" title="Denoising Lena" /&gt;][]&lt;/p&gt;
 &lt;p&gt;[&lt;img alt="Dictionary learned from lena patches" src="http://localhost:8001/wp-content/uploads/2011/06/image.png" title="Dictionary learned from lena patches" /&gt;]: http://localhost:8001/wp-content/uploads/2011/06/image.png
-  [&lt;img alt="Denoising Lena with dictionary learning and OMP" src="http://localhost:8001/wp-content/uploads/2011/06/denoise.png" title="Denoising Lena" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/06/denoise.png&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Fri, 24 Jun 2011 12:06:00 +0200</pubDate><guid>tag:vene.ro,2011-06-24:blog/dictionary-learning-sneak-peek.html</guid><category>Uncategorized</category></item><item><title>Summer of Code roadmap, part 1</title><link>http://vene.ro/blog/summer-of-code-roadmap-part-1.html</link><description>&lt;p&gt;After a little busy while, I have graduated and entered the summer
+  [&lt;img alt="Denoising Lena with dictionary learning and OMP" src="http://localhost:8001/wp-content/uploads/2011/06/denoise.png" title="Denoising Lena" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/06/denoise.png&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Fri, 24 Jun 2011 12:06:00 +0200</pubDate><guid isPermaLink="false">tag:vene.ro,2011-06-24:blog/dictionary-learning-sneak-peek.html</guid><category>Uncategorized</category></item><item><title>Summer of Code roadmap, part 1</title><link>http://vene.ro/blog/summer-of-code-roadmap-part-1.html</link><description>&lt;p&gt;After a little busy while, I have graduated and entered the summer
 vacation, which means time for serious GSoC&amp;nbsp;work.&lt;/p&gt;
 &lt;p&gt;[&lt;img alt="Me on graduation day" src="http://localhost:8001/wp-content/uploads/2011/06/p1080283.jpg" title="Graduation day" /&gt;][]&lt;/p&gt;
 &lt;p&gt;So we had a little conference in order to discuss what will be done and
@@ -4302,7 +3400,7 @@ this will depend on more factors. As long as the pull requests are up,
 the code review system will push it forward towards the merge. The focus
 is on teamwork and on feedback cycles as short as possible, as opposed
 to falling into the trap of delaying work until the night before the&amp;nbsp;deadline.&lt;/p&gt;
-&lt;p&gt;[&lt;img alt="Me on graduation day" src="http://localhost:8001/wp-content/uploads/2011/06/p1080283.jpg" title="Graduation day" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/06/p1080283.jpg&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Sun, 12 Jun 2011 14:28:00 +0200</pubDate><guid>tag:vene.ro,2011-06-12:blog/summer-of-code-roadmap-part-1.html</guid><category>gsoc</category><category>Uncategorized</category></item><item><title>First thoughts on Orthogonal Matching Pursuit</title><link>http://vene.ro/blog/first-thoughts-on-orthogonal-matching-pursuit.html</link><description>&lt;p&gt;I am working on implementing the Orthogonal Matching Pursuit (&lt;span class="caps"&gt;OMP&lt;/span&gt;)
+&lt;p&gt;[&lt;img alt="Me on graduation day" src="http://localhost:8001/wp-content/uploads/2011/06/p1080283.jpg" title="Graduation day" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/06/p1080283.jpg&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Sun, 12 Jun 2011 14:28:00 +0200</pubDate><guid isPermaLink="false">tag:vene.ro,2011-06-12:blog/summer-of-code-roadmap-part-1.html</guid><category>gsoc</category><category>Uncategorized</category></item><item><title>First thoughts on Orthogonal Matching Pursuit</title><link>http://vene.ro/blog/first-thoughts-on-orthogonal-matching-pursuit.html</link><description>&lt;p&gt;I am working on implementing the Orthogonal Matching Pursuit (&lt;span class="caps"&gt;OMP&lt;/span&gt;)
 algorithm for the scikit. It is an elegant algorithm (that almost writes
 itself in Numpy!) to compute a greedy approximation to the solution of a
 sparse coding&amp;nbsp;problem:&lt;/p&gt;
@@ -4341,7 +3439,7 @@ the implementation is robust and ready for use, I will make some&amp;nbsp;benchm
 [1]
 http://www.cs.technion.ac.il/\~ronrubin/Publications/&lt;span class="caps"&gt;KSVD&lt;/span&gt;-&lt;span class="caps"&gt;OMP&lt;/span&gt;-v2.pdf&lt;/p&gt;
 &lt;p&gt;[&lt;img alt="Stem plot for sparse signals recovered by OMP" src="http://localhost:8001/wp-content/uploads/2011/06/omp.png" title="Orthogonal Matching Pursuit sparse signal recovery" /&gt;]: http://localhost:8001/wp-content/uploads/2011/06/omp.png
-  [&lt;img alt="Orthogonal Matching Pursuit benchmark" src="http://localhost:8001/wp-content/uploads/2011/06/omp_bench.png" title="OMP benchmark, time and error" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/06/omp_bench.png&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Mon, 30 May 2011 13:02:00 +0200</pubDate><guid>tag:vene.ro,2011-05-30:blog/first-thoughts-on-orthogonal-matching-pursuit.html</guid><category>Uncategorized</category><category>dictionary learning</category><category>omp</category><category>orthogonal matching pursuit</category></item><item><title>Sparse PCA</title><link>http://vene.ro/blog/sparse-pca.html</link><description>&lt;p&gt;I have been working on the integration into the scikits.learn codebase
+  [&lt;img alt="Orthogonal Matching Pursuit benchmark" src="http://localhost:8001/wp-content/uploads/2011/06/omp_bench.png" title="OMP benchmark, time and error" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/06/omp_bench.png&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Mon, 30 May 2011 13:02:00 +0200</pubDate><guid isPermaLink="false">tag:vene.ro,2011-05-30:blog/first-thoughts-on-orthogonal-matching-pursuit.html</guid><category>Uncategorized</category><category>dictionary learning</category><category>omp</category><category>orthogonal matching pursuit</category></item><item><title>Sparse PCA</title><link>http://vene.ro/blog/sparse-pca.html</link><description>&lt;p&gt;I have been working on the integration into the scikits.learn codebase
 of a sparse principal components analysis (SparsePCA) algorithm coded by
 Gaël and Alexandre and based on [[1]][]. Because the name &amp;#8220;sparse &lt;span class="caps"&gt;PCA&lt;/span&gt;&amp;#8221;
 has some inherent ambiguity, I will describe in greater depth what
@@ -4408,7 +3506,7 @@ to see the results: one is related to &lt;a href="http://venefrombucharest.wordp
 n-gram components. The other task is to plug it in as feature extractor
 for handwritten digit classification, for my undergraduate&amp;nbsp;thesis.&lt;/p&gt;
 &lt;p&gt;&lt;span id="footnote_1"&gt;[1] &lt;a href="http://www.di.ens.fr/sierra/pdfs/icml09.pdf"&gt;http://www.di.ens.fr/sierra/pdfs/icml09.pdf&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;[[1]]:&amp;nbsp;#footnote_1&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Mon, 23 May 2011 15:19:00 +0200</pubDate><guid>tag:vene.ro,2011-05-23:blog/sparse-pca.html</guid><category>dictionary learning</category><category>pca</category><category>sparse pca</category><category>SparsePCA</category><category>spca</category><category>scikit-learn</category></item><item><title>Customizing scikits.learn for a specific text analysis task</title><link>http://vene.ro/blog/customizing-scikits-learn-for-a-specific-text-analysis-task.html</link><description>&lt;p&gt;Scikits.learn is a great general library, but machine learning has so
+&lt;p&gt;[[1]]:&amp;nbsp;#footnote_1&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Mon, 23 May 2011 15:19:00 +0200</pubDate><guid isPermaLink="false">tag:vene.ro,2011-05-23:blog/sparse-pca.html</guid><category>dictionary learning</category><category>pca</category><category>sparse pca</category><category>SparsePCA</category><category>spca</category><category>scikit-learn</category></item><item><title>Customizing scikits.learn for a specific text analysis task</title><link>http://vene.ro/blog/customizing-scikits-learn-for-a-specific-text-analysis-task.html</link><description>&lt;p&gt;Scikits.learn is a great general library, but machine learning has so
 many different application, that it is often very helpful to be able to
 extend its &lt;span class="caps"&gt;API&lt;/span&gt; to better integrate with your code. With scikits.learn,
 this is extremely easy to do using inheritance and using the pipeline&amp;nbsp;module.&lt;/p&gt;
@@ -4480,7 +3578,7 @@ for dimensionality reduction before classification. It would only
 require an extra item in the pipeline constructor. A call from a
 web-based frontend, for example, would be very short and simple. Because
 of the consistency in the scikits.learn classes, we can write cleaner
-and better code, and therefore work with greater&amp;nbsp;efficiency.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Fri, 29 Apr 2011 14:33:00 +0200</pubDate><guid>tag:vene.ro,2011-04-29:blog/customizing-scikits-learn-for-a-specific-text-analysis-task.html</guid><category>nlp</category><category>scikit-learn</category></item><item><title>An overview of dictionary learning: Terminology</title><link>http://vene.ro/blog/an-overview-of-dictionary-learning-terminology.html</link><description>&lt;p&gt;My GSoC proposal is titled &amp;#8220;Dictionary learning in scikits.learn&amp;#8221; and in
+and better code, and therefore work with greater&amp;nbsp;efficiency.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Fri, 29 Apr 2011 14:33:00 +0200</pubDate><guid isPermaLink="false">tag:vene.ro,2011-04-29:blog/customizing-scikits-learn-for-a-specific-text-analysis-task.html</guid><category>nlp</category><category>scikit-learn</category></item><item><title>An overview of dictionary learning: Terminology</title><link>http://vene.ro/blog/an-overview-of-dictionary-learning-terminology.html</link><description>&lt;p&gt;My GSoC proposal is titled &amp;#8220;Dictionary learning in scikits.learn&amp;#8221; and in
 the project, I plan to implement methods used in state of the art
 research and industry applications in signal and image processing. In
 this post, I want to clarify the terminology&amp;nbsp;used.&lt;/p&gt;
@@ -4550,7 +3648,7 @@ are interested in these variants and they are planned for implementation
 in my GSoC&amp;nbsp;proposal.&lt;/p&gt;
 &lt;p&gt;Julien Mairal&amp;#8217;s presentation of his work in this domain, available
 &lt;a href="http://videolectures.net/icml09_mairal_odlsc/" title="Mairal dictionary learning"&gt;here&lt;/a&gt;, shows the theoretical background of such methods, along with
-examples showing state of the art results in image&amp;nbsp;processing.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Fri, 15 Apr 2011 14:10:00 +0200</pubDate><guid>tag:vene.ro,2011-04-15:blog/an-overview-of-dictionary-learning-terminology.html</guid><category>dictionary learning</category><category>scikit-learn</category><category>Uncategorized</category></item><item><title>Newton interpolation and numerical differentiation</title><link>http://vene.ro/blog/newton-interpolation-and-numerical-differentiation.html</link><description>&lt;p&gt;I am sharing some Python code code that I wrote as a school assignment.
+examples showing state of the art results in image&amp;nbsp;processing.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Fri, 15 Apr 2011 14:10:00 +0200</pubDate><guid isPermaLink="false">tag:vene.ro,2011-04-15:blog/an-overview-of-dictionary-learning-terminology.html</guid><category>dictionary learning</category><category>scikit-learn</category><category>Uncategorized</category></item><item><title>Newton interpolation and numerical differentiation</title><link>http://vene.ro/blog/newton-interpolation-and-numerical-differentiation.html</link><description>&lt;p&gt;I am sharing some Python code code that I wrote as a school assignment.
 This computes the Newton form of the interpolation polynomial of a given
 set of points, and allows for the evaluation of both the polynomial and
 its derivative, at a given point. This is an accurate way of estimating
@@ -4558,7 +3656,7 @@ the derivative of a complicated&amp;nbsp;function.&lt;/p&gt;
 &lt;p&gt;Initially it plots the function, the interpolating polynomial and its
 derivative. When clicking on the plot, the tangent to the interpolating
 polynomial at the horizontal position of the mouse cursor is&amp;nbsp;plotted.&lt;/p&gt;
-&lt;p&gt;It can be found here: &lt;a href="https://gist.github.com/921554"&gt;https://gist.github.com/921554&lt;/a&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Fri, 15 Apr 2011 13:34:00 +0200</pubDate><guid>tag:vene.ro,2011-04-15:blog/newton-interpolation-and-numerical-differentiation.html</guid><category>differentiation</category><category>interpolation</category><category>matplotlib</category><category>newton</category><category>numerical</category><category>numpy</category><category>python</category></item><item><title>A look at Romanian verbs with scikits-learn</title><link>http://vene.ro/blog/a-look-at-romanian-verbs-with-scikits-learn.html</link><description>&lt;p&gt;One of the problems we tackled here at my university is one as old as
+&lt;p&gt;It can be found here: &lt;a href="https://gist.github.com/921554"&gt;https://gist.github.com/921554&lt;/a&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Fri, 15 Apr 2011 13:34:00 +0200</pubDate><guid isPermaLink="false">tag:vene.ro,2011-04-15:blog/newton-interpolation-and-numerical-differentiation.html</guid><category>differentiation</category><category>interpolation</category><category>matplotlib</category><category>newton</category><category>numerical</category><category>numpy</category><category>python</category></item><item><title>A look at Romanian verbs with scikits-learn</title><link>http://vene.ro/blog/a-look-at-romanian-verbs-with-scikits-learn.html</link><description>&lt;p&gt;One of the problems we tackled here at my university is one as old as
 the modern Romanian language. It is a problem for linguists, as well as
 for foreigners trying to learn the language. We call it the root
 alternations&amp;nbsp;problem.&lt;/p&gt;
@@ -4601,7 +3699,7 @@ subclasses of the dataset, such a representation (or even a simpler one)
 is enough to clearly answer whether a verb does not exhibit
 alternations. This encourages further exploration of this path,
 especially supervised and semi-supervised&amp;nbsp;approaches.&lt;/p&gt;
-&lt;p&gt;[&lt;img alt="Romanian infinitives as 2D projection" src="http://localhost:8001/wp-content/uploads/2011/04/infinitives_pca.png" title="infinitives_pca" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/04/infinitives_pca.png&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Thu, 14 Apr 2011 01:40:00 +0200</pubDate><guid>tag:vene.ro,2011-04-14:blog/a-look-at-romanian-verbs-with-scikits-learn.html</guid><category>alternations</category><category>computational linguistics</category><category>infinitives</category><category>pca</category><category>principal components analysis</category><category>nlp</category><category>scikit-learn</category></item><item><title>Tweaking matplotlib subplots for pretty results</title><link>http://vene.ro/blog/tweaking-matplotlib-subplots-for-pretty-results.html</link><description>&lt;p&gt;When plotting multiple subplots using matplotlib, the axes rarely look
+&lt;p&gt;[&lt;img alt="Romanian infinitives as 2D projection" src="http://localhost:8001/wp-content/uploads/2011/04/infinitives_pca.png" title="infinitives_pca" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/04/infinitives_pca.png&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Thu, 14 Apr 2011 01:40:00 +0200</pubDate><guid isPermaLink="false">tag:vene.ro,2011-04-14:blog/a-look-at-romanian-verbs-with-scikits-learn.html</guid><category>alternations</category><category>computational linguistics</category><category>infinitives</category><category>pca</category><category>principal components analysis</category><category>nlp</category><category>scikit-learn</category></item><item><title>Tweaking matplotlib subplots for pretty results</title><link>http://vene.ro/blog/tweaking-matplotlib-subplots-for-pretty-results.html</link><description>&lt;p&gt;When plotting multiple subplots using matplotlib, the axes rarely look
 pretty with the default configuration. Since matplotlib figures are
 abstract objects, designed for consistency in print as well as on
 screen, tweaking their layout can get&amp;nbsp;tricky.&lt;/p&gt;
@@ -4635,7 +3733,7 @@ then exploring the direction in which they need to be&amp;nbsp;changed.&lt;/p&gt
 This means you can adjust your subplots visually and you will have the
 parameter values to use in the call to &lt;code&gt;subplots_adjust&lt;/code&gt; in one&amp;nbsp;go!&lt;/p&gt;
 &lt;p&gt;You can set your backend to WXAgg by adding the line &lt;code&gt;backend: WXAgg&lt;/code&gt; in
-your &lt;a href="http://matplotlib.sourceforge.net/users/customizing.html#the-matplotlibrc-file" title="Customizing matplotlib"&gt;matplotlibrc file&lt;/a&gt;.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Mon, 04 Apr 2011 20:53:00 +0200</pubDate><guid>tag:vene.ro,2011-04-04:blog/tweaking-matplotlib-subplots-for-pretty-results.html</guid><category>matplotlib</category><category>python</category></item><item><title>On setuptools subpackages</title><link>http://vene.ro/blog/on-setuptools-subpackages.html</link><description>&lt;p&gt;Today, I spent more than two hours trying to figure out why, despite
+your &lt;a href="http://matplotlib.sourceforge.net/users/customizing.html#the-matplotlibrc-file" title="Customizing matplotlib"&gt;matplotlibrc file&lt;/a&gt;.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Mon, 04 Apr 2011 20:53:00 +0200</pubDate><guid isPermaLink="false">tag:vene.ro,2011-04-04:blog/tweaking-matplotlib-subplots-for-pretty-results.html</guid><category>matplotlib</category><category>python</category></item><item><title>On setuptools subpackages</title><link>http://vene.ro/blog/on-setuptools-subpackages.html</link><description>&lt;p&gt;Today, I spent more than two hours trying to figure out why, despite
 things working out fine in my development scikits.learn folder,
 &lt;code&gt;python setup.py install&lt;/code&gt; would completely ignore the module I
 refactored into a&amp;nbsp;subpackage.&lt;/p&gt;
@@ -4666,7 +3764,7 @@ setuptools-based project are as&amp;nbsp;follows:&lt;/p&gt;
 very pleasant, I am not frustrated with setuptools. On the contrary, now
 that I understand it better I can appreciate its flexibility and
 clarity, when compared to, for example, MSBuild and Visual Studio
-project files. Just one more reason to love&amp;nbsp;Python!&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Mon, 04 Apr 2011 15:01:00 +0200</pubDate><guid>tag:vene.ro,2011-04-04:blog/on-setuptools-subpackages.html</guid><category>python</category><category>setuptools</category></item><item><title>My first scikits.learn coding sprint</title><link>http://vene.ro/blog/my-first-scikits-learn-coding-sprint.html</link><description>&lt;p&gt;The fifth &lt;a href="http://scikit-learn.sourceforge.net/" title="scikits.learn"&gt;scikits.learn&lt;/a&gt; coding sprint took place Friday, April 1st
+project files. Just one more reason to love&amp;nbsp;Python!&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Mon, 04 Apr 2011 15:01:00 +0200</pubDate><guid isPermaLink="false">tag:vene.ro,2011-04-04:blog/on-setuptools-subpackages.html</guid><category>python</category><category>setuptools</category></item><item><title>My first scikits.learn coding sprint</title><link>http://vene.ro/blog/my-first-scikits-learn-coding-sprint.html</link><description>&lt;p&gt;The fifth &lt;a href="http://scikit-learn.sourceforge.net/" title="scikits.learn"&gt;scikits.learn&lt;/a&gt; coding sprint took place Friday, April 1st
 2011. For anyone who is not familiar with it, scikits.learn is a fast
 and easy to use machine learning toolkit for the pylab environment
 (Python, NumPy, SciPy,&amp;nbsp;Matplotlib.)&lt;/p&gt;
@@ -4675,7 +3773,7 @@ in order to bring my &lt;span class="caps"&gt;NMF&lt;/span&gt; code up to standa
 Though I live far from every nucleus of scikits-learn developers, I
 efficiently participated via &lt;span class="caps"&gt;IRC&lt;/span&gt;. This way, I also got the chance to
 help out a bit on Mathieu Blondel&amp;#8217;s Kernel &lt;span class="caps"&gt;PCA&lt;/span&gt; code, which will also be
-merged into&amp;nbsp;main soon.&lt;/p&gt;
+merged into main&amp;nbsp;soon.&lt;/p&gt;
 &lt;h2&gt;How it felt&amp;nbsp;like&lt;/h2&gt;
 &lt;p&gt;Short answer:&amp;nbsp;awesome!&lt;/p&gt;
 &lt;p&gt;Slightly longer answer: Everybody was very encouraging  and helpful.
@@ -4716,11 +3814,11 @@ what he did to make it look so good. But I&amp;#8217;ll figure it out soon, I&am
 &lt;p&gt;I also learned a lot more about the intricacies of the scikits.learn
 APIs, the philosophy of ease of use, and the project tree in&amp;nbsp;general.&lt;/p&gt;
 &lt;p&gt;In short, the coding sprint has been a great and rewarding experience,
-for which I thank all of you guys&amp;nbsp;there!&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Sat, 02 Apr 2011 20:12:00 +0200</pubDate><guid>tag:vene.ro,2011-04-02:blog/my-first-scikits-learn-coding-sprint.html</guid><category>coding sprint</category><category>scikit-learn</category></item><item><title>About</title><link>http://vene.ro/blog/about.html</link><description>&lt;p&gt;My name is Vlad, I am a master&amp;#8217;s student at the University of Bucharest,
+for which I thank all of you guys&amp;nbsp;there!&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Sat, 02 Apr 2011 20:12:00 +0200</pubDate><guid isPermaLink="false">tag:vene.ro,2011-04-02:blog/my-first-scikits-learn-coding-sprint.html</guid><category>coding sprint</category><category>scikit-learn</category></item><item><title>About</title><link>http://vene.ro/blog/about.html</link><description>&lt;p&gt;My name is Vlad, I am a master&amp;#8217;s student at the University of Bucharest,
 I work there at the Centre for Computational Linguistics, and I am a
-contributor to the Python machine learning library &lt;a href="http://scikit-learn.org" title="scikit-learn"&gt;scikit-learn&lt;/a&gt;.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Wed, 30 Mar 2011 08:59:00 +0200</pubDate><guid>tag:vene.ro,2011-03-30:blog/about.html</guid></item><item><title>Hello world!</title><link>http://vene.ro/blog/hello-world-2.html</link><description>&lt;p&gt;This is the blog where I will post updates regarding my work
+contributor to the Python machine learning library &lt;a href="http://scikit-learn.org" title="scikit-learn"&gt;scikit-learn&lt;/a&gt;.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Wed, 30 Mar 2011 08:59:00 +0200</pubDate><guid isPermaLink="false">tag:vene.ro,2011-03-30:blog/about.html</guid></item><item><title>Hello world!</title><link>http://vene.ro/blog/hello-world-2.html</link><description>&lt;p&gt;This is the blog where I will post updates regarding my work
 on&lt;a href="http://scikit-learn.sourceforge.net/" title="scikits-learn"&gt;scikits-learn.&lt;/a&gt; I am applying as a GSoC 2011 student with the &lt;span class="caps"&gt;PSF&lt;/span&gt;
 for work on this machine learning&amp;nbsp;library.&lt;/p&gt;
 &lt;p&gt;I will also post related work that I do in the machine learning&amp;nbsp;field.&lt;/p&gt;
 &lt;p&gt;I hope to prove an enjoyable read for everybody who stumbles on to this
-site, or for those who will be forced to review it&amp;nbsp;:)&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Wed, 30 Mar 2011 08:59:00 +0200</pubDate><guid>tag:vene.ro,2011-03-30:blog/hello-world-2.html</guid><category>Uncategorized</category></item></channel></rss>
+site, or for those who will be forced to review it&amp;nbsp;:)&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vene</dc:creator><pubDate>Wed, 30 Mar 2011 08:59:00 +0200</pubDate><guid isPermaLink="false">tag:vene.ro,2011-03-30:blog/hello-world-2.html</guid><category>Uncategorized</category></item></channel></rss>
