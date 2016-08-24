@@ -29,7 +29,10 @@ the University of Bucharest](http://nlp.unibuc.ro/).
   
 # Teaching
 
-  - TA for CS 4740 Fall 2016: Introduction to Natural Language Processing.  Office hours Wed 3-4pm in Gates G11.
+  - TA for [CS 4740 Fall 2016: Introduction to Natural Language Processing.](http://www.cs.cornell.edu/courses/cs4740/2016fa/)
+    
+    Office hours Wed 3&ndash;4pm in Gates G11: see you there!
+
   - [older material](teaching.html)
 
 # Research
