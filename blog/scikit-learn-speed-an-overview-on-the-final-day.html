@@ -55,11 +55,6 @@
         <header id="banner" class="body">
                 <div id="mainheader">Vlad Niculae (~vene)</div>
                 <!--<nav><ul>
-                    <li><a href="http://vene.ro/fonts.html">Fonts</a></li>
-                    <li><a href="http://vene.ro/papers.html">Publications</a></li>
-                    <li><a href="http://vene.ro/privacy.html">Privacy&nbsp;Policy</a></li>
-                    <li><a href="http://vene.ro/talks.html">Talks</a></li>
-                    <li><a href="http://vene.ro/teaching.html">Teaching</a></li>
                     <li><a href="/publications.html">Publications</a></li>
                     <li><a href="http://vene.ro/blog/">Blog</a></li>
                 </ul></nav> -->
@@ -92,21 +87,21 @@ faster wherever I&nbsp;can.</p>
 recall the accomplishments and failures of this project, and all the
 lessons to be&nbsp;learned.</p>
 <h2>The <em>scikit-learn-speed</em> benchmark&nbsp;platform</h2>
-<p>[<img alt="" src="http://localhost:8001/wp-content/uploads/2012/08/skl-speed-300x163.png" title="skl-speed" />][]<br />
-[<em>Scikit-learn-speed</em>][<img alt="" src="http://localhost:8001/wp-content/uploads/2012/08/skl-speed-300x163.png" title="skl-speed" />] is a continuous benchmark suite for the
+<p>[<img alt="" src="http://localhost:8001/wp-content/uploads/2012/08/skl-speed-300x163.png" title="skl-speed">][]<br>
+[<em>Scikit-learn-speed</em>][<img alt="" src="http://localhost:8001/wp-content/uploads/2012/08/skl-speed-300x163.png" title="skl-speed">] is a continuous benchmark suite for the
 <a href="http://scikit-learn.org"><em>scikit-learn</em></a> library. It has the following&nbsp;features:</p>
 <ul>
 <li><em>vbench</em>-powered integration with&nbsp;Git</li>
 <li>Easily triggered build and report generation: just type <code>make</code></li>
 <li>Easily readable and writeable template for benchmarks:
     <p>
-    [sourcecode lang=&#8221;python&#8221;]<br />
-    {<br />
-    &#8216;obj&#8217;: &#8216;LogisticRegression&#8217;,<br />
-    &#8216;init_params&#8217;: {&#8216;C&#8217;: 1e5},<br />
-    &#8216;datasets&#8217;: (&#8216;arcene&#8217;, &#8216;madelon&#8217;),<br />
-    &#8216;statements&#8217;: (&#8216;fit&#8217;, &#8216;predict&#8217;)<br />
-    }, &#8230;<br />&nbsp;[/sourcecode]</li>
+    [sourcecode lang=&#8221;python&#8221;]<br>
+    {<br>
+    &#8216;obj&#8217;: &#8216;LogisticRegression&#8217;,<br>
+    &#8216;init_params&#8217;: {&#8216;C&#8217;: 1e5},<br>
+    &#8216;datasets&#8217;: (&#8216;arcene&#8217;, &#8216;madelon&#8217;),<br>
+    &#8216;statements&#8217;: (&#8216;fit&#8217;, &#8216;predict&#8217;)<br>
+    }, &#8230;<br>&nbsp;[/sourcecode]</li>
 <li>Many attributes recorded: time (w/ estimated standard deviation),
     memory usage, cProfiler output, line_profiler output,&nbsp;tracebacks</li>
 <li>Multi-step benchmarks: i.e. <code>fit</code> followed by <code>predict</code></li>
@@ -156,7 +151,7 @@ the profiler output with one click. I jumped on the following&nbsp;speed-ups:</p
 <li>Speed up <code>euclidean_distances</code> by rewriting in Cython. (<a href="https://github.com/scikit-learn/scikit-learn/pull/1006"><span class="caps">PR</span></a>)
     <p>
     This meant making more operations support an <code>out</code> argument, for
-    passing preallocated memory. This touches many<br />
+    passing preallocated memory. This touches many<br>
     different objects in the codebase: clustering, manifold learning,
     nearest neighbour&nbsp;methods.</li>
 <li><a href="http://localhost:8001/2012/08/18/inverses-pseudoinverses-numerical-issues-speed-symmetry/" title="Inverses and pseudoinverses. Numerical issues, speed, symmetry.">Insight into inverse and pseudoinverse computation</a>, new <code>pinvh</code>
@@ -185,23 +180,23 @@ computations that are orders of magnitude slower. However, there is an
 elephant in the room: the assumption that making code faster invariably
 makes it less clear, and takes a lot of&nbsp;effort.</p>
 <p>The following code is a part of scipy&#8217;s <code>pinv2</code> function as it currently
-is written:<br />
-[sourcecode lang=&#8221;python&#8221;]<br />
-cutoff = cond*np.maximum.reduce(s)<br />
-psigma = np.zeros((m, n), t)<br />
-for i in range(len(s)):<br />
-if s[i] > cutoff:<br />
-psigma[i,i] = 1.0/np.conjugate(s[i])<br />
-return np.transpose(np.conjugate(np.dot(np.dot(u,psigma),vh)))<br />&nbsp;[/sourcecode]</p>
+is written:<br>
+[sourcecode lang=&#8221;python&#8221;]<br>
+cutoff = cond*np.maximum.reduce(s)<br>
+psigma = np.zeros((m, n), t)<br>
+for i in range(len(s)):<br>
+if s[i] > cutoff:<br>
+psigma[i,i] = 1.0/np.conjugate(s[i])<br>
+return np.transpose(np.conjugate(np.dot(np.dot(u,psigma),vh)))<br>&nbsp;[/sourcecode]</p>
 <p><code>psigma</code> is a diagonal matrix, and some time and memory can be saved
 with simple vectorization. However, this part of the code dominated by
 an above call to <code>svd</code>. The profiler output would say that we shouldn&#8217;t
 bother, but is it really a bother? Look at Jake&#8217;s new&nbsp;version:</p>
-<p>[sourcecode lang=&#8221;python&#8221;]<br />
-above_cutoff = (s > cond * np.max(s))<br />
-psigma_diag = np.zeros_like(s)<br />
+<p>[sourcecode lang=&#8221;python&#8221;]<br>
+above_cutoff = (s > cond * np.max(s))<br>
+psigma_diag = np.zeros_like(s)<br>
 psigma_diag[above_cutoff] = 1.0 /&nbsp;s[above_cutoff]</p>
-<p>return np.transpose(np.conjugate(np.dot(u * psigma_diag, vh)))<br />&nbsp;[/sourcecode]</p>
+<p>return np.transpose(np.conjugate(np.dot(u * psigma_diag, vh)))<br>&nbsp;[/sourcecode]</p>
 <p>It&#8217;s shorter, more elegant, easier to read, and nevertheless faster. I
 would say it is worth&nbsp;it.</p>
 <h3>Small speed-ups can&nbsp;propagate</h3>
@@ -220,7 +215,7 @@ large number of speed-ups, but a few considerable ones nonetheless. And
 I venture the claim that the <em>scikit-learn-speed</em> tool will prove useful
 over time, and that the efforts deployed during this project have
 stretched beyond the boundary of the <em>scikit-learn</em>.</p>
-<p>[<img alt="" src="http://localhost:8001/wp-content/uploads/2012/08/skl-speed-300x163.png" title="skl-speed" />]:&nbsp;http://jenkins-scikit-learn.github.com/scikit-learn-speed/</p>
+<p>[<img alt="" src="http://localhost:8001/wp-content/uploads/2012/08/skl-speed-300x163.png" title="skl-speed">]:&nbsp;http://jenkins-scikit-learn.github.com/scikit-learn-speed/</p>
     </div><!-- /.entry-content -->
     <div class="comments">
       <h2>Comments !</h2>

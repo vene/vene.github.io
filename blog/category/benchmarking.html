@@ -55,11 +55,6 @@
         <header id="banner" class="body">
                 <div id="mainheader">Vlad Niculae (~vene)</div>
                 <!--<nav><ul>
-                    <li><a href="http://vene.ro/fonts.html">Fonts</a></li>
-                    <li><a href="http://vene.ro/papers.html">Publications</a></li>
-                    <li><a href="http://vene.ro/privacy.html">Privacy&nbsp;Policy</a></li>
-                    <li><a href="http://vene.ro/talks.html">Talks</a></li>
-                    <li><a href="http://vene.ro/teaching.html">Teaching</a></li>
                     <li><a href="/publications.html">Publications</a></li>
                     <li><a href="http://vene.ro/blog/">Blog</a></li>
                 </ul></nav> -->
@@ -206,63 +201,63 @@ the <span class="caps">SVD</span> and transposes everything like shown above. Bo
 very small singular values, but (<em>attention!</em>) they behave&nbsp;differently!</p>
 <p>The different implementations also lead to different speed. Let&#8217;s look
 at inverting a random square&nbsp;matrix:</p>
-<p>[sourcecode lang=&#8221;python&#8221;]<br />
+<p>[sourcecode lang=&#8221;python&#8221;]<br>
 In [1]: import numpy as&nbsp;np</p>
 <p>In [2]: from scipy import&nbsp;linalg</p>
 <p>In [3]: a = np.random.randn(1000,&nbsp;1000)</p>
-<p>In [4]: timeit linalg.inv(a)<br />
+<p>In [4]: timeit linalg.inv(a)<br>
 10 loops, best of 3: 132 ms per&nbsp;loop</p>
-<p>In [5]: timeit linalg.pinv(a)<br />
+<p>In [5]: timeit linalg.pinv(a)<br>
 1 loops, best of 3: 18.8 s per&nbsp;loop</p>
-<p>In [6]: timeit linalg.pinv2(a)<br />
-1 loops, best of 3: 1.58 s per loop<br />&nbsp;[/sourcecode]</p>
+<p>In [6]: timeit linalg.pinv2(a)<br>
+1 loops, best of 3: 1.58 s per loop<br>&nbsp;[/sourcecode]</p>
 <p>Woah, huge difference! But do all three methods return the &#8220;right&#8221;&nbsp;result?</p>
-<p>[sourcecode lang=&#8221;python&#8221;]<br />
-In [7]: linalg.inv(a)[:3, :3]<br />
-Out[7]:<br />
-array([[ 0.03636918, 0.01641725, 0.00736503],<br />
-[-0.04575771, 0.03578062, 0.02937733],<br />
+<p>[sourcecode lang=&#8221;python&#8221;]<br>
+In [7]: linalg.inv(a)[:3, :3]<br>
+Out[7]:<br>
+array([[ 0.03636918, 0.01641725, 0.00736503],<br>
+[-0.04575771, 0.03578062, 0.02937733],<br>
 [ 0.00542367, 0.01246306, 0.0122156&nbsp;]])</p>
-<p>In [8]: linalg.pinv(a)[:3, :3]<br />
-Out[8]:<br />
-array([[ 0.03636918, 0.01641725, 0.00736503],<br />
-[-0.04575771, 0.03578062, 0.02937733],<br />
+<p>In [8]: linalg.pinv(a)[:3, :3]<br>
+Out[8]:<br>
+array([[ 0.03636918, 0.01641725, 0.00736503],<br>
+[-0.04575771, 0.03578062, 0.02937733],<br>
 [ 0.00542367, 0.01246306, 0.0122156&nbsp;]])</p>
-<p>In [9]: linalg.pinv2(a)[:3, :3]<br />
-Out[9]:<br />
-array([[ 0.03636918, 0.01641725, 0.00736503],<br />
-[-0.04575771, 0.03578062, 0.02937733],<br />
+<p>In [9]: linalg.pinv2(a)[:3, :3]<br>
+Out[9]:<br>
+array([[ 0.03636918, 0.01641725, 0.00736503],<br>
+[-0.04575771, 0.03578062, 0.02937733],<br>
 [ 0.00542367, 0.01246306, 0.0122156&nbsp;]])</p>
 <p>In [10]: np.testing.assert_array_almost_equal(linalg.inv(a),&nbsp;linalg.pinv(a))</p>
 <p>In [11]: np.testing.assert_array_almost_equal(linalg.inv(a),
-linalg.pinv2(a))<br />&nbsp;[/sourcecode]</p>
+linalg.pinv2(a))<br>&nbsp;[/sourcecode]</p>
 <p>Looks good! This is because we got lucky, though, and <code>a</code> was invertible
 to start with. Let&#8217;s look at its&nbsp;spectrum:</p>
-<p>[sourcecode lang=&#8221;python&#8221;]<br />
+<p>[sourcecode lang=&#8221;python&#8221;]<br>
 In [12]: _, s, _ =&nbsp;linalg.svd(a)</p>
-<p>In [13]: np.min(s), np.max(s)<br />
-Out[13]: (0.029850235603382822, 62.949785645178906)<br />&nbsp;[/sourcecode]</p>
+<p>In [13]: np.min(s), np.max(s)<br>
+Out[13]: (0.029850235603382822, 62.949785645178906)<br>&nbsp;[/sourcecode]</p>
 <p>This is a lovely range for the singular values of a matrix, not too
 small, not too large. But what if we built the matrix in a way that
 would always pose problems? Specifically, let&#8217;s look at the case of
 covariance&nbsp;matrices:</p>
-<p>[sourcecode lang=&#8221;python&#8221;]<br />
+<p>[sourcecode lang=&#8221;python&#8221;]<br>
 In [14]: a = np.random.randn(1000,&nbsp;50)</p>
 <p>In [15]: a = np.dot(a,&nbsp;a.T)</p>
 <p>In [16]: _, s, _ =&nbsp;linalg.svd(a)</p>
-<p>In [17]: s[-9:]<br />
-Out[17]:<br />
-array([ 7.40548924e-14, 6.48102455e-14, 5.75803505e-14,<br />
-5.44263048e-14, 4.51528730e-14, 3.55317976e-14,<br />
+<p>In [17]: s[-9:]<br>
+Out[17]:<br>
+array([ 7.40548924e-14, 6.48102455e-14, 5.75803505e-14,<br>
+5.44263048e-14, 4.51528730e-14, 3.55317976e-14,<br>
 2.46939141e-14, 1.54186776e-14,&nbsp;5.08135874e-15])</p>
 <p>[/sourcecode]</p>
 <p><code>a</code> has at least 9 tiny singular values. Actually it&#8217;s easy to see why
 there are 950 of&nbsp;them:</p>
-<p>[sourcecode lang=&#8221;python&#8221;]<br />
-In [18]: np.sum(s \&lt; 1e-10)<br />
-Out[18]: 950<br />&nbsp;[/sourcecode]</p>
+<p>[sourcecode lang=&#8221;python&#8221;]<br>
+In [18]: np.sum(s \&lt; 1e-10)<br>
+Out[18]: 950<br>&nbsp;[/sourcecode]</p>
 <p>How do our functions behave in this case? Instead of just looking at a
-corner, let&#8217;s use our gift of sight:[<img alt="" src="http://localhost:8001/wp-content/uploads/2012/08/pseudoinverses-300x218.png" title="Pseudoinverses" />][]</p>
+corner, let&#8217;s use our gift of sight:[<img alt="" src="http://localhost:8001/wp-content/uploads/2012/08/pseudoinverses-300x218.png" title="Pseudoinverses">][]</p>
 <p>The small eigenvalues are large enough that <code>inv</code> thinks the matrix is
 full rank. <code>pinv</code> does better but it still fails, you can see a group of
 high-amplitude noisy columns. <code>pinv2</code> is faster and it also gives us a
@@ -271,16 +266,16 @@ useful result in this&nbsp;case.</p>
 <p>Not quite. Remember, we are now trying to actually invert matrices, and
 degrade gracefully in case of rank deficiency. But what if we need the
 pseudoinverse to solve an actual non-square, wide or tall&nbsp;system?</p>
-<p>[sourcecode lang=&#8221;python&#8221;]<br />
+<p>[sourcecode lang=&#8221;python&#8221;]<br>
 In [19]: a = np.random.randn(1000,&nbsp;50)</p>
-<p>In [20]: timeit linalg.pinv(a)<br />
+<p>In [20]: timeit linalg.pinv(a)<br>
 10 loops, best of 3: 104 ms per&nbsp;loop</p>
-<p>In [21]: timeit linalg.pinv(a.T)<br />
+<p>In [21]: timeit linalg.pinv(a.T)<br>
 100 loops, best of 3: 7.08 ms per&nbsp;loop</p>
-<p>In [22]: timeit linalg.pinv2(a)<br />
+<p>In [22]: timeit linalg.pinv2(a)<br>
 10 loops, best of 3: 114 ms per&nbsp;loop</p>
-<p>In [23]: timeit linalg.pinv2(a.T)<br />
-10 loops, best of 3: 126 ms per loop<br />&nbsp;[/sourcecode]</p>
+<p>In [23]: timeit linalg.pinv2(a.T)<br>
+10 loops, best of 3: 126 ms per loop<br>&nbsp;[/sourcecode]</p>
 <p>Huge victory for <code>pinv</code> in the wide case! Hurray! With all this insight,
 we can draw a line and see what we&nbsp;learned.</p>
 <ul>
@@ -301,14 +296,14 @@ computed cheaper than the <span class="caps">SVD</span> using Scipy <code>eigh</
 <code>*evr</code>. As part of my GSoC this year, with help from <a href="http://jakevdp.github.com/">Jake
 VanderPlas</a>, we made a <a href="https://github.com/scipy/scipy/pull/289">pull request to Scipy</a> containing a <code>pinvh</code>
 function that is equivalent to <code>pinv2</code> but faster for symmetric&nbsp;matrices.</p>
-<p>[sourcecode lang=&#8221;python&#8221;]<br />
-In [24]: timeit linalg.pinv2(a)<br />
+<p>[sourcecode lang=&#8221;python&#8221;]<br>
+In [24]: timeit linalg.pinv2(a)<br>
 1 loops, best of 3: 1.54 s per&nbsp;loop</p>
-<p>In [25]: timeit linalg.pinvh(a)<br />
+<p>In [25]: timeit linalg.pinvh(a)<br>
 1 loops, best of 3: 621 ms per&nbsp;loop</p>
 <p>In [26]: np.testing.assert_array_almost_equal(linalg.pinv2(a),
-linalg.pinvh(a))<br />&nbsp;[/sourcecode]</p>
-<p>[<img alt="" src="http://localhost:8001/wp-content/uploads/2012/08/pseudoinverses-300x218.png" title="Pseudoinverses" />]:&nbsp;http://localhost:8001/wp-content/uploads/2012/08/pseudoinverses.png</p><p>There are <a href="http://vene.ro/blog/inverses-pseudoinverses-numerical-issues-speed-symmetry.html#disqus_thread">comments</a>.</p>                </article>
+linalg.pinvh(a))<br>&nbsp;[/sourcecode]</p>
+<p>[<img alt="" src="http://localhost:8001/wp-content/uploads/2012/08/pseudoinverses-300x218.png" title="Pseudoinverses">]:&nbsp;http://localhost:8001/wp-content/uploads/2012/08/pseudoinverses.png</p><p>There are <a href="http://vene.ro/blog/inverses-pseudoinverses-numerical-issues-speed-symmetry.html#disqus_thread">comments</a>.</p>                </article>
             </aside><!-- /#featured -->
                 <section id="content" class="body">
                     <h1>Other articles</h1>
@@ -338,7 +333,7 @@ linalg.pinvh(a))<br />&nbsp;[/sourcecode]</p>
 <p>This was accomplished by building on what I described in my recent
 posts, specifically the extensions to Fabian&#8217;s [memory_profiler][] that
 you can find in <a href="https://github.com/vene/memory_profiler">my fork</a>, but they will be merged upstream soon. The
-key element is the <code>%magic_memit</code> function whose ...</p>
+key element is the <code>%magic_memit</code> function whose …</p>
                 <a class="readmore" href="http://vene.ro/blog/memory-benchmarking-with-vbench.html">read more</a>
 <p>There are <a href="http://vene.ro/blog/memory-benchmarking-with-vbench.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
@@ -366,7 +361,7 @@ key element is the <code>%magic_memit</code> function whose ...</p>
 state of <code>%memit</code>, because some more complicated numerical function
 calls make it crash. I will start this post with a reminder of a pretty
 important&nbsp;bug:</p>
-<p><strong>[On MacOS X (10.7 but maybe more), after forking ...</strong></p>
+<p><strong>[On MacOS X (10.7 but maybe more), after forking …</strong></p>
                 <a class="readmore" href="http://vene.ro/blog/on-why-my-memit-fails-on-osx.html">read more</a>
 <p>There are <a href="http://vene.ro/blog/on-why-my-memit-fails-on-osx.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
@@ -394,7 +389,7 @@ important&nbsp;bug:</p>
 Python, I updated Fabian&#8217;s [memory_profiler][] to include a couple of
 useful IPython magics. While in my <a href="http://localhost:8001/2012/06/30/quick-memory-usage-benchmarking-in-ipython/" title="Quick memory usage benchmarking in IPython">last post</a>, I used the new IPython
 0.13 syntax for defining magics, this time I used the
-backwards-compatible ...</p>
+backwards-compatible …</p>
                 <a class="readmore" href="http://vene.ro/blog/more-on-memory-benchmarking.html">read more</a>
 <p>There are <a href="http://vene.ro/blog/more-on-memory-benchmarking.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
@@ -423,7 +418,7 @@ something like that, but for measuring how much memory your line takes?
 Well, now you can; grab a hold of the script in the following gist and
 run it like in the&nbsp;example.</p>
 <p>[gist&nbsp;id=3022718]</p>
-<p>Instead ...</p>
+<p>Instead …</p>
                 <a class="readmore" href="http://vene.ro/blog/quick-memory-usage-benchmarking-in-ipython.html">read more</a>
 <p>There are <a href="http://vene.ro/blog/quick-memory-usage-benchmarking-in-ipython.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>

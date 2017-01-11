@@ -55,11 +55,6 @@
         <header id="banner" class="body">
                 <div id="mainheader">Vlad Niculae (~vene)</div>
                 <!--<nav><ul>
-                    <li><a href="http://vene.ro/fonts.html">Fonts</a></li>
-                    <li><a href="http://vene.ro/papers.html">Publications</a></li>
-                    <li><a href="http://vene.ro/privacy.html">Privacy&nbsp;Policy</a></li>
-                    <li><a href="http://vene.ro/talks.html">Talks</a></li>
-                    <li><a href="http://vene.ro/teaching.html">Teaching</a></li>
                     <li><a href="/publications.html">Publications</a></li>
                     <li><a href="http://vene.ro/blog/">Blog</a></li>
                 </ul></nav> -->
@@ -104,8 +99,8 @@ problem [latex] X\gamma = y[/latex]. Mathematically, it approximates
 the solution of the optimization&nbsp;problem:</p>
 <p>\$\$ \text{argmin} {\big|\big|} \gamma {\big|\big|} _0 \text{
 subject to }{\big |\big|}y-X\gamma{\big|\big|}_2\^2 \leq
-\epsilon \$\$<br />
-or (under a different parametrization):<br />
+\epsilon \$\$<br>
+or (under a different parametrization):<br>
 \$\$\text{argmin} {\big |\big|}y - X\gamma{\big |\big|}_2\^2
 \text{ subject to } {\big|\big|}\gamma{\big|\big|}_0 \leq
 n_{\text{nonzero&nbsp;coefs}}\$\$</p>
@@ -114,28 +109,28 @@ follow the notation in the formulas&nbsp;above.</p>
 <p><strong>Important note:</strong> The regressors/dictionary atoms (the columns of
 [latex] X[/latex]) are assumed to be normalized throughout this post (as
 well as usually any discussion of <span class="caps">OMP</span>). We also assume the following
-imports:<br />
-[sourcecode language=&#8221;Python&#8221;]<br />
-import numpy as np<br />
-from scipy import linalg<br />&nbsp;[/sourcecode]</p>
+imports:<br>
+[sourcecode language=&#8221;Python&#8221;]<br>
+import numpy as np<br>
+from scipy import linalg<br>&nbsp;[/sourcecode]</p>
 <p>Orthogonal matching pursuit is a very simple algorithm in pseudocode,
 and as I stated before, it almost writes itself in Numpy. For this
 reason, instead of stating the pseudocode here, I will start with how
 naively implemented <span class="caps">OMP</span> looks like in&nbsp;Python:</p>
-<p>[sourcecode language=&#8221;Python&#8221;]<br />
-def orthogonal_mp(X, y, n_nonzero_coefs, eps=None):<br />
-residual = y<br />
-idx = []<br />
-if eps == None:<br />
-stopping_condition = lambda: len(idx) == n_nonzero_coefs<br />
-else:<br />
-stopping_condition = lambda: np.inner(residual, residual) &lt;= eps<br />
-while not stopping_condition():<br />
-lam = np.abs(np.dot(residual, X)).argmax()<br />
-idx.append(lam)<br />
-gamma, _, _, _ = linalg.lstsq(X[:, idx], y)<br />
-residual = y - np.dot(X[:, idx], gamma)<br />
-return gamma, idx<br />&nbsp;[/sourcecode]</p>
+<p>[sourcecode language=&#8221;Python&#8221;]<br>
+def orthogonal_mp(X, y, n_nonzero_coefs, eps=None):<br>
+residual = y<br>
+idx = []<br>
+if eps == None:<br>
+stopping_condition = lambda: len(idx) == n_nonzero_coefs<br>
+else:<br>
+stopping_condition = lambda: np.inner(residual, residual) &lt;= eps<br>
+while not stopping_condition():<br>
+lam = np.abs(np.dot(residual, X)).argmax()<br>
+idx.append(lam)<br>
+gamma, _, _, _ = linalg.lstsq(X[:, idx], y)<br>
+residual = y - np.dot(X[:, idx], gamma)<br>
+return gamma, idx<br>&nbsp;[/sourcecode]</p>
 <p>Using lambda expressions as stopping conditions never looked like a
 brilliant idea, but it seems to me like the most elegant way to specify
 such a variable stopping condition. However, the biggest slowdown in
@@ -167,31 +162,31 @@ X_{\text{idx}}\gamma = y[/latex] with two much simpler computations:
 solving [latex] \tilde{L}\mathbf{w} = \mathbf{v}[/latex] and solving
 [latex] <span class="caps">LL</span>&#8217;\gamma = X_{\text{idx}}&#8217;y[/latex]. Due to the [latex]
 L[/latex]&#8217;s structure, these are much quicker operations than a least
-squares projection.<br />
+squares projection.<br>
 Here is the initial way I implemented&nbsp;this:</p>
 <p>[sourcecode&nbsp;language=&#8221;Python&#8221;]</p>
-<p>def cholesky_omp(X, y, n_nonzero_coefs, eps=None):<br />
-if eps == None:<br />
-stopping_condition = lambda: it == n_nonzero_coefs<br />
-else:<br />
+<p>def cholesky_omp(X, y, n_nonzero_coefs, eps=None):<br>
+if eps == None:<br>
+stopping_condition = lambda: it == n_nonzero_coefs<br>
+else:<br>
 stopping_condition = lambda: np.inner(residual, residual) \&lt;=&nbsp;eps</p>
-<p>alpha = np.dot(X.T, y)<br />
-residual = y<br />
-idx = []<br />
+<p>alpha = np.dot(X.T, y)<br>
+residual = y<br>
+idx = []<br>
 L =&nbsp;np.ones((1,1))</p>
-<p>while not stopping_condition():<br />
-lam = np.abs(np.dot(residual, X)).argmax()<br />
-if len(idx) &gt; 0:<br />
-w = linalg.solve_triangular(L, np.dot(X[:, idx].T, X[:, lam]),<br />
-lower=True)<br />
-L = np.r_[np.c_[L, np.zeros(len(L))],<br />
-np.atleast_2d(np.append(w, np.sqrt(1 - np.dot(w.T, w))))]<br />
-idx.append(lam)<br />
-# solve <span class="caps">LL</span>&#8217;x = y in two steps:<br />
-Ltx = linalg.solve_triangular(L, alpha[idx], lower=True)<br />
-gamma = linalg.solve_triangular(L, Ltx, trans=1, lower=True)<br />
+<p>while not stopping_condition():<br>
+lam = np.abs(np.dot(residual, X)).argmax()<br>
+if len(idx) &gt; 0:<br>
+w = linalg.solve_triangular(L, np.dot(X[:, idx].T, X[:, lam]),<br>
+lower=True)<br>
+L = np.r_[np.c_[L, np.zeros(len(L))],<br>
+np.atleast_2d(np.append(w, np.sqrt(1 - np.dot(w.T, w))))]<br>
+idx.append(lam)<br>
+# solve <span class="caps">LL</span>&#8217;x = y in two steps:<br>
+Ltx = linalg.solve_triangular(L, alpha[idx], lower=True)<br>
+gamma = linalg.solve_triangular(L, Ltx, trans=1, lower=True)<br>
 residual = y - np.dot(X[:, idx],&nbsp;gamma)</p>
-<p>return gamma, idx<br />&nbsp;[/sourcecode]</p>
+<p>return gamma, idx<br>&nbsp;[/sourcecode]</p>
 <p>Note that a lot of the code remained unchanged, this is the same
 algorithm as before, only the Cholesky trick is used to improve
 performance. According to the plot in [<a href="#footnote-3">3</a>], we can see that the naive
@@ -211,7 +206,7 @@ can be found in the <code>scikits.learn</code> repository [<a href="#footnote-4"
 moved on to code other things, since <span class="caps">OMP</span> was passing tests and the
 signal recovery example was working. The following issues popped up
 during&nbsp;review:</p>
-<p>​1. The lambda stopping condition does not pickle.<br />
+<p>​1. The lambda stopping condition does not pickle.<br>
 2. For well-constructed signals and data matrices, assuming normal
 atoms, [latex] \mathbf{w}[/latex] on line 14 will never have norm
 greater than or equal to zero, unless the chosen feature happens to be
@@ -220,7 +215,7 @@ since we do an orthogonal projection at each step. However, if the
 matrix [latex] X[/latex] is not well-behaved (for example, if it has two
 identical columns, and [latex] y[/latex] is built using non-zero
 coefficients for those columns), then we end up with the square root of
-a negative value on line 17.<br />
+a negative value on line 17.<br>
 3. It was orders of magnitude slower than least-angle regression, given
 the same number of nonzero&nbsp;coefficients.</p>
 <p>1 was an easy fix. 2 was a bit tricky since it was a little hidden: the
@@ -244,44 +239,44 @@ obvious thing was the way I was building the matrix [latex] L[/latex]
 was clearly suboptimal, reallocating it at each&nbsp;iteration.</p>
 <p>This leads to the following&nbsp;code:</p>
 <p>[sourcecode&nbsp;language=&#8221;Python&#8221;]</p>
-<p>def cholesky_omp(X, y, n_nonzero_coefs, eps=None):<br />
-min_float = np.finfo(X.dtype).eps<br />
-alpha = np.dot(X.T, y)<br />
-residual = y<br />
-n_active = 0<br />
+<p>def cholesky_omp(X, y, n_nonzero_coefs, eps=None):<br>
+min_float = np.finfo(X.dtype).eps<br>
+alpha = np.dot(X.T, y)<br>
+residual = y<br>
+n_active = 0<br>
 idx =&nbsp;[]</p>
-<p>max_features = X.shape<a href="#footnote-1">1</a> if eps is not None else n_nonzero_coefs<br />
-L = np.empty((max_features, max_features), dtype=X.dtype)<br />
+<p>max_features = X.shape<a href="#footnote-1">1</a> if eps is not None else n_nonzero_coefs<br>
+L = np.empty((max_features, max_features), dtype=X.dtype)<br>
 L[0, 0] =&nbsp;1.</p>
-<p>while 1:<br />
-lam = np.abs(np.dot(X.T, residual)).argmax()<br />
-if lam \&lt; n_active or alpha[lam] ** 2 > min_float:<br />
-# atom already selected or inner product too small<br />
-warn(&#8220;Stopping early&#8221;)<br />
-break<br />
-if n_active &gt; 0:<br />
-# Updates the Cholesky decomposition of X&#8217; X<br />
-w = linalg.solve_triangular(L[:n_active, :n_active],<br />
-np.dot(X[:, idx].T, X[:, lam]),<br />
-lower=True)<br />
-L[n_active, :n_active] = w<br />
-d = np.dot(w.T, w)<br />
-if 1 - d &lt;= min_float: # selected atoms are dependent<br />
-warn(&#8220;Stopping early&#8221;)<br />
-break<br />
-L[n_active, n_active] = np.sqrt(1 - d)<br />
-idx.append(lam)<br />
-# solve <span class="caps">LL</span>&#8217;x = y in two steps:<br />
+<p>while 1:<br>
+lam = np.abs(np.dot(X.T, residual)).argmax()<br>
+if lam \&lt; n_active or alpha[lam] ** 2 > min_float:<br>
+# atom already selected or inner product too small<br>
+warn(&#8220;Stopping early&#8221;)<br>
+break<br>
+if n_active &gt; 0:<br>
+# Updates the Cholesky decomposition of X&#8217; X<br>
+w = linalg.solve_triangular(L[:n_active, :n_active],<br>
+np.dot(X[:, idx].T, X[:, lam]),<br>
+lower=True)<br>
+L[n_active, :n_active] = w<br>
+d = np.dot(w.T, w)<br>
+if 1 - d &lt;= min_float: # selected atoms are dependent<br>
+warn(&#8220;Stopping early&#8221;)<br>
+break<br>
+L[n_active, n_active] = np.sqrt(1 - d)<br>
+idx.append(lam)<br>
+# solve <span class="caps">LL</span>&#8217;x = y in two steps:<br>
 Ltx = linalg.solve_triangular(L[:n_active, :n_active], alpha[idx],
-lower=True)<br />
+lower=True)<br>
 gamma = linalg.solve_triangular(L[:n_active, :n_active], Ltx,
-trans=1, lower=True)<br />
-residual = y - np.dot(X[:, idx], gamma)<br />
-if eps is not None and np.dot(residual.T, residual) &lt;= eps:<br />
-break<br />
-elif n_active == max_features:<br />
-break<br />
-return gamma, idx<br />&nbsp;[/sourcecode]</p>
+trans=1, lower=True)<br>
+residual = y - np.dot(X[:, idx], gamma)<br>
+if eps is not None and np.dot(residual.T, residual) &lt;= eps:<br>
+break<br>
+elif n_active == max_features:<br>
+break<br>
+return gamma, idx<br>&nbsp;[/sourcecode]</p>
 <p>What should be noted here, apart from the obvious fix for #1, are the
 early stopping conditions. It is natural to stop if the same feature
 gets picked twice: the residual is always orthogonalized with respect to
@@ -303,13 +298,13 @@ and beneath is initialized before access. Luckily, the
 least-angle regression. In the next part of the article we will see how
 we can make it beat <span class="caps">LARS</span>.</p>
 <p><span id="footnote-1"><a href="#footnote-1">1</a></span> I always wanted to use this word in a
-serious context :P<br />
+serious context :P<br>
 <span id="footnote-2"><a href="#footnote-2">2</a></span> Rubinstein, R., Zibulevsky, M. and
 Elad, M., [Efficient Implementation of the K-<span class="caps">SVD</span> Algorithm using Batch
 Orthogonal Matching Pursuit][] Technical Report - <span class="caps">CS</span> Technion, April
-2008.<br />
+2008.<br>
 <span id="footnote-3"><a href="#footnote-3">3</a></span> <a href="http://venefrombucharest.wordpress.com/2011/05/30/first-thoughts-on-orthogonal-matching-pursuit/" title="First thoughts on Orthogonal Matching Pursuit">First thoughts on Orthogonal
-Matching Pursuit</a> on this blog.<br />
+Matching Pursuit</a> on this blog.<br>
 <span id="footnote-4"><a href="#footnote-4">4</a></span> <a href="https://github.com/scikit-learn/scikit-learn/blob/master/scikits/learn/linear_model/omp.py">omp.py</a> on&nbsp;github.</p>
 <p>[Efficient Implementation of the K-<span class="caps">SVD</span> Algorithm using Batch
   Orthogonal Matching Pursuit]: http://www.cs.technion.ac.il/~ronrubin/Publications/<span class="caps">KSVD</span>-<span class="caps">OMP</span>-v2.pdf</p>

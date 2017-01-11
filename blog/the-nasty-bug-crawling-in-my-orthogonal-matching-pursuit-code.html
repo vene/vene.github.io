@@ -55,11 +55,6 @@
         <header id="banner" class="body">
                 <div id="mainheader">Vlad Niculae (~vene)</div>
                 <!--<nav><ul>
-                    <li><a href="http://vene.ro/fonts.html">Fonts</a></li>
-                    <li><a href="http://vene.ro/papers.html">Publications</a></li>
-                    <li><a href="http://vene.ro/privacy.html">Privacy&nbsp;Policy</a></li>
-                    <li><a href="http://vene.ro/talks.html">Talks</a></li>
-                    <li><a href="http://vene.ro/teaching.html">Teaching</a></li>
                     <li><a href="/publications.html">Publications</a></li>
                     <li><a href="http://vene.ro/blog/">Blog</a></li>
                 </ul></nav> -->
@@ -91,9 +86,9 @@ a similar (or maybe even identical) outcome, in theory. So lucky that
 Alejandro pointed out to him the existence of the scikit-learn
 implementation, and that Bob&#8217;s code <a href="http://media.aau.dk/null_space_pursuits/2011/10/omp-in-python-strange-results.html">exposed a bug</a> that all the test
 coverage didn&#8217;t catch! This plot should increase, certainly not
-decrease! Something is clearly wrong here.<br />
+decrease! Something is clearly wrong here.<br>
 <a href="http://media.aau.dk/null_space_pursuits/2011/10/omp-in-python-strange-results.html"><img alt="OMP buggy phase transition, decreasing instead of
-increasing" src="http://media.aau.dk/null_space_pursuits/2011/10/17/OMPscikit.png" title="OMP buggy phase transition" /></a><br />
+increasing" src="http://media.aau.dk/null_space_pursuits/2011/10/17/OMPscikit.png" title="OMP buggy phase transition"></a><br>
 Luckily we were able to find it and <a href="http://media.aau.dk/null_space_pursuits/2011/10/to-the-rescue.html">fix it</a> very quickly. I have
 updated the old entries I wrote on the <span class="caps">OMP</span> optimizations, so they no
 longer include the bug. But I take this opportunity to explain what
@@ -113,23 +108,23 @@ leading to more zero entries than we should have. A keen eye could have
 noticed that the first `n_nonzero_coefs` entries in <span class="caps">OMP</span> solution
 vectors were never non-zero. But alas, my eye was not a keen one at&nbsp;all.</p>
 <p>In other words, the following test (that was written after the bug was
-found, unfortunately) was failing:<br />
-[sourcecode lang=&#8221;Python&#8221;]<br />
-def test_swapped_regressors():<br />
-gamma = np.zeros(n_features)<br />
-# X[:, 21] should be selected first, then X[:, 0] selected second,<br />
-# which will take X[:, 21]&#8217;s place in case the algorithm does<br />
-# column swapping for optimization (which is the case at the moment)<br />
-gamma[21] = 1.0<br />
-gamma[0] = 0.5<br />
-new_y = np.dot(X, gamma)<br />
-new_Xy = np.dot(X.T, new_y)<br />
-gamma_hat = orthogonal_mp(X, new_y, 2)<br />
-gamma_hat_gram = orthogonal_mp_gram(G, new_Xy, 2)<br />
-# active indices should be [0, 21], but prior to the bugfix<br />
-# the algorithm would update only [21] but twice<br />
-assert_equal(np.flatnonzero(gamma_hat), [0, 21])<br />
-assert_equal(np.flatnonzero(gamma_hat_gram), [0, 21])<br />&nbsp;[/sourcecode]</p>
+found, unfortunately) was failing:<br>
+[sourcecode lang=&#8221;Python&#8221;]<br>
+def test_swapped_regressors():<br>
+gamma = np.zeros(n_features)<br>
+# X[:, 21] should be selected first, then X[:, 0] selected second,<br>
+# which will take X[:, 21]&#8217;s place in case the algorithm does<br>
+# column swapping for optimization (which is the case at the moment)<br>
+gamma[21] = 1.0<br>
+gamma[0] = 0.5<br>
+new_y = np.dot(X, gamma)<br>
+new_Xy = np.dot(X.T, new_y)<br>
+gamma_hat = orthogonal_mp(X, new_y, 2)<br>
+gamma_hat_gram = orthogonal_mp_gram(G, new_Xy, 2)<br>
+# active indices should be [0, 21], but prior to the bugfix<br>
+# the algorithm would update only [21] but twice<br>
+assert_equal(np.flatnonzero(gamma_hat), [0, 21])<br>
+assert_equal(np.flatnonzero(gamma_hat_gram), [0, 21])<br>&nbsp;[/sourcecode]</p>
 <p>Note that this bug has been fixed for a while, but I didn&#8217;t get the free
 time to write this post until now. Good news is: we fixed it, and did so
 very quickly after the report. So you can still trust me, I&nbsp;guess!</p>

@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Vlad Niculae (~vene)</title><link href="http://vene.ro/" rel="alternate"></link><link href="http://vene.ro/feeds/conferences.atom.xml" rel="self"></link><id>http://vene.ro/</id><updated>2011-09-20T14:17:00+02:00</updated><entry><title>RANLP 2011 in Hissar, BG</title><link href="http://vene.ro/blog/ranlp-2011-in-hissar-bg.html" rel="alternate"></link><published>2011-09-20T14:17:00+02:00</published><author><name>vene</name></author><id>tag:vene.ro,2011-09-20:blog/ranlp-2011-in-hissar-bg.html</id><summary type="html">&lt;p&gt;Last week was marked by the international &lt;span class="caps"&gt;RANLP&lt;/span&gt; (Recent Advances in
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Vlad Niculae (~vene) - conferences</title><link href="http://vene.ro/" rel="alternate"></link><link href="http://vene.ro/feeds/conferences.atom.xml" rel="self"></link><id>http://vene.ro/</id><updated>2011-09-20T14:17:00+02:00</updated><entry><title>RANLP 2011 in Hissar, BG</title><link href="http://vene.ro/blog/ranlp-2011-in-hissar-bg.html" rel="alternate"></link><published>2011-09-20T14:17:00+02:00</published><updated>2011-09-20T14:17:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-09-20:/blog/ranlp-2011-in-hissar-bg.html</id><summary type="html">&lt;p&gt;Last week was marked by the international &lt;span class="caps"&gt;RANLP&lt;/span&gt; (Recent Advances in
 Natural Language Processing) conference, taking place in a nice spa in
 Hissar, Bulgaria. The excellent folks from the &lt;a href="http://clg.wlv.ac.uk/"&gt;computational
 linguistics group&lt;/a&gt; at the University of Wolverhampton were behind it,
 together with the &lt;a href="http://www.iict.bas.bg/EN/index.html"&gt;Institute of Information and Communication
-Technologies&lt;/a&gt; from the Bulgarian Academy of Sciences.&lt;br /&gt;
+Technologies&lt;/a&gt; from …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Last week was marked by the international &lt;span class="caps"&gt;RANLP&lt;/span&gt; (Recent Advances in
+Natural Language Processing) conference, taking place in a nice spa in
+Hissar, Bulgaria. The excellent folks from the &lt;a href="http://clg.wlv.ac.uk/"&gt;computational
+linguistics group&lt;/a&gt; at the University of Wolverhampton were behind it,
+together with the &lt;a href="http://www.iict.bas.bg/EN/index.html"&gt;Institute of Information and Communication
+Technologies&lt;/a&gt; from the Bulgarian Academy of Sciences.&lt;br&gt;
 [caption id=&amp;#8221;attachment_247&amp;#8221; align=&amp;#8221;alignleft&amp;#8221; width=&amp;#8221;225&amp;#8221; caption=&amp;#8221;
-&amp;#8220;][&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2011/09/319030_10150303323328171_677848170_8151131_1046590975_n1.jpg?w=225" title="Warm spring in Hissar" /&gt;][]&lt;/p&gt;
-&lt;p&gt;A fountain with warm mineral spring water in Hissarya. &lt;br /&gt;
+&amp;#8220;][&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2011/09/319030_10150303323328171_677848170_8151131_1046590975_n1.jpg?w=225" title="Warm spring in Hissar"&gt;][]&lt;/p&gt;
+&lt;p&gt;A fountain with warm mineral spring water in Hissarya. &lt;br&gt;
 &lt;small&gt;Picture by &lt;a href="http://pers-www.wlv.ac.uk/~ex0233/" title="Miranda Chong"&gt;Miranda&lt;/a&gt;&lt;/small&gt;&lt;/p&gt;
-&lt;p&gt;[/caption]&lt;br /&gt;
+&lt;p&gt;[/caption]&lt;br&gt;
 I must begin by thanking them: the organization was impeccable! I&amp;#8217;m not
 sure, but I think that at one point Ivelina was even running around
 buying routers to improve wifi coverage (which is already spectacular in
@@ -60,8 +65,11 @@ about something important, or whether I am plain wrong about something.
 In particular, I seem to have been completely ignorant of the existence
 of the Google n-gram data, which has been around for quite a while, so I
 must have missed other important things as&amp;nbsp;well.&lt;/p&gt;
-&lt;p&gt;Take care, kind readers, and express your opinion!&lt;br /&gt;&amp;nbsp;V&lt;/p&gt;
-&lt;p&gt;[&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2011/09/319030_10150303323328171_677848170_8151131_1046590975_n1.jpg?w=225" title="Warm spring in Hissar" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/09/319030_10150303323328171_677848170_8151131_1046590975_n1.jpg&lt;/p&gt;</summary><category term="conferences"></category><category term="nlp"></category></entry><entry><title>Long overdue update. EuroScipy and SSLST 2011</title><link href="http://vene.ro/blog/long-overdue-update-euroscipy-and-sslst-2011.html" rel="alternate"></link><published>2011-09-05T00:08:00+02:00</published><author><name>vene</name></author><id>tag:vene.ro,2011-09-05:blog/long-overdue-update-euroscipy-and-sslst-2011.html</id><summary type="html">&lt;p&gt;Anybody reading my blog should have expected me to blog about the end of
+&lt;p&gt;Take care, kind readers, and express your opinion!&lt;br&gt;&amp;nbsp;V&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2011/09/319030_10150303323328171_677848170_8151131_1046590975_n1.jpg?w=225" title="Warm spring in Hissar"&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/09/319030_10150303323328171_677848170_8151131_1046590975_n1.jpg&lt;/p&gt;</content><category term="conferences"></category><category term="nlp"></category></entry><entry><title>Long overdue update. EuroScipy and SSLST 2011</title><link href="http://vene.ro/blog/long-overdue-update-euroscipy-and-sslst-2011.html" rel="alternate"></link><published>2011-09-05T00:08:00+02:00</published><updated>2011-09-05T00:08:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-09-05:/blog/long-overdue-update-euroscipy-and-sslst-2011.html</id><summary type="html">&lt;p&gt;Anybody reading my blog should have expected me to blog about the end of
+my GSoC. Sorry to disappoint, but I simply did not experience anything
+similar to an ending. On the contrary, I feel like things have barely
+started. Also, I apologize for one of the few posts here …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Anybody reading my blog should have expected me to blog about the end of
 my GSoC. Sorry to disappoint, but I simply did not experience anything
 similar to an ending. On the contrary, I feel like things have barely
 started. Also, I apologize for one of the few posts here without pretty
@@ -109,9 +117,9 @@ Romanian Ministry of Education failed to specify the allocated number of
 public positions for masters&amp;#8217; programmes, the admission exam at the
 University of Bucharest will be delayed by a couple of weeks. Luckily,
 this will allow me to attend &lt;a href="http://lml.bas.bg/ranlp2011/start3.php"&gt;&lt;span class="caps"&gt;RANLP&lt;/span&gt; 2011&lt;/a&gt; in Hissar, Bulgaria a week
-from now, where I will present my poster entitled:&lt;br /&gt;
+from now, where I will present my poster entitled:&lt;br&gt;
 &amp;#8220;Can alternations be learned? A machine learning approach to Romanian
 verb conjugation&amp;#8221; by Liviu P. Dinu, Emil Ionescu, Vlad Niculae and
 Octavia-Maria Sulea. See you in&amp;nbsp;Hissar!&lt;/p&gt;
 &lt;p&gt;[computational linguistics and psycholinguistics research center
-  (CLiPS)]:&amp;nbsp;http://www.clips.ua.ac.be/&lt;/p&gt;</summary><category term="Uncategorized"></category></entry></feed>
+  (CLiPS)]:&amp;nbsp;http://www.clips.ua.ac.be/&lt;/p&gt;</content><category term="Uncategorized"></category></entry></feed>

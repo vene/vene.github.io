@@ -55,11 +55,6 @@
         <header id="banner" class="body">
                 <div id="mainheader">Vlad Niculae (~vene)</div>
                 <!--<nav><ul>
-                    <li><a href="http://vene.ro/fonts.html">Fonts</a></li>
-                    <li><a href="http://vene.ro/papers.html">Publications</a></li>
-                    <li><a href="http://vene.ro/privacy.html">Privacy&nbsp;Policy</a></li>
-                    <li><a href="http://vene.ro/talks.html">Talks</a></li>
-                    <li><a href="http://vene.ro/teaching.html">Teaching</a></li>
                     <li><a href="/publications.html">Publications</a></li>
                     <li><a href="http://vene.ro/blog/">Blog</a></li>
                 </ul></nav> -->
@@ -100,24 +95,24 @@ before engineering such a solution, I wanted to test out how to generate
 three related benchmarks using different arguments for the dataset
 generation&nbsp;function.</p>
 <p>This is what I came up&nbsp;with:</p>
-<p>[sourcecode language=&#8221;python&#8221;]<br />
+<p>[sourcecode language=&#8221;python&#8221;]<br>
 from vbench.benchmark import&nbsp;Benchmark</p>
-<p>_setup = &#8220;&#8221;&#8220;<br />
+<p>_setup = &#8220;&#8221;&#8220;<br>
 from deps import&nbsp;*</p>
-<p>kwargs = %s<br />
-X, y = make_regression(random_state=0, **kwargs)<br />
-lr = LinearRegression()<br />&nbsp;&#8220;&#8221;&#8220;</p>
-<p>_configurations = [<br />
-(&#8216;linear_regression_many_samples&#8217;,<br />
-{&#8216;n_samples&#8217;: 10000, &#8216;n_features&#8217;: 100}),<br />
-(&#8216;linear_regression_many_features&#8217;,<br />
-{&#8216;n_samples&#8217;: 100, &#8216;n_features&#8217;: 10000}),<br />
-(&#8216;linear_regression_many_targets&#8217;,<br />
-{&#8216;n_samples&#8217;: 1000, &#8216;n_features&#8217;: 100, &#8216;n_targets&#8217;: 100})<br />&nbsp;]</p>
+<p>kwargs = %s<br>
+X, y = make_regression(random_state=0, **kwargs)<br>
+lr = LinearRegression()<br>&nbsp;&#8220;&#8221;&#8220;</p>
+<p>_configurations = [<br>
+(&#8216;linear_regression_many_samples&#8217;,<br>
+{&#8216;n_samples&#8217;: 10000, &#8216;n_features&#8217;: 100}),<br>
+(&#8216;linear_regression_many_features&#8217;,<br>
+{&#8216;n_samples&#8217;: 100, &#8216;n_features&#8217;: 10000}),<br>
+(&#8216;linear_regression_many_targets&#8217;,<br>
+{&#8216;n_samples&#8217;: 1000, &#8216;n_features&#8217;: 100, &#8216;n_targets&#8217;: 100})<br>&nbsp;]</p>
 <p>_statement = &#8220;lr.fit(X,&nbsp;y)&#8221;</p>
-<p>_globs = globals()<br />
+<p>_globs = globals()<br>
 _globs.update({name: Benchmark(_statement, _setup % str(kwargs),
-name=name)<br />
+name=name)<br>
 for name, kwargs in&nbsp;_configurations})</p>
 <p>[/sourcecode]</p>
 <p>It works perfectly, but I don&#8217;t like having to hack the globals to make
@@ -135,14 +130,14 @@ that anything was&nbsp;wrong.</p>
 <p>So what was the problem? My fault, of course, whitespace. But in all
 fairness, we should add better&nbsp;feedback.</p>
 <p>This is what I was doing to generate the setup&nbsp;string:</p>
-<p>[sourcecode lang=&#8221;python&#8221;]<br />
-def _make_setup(kwargs):<br />
-return &#8220;&#8221;&#8220;<br />
+<p>[sourcecode lang=&#8221;python&#8221;]<br>
+def _make_setup(kwargs):<br>
+return &#8220;&#8221;&#8220;<br>
 from deps import&nbsp;*</p>
-<p>kwargs = %s<br />
-X, y = make_regression(random_state=0, **kwargs)<br />
-lr = LinearRegression()<br />
-&#8220;&#8221;&#8221; % str(kwargs)<br />&nbsp;[/sourcecode]</p>
+<p>kwargs = %s<br>
+X, y = make_regression(random_state=0, **kwargs)<br>
+lr = LinearRegression()<br>
+&#8220;&#8221;&#8221; % str(kwargs)<br>&nbsp;[/sourcecode]</p>
 <p>It&#8217;s clear as daylight now that I overzealously indented the multiline
 string. But man, was it hard to debug! Also, in this example, the bug
 led to a refactoring that made the whole thing nicer and more direct.
