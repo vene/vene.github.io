@@ -3,6 +3,12 @@ Slug: papers
 
 # Publications
 
+* Vlad Niculae, Joonsuk Park, Claire Cardie.
+Argument mining with structured SVMs and RNNs. In: Proc. of *ACL 2017*.
+\[&nbsp;[arXiv](https://arxiv.org/abs/1704.06869)&nbsp;\]
+\[&nbsp;[code](https://github.com/vene/marseille)&nbsp;\]
+\[&nbsp;[data](http://joonsuk.org/)&nbsp;\]
+
 * Vlad Niculae and Cristian Danescu-Niculescu-Mizil.
 Conversational markers of constructive discussions. In: Proc. of *NAACL-HLT 2016*. \[ [Website](/constructive) \]
 

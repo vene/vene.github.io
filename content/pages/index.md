@@ -25,10 +25,12 @@ the University of Bucharest](http://nlp.unibuc.ro/).
 
 # News
 
+  - Check out our ACL'17 paper on [*Argument mining with structured SVMs and
+    RNNs*](https://arxiv.org/abs/1704.06869)!
+    [Code](https://github.com/vene/marseille) and 
+    [data](http://joonsuk.org/) are available. 
   - Released the dataset for our NAACL 2016 paper, [*Conversational markers of constructive discussions*](/constructive).
   - Chenhao and I wrote a [blog post]({filename}/blog/winning_arguments.ipynb) about our WWW 2016 paper with [Cristian](http://www.cs.cornell.edu/~cristian/) and [Lillian](http://www.cs.cornell.edu/home/llee/), [*Winning Arguments: Interaction Dynamics and Persuasion Strategies in Good-faith Online Discussions*](https://chenhaot.com/pages/changemyview.html).
-  - Read more about our ACL 2015 paper [*Linguistic Harbingers of
-  Betrayal*](/betrayal), in which we study the language of alliances and betrayals between players of the strategy game *Diplomacy*.
 
 <!--
 # Teaching
