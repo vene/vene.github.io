@@ -8,10 +8,13 @@ save_as: index.html
 
 Welcome, traveler, to my page. Enjoy your brief stay while you get to
 know me!
-
 My name is Vlad and I'm a PhD student in Computer Science
 at [Cornell](http://www.cs.cornell.edu/), advised by [Claire
 Cardie](http://www.cs.cornell.edu/home/cardie/).
+
+In the spring of '17 I am happy to intern at [*NTT Communication Science Labs*](http://www.kecl.ntt.co.jp/rps/english/index_e.html) with [Mathieu Blondel](http://mblondel.org).
+
+
 I am also a scientific Python developer, maintainter of the
 [polylearn](http://contrib.scikit-learn.org/polylearn) library
 for factorization machines and polynomial networks in Python,
@@ -26,13 +29,14 @@ the University of Bucharest](http://nlp.unibuc.ro/).
   - Chenhao and I wrote a [blog post]({filename}/blog/winning_arguments.ipynb) about our WWW 2016 paper with [Cristian](http://www.cs.cornell.edu/~cristian/) and [Lillian](http://www.cs.cornell.edu/home/llee/), [*Winning Arguments: Interaction Dynamics and Persuasion Strategies in Good-faith Online Discussions*](https://chenhaot.com/pages/changemyview.html).
   - Read more about our ACL 2015 paper [*Linguistic Harbingers of
   Betrayal*](/betrayal), in which we study the language of alliances and betrayals between players of the strategy game *Diplomacy*.
-  
+
+<!--
 # Teaching
 
   - Fall 2016: TA for [CS 4740 Introduction to Natural Language Processing.](http://www.cs.cornell.edu/courses/cs4740/2016fa/)
     
     Office hours Wed 3&ndash;4pm in Gates G11: see you there!
-
+-->
 # Research
 
 You can take a look at the list of my [publications](papers.html).   The
