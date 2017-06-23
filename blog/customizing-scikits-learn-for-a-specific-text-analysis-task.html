@@ -54,10 +54,6 @@
 <div id="container">
         <header id="banner" class="body">
                 <div id="mainheader">Vlad Niculae (~vene)</div>
-                <!--<nav><ul>
-                    <li><a href="/publications.html">Publications</a></li>
-                    <li><a href="http://vene.ro/blog/">Blog</a></li>
-                </ul></nav> -->
         </header><!-- /#banner -->
         <div id="main" role="main">
 <section id="content" class="body">
@@ -121,7 +117,7 @@ complex object. In this case, we would like a classifier that receives a
 string as input, and directly outputs its label. We wouldn&#8217;t want the
 user to have to manually use the feature extractor prior to&nbsp;classification.</p>
 <p>The pipeline is very easy to&nbsp;build:  </p>
-<p><code>pipeline = Pipeline([('extr', InfinitivesExtractor()), ('svc', LinearSVC(multi_class=True))])</code><br>
+<p><code>pipeline = Pipeline([('extr', InfinitivesExtractor()), ('svc', LinearSVC(multi_class=True))])</code><br />
 The pipeline object now works exactly as expected: we can call fit and
 predict on it. It also exposes the parameters of its constituents, by
 prefixing them with the name of that component. For example, the support
@@ -178,16 +174,6 @@ and better code, and therefore work with greater&nbsp;efficiency.</p>
                 </address><!-- /#about -->
         </footer><!-- /#contentinfo -->
         </div>
-    <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-47024389-1']);
-    _gaq.push(['_trackPageview']);
-    (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-    </script>
 <script type="text/javascript">
     var disqus_shortname = 'vene';
     (function () {

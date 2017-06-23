@@ -54,10 +54,6 @@
 <div id="container">
         <header id="banner" class="body">
                 <div id="mainheader">Vlad Niculae (~vene)</div>
-                <!--<nav><ul>
-                    <li><a href="/publications.html">Publications</a></li>
-                    <li><a href="http://vene.ro/blog/">Blog</a></li>
-                </ul></nav> -->
         </header><!-- /#banner -->
         <div id="main" role="main">
 <section id="content" class="body">
@@ -103,7 +99,7 @@ want to have a huge, monolithic <code>Benchmark</code> class that was specific t
 what we want in scikit-learn-speed. So on this branch, I set up a
 mixin/multiple inheritance hierarchy of benchmark&nbsp;classes.</p>
 <p>The <code>Benchmark</code> class in vbench is now an abstract base class, with some
-common functionality and structure.<br>
+common functionality and structure.<br />
 Our <code>SklBenchmark</code> class is defined in scikit-learn-speed&nbsp;as:</p>
 <p><code>class SklBenchmark(CProfileBenchmarkMixin,  MemoryBenchmarkMixin, PythonBenchmark):</code></p>
 <p>Let&#8217;s read this from right to&nbsp;left:</p>
@@ -147,16 +143,6 @@ would be very&nbsp;appreciated.</p>
                 </address><!-- /#about -->
         </footer><!-- /#contentinfo -->
         </div>
-    <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-47024389-1']);
-    _gaq.push(['_trackPageview']);
-    (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-    </script>
 <script type="text/javascript">
     var disqus_shortname = 'vene';
     (function () {

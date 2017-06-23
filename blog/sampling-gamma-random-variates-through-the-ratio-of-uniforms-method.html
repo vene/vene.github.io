@@ -54,10 +54,6 @@
 <div id="container">
         <header id="banner" class="body">
                 <div id="mainheader">Vlad Niculae (~vene)</div>
-                <!--<nav><ul>
-                    <li><a href="/publications.html">Publications</a></li>
-                    <li><a href="http://vene.ro/blog/">Blog</a></li>
-                </ul></nav> -->
         </header><!-- /#banner -->
         <div id="main" role="main">
 <section id="content" class="body">
@@ -92,10 +88,10 @@ functions. Essentially, given a density function over [latex]
 c > 0 [/latex] and a parametrization [latex]\phi[/latex] from [latex]
 \mathbb{R}\^{m+1}[/latex] to [latex] \mathbb{R}\^{m}[/latex] expressed
 as: \$\$ \phi(v_0, v_1, &#8230;, v_m) = \left ( \frac{v_1}{v_0\^c},
-\frac{v_2}{v_0\^c}, &#8230;, \frac{v_m}{v_0\^c} \right )\$\$<br>
+\frac{v_2}{v_0\^c}, &#8230;, \frac{v_m}{v_0\^c} \right )\$\$<br />
 Define the set [latex] \mathcal{C} = \{\mathbf{v} \big |
 \gamma(\mathbf{v}) \leq 0, v_0 > 0\} \in
-\mathbb{R}\^{m+1}[/latex] where<br>
+\mathbb{R}\^{m+1}[/latex] where<br />
 \$\$\gamma(\mathbf{v}) = \log v_0 - \frac{\log h(\phi(v_0,
 v_1, &#8230;, v_m))}{mc + 1}\$\$ If [latex] \mathcal{C}[/latex] is
 bounded and we sample a uniform vector [latex] \mathbf{V} \sim
@@ -107,29 +103,29 @@ but if you are interested, just leave me a comment and I&#8217;ll do a
 follow-up post with the&nbsp;proofs.</p>
 <h3>Univariate&nbsp;scenario</h3>
 <p>For the univariate case, all the above simplifies to \$\$ \mathcal{C} =
-\left \{(u, v) \Big | 0 \&lt; u \&lt; \sqrt<br>
+\left \{(u, v) \Big | 0 \&lt; u \&lt; \sqrt<br />
 {h\left (\frac{v}{u\^c}\right )} \right \} \$\$. We generate
 [latex] (U, V) \sim \text{Uniform}(\mathcal{C})[/latex] and take
-[latex] \frac{V}{U\^c} \sim f(x)[/latex].<br>
+[latex] \frac{V}{U\^c} \sim f(x)[/latex].<br />
 Since we are looking at the (univariate) Gamma distribution, described
 by: \$\$ f(x; \nu, \theta) = \frac{x\^{\mu - 1}
 \exp(\frac{-x}{\theta})}{\theta\^k\Gamma(k)}\$\$ [latex]
 \nu[/latex] is the shape parameter and [latex] \theta[/latex] is the
-scale parameter.<br>
+scale parameter.<br />
 But because of the property that if [latex] X \sim \text{Gamma}(\nu,
 \theta)[/latex], then for any [latex] k > 0[/latex], [latex] kX \sim
 \text{Gamma}(\nu, k\theta)[/latex], we conclude that we can fix
 [latex] \theta[/latex] to 1 without loss of generality. Replacing in
 the style of the definition in the previous section, we have [latex]
 h(x; \nu) = x\^{\nu-1}e\^{-x}[/latex] and [latex] H_\nu =
-\Gamma(\nu)[/latex].<br>
+\Gamma(\nu)[/latex].<br />
 This allows us to compute the equation of the boundary of the set
 [latex] \mathcal{C}[/latex] which ends up being described by
 [latex]\gamma(u, v) = \log{u} - \frac{\nu - 1}{c + 1}
 \log{\left(\frac{v}{u\^c}\right)} + \frac{1}{c+1}
 \frac{v}{u\^c}[/latex]. For visualisation purposes, here is how it
 would look like for [latex] \nu=6, c=1[/latex] (plotted using <a href="http://www.wolframalpha.com/" title="Wolfram Alpha">Wolfram
-Alpha</a>):[<img alt="" src="http://localhost:8001/wp-content/uploads/2011/10/regiunea.png" title="The accepting set C">][]</p>
+Alpha</a>):[<img alt="" src="http://localhost:8001/wp-content/uploads/2011/10/regiunea.png" title="The accepting set C" />][]</p>
 <h3>Sampling&nbsp;algorithm</h3>
 <p>In order to uniformly sample from this set, we can apply basic rejection
 sampling: just uniformly sample from a rectangular region surrounding
@@ -139,7 +135,7 @@ minimal bounding box, which can be done by solving a couple of
 optimization problems using Lagrange multipliers and the <span class="caps">KKT</span> conditions.
 Also by looking closely at the image, you can see that the lower left
 corner is exactly the origin: this turns out not to be a coincidence. I
-won&#8217;t go into detail here, but here are the bounds I derived:<br>
+won&#8217;t go into detail here, but here are the bounds I derived:<br />
 \$\$ 0 \&lt; u \&lt; (\nu - 1)\^\frac{\nu - 1}{c + 1} e \^ {-\frac{\nu -
 1}{c + 1}} \text{ and } 0\&lt; v \&lt; \left(\frac{c\nu +
 1}{c}\right)\^{\frac{c\nu + 1}{c + 1}} e \^ {- \frac {c\nu +&nbsp;1}{c+1}}\$\$</p>
@@ -165,45 +161,45 @@ treated separately, which I did using the following property: Let
 a proof of this fact, see [<a href="#footnote-1">1</a>], which is a great article on
 generating Gamma&nbsp;variates.</p>
 <h3>Implementation</h3>
-<p>[sourcecode language=&#8221;python&#8221;]<br>
+<p>[sourcecode language=&#8221;python&#8221;]<br />
 from import numpy as&nbsp;np</p>
-<p>def _cond(u, v, k, c):<br>
-&#8220;&#8221;&#8220;Identity function describing the acceptance region&#8221;&#8220;&#8221;<br>
-x = v / u ** c<br>
+<p>def _cond(u, v, k, c):<br />
+&#8220;&#8221;&#8220;Identity function describing the acceptance region&#8221;&#8220;&#8221;<br />
+x = v / u ** c<br />
 return (c + 1) * np.log(u) \&lt;= (k - 1) * np.log(x) -&nbsp;x</p>
-<p>def vn_standard_gamma(k, c=1.0, rng=np.random):<br>
-&#8220;&#8221;&#8220;Generates a single standard gamma random variate&#8221;&#8220;&#8221;<br>
-if k \&lt;= 0:<br>
-raise ValueError(&#8220;Gamma shape should be positive&#8221;)<br>
-elif k \&lt; 1:<br>
+<p>def vn_standard_gamma(k, c=1.0, rng=np.random):<br />
+&#8220;&#8221;&#8220;Generates a single standard gamma random variate&#8221;&#8220;&#8221;<br />
+if k \&lt;= 0:<br />
+raise ValueError(&#8220;Gamma shape should be positive&#8221;)<br />
+elif k \&lt; 1:<br />
 return vn_standard_gamma(1 + k, c, rng) * rng.uniform() ** (1 /
-k)<br>
-elif k == 1:<br>
-return rng.standard_exponential()<br>
-else:<br>
-a, b = get_bounds(k, c)<br>
-while True:<br>
-u, v = rng.uniform(0, a), rng.uniform(0, b)<br>
-if _cond(u, v, k, c):<br>
-break;<br>
+k)<br />
+elif k == 1:<br />
+return rng.standard_exponential()<br />
+else:<br />
+a, b = get_bounds(k, c)<br />
+while True:<br />
+u, v = rng.uniform(0, a), rng.uniform(0, b)<br />
+if _cond(u, v, k, c):<br />
+break;<br />
 return v / u **&nbsp;c</p>
-<p>def vn_gamma(k, t, shape=1, c=1.0, rng=np.random):<br>
-&#8220;&#8221;&#8220;Vectorized function to generate multiple gamma variates&#8221;&#8220;&#8221;<br>
-generator = lambda x: t * vn_standard_gamma(k, c, rng)<br>
-generator = np.vectorize(generator)<br>
+<p>def vn_gamma(k, t, shape=1, c=1.0, rng=np.random):<br />
+&#8220;&#8221;&#8220;Vectorized function to generate multiple gamma variates&#8221;&#8220;&#8221;<br />
+generator = lambda x: t * vn_standard_gamma(k, c, rng)<br />
+generator = np.vectorize(generator)<br />
 return&nbsp;generator(np.empty(shape))</p>
-<p>def get_bounds(k, c=1.0):<br>
+<p>def get_bounds(k, c=1.0):<br />
 &#8220;&#8221;&#8220;Computes the minimal upper bounds surrounding the acceptance
-region&#8221;&#8220;&#8221;<br>
-a = ((k - 1) / np.e) ** ((k - 1) / (c + 1))<br>
-b = ((c * k + 1) / (c * np.e)) ** ((c * k + 1) / (c + 1))<br>
+region&#8221;&#8220;&#8221;<br />
+a = ((k - 1) / np.e) ** ((k - 1) / (c + 1))<br />
+b = ((c * k + 1) / (c * np.e)) ** ((c * k + 1) / (c + 1))<br />
 return a,&nbsp;b</p>
-<p>def prob_acc(k, c=1.0):<br>
+<p>def prob_acc(k, c=1.0):<br />
 &#8220;&#8221;&#8220;Calculates the probability of acceptance for the given
-parameters&#8221;&#8220;&#8221;<br>
-from scipy.special import gamma<br>
-a, b = get_bounds(k, c)<br>
-return gamma(k) / ((c + 1) * a * b)<br>&nbsp;[/sourcecode]</p>
+parameters&#8221;&#8220;&#8221;<br />
+from scipy.special import gamma<br />
+a, b = get_bounds(k, c)<br />
+return gamma(k) / ((c + 1) * a * b)<br />&nbsp;[/sourcecode]</p>
 <h3>Results</h3>
 <p>And of course I should show you that it works. Here are some histograms
 for various values of [latex] \nu[/latex], with the theoretical density
@@ -211,15 +207,15 @@ plotted in dotted red, after sampling [latex] 10\^5[/latex] values. The
 y-axis is the frequency (sorry for labeling in Romanian), and for the
 red dotted line it can be interpreted as the theoretical probability.
 You can clearly see the goodness of fit is&nbsp;excellent.</p>
-<p>[<img alt="" src="http://localhost:8001/wp-content/uploads/2011/10/hist1.png" title="Histogram for nu=6">][][<img alt="" src="http://localhost:8001/wp-content/uploads/2011/10/hist2.png" title="Histogram for nu=100">][][<img alt="" src="http://localhost:8001/wp-content/uploads/2011/10/hist3.png" title="Histogram for nu=0.66">][]</p>
+<p>[<img alt="" src="http://localhost:8001/wp-content/uploads/2011/10/hist1.png" title="Histogram for nu=6" />][][<img alt="" src="http://localhost:8001/wp-content/uploads/2011/10/hist2.png" title="Histogram for nu=100" />][][<img alt="" src="http://localhost:8001/wp-content/uploads/2011/10/hist3.png" title="Histogram for nu=0.66" />][]</p>
 <p><span id="footnote-1"><a href="#footnote-1">1</a></span>: George Marsaglia and Wai Wan Tsang.
 1998. <a href="http://www.jstatsoft.org/v03/i03/paper">The Monty Python method for generating random variables</a>. <span class="caps">ACM</span>
 Trans. Math. Softw. 24, 3 (September 1998), 341-350.
 <a href="http://doi.acm.org/10.1145/292395.292453"><span class="caps">DOI</span>=10.1145/292395.292453</a></p>
-<p>[<img alt="" src="http://localhost:8001/wp-content/uploads/2011/10/regiunea.png" title="The accepting set C">]: http://localhost:8001/wp-content/uploads/2011/10/regiunea.png
-  [<img alt="" src="http://localhost:8001/wp-content/uploads/2011/10/hist1.png" title="Histogram for nu=6">]: http://localhost:8001/wp-content/uploads/2011/10/hist1.png
-  [<img alt="" src="http://localhost:8001/wp-content/uploads/2011/10/hist2.png" title="Histogram for nu=100">]: http://localhost:8001/wp-content/uploads/2011/10/hist2.png
-  [<img alt="" src="http://localhost:8001/wp-content/uploads/2011/10/hist3.png" title="Histogram for nu=0.66">]:&nbsp;http://localhost:8001/wp-content/uploads/2011/10/hist3.png</p>
+<p>[<img alt="" src="http://localhost:8001/wp-content/uploads/2011/10/regiunea.png" title="The accepting set C" />]: http://localhost:8001/wp-content/uploads/2011/10/regiunea.png
+  [<img alt="" src="http://localhost:8001/wp-content/uploads/2011/10/hist1.png" title="Histogram for nu=6" />]: http://localhost:8001/wp-content/uploads/2011/10/hist1.png
+  [<img alt="" src="http://localhost:8001/wp-content/uploads/2011/10/hist2.png" title="Histogram for nu=100" />]: http://localhost:8001/wp-content/uploads/2011/10/hist2.png
+  [<img alt="" src="http://localhost:8001/wp-content/uploads/2011/10/hist3.png" title="Histogram for nu=0.66" />]:&nbsp;http://localhost:8001/wp-content/uploads/2011/10/hist3.png</p>
     </div><!-- /.entry-content -->
     <div class="comments">
       <h2>Comments !</h2>
@@ -246,16 +242,6 @@ Trans. Math. Softw. 24, 3 (September 1998), 341-350.
                 </address><!-- /#about -->
         </footer><!-- /#contentinfo -->
         </div>
-    <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-47024389-1']);
-    _gaq.push(['_trackPageview']);
-    (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-    </script>
 <script type="text/javascript">
     var disqus_shortname = 'vene';
     (function () {

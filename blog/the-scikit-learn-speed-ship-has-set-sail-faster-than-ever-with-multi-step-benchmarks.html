@@ -54,10 +54,6 @@
 <div id="container">
         <header id="banner" class="body">
                 <div id="mainheader">Vlad Niculae (~vene)</div>
-                <!--<nav><ul>
-                    <li><a href="/publications.html">Publications</a></li>
-                    <li><a href="http://vene.ro/blog/">Blog</a></li>
-                </ul></nav> -->
         </header><!-- /#banner -->
         <div id="main" role="main">
 <section id="content" class="body">
@@ -133,17 +129,17 @@ sequence of strings, instead of just a string. On the database side,
 every benchmark result entry gets an extra component in the primary key,
 the number of the step it&nbsp;measures.</p>
 <p>In the benchmark description files, nothing is&nbsp;changed:</p>
-<p>[sourcecode lang=&#8221;python&#8221;]<br>
-{<br>
-&#8216;obj&#8217;: &#8216;<span class="caps">NMF</span>&#8217;,<br>
-&#8216;init_params&#8217;: {&#8216;n_components&#8217;: 2},<br>
-&#8216;datasets&#8217;: (&#8216;blobs&#8217;,),<br>
-&#8216;statements&#8217;: (&#8216;fit_unsup&#8217;, &#8216;transform_unsup&#8217;, &#8216;fit_transform&#8217;)<br>
-},<br>&nbsp;[/sourcecode]</p>
+<p>[sourcecode lang=&#8221;python&#8221;]<br />
+{<br />
+&#8216;obj&#8217;: &#8216;<span class="caps">NMF</span>&#8217;,<br />
+&#8216;init_params&#8217;: {&#8216;n_components&#8217;: 2},<br />
+&#8216;datasets&#8217;: (&#8216;blobs&#8217;,),<br />
+&#8216;statements&#8217;: (&#8216;fit_unsup&#8217;, &#8216;transform_unsup&#8217;, &#8216;fit_transform&#8217;)<br />
+},<br />&nbsp;[/sourcecode]</p>
 <p>But before, we would take the cartesian product of datasets and
 statements, and build a <code>Benchmark</code> object for every pairing. Now, we
 just pass the tuple as it is, and vbench is smart enough to do the right
-thing.<br>
+thing.<br />
 We avoided the extra calls to <code>fit</code> in a lot of benchmarks. The whole
 suite now takes almost half the time to&nbsp;run!</p>
 <p><em>Note:</em> This trick is currently hosted in the
@@ -174,16 +170,6 @@ suite now takes almost half the time to&nbsp;run!</p>
                 </address><!-- /#about -->
         </footer><!-- /#contentinfo -->
         </div>
-    <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-47024389-1']);
-    _gaq.push(['_trackPageview']);
-    (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-    </script>
 <script type="text/javascript">
     var disqus_shortname = 'vene';
     (function () {
