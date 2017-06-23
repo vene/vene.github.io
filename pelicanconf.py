@@ -63,7 +63,7 @@ EXTRA_PATH_METADATA = {
 
 
 # Evil tracking
-GOOGLE_ANALYTICS = 'UA-47024389-1'
+GOOGLE_ANALYTICS = None  # 'UA-47024389-1'
 DISQUS_SITENAME = 'vene'
 
 # IPython Notebook plugin

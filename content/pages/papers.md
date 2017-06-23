@@ -3,6 +3,17 @@ Slug: papers
 
 # Publications
 
+(More statistics and stuff on my [Google Scholar
+profile](https://scholar.google.com/citations?user=7_3UAgQAAAAJ).)
+
+* Vlad Niculae and Mathieu Blondel.
+A Regularized Framework for Sparse and Structured Neural Attention. 2017.
+\[&nbsp;[arXiv&nbsp;preprint](https://arxiv.org/abs/1705.07704)&nbsp;\]
+
+* Mathieu Blondel, Vlad Niculae, Takuma Otsuka, Naonori Ueda.
+A Regularized Framework for Sparse and Structured Neural Attention. 2017.
+\[&nbsp;[arXiv&nbsp;preprint](https://arxiv.org/abs/1705.07603)&nbsp;\]
+
 * Vlad Niculae, Joonsuk Park, Claire Cardie.
 Argument mining with structured SVMs and RNNs. In: Proc. of *ACL 2017*.
 \[&nbsp;[arXiv](https://arxiv.org/abs/1704.06869)&nbsp;\]
@@ -39,13 +50,11 @@ and Structures in Corpora.* Trento, Italy, November 2013. Association for
 Computational Linguistics.
 \[ [PDF](http://aclweb.org/anthology/W/W13/W13-3829.pdf) \] \[ [poster](papers/jssp13-similes-poster.pdf) \] \[ [code](https://github.com/vene/comparison-pattern) \]
 
-
 * Vlad Niculae and Octavian Popescu. Determining is-a relationships for textual
 entailment. In: *Proceedings of the Joint Symposium on Semantic Processing.
 Textual Inference and Structures in Corpora.* Trento, Italy, November 2013.
 Association for Computational Linguistics.
 \[ [PDF](http://aclweb.org/anthology/W/W13/W13-3830.pdf) \] \[ [poster](papers/jssp-rte-poster.pdf) \]
-
 
 * Lars Buitinck, Gilles Louppe, Mathieu Blondel, Fabian Pedregosa, Andreas
 Müller, Olivier Grisel, Vlad Niculae, Peter Prettenhofer, Alexandre Gramfort,
@@ -57,7 +66,7 @@ Learning*, Prague, Czech Republic.
 \[ [PDF](http://orbi.ulg.ac.be/bitstream/2268/154357/1/paper.pdf) \]
 
 * Liviu P. Dinu, Vlad Niculae, Octavia-Maria Șulea,
-Sequence tagging for verb conjugation in Romanian.  
+Sequence tagging for verb conjugation in Romanian.
 In Proceedings of the International Conference Recent Advances in Natural
 Language Processing RANLP 2013, 215–220. Hissar, Bulgaria, September 2013.
 INCOMA Ltd. Shoumen, BULGARIA.

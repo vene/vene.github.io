@@ -59,7 +59,7 @@
 {% include 'github.html' %}
         <header id="banner" class="body">
                 <div id="mainheader">{{ SITENAME }}</div>
-                <!--<nav><ul>
+{#
                 {% if DISPLAY_PAGES_ON_MENU %}
                 {% for page in PAGES %}
                     <li><a href="{{ SITEURL }}/{{ page.url }}">{{ page.title }}</a></li>
@@ -73,7 +73,8 @@
                     <li {% if cat == category %}class="active"{% endif %}><a href="{{ SITEURL }}/{{ cat.url }}">{{ cat }}</a></li>
                 {% endfor %}
                 {% endif %}
-                </ul></nav> -->
+                </ul></nav>
+#}
         </header><!-- /#banner -->
         <div id="main" role="main">
         {% block content %}

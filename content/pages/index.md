@@ -12,9 +12,6 @@ My name is Vlad and I'm a PhD student in Computer Science
 at [Cornell](http://www.cs.cornell.edu/), advised by [Claire
 Cardie](http://www.cs.cornell.edu/home/cardie/).
 
-In the spring of '17 I am happy to intern at [*NTT Communication Science Labs*](http://www.kecl.ntt.co.jp/rps/english/index_e.html) with [Mathieu Blondel](http://mblondel.org).
-
-
 I am also a scientific Python developer, maintainter of the
 [polylearn](http://contrib.scikit-learn.org/polylearn) library
 for factorization machines and polynomial networks in Python,
@@ -41,7 +38,7 @@ the University of Bucharest](http://nlp.unibuc.ro/).
 -->
 # Research
 
-You can take a look at the list of my [publications](papers.html).   The
+You can take a look at the list of my [publications](papers.html). The
 materials for [talks](talks.html) that I've had the honor of giving are also
 available.
 
