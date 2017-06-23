@@ -11,7 +11,7 @@ A Regularized Framework for Sparse and Structured Neural Attention. 2017.
 \[&nbsp;[arXiv&nbsp;preprint](https://arxiv.org/abs/1705.07704)&nbsp;\]
 
 * Mathieu Blondel, Vlad Niculae, Takuma Otsuka, Naonori Ueda.
-A Regularized Framework for Sparse and Structured Neural Attention. 2017.
+Multi-output Polynomial Networks and Factorization Machines. 2017.
 \[&nbsp;[arXiv&nbsp;preprint](https://arxiv.org/abs/1705.07603)&nbsp;\]
 
 * Vlad Niculae, Joonsuk Park, Claire Cardie.
