@@ -7,11 +7,13 @@ Slug: papers
 profile](https://scholar.google.com/citations?user=7_3UAgQAAAAJ).)
 
 * Vlad Niculae and Mathieu Blondel.
-A Regularized Framework for Sparse and Structured Neural Attention. 2017.
+A Regularized Framework for Sparse and Structured Neural Attention. In: Proc.
+of *NIPS 2017* (forthcoming).
 \[&nbsp;[arXiv&nbsp;preprint](https://arxiv.org/abs/1705.07704)&nbsp;\]
 
 * Mathieu Blondel, Vlad Niculae, Takuma Otsuka, Naonori Ueda.
-Multi-output Polynomial Networks and Factorization Machines. 2017.
+Multi-output Polynomial Networks and Factorization Machines. In: Proc. 
+of *NIPS 2017* (forthcoming).
 \[&nbsp;[arXiv&nbsp;preprint](https://arxiv.org/abs/1705.07603)&nbsp;\]
 
 * Vlad Niculae, Joonsuk Park, Claire Cardie.

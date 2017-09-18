@@ -29,13 +29,12 @@ the University of Bucharest](http://nlp.unibuc.ro/).
   - Released the dataset for our NAACL 2016 paper, [*Conversational markers of constructive discussions*](/constructive).
   - Chenhao and I wrote a [blog post]({filename}/blog/winning_arguments.ipynb) about our WWW 2016 paper with [Cristian](http://www.cs.cornell.edu/~cristian/) and [Lillian](http://www.cs.cornell.edu/home/llee/), [*Winning Arguments: Interaction Dynamics and Persuasion Strategies in Good-faith Online Discussions*](https://chenhaot.com/pages/changemyview.html).
 
-<!--
 # Teaching
 
-  - Fall 2016: TA for [CS 4740 Introduction to Natural Language Processing.](http://www.cs.cornell.edu/courses/cs4740/2016fa/)
+  - Fall 2017: TA for [CS 4740 Introduction to Natural Language Processing.](http://www.cs.cornell.edu/courses/cs4740/2017fa/)
     
-    Office hours Wed 3&ndash;4pm in Gates G11: see you there!
--->
+    Office hours Tue 3&ndash;4pm in Gates G15: see you there!
+
 # Research
 
 You can take a look at the list of my [publications](papers.html). The
