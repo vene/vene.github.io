@@ -8,7 +8,7 @@ save_as: index.html
 
 Welcome, traveler, to my page. Enjoy your brief stay while you get to
 know me!
-My name is Vlad and I'm a PhD student in Computer Science
+My name is Vlad and I'm a PhD candidate in Computer Science
 at [Cornell](http://www.cs.cornell.edu/), advised by [Claire
 Cardie](http://www.cs.cornell.edu/home/cardie/).
 
