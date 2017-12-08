@@ -92,7 +92,7 @@ and it forcefully overwrites <code>b</code>. Even though if weren&#8217;t faster
 should still be used: <code>scikits.learn</code> aims to be as backwards-compatible
 with SciPy as possible, and <code>linalg.solve_triangular</code> was added in
 0.9.0. Anyway, let&#8217;s just see whether it&#8217;s&nbsp;faster:</p>
-<p>[sourcecode language=&#8221;python&#8221;]<br />
+<p>[sourcecode language=&#8221;python&#8221;]<br>
 In <a href="#footnote-1">1</a>: import numpy as&nbsp;np</p>
 <p>In <a href="#footnote-2">2</a>: from scipy import&nbsp;linalg</p>
 <p>In [3]: from scikits.learn.datasets import&nbsp;make_spd_matrix</p>
@@ -101,11 +101,11 @@ In <a href="#footnote-1">1</a>: import numpy as&nbsp;np</p>
 <p>In [6]: L = linalg.cholesky(G,&nbsp;lower=True)</p>
 <p>In [7]: x =&nbsp;np.random.randn(1000)</p>
 <p>In [8]: y =&nbsp;x.copy()</p>
-<p>In [9]: timeit solve_triangular(L, x)<br />
+<p>In [9]: timeit solve_triangular(L, x)<br>
 100 loops, best of 3: 3.45 ms per&nbsp;loop</p>
 <p>In [10]: timeit linalg.solve_triangular(L, y, lower=True,
-overwrite_b=True)<br />
-10 loops, best of 3: 134 ms per loop<br />&nbsp;[/sourcecode]</p>
+overwrite_b=True)<br>
+10 loops, best of 3: 134 ms per loop<br>&nbsp;[/sourcecode]</p>
 <p>Wow! That&#8217;s 40x faster. We&#8217;re catching two rabbits with one stone here,
 let&#8217;s do the change! Notice that we can just copy [latex]
 \mathbf{v}[/latex] into the appropriate place in [latex] L[/latex] and
@@ -127,53 +127,53 @@ wrapper around this, the <code>linalg.cho_solve</code> function.</p>
 from <span class="caps">LAPACK</span>, through the use of <code>linalg.lapack.get_lapack_funcs</code>. Let&#8217;s
 see how the low-level <span class="caps">LAPACK</span> function compares to the SciPy wrapper, for
 our use&nbsp;case:</p>
-<p>[sourcecode language=&#8221;python&#8221;]<br />
+<p>[sourcecode language=&#8221;python&#8221;]<br>
 In [11]: x =&nbsp;np.random.randn(1000)</p>
 <p>In [12]: y =&nbsp;x.copy()</p>
-<p>In [13]: timeit linalg.cho_solve((L, True), x)<br />
+<p>In [13]: timeit linalg.cho_solve((L, True), x)<br>
 1 loops, best of 3: 95.4 ms per&nbsp;loop</p>
 <p>In [14]: potrs, = linalg.lapack.get_lapack_funcs((&#8216;potrs&#8217;,),&nbsp;(G,))</p>
-<p>In [15]: potrs<br />
+<p>In [15]: potrs<br>
 Out[15]: &lt;fortran&nbsp;object&gt;</p>
-<p>In [16]: timeit potrs(L, y)<br />
-100 loops, best of 3: 9.49 ms per loop<br />&nbsp;[/sourcecode]</p>
+<p>In [16]: timeit potrs(L, y)<br>
+100 loops, best of 3: 9.49 ms per loop<br>&nbsp;[/sourcecode]</p>
 <p>That&#8217;s 10 times faster! So now we found an obvious way to optimize the&nbsp;code:</p>
-<p>[sourcecode language=&#8221;python&#8221;]<br />
-def cholesky_omp(X, y, n_nonzero_coefs, eps=None):<br />
-min_float = np.finfo(X.dtype).eps<br />
-potrs, = get_lapack_funcs((&#8216;potrs&#8217;,), (X,))<br />
-alpha = np.dot(X.T, y)<br />
-residual = y<br />
-n_active = 0<br />
+<p>[sourcecode language=&#8221;python&#8221;]<br>
+def cholesky_omp(X, y, n_nonzero_coefs, eps=None):<br>
+min_float = np.finfo(X.dtype).eps<br>
+potrs, = get_lapack_funcs((&#8216;potrs&#8217;,), (X,))<br>
+alpha = np.dot(X.T, y)<br>
+residual = y<br>
+n_active = 0<br>
 idx =&nbsp;[]</p>
-<p>max_features = X.shape<a href="#footnote-1">1</a> if eps is not None else n_nonzero_coefs<br />
-L = np.empty((max_features, max_features), dtype=X.dtype)<br />
+<p>max_features = X.shape<a href="#footnote-1">1</a> if eps is not None else n_nonzero_coefs<br>
+L = np.empty((max_features, max_features), dtype=X.dtype)<br>
 L[0, 0] =&nbsp;1.</p>
-<p>while 1:<br />
-lam = np.abs(np.dot(X.T, residual)).argmax()<br />
-if lam &lt; n_active or alpha[lam] ** 2 &lt; min_float:<br />
-# atom already selected or inner product too small<br />
-warn(&#8220;Stopping early&#8221;)<br />
-break<br />
-if n_active &gt; 0:<br />
-# Updates the Cholesky decomposition of X&#8217; X<br />
-L[n_active, :n_active] = np.dot(X[:, idx].T, X[:, lam]<br />
-solve_triangular(L[:n_active, :n_active], L[n_active, :n_active])<br />
-d = np.dot(L[n_active, :n_active].T, L[n_active, :n_active])<br />
-if 1 - d &lt;= min_float: # selected atoms are dependent<br />
-warn(&#8220;Stopping early&#8221;)<br />
-break<br />
-L[n_active, n_active] = np.sqrt(1 - d)<br />
-idx.append(lam)<br />
-# solve <span class="caps">LL</span>&#8217;x = y in two steps:<br />
-gamma, _ = potrs(L[:n_active, :n_active], alpha[idx], lower=True,<br />
-overwrite_b=False)<br />
-residual = y - np.dot(X[:, idx], gamma)<br />
-if eps is not None and np.dot(residual.T, residual) &lt;= eps:<br />
-break<br />
-elif n_active == max_features:<br />
-break<br />
-return gamma, idx<br />&nbsp;[/sourcecode]</p>
+<p>while 1:<br>
+lam = np.abs(np.dot(X.T, residual)).argmax()<br>
+if lam &lt; n_active or alpha[lam] ** 2 &lt; min_float:<br>
+# atom already selected or inner product too small<br>
+warn(&#8220;Stopping early&#8221;)<br>
+break<br>
+if n_active &gt; 0:<br>
+# Updates the Cholesky decomposition of X&#8217; X<br>
+L[n_active, :n_active] = np.dot(X[:, idx].T, X[:, lam]<br>
+solve_triangular(L[:n_active, :n_active], L[n_active, :n_active])<br>
+d = np.dot(L[n_active, :n_active].T, L[n_active, :n_active])<br>
+if 1 - d &lt;= min_float: # selected atoms are dependent<br>
+warn(&#8220;Stopping early&#8221;)<br>
+break<br>
+L[n_active, n_active] = np.sqrt(1 - d)<br>
+idx.append(lam)<br>
+# solve <span class="caps">LL</span>&#8217;x = y in two steps:<br>
+gamma, _ = potrs(L[:n_active, :n_active], alpha[idx], lower=True,<br>
+overwrite_b=False)<br>
+residual = y - np.dot(X[:, idx], gamma)<br>
+if eps is not None and np.dot(residual.T, residual) &lt;= eps:<br>
+break<br>
+elif n_active == max_features:<br>
+break<br>
+return gamma, idx<br>&nbsp;[/sourcecode]</p>
 <p>Woohoo! But we still lag behind. Now that we delegated the trickiest
 parts of the code to fast and reliable solvers, it&#8217;s time to use a
 profiler and see what the bottleneck is now. Python has excellent tools
@@ -194,76 +194,76 @@ we can replace <code>X[:, idx]</code> with <code>X[:, :n_active]</code>. The nic
 if the array is stored in Fortran-contiguous order (ie. column
 contiguous order, as opposed to row contiguous order, as in C), swapping
 two columns is a very fast operation!. Let&#8217;s see some more&nbsp;benchmarks!</p>
-<p>[sourcecode language=&#8221;python&#8221;]<br />
+<p>[sourcecode language=&#8221;python&#8221;]<br>
 In [17]: X = np.random.randn(5000,&nbsp;5000)</p>
 <p>In [18]: Y = X.copy(&#8216;F&#8217;) #&nbsp;fortran-ordered</p>
 <p>In [19]: a, b = 1000,&nbsp;2500</p>
 <p>In [20]: swap, = linalg.get_blas_funcs((&#8216;swap&#8217;,),&nbsp;(X,))</p>
-<p>In [21]: timeit X[:, a], X[:, b] = swap(X[:, a], X[:, b])<br />
+<p>In [21]: timeit X[:, a], X[:, b] = swap(X[:, a], X[:, b])<br>
 100 loops, best of 3: 6.29 ms per&nbsp;loop</p>
-<p>In [22]: timeit Y[:, a], Y[:, b] = swap(Y[:, a], Y[:, b])<br />
-10000 loops, best of 3: 111 us per loop<br />&nbsp;[/sourcecode]</p>
+<p>In [22]: timeit Y[:, a], Y[:, b] = swap(Y[:, a], Y[:, b])<br>
+10000 loops, best of 3: 111 us per loop<br>&nbsp;[/sourcecode]</p>
 <p>We can see that using Fortran-order takes us from the order of
 miliseconds to the order of&nbsp;microseconds!</p>
 <p>Side note: I almost fell into the trap of swapping columns the pythonic
-way. That doesn&#8217;t work:<br />
-[sourcecode language=&#8221;python&#8221;]<br />
+way. That doesn&#8217;t work:<br>
+[sourcecode language=&#8221;python&#8221;]<br>
 In [23]: X[:, a], X[:, b] = X[:, b], X[:,&nbsp;a]</p>
 <p>In [24]: np.testing.assert_array_equal(X[:, a], X[:,&nbsp;b])</p>
-<p>In [25]:<br />&nbsp;[/sourcecode]</p>
+<p>In [25]:<br>&nbsp;[/sourcecode]</p>
 <p>However this trick works great for swapping elements of one-dimensional&nbsp;arrays.</p>
 <p>Another small optimization that we can do: I found that on my system,
 it&#8217;s slightly faster to compute the norm using the <span class="caps">BLAS</span> function <code>nrm2</code>.
 So by putting all of these together, we end up with the final version of
 our&nbsp;code:</p>
-<p>[sourcecode language=&#8221;python&#8221;]<br />
+<p>[sourcecode language=&#8221;python&#8221;]<br>
 def cholesky_omp(X, y, n_nonzero_coefs, eps=None,
-overwrite_X=False):<br />
-if not overwrite_X:<br />
-X = X.copy(&#8216;F&#8217;)<br />
+overwrite_X=False):<br>
+if not overwrite_X:<br>
+X = X.copy(&#8216;F&#8217;)<br>
 else: # even if we are allowed to overwrite, still copy it if bad
-order<br />
+order<br>
 X =&nbsp;np.asfortranarray(X)</p>
-<p>min_float = np.finfo(X.dtype).eps<br />
-nrm2, swap = linalg.get_blas_funcs((&#8216;nrm2&#8217;, &#8216;swap&#8217;), (X,))<br />
+<p>min_float = np.finfo(X.dtype).eps<br>
+nrm2, swap = linalg.get_blas_funcs((&#8216;nrm2&#8217;, &#8216;swap&#8217;), (X,))<br>
 potrs, = get_lapack_funcs((&#8216;potrs&#8217;,),&nbsp;(X,))</p>
-<p>indices = range(len(Gram)) # keeping track of swapping<br />
-alpha = np.dot(X.T, y)<br />
-residual = y<br />
+<p>indices = range(len(Gram)) # keeping track of swapping<br>
+alpha = np.dot(X.T, y)<br>
+residual = y<br>
 n_active =&nbsp;0</p>
-<p>max_features = X.shape<a href="#footnote-1">1</a> if eps is not None else n_nonzero_coefs<br />
-L = np.empty((max_features, max_features), dtype=X.dtype)<br />
+<p>max_features = X.shape<a href="#footnote-1">1</a> if eps is not None else n_nonzero_coefs<br>
+L = np.empty((max_features, max_features), dtype=X.dtype)<br>
 L[0, 0] =&nbsp;1.</p>
-<p>while True:<br />
-lam = np.abs(np.dot(X.T, residual)).argmax()<br />
-if lam &lt; n_active or alpha[lam] ** 2 &lt; min_float:<br />
-# atom already selected or inner product too small<br />
-warn(&#8220;Stopping early&#8221;)<br />
-break<br />
-if n_active &gt; 0:<br />
-# Updates the Cholesky decomposition of X&#8217; X<br />
-L[n_active, :n_active] = np.dot(X[:, :n_active].T, X[:, lam])<br />
-solve_triangular(L[:n_active, :n_active], L[n_active, :n_active])<br />
-v = nrm2(L[n_active, :n_active]) ** 2<br />
-if 1 - v &lt;= min_float: # selected atoms are dependent<br />
-warn(&#8220;Stopping early&#8221;)<br />
-break<br />
-L[n_active, n_active] = np.sqrt(1 - v)<br />
-X.T[n_active], X.T[lam] = swap(X.T[n_active], X.T[lam])<br />
-alpha[n_active], alpha[lam] = alpha[lam], alpha[n_active]<br />
-indices[n_active], indices[lam] = indices[lam], indices[n_active]<br />
-n_active += 1<br />
-# solves <span class="caps">LL</span>&#8217;x = y as a composition of two triangular systems<br />
+<p>while True:<br>
+lam = np.abs(np.dot(X.T, residual)).argmax()<br>
+if lam &lt; n_active or alpha[lam] ** 2 &lt; min_float:<br>
+# atom already selected or inner product too small<br>
+warn(&#8220;Stopping early&#8221;)<br>
+break<br>
+if n_active &gt; 0:<br>
+# Updates the Cholesky decomposition of X&#8217; X<br>
+L[n_active, :n_active] = np.dot(X[:, :n_active].T, X[:, lam])<br>
+solve_triangular(L[:n_active, :n_active], L[n_active, :n_active])<br>
+v = nrm2(L[n_active, :n_active]) ** 2<br>
+if 1 - v &lt;= min_float: # selected atoms are dependent<br>
+warn(&#8220;Stopping early&#8221;)<br>
+break<br>
+L[n_active, n_active] = np.sqrt(1 - v)<br>
+X.T[n_active], X.T[lam] = swap(X.T[n_active], X.T[lam])<br>
+alpha[n_active], alpha[lam] = alpha[lam], alpha[n_active]<br>
+indices[n_active], indices[lam] = indices[lam], indices[n_active]<br>
+n_active += 1<br>
+# solves <span class="caps">LL</span>&#8217;x = y as a composition of two triangular systems<br>
 gamma, _ = potrs(L[:n_active, :n_active], alpha[:n_active],
-lower=True,<br />&nbsp;overwrite_b=False)</p>
-<p>residual = y - np.dot(X[:, :n_active], gamma)<br />
-if eps is not None and nrm2(residual) ** 2 &lt;= eps:<br />
-break<br />
-elif n_active == max_features:<br />&nbsp;break</p>
-<p>return gamma, indices[:n_active]<br />&nbsp;[/sourcecode]</p>
+lower=True,<br>&nbsp;overwrite_b=False)</p>
+<p>residual = y - np.dot(X[:, :n_active], gamma)<br>
+if eps is not None and nrm2(residual) ** 2 &lt;= eps:<br>
+break<br>
+elif n_active == max_features:<br>&nbsp;break</p>
+<p>return gamma, indices[:n_active]<br>&nbsp;[/sourcecode]</p>
 <p>Now, the benchmark at [<a href="#footnote-1">1</a>] indicates victory over least-angle
 regression! I hope you have enjoyed this short tour. See you next&nbsp;time!</p>
-<p><a href="https://github.com/scikit-learn/scikit-learn/blob/master/benchmarks/bench_plot_omp_lars.py" title="Orthogonal matching pursuit versus least-angle regression"><span id="footnote-1">1</span></a>[]<br />
+<p><a href="https://github.com/scikit-learn/scikit-learn/blob/master/benchmarks/bench_plot_omp_lars.py" title="Orthogonal matching pursuit versus least-angle regression"><span id="footnote-1">1</span></a>[]<br>
 <a href="http://scikit-learn.sourceforge.net/dev/developers/performance.html#profiling-python-code" title="Profiling Python code"><span id="footnote-2">2</span></a>[]</p>
     </div><!-- /.entry-content -->
     <div class="comments">

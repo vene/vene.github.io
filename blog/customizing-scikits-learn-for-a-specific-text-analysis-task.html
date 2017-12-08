@@ -117,7 +117,7 @@ complex object. In this case, we would like a classifier that receives a
 string as input, and directly outputs its label. We wouldn&#8217;t want the
 user to have to manually use the feature extractor prior to&nbsp;classification.</p>
 <p>The pipeline is very easy to&nbsp;build:  </p>
-<p><code>pipeline = Pipeline([('extr', InfinitivesExtractor()), ('svc', LinearSVC(multi_class=True))])</code><br />
+<p><code>pipeline = Pipeline([('extr', InfinitivesExtractor()), ('svc', LinearSVC(multi_class=True))])</code><br>
 The pipeline object now works exactly as expected: we can call fit and
 predict on it. It also exposes the parameters of its constituents, by
 prefixing them with the name of that component. For example, the support

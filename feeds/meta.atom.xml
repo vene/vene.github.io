@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Vlad Niculae (~vene)</title><link href="http://vene.ro/" rel="alternate"></link><link href="http://vene.ro/feeds/meta.atom.xml" rel="self"></link><id>http://vene.ro/</id><updated>2014-01-10T12:00:00+01:00</updated><entry><title>Site move</title><link href="http://vene.ro/blog/site-move.html" rel="alternate"></link><published>2014-01-10T12:00:00+01:00</published><author><name>vene</name></author><id>tag:vene.ro,2014-01-10:blog/site-move.html</id><summary type="html">&lt;p&gt;I finally got around to moving my entire website, including the blog,
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Vlad Niculae (~vene) - meta</title><link href="http://vene.ro/" rel="alternate"></link><link href="http://vene.ro/feeds/meta.atom.xml" rel="self"></link><id>http://vene.ro/</id><updated>2014-01-10T12:00:00+01:00</updated><entry><title>Site move</title><link href="http://vene.ro/blog/site-move.html" rel="alternate"></link><published>2014-01-10T12:00:00+01:00</published><updated>2014-01-10T12:00:00+01:00</updated><author><name>vene</name></author><id>tag:vene.ro,2014-01-10:/blog/site-move.html</id><summary type="html">&lt;p&gt;I finally got around to moving my entire website, including the blog,
+to &lt;a href="http://getpelican.com"&gt;Pelican&lt;/a&gt;.  I probably would have gotten away with it
+too if it weren&amp;#8217;t for those meddling kids who hacked my friend&amp;#8217;s server and
+convinced me that it&amp;#8217;s worth the effort to go&amp;nbsp;static.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;It …&lt;/strong&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;I finally got around to moving my entire website, including the blog,
 to &lt;a href="http://getpelican.com"&gt;Pelican&lt;/a&gt;.  I probably would have gotten away with it
 too if it weren&amp;#8217;t for those meddling kids who hacked my friend&amp;#8217;s server and
 convinced me that it&amp;#8217;s worth the effort to go&amp;nbsp;static.&lt;/p&gt;
@@ -28,4 +32,4 @@ that the genie granted me to simply redirect the subdomain
 &lt;code&gt;vene.ro/blog&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Best part about this is that I will now be able to migrate my &lt;a href="/papers.html"&gt;personal list of
 papers&lt;/a&gt; to
-&lt;a href="https://github.com/vene/pelican-bibtex"&gt;pelican-bibtex&lt;/a&gt;.&lt;/p&gt;</summary><category term="pelican"></category><category term="blog"></category></entry></feed>
+&lt;a href="https://github.com/vene/pelican-bibtex"&gt;pelican-bibtex&lt;/a&gt;.&lt;/p&gt;</content><category term="pelican"></category><category term="blog"></category></entry></feed>

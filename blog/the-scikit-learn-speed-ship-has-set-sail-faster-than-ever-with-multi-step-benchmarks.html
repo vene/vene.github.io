@@ -129,17 +129,17 @@ sequence of strings, instead of just a string. On the database side,
 every benchmark result entry gets an extra component in the primary key,
 the number of the step it&nbsp;measures.</p>
 <p>In the benchmark description files, nothing is&nbsp;changed:</p>
-<p>[sourcecode lang=&#8221;python&#8221;]<br />
-{<br />
-&#8216;obj&#8217;: &#8216;<span class="caps">NMF</span>&#8217;,<br />
-&#8216;init_params&#8217;: {&#8216;n_components&#8217;: 2},<br />
-&#8216;datasets&#8217;: (&#8216;blobs&#8217;,),<br />
-&#8216;statements&#8217;: (&#8216;fit_unsup&#8217;, &#8216;transform_unsup&#8217;, &#8216;fit_transform&#8217;)<br />
-},<br />&nbsp;[/sourcecode]</p>
+<p>[sourcecode lang=&#8221;python&#8221;]<br>
+{<br>
+&#8216;obj&#8217;: &#8216;<span class="caps">NMF</span>&#8217;,<br>
+&#8216;init_params&#8217;: {&#8216;n_components&#8217;: 2},<br>
+&#8216;datasets&#8217;: (&#8216;blobs&#8217;,),<br>
+&#8216;statements&#8217;: (&#8216;fit_unsup&#8217;, &#8216;transform_unsup&#8217;, &#8216;fit_transform&#8217;)<br>
+},<br>&nbsp;[/sourcecode]</p>
 <p>But before, we would take the cartesian product of datasets and
 statements, and build a <code>Benchmark</code> object for every pairing. Now, we
 just pass the tuple as it is, and vbench is smart enough to do the right
-thing.<br />
+thing.<br>
 We avoided the extra calls to <code>fit</code> in a lot of benchmarks. The whole
 suite now takes almost half the time to&nbsp;run!</p>
 <p><em>Note:</em> This trick is currently hosted in the
