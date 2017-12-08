@@ -8,13 +8,14 @@ profile](https://scholar.google.com/citations?user=7_3UAgQAAAAJ).)
 
 * Vlad Niculae and Mathieu Blondel.
 A Regularized Framework for Sparse and Structured Neural Attention. In: Proc.
-of *NIPS 2017* (forthcoming).
-\[&nbsp;[arXiv&nbsp;preprint](https://arxiv.org/abs/1705.07704)&nbsp;\]
+of *NIPS 2017*.
+\[&nbsp;[arXiv](https://arxiv.org/abs/1705.07704)&nbsp;\]
+\[&nbsp;[code](https://github.com/vene/sparse-structured-attention)&nbsp;\]
 
 * Mathieu Blondel, Vlad Niculae, Takuma Otsuka, Naonori Ueda.
 Multi-output Polynomial Networks and Factorization Machines. In: Proc. 
-of *NIPS 2017* (forthcoming).
-\[&nbsp;[arXiv&nbsp;preprint](https://arxiv.org/abs/1705.07603)&nbsp;\]
+of *NIPS 2017*.
+\[&nbsp;[arXiv](https://arxiv.org/abs/1705.07603)&nbsp;\]
 
 * Vlad Niculae, Joonsuk Park, Claire Cardie.
 Argument mining with structured SVMs and RNNs. In: Proc. of *ACL 2017*.
