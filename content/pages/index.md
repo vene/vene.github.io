@@ -29,7 +29,6 @@ the University of Bucharest](http://nlp.unibuc.ro/).
     RNNs*](https://arxiv.org/abs/1704.06869)!
     [Code](https://github.com/vene/marseille) and 
     [data](http://joonsuk.org/) are available. 
-  - Released the dataset for our NAACL 2016 paper, [*Conversational markers of constructive discussions*](/constructive).
 
 # Research
 
