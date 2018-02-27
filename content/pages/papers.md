@@ -6,6 +6,10 @@ Slug: papers
 (More statistics and stuff on my [Google Scholar
 profile](https://scholar.google.com/citations?user=7_3UAgQAAAAJ).)
 
+* Vlad Niculae, André F. T. Martins, Mathieu Blondel, Claire Cardie.
+*SparseMAP:* Differentiable Sparse Structured Inference.
+\[&nbsp;[arXiv preprint](https://arxiv.org/abs/1802.04223)&nbsp;\]
+
 * Vlad Niculae and Mathieu Blondel.
 A Regularized Framework for Sparse and Structured Neural Attention. In: Proc.
 of *NIPS 2017*.
