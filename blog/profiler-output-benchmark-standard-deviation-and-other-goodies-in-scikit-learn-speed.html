@@ -99,7 +99,7 @@ want to have a huge, monolithic <code>Benchmark</code> class that was specific t
 what we want in scikit-learn-speed. So on this branch, I set up a
 mixin/multiple inheritance hierarchy of benchmark&nbsp;classes.</p>
 <p>The <code>Benchmark</code> class in vbench is now an abstract base class, with some
-common functionality and structure.<br>
+common functionality and structure.<br />
 Our <code>SklBenchmark</code> class is defined in scikit-learn-speed&nbsp;as:</p>
 <p><code>class SklBenchmark(CProfileBenchmarkMixin,  MemoryBenchmarkMixin, PythonBenchmark):</code></p>
 <p>Let&#8217;s read this from right to&nbsp;left:</p>

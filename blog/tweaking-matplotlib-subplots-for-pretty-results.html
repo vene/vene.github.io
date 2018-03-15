@@ -81,7 +81,7 @@ abstract objects, designed for consistency in print as well as on
 screen, tweaking their layout can get&nbsp;tricky.</p>
 <h3>An&nbsp;example</h3>
 <p>The following code is taken from the <a href="http://scikit-learn.sourceforge.net/auto_examples/applications/plot_face_recognition.html" title="face recognition example">face recognition example</a> in
-scikits.learn:<br>
+scikits.learn:<br />
 <code>pl.figure(figsize=(1.8 * n_col, 2.4 * n_row))</code></p>
 <p>This is very confusing at first, for somebody used to work on screen:
 the quantities in there are actually inches! These are converted
@@ -89,7 +89,7 @@ implicitly to pixels through the dpi parameter, which is left as default
 (80 dpi) in this&nbsp;example.</p>
 <p>Then, it gets even worse: In order to tweak the positioning of the
 subplots, this is what is&nbsp;done:  </p>
-<p><code>pl.subplots_adjust(bottom=0, left=.01, right=.99, top=.90, hspace=.35)</code><br>
+<p><code>pl.subplots_adjust(bottom=0, left=.01, right=.99, top=.90, hspace=.35)</code><br />
 Now, all of these are percents of the image height/width. The margins
 are sort of like <span class="caps">CSS</span>-style margins, only relative to the bottom left
 corner. In other words, <code>right=.99</code> means that the right margin is 1%

@@ -81,7 +81,7 @@ calls make it crash. I will start this post with a reminder of a pretty
 important&nbsp;bug:</p>
 <p><strong>[On MacOS X (10.7 but maybe more), after forking a new process, there
 is a segfault in Grand Central Dispatch on the <span class="caps">BLAS</span> <span class="caps">DGEMM</span> function from
-Accelerate.][]<br>
+Accelerate.][]<br />
 </strong></p>
 <p><strong><span class="caps">EDIT</span> 1:</strong> In a hurry, I forgot to mention how <a href="http://twitter.com/ogrisel/">Olivier Grisel</a> and
 <a href="https://github.com/cournape">David Cournapeau</a> spent some time narrowing down this issue, starting
@@ -95,66 +95,66 @@ measuring the current memory, running the command, and measuring the
 memory again. The problem is the results are not consistent, because
 Python <a href="http://effbot.org/pyfaq/why-doesnt-python-release-the-memory-when-i-delete-a-large-object.htm">tries to reuse already allocated memory whenever it can</a>.</p>
 <p>Using memory_profiler, here&#8217;s an example illustrating this elastic
-memory management:<br>
-[sourcecode lang=&#8221;python&#8221;]<br>
-# mem_test.py<br>
+memory management:<br />
+[sourcecode lang=&#8221;python&#8221;]<br />
+# mem_test.py<br />
 import numpy as&nbsp;np</p>
-<p>def make_a_large_array():<br>
+<p>def make_a_large_array():<br />
 return np.ones((1000,&nbsp;1000))</p>
-<p>def main():<br>
-make_a_large_array()<br>
-make_a_large_array()<br>&nbsp;make_a_large_array()</p>
-<p># in IPython:<br>
+<p>def main():<br />
+make_a_large_array()<br />
+make_a_large_array()<br />&nbsp;make_a_large_array()</p>
+<p># in IPython:<br />
 In [1]: import&nbsp;mem_test</p>
-<p>In [2]: %mprun -f mem_test.main mem_test.main()<br>
+<p>In [2]: %mprun -f mem_test.main mem_test.main()<br />
 Filename:&nbsp;mem_test.py</p>
 <h1>Line # Mem usage Increment Line&nbsp;Contents</h1>
-<p>8 24.8477 <span class="caps">MB</span> 0.0000 <span class="caps">MB</span> def main():<br>
-9 24.8633 <span class="caps">MB</span> 0.0156 <span class="caps">MB</span> make_a_large_array()<br>
-10 32.4688 <span class="caps">MB</span> 7.6055 <span class="caps">MB</span> make_a_large_array()<br>
-11 32.4688 <span class="caps">MB</span> 0.0000 <span class="caps">MB</span> make_a_large_array()<br>&nbsp;[/sourcecode]</p>
+<p>8 24.8477 <span class="caps">MB</span> 0.0000 <span class="caps">MB</span> def main():<br />
+9 24.8633 <span class="caps">MB</span> 0.0156 <span class="caps">MB</span> make_a_large_array()<br />
+10 32.4688 <span class="caps">MB</span> 7.6055 <span class="caps">MB</span> make_a_large_array()<br />
+11 32.4688 <span class="caps">MB</span> 0.0000 <span class="caps">MB</span> make_a_large_array()<br />&nbsp;[/sourcecode]</p>
 <p>If this was in an IPython environment, and one would like to see how
 much memory <code>make_a_large_array()</code> uses, you could say we can simply run
 it a few times and take the maximum. However, if you happened to
 accidentally call <code>main()</code> once before, you will no longer get a good&nbsp;result:</p>
-<p>[sourcecode lang=&#8221;python&#8221;]<br>
-In [3]: %mprun -f mem_test.main mem_test.main()<br>
+<p>[sourcecode lang=&#8221;python&#8221;]<br />
+In [3]: %mprun -f mem_test.main mem_test.main()<br />
 Filename:&nbsp;mem_test.py</p>
 <h1>Line # Mem usage Increment Line&nbsp;Contents</h1>
-<p>8 32.4922 <span class="caps">MB</span> 0.0000 <span class="caps">MB</span> def main():<br>
-9 32.5234 <span class="caps">MB</span> 0.0312 <span class="caps">MB</span> make_a_large_array()<br>
-10 32.5234 <span class="caps">MB</span> 0.0000 <span class="caps">MB</span> make_a_large_array()<br>
-11 32.5234 <span class="caps">MB</span> 0.0000 <span class="caps">MB</span> make_a_large_array()<br>&nbsp;[/sourcecode]</p>
+<p>8 32.4922 <span class="caps">MB</span> 0.0000 <span class="caps">MB</span> def main():<br />
+9 32.5234 <span class="caps">MB</span> 0.0312 <span class="caps">MB</span> make_a_large_array()<br />
+10 32.5234 <span class="caps">MB</span> 0.0000 <span class="caps">MB</span> make_a_large_array()<br />
+11 32.5234 <span class="caps">MB</span> 0.0000 <span class="caps">MB</span> make_a_large_array()<br />&nbsp;[/sourcecode]</p>
 <p>So how can we get consistent results for the memory usage of an
 instruction? We could run it in a fresh, new process. I implemented this
 in %memit and it&nbsp;shows:</p>
-<p>[sourcecode lang=&#8221;python&#8221;]<br>
-In [5]: %memit mem_test.make_a_large_array()<br>
+<p>[sourcecode lang=&#8221;python&#8221;]<br />
+In [5]: %memit mem_test.make_a_large_array()<br />
 maximum of 3: 8.039062 <span class="caps">MB</span> per&nbsp;loop</p>
-<p>In [6]: %memit mem_test.make_a_large_array()<br>
+<p>In [6]: %memit mem_test.make_a_large_array()<br />
 maximum of 3: 8.035156 <span class="caps">MB</span> per&nbsp;loop</p>
-<p>In [7]: %memit mem_test.make_a_large_array()<br>
-maximum of 3: 8.042969 <span class="caps">MB</span> per loop<br>&nbsp;[/sourcecode]</p>
+<p>In [7]: %memit mem_test.make_a_large_array()<br />
+maximum of 3: 8.042969 <span class="caps">MB</span> per loop<br />&nbsp;[/sourcecode]</p>
 <p>This way you can also realistically benchmark&nbsp;assignments:</p>
-<p>[sourcecode lang=&#8221;python&#8221;]<br>
-In [8]: %memit X = mem_test.make_a_large_array()<br>
+<p>[sourcecode lang=&#8221;python&#8221;]<br />
+In [8]: %memit X = mem_test.make_a_large_array()<br />
 maximum of 3: 8.054688 <span class="caps">MB</span> per&nbsp;loop</p>
-<p>In [9]: %memit X = mem_test.make_a_large_array()<br>
+<p>In [9]: %memit X = mem_test.make_a_large_array()<br />
 maximum of 3: 8.058594 <span class="caps">MB</span> per&nbsp;loop</p>
-<p>In [10]: %memit X = mem_test.make_a_large_array()<br>
-maximum of 3: 8.058594 <span class="caps">MB</span> per loop<br>&nbsp;[/sourcecode]</p>
+<p>In [10]: %memit X = mem_test.make_a_large_array()<br />
+maximum of 3: 8.058594 <span class="caps">MB</span> per loop<br />&nbsp;[/sourcecode]</p>
 <p>If we don&#8217;t spawn a subprocess, <code>del</code> doesn&#8217;t help, but allocating new
-variables does:<br>
-[sourcecode lang=&#8221;python&#8221;]<br>
-In [11]: %memit -i X = mem_test.make_a_large_array()<br>
+variables does:<br />
+[sourcecode lang=&#8221;python&#8221;]<br />
+In [11]: %memit -i X = mem_test.make_a_large_array()<br />
 maximum of 3: 7.632812 <span class="caps">MB</span> per&nbsp;loop</p>
 <p>In [12]: del&nbsp;X</p>
-<p>In [13]: %memit -i X = mem_test.make_a_large_array()<br>
+<p>In [13]: %memit -i X = mem_test.make_a_large_array()<br />
 maximum of 3: 0.000000 <span class="caps">MB</span> per&nbsp;loop</p>
-<p>In [14]: %memit -i Y = mem_test.make_a_large_array()<br>
+<p>In [14]: %memit -i Y = mem_test.make_a_large_array()<br />
 maximum of 3: 7.632812 <span class="caps">MB</span> per&nbsp;loop</p>
-<p>In [15]: %memit -i Z = mem_test.make_a_large_array()<br>
-maximum of 3: 7.632812 <span class="caps">MB</span> per loop<br>&nbsp;[/sourcecode]</p>
+<p>In [15]: %memit -i Z = mem_test.make_a_large_array()<br />
+maximum of 3: 7.632812 <span class="caps">MB</span> per loop<br />&nbsp;[/sourcecode]</p>
 <p>Now, the problem is that when the function that you are benchmarking
 contains calls to <code>np.dot</code> (matrix multiplication), the subprocess will
 consistently fail with <span class="caps">SIGSEGV</span> on affected <span class="caps">OS</span> X systems. These are

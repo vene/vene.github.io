@@ -80,21 +80,21 @@ faster wherever I&nbsp;can.</p>
 recall the accomplishments and failures of this project, and all the
 lessons to be&nbsp;learned.</p>
 <h2>The <em>scikit-learn-speed</em> benchmark&nbsp;platform</h2>
-<p>[<img alt="" src="http://localhost:8001/wp-content/uploads/2012/08/skl-speed-300x163.png" title="skl-speed">][]<br>
-[<em>Scikit-learn-speed</em>][<img alt="" src="http://localhost:8001/wp-content/uploads/2012/08/skl-speed-300x163.png" title="skl-speed">] is a continuous benchmark suite for the
+<p>[<img alt="" src="http://localhost:8001/wp-content/uploads/2012/08/skl-speed-300x163.png" title="skl-speed" />][]<br />
+[<em>Scikit-learn-speed</em>][<img alt="" src="http://localhost:8001/wp-content/uploads/2012/08/skl-speed-300x163.png" title="skl-speed" />] is a continuous benchmark suite for the
 <a href="http://scikit-learn.org"><em>scikit-learn</em></a> library. It has the following&nbsp;features:</p>
 <ul>
 <li><em>vbench</em>-powered integration with&nbsp;Git</li>
 <li>Easily triggered build and report generation: just type <code>make</code></li>
 <li>Easily readable and writeable template for benchmarks:
     <p>
-    [sourcecode lang=&#8221;python&#8221;]<br>
-    {<br>
-    &#8216;obj&#8217;: &#8216;LogisticRegression&#8217;,<br>
-    &#8216;init_params&#8217;: {&#8216;C&#8217;: 1e5},<br>
-    &#8216;datasets&#8217;: (&#8216;arcene&#8217;, &#8216;madelon&#8217;),<br>
-    &#8216;statements&#8217;: (&#8216;fit&#8217;, &#8216;predict&#8217;)<br>
-    }, &#8230;<br>&nbsp;[/sourcecode]</li>
+    [sourcecode lang=&#8221;python&#8221;]<br />
+    {<br />
+    &#8216;obj&#8217;: &#8216;LogisticRegression&#8217;,<br />
+    &#8216;init_params&#8217;: {&#8216;C&#8217;: 1e5},<br />
+    &#8216;datasets&#8217;: (&#8216;arcene&#8217;, &#8216;madelon&#8217;),<br />
+    &#8216;statements&#8217;: (&#8216;fit&#8217;, &#8216;predict&#8217;)<br />
+    }, &#8230;<br />&nbsp;[/sourcecode]</li>
 <li>Many attributes recorded: time (w/ estimated standard deviation),
     memory usage, cProfiler output, line_profiler output,&nbsp;tracebacks</li>
 <li>Multi-step benchmarks: i.e. <code>fit</code> followed by <code>predict</code></li>
@@ -144,7 +144,7 @@ the profiler output with one click. I jumped on the following&nbsp;speed-ups:</p
 <li>Speed up <code>euclidean_distances</code> by rewriting in Cython. (<a href="https://github.com/scikit-learn/scikit-learn/pull/1006"><span class="caps">PR</span></a>)
     <p>
     This meant making more operations support an <code>out</code> argument, for
-    passing preallocated memory. This touches many<br>
+    passing preallocated memory. This touches many<br />
     different objects in the codebase: clustering, manifold learning,
     nearest neighbour&nbsp;methods.</li>
 <li><a href="http://localhost:8001/2012/08/18/inverses-pseudoinverses-numerical-issues-speed-symmetry/" title="Inverses and pseudoinverses. Numerical issues, speed, symmetry.">Insight into inverse and pseudoinverse computation</a>, new <code>pinvh</code>
@@ -173,23 +173,23 @@ computations that are orders of magnitude slower. However, there is an
 elephant in the room: the assumption that making code faster invariably
 makes it less clear, and takes a lot of&nbsp;effort.</p>
 <p>The following code is a part of scipy&#8217;s <code>pinv2</code> function as it currently
-is written:<br>
-[sourcecode lang=&#8221;python&#8221;]<br>
-cutoff = cond*np.maximum.reduce(s)<br>
-psigma = np.zeros((m, n), t)<br>
-for i in range(len(s)):<br>
-if s[i] > cutoff:<br>
-psigma[i,i] = 1.0/np.conjugate(s[i])<br>
-return np.transpose(np.conjugate(np.dot(np.dot(u,psigma),vh)))<br>&nbsp;[/sourcecode]</p>
+is written:<br />
+[sourcecode lang=&#8221;python&#8221;]<br />
+cutoff = cond*np.maximum.reduce(s)<br />
+psigma = np.zeros((m, n), t)<br />
+for i in range(len(s)):<br />
+if s[i] > cutoff:<br />
+psigma[i,i] = 1.0/np.conjugate(s[i])<br />
+return np.transpose(np.conjugate(np.dot(np.dot(u,psigma),vh)))<br />&nbsp;[/sourcecode]</p>
 <p><code>psigma</code> is a diagonal matrix, and some time and memory can be saved
 with simple vectorization. However, this part of the code dominated by
 an above call to <code>svd</code>. The profiler output would say that we shouldn&#8217;t
 bother, but is it really a bother? Look at Jake&#8217;s new&nbsp;version:</p>
-<p>[sourcecode lang=&#8221;python&#8221;]<br>
-above_cutoff = (s > cond * np.max(s))<br>
-psigma_diag = np.zeros_like(s)<br>
+<p>[sourcecode lang=&#8221;python&#8221;]<br />
+above_cutoff = (s > cond * np.max(s))<br />
+psigma_diag = np.zeros_like(s)<br />
 psigma_diag[above_cutoff] = 1.0 /&nbsp;s[above_cutoff]</p>
-<p>return np.transpose(np.conjugate(np.dot(u * psigma_diag, vh)))<br>&nbsp;[/sourcecode]</p>
+<p>return np.transpose(np.conjugate(np.dot(u * psigma_diag, vh)))<br />&nbsp;[/sourcecode]</p>
 <p>It&#8217;s shorter, more elegant, easier to read, and nevertheless faster. I
 would say it is worth&nbsp;it.</p>
 <h3>Small speed-ups can&nbsp;propagate</h3>
@@ -208,7 +208,7 @@ large number of speed-ups, but a few considerable ones nonetheless. And
 I venture the claim that the <em>scikit-learn-speed</em> tool will prove useful
 over time, and that the efforts deployed during this project have
 stretched beyond the boundary of the <em>scikit-learn</em>.</p>
-<p>[<img alt="" src="http://localhost:8001/wp-content/uploads/2012/08/skl-speed-300x163.png" title="skl-speed">]:&nbsp;http://jenkins-scikit-learn.github.com/scikit-learn-speed/</p><p>There are <a href="http://vene.ro/blog/scikit-learn-speed-an-overview-on-the-final-day.html#disqus_thread">comments</a>.</p>                </article>
+<p>[<img alt="" src="http://localhost:8001/wp-content/uploads/2012/08/skl-speed-300x163.png" title="skl-speed" />]:&nbsp;http://jenkins-scikit-learn.github.com/scikit-learn-speed/</p><p>There are <a href="http://vene.ro/blog/scikit-learn-speed-an-overview-on-the-final-day.html#disqus_thread">comments</a>.</p>                </article>
             </aside><!-- /#featured -->
                 <section id="content" class="body">
                     <h1>Other articles</h1>
@@ -237,7 +237,7 @@ stretched beyond the boundary of the <em>scikit-learn</em>.</p>
 </footer><!-- /.post-info -->                <p>I am pleased to announce that last night at 2:03 <span class="caps">AM</span>, the first fully
 automated run of the scikit-learn-speed test suite has run on our
 Jenkins instance! You can admire it at <a href="http://jenkins-scikit-learn.github.com/scikit-learn-speed/">its temporary home</a> for now.
-As soon as we verify that everything is good, we will move …</p>
+As soon as we verify that everything is good, we will move ...</p>
                 <a class="readmore" href="http://vene.ro/blog/the-scikit-learn-speed-ship-has-set-sail-faster-than-ever-with-multi-step-benchmarks.html">read more</a>
 <p>There are <a href="http://vene.ro/blog/the-scikit-learn-speed-ship-has-set-sail-faster-than-ever-with-multi-step-benchmarks.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
@@ -267,7 +267,7 @@ benchmarking suite that runs and generates <span class="caps">HTML</span> report
 McKinney&#8217;s <a href="http://wesmckinney.com/blog/?p=373">vbench</a> framework, to which I had to make some (useful, I
 hope)&nbsp;additions.</p>
 <h2>What it looks like&nbsp;now</h2>
-<p>You …</p>
+<p>You ...</p>
                 <a class="readmore" href="http://vene.ro/blog/profiler-output-benchmark-standard-deviation-and-other-goodies-in-scikit-learn-speed.html">read more</a>
 <p>There are <a href="http://vene.ro/blog/profiler-output-benchmark-standard-deviation-and-other-goodies-in-scikit-learn-speed.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
@@ -295,7 +295,7 @@ hope)&nbsp;additions.</p>
 <p>Last time, I teased you with a screenshot of local output. Now, I will
 tease you with the benchmarks run on a couple of recent commits, along
 with some from earlier this&nbsp;year.</p>
-<p>After some effort and bugfixes …</p>
+<p>After some effort and bugfixes ...</p>
                 <a class="readmore" href="http://vene.ro/blog/scikit-learn-speed-html-reports-teaser.html">read more</a>
 <p>There are <a href="http://vene.ro/blog/scikit-learn-speed-html-reports-teaser.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
@@ -323,7 +323,7 @@ with some from earlier this&nbsp;year.</p>
 string. The constructor&#8217;s signature&nbsp;is:  </p>
 <p><code>Benchmark(self, code, setup, ncalls=None, repeat=3, cleanup=None, name=None, description=None, start_date=None, logy=False)</code>.</p>
 <h2>Why generate benchmarks&nbsp;dynamically?</h2>
-<p>For most <code>scikit-learn</code> purposes, the <code>code</code> string will be …</p>
+<p>For most <code>scikit-learn</code> purposes, the <code>code</code> string will be ...</p>
                 <a class="readmore" href="http://vene.ro/blog/dynamically-generated-benchmarks-with-vbench.html">read more</a>
 <p>There are <a href="http://vene.ro/blog/dynamically-generated-benchmarks-with-vbench.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
