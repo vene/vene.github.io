@@ -4,7 +4,7 @@ URL:
 save_as: index.html
 
 # Allow me to introduce myself
-<img style="float: right" src="vlad-niculae.jpg" alt="Vlad Niculae" />
+<img id="vladpic" class="marginnote" src="vlad-niculae.jpg" alt="Vlad Niculae" />
 
 Welcome, traveler, to my page. Enjoy your brief stay while you get to
 know me!
