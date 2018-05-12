@@ -8,6 +8,7 @@ profile](https://scholar.google.com/citations?user=7_3UAgQAAAAJ).)
 
 * Vlad Niculae, André F. T. Martins, Mathieu Blondel, Claire Cardie.
 *SparseMAP:* Differentiable Sparse Structured Inference.
+In: Proc. of *ICML 2018* (to appear).
 \[&nbsp;[arXiv preprint](https://arxiv.org/abs/1802.04223)&nbsp;\]
 
 * Vlad Niculae and Mathieu Blondel.
