@@ -94,28 +94,28 @@ reports, without having to go in and add the <code>@profile</code> decorator.</p
 <p>In [3]: X, y = np.array([[1, 2], [3, 4], [5, 6]]), np.array([2, 4,&nbsp;6])</p>
 <p>In [4]: %mprun -f ridge_regression ridge_regression(X, y,&nbsp;1.0)</p>
 <p>(&#8230;)</p>
-<p>109 41.6406 <span class="caps">MB</span> 0.0000 <span class="caps">MB</span> if n_features > n_samples or \<br />
-110 41.6406 <span class="caps">MB</span> 0.0000 <span class="caps">MB</span> isinstance(sample_weight, np.ndarray) or \<br />
-111 41.6406 <span class="caps">MB</span> 0.0000 <span class="caps">MB</span> sample_weight != 1.0:<br />
-112<br />
-113 # kernel ridge<br />
-114 # w = X.T * inv(X X\^t + alpha*Id) y<br />
-115 A = np.dot(X, X.T)<br />
-116 A.flat[::n_samples + 1] += alpha * sample_weight<br />
-117 coef = np.dot(X.T, _solve(A, y, solver, tol))<br />
-118 else:<br />
-119 # ridge<br />
-120 # w = inv(X\^t X + alpha*Id) * X.T y<br />
-121 41.6484 <span class="caps">MB</span> 0.0078 <span class="caps">MB</span> A = np.dot(X.T, X)<br />
-122 41.6875 <span class="caps">MB</span> 0.0391 <span class="caps">MB</span> A.flat[::n_features + 1] += alpha<br />
+<p>109 41.6406 <span class="caps">MB</span> 0.0000 <span class="caps">MB</span> if n_features > n_samples or \<br>
+110 41.6406 <span class="caps">MB</span> 0.0000 <span class="caps">MB</span> isinstance(sample_weight, np.ndarray) or \<br>
+111 41.6406 <span class="caps">MB</span> 0.0000 <span class="caps">MB</span> sample_weight != 1.0:<br>
+112<br>
+113 # kernel ridge<br>
+114 # w = X.T * inv(X X\^t + alpha*Id) y<br>
+115 A = np.dot(X, X.T)<br>
+116 A.flat[::n_samples + 1] += alpha * sample_weight<br>
+117 coef = np.dot(X.T, _solve(A, y, solver, tol))<br>
+118 else:<br>
+119 # ridge<br>
+120 # w = inv(X\^t X + alpha*Id) * X.T y<br>
+121 41.6484 <span class="caps">MB</span> 0.0078 <span class="caps">MB</span> A = np.dot(X.T, X)<br>
+122 41.6875 <span class="caps">MB</span> 0.0391 <span class="caps">MB</span> A.flat[::n_features + 1] += alpha<br>
 123 41.7344 <span class="caps">MB</span> 0.0469 <span class="caps">MB</span> coef = _solve(A, np.dot(X.T, y), solver,
-tol)<br />
-124<br />
+tol)<br>
+124<br>
 125 41.7344 <span class="caps">MB</span> 0.0000 <span class="caps">MB</span> return&nbsp;coef.T</p>
 <p>[/sourcecode]</p>
 <h2>%memit</h2>
 <p>As described in my previous post, this is a <code>%timeit</code>-like magic for
-quickly seeing how much memory a Python command uses.<br />
+quickly seeing how much memory a Python command uses.<br>
 Unlike %timeit, however, the command needs to be executed in a fresh
 process. I have to dig in some more to debug this, but if the command is
 run in the current process, very often the difference in memory usage
@@ -123,16 +123,16 @@ will be insignificant, I assume because preallocated memory is used. The
 problem is that when running in a new process, some functions that I
 tried to bench crash with <code>SIGSEGV</code>. For a lot of stuff, though,
 <code>%memit</code> is currently&nbsp;usable:</p>
-<p>[sourcecode lang=&#8221;python&#8221;]<br />
+<p>[sourcecode lang=&#8221;python&#8221;]<br>
 In [1]: import numpy as&nbsp;np</p>
 <p>In [2]: X = np.ones((1000,&nbsp;1000))</p>
-<p>In [3]: %memit X.T<br />
+<p>In [3]: %memit X.T<br>
 worst of 3: 0.242188 <span class="caps">MB</span> per&nbsp;loop</p>
-<p>In [4]: %memit np.asfortranarray(X)<br />
+<p>In [4]: %memit np.asfortranarray(X)<br>
 worst of 3: 15.687500 <span class="caps">MB</span> per&nbsp;loop</p>
 <p>In [5]: Y =&nbsp;X.copy(&#8216;F&#8217;)</p>
-<p>In [6]: %memit np.asfortranarray(Y)<br />
-worst of 3: 0.324219 <span class="caps">MB</span> per loop<br />&nbsp;[/sourcecode]</p>
+<p>In [6]: %memit np.asfortranarray(Y)<br>
+worst of 3: 0.324219 <span class="caps">MB</span> per loop<br>&nbsp;[/sourcecode]</p>
 <p>It is very easy, using this small tool, to see what forces memory
 copying and what does&nbsp;not.</p>
 <h2>Installation&nbsp;instructions</h2>
@@ -140,36 +140,36 @@ copying and what does&nbsp;not.</p>
 memory_profiler. Then, it depends on your version of IPython. If you
 have 0.10, you have to edit <code>~/.ipython/ipy_user_conf.py</code> like this:
 (once again, instructions <em>borrowed</em> from&nbsp;[line_profiler][])</p>
-<p>[sourcecode lang=&#8221;python&#8221;]<br />
-# These two lines are standard and probably already there.<br />
-import IPython.ipapi<br />
+<p>[sourcecode lang=&#8221;python&#8221;]<br>
+# These two lines are standard and probably already there.<br>
+import IPython.ipapi<br>
 ip =&nbsp;IPython.ipapi.get()</p>
-<p># These two are the important ones.<br />
-import memory_profiler<br />
-ip.expose_magic(&#8216;mprun&#8217;, memory_profiler.magic_mprun)<br />
-ip.expose_magic(&#8216;memit&#8217;, memory_profiler.magic_memit)<br />&nbsp;[/sourcecode]</p>
+<p># These two are the important ones.<br>
+import memory_profiler<br>
+ip.expose_magic(&#8216;mprun&#8217;, memory_profiler.magic_mprun)<br>
+ip.expose_magic(&#8216;memit&#8217;, memory_profiler.magic_memit)<br>&nbsp;[/sourcecode]</p>
 <p>If you&#8217;re using IPython 0.11 or newer, the steps are different. First
-create a configuration profile:<br />
-[sourcecode lang=&#8221;bash&#8221;]<br />
-\$ ipython profile create<br />
-[/sourcecode]<br />
+create a configuration profile:<br>
+[sourcecode lang=&#8221;bash&#8221;]<br>
+\$ ipython profile create<br>
+[/sourcecode]<br>
 Then create a file named <code>~/.ipython/extensions/memory_profiler_ext.py</code>
 with the following&nbsp;content:</p>
-<p>[sourcecode lang=&#8221;python&#8221;]<br />
+<p>[sourcecode lang=&#8221;python&#8221;]<br>
 import&nbsp;memory_profiler</p>
-<p>def load_ipython_extension(ip):<br />
-ip.define_magic(&#8216;mprun&#8217;, memory_profiler.magic_mprun)<br />
-ip.define_magic(&#8216;memit&#8217;, memory_profiler.magic_memit)<br />&nbsp;[/sourcecode]</p>
+<p>def load_ipython_extension(ip):<br>
+ip.define_magic(&#8216;mprun&#8217;, memory_profiler.magic_mprun)<br>
+ip.define_magic(&#8216;memit&#8217;, memory_profiler.magic_memit)<br>&nbsp;[/sourcecode]</p>
 <p>Then register it in <code>~/.ipython/profile_default/ipython_config.py</code>, like
 this. Of course, if you already have other extensions such as
 <code>line_profiler_ext</code>, just add the new one to the&nbsp;list.</p>
-<p>[sourcecode lang=&#8221;python&#8221;]<br />
-c.TerminalIPythonApp.extensions = [<br />
-&#8216;memory_profiler_ext&#8217;,<br />
-]<br />
-c.InteractiveShellApp.extensions = [<br />
-&#8216;memory_profiler_ext&#8217;,<br />
-]<br />&nbsp;[/sourcecode]</p>
+<p>[sourcecode lang=&#8221;python&#8221;]<br>
+c.TerminalIPythonApp.extensions = [<br>
+&#8216;memory_profiler_ext&#8217;,<br>
+]<br>
+c.InteractiveShellApp.extensions = [<br>
+&#8216;memory_profiler_ext&#8217;,<br>
+]<br>&nbsp;[/sourcecode]</p>
 <p>Now launch IPython and you can use the new magics like in the examples&nbsp;above.</p>
     </div><!-- /.entry-content -->
     <div class="comments">
