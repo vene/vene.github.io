@@ -31,11 +31,11 @@ DEFAULT_PAGINATION = False
 # Uncomment following line if you want document-relative URLs when developing
 #RELATIVE_URLS = True
 
-THEME = 'themes/TuftePelican'
+THEME = 'themes/vene-tufte'
 
 # IPython Notebook plugin
 MARKUP = ('md', 'ipynb')
-PLUGIN_PATH = './plugins'
+PLUGIN_PATHS = ['./plugins']
 PLUGINS = ['pelican-ipynb']
 
 ARTICLE_PATHS = ['blog']
