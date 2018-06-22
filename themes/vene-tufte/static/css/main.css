@@ -9,24 +9,23 @@
 
 @charset "UTF-8";
 
-/*
 @font-face {
   font-family: "euclid-flex";
-  src: url("euclid-flex/Woff/euclidflex-bold-webtrial.woff") format("woff");
-  font-weight: bold;
+  src: url("EuclidFlex-Bold-Web/XL/EuclidFlex-Bold-WebXL.woff2") format("woff2");
+  font-weight: bold
   font-style: normal
 }
 
 @font-face {
   font-family: "euclid-flex";
-  src: url("euclid-flex/Woff/euclidflex-medium-webtrial.woff") format("woff");
+  src: url("EuclidFlex-Medium-Web/XL/EuclidFlex-Medium-WebXL.woff2") format("woff2");
   font-weight: 600;
   font-style: normal
 }
 
 @font-face {
   font-family: "euclid-flex";
-  src: url("euclid-flex/Woff/euclidflex-regular-webtrial.woff") format("woff");
+  src: url("EuclidFlex-Regular-Web/XL/EuclidFlex-Regular-WebXL.woff2") format("woff2");
   font-weight: regular;
   font-style: normal
 }
@@ -110,16 +109,23 @@ p > figure > figcaption { float: right;
   font-family: 'euclid-flex';
   text-transform: uppercase;
   font-weight: bold;
-     margin-top: 3rem;
-     margin-bottom: 1.5rem;
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
+  list-style-type: none;
 }
 
 #navmenu a {
   background: none;
+  text-shadow: none;
+}
+
+#navmenu li {
+  display: inline;
 }
 
 #navmenu li:after {
-    content: " /";
+    content: " ⋅";
+    /* content: " ⋅ \00B7"; */
 }
 #navmenu li:last-child:after {
     content: "";
