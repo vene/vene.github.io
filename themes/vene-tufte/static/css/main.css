@@ -194,6 +194,7 @@ img { width: 100%; }
 
 
 /* layout and menu */
+.center { text-align: center; }
 div#container{
 	height: 100%;
 	margin: 0 auto;
@@ -311,8 +312,7 @@ pre {
     max-width: 250px
   }
 
-  #vladpic
-  {
+  #vladpic {
     width: 200px;
     height: 200px;
     margin-left: 1rem;

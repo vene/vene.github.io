@@ -26,7 +26,7 @@ LINKS = None
 #  SOCIAL = (('You can add links in your config file', '#'),
           #  ('Another social link', '#'),)
 
-DEFAULT_PAGINATION = 3 
+DEFAULT_PAGINATION = 3
 
 # Uncomment following line if you want document-relative URLs when developing
 #RELATIVE_URLS = True
@@ -39,7 +39,6 @@ PLUGIN_PATHS = ['./plugins']
 PLUGINS = ['pelican-ipynb.markup']
 IPYNB_IGNORE_CSS = True
 
-AUTHOR_SAVE_AS = False 
 ARTICLE_PATHS = ['blog']
 ARTICLE_URL = 'blog/{slug}.html'
 ARTICLE_SAVE_AS = ARTICLE_URL
