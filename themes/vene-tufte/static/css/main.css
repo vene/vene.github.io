@@ -11,6 +11,16 @@
 
 @font-face {
   font-family: "euclid-flex";
+  src: url("../fonts/EuclidFlex-BoldItalic-WebXL.woff2") format("woff2"),
+       url("../fonts/EuclidFlex-BoldItalic-WebXL.woff") format("woff"),
+       url("../fonts/EuclidFlex-BoldItalic-WebXL.ttf") format("truetype");
+  font-weight: bold;
+  font-style: italic;
+}
+
+/*
+@font-face {
+  font-family: "euclid-flex";
   src: url("../fonts/EuclidFlex-Medium-WebXL.woff2") format("woff2"),
        url("../fonts/EuclidFlex-Medium-WebXL.woff") format("woff"),
        url("../fonts/EuclidFlex-Medium-WebXL.ttf") format("truetype");
@@ -20,29 +30,21 @@
 
 @font-face {
   font-family: "euclid-flex";
-  src: url("../fonts/EuclidFlex-Regular-WebXL.woff2") format("woff2"),
-       url("../fonts/EuclidFlex-Regular-WebXL.woff") format("woff"),
-       url("../fonts/EuclidFlex-Regular-WebXL.ttf") format("truetype");
-  font-weight: regular;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "euclid-flex";
-  src: url("../fonts/EuclidFlex-BoldItalic-WebXL.woff2") format("woff2"),
-       url("../fonts/EuclidFlex-BoldItalic-WebXL.woff") format("woff"),
-       url("../fonts/EuclidFlex-BoldItalic-WebXL.ttf") format("truetype");
-  font-weight: bold;
-  font-style: italic;
-}
-
-@font-face {
-  font-family: "euclid-flex";
   src: url("../fonts/EuclidFlex-MediumItalic-WebXL.woff2") format("woff2"),
        url("../fonts/EuclidFlex-MediumItalic-WebXL.woff") format("woff"),
        url("../fonts/EuclidFlex-MediumItalic-WebXL.ttf") format("truetype");
   font-weight: 600;
   font-style: italic;
+}
+*/
+
+@font-face {
+  font-family: "euclid-flex";
+  src: url("../fonts/EuclidFlex-Regular-WebXL.woff2") format("woff2"),
+       url("../fonts/EuclidFlex-Regular-WebXL.woff") format("woff"),
+       url("../fonts/EuclidFlex-Regular-WebXL.ttf") format("truetype");
+  font-weight: regular;
+  font-style: normal;
 }
 
 @font-face {
@@ -216,12 +218,7 @@ img { width: 100%; }
 div#container{
 	height: 100%;
 	margin: 0 auto;
-  margin: 1.3333em 10px;
-}
-
-#navmenu {
-  margin-bottom: 1.5rem;
-  margin-left: auto;
+  margin: 1.3333rem 10px;
 }
 
 #navmenu {
@@ -229,10 +226,12 @@ div#container{
   text-transform: uppercase;
   font-weight: bold;
   list-style-type: none;
+  margin-bottom: 1.5rem;
 }
 
 #navmenu li#homelink {
   font-size: 2.38rem;
+  line-height: 2rem;
   margin-bottom: 1rem;
 }
 #navmenu li.menu {
@@ -262,8 +261,9 @@ code, pre {
 }
 
 pre {
-  font-size: .7rem;
+  font-size: .66rem;
   line-height: 1rem;
+  margin: 0;
 }
 
 .highlight, .output_area {
@@ -272,7 +272,7 @@ pre {
     border-radius: 5px;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
-    margin: .5rem;
+    margin: .5rem 0;
     padding: 5px;
 }
 
@@ -290,37 +290,66 @@ pre {
   margin-top: 1rem;
 }
 
-/*
-#navmenu {
-
-  font-size: 4rem;
-  margin-top: 3rem;
-  margin-bottom: 1.5rem;
-}
-h1 { 
-  font-family: "euclid-flex", sans;
-  font-weight: medium;
-  margin-top: 1.568rem;
-  margin-bottom: 1.568rem;
-  font-size: 2.5rem;
-  line-height: 0.784;
+@media only screen and (min-width: 640px) {
+  div#container{
+    margin-top: 2rem;
+    margin-left: 3rem;
+  }
+  div#main{
+    width: 33rem;
+  }
 }
 
-h2 {
-  font-style: italic;
-  font-weight: 400;
-  margin-top: 1.866666666666667rem;
-  margin-bottom: 0;
-  font-size: 2.1rem;
-  line-height: 0.933333333333333;
+@media only screen and (min-width: 860px) {
+  img {
+    width: 80%;
+    margin-left: 10%;
+  }
+  #navmenu {
+    font-size: 2.11rem;
+    margin-bottom: 1.5rem;
+    line-height: 3rem;
+  }
+  #navmenu li#homelink,
+  #navmenu li.menu  {
+    display: inline;
+    font-size: inherit;
+    line-height: inherit;
+    margin: inherit;
+  }
+
+  #navmenu li#homelink:after {content: " ⋅ ";}
+
+  label.margin-toggle:not(.sidenote-number) { display: none; }
+  input.margin-toggle { display: none; }
+  
+  .sidenote, .marginnote { 
+    display: block;
+    float: none;
+    position: absolute;
+    left: 36rem;
+    margin: 0 1rem;
+    max-width: 250px
+  }
+
+  #vladpic
+  {
+    width: 200px;
+    height: 200px;
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+
 }
 
-h3 {
-  font-style: italic;
-  font-weight: 400;
-  font-size: 1.8rem;
-  margin-top: 2.1777777777777778rem;
-  margin-bottom: 0;
-  line-height: 1.08888888888889;
+@media only screen and (min-width: 1024px) {
+  html { 
+    font-size: 21px; 
+  }
 }
-*/
+
+@media only screen and (min-width: 1280px) {
+  #navmenu {
+    font-size: 2.76rem;
+  }
+}
