@@ -77,6 +77,7 @@ body {
   background-color: #F8F8FF;
   color: #111;
   counter-reset: sidenote-counter;
+  overflow-wrap: break-word;
 }
 
 
@@ -84,9 +85,12 @@ body {
   color: red;
 }
 
-code {
+code, pre {
   font-family: "PT Mono", monospace;
-  font-size: .95rem;
+}
+pre {
+  font-size: .7rem;
+  line-height: 1rem;
 }
 
 /*
@@ -292,9 +296,8 @@ a.anchor-link:link, a.anchor-link:visited, a.anchor-link:hover {
   background: none;
   text-shadow: none;
 }
-.highlight {
-    font-size: 0.7rem;
-    line-height: 1rem;
+
+.highlight, .output_area {
     overflow: auto;
 
     border-radius: 5px;
@@ -302,12 +305,14 @@ a.anchor-link:link, a.anchor-link:visited, a.anchor-link:hover {
     -webkit-border-radius: 5px;
     margin: .5rem;
     padding: 5px;
-    background-color: #efefef;
 }
+
+.highlight {
+    background: #efefef;
+}
+
 .output_area {
-  margin: .5rem;
-  padding: 5px;
-  overflow: auto;
+  border-left: 5px solid #efefef; 
 }
 
 /*
