@@ -299,6 +299,11 @@ a.anchor-link:link, a.anchor-link:visited, a.anchor-link:hover {
     padding: 5px;
     background-color: #efefef;
 }
+.output_area {
+  margin: .5rem;
+  padding: 5px;
+  overflow: auto;
+}
 
 /*
 #navmenu {
