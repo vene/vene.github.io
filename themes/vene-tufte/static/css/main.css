@@ -63,10 +63,6 @@
   font-style: italic; 
 }
 
-/* Imports */
-@import url("pygment.css");
-@import url("typogrify.css");
-
 html { 
   font-size: 18px; 
   line-height: 1.66rem;
@@ -209,6 +205,7 @@ div.text_cell_render {padding: 0 !important;}
 /* collapse */
 label.margin-toggle:not(.sidenote-number) { display: inline; }
 label { cursor: pointer; }
+input.margin-toggle { display: none; }
 sidenote, .marginnote { display: none; }
 .margin-toggle:checked + .sidenote,
 .margin-toggle:checked + .marginnote { display: block;
@@ -241,7 +238,7 @@ div#container{
 }
 
 #navmenu li#homelink {
-  font-size: 2.22rem;
+  font-size: 2.38rem;
   margin-bottom: 1rem;
 }
 #navmenu li.menu {
@@ -290,10 +287,22 @@ a.anchor-link:link, a.anchor-link:visited, a.anchor-link:hover {
   background: none;
   text-shadow: none;
 }
-.highlight {font-size: 0.8rem;}
+.highlight {
+    font-size: 0.7rem;
+    line-height: 1rem;
+    overflow: auto;
+
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    margin: .5rem;
+    padding: 5px;
+    background-color: #efefef;
+}
 
 /*
 #navmenu {
+
   font-size: 4rem;
   margin-top: 3rem;
   margin-bottom: 1.5rem;
