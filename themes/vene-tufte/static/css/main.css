@@ -88,6 +88,11 @@ body {
   color: red;
 }
 
+code {
+  font-family: "PT Mono", monospace;
+  font-size: .95rem;
+}
+
 /*
 article { 
   position: relative;
