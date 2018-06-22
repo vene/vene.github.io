@@ -3,4 +3,5 @@ Author: vene
 Date: 2014-01-22 18:00
 Category: python
 Tags: python, rank aggregation, kendall, tau, kemeny, kemeny-young, voting theory
+Summary: Rank aggregation is a problem with many important applications and naive approaches to it go wrong in subtle ways. Let's say that your national Quidditch league is dominated by five major wizard sports newspapers. Yes, the ones with moving images and everything.  Every week after the games, each of them publishes a ranking of the star players.  For now, let's suppose that the set of players under investigation is always the same, as the problem becomes a bit more complicated otherwise. ...
 

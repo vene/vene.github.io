@@ -6,7 +6,7 @@
 {% for article in articles_page.object_list %}
 <article class="post">
 {% include "article_header.html" %}
-{{ article.content }}	
+{{ article.summary }}	
 </article>
 {% endfor %}
 </main>

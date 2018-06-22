@@ -4,3 +4,4 @@ Date: 2015-11-07 12:00
 Category: python
 Tags: word embeddings, text classification, earth mover's distance
 Status: published
+Summary: In document classification and other natural language processing applications, having a good measure of the similarity of two texts can be a valuable building block.   Ideally, such a measure would capture semantic information.  Cosine similarity on bag-of-words vectors is known to do well in practice, but it inherently cannot capture when documents say the same thing in completely different words. ...
