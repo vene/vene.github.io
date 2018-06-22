@@ -36,7 +36,8 @@ THEME = 'themes/vene-tufte'
 # IPython Notebook plugin
 MARKUP = ('md', 'ipynb')
 PLUGIN_PATHS = ['./plugins']
-PLUGINS = ['pelican-ipynb']
+PLUGINS = ['pelican-ipynb.markup']
+IPYNB_IGNORE_CSS = True
 
 ARTICLE_PATHS = ['blog']
 ARTICLE_URL = 'blog/{slug}.html'

@@ -3,8 +3,9 @@ Status: hidden
 URL:
 save_as: index.html
 
-# Allow me to introduce myself
 <img id="vladpic" class="marginnote" src="vlad-niculae.jpg" alt="Vlad Niculae" />
+
+# Allow me to introduce&nbsp;myself
 
 Welcome, traveler, to my page. Enjoy your brief stay while you get to
 know me!

@@ -6,7 +6,6 @@
   <title>{% block title %}{{ SITENAME }}{% endblock %}</title>
   <meta name="author" content="{{ AUTHOR }}" />
   <base href="{{ SITEURL }}">
-  <link rel="stylesheet" type="text/css" href="/theme/tufte-css/tufte.css" />
   <link rel="stylesheet" type="text/css" href="/theme/css/main.css" />
   <!--
   Original link to favicon
@@ -62,23 +61,28 @@
 </head>
 
 <body>
+<div id="container">
 <header>
   <nav class="navmenu" id="navmenu">
-    <li><a href="/">{{ SITENAME }}</a></li>
-    {% for title, link in MENUITEMS %}
-    <li><a class="navitemlink" href="{{ SITEURL }}/{{ link }}">{{ title }}</a></li>
-    {% endfor %}
-    <!-- <li><a class="navitemlink" href="{{ SITEURL }}/archives.html">Archive</a></li> -->
-    {% if DISPLAY_PAGES_ON_MENU %}
-    {% for p in PAGES %}
-    <li><a class="navitemlink" href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a></li>
-    {% endfor %}{% endif %}
+    <li id="homelink"><a href="/">{{ SITENAME }}</a>
+{% for title, link in MENUITEMS %}
+    </li><li class="menu"><a href="{{ SITEURL }}/{{ link }}">{{ title }}</a>
+{% endfor %}
+{% if DISPLAY_PAGES_ON_MENU %}
+{% for p in PAGES %}
+  </li><li class="menu"><a href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a>
+{% endfor %}
+{% endif %}
+   </li>
    </nav>
  </header>
+ <div id="main">
 {% block content%}
 {% endblock content %}
+ </div>
 <footer>
   <p>Powered by <a href="http://pelican.readthedocs.org">Pelican</a></p>
 </footer>
+</div>
 </body>
 </html>
