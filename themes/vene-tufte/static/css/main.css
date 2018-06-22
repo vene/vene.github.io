@@ -1,12 +1,3 @@
-/*
-	Name: Smashing HTML5
-	Date: July 2009
-	Description: Sample layout for HTML5 and CSS3 goodness.
-	Version: 1.0
-	Author: Enrique Ramírez
-	Autor URI: http://enrique-ramirez.com
-*/
-
 @charset "UTF-8";
 
 @font-face {
@@ -80,53 +71,59 @@ body {
   overflow-wrap: break-word;
 }
 
-
-.danger {
-  color: red;
-}
-
-code, pre {
-  font-family: "PT Mono", monospace;
-}
-pre {
-  font-size: .7rem;
-  line-height: 1rem;
-}
-
-/*
-article { 
-  position: relative;
-  padding: 5rem 0rem;
-}
-*/
-
-section {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-}
-
 ol, ul {
   margin: 0;
-
 }
 
-p {
-  margin: 0 0 1rem 0 !important;
+p, li {
+  margin: 0 0 1rem 0;
   vertical-align: baseline;
 }
 
 p.subtitle {
   font-style: italic;
-  /*font-size: 1.8rem;
-  line-height: 1;*/
-  display: block;
 }
 
+.marginnote, .sidenote {
+  font-size: .8rem;
+  line-height: 1.1rem;
+}
 
 blockquote footer {
   font-size: .8rem;
   text-align: right;
 }
+
+/* headers */
+h1 a:link {background: none;}
+
+h1,h2,h3,h4 {
+  font-family: "euclid-flex", sans;
+  font-style: normal;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-weight: bold;
+}
+
+h1 { 
+  font-size: 1.5rem;
+}
+
+h2 {
+  font-size: 1.2222rem;
+}
+
+h3 {
+  font-size: 1.1111rem;
+}
+
+
+a.anchor-link:link, a.anchor-link:visited, a.anchor-link:hover {
+  color: lightgray; 
+  background: none;
+  text-shadow: none;
+}
+
 
 /* Links: replicate underline that clears descenders */
 a:link, a:visited { color: inherit; }
@@ -160,6 +157,11 @@ a:link::-moz-selection {
 }
 /* end links */
 
+section {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
 
 /*
 hr {
@@ -185,6 +187,18 @@ article div ol li p { padding: 0;
 
 */
 
+/* collapsable side-notes by default */
+label.margin-toggle:not(.sidenote-number) { display: inline; }
+label { cursor: pointer; }
+input.margin-toggle { display: none; }
+sidenote, .marginnote { display: none; }
+.margin-toggle:checked + .sidenote,
+.margin-toggle:checked + .marginnote { 
+  display: block;
+  margin: 1rem 1rem;
+}
+
+img { width: 100%; }
 
 #vladpic
 {
@@ -197,37 +211,8 @@ article div ol li p { padding: 0;
   margin-right: auto;
 }
 
-h1 a:link {background: none;}
 
-h2,h3,h4 {
-  font-family: euclid-flex;
-  font-weight: 600;
-  font-style: normal;
-}
-
-/* these need to be important to override inline styles */
-div.prompt {display: none !important;}
-div.cell {padding: 0 !important;}
-div.text_cell_render {padding: 0 !important;}
-
-
-/* collapse */
-label.margin-toggle:not(.sidenote-number) { display: inline; }
-label { cursor: pointer; }
-input.margin-toggle { display: none; }
-sidenote, .marginnote { display: none; }
-.margin-toggle:checked + .sidenote,
-.margin-toggle:checked + .marginnote { display: block;
-                                       float: left;
-                                       left: 1rem;
-                                       clear: both;
-                                       margin: 1rem 0;
-                                       vertical-align: baseline;
-                                       position: relative; }
-/* SPACING */
-
-img {width: 100%; }
-
+/* layout and menu */
 div#container{
 	height: 100%;
 	margin: 0 auto;
@@ -268,33 +253,17 @@ div#container{
     content: "";
 }
 
-h1 { 
-  font-family: "euclid-flex", sans;
-  font-weight: medium;
-  font-size: 1.222rem;
-  margin-top: 1rem;
-  margin-bottom: 0;
+/* Code and notebooks */
+
+div.prompt {display: none}
+
+code, pre {
+  font-family: "PT Mono", monospace;
 }
 
-h2 {
-  font-weight: medium;
-  font-size: 1.111rem;
-  line-height: 0.933333333333333;
-}
-
-h3 {
-  font-weight: medium;
-  font-size: 1rem;
-  /*margin-top: 2.1777777777777778rem*/;
-  margin-bottom: 0;
-  /*line-height: 1.08888888888889*/;
-}
-
-/* undo ipynb-pelican bullshit */
-a.anchor-link:link, a.anchor-link:visited, a.anchor-link:hover {
-  color: lightgray; 
-  background: none;
-  text-shadow: none;
+pre {
+  font-size: .7rem;
+  line-height: 1rem;
 }
 
 .highlight, .output_area {
@@ -313,6 +282,12 @@ a.anchor-link:link, a.anchor-link:visited, a.anchor-link:hover {
 
 .output_area {
   border-left: 5px solid #efefef; 
+}
+
+.code_cell + div h1,
+.code_cell + div h2,
+.code_cell + div h3 {
+  margin-top: 1rem;
 }
 
 /*
