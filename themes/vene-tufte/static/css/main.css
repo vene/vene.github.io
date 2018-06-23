@@ -124,12 +124,14 @@ h3 {
 }
 
 
+/* Fix these later. For now, hide.
 a.anchor-link:link, a.anchor-link:visited, a.anchor-link:hover {
   color: lightgray; 
   background: none;
   text-shadow: none;
 }
-
+*/
+a.anchor-link {display: none;}
 
 /* Links: replicate underline that clears descenders */
 a:link, a:visited { color: inherit; }
