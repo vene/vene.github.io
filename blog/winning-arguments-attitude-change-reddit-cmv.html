@@ -1,1066 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <title>Winning Arguments and Attitude Change on Reddit</title>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="/theme/css/main.css" type="text/css" />
-        <link href="http://vene.ro/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Vlad Niculae (~vene) Atom Feed" />
-        <link href="http://vene.ro/feed/all.rss.xml" type="application/rss+xml" rel="alternate" title="Vlad Niculae (~vene) RSS Feed" />
-        <link href='http://fonts.googleapis.com/css?family=Averia+Gruesa+Libre|Alegreya:400italic,400,700|Alegreya+SC&subset=latin-ext' rel='stylesheet' type='text/css'>
+  <meta charset="utf-8" />
+  <title>Winning Arguments and Attitude Change on Reddit</title>
+  <meta name="author" content="Vlad" />
+  <base href="//vene.ro">
+  <link rel="stylesheet" type="text/css" 
+        href="//vene.ro/theme/css/main.css" />
+  <link rel="stylesheet" type="text/css" 
+        href="//vene.ro/theme/css/pygment.css" />
+  <link rel="stylesheet" type="text/css" 
+        href="//vene.ro/theme/css/typogrify.css" />
+  <link rel="shortcut icon" href="//vene.ro/favicon.ico" />
+  <link href="//vene.ro/" type="application/atom+xml"
+        rel="alternate" title="Vlad Niculae ALL Atom Feed" />
+  <link href="//fonts.googleapis.com/css?family=PT+Mono|PT+Serif" rel="stylesheet"> 
 
-        <!--[if IE]>
-                <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-
-        <!--[if lte IE 7]>
-                <link rel="stylesheet" type="text/css" media="all" href="http://vene.ro/css/ie.css"/>
-                <script src="http://vene.ro/js/IE8.js" type="text/javascript"></script><![endif]-->
-
-        <!--[if lt IE 7]>
-                <link rel="stylesheet" type="text/css" media="all" href="http://vene.ro/css/ie6.css"/><![endif]-->
-    <!-- MathJax configuration -->
-    <script type="text/x-mathjax-config">
+  <!-- OpenGraph Info -->
+  <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
+      extensions: ["tex2jax.js"],
+      jax: ["input/TeX", "output/HTML-CSS"],
       tex2jax: {
         inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-        displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true
       },
-      displayAlign: 'left', // Change this to 'center' to center equations.
-      "HTML-CSS": {
-        styles: {'.MathJax_Display': {"margin": 0}}
-      }
+      displayAlign: 'left',
+      TeX: {
+        Macros: {
+          RR: "{\\mathbb{R}}",
+          argmin: "{\\mathop{\\mathrm{arg\\,min}}}",
+          bold: ["{\\bf #1}",1]
+        }
+        },
+      "HTML-CSS": { availableFonts: ["TeX"] }
     });
-    </script>
-    <!-- End of mathjax configuration -->
+  </script>
 
-    <script>
-    //  We wait for the onload function to load MathJax after the page is completely loaded.
-    //  MathJax is loaded 1 unit of time after the page is ready.
-    //  This hack prevent problems when you load multiple js files.
-
-    window.onload = function () {
-      setTimeout(function () {
-        var script = document.createElement("script");
-        script.type = "text/javascript";
-        script.src  = "https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS_HTML";
-        document.getElementsByTagName("head")[0].appendChild(script);
-      },1)
-    }
-    </script>
+  <script type="text/javascript" async
+          src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
 
 </head>
 
-<body id="index" class="home">
+<body>
 <div id="container">
-        <header id="banner" class="body">
-                <div id="mainheader">Vlad Niculae (~vene)</div>
-        </header><!-- /#banner -->
-        <div id="main" role="main">
+<header>
+  <nav class="navmenu" id="navmenu">
+    <li id="homelink"><a href="/">Vlad Niculae</a>
+    </li><li class="menu"><a href="//vene.ro/papers.html">Papers</a>
+    </li><li class="menu"><a href="//vene.ro/blog/">Blog</a>
+    </li><li class="menu"><a href="//vene.ro/teaching.html">Teaching</a>
+   </li>
+   </nav>
+ </header>
+ <div id="main">
 <section id="content" class="body">
   <article>
     <header>
       <h1 class="entry-title">
-        <a href="http://vene.ro/blog/winning-arguments-attitude-change-reddit-cmv.html" rel="bookmark"
+        <a href="//vene.ro/blog/winning-arguments-attitude-change-reddit-cmv.html" rel="bookmark"
            title="Permalink to Winning Arguments and Attitude Change on Reddit">Winning Arguments and Attitude Change on&nbsp;Reddit</a></h1>
-    </header>
+<p class="subtitle"><time datetime="2016-03-04T12:00:00+01:00">Fri 04 March 2016</time><label for="winning-arguments-attitude-change-reddit-cmv" class="margin-toggle"> ⊕</label><input type="checkbox" id="winning-arguments-attitude-change-reddit-cmv" class="margin-toggle" /><span class="marginnote">Category: <a href="//vene.ro/category/social-nlp.html">social-nlp</a><br />
+ #<a href="//vene.ro/tag/persuasion.html">persuasion</a> #<a href="//vene.ro/tag/malleability.html">malleability</a> #<a href="//vene.ro/tag/attitude-change.html">attitude change</a> #<a href="//vene.ro/tag/reddit.html">reddit</a> #<a href="//vene.ro/tag/social.html">social</a></span></p>    </header>
 
     <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2016-03-04T12:00:00+01:00">
-                Fri 04 March 2016
-        </abbr>
-
-        <address class="vcard author">
-                By <a class="url fn" href="http://vene.ro/blog/author/vene-chenhao-tan.html">vene & Chenhao Tan</a>
-        </address>
-<p>In <a href="http://vene.ro/blog/category/python-social-nlp.html">python, social-nlp</a>. </p>
-<p>tags: <a href="http://vene.ro/blog/tag/persuasion.html">persuasion</a> <a href="http://vene.ro/blog/tag/malleability.html">malleability</a> <a href="http://vene.ro/blog/tag/attitude-change.html">attitude change</a> <a href="http://vene.ro/blog/tag/reddit.html">reddit</a> <a href="http://vene.ro/blog/tag/social.html">social</a> </p>
-</footer><!-- /.post-info -->      <style type="text/css">/*!
-*
-* IPython notebook
-*
-*/
-/* <span class="caps">CSS</span> font colors for translated <span class="caps">ANSI</span> colors. */
-.ansibold {
-  font-weight: bold;
-}
-/* use dark versions for foreground, to improve visibility */
-.ansiblack {
-  color: black;
-}
-.ansired {
-  color: darkred;
-}
-.ansigreen {
-  color: darkgreen;
-}
-.ansiyellow {
-  color: #c4a000;
-}
-.ansiblue {
-  color: darkblue;
-}
-.ansipurple {
-  color: darkviolet;
-}
-.ansicyan {
-  color: steelblue;
-}
-.ansigray {
-  color: gray;
-}
-/* and light for background, for the same reason */
-.ansibgblack {
-  background-color: black;
-}
-.ansibgred {
-  background-color: red;
-}
-.ansibggreen {
-  background-color: green;
-}
-.ansibgyellow {
-  background-color: yellow;
-}
-.ansibgblue {
-  background-color: blue;
-}
-.ansibgpurple {
-  background-color: magenta;
-}
-.ansibgcyan {
-  background-color: cyan;
-}
-.ansibggray {
-  background-color: gray;
-}
-div.cell {
-  /* Old browsers */
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-box-align: stretch;
-  display: -moz-box;
-  -moz-box-orient: vertical;
-  -moz-box-align: stretch;
-  display: box;
-  box-orient: vertical;
-  box-align: stretch;
-  /* Modern browsers */
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  border-radius: 2px;
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  border-width: 1px;
-  border-style: solid;
-  border-color: transparent;
-  width: 100%;
-  padding: 5px;
-  /* This acts as a spacer between cells, that is outside the border */
-  margin: 0px;
-  outline: none;
-  border-left-width: 1px;
-  padding-left: 5px;
-  background: linear-gradient(to right, transparent -40px, transparent 1px, transparent 1px, transparent 100%);
-}
-div.cell.jupyter-soft-selected {
-  border-left-color: #<span class="caps">90CAF9</span>;
-  border-left-color: #<span class="caps">E3F2FD</span>;
-  border-left-width: 1px;
-  padding-left: 5px;
-  border-right-color: #<span class="caps">E3F2FD</span>;
-  border-right-width: 1px;
-  background: #<span class="caps">E3F2FD</span>;
-}
-@media print {
-  div.cell.jupyter-soft-selected {
-    border-color: transparent;
-  }
-}
-div.cell.selected {
-  border-color: #ababab;
-  border-left-width: 0px;
-  padding-left: 6px;
-  background: linear-gradient(to right, #<span class="caps">42A5F5</span> -40px, #<span class="caps">42A5F5</span> 5px, transparent 5px, transparent 100%);
-}
-@media print {
-  div.cell.selected {
-    border-color: transparent;
-  }
-}
-div.cell.selected.jupyter-soft-selected {
-  border-left-width: 0;
-  padding-left: 6px;
-  background: linear-gradient(to right, #<span class="caps">42A5F5</span> -40px, #<span class="caps">42A5F5</span> 7px, #<span class="caps">E3F2FD</span> 7px, #<span class="caps">E3F2FD</span> 100%);
-}
-.edit_mode div.cell.selected {
-  border-color: #<span class="caps">66BB6A</span>;
-  border-left-width: 0px;
-  padding-left: 6px;
-  background: linear-gradient(to right, #<span class="caps">66BB6A</span> -40px, #<span class="caps">66BB6A</span> 5px, transparent 5px, transparent 100%);
-}
-@media print {
-  .edit_mode div.cell.selected {
-    border-color: transparent;
-  }
-}
-.prompt {
-  /* This needs to be wide enough for 3 digit prompt numbers: In[100]: */
-  min-width: 14ex;
-  /* This padding is tuned to match the padding on the CodeMirror editor. */
-  padding: 0.4em;
-  margin: 0px;
-  font-family: monospace;
-  text-align: right;
-  /* This has to match that of the the CodeMirror class line-height below */
-  line-height: 1.21429em;
-  /* Don't highlight prompt number selection */
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  /* Use default cursor */
-  cursor: default;
-}
-@media (max-width: 540px) {
-  .prompt {
-    text-align: left;
-  }
-}
-div.inner_cell {
-  /* Old browsers */
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-box-align: stretch;
-  display: -moz-box;
-  -moz-box-orient: vertical;
-  -moz-box-align: stretch;
-  display: box;
-  box-orient: vertical;
-  box-align: stretch;
-  /* Modern browsers */
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  /* Old browsers */
-  -webkit-box-flex: 1;
-  -moz-box-flex: 1;
-  box-flex: 1;
-  /* Modern browsers */
-  flex: 1;
-}
-@-moz-document url-prefix() {
-  div.inner_cell {
-    overflow-x: hidden;
-  }
-}
-/* input_area and input_prompt must match in top border and margin for alignment */
-div.input_area {
-  border: 1px solid #cfcfcf;
-  border-radius: 2px;
-  background: #f7f7f7;
-  line-height: 1.21429em;
-}
-/* This is needed so that empty prompt areas can collapse to zero height when there
-   is no content in the output_subarea and the prompt. The main purpose of this is
-   to make sure that empty JavaScript output_subareas have no height. */
-div.prompt:empty {
-  padding-top: 0;
-  padding-bottom: 0;
-}
-div.unrecognized_cell {
-  padding: 5px 5px 5px 0px;
-  /* Old browsers */
-  display: -webkit-box;
-  -webkit-box-orient: horizontal;
-  -webkit-box-align: stretch;
-  display: -moz-box;
-  -moz-box-orient: horizontal;
-  -moz-box-align: stretch;
-  display: box;
-  box-orient: horizontal;
-  box-align: stretch;
-  /* Modern browsers */
-  display: flex;
-  flex-direction: row;
-  align-items: stretch;
-}
-div.unrecognized_cell .inner_cell {
-  border-radius: 2px;
-  padding: 5px;
-  font-weight: bold;
-  color: red;
-  border: 1px solid #cfcfcf;
-  background: #eaeaea;
-}
-div.unrecognized_cell .inner_cell a {
-  color: inherit;
-  text-decoration: none;
-}
-div.unrecognized_cell .inner_cell a:hover {
-  color: inherit;
-  text-decoration: none;
-}
-@media (max-width: 540px) {
-  div.unrecognized_cell > div.prompt {
-    display: none;
-  }
-}
-div.code_cell {
-  /* avoid page breaking on code cells when printing */
-}
-@media print {
-  div.code_cell {
-    page-break-inside: avoid;
-  }
-}
-/* any special styling for code cells that are currently running goes here */
-div.input {
-  page-break-inside: avoid;
-  /* Old browsers */
-  display: -webkit-box;
-  -webkit-box-orient: horizontal;
-  -webkit-box-align: stretch;
-  display: -moz-box;
-  -moz-box-orient: horizontal;
-  -moz-box-align: stretch;
-  display: box;
-  box-orient: horizontal;
-  box-align: stretch;
-  /* Modern browsers */
-  display: flex;
-  flex-direction: row;
-  align-items: stretch;
-}
-@media (max-width: 540px) {
-  div.input {
-    /* Old browsers */
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-box-align: stretch;
-    display: -moz-box;
-    -moz-box-orient: vertical;
-    -moz-box-align: stretch;
-    display: box;
-    box-orient: vertical;
-    box-align: stretch;
-    /* Modern browsers */
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-  }
-}
-/* input_area and input_prompt must match in top border and margin for alignment */
-div.input_prompt {
-  color: #<span class="caps">303F9F</span>;
-  border-top: 1px solid transparent;
-}
-div.input_area > div.highlight {
-  margin: 0.4em;
-  border: none;
-  padding: 0px;
-  background-color: transparent;
-}
-div.input_area > div.highlight > pre {
-  margin: 0px;
-  border: none;
-  padding: 0px;
-  background-color: transparent;
-}
-/* The following gets added to the <head> if it is detected that the user has a
- * monospace font with inconsistent normal/bold/italic height.  See
- * notebookmain.js.  Such fonts will have keywords vertically offset with
- * respect to the rest of the text.  The user should select a better font.
- * See: https://github.com/ipython/ipython/issues/1503
- *
- * .CodeMirror span {
- *      vertical-align: bottom;
- * }
- */
-.CodeMirror {
-  line-height: 1.21429em;
-  /* Changed from 1em to our global default */
-  font-size: 14px;
-  height: auto;
-  /* Changed to auto to autogrow */
-  background: none;
-  /* Changed from white to allow our bg to show through */
-}
-.CodeMirror-scroll {
-  /*  The CodeMirror docs are a bit fuzzy on if overflow-y should be hidden or visible.*/
-  /*  We have found that if it is visible, vertical scrollbars appear with font size changes.*/
-  overflow-y: hidden;
-  overflow-x: auto;
-}
-.CodeMirror-lines {
-  /* In <span class="caps">CM2</span>, this used to be 0.4em, but in <span class="caps">CM3</span> it went to 4px. We need the em value because */
-  /* we have set a different line-height and want this to scale with that. */
-  padding: 0.4em;
-}
-.CodeMirror-linenumber {
-  padding: 0 8px 0 4px;
-}
-.CodeMirror-gutters {
-  border-bottom-left-radius: 2px;
-  border-top-left-radius: 2px;
-}
-.CodeMirror pre {
-  /* In <span class="caps">CM3</span> this went to 4px from 0 in <span class="caps">CM2</span>. We need the 0 value because of how we size */
-  /* .CodeMirror-lines */
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-}
-/*
-
-Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiacs.Org>
-Adapted from GitHub theme
-
-*/
-.highlight-base {
-  color: #000;
-}
-.highlight-variable {
-  color: #000;
-}
-.highlight-variable-2 {
-  color: #1a1a1a;
-}
-.highlight-variable-3 {
-  color: #333333;
-}
-.highlight-string {
-  color: #<span class="caps">BA2121</span>;
-}
-.highlight-comment {
-  color: #408080;
-  font-style: italic;
-}
-.highlight-number {
-  color: #080;
-}
-.highlight-atom {
-  color: #88F;
-}
-.highlight-keyword {
-  color: #008000;
-  font-weight: bold;
-}
-.highlight-builtin {
-  color: #008000;
-}
-.highlight-error {
-  color: #f00;
-}
-.highlight-operator {
-  color: #<span class="caps">AA22FF</span>;
-  font-weight: bold;
-}
-.highlight-meta {
-  color: #<span class="caps">AA22FF</span>;
-}
-/* previously not defined, copying from default codemirror */
-.highlight-def {
-  color: #00f;
-}
-.highlight-string-2 {
-  color: #f50;
-}
-.highlight-qualifier {
-  color: #555;
-}
-.highlight-bracket {
-  color: #997;
-}
-.highlight-tag {
-  color: #170;
-}
-.highlight-attribute {
-  color: #00c;
-}
-.highlight-header {
-  color: blue;
-}
-.highlight-quote {
-  color: #090;
-}
-.highlight-link {
-  color: #00c;
-}
-/* apply the same style to codemirror */
-.cm-s-ipython span.cm-keyword {
-  color: #008000;
-  font-weight: bold;
-}
-.cm-s-ipython span.cm-atom {
-  color: #88F;
-}
-.cm-s-ipython span.cm-number {
-  color: #080;
-}
-.cm-s-ipython span.cm-def {
-  color: #00f;
-}
-.cm-s-ipython span.cm-variable {
-  color: #000;
-}
-.cm-s-ipython span.cm-operator {
-  color: #<span class="caps">AA22FF</span>;
-  font-weight: bold;
-}
-.cm-s-ipython span.cm-variable-2 {
-  color: #1a1a1a;
-}
-.cm-s-ipython span.cm-variable-3 {
-  color: #333333;
-}
-.cm-s-ipython span.cm-comment {
-  color: #408080;
-  font-style: italic;
-}
-.cm-s-ipython span.cm-string {
-  color: #<span class="caps">BA2121</span>;
-}
-.cm-s-ipython span.cm-string-2 {
-  color: #f50;
-}
-.cm-s-ipython span.cm-meta {
-  color: #<span class="caps">AA22FF</span>;
-}
-.cm-s-ipython span.cm-qualifier {
-  color: #555;
-}
-.cm-s-ipython span.cm-builtin {
-  color: #008000;
-}
-.cm-s-ipython span.cm-bracket {
-  color: #997;
-}
-.cm-s-ipython span.cm-tag {
-  color: #170;
-}
-.cm-s-ipython span.cm-attribute {
-  color: #00c;
-}
-.cm-s-ipython span.cm-header {
-  color: blue;
-}
-.cm-s-ipython span.cm-quote {
-  color: #090;
-}
-.cm-s-ipython span.cm-link {
-  color: #00c;
-}
-.cm-s-ipython span.cm-error {
-  color: #f00;
-}
-.cm-s-ipython span.cm-tab {
-  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAMCAYAAAAkuj5RAAAAAXNSR0IArs4c6QAAAGFJREFUSMft1LsRQFAQheHPowAKoACx3IgEKtaEHujDjORSgWTH/ZOdnZOcM/sgk/kFFWY0qV8foQwS4MKBCS3qR6ixBJvElOobYAtivseIE120FaowJPN75GMu8j/LfMwNjh4HUpwg4LUAAAAASUVORK5CYII=);
-  background-position: right;
-  background-repeat: no-repeat;
-}
-div.output_wrapper {
-  /* this position must be relative to enable descendents to be absolute within it */
-  position: relative;
-  /* Old browsers */
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-box-align: stretch;
-  display: -moz-box;
-  -moz-box-orient: vertical;
-  -moz-box-align: stretch;
-  display: box;
-  box-orient: vertical;
-  box-align: stretch;
-  /* Modern browsers */
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  z-index: 1;
-}
-/* class for the output area when it should be height-limited */
-div.output_scroll {
-  /* ideally, this would be max-height, but <span class="caps">FF</span> barfs all over that */
-  height: 24em;
-  /* <span class="caps">FF</span> needs this *and the wrapper* to specify full width, or it will shrinkwrap */
-  width: 100%;
-  overflow: auto;
-  border-radius: 2px;
-  -webkit-box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
-  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
-  display: block;
-}
-/* output div while it is collapsed */
-div.output_collapsed {
-  margin: 0px;
-  padding: 0px;
-  /* Old browsers */
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-box-align: stretch;
-  display: -moz-box;
-  -moz-box-orient: vertical;
-  -moz-box-align: stretch;
-  display: box;
-  box-orient: vertical;
-  box-align: stretch;
-  /* Modern browsers */
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-}
-div.out_prompt_overlay {
-  height: 100%;
-  padding: 0px 0.4em;
-  position: absolute;
-  border-radius: 2px;
-}
-div.out_prompt_overlay:hover {
-  /* use inner shadow to get border that is computed the same on WebKit/<span class="caps">FF</span> */
-  -webkit-box-shadow: inset 0 0 1px #000;
-  box-shadow: inset 0 0 1px #000;
-  background: rgba(240, 240, 240, 0.5);
-}
-div.output_prompt {
-  color: #D84315;
-}
-/* This class is the outer container of all output sections. */
-div.output_area {
-  padding: 0px;
-  page-break-inside: avoid;
-  /* Old browsers */
-  display: -webkit-box;
-  -webkit-box-orient: horizontal;
-  -webkit-box-align: stretch;
-  display: -moz-box;
-  -moz-box-orient: horizontal;
-  -moz-box-align: stretch;
-  display: box;
-  box-orient: horizontal;
-  box-align: stretch;
-  /* Modern browsers */
-  display: flex;
-  flex-direction: row;
-  align-items: stretch;
-}
-div.output_area .MathJax_Display {
-  text-align: left !important;
-}
-div.output_area 
-div.output_area 
-div.output_area img,
-div.output_area svg {
-  max-width: 100%;
-  height: auto;
-}
-div.output_area img.unconfined,
-div.output_area svg.unconfined {
-  max-width: none;
-}
-/* This is needed to protect the pre formating from global settings such
-   as that of bootstrap */
-.output {
-  /* Old browsers */
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-box-align: stretch;
-  display: -moz-box;
-  -moz-box-orient: vertical;
-  -moz-box-align: stretch;
-  display: box;
-  box-orient: vertical;
-  box-align: stretch;
-  /* Modern browsers */
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-}
-@media (max-width: 540px) {
-  div.output_area {
-    /* Old browsers */
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-box-align: stretch;
-    display: -moz-box;
-    -moz-box-orient: vertical;
-    -moz-box-align: stretch;
-    display: box;
-    box-orient: vertical;
-    box-align: stretch;
-    /* Modern browsers */
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-  }
-}
-div.output_area pre {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  vertical-align: baseline;
-  color: black;
-  background-color: transparent;
-  border-radius: 0;
-}
-/* This class is for the output subarea inside the output_area and after
-   the prompt div. */
-div.output_subarea {
-  overflow-x: auto;
-  padding: 0.4em;
-  /* Old browsers */
-  -webkit-box-flex: 1;
-  -moz-box-flex: 1;
-  box-flex: 1;
-  /* Modern browsers */
-  flex: 1;
-  max-width: calc(100% - 14ex);
-}
-div.output_scroll div.output_subarea {
-  overflow-x: visible;
-}
-/* The rest of the output_* classes are for special styling of the different
-   output types */
-/* all text output has this class: */
-div.output_text {
-  text-align: left;
-  color: #000;
-  /* This has to match that of the the CodeMirror class line-height below */
-  line-height: 1.21429em;
-}
-/* stdout/stderr are 'text' as well as 'stream', but execute_result/error are *not* streams */
-div.output_stderr {
-  background: #fdd;
-  /* very light red background for stderr */
-}
-div.output_latex {
-  text-align: left;
-}
-/* Empty output_javascript divs should have no height */
-div.output_javascript:empty {
-  padding: 0;
-}
-.js-error {
-  color: darkred;
-}
-/* raw_input styles */
-div.raw_input_container {
-  line-height: 1.21429em;
-  padding-top: 5px;
-}
-pre.raw_input_prompt {
-  /* nothing needed here. */
-}
-input.raw_input {
-  font-family: monospace;
-  font-size: inherit;
-  color: inherit;
-  width: auto;
-  /* make sure input baseline aligns with prompt */
-  vertical-align: baseline;
-  /* padding + margin = 0.5em between prompt and cursor */
-  padding: 0em 0.25em;
-  margin: 0em 0.25em;
-}
-input.raw_input:focus {
-  box-shadow: none;
-}
-p.p-space {
-  margin-bottom: 10px;
-}
-div.output_unrecognized {
-  padding: 5px;
-  font-weight: bold;
-  color: red;
-}
-div.output_unrecognized a {
-  color: inherit;
-  text-decoration: none;
-}
-div.output_unrecognized a:hover {
-  color: inherit;
-  text-decoration: none;
-}
-.rendered_html {
-  color: #000;
-  /* any extras will just be numbers: */
-}
-
-
-
-.rendered_html :link {
-  text-decoration: underline;
-}
-.rendered_html :visited {
-  text-decoration: underline;
-}
-
-
-
-
-
-
-.rendered_html h1:first-child {
-  margin-top: 0.538em;
-}
-.rendered_html h2:first-child {
-  margin-top: 0.636em;
-}
-.rendered_html h3:first-child {
-  margin-top: 0.777em;
-}
-.rendered_html h4:first-child {
-  margin-top: 1em;
-}
-.rendered_html h5:first-child {
-  margin-top: 1em;
-}
-.rendered_html h6:first-child {
-  margin-top: 1em;
-}
-
-
-
-
-
-
-
-
-.rendered_html * + ul {
-  margin-top: 1em;
-}
-.rendered_html * + ol {
-  margin-top: 1em;
-}
-
-
-.rendered_html pre,
-
-
-
-.rendered_html tr,
-.rendered_html th,
-
-.rendered_html td,
-
-
-.rendered_html * + table {
-  margin-top: 1em;
-}
-
-.rendered_html * + p {
-  margin-top: 1em;
-}
-
-.rendered_html * + img {
-  margin-top: 1em;
-}
-.rendered_html img,
-
-.rendered_html img.unconfined,
-
-div.text_cell {
-  /* Old browsers */
-  display: -webkit-box;
-  -webkit-box-orient: horizontal;
-  -webkit-box-align: stretch;
-  display: -moz-box;
-  -moz-box-orient: horizontal;
-  -moz-box-align: stretch;
-  display: box;
-  box-orient: horizontal;
-  box-align: stretch;
-  /* Modern browsers */
-  display: flex;
-  flex-direction: row;
-  align-items: stretch;
-}
-@media (max-width: 540px) {
-  div.text_cell > div.prompt {
-    display: none;
-  }
-}
-div.text_cell_render {
-  /*font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;*/
-  outline: none;
-  resize: none;
-  width: inherit;
-  border-style: none;
-  padding: 0.5em 0.5em 0.5em 0.4em;
-  color: #000;
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-}
-a.anchor-link:link {
-  text-decoration: none;
-  padding: 0px 20px;
-  visibility: hidden;
-}
-h1:hover .anchor-link,
-h2:hover .anchor-link,
-h3:hover .anchor-link,
-h4:hover .anchor-link,
-h5:hover .anchor-link,
-h6:hover .anchor-link {
-  visibility: visible;
-}
-.text_cell.rendered .input_area {
-  display: none;
-}
-.text_cell.rendered 
-.text_cell.unrendered .text_cell_render {
-  display: none;
-}
-.cm-header-1,
-.cm-header-2,
-.cm-header-3,
-.cm-header-4,
-.cm-header-5,
-.cm-header-6 {
-  font-weight: bold;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-.cm-header-1 {
-  font-size: 185.7%;
-}
-.cm-header-2 {
-  font-size: 157.1%;
-}
-.cm-header-3 {
-  font-size: 128.6%;
-}
-.cm-header-4 {
-  font-size: 110%;
-}
-.cm-header-5 {
-  font-size: 100%;
-  font-style: italic;
-}
-.cm-header-6 {
-  font-size: 100%;
-  font-style: italic;
-}
-</style>
-<style type="text/css">.highlight .hll { background-color: #ffffcc }
-.highlight  { background: #f8f8f8; }
-.highlight .c { color: #408080; font-style: italic } /* Comment */
-.highlight .err { border: 1px solid #<span class="caps">FF0000</span> } /* Error */
-.highlight .k { color: #008000; font-weight: bold } /* Keyword */
-.highlight .o { color: #666666 } /* Operator */
-.highlight .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
-.highlight .cm { color: #408080; font-style: italic } /* Comment.Multiline */
-.highlight .cp { color: #<span class="caps">BC7A00</span> } /* Comment.Preproc */
-.highlight .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
-.highlight .c1 { color: #408080; font-style: italic } /* Comment.Single */
-.highlight .cs { color: #408080; font-style: italic } /* Comment.Special */
-.highlight .gd { color: #A00000 } /* Generic.Deleted */
-.highlight .ge { font-style: italic } /* Generic.Emph */
-.highlight .gr { color: #<span class="caps">FF0000</span> } /* Generic.Error */
-.highlight .gh { color: #000080; font-weight: bold } /* Generic.Heading */
-.highlight .gi { color: #00A000 } /* Generic.Inserted */
-.highlight .go { color: #888888 } /* Generic.Output */
-.highlight .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
-.highlight .gs { font-weight: bold } /* Generic.Strong */
-.highlight .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
-.highlight .gt { color: #<span class="caps">0044DD</span> } /* Generic.Traceback */
-.highlight .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
-.highlight .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
-.highlight .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
-.highlight .kp { color: #008000 } /* Keyword.Pseudo */
-.highlight .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
-.highlight .kt { color: #B00040 } /* Keyword.Type */
-.highlight .m { color: #666666 } /* Literal.Number */
-.highlight .s { color: #<span class="caps">BA2121</span> } /* Literal.String */
-.highlight .na { color: #7D9029 } /* Name.Attribute */
-.highlight .nb { color: #008000 } /* Name.Builtin */
-.highlight .nc { color: #<span class="caps">0000FF</span>; font-weight: bold } /* Name.Class */
-.highlight .no { color: #880000 } /* Name.Constant */
-.highlight .nd { color: #<span class="caps">AA22FF</span> } /* Name.Decorator */
-.highlight .ni { color: #999999; font-weight: bold } /* Name.Entity */
-.highlight .ne { color: #<span class="caps">D2413A</span>; font-weight: bold } /* Name.Exception */
-.highlight .nf { color: #<span class="caps">0000FF</span> } /* Name.Function */
-.highlight .nl { color: #<span class="caps">A0A000</span> } /* Name.Label */
-.highlight .nn { color: #<span class="caps">0000FF</span>; font-weight: bold } /* Name.Namespace */
-.highlight .nt { color: #008000; font-weight: bold } /* Name.Tag */
-.highlight .nv { color: #19177C } /* Name.Variable */
-.highlight .ow { color: #<span class="caps">AA22FF</span>; font-weight: bold } /* Operator.Word */
-.highlight .w { color: #bbbbbb } /* Text.Whitespace */
-.highlight .mb { color: #666666 } /* Literal.Number.Bin */
-.highlight .mf { color: #666666 } /* Literal.Number.Float */
-.highlight .mh { color: #666666 } /* Literal.Number.Hex */
-.highlight .mi { color: #666666 } /* Literal.Number.Integer */
-.highlight .mo { color: #666666 } /* Literal.Number.Oct */
-.highlight .sb { color: #<span class="caps">BA2121</span> } /* Literal.String.Backtick */
-.highlight .sc { color: #<span class="caps">BA2121</span> } /* Literal.String.Char */
-.highlight .sd { color: #<span class="caps">BA2121</span>; font-style: italic } /* Literal.String.Doc */
-.highlight .s2 { color: #<span class="caps">BA2121</span> } /* Literal.String.Double */
-.highlight .se { color: #<span class="caps">BB6622</span>; font-weight: bold } /* Literal.String.Escape */
-.highlight .sh { color: #<span class="caps">BA2121</span> } /* Literal.String.Heredoc */
-.highlight .si { color: #<span class="caps">BB6688</span>; font-weight: bold } /* Literal.String.Interpol */
-.highlight .sx { color: #008000 } /* Literal.String.Other */
-.highlight .sr { color: #<span class="caps">BB6688</span> } /* Literal.String.Regex */
-.highlight .s1 { color: #<span class="caps">BA2121</span> } /* Literal.String.Single */
-.highlight .ss { color: #19177C } /* Literal.String.Symbol */
-.highlight .bp { color: #008000 } /* Name.Builtin.Pseudo */
-.highlight .vc { color: #19177C } /* Name.Variable.Class */
-.highlight .vg { color: #19177C } /* Name.Variable.Global */
-.highlight .vi { color: #19177C } /* Name.Variable.Instance */
-.highlight .il { color: #666666 } /* Literal.Number.Integer.Long */</style>
-<style type="text/css">
-/* Temporary definitions which will become obsolete with Notebook release 5.0 */
-.ansi-black-fg { color: #<span class="caps">3E424D</span>; }
-.ansi-black-bg { background-color: #<span class="caps">3E424D</span>; }
-.ansi-black-intense-fg { color: #282C36; }
-.ansi-black-intense-bg { background-color: #282C36; }
-.ansi-red-fg { color: #<span class="caps">E75C58</span>; }
-.ansi-red-bg { background-color: #<span class="caps">E75C58</span>; }
-.ansi-red-intense-fg { color: #<span class="caps">B22B31</span>; }
-.ansi-red-intense-bg { background-color: #<span class="caps">B22B31</span>; }
-.ansi-green-fg { color: #00A250; }
-.ansi-green-bg { background-color: #00A250; }
-.ansi-green-intense-fg { color: #007427; }
-.ansi-green-intense-bg { background-color: #007427; }
-.ansi-yellow-fg { color: #<span class="caps">DDB62B</span>; }
-.ansi-yellow-bg { background-color: #<span class="caps">DDB62B</span>; }
-.ansi-yellow-intense-fg { color: #<span class="caps">B27D12</span>; }
-.ansi-yellow-intense-bg { background-color: #<span class="caps">B27D12</span>; }
-.ansi-blue-fg { color: #<span class="caps">208FFB</span>; }
-.ansi-blue-bg { background-color: #<span class="caps">208FFB</span>; }
-.ansi-blue-intense-fg { color: #<span class="caps">0065CA</span>; }
-.ansi-blue-intense-bg { background-color: #<span class="caps">0065CA</span>; }
-.ansi-magenta-fg { color: #<span class="caps">D160C4</span>; }
-.ansi-magenta-bg { background-color: #<span class="caps">D160C4</span>; }
-.ansi-magenta-intense-fg { color: #A03196; }
-.ansi-magenta-intense-bg { background-color: #A03196; }
-.ansi-cyan-fg { color: #<span class="caps">60C6C8</span>; }
-.ansi-cyan-bg { background-color: #<span class="caps">60C6C8</span>; }
-.ansi-cyan-intense-fg { color: #<span class="caps">258F8F</span>; }
-.ansi-cyan-intense-bg { background-color: #<span class="caps">258F8F</span>; }
-.ansi-white-fg { color: #<span class="caps">C5C1B4</span>; }
-.ansi-white-bg { background-color: #<span class="caps">C5C1B4</span>; }
-.ansi-white-intense-fg { color: #<span class="caps">A1A6B2</span>; }
-.ansi-white-intense-bg { background-color: #<span class="caps">A1A6B2</span>; }
-
-.ansi-bold { font-weight: bold; }
-</style>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+      
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><em>I have the honor of featuring another guest post on my blog. This time, we have with us my friend <a href="https://chenhaot.com">Chenhao Tan</a>. We recently collaborated on <a href="https://chenhaot.com/pages/changemyview.html">an effort to understand how people change their minds</a> on the <a href="http://reddit.com/r/changemyview"><code>/r/ChangeMyView</code></a>&nbsp;subreddit.</em></p>
 <p><a href="http://nbviewer.jupyter.org/github/vene/vene.github.io/blob/pelican/content/blog/winning_arguments.ipynb">Source of this Jupyter&nbsp;Notebook.</a></p>
-<p>One of the many reasons why people are beautiful and fascinating is the way we change.  I get reminded of how much I have changed everytime I see a photo of myself from high school, and this always triggers memories of how my opinions and attitudes have changed over the years. Some of the beliefs I held most strongly ended up being abandonded completely, while others have not changed much. <span style="color: red">*If you&#8217;re bored already, scroll down, this blog post has code&nbsp;too!*</span></p>
+<p>One of the many reasons why people are beautiful and fascinating is the way we change.  I get reminded of how much I have changed everytime I see a photo of myself from high school, and this always triggers memories of how my opinions and attitudes have changed over the years. Some of the beliefs I held most strongly ended up being abandonded completely, while others have not changed much. <span style='color: red'>*If you&#8217;re bored already, scroll down, this blog post has code&nbsp;too!*</span></p>
 <p>Attitude change and persuasion has been an appealing research topic for a long time.  One of the more interesting theories on this issue is <a href="http://youarenotsosmart.com/2011/06/10/the-backfire-effect/"><em>the backfire effect</em></a>:</p>
 <blockquote><p>When your deepest convictions are challenged by contradictory evidence, your beliefs get&nbsp;stronger.</p>
 </blockquote>
 <p>Earlier studies, however, suggest a lot more nuance. For instance, individuals who <a href="https://en.wikipedia.org/wiki/Self-affirmation"><em>affirm their self</em></a> were <a href="https://ed.stanford.edu/sites/default/files/when_beliefs_yield.pdf">found</a> to be more likely to be persuaded by evidence.  Studying opinion change <em>in the wild</em> can be difficult.  Many times, people change their mind slowly and subtly, over a number of years, making it difficult to pinpoint the exact moment or cause of the change.  Also, a change of opinion on a minor, inconsequential topic may not be worth&nbsp;discussing.</p>
 <p>We contributed to these efforts by studying <a href="http://reddit.com/r/changemyview"><code>/r/ChangeMyView</code></a> (<span class="caps">CMV</span>), an online forum of civil, open-minded discussion where people invite other members to challenge their more controversial views.  If you&#8217;ve never visited <span class="caps">CMV</span>, the concept that people can debate hot topics without getting into flame wars on the internet might be hard to believe.  Or, if you read a lot of Youtube comments, you might be inclined to believe <em>the backfire effect</em>, and doubt that graceful concession is even possible online.  But a quick trip to this great subreddit will undoubtably make you a&nbsp;believer.</p>
-<h1 id="What-makes-/r/ChangeMyView-special?">What makes <code>/r/ChangeMyView</code> special?<a class="anchor-link" href="#What-makes-/r/ChangeMyView-special?">&#182;</a></h1><p>Some of the more interesting reasons why <span class="caps">CMV</span> is a cool lens for the study of persuasion&nbsp;is:</p>
+<h2 id="What-makes-/r/ChangeMyView-special?">What makes <code>/r/ChangeMyView</code> special?<a class="anchor-link" href="#What-makes-/r/ChangeMyView-special?">&#182;</a></h2><p>Some of the more interesting reasons why <span class="caps">CMV</span> is a cool lens for the study of persuasion&nbsp;is:</p>
 <ul>
 <li><p>Original posters (<span class="caps">OP</span>) select views that are important to them and controversial, but, by posting them there, manifest a <em>de facto</em> openness to&nbsp;counterarguments.</p>
 </li>
@@ -1071,7 +90,7 @@ h6:hover .anchor-link {
 <li><p>Even in light of <span class="caps">CMV</span> users being open-minded, <em>not all opinions are changed</em>, and not just due to a lack of trying. This gives us a chance to analyze <em>resistance to persuasion</em>.</p>
 </li>
 </ul>
-<h1 id="Taking-a-look-at-the-dataset">Taking a look at the dataset<a class="anchor-link" href="#Taking-a-look-at-the-dataset">&#182;</a></h1><p>I know what you&#8217;re thinking, a little less conversation, let&#8217;s actually look at some examples.  Sure, our pleasure! Let&#8217;s download the dataset that we&nbsp;compiled.</p>
+<h2 id="Taking-a-look-at-the-dataset">Taking a look at the dataset<a class="anchor-link" href="#Taking-a-look-at-the-dataset">&#182;</a></h2><p>I know what you&#8217;re thinking, a little less conversation, let&#8217;s actually look at some examples.  Sure, our pleasure! Let&#8217;s download the dataset that we&nbsp;compiled.</p>
 <p><strong>Warning:</strong> If you&#8217;re following along at home, and you don&#8217;t already have it, this will download the 321M file <code>cmv.tar.bz2</code>.  We kept the code simple, but the downside is that your Jupyter kernel will be busy until the file is downloaded.  If, by any chance, your connection drops or you interrupt it, you will have to remove the partial file, otherwise the rest of the notebook might not&nbsp;work.</p>
 
 </div>
@@ -1138,8 +157,7 @@ h6:hover .anchor-link {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -1184,7 +202,11 @@ h6:hover .anchor-link {
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[3]:</div>
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[3]:</div>
+
+
 
 <div class="output_markdown rendered_html output_subarea output_execute_result">
 <blockquote><p><strong><span class="caps">CMV</span>: Taxation should be voluntary, with individuals retaining the right to opt out of&nbsp;it.</strong></p>
@@ -1204,8 +226,7 @@ In my opinion, this would create a voluntary political system where individual r
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -1231,7 +252,11 @@ In my opinion, this would create a voluntary political system where individual r
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[4]:</div>
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[4]:</div>
+
+
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -1244,8 +269,7 @@ In my opinion, this would create a voluntary political system where individual r
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -1271,7 +295,11 @@ In my opinion, this would create a voluntary political system where individual r
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>http://reddit.com/r/changemyview/comments/2q03zk
 </pre>
@@ -1282,8 +310,7 @@ In my opinion, this would create a voluntary political system where individual r
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -1328,7 +355,11 @@ In my opinion, this would create a voluntary political system where individual r
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[7]:</div>
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[7]:</div>
+
+
 
 <div class="output_markdown rendered_html output_subarea output_execute_result">
 <blockquote><p><strong><span class="caps">CMV</span>: Taxation should be voluntary, with individuals retaining the right to opt out of&nbsp;it.</strong></p>
@@ -1346,8 +377,7 @@ In my opinion, this would create a voluntary political system where individual r
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -1362,12 +392,11 @@ In my opinion, this would create a voluntary political system where individual r
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Reproducing-some-results">Reproducing some results<a class="anchor-link" href="#Reproducing-some-results">&#182;</a></h1><p>One of our findings was that OPs who express their view using &#8220;we&#8221; are more stubborn than the ones who say &#8220;I&#8221;. The example above uses some plural pronouns (&#8220;If we believe&#8221;) but overall it seems the opinion is purely self-attributed.  Does this pattern hold in the&nbsp;dataset?</p>
+<h2 id="Reproducing-some-results">Reproducing some results<a class="anchor-link" href="#Reproducing-some-results">&#182;</a></h2><p>One of our findings was that OPs who express their view using &#8220;we&#8221; are more stubborn than the ones who say &#8220;I&#8221;. The example above uses some plural pronouns (&#8220;If we believe&#8221;) but overall it seems the opinion is purely self-attributed.  Does this pattern hold in the&nbsp;dataset?</p>
 
 </div>
 </div>
@@ -1450,7 +479,11 @@ In my opinion, this would create a voluntary political system where individual r
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[11]:</div>
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[11]:</div>
+
+
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -1523,7 +556,11 @@ In my opinion, this would create a voluntary political system where individual r
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>/home/vlad/conda/lib/python3.4/site-packages/IPython/html.py:14: ShimWarning: The `IPython.html` package has been deprecated. You should import from `notebook` instead. `IPython.html.widgets` has moved to `ipywidgets`.
   &#34;`IPython.html.widgets` has moved to `ipywidgets`.&#34;, ShimWarning)
@@ -1603,7 +640,11 @@ In my opinion, this would create a voluntary political system where individual r
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 
 
 <div class="output_png output_subarea ">
@@ -2109,7 +1150,8 @@ TwaPx5P8zEYgEOCrr76SKrNs2TKcOXMGW7Zsgba2NubPnw9PT0/JsUlJSUFERATmzJkD4PmZfnJy
 Mvh8vsK20ZO61I9ylHK0O+YoTQlKCCGEdDN02ZwQQgjpZqjzJoQQQroZ6rwJIYSQboY6b0IIIaSb
 oc6bEEII6Wao8yaEEEK6Geq8CSGEkG6GOm9CCCGkm6HOmxBCCOlm/g9pjDi5Hs4L/QAAAABJRU5E
 rkJggg==
-">
+"
+>
 </div>
 
 </div>
@@ -2118,12 +1160,11 @@ rkJggg==
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Training-a-simple-classifier">Training a simple classifier<a class="anchor-link" href="#Training-a-simple-classifier">&#182;</a></h1><p>We can take this one step further and train a simple bag-of-words classifier using <a href="http://scikit-learn.org/"><code>scikit-learn</code></a>.  Bag-of-words is often a good baseline, and a good <em>debugging</em> tool: sometimes, problems are simpler than we think, and bag-of-words can catch this and hint that we&#8217;re being too optimistic.  (For an example of what I mean, try running the code below without the &#8220;cleanup&#8221;&nbsp;step.)</p>
+<h2 id="Training-a-simple-classifier">Training a simple classifier<a class="anchor-link" href="#Training-a-simple-classifier">&#182;</a></h2><p>We can take this one step further and train a simple bag-of-words classifier using <a href="http://scikit-learn.org/"><code>scikit-learn</code></a>.  Bag-of-words is often a good baseline, and a good <em>debugging</em> tool: sometimes, problems are simpler than we think, and bag-of-words can catch this and hint that we&#8217;re being too optimistic.  (For an example of what I mean, try running the code below without the &#8220;cleanup&#8221;&nbsp;step.)</p>
 
 </div>
 </div>
@@ -2171,8 +1212,7 @@ rkJggg==
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -2228,7 +1268,11 @@ rkJggg==
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[22]:</div>
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[22]:</div>
+
+
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -2266,7 +1310,11 @@ rkJggg==
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Test ROC AUC score: 0.531
 </pre>
@@ -2277,14 +1325,13 @@ rkJggg==
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The score is in the same ballpark as the results in our paper, with the differences coming from the more naive tokenization and preprocessing used here.  The <span class="caps">ROC</span> <span class="caps">AUC</span> score (area under the <span class="caps">ROC</span> curve) can be interpreted as the probability that, given a pair of a malleable and a stubborn <span class="caps">OP</span>, the classifier will successfully tell which is which.  This metric is particularly good for imbalanced datasets, and 50% corresponds to an uninformed classifier (one that responds randomly or always gives the same answer).  In light of this, the score is not great, confirming that this is not at all an easy problem, still open for further&nbsp;research.</p>
 <p>We point out one particular challenge: our heldout data is temporally newer than the training data, because we collected it <em>strictly after</em> developing our work on the training set.  This has the advantage of making overfitting impossible, but <em>extrapolating</em> is different than <em>interpolating</em> in time, and some attributes of the <span class="caps">CMV</span> community shift over time.  (We discuss some of them in Section 2 of our paper.) You may model malleability better by accounting for shifts both in covariates and the outcome&nbsp;variable.</p>
-<h1 id="Checking-out-the-features">Checking out the features<a class="anchor-link" href="#Checking-out-the-features">&#182;</a></h1><p>We can use the trained model to see what words have high and low weights. You could use the output for further inspiration.  For instance, this could suggest that generalizing words (&#8220;anything&#8221;, &#8220;anyone&#8221;, &#8220;nothing&#8221;) might be a sign of stubbornness.  There is plenty of potential for exploring and expanding our work further, so give it a&nbsp;try!</p>
+<h2 id="Checking-out-the-features">Checking out the features<a class="anchor-link" href="#Checking-out-the-features">&#182;</a></h2><p>We can use the trained model to see what words have high and low weights. You could use the output for further inspiration.  For instance, this could suggest that generalizing words (&#8220;anything&#8221;, &#8220;anyone&#8221;, &#8220;nothing&#8221;) might be a sign of stubbornness.  There is plenty of potential for exploring and expanding our work further, so give it a&nbsp;try!</p>
 
 </div>
 </div>
@@ -2322,7 +1369,11 @@ rkJggg==
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>[ 8.9] so                  [-9.1] its                 
 [ 7.2] even                [-5.5] having              
@@ -2347,8 +1398,7 @@ rkJggg==
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -2387,7 +1437,11 @@ rkJggg==
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>2016-03-04 
 
@@ -2414,11 +1468,14 @@ interpreter: 64bit
 </div>
 
 </div>
+ 
+
+
 <script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var mathjaxscript = document.createElement('script');
     mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
     mathjaxscript.type = 'text/javascript';
-    mathjaxscript.src = '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript.src = '//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
     mathjaxscript[(window.opera ? "innerHTML" : "text")] =
         "MathJax.Hub.Config({" +
         "    config: ['MMLorHTML.js']," +
@@ -2435,6 +1492,7 @@ interpreter: 64bit
         "        preview: 'TeX'," +
         "    }, " +
         "    'HTML-CSS': { " +
+        " linebreaks: { automatic: true, width: '95% container' }, " +
         "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'black ! important'} }" +
         "    } " +
         "}); ";
@@ -2447,36 +1505,25 @@ interpreter: 64bit
       <h2>Comments !</h2>
       <div id="disqus_thread"></div>
       <script type="text/javascript">
-        var disqus_identifier = "blog/winning-arguments-attitude-change-reddit-cmv.html";
+        var disqus_shortname = 'vene';
+        var disqus_identifier = 'blog/winning-arguments-attitude-change-reddit-cmv.html';
+        var disqus_url = '//vene.ro/blog/winning-arguments-attitude-change-reddit-cmv.html';
         (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = 'http://vene.disqus.com/embed.js';
+        dsq.src = '//vene.disqus.com/embed.js';
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
       </script>
+      <noscript>Please enable JavaScript to view the comments.</noscript>
     </div>
 
   </article>
 </section>
-        <section id="extras" class="body">
-        </section><!-- /#extras -->
-
-        <footer id="contentinfo" class="body">
-                <address id="about" class="vcard body">
-                Go <a href="/">home</a>. <a href="/privacy.html">Privacy policy.</a>
-                Powered by <a href="http://getpelican.com/">Pelican</a>.
-                </address><!-- /#about -->
-        </footer><!-- /#contentinfo -->
-        </div>
-<script type="text/javascript">
-    var disqus_shortname = 'vene';
-    (function () {
-        var s = document.createElement('script'); s.async = true;
-        s.type = 'text/javascript';
-        s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
-        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-    }());
-</script>
+ </div>
+<footer>
+  <p>Powered by <a href="http://pelican.readthedocs.org">Pelican</a>.
+  <a href="/privacy.html">Privacy policy</a>.</p>
+</footer>
 </div>
 </body>
 </html>

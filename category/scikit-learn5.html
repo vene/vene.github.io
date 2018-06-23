@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>scikit-learn - Vlad Niculae</title>
+  <meta name="author" content="Vlad" />
+  <base href="//vene.ro">
+  <link rel="stylesheet" type="text/css" 
+        href="//vene.ro/theme/css/main.css" />
+  <link rel="stylesheet" type="text/css" 
+        href="//vene.ro/theme/css/pygment.css" />
+  <link rel="stylesheet" type="text/css" 
+        href="//vene.ro/theme/css/typogrify.css" />
+  <link rel="shortcut icon" href="//vene.ro/favicon.ico" />
+  <link href="//vene.ro/" type="application/atom+xml"
+        rel="alternate" title="Vlad Niculae ALL Atom Feed" />
+  <link href="//fonts.googleapis.com/css?family=PT+Mono|PT+Serif" rel="stylesheet"> 
+
+  <!-- OpenGraph Info -->
+  <meta property="og:title" content="Vlad Niculae"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:description" content=""/>
+  <meta property="og:url" content="//vene.ro"/>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      extensions: ["tex2jax.js"],
+      jax: ["input/TeX", "output/HTML-CSS"],
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true
+      },
+      displayAlign: 'left',
+      TeX: {
+        Macros: {
+          RR: "{\\mathbb{R}}",
+          argmin: "{\\mathop{\\mathrm{arg\\,min}}}",
+          bold: ["{\\bf #1}",1]
+        }
+        },
+      "HTML-CSS": { availableFonts: ["TeX"] }
+    });
+  </script>
+
+  <script type="text/javascript" async
+          src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
+
+</head>
+
+<body>
+<div id="container">
+<header>
+  <nav class="navmenu" id="navmenu">
+    <li id="homelink"><a href="/">Vlad Niculae</a>
+    </li><li class="menu"><a href="//vene.ro/papers.html">Papers</a>
+    </li><li class="menu"><a href="//vene.ro/blog/">Blog</a>
+    </li><li class="menu"><a href="//vene.ro/teaching.html">Teaching</a>
+   </li>
+   </nav>
+ </header>
+ <div id="main">
+<main class="articlelisting">
+
+<article class="hentry">
+<header>
+<h1><a href="//vene.ro/blog/progress-on-orthogonal-matching-pursuit.html"
+       rel="bookmark"
+       title="Permalink to Progress on Orthogonal Matching Pursuit">Progress on Orthogonal Matching&nbsp;Pursuit</a></h1>
+</header>
+<p class="subtitle"><time datetime="2011-08-02T16:56:00+02:00">Tue 02 August 2011</time><label for="progress-on-orthogonal-matching-pursuit" class="margin-toggle"> ⊕</label><input type="checkbox" id="progress-on-orthogonal-matching-pursuit" class="margin-toggle" /><span class="marginnote">Category: <a href="//vene.ro/category/scikit-learn.html">scikit-learn</a><br />
+ #<a href="//vene.ro/tag/omp.html">omp</a> #<a href="//vene.ro/tag/orthogonal-matching-pursuit.html">orthogonal matching pursuit</a> #<a href="//vene.ro/tag/scikit-learn.html">scikit-learn</a></span></p><p>Since orthogonal matching pursuit (<span class="caps">OMP</span>) is an important part of signal
+processing and therefore crucial to the image processing aspect of
+dictionary learning, I am currently focusing on optimizing the <span class="caps">OMP</span> code
+and making sure it is stable. <span class="caps">OMP</span> is a forward method like least-angle
+regression, so it is natural …</p>	
+</article>
+<article class="hentry">
+<header>
+<h1><a href="//vene.ro/blog/sparsepca-in-scikits-learn-git.html"
+       rel="bookmark"
+       title="Permalink to SparsePCA in scikits.learn-git">SparsePCA in&nbsp;scikits.learn-git</a></h1>
+</header>
+<p class="subtitle"><time datetime="2011-07-19T12:01:00+02:00">Tue 19 July 2011</time><label for="sparsepca-in-scikits-learn-git" class="margin-toggle"> ⊕</label><input type="checkbox" id="sparsepca-in-scikits-learn-git" class="margin-toggle" /><span class="marginnote">Category: <a href="//vene.ro/category/scikit-learn.html">scikit-learn</a><br />
+ #<a href="//vene.ro/tag/pca.html">pca</a> #<a href="//vene.ro/tag/principal-components-analysis.html">principal components analysis</a> #<a href="//vene.ro/tag/scikit-learn.html">scikit-learn</a> #<a href="//vene.ro/tag/sparse-pca.html">sparse pca</a> #<a href="//vene.ro/tag/sparsepca.html">SparsePCA</a> #<a href="//vene.ro/tag/spca.html">spca</a></span></p><p>I am happy to announce that the Sparse <span class="caps">PCA</span> code has been reviewed and
+merged into the main <code>scikits.learn</code> repository.</p>
+<p>You can use it if you install the bleeding edge <code>scikits.learn</code> git
+version, by first downloading the source code as explained in the
+<a href="http://scikit-learn.sourceforge.net/stable/developers/index.html#git-repo" title="installation user's guide">user&#8217;s guide</a>, and then …</p>	
+</article>
+<article class="hentry">
+<header>
+<h1><a href="//vene.ro/blog/k-means-for-dictionary-learning.html"
+       rel="bookmark"
+       title="Permalink to K-Means for dictionary learning">K-Means for dictionary&nbsp;learning</a></h1>
+</header>
+<p class="subtitle"><time datetime="2011-07-10T14:27:00+02:00">Sun 10 July 2011</time><label for="k-means-for-dictionary-learning" class="margin-toggle"> ⊕</label><input type="checkbox" id="k-means-for-dictionary-learning" class="margin-toggle" /><span class="marginnote">Category: <a href="//vene.ro/category/scikit-learn.html">scikit-learn</a><br />
+ #<a href="//vene.ro/tag/dictionary-learning.html">dictionary learning</a> #<a href="//vene.ro/tag/k-means.html">k-means</a> #<a href="//vene.ro/tag/scikit-learn.html">scikit-learn</a> #<a href="//vene.ro/tag/vq.html">vq</a> #<a href="//vene.ro/tag/uncategorized.html">Uncategorized</a></span></p><p>[![Dictionary learned with K-Means on the <span class="caps">LFW</span> dataset with whitening
+<span class="caps">PCA</span>][]][][![Dictionary learned with K-Means on the <span class="caps">LFW</span> dataset without
+whitening <span class="caps">PCA</span>][]][]</p>
+<p>One of the simplest, and yet most heavily constrained form of matrix
+factorization, is vector quantization (<span class="caps">VQ</span>). Heavily used in image/video
+compression, the <span class="caps">VQ</span> problem is a …</p>	
+</article>
+</main>
+<div class="blognav">
+      <nav id="pagination">
+[&nbsp;<a href="/archives.html">all posts</a>&nbsp;]
+[&nbsp;<a href="/categories.html">categories</a>&nbsp;]
+[&nbsp;<a href="/tags.html">tags</a>&nbsp;]
+[&nbsp;pages:        <a id="first_page" href="//vene.ro/category/scikit-learn.html">&#60;&#60;</a>
+        <a id="prev_page" rel="prev" href="//vene.ro/category/scikit-learn4.html">&#60;</a>
+        <a href="//vene.ro/category/scikit-learn.html">1</a>
+        <a href="//vene.ro/category/scikit-learn2.html">2</a>
+        <a href="//vene.ro/category/scikit-learn3.html">3</a>
+        <a href="//vene.ro/category/scikit-learn4.html">4</a>
+        <span class="a active">5</span>
+        <a href="//vene.ro/category/scikit-learn6.html">6</a>
+        <a href="//vene.ro/category/scikit-learn7.html">7</a>
+        <a id="next_page" rel="next" href="//vene.ro/category/scikit-learn6.html">&#62;</a>
+        <a id="last_page" href="//vene.ro/category/scikit-learn7.html">&#62;&#62;</a>
+&nbsp;]
+      </nav></div>
+ </div>
+<footer>
+  <p>Powered by <a href="http://pelican.readthedocs.org">Pelican</a>.
+  <a href="/privacy.html">Privacy policy</a>.</p>
+</footer>
+</div>
+</body>
+</html>

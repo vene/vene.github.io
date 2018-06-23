@@ -1,126 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <title>Vlad Niculae&#8217;s  personal&nbsp;website</title>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="/theme/css/main.css" type="text/css" />
-        <link href="http://vene.ro/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Vlad Niculae (~vene) Atom Feed" />
-        <link href="http://vene.ro/feed/all.rss.xml" type="application/rss+xml" rel="alternate" title="Vlad Niculae (~vene) RSS Feed" />
-        <link href='http://fonts.googleapis.com/css?family=Averia+Gruesa+Libre|Alegreya:400italic,400,700|Alegreya+SC&subset=latin-ext' rel='stylesheet' type='text/css'>
+  <meta charset="utf-8" />
+  <title>Vlad Niculae&#8217;s  personal&nbsp;website</title>
+  <meta name="author" content="Vlad" />
+  <base href="//vene.ro">
+  <link rel="stylesheet" type="text/css" 
+        href="//vene.ro/theme/css/main.css" />
+  <link rel="stylesheet" type="text/css" 
+        href="//vene.ro/theme/css/pygment.css" />
+  <link rel="stylesheet" type="text/css" 
+        href="//vene.ro/theme/css/typogrify.css" />
+  <link rel="shortcut icon" href="//vene.ro/favicon.ico" />
+  <link href="//vene.ro/" type="application/atom+xml"
+        rel="alternate" title="Vlad Niculae ALL Atom Feed" />
+  <link href="//fonts.googleapis.com/css?family=PT+Mono|PT+Serif" rel="stylesheet"> 
 
-        <!--[if IE]>
-                <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-
-        <!--[if lte IE 7]>
-                <link rel="stylesheet" type="text/css" media="all" href="http://vene.ro/css/ie.css"/>
-                <script src="http://vene.ro/js/IE8.js" type="text/javascript"></script><![endif]-->
-
-        <!--[if lt IE 7]>
-                <link rel="stylesheet" type="text/css" media="all" href="http://vene.ro/css/ie6.css"/><![endif]-->
-    <!-- MathJax configuration -->
-    <script type="text/x-mathjax-config">
+  <!-- OpenGraph Info -->
+  <meta property="og:title" content="Vlad Niculae"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:description" content=""/>
+  <meta property="og:url" content="//vene.ro"/>
+  <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
+      extensions: ["tex2jax.js"],
+      jax: ["input/TeX", "output/HTML-CSS"],
       tex2jax: {
         inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-        displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true
       },
-      displayAlign: 'left', // Change this to 'center' to center equations.
-      "HTML-CSS": {
-        styles: {'.MathJax_Display': {"margin": 0}}
-      }
+      displayAlign: 'left',
+      TeX: {
+        Macros: {
+          RR: "{\\mathbb{R}}",
+          argmin: "{\\mathop{\\mathrm{arg\\,min}}}",
+          bold: ["{\\bf #1}",1]
+        }
+        },
+      "HTML-CSS": { availableFonts: ["TeX"] }
     });
-    </script>
-    <!-- End of mathjax configuration -->
+  </script>
 
-    <script>
-    //  We wait for the onload function to load MathJax after the page is completely loaded.
-    //  MathJax is loaded 1 unit of time after the page is ready.
-    //  This hack prevent problems when you load multiple js files.
-
-    window.onload = function () {
-      setTimeout(function () {
-        var script = document.createElement("script");
-        script.type = "text/javascript";
-        script.src  = "https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS_HTML";
-        document.getElementsByTagName("head")[0].appendChild(script);
-      },1)
-    }
-    </script>
+  <script type="text/javascript" async
+          src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
 
 </head>
 
-<body id="index" class="home">
+<body>
 <div id="container">
-        <header id="banner" class="body">
-                <div id="mainheader">Vlad Niculae (~vene)</div>
-        </header><!-- /#banner -->
-        <div id="main" role="main">
-        
-<section id="content" class="body">    
-    
-    <h1>Allow me to introduce&nbsp;myself</h1>
-<p><img style="float: right" src="vlad-niculae.jpg" alt="Vlad Niculae" /></p>
-<p>Welcome, traveler, to my page. Enjoy your brief stay while you get to
-know me!
-My name is Vlad and I&#8217;m a PhD candidate in Computer Science
+<header>
+  <nav class="navmenu" id="navmenu">
+    <li id="homelink"><a href="/">Vlad Niculae</a>
+    </li><li class="menu"><a href="//vene.ro/papers.html">Papers</a>
+    </li><li class="menu"><a href="//vene.ro/blog/">Blog</a>
+    </li><li class="menu"><a href="//vene.ro/teaching.html">Teaching</a>
+   </li>
+   </nav>
+ </header>
+ <div id="main">
+<p><img id="vladpic" class="marginnote" src="vlad-niculae.jpg" alt="Vlad Niculae" /></p>
+<p>Hi! I&#8217;m Vlad, and I&#8217;m <span class="caps">CS</span> PhD candidate
 at <a href="http://www.cs.cornell.edu/">Cornell</a>, advised by <a href="http://www.cs.cornell.edu/home/cardie/">Claire
-Cardie</a>.</p>
-<p>I am also a scientific Python developer, maintainter of the
-<a href="http://contrib.scikit-learn.org/polylearn">polylearn</a> library
-for factorization machines and polynomial networks in Python,
-and sometimes contributing to the
-<a href="http://scikit-learn.org">scikit-learn</a> machine learning library.
-I am collaborating with the <a href="http://nlp.unibuc.ro/">Center for Computational Linguistics at
-the University of Bucharest</a>.</p>
+Cardie</a>.
+I work on machine learning <span class="amp">&amp;</span> natural language processing,
+focusing on structure and sparsity.
+I am a <a href="http://scikit-learn.org">scikit-learn</a> &#8220;alum&#8221; and
+I develop the <a href="http://contrib.scikit-learn.org/polylearn">polylearn</a>
+library for factorization machines and polynomial networks in&nbsp;Python.</p>
 <h1>News</h1>
 <ul>
-<li>Released <a href="https://github.com/vene/sparse-structured-attention">code</a>
-    for our <span class="caps">NIPS</span>&#8216;17 paper on <a href="https://arxiv.org/abs/1705.07704"><em>A Regularized Framework for Sparse and
-    Structured Neural&nbsp;Attention.</em></a></li>
-<li>Check out our <span class="caps">ACL</span>&#8216;17 paper on <a href="https://arxiv.org/abs/1704.06869"><em>Argument mining with structured SVMs and
-    RNNs</em></a>!
-    <a href="https://github.com/vene/marseille">Code</a> and 
-    <a href="http://joonsuk.org/">data</a> are&nbsp;available. </li>
+<li>
+<p><a href="https://arxiv.org/abs/1802.04223"><em>SparseMAP: Differentiable sparse structured inference</em>
+</a>
+  is accepted at <span class="caps">ICML</span>&#8216;18! <a href="https://github.com/vene/sparsemap">PyTorch implementation</a> (dynet coming&nbsp;soon).</p>
+</li>
+<li>
+<p>Released <a href="https://github.com/vene/sparse-structured-attention">code</a>
+    for our <span class="caps">NIPS</span>&#8216;17 paper on <a href="https://arxiv.org/abs/1705.07704"><em>A regularized framework for sparse and
+    structured neural&nbsp;attention.</em></a></p>
+</li>
 </ul>
-<h1>Research</h1>
-<p>You can take a look at the list of my <a href="papers.html">publications</a>. The
-materials for <a href="talks.html">talks</a> that I&#8217;ve had the honor of giving are also&nbsp;available.</p>
-<h1>Miscellanea</h1>
-<p>Whenever I code something that I think is cool and could be useful,
-I <a href="blog/index.html">blog</a> about&nbsp;it.</p>
-<p>You can read about the <a href="fonts.html">fonts</a> I&#8217;m using on this page and I&#8217;m sure
-you&#8217;ll find it interesting, especially if you&#8217;re mathematically inclined. Then
-again, people don&#8217;t usually get my math jokes, so I won&#8217;t get my hopes&nbsp;up.</p>
 <h1>Contact</h1>
 <p>You can find me on twitter as
 <a href="https://www.twitter.com/vnfrombucharest">@vnfrombucharest</a> or on github as
 <a href="https://www.github.com/vene">@vene</a>. I&#8217;m also on
 <a href="https://www.facebook.com/vlad.niculae">facebook</a> and
 <a href="http://gplus.to/vladn">g+</a>.
-You can transmit your thoughts to me at vlad<span
-style="display:none">hunter2</span>@vene.ro.
+Or just e-mail me: vlad<span
+style="display:none">hunter2</span> at vene.ro.
 My public key is available from <a href="https://keybase.io/vladn">Keybase</a>.</p>
-</section>
-        <section id="extras" class="body">
-        </section><!-- /#extras -->
-
-        <footer id="contentinfo" class="body">
-                <address id="about" class="vcard body">
-                Go <a href="/">home</a>. <a href="/privacy.html">Privacy policy.</a>
-                Powered by <a href="http://getpelican.com/">Pelican</a>.
-                </address><!-- /#about -->
-        </footer><!-- /#contentinfo -->
-        </div>
-<script type="text/javascript">
-    var disqus_shortname = 'vene';
-    (function () {
-        var s = document.createElement('script'); s.async = true;
-        s.type = 'text/javascript';
-        s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
-        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-    }());
-</script>
+ </div>
+<footer>
+  <p>Powered by <a href="http://pelican.readthedocs.org">Pelican</a>.
+  <a href="/privacy.html">Privacy policy</a>.</p>
+</footer>
 </div>
 </body>
 </html>

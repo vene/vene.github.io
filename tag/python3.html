@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Tagged "python" - Vlad Niculae</title>
+  <meta name="author" content="Vlad" />
+  <base href="//vene.ro">
+  <link rel="stylesheet" type="text/css" 
+        href="//vene.ro/theme/css/main.css" />
+  <link rel="stylesheet" type="text/css" 
+        href="//vene.ro/theme/css/pygment.css" />
+  <link rel="stylesheet" type="text/css" 
+        href="//vene.ro/theme/css/typogrify.css" />
+  <link rel="shortcut icon" href="//vene.ro/favicon.ico" />
+  <link href="//vene.ro/" type="application/atom+xml"
+        rel="alternate" title="Vlad Niculae ALL Atom Feed" />
+  <link href="//fonts.googleapis.com/css?family=PT+Mono|PT+Serif" rel="stylesheet"> 
+
+  <!-- OpenGraph Info -->
+  <meta property="og:title" content="Vlad Niculae"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:description" content=""/>
+  <meta property="og:url" content="//vene.ro"/>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      extensions: ["tex2jax.js"],
+      jax: ["input/TeX", "output/HTML-CSS"],
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true
+      },
+      displayAlign: 'left',
+      TeX: {
+        Macros: {
+          RR: "{\\mathbb{R}}",
+          argmin: "{\\mathop{\\mathrm{arg\\,min}}}",
+          bold: ["{\\bf #1}",1]
+        }
+        },
+      "HTML-CSS": { availableFonts: ["TeX"] }
+    });
+  </script>
+
+  <script type="text/javascript" async
+          src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
+
+</head>
+
+<body>
+<div id="container">
+<header>
+  <nav class="navmenu" id="navmenu">
+    <li id="homelink"><a href="/">Vlad Niculae</a>
+    </li><li class="menu"><a href="//vene.ro/papers.html">Papers</a>
+    </li><li class="menu"><a href="//vene.ro/blog/">Blog</a>
+    </li><li class="menu"><a href="//vene.ro/teaching.html">Teaching</a>
+   </li>
+   </nav>
+ </header>
+ <div id="main">
+<main class="articlelisting">
+
+<article class="hentry">
+<header>
+<h1><a href="//vene.ro/blog/memory-benchmarking-with-vbench.html"
+       rel="bookmark"
+       title="Permalink to Memory benchmarking with vbench">Memory benchmarking with&nbsp;vbench</a></h1>
+</header>
+<p class="subtitle"><time datetime="2012-07-05T12:38:00+02:00">Thu 05 July 2012</time><label for="memory-benchmarking-with-vbench" class="margin-toggle"> ⊕</label><input type="checkbox" id="memory-benchmarking-with-vbench" class="margin-toggle" /><span class="marginnote">Category: <a href="//vene.ro/category/benchmarking.html">benchmarking</a><br />
+ #<a href="//vene.ro/tag/memit.html">memit</a> #<a href="//vene.ro/tag/memory.html">memory</a> #<a href="//vene.ro/tag/vbench.html">vbench</a> #<a href="//vene.ro/tag/python.html">python</a> #<a href="//vene.ro/tag/scikit-learn.html">scikit-learn</a></span></p><p>The <a href="https://github.com/vene/scikit-learn-speed">scikit-learn-speed project</a> now has memory usage&nbsp;benchmarking!</p>
+<p>This was accomplished by building on what I described in my recent
+posts, specifically the extensions to Fabian&#8217;s [memory_profiler][] that
+you can find in <a href="https://github.com/vene/memory_profiler">my fork</a>, but they will be merged upstream soon. The
+key element is the <code>%magic_memit</code> function whose …</p>	
+</article>
+<article class="hentry">
+<header>
+<h1><a href="//vene.ro/blog/on-why-my-memit-fails-on-osx.html"
+       rel="bookmark"
+       title="Permalink to On why my %memit fails on OSX">On why my %memit fails on <span class="caps">OSX</span></a></h1>
+</header>
+<p class="subtitle"><time datetime="2012-07-04T12:49:00+02:00">Wed 04 July 2012</time><label for="on-why-my-memit-fails-on-osx" class="margin-toggle"> ⊕</label><input type="checkbox" id="on-why-my-memit-fails-on-osx" class="margin-toggle" /><span class="marginnote">Category: <a href="//vene.ro/category/benchmarking.html">benchmarking</a><br />
+ #<a href="//vene.ro/tag/ipython.html">IPython</a> #<a href="//vene.ro/tag/magic.html">magic</a> #<a href="//vene.ro/tag/memit.html">memit</a> #<a href="//vene.ro/tag/mprun.html">mprun</a> #<a href="//vene.ro/tag/benchmarking.html">benchmarking</a> #<a href="//vene.ro/tag/python.html">python</a></span></p><p>In my <a href="http://localhost:8001/2012/07/02/more-on-memory-benchmarking/" title="More on memory benchmarking">last post</a> I mentioned that I&#8217;m not satisfied with the current
+state of <code>%memit</code>, because some more complicated numerical function
+calls make it crash. I will start this post with a reminder of a pretty
+important&nbsp;bug:</p>
+<p><strong>[On MacOS X (10.7 but maybe more), after forking …</strong></p>	
+</article>
+<article class="hentry">
+<header>
+<h1><a href="//vene.ro/blog/more-on-memory-benchmarking.html"
+       rel="bookmark"
+       title="Permalink to More on memory benchmarking">More on memory&nbsp;benchmarking</a></h1>
+</header>
+<p class="subtitle"><time datetime="2012-07-02T11:27:00+02:00">Mon 02 July 2012</time><label for="more-on-memory-benchmarking" class="margin-toggle"> ⊕</label><input type="checkbox" id="more-on-memory-benchmarking" class="margin-toggle" /><span class="marginnote">Category: <a href="//vene.ro/category/benchmarking.html">benchmarking</a><br />
+ #<a href="//vene.ro/tag/ipython.html">IPython</a> #<a href="//vene.ro/tag/magic.html">magic</a> #<a href="//vene.ro/tag/memit.html">memit</a> #<a href="//vene.ro/tag/memory.html">memory</a> #<a href="//vene.ro/tag/memory_profiler.html">memory_profiler</a> #<a href="//vene.ro/tag/mprun.html">mprun</a> #<a href="//vene.ro/tag/benchmarking.html">benchmarking</a> #<a href="//vene.ro/tag/python.html">python</a></span></p><p>Following up on my task to make it easier to benchmark memory usage in
+Python, I updated Fabian&#8217;s [memory_profiler][] to include a couple of
+useful IPython magics. While in my <a href="http://localhost:8001/2012/06/30/quick-memory-usage-benchmarking-in-ipython/" title="Quick memory usage benchmarking in IPython">last post</a>, I used the new IPython
+0.13 syntax for defining magics, this time I used the
+backwards-compatible …</p>	
+</article>
+</main>
+<div class="blognav">
+      <nav id="pagination">
+[&nbsp;<a href="/archives.html">all posts</a>&nbsp;]
+[&nbsp;<a href="/categories.html">categories</a>&nbsp;]
+[&nbsp;<a href="/tags.html">tags</a>&nbsp;]
+[&nbsp;pages:        <a id="first_page" href="//vene.ro/tag/python.html">&#60;&#60;</a>
+        <a id="prev_page" rel="prev" href="//vene.ro/tag/python2.html">&#60;</a>
+        <a href="//vene.ro/tag/python.html">1</a>
+        <a href="//vene.ro/tag/python2.html">2</a>
+        <span class="a active">3</span>
+        <a href="//vene.ro/tag/python4.html">4</a>
+        <a href="//vene.ro/tag/python5.html">5</a>
+        <a href="//vene.ro/tag/python6.html">6</a>
+        <a id="next_page" rel="next" href="//vene.ro/tag/python4.html">&#62;</a>
+        <a id="last_page" href="//vene.ro/tag/python6.html">&#62;&#62;</a>
+&nbsp;]
+      </nav></div>
+ </div>
+<footer>
+  <p>Powered by <a href="http://pelican.readthedocs.org">Pelican</a>.
+  <a href="/privacy.html">Privacy policy</a>.</p>
+</footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Tagged "SparsePCA" - Vlad Niculae</title>
+  <meta name="author" content="Vlad" />
+  <base href="//vene.ro">
+  <link rel="stylesheet" type="text/css" 
+        href="//vene.ro/theme/css/main.css" />
+  <link rel="stylesheet" type="text/css" 
+        href="//vene.ro/theme/css/pygment.css" />
+  <link rel="stylesheet" type="text/css" 
+        href="//vene.ro/theme/css/typogrify.css" />
+  <link rel="shortcut icon" href="//vene.ro/favicon.ico" />
+  <link href="//vene.ro/" type="application/atom+xml"
+        rel="alternate" title="Vlad Niculae ALL Atom Feed" />
+  <link href="//fonts.googleapis.com/css?family=PT+Mono|PT+Serif" rel="stylesheet"> 
+
+  <!-- OpenGraph Info -->
+  <meta property="og:title" content="Vlad Niculae"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:description" content=""/>
+  <meta property="og:url" content="//vene.ro"/>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      extensions: ["tex2jax.js"],
+      jax: ["input/TeX", "output/HTML-CSS"],
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true
+      },
+      displayAlign: 'left',
+      TeX: {
+        Macros: {
+          RR: "{\\mathbb{R}}",
+          argmin: "{\\mathop{\\mathrm{arg\\,min}}}",
+          bold: ["{\\bf #1}",1]
+        }
+        },
+      "HTML-CSS": { availableFonts: ["TeX"] }
+    });
+  </script>
+
+  <script type="text/javascript" async
+          src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
+
+</head>
+
+<body>
+<div id="container">
+<header>
+  <nav class="navmenu" id="navmenu">
+    <li id="homelink"><a href="/">Vlad Niculae</a>
+    </li><li class="menu"><a href="//vene.ro/papers.html">Papers</a>
+    </li><li class="menu"><a href="//vene.ro/blog/">Blog</a>
+    </li><li class="menu"><a href="//vene.ro/teaching.html">Teaching</a>
+   </li>
+   </nav>
+ </header>
+ <div id="main">
+<main class="articlelisting">
+
+<article class="hentry">
+<header>
+<h1><a href="//vene.ro/blog/sparsepca-in-scikits-learn-git.html"
+       rel="bookmark"
+       title="Permalink to SparsePCA in scikits.learn-git">SparsePCA in&nbsp;scikits.learn-git</a></h1>
+</header>
+<p class="subtitle"><time datetime="2011-07-19T12:01:00+02:00">Tue 19 July 2011</time><label for="sparsepca-in-scikits-learn-git" class="margin-toggle"> ⊕</label><input type="checkbox" id="sparsepca-in-scikits-learn-git" class="margin-toggle" /><span class="marginnote">Category: <a href="//vene.ro/category/scikit-learn.html">scikit-learn</a><br />
+ #<a href="//vene.ro/tag/pca.html">pca</a> #<a href="//vene.ro/tag/principal-components-analysis.html">principal components analysis</a> #<a href="//vene.ro/tag/scikit-learn.html">scikit-learn</a> #<a href="//vene.ro/tag/sparse-pca.html">sparse pca</a> #<a href="//vene.ro/tag/sparsepca.html">SparsePCA</a> #<a href="//vene.ro/tag/spca.html">spca</a></span></p><p>I am happy to announce that the Sparse <span class="caps">PCA</span> code has been reviewed and
+merged into the main <code>scikits.learn</code> repository.</p>
+<p>You can use it if you install the bleeding edge <code>scikits.learn</code> git
+version, by first downloading the source code as explained in the
+<a href="http://scikit-learn.sourceforge.net/stable/developers/index.html#git-repo" title="installation user's guide">user&#8217;s guide</a>, and then …</p>	
+</article>
+<article class="hentry">
+<header>
+<h1><a href="//vene.ro/blog/sparse-pca.html"
+       rel="bookmark"
+       title="Permalink to Sparse PCA">Sparse <span class="caps">PCA</span></a></h1>
+</header>
+<p class="subtitle"><time datetime="2011-05-23T15:19:00+02:00">Mon 23 May 2011</time><label for="sparse-pca" class="margin-toggle"> ⊕</label><input type="checkbox" id="sparse-pca" class="margin-toggle" /><span class="marginnote">Category: <a href="//vene.ro/category/scikit-learn.html">scikit-learn</a><br />
+ #<a href="//vene.ro/tag/dictionary-learning.html">dictionary learning</a> #<a href="//vene.ro/tag/pca.html">pca</a> #<a href="//vene.ro/tag/sparse-pca.html">sparse pca</a> #<a href="//vene.ro/tag/sparsepca.html">SparsePCA</a> #<a href="//vene.ro/tag/spca.html">spca</a> #<a href="//vene.ro/tag/scikit-learn.html">scikit-learn</a></span></p><p>I have been working on the integration into the scikits.learn codebase
+of a sparse principal components analysis (SparsePCA) algorithm coded by
+Gaël and Alexandre and based on [[1]][]. Because the name &#8220;sparse <span class="caps">PCA</span>&#8221;
+has some inherent ambiguity, I will describe in greater depth what
+problem we are actually solving …</p>	
+</article>
+</main>
+<div class="blognav">
+      <nav id="pagination">
+[&nbsp;<a href="/archives.html">all posts</a>&nbsp;]
+[&nbsp;<a href="/categories.html">categories</a>&nbsp;]
+[&nbsp;<a href="/tags.html">tags</a>&nbsp;]
+[&nbsp;pages:   <!-- <span id="first_page" class="a inactive">&#60;&#60;</span>
+        <span id="first_page" class="a inactive">&#60;</span> -->
+        <span class="a active">1</span>
+   <!-- <span id="next_page" class="a inactive">&#62;</span>
+        <span id="next_page" class="a inactive">&#62;&#62;</span> -->
+&nbsp;]
+      </nav></div>
+ </div>
+<footer>
+  <p>Powered by <a href="http://pelican.readthedocs.org">Pelican</a>.
+  <a href="/privacy.html">Privacy policy</a>.</p>
+</footer>
+</div>
+</body>
+</html>

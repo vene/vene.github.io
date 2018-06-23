@@ -1,229 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <title>Vlad Niculae (~vene)</title>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="/theme/css/main.css" type="text/css" />
-        <link href="http://vene.ro/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Vlad Niculae (~vene) Atom Feed" />
-        <link href="http://vene.ro/feed/all.rss.xml" type="application/rss+xml" rel="alternate" title="Vlad Niculae (~vene) RSS Feed" />
-        <link href='http://fonts.googleapis.com/css?family=Averia+Gruesa+Libre|Alegreya:400italic,400,700|Alegreya+SC&subset=latin-ext' rel='stylesheet' type='text/css'>
+  <meta charset="utf-8" />
+  <title>Vlad Niculae</title>
+  <meta name="author" content="Vlad" />
+  <base href="//vene.ro">
+  <link rel="stylesheet" type="text/css" 
+        href="//vene.ro/theme/css/main.css" />
+  <link rel="stylesheet" type="text/css" 
+        href="//vene.ro/theme/css/pygment.css" />
+  <link rel="stylesheet" type="text/css" 
+        href="//vene.ro/theme/css/typogrify.css" />
+  <link rel="shortcut icon" href="//vene.ro/favicon.ico" />
+  <link href="//vene.ro/" type="application/atom+xml"
+        rel="alternate" title="Vlad Niculae ALL Atom Feed" />
+  <link href="//fonts.googleapis.com/css?family=PT+Mono|PT+Serif" rel="stylesheet"> 
 
-        <!--[if IE]>
-                <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-
-        <!--[if lte IE 7]>
-                <link rel="stylesheet" type="text/css" media="all" href="http://vene.ro/css/ie.css"/>
-                <script src="http://vene.ro/js/IE8.js" type="text/javascript"></script><![endif]-->
-
-        <!--[if lt IE 7]>
-                <link rel="stylesheet" type="text/css" media="all" href="http://vene.ro/css/ie6.css"/><![endif]-->
-    <!-- MathJax configuration -->
-    <script type="text/x-mathjax-config">
+  <!-- OpenGraph Info -->
+  <meta property="og:title" content="Vlad Niculae"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:description" content=""/>
+  <meta property="og:url" content="//vene.ro"/>
+  <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
+      extensions: ["tex2jax.js"],
+      jax: ["input/TeX", "output/HTML-CSS"],
       tex2jax: {
         inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-        displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true
       },
-      displayAlign: 'left', // Change this to 'center' to center equations.
-      "HTML-CSS": {
-        styles: {'.MathJax_Display': {"margin": 0}}
-      }
+      displayAlign: 'left',
+      TeX: {
+        Macros: {
+          RR: "{\\mathbb{R}}",
+          argmin: "{\\mathop{\\mathrm{arg\\,min}}}",
+          bold: ["{\\bf #1}",1]
+        }
+        },
+      "HTML-CSS": { availableFonts: ["TeX"] }
     });
-    </script>
-    <!-- End of mathjax configuration -->
+  </script>
 
-    <script>
-    //  We wait for the onload function to load MathJax after the page is completely loaded.
-    //  MathJax is loaded 1 unit of time after the page is ready.
-    //  This hack prevent problems when you load multiple js files.
-
-    window.onload = function () {
-      setTimeout(function () {
-        var script = document.createElement("script");
-        script.type = "text/javascript";
-        script.src  = "https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS_HTML";
-        document.getElementsByTagName("head")[0].appendChild(script);
-      },1)
-    }
-    </script>
+  <script type="text/javascript" async
+          src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
 
 </head>
 
-<body id="index" class="home">
+<body>
 <div id="container">
-        <header id="banner" class="body">
-                <div id="mainheader">Vlad Niculae (~vene)</div>
-        </header><!-- /#banner -->
-        <div id="main" role="main">
-        
-        
+<header>
+  <nav class="navmenu" id="navmenu">
+    <li id="homelink"><a href="/">Vlad Niculae</a>
+    </li><li class="menu"><a href="//vene.ro/papers.html">Papers</a>
+    </li><li class="menu"><a href="//vene.ro/blog/">Blog</a>
+    </li><li class="menu"><a href="//vene.ro/teaching.html">Teaching</a>
+   </li>
+   </nav>
+ </header>
+ <div id="main">
+<main class="articlelisting">
 
- 
-                <section id="content" class="body">
-                    <ol id="posts-list" class="hfeed" start="4">
-            <li><article class="hentry">    
-                <header>
-                    <h1><a href="http://vene.ro/blog/quick-memory-usage-benchmarking-in-ipython.html" rel="bookmark"
-                           title="Permalink to Quick memory usage benchmarking in IPython">Quick memory usage benchmarking in&nbsp;IPython</a></h1>
-                </header>
-                
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2012-06-30T08:53:00+02:00">
-                Sat 30 June 2012
-        </abbr>
-
-        <address class="vcard author">
-                By <a class="url fn" href="http://vene.ro/blog/author/vene.html">vene</a>
-        </address>
-<p>In <a href="http://vene.ro/blog/category/benchmarking.html">benchmarking</a>. </p>
-<p>tags: <a href="http://vene.ro/blog/tag/benchmark.html">benchmark</a> <a href="http://vene.ro/blog/tag/ipython.html">IPython</a> <a href="http://vene.ro/blog/tag/magic.html">magic</a> <a href="http://vene.ro/blog/tag/memory.html">memory</a> <a href="http://vene.ro/blog/tag/memory_profiler.html">memory_profiler</a> <a href="http://vene.ro/blog/tag/profiling.html">profiling</a> <a href="http://vene.ro/blog/tag/benchmarking.html">benchmarking</a> <a href="http://vene.ro/blog/tag/python.html">python</a> </p>
-</footer><!-- /.post-info -->                <p>Everybody loves <code>%timeit</code>, there&#8217;s no doubt about it. So why not have
-something like that, but for measuring how much memory your line takes?
-Well, now you can; grab a hold of the script in the following gist and
-run it like in the&nbsp;example.</p>
-<p>[gist&nbsp;id=3022718]</p>
-<p>Instead …</p>
-                <a class="readmore" href="http://vene.ro/blog/quick-memory-usage-benchmarking-in-ipython.html">read more</a>
-<p>There are <a href="http://vene.ro/blog/quick-memory-usage-benchmarking-in-ipython.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-        
-
- 
-            <li><article class="hentry">    
-                <header>
-                    <h1><a href="http://vene.ro/blog/compiling-and-installing-glarf-and-the-bundled-charniak-parser-on-macos-x.html" rel="bookmark"
-                           title="Permalink to Compiling and Installing GLARF and the bundled Charniak parser on MacOS X">Compiling and Installing <span class="caps">GLARF</span> and the bundled Charniak parser on MacOS&nbsp;X</a></h1>
-                </header>
-                
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2012-06-21T12:32:00+02:00">
-                Thu 21 June 2012
-        </abbr>
-
-        <address class="vcard author">
-                By <a class="url fn" href="http://vene.ro/blog/author/vene.html">vene</a>
-        </address>
-<p>In <a href="http://vene.ro/blog/category/nlp.html">nlp</a>. </p>
-<p>tags: <a href="http://vene.ro/blog/tag/bllip.html">bllip</a> <a href="http://vene.ro/blog/tag/charniak.html">charniak</a> <a href="http://vene.ro/blog/tag/glarf.html">glarf</a> <a href="http://vene.ro/blog/tag/installation.html">installation</a> <a href="http://vene.ro/blog/tag/parser.html">parser</a> <a href="http://vene.ro/blog/tag/nlp.html">nlp</a> </p>
-</footer><!-- /.post-info -->                <p>It seems that I keep getting handed buggy code to install. These are
-cases of research software where the developers didn&#8217;t make the effort
-to make sure their tool works on the platforms it&nbsp;should.</p>
-<p>[<span class="caps">GLARF</span>][] (Grammatical and Logical Argument Representation Framework)
-is, in their words, &#8220;a typed feature …</p>
-                <a class="readmore" href="http://vene.ro/blog/compiling-and-installing-glarf-and-the-bundled-charniak-parser-on-macos-x.html">read more</a>
-<p>There are <a href="http://vene.ro/blog/compiling-and-installing-glarf-and-the-bundled-charniak-parser-on-macos-x.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-        
-
- 
-            <li><article class="hentry">    
-                <header>
-                    <h1><a href="http://vene.ro/blog/compiling-megam-on-macos-x.html" rel="bookmark"
-                           title="Permalink to Compiling MegaM on MacOS X">Compiling MegaM on MacOS&nbsp;X</a></h1>
-                </header>
-                
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2012-06-08T11:45:00+02:00">
-                Fri 08 June 2012
-        </abbr>
-
-        <address class="vcard author">
-                By <a class="url fn" href="http://vene.ro/blog/author/vene.html">vene</a>
-        </address>
-<p>In <a href="http://vene.ro/blog/category/nlp.html">nlp</a>. </p>
-<p>tags: <a href="http://vene.ro/blog/tag/compile.html">compile</a> <a href="http://vene.ro/blog/tag/install.html">install</a> <a href="http://vene.ro/blog/tag/maxent.html">maxent</a> <a href="http://vene.ro/blog/tag/megam.html">megam</a> <a href="http://vene.ro/blog/tag/nlp.html">nlp</a> </p>
-</footer><!-- /.post-info -->                <p><a href="http://hal3.name/megam">MegaM</a> is Hal Daumé <span class="caps">III</span>&#8217;s maxent (logistic regression, and much more)
-modeling software written in OCaml. It is feature-packed and seems to be
-used a lot, despite being slightly dated. <a href="http://nltk.org" title="Natural Language Toolkit"><span class="caps">NLTK</span></a> is able to use&nbsp;it.</p>
-<p>In order to compile it as of 2012, with the current version of …</p>
-                <a class="readmore" href="http://vene.ro/blog/compiling-megam-on-macos-x.html">read more</a>
-<p>There are <a href="http://vene.ro/blog/compiling-megam-on-macos-x.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-        
-
- 
-            <li><article class="hentry">    
-                <header>
-                    <h1><a href="http://vene.ro/blog/dynamically-generated-benchmarks-with-vbench.html" rel="bookmark"
-                           title="Permalink to Dynamically generated benchmarks with vbench">Dynamically generated benchmarks with&nbsp;vbench</a></h1>
-                </header>
-                
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2012-06-07T01:57:00+02:00">
-                Thu 07 June 2012
-        </abbr>
-
-        <address class="vcard author">
-                By <a class="url fn" href="http://vene.ro/blog/author/vene.html">vene</a>
-        </address>
-<p>In <a href="http://vene.ro/blog/category/scikit-learn.html">scikit-learn</a>. </p>
-<p>tags: <a href="http://vene.ro/blog/tag/gsoc.html">gsoc</a> <a href="http://vene.ro/blog/tag/vbench.html">vbench</a> <a href="http://vene.ro/blog/tag/benchmarking.html">benchmarking</a> <a href="http://vene.ro/blog/tag/python.html">python</a> </p>
-</footer><!-- /.post-info -->                <p>To construct a <code>vbench</code> benchmark you need a setup string and a code
-string. The constructor&#8217;s signature&nbsp;is:  </p>
-<p><code>Benchmark(self, code, setup, ncalls=None, repeat=3, cleanup=None, name=None, description=None, start_date=None, logy=False)</code>.</p>
-<h2>Why generate benchmarks&nbsp;dynamically?</h2>
-<p>For most <code>scikit-learn</code> purposes, the <code>code</code> string will be …</p>
-                <a class="readmore" href="http://vene.ro/blog/dynamically-generated-benchmarks-with-vbench.html">read more</a>
-<p>There are <a href="http://vene.ro/blog/dynamically-generated-benchmarks-with-vbench.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-        
-
- 
-            <li><article class="hentry">    
-                <header>
-                    <h1><a href="http://vene.ro/blog/first-contact-with-vbench.html" rel="bookmark"
-                           title="Permalink to First contact with vbench">First contact with&nbsp;vbench</a></h1>
-                </header>
-                
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2012-05-29T12:57:00+02:00">
-                Tue 29 May 2012
-        </abbr>
-
-        <address class="vcard author">
-                By <a class="url fn" href="http://vene.ro/blog/author/vene.html">vene</a>
-        </address>
-<p>In <a href="http://vene.ro/blog/category/scikit-learn.html">scikit-learn</a>. </p>
-<p>tags: <a href="http://vene.ro/blog/tag/benchmarks.html">benchmarks</a> <a href="http://vene.ro/blog/tag/perfpy.html">perf.py</a> <a href="http://vene.ro/blog/tag/performance.html">performance</a> <a href="http://vene.ro/blog/tag/vbench.html">vbench</a> <a href="http://vene.ro/blog/tag/scikit-learn.html">scikit-learn</a> </p>
-</footer><!-- /.post-info -->                <p>With a slight delay caused by going to lovely lovely Istanbul for the
-<span class="caps">LREC</span> conference where I presented a <a href="http://vene.ro/papers/lrec12-poster.pdf">poster</a>, I am back to work on the
-Google Summer of Code project. By the way, this year&#8217;s logo and swag
-looks a lot nicer than last year&#8217;s, thank …</p>
-                <a class="readmore" href="http://vene.ro/blog/first-contact-with-vbench.html">read more</a>
-<p>There are <a href="http://vene.ro/blog/first-contact-with-vbench.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-            </ol><!-- /#posts-list -->
-<p class="paginator">
-        <a href="http://vene.ro/blog/index3.html">&laquo;</a>
-    Page 4 / 10
-        <a href="http://vene.ro/blog/index5.html">&raquo;</a>
-</p>
-            </section><!-- /#content -->
-        <section id="extras" class="body">
-        </section><!-- /#extras -->
-
-        <footer id="contentinfo" class="body">
-                <address id="about" class="vcard body">
-                Go <a href="/">home</a>. <a href="/privacy.html">Privacy policy.</a>
-                Powered by <a href="http://getpelican.com/">Pelican</a>.
-                </address><!-- /#about -->
-        </footer><!-- /#contentinfo -->
-        </div>
-<script type="text/javascript">
-    var disqus_shortname = 'vene';
-    (function () {
-        var s = document.createElement('script'); s.async = true;
-        s.type = 'text/javascript';
-        s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
-        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-    }());
-</script>
+<article class="hentry">
+<header>
+<h1><a href="//vene.ro/blog/the-scikit-learn-speed-ship-has-set-sail-faster-than-ever-with-multi-step-benchmarks.html"
+       rel="bookmark"
+       title="Permalink to The scikit-learn-speed ship has set sail! Faster than ever, with multi-step benchmarks!">The scikit-learn-speed ship has set sail! Faster than ever, with multi-step&nbsp;benchmarks!</a></h1>
+</header>
+<p class="subtitle"><time datetime="2012-08-11T17:32:00+02:00">Sat 11 August 2012</time><label for="the-scikit-learn-speed-ship-has-set-sail-faster-than-ever-with-multi-step-benchmarks" class="margin-toggle"> ⊕</label><input type="checkbox" id="the-scikit-learn-speed-ship-has-set-sail-faster-than-ever-with-multi-step-benchmarks" class="margin-toggle" /><span class="marginnote">Category: <a href="//vene.ro/category/scikit-learn.html">scikit-learn</a><br />
+ #<a href="//vene.ro/tag/multi-step.html">multi-step</a> #<a href="//vene.ro/tag/multistep.html">multistep</a> #<a href="//vene.ro/tag/vbench.html">vbench</a> #<a href="//vene.ro/tag/benchmarking.html">benchmarking</a> #<a href="//vene.ro/tag/python.html">python</a> #<a href="//vene.ro/tag/scikit-learn.html">scikit-learn</a></span></p><p>I am pleased to announce that last night at 2:03 <span class="caps">AM</span>, the first fully
+automated run of the scikit-learn-speed test suite has run on our
+Jenkins instance! You can admire it at <a href="http://jenkins-scikit-learn.github.com/scikit-learn-speed/">its temporary home</a> for now.
+As soon as we verify that everything is good, we will move …</p>	
+</article>
+<article class="hentry">
+<header>
+<h1><a href="//vene.ro/blog/profiler-output-benchmark-standard-deviation-and-other-goodies-in-scikit-learn-speed.html"
+       rel="bookmark"
+       title="Permalink to Profiler output, benchmark standard deviation and other goodies in scikit-learn-speed">Profiler output, benchmark standard deviation and other goodies in&nbsp;scikit-learn-speed</a></h1>
+</header>
+<p class="subtitle"><time datetime="2012-07-27T11:01:00+02:00">Fri 27 July 2012</time><label for="profiler-output-benchmark-standard-deviation-and-other-goodies-in-scikit-learn-speed" class="margin-toggle"> ⊕</label><input type="checkbox" id="profiler-output-benchmark-standard-deviation-and-other-goodies-in-scikit-learn-speed" class="margin-toggle" /><span class="marginnote">Category: <a href="//vene.ro/category/scikit-learn.html">scikit-learn</a><br />
+ #<a href="//vene.ro/tag/gsoc.html">gsoc</a> #<a href="//vene.ro/tag/memory_profiler.html">memory_profiler</a> #<a href="//vene.ro/tag/scikit-learn-speed.html">scikit-learn-speed</a> #<a href="//vene.ro/tag/vbench.html">vbench</a> #<a href="//vene.ro/tag/benchmarking.html">benchmarking</a> #<a href="//vene.ro/tag/python.html">python</a> #<a href="//vene.ro/tag/scikit-learn.html">scikit-learn</a></span></p><p>This post is about the <a href="http://scikit-learn.org">scikit-learn</a>benchmarking project that I am
+working on, called <a href="https://github.com/vene/scikit-learn-speed">scikit-learn-speed</a>. This is a continuous
+benchmarking suite that runs and generates <span class="caps">HTML</span> reports using Wes
+McKinney&#8217;s <a href="http://wesmckinney.com/blog/?p=373">vbench</a> framework, to which I had to make some (useful, I
+hope)&nbsp;additions.</p>
+<h2>What it looks like&nbsp;now</h2>
+<p>You …</p>	
+</article>
+<article class="hentry">
+<header>
+<h1><a href="//vene.ro/blog/scikit-learn-speed-html-reports-teaser.html"
+       rel="bookmark"
+       title="Permalink to Scikit-learn-speed HTML reports teaser">Scikit-learn-speed <span class="caps">HTML</span> reports&nbsp;teaser</a></h1>
+</header>
+<p class="subtitle"><time datetime="2012-07-20T14:40:00+02:00">Fri 20 July 2012</time><label for="scikit-learn-speed-html-reports-teaser" class="margin-toggle"> ⊕</label><input type="checkbox" id="scikit-learn-speed-html-reports-teaser" class="margin-toggle" /><span class="marginnote">Category: <a href="//vene.ro/category/scikit-learn.html">scikit-learn</a><br />
+ #<a href="//vene.ro/tag/gsoc.html">gsoc</a> #<a href="//vene.ro/tag/scikit-learn-speed.html">scikit-learn-speed</a> #<a href="//vene.ro/tag/vbench.html">vbench</a> #<a href="//vene.ro/tag/benchmarking.html">benchmarking</a> #<a href="//vene.ro/tag/python.html">python</a> #<a href="//vene.ro/tag/scikit-learn.html">scikit-learn</a></span></p><p><span class="caps">EDIT</span>: I made the plots a little more readable, check it&nbsp;out!</p>
+<p>Last time, I teased you with a screenshot of local output. Now, I will
+tease you with the benchmarks run on a couple of recent commits, along
+with some from earlier this&nbsp;year.</p>
+<p>After some effort and bugfixes …</p>	
+</article>
+</main>
+<div class="blognav">
+      <nav id="pagination">
+[&nbsp;<a href="/archives.html">all posts</a>&nbsp;]
+[&nbsp;<a href="/categories.html">categories</a>&nbsp;]
+[&nbsp;<a href="/tags.html">tags</a>&nbsp;]
+[&nbsp;pages:        <a id="first_page" href="//vene.ro/blog/index.html">&#60;&#60;</a>
+        <a id="prev_page" rel="prev" href="//vene.ro/blog/index3.html">&#60;</a>
+        <a href="//vene.ro/blog/index.html">1</a>
+        <a href="//vene.ro/blog/index2.html">2</a>
+        <a href="//vene.ro/blog/index3.html">3</a>
+        <span class="a active">4</span>
+        <a href="//vene.ro/blog/index5.html">5</a>
+        <a href="//vene.ro/blog/index6.html">6</a>
+        <a href="//vene.ro/blog/index7.html">7</a>
+        <a href="//vene.ro/blog/index8.html">8</a>
+        <a id="next_page" rel="next" href="//vene.ro/blog/index5.html">&#62;</a>
+        <a id="last_page" href="//vene.ro/blog/index17.html">&#62;&#62;</a>
+&nbsp;]
+      </nav></div>
+ </div>
+<footer>
+  <p>Powered by <a href="http://pelican.readthedocs.org">Pelican</a>.
+  <a href="/privacy.html">Privacy policy</a>.</p>
+</footer>
 </div>
 </body>
 </html>

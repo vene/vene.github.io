@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Tagged "python" - Vlad Niculae</title>
+  <meta name="author" content="Vlad" />
+  <base href="//vene.ro">
+  <link rel="stylesheet" type="text/css" 
+        href="//vene.ro/theme/css/main.css" />
+  <link rel="stylesheet" type="text/css" 
+        href="//vene.ro/theme/css/pygment.css" />
+  <link rel="stylesheet" type="text/css" 
+        href="//vene.ro/theme/css/typogrify.css" />
+  <link rel="shortcut icon" href="//vene.ro/favicon.ico" />
+  <link href="//vene.ro/" type="application/atom+xml"
+        rel="alternate" title="Vlad Niculae ALL Atom Feed" />
+  <link href="//fonts.googleapis.com/css?family=PT+Mono|PT+Serif" rel="stylesheet"> 
+
+  <!-- OpenGraph Info -->
+  <meta property="og:title" content="Vlad Niculae"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:description" content=""/>
+  <meta property="og:url" content="//vene.ro"/>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      extensions: ["tex2jax.js"],
+      jax: ["input/TeX", "output/HTML-CSS"],
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true
+      },
+      displayAlign: 'left',
+      TeX: {
+        Macros: {
+          RR: "{\\mathbb{R}}",
+          argmin: "{\\mathop{\\mathrm{arg\\,min}}}",
+          bold: ["{\\bf #1}",1]
+        }
+        },
+      "HTML-CSS": { availableFonts: ["TeX"] }
+    });
+  </script>
+
+  <script type="text/javascript" async
+          src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
+
+</head>
+
+<body>
+<div id="container">
+<header>
+  <nav class="navmenu" id="navmenu">
+    <li id="homelink"><a href="/">Vlad Niculae</a>
+    </li><li class="menu"><a href="//vene.ro/papers.html">Papers</a>
+    </li><li class="menu"><a href="//vene.ro/blog/">Blog</a>
+    </li><li class="menu"><a href="//vene.ro/teaching.html">Teaching</a>
+   </li>
+   </nav>
+ </header>
+ <div id="main">
+<main class="articlelisting">
+
+<article class="hentry">
+<header>
+<h1><a href="//vene.ro/blog/quick-memory-usage-benchmarking-in-ipython.html"
+       rel="bookmark"
+       title="Permalink to Quick memory usage benchmarking in IPython">Quick memory usage benchmarking in&nbsp;IPython</a></h1>
+</header>
+<p class="subtitle"><time datetime="2012-06-30T08:53:00+02:00">Sat 30 June 2012</time><label for="quick-memory-usage-benchmarking-in-ipython" class="margin-toggle"> ⊕</label><input type="checkbox" id="quick-memory-usage-benchmarking-in-ipython" class="margin-toggle" /><span class="marginnote">Category: <a href="//vene.ro/category/benchmarking.html">benchmarking</a><br />
+ #<a href="//vene.ro/tag/benchmark.html">benchmark</a> #<a href="//vene.ro/tag/ipython.html">IPython</a> #<a href="//vene.ro/tag/magic.html">magic</a> #<a href="//vene.ro/tag/memory.html">memory</a> #<a href="//vene.ro/tag/memory_profiler.html">memory_profiler</a> #<a href="//vene.ro/tag/profiling.html">profiling</a> #<a href="//vene.ro/tag/benchmarking.html">benchmarking</a> #<a href="//vene.ro/tag/python.html">python</a></span></p><p>Everybody loves <code>%timeit</code>, there&#8217;s no doubt about it. So why not have
+something like that, but for measuring how much memory your line takes?
+Well, now you can; grab a hold of the script in the following gist and
+run it like in the&nbsp;example.</p>
+<p>[gist&nbsp;id=3022718]</p>
+<p>Instead …</p>	
+</article>
+<article class="hentry">
+<header>
+<h1><a href="//vene.ro/blog/dynamically-generated-benchmarks-with-vbench.html"
+       rel="bookmark"
+       title="Permalink to Dynamically generated benchmarks with vbench">Dynamically generated benchmarks with&nbsp;vbench</a></h1>
+</header>
+<p class="subtitle"><time datetime="2012-06-07T01:57:00+02:00">Thu 07 June 2012</time><label for="dynamically-generated-benchmarks-with-vbench" class="margin-toggle"> ⊕</label><input type="checkbox" id="dynamically-generated-benchmarks-with-vbench" class="margin-toggle" /><span class="marginnote">Category: <a href="//vene.ro/category/scikit-learn.html">scikit-learn</a><br />
+ #<a href="//vene.ro/tag/gsoc.html">gsoc</a> #<a href="//vene.ro/tag/vbench.html">vbench</a> #<a href="//vene.ro/tag/benchmarking.html">benchmarking</a> #<a href="//vene.ro/tag/python.html">python</a></span></p><p>To construct a <code>vbench</code> benchmark you need a setup string and a code
+string. The constructor&#8217;s signature&nbsp;is:  </p>
+<p><code>Benchmark(self, code, setup, ncalls=None, repeat=3, cleanup=None, name=None, description=None, start_date=None, logy=False)</code>.</p>
+<h2>Why generate benchmarks&nbsp;dynamically?</h2>
+<p>For most <code>scikit-learn</code> purposes, the <code>code</code> string will be …</p>	
+</article>
+<article class="hentry">
+<header>
+<h1><a href="//vene.ro/blog/support-vector-regression-on-anscombes-dataset.html"
+       rel="bookmark"
+       title="Permalink to Support vector regression on Anscombe’s dataset">Support vector regression on Anscombe&#8217;s&nbsp;dataset</a></h1>
+</header>
+<p class="subtitle"><time datetime="2012-05-27T21:59:00+02:00">Sun 27 May 2012</time><label for="support-vector-regression-on-anscombes-dataset" class="margin-toggle"> ⊕</label><input type="checkbox" id="support-vector-regression-on-anscombes-dataset" class="margin-toggle" /><span class="marginnote">Category: <a href="//vene.ro/category/scikit-learn.html">scikit-learn</a><br />
+ #<a href="//vene.ro/tag/anscombe.html">anscombe</a> #<a href="//vene.ro/tag/outlier.html">outlier</a> #<a href="//vene.ro/tag/robust-regression.html">robust regression</a> #<a href="//vene.ro/tag/support-vector-regression.html">support vector regression</a> #<a href="//vene.ro/tag/svm.html">svm</a> #<a href="//vene.ro/tag/svr.html">svr</a> #<a href="//vene.ro/tag/python.html">python</a> #<a href="//vene.ro/tag/scikit-learn.html">scikit-learn</a></span></p><p><a href="http://en.wikipedia.org/wiki/Anscombe's_quartet" title="Anscombe's quartet">Anscombe&#8217;s quartet</a> is a set of four toy datasets that look very
+different, but many of their statistics coincide. They were developed by
+Francis Anscombe as a striking visual to show that even for small
+datasets, blindly examining their statistical properties without
+considering their structure can&nbsp;mislead.</p>
+<p><img alt="Anscombe's datasets" src="http://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Anscombe%27s_quartet_3.svg/640px-Anscombe%27s_quartet_3.svg.png"></p>
+<p>Particularly, the …</p>	
+</article>
+</main>
+<div class="blognav">
+      <nav id="pagination">
+[&nbsp;<a href="/archives.html">all posts</a>&nbsp;]
+[&nbsp;<a href="/categories.html">categories</a>&nbsp;]
+[&nbsp;<a href="/tags.html">tags</a>&nbsp;]
+[&nbsp;pages:        <a id="first_page" href="//vene.ro/tag/python.html">&#60;&#60;</a>
+        <a id="prev_page" rel="prev" href="//vene.ro/tag/python3.html">&#60;</a>
+        <a href="//vene.ro/tag/python.html">1</a>
+        <a href="//vene.ro/tag/python2.html">2</a>
+        <a href="//vene.ro/tag/python3.html">3</a>
+        <span class="a active">4</span>
+        <a href="//vene.ro/tag/python5.html">5</a>
+        <a href="//vene.ro/tag/python6.html">6</a>
+        <a id="next_page" rel="next" href="//vene.ro/tag/python5.html">&#62;</a>
+        <a id="last_page" href="//vene.ro/tag/python6.html">&#62;&#62;</a>
+&nbsp;]
+      </nav></div>
+ </div>
+<footer>
+  <p>Powered by <a href="http://pelican.readthedocs.org">Pelican</a>.
+  <a href="/privacy.html">Privacy policy</a>.</p>
+</footer>
+</div>
+</body>
+</html>

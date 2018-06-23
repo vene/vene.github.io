@@ -1,234 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <title>Vlad Niculae (~vene)</title>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="/theme/css/main.css" type="text/css" />
-        <link href="http://vene.ro/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Vlad Niculae (~vene) Atom Feed" />
-        <link href="http://vene.ro/feed/all.rss.xml" type="application/rss+xml" rel="alternate" title="Vlad Niculae (~vene) RSS Feed" />
-        <link href='http://fonts.googleapis.com/css?family=Averia+Gruesa+Libre|Alegreya:400italic,400,700|Alegreya+SC&subset=latin-ext' rel='stylesheet' type='text/css'>
+  <meta charset="utf-8" />
+  <title>Vlad Niculae</title>
+  <meta name="author" content="Vlad" />
+  <base href="//vene.ro">
+  <link rel="stylesheet" type="text/css" 
+        href="//vene.ro/theme/css/main.css" />
+  <link rel="stylesheet" type="text/css" 
+        href="//vene.ro/theme/css/pygment.css" />
+  <link rel="stylesheet" type="text/css" 
+        href="//vene.ro/theme/css/typogrify.css" />
+  <link rel="shortcut icon" href="//vene.ro/favicon.ico" />
+  <link href="//vene.ro/" type="application/atom+xml"
+        rel="alternate" title="Vlad Niculae ALL Atom Feed" />
+  <link href="//fonts.googleapis.com/css?family=PT+Mono|PT+Serif" rel="stylesheet"> 
 
-        <!--[if IE]>
-                <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-
-        <!--[if lte IE 7]>
-                <link rel="stylesheet" type="text/css" media="all" href="http://vene.ro/css/ie.css"/>
-                <script src="http://vene.ro/js/IE8.js" type="text/javascript"></script><![endif]-->
-
-        <!--[if lt IE 7]>
-                <link rel="stylesheet" type="text/css" media="all" href="http://vene.ro/css/ie6.css"/><![endif]-->
-    <!-- MathJax configuration -->
-    <script type="text/x-mathjax-config">
+  <!-- OpenGraph Info -->
+  <meta property="og:title" content="Vlad Niculae"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:description" content=""/>
+  <meta property="og:url" content="//vene.ro"/>
+  <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
+      extensions: ["tex2jax.js"],
+      jax: ["input/TeX", "output/HTML-CSS"],
       tex2jax: {
         inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-        displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true
       },
-      displayAlign: 'left', // Change this to 'center' to center equations.
-      "HTML-CSS": {
-        styles: {'.MathJax_Display': {"margin": 0}}
-      }
+      displayAlign: 'left',
+      TeX: {
+        Macros: {
+          RR: "{\\mathbb{R}}",
+          argmin: "{\\mathop{\\mathrm{arg\\,min}}}",
+          bold: ["{\\bf #1}",1]
+        }
+        },
+      "HTML-CSS": { availableFonts: ["TeX"] }
     });
-    </script>
-    <!-- End of mathjax configuration -->
+  </script>
 
-    <script>
-    //  We wait for the onload function to load MathJax after the page is completely loaded.
-    //  MathJax is loaded 1 unit of time after the page is ready.
-    //  This hack prevent problems when you load multiple js files.
-
-    window.onload = function () {
-      setTimeout(function () {
-        var script = document.createElement("script");
-        script.type = "text/javascript";
-        script.src  = "https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS_HTML";
-        document.getElementsByTagName("head")[0].appendChild(script);
-      },1)
-    }
-    </script>
+  <script type="text/javascript" async
+          src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
 
 </head>
 
-<body id="index" class="home">
+<body>
 <div id="container">
-        <header id="banner" class="body">
-                <div id="mainheader">Vlad Niculae (~vene)</div>
-        </header><!-- /#banner -->
-        <div id="main" role="main">
-        
-        
+<header>
+  <nav class="navmenu" id="navmenu">
+    <li id="homelink"><a href="/">Vlad Niculae</a>
+    </li><li class="menu"><a href="//vene.ro/papers.html">Papers</a>
+    </li><li class="menu"><a href="//vene.ro/blog/">Blog</a>
+    </li><li class="menu"><a href="//vene.ro/teaching.html">Teaching</a>
+   </li>
+   </nav>
+ </header>
+ <div id="main">
+<main class="articlelisting">
 
- 
-                <section id="content" class="body">
-                    <ol id="posts-list" class="hfeed" start="4">
-            <li><article class="hentry">    
-                <header>
-                    <h1><a href="http://vene.ro/blog/image-denoising-with-dictionary-learning.html" rel="bookmark"
-                           title="Permalink to Image denoising with dictionary learning">Image denoising with dictionary&nbsp;learning</a></h1>
-                </header>
-                
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2011-07-07T20:00:00+02:00">
-                Thu 07 July 2011
-        </abbr>
-
-        <address class="vcard author">
-                By <a class="url fn" href="http://vene.ro/blog/author/vene.html">vene</a>
-        </address>
-<p>In <a href="http://vene.ro/blog/category/scikit-learn.html">scikit-learn</a>. </p>
-<p>tags: <a href="http://vene.ro/blog/tag/denoising.html">denoising</a> <a href="http://vene.ro/blog/tag/dictionary-learning.html">dictionary learning</a> <a href="http://vene.ro/blog/tag/scikit-learn.html">scikit-learn</a> </p>
-</footer><!-- /.post-info -->                <p>I am presenting an image denoising example that fully runs under my
-local scikits-learn fork. Coming soon near&nbsp;you!</p>
-<p>The 400 square pixels area covering Lena&#8217;s face was distorted by
-additive gaussian noise with a standard deviation of 50 (pixel values
-are ranged&nbsp;0-256.)</p>
-<p>[<img alt="Lena image denoising using dictionary learning" src="http://localhost:8001/wp-content/uploads/2011/07/denoise3.png" title="Lena denoising">][]</p>
-<p>The dictionary contains 100 atoms …</p>
-                <a class="readmore" href="http://vene.ro/blog/image-denoising-with-dictionary-learning.html">read more</a>
-<p>There are <a href="http://vene.ro/blog/image-denoising-with-dictionary-learning.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-        
-
- 
-            <li><article class="hentry">    
-                <header>
-                    <h1><a href="http://vene.ro/blog/dictionary-learning-sneak-peek.html" rel="bookmark"
-                           title="Permalink to Dictionary learning sneak peek">Dictionary learning sneak&nbsp;peek</a></h1>
-                </header>
-                
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2011-06-24T12:06:00+02:00">
-                Fri 24 June 2011
-        </abbr>
-
-        <address class="vcard author">
-                By <a class="url fn" href="http://vene.ro/blog/author/vene.html">vene</a>
-        </address>
-<p>In <a href="http://vene.ro/blog/category/uncategorized.html">Uncategorized</a>. </p>
-<p>tags: <a href="http://vene.ro/blog/tag/uncategorized.html">Uncategorized</a> </p>
-</footer><!-- /.post-info -->                <p>Closing in on the goal of integrating J. Mairal&#8217;s dictionary learning in
-the scikit, I stitched together a couple of&nbsp;examples.</p>
-<p>The code is not yet integrated according to our standards, but here is
-the kind of results you can&nbsp;expect.</p>
-<p>Here is how a dictionary obtained from 8x8 …</p>
-                <a class="readmore" href="http://vene.ro/blog/dictionary-learning-sneak-peek.html">read more</a>
-<p>There are <a href="http://vene.ro/blog/dictionary-learning-sneak-peek.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-        
-
- 
-            <li><article class="hentry">    
-                <header>
-                    <h1><a href="http://vene.ro/blog/summer-of-code-roadmap-part-1.html" rel="bookmark"
-                           title="Permalink to Summer of Code roadmap, part 1">Summer of Code roadmap, part&nbsp;1</a></h1>
-                </header>
-                
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2011-06-12T14:28:00+02:00">
-                Sun 12 June 2011
-        </abbr>
-
-        <address class="vcard author">
-                By <a class="url fn" href="http://vene.ro/blog/author/vene.html">vene</a>
-        </address>
-<p>In <a href="http://vene.ro/blog/category/scikit-learn.html">scikit-learn</a>. </p>
-<p>tags: <a href="http://vene.ro/blog/tag/gsoc.html">gsoc</a> <a href="http://vene.ro/blog/tag/uncategorized.html">Uncategorized</a> </p>
-</footer><!-- /.post-info -->                <p>After a little busy while, I have graduated and entered the summer
-vacation, which means time for serious GSoC&nbsp;work.</p>
-<p>[<img alt="Me on graduation day" src="http://localhost:8001/wp-content/uploads/2011/06/p1080283.jpg" title="Graduation day">][]</p>
-<p>So we had a little conference in order to discuss what will be done and
-when. We gathered quite a few code snippets since the official start of
-the project …</p>
-                <a class="readmore" href="http://vene.ro/blog/summer-of-code-roadmap-part-1.html">read more</a>
-<p>There are <a href="http://vene.ro/blog/summer-of-code-roadmap-part-1.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-        
-
- 
-            <li><article class="hentry">    
-                <header>
-                    <h1><a href="http://vene.ro/blog/first-thoughts-on-orthogonal-matching-pursuit.html" rel="bookmark"
-                           title="Permalink to First thoughts on Orthogonal Matching Pursuit">First thoughts on Orthogonal Matching&nbsp;Pursuit</a></h1>
-                </header>
-                
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2011-05-30T13:02:00+02:00">
-                Mon 30 May 2011
-        </abbr>
-
-        <address class="vcard author">
-                By <a class="url fn" href="http://vene.ro/blog/author/vene.html">vene</a>
-        </address>
-<p>In <a href="http://vene.ro/blog/category/scikit-learn.html">scikit-learn</a>. </p>
-<p>tags: <a href="http://vene.ro/blog/tag/uncategorized.html">Uncategorized</a> <a href="http://vene.ro/blog/tag/dictionary-learning.html">dictionary learning</a> <a href="http://vene.ro/blog/tag/omp.html">omp</a> <a href="http://vene.ro/blog/tag/orthogonal-matching-pursuit.html">orthogonal matching pursuit</a> </p>
-</footer><!-- /.post-info -->                <p>I am working on implementing the Orthogonal Matching Pursuit (<span class="caps">OMP</span>)
-algorithm for the scikit. It is an elegant algorithm (that almost writes
-itself in Numpy!) to compute a greedy approximation to the solution of a
-sparse coding&nbsp;problem:</p>
-<p>\$\$ \text{argmin} \big|\big|\gamma\big|\big|_0 \text{ subject
-to }\big …</p>
-                <a class="readmore" href="http://vene.ro/blog/first-thoughts-on-orthogonal-matching-pursuit.html">read more</a>
-<p>There are <a href="http://vene.ro/blog/first-thoughts-on-orthogonal-matching-pursuit.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-        
-
- 
-            <li><article class="hentry">    
-                <header>
-                    <h1><a href="http://vene.ro/blog/sparse-pca.html" rel="bookmark"
-                           title="Permalink to Sparse PCA">Sparse <span class="caps">PCA</span></a></h1>
-                </header>
-                
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2011-05-23T15:19:00+02:00">
-                Mon 23 May 2011
-        </abbr>
-
-        <address class="vcard author">
-                By <a class="url fn" href="http://vene.ro/blog/author/vene.html">vene</a>
-        </address>
-<p>In <a href="http://vene.ro/blog/category/scikit-learn.html">scikit-learn</a>. </p>
-<p>tags: <a href="http://vene.ro/blog/tag/dictionary-learning.html">dictionary learning</a> <a href="http://vene.ro/blog/tag/pca.html">pca</a> <a href="http://vene.ro/blog/tag/sparse-pca.html">sparse pca</a> <a href="http://vene.ro/blog/tag/sparsepca.html">SparsePCA</a> <a href="http://vene.ro/blog/tag/spca.html">spca</a> <a href="http://vene.ro/blog/tag/scikit-learn.html">scikit-learn</a> </p>
-</footer><!-- /.post-info -->                <p>I have been working on the integration into the scikits.learn codebase
-of a sparse principal components analysis (SparsePCA) algorithm coded by
-Gaël and Alexandre and based on [[1]][]. Because the name &#8220;sparse <span class="caps">PCA</span>&#8221;
-has some inherent ambiguity, I will describe in greater depth what
-problem we are actually solving …</p>
-                <a class="readmore" href="http://vene.ro/blog/sparse-pca.html">read more</a>
-<p>There are <a href="http://vene.ro/blog/sparse-pca.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-            </ol><!-- /#posts-list -->
-<p class="paginator">
-        <a href="http://vene.ro/blog/index7.html">&laquo;</a>
-    Page 8 / 10
-        <a href="http://vene.ro/blog/index9.html">&raquo;</a>
-</p>
-            </section><!-- /#content -->
-        <section id="extras" class="body">
-        </section><!-- /#extras -->
-
-        <footer id="contentinfo" class="body">
-                <address id="about" class="vcard body">
-                Go <a href="/">home</a>. <a href="/privacy.html">Privacy policy.</a>
-                Powered by <a href="http://getpelican.com/">Pelican</a>.
-                </address><!-- /#about -->
-        </footer><!-- /#contentinfo -->
-        </div>
-<script type="text/javascript">
-    var disqus_shortname = 'vene';
-    (function () {
-        var s = document.createElement('script'); s.async = true;
-        s.type = 'text/javascript';
-        s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
-        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-    }());
-</script>
+<article class="hentry">
+<header>
+<h1><a href="//vene.ro/blog/gsoc-2012-proposal-need-for-scikit-learn-speed.html"
+       rel="bookmark"
+       title="Permalink to GSoC 2012 proposal: Need for scikit-learn speed">GSoC 2012 proposal: Need for scikit-learn&nbsp;speed</a></h1>
+</header>
+<p class="subtitle"><time datetime="2012-04-16T00:37:00+02:00">Mon 16 April 2012</time><label for="gsoc-2012-proposal-need-for-scikit-learn-speed" class="margin-toggle"> ⊕</label><input type="checkbox" id="gsoc-2012-proposal-need-for-scikit-learn-speed" class="margin-toggle" /><span class="marginnote">Category: <a href="//vene.ro/category/scikit-learn.html">scikit-learn</a><br />
+ #<a href="//vene.ro/tag/gsoc.html">gsoc</a> #<a href="//vene.ro/tag/proposal.html">proposal</a> #<a href="//vene.ro/tag/scikit-learn.html">scikit-learn</a></span></p><p>This summer I hope to be able to put in another full-time amount of
+effort into scikit-learn. After a successful Google Summer of Code
+project last year on dictionary learning, I now plan to do some
+low-level work. The title of my proposal is: &#8220;Need for scikit-learn
+speed&#8221; and, in …</p>	
+</article>
+<article class="hentry">
+<header>
+<h1><a href="//vene.ro/blog/romanian-people-and-coffee.html"
+       rel="bookmark"
+       title="Permalink to Romanian people and coffee">Romanian people and&nbsp;coffee</a></h1>
+</header>
+<p class="subtitle"><time datetime="2012-04-13T21:20:00+02:00">Fri 13 April 2012</time><label for="romanian-people-and-coffee" class="margin-toggle"> ⊕</label><input type="checkbox" id="romanian-people-and-coffee" class="margin-toggle" /><span class="marginnote">Category: <a href="//vene.ro/category/nlp.html">nlp</a><br />
+ #<a href="//vene.ro/tag/uncategorized.html">Uncategorized</a> #<a href="//vene.ro/tag/coffee.html">coffee</a> #<a href="//vene.ro/tag/ngram.html">ngram</a></span></p><p>So I got my hands of the <a href="http://googleresearch.blogspot.com/2006/08/all-our-n-gram-are-belong-to-you.html" title="Google Research">Google N-gram data</a> for the Romanian
+language. It&#8217;s noisy as hell, has some other subtle issues too, but
+here&#8217;s the first thing I&nbsp;noticed:</p>
+<p>The Romanian word for coffee is <em>cafea</em>, and the more you crave it, the
+longer you pronunce …</p>	
+</article>
+<article class="hentry">
+<header>
+<h1><a href="//vene.ro/blog/nash-williams-theorem-on-the-hamiltonian-property-of-some-regular-graphs.html"
+       rel="bookmark"
+       title="Permalink to Nash-Williams theorem on the Hamiltonian property of some regular graphs">Nash-Williams theorem on the Hamiltonian property of some regular&nbsp;graphs</a></h1>
+</header>
+<p class="subtitle"><time datetime="2012-01-29T22:31:00+01:00">Sun 29 January 2012</time><label for="nash-williams-theorem-on-the-hamiltonian-property-of-some-regular-graphs" class="margin-toggle"> ⊕</label><input type="checkbox" id="nash-williams-theorem-on-the-hamiltonian-property-of-some-regular-graphs" class="margin-toggle" /><span class="marginnote">Category: <a href="//vene.ro/category/graph-theory.html">graph theory</a><br />
+ #<a href="//vene.ro/tag/graph.html">graph</a> #<a href="//vene.ro/tag/graph-theory.html">graph theory</a> #<a href="//vene.ro/tag/hamiltonian.html">hamiltonian</a> #<a href="//vene.ro/tag/nash-williams.html">nash-williams</a> #<a href="//vene.ro/tag/uncategorized.html">Uncategorized</a></span></p><p>I have been digging on the internet for the proof of this theorem for
+the last couple of days without success. The result was published by Sir
+Crispin Nash-Williams as <em>Valency Sequences which force graphs to have
+Hamiltonian Circuits</em>. Interim Rep, University of Waterloo Res Rep.,
+Waterloo, Ontario, 1969. However …</p>	
+</article>
+</main>
+<div class="blognav">
+      <nav id="pagination">
+[&nbsp;<a href="/archives.html">all posts</a>&nbsp;]
+[&nbsp;<a href="/categories.html">categories</a>&nbsp;]
+[&nbsp;<a href="/tags.html">tags</a>&nbsp;]
+[&nbsp;pages:        <a id="first_page" href="//vene.ro/blog/index.html">&#60;&#60;</a>
+        <a id="prev_page" rel="prev" href="//vene.ro/blog/index7.html">&#60;</a>
+        <a href="//vene.ro/blog/index4.html">4</a>
+        <a href="//vene.ro/blog/index5.html">5</a>
+        <a href="//vene.ro/blog/index6.html">6</a>
+        <a href="//vene.ro/blog/index7.html">7</a>
+        <span class="a active">8</span>
+        <a href="//vene.ro/blog/index9.html">9</a>
+        <a href="//vene.ro/blog/index10.html">10</a>
+        <a href="//vene.ro/blog/index11.html">11</a>
+        <a href="//vene.ro/blog/index12.html">12</a>
+        <a id="next_page" rel="next" href="//vene.ro/blog/index9.html">&#62;</a>
+        <a id="last_page" href="//vene.ro/blog/index17.html">&#62;&#62;</a>
+&nbsp;]
+      </nav></div>
+ </div>
+<footer>
+  <p>Powered by <a href="http://pelican.readthedocs.org">Pelican</a>.
+  <a href="/privacy.html">Privacy policy</a>.</p>
+</footer>
 </div>
 </body>
 </html>
