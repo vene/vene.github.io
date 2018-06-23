@@ -4,7 +4,6 @@ from __future__ import unicode_literals
 
 AUTHOR = 'Vlad'
 SITENAME = 'Vlad Niculae'
-# SITEURL = 'https://vene.ro'
 SITEURL = ''
 
 PATH = 'content'
@@ -70,5 +69,3 @@ EXTRA_PATH_METADATA = {
     'extras/README.rst': {'path': 'README.rst'},
     'extras/vlad-niculae.jpg': {'path': 'vlad-niculae.jpg'},
     'extras/CNAME': {'path': 'CNAME'}}
-
-DISQUS_SITENAME = 'vene'
