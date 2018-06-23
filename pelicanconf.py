@@ -4,12 +4,12 @@ from __future__ import unicode_literals
 
 AUTHOR = 'Vlad'
 SITENAME = 'Vlad Niculae'
+# SITEURL = 'https://vene.ro'
 SITEURL = ''
 
 PATH = 'content'
 
 TIMEZONE = 'Europe/Paris'
-
 DEFAULT_LANG = 'en'
 
 # Feed generation is usually not desired when developing
@@ -31,6 +31,8 @@ DEFAULT_PAGINATION = 3
 # Uncomment following line if you want document-relative URLs when developing
 #RELATIVE_URLS = True
 
+TYPOGRIFY = True
+
 THEME = 'themes/vene-tufte'
 
 # IPython Notebook plugin
@@ -39,6 +41,8 @@ PLUGIN_PATHS = ['./plugins']
 PLUGINS = ['pelican-ipynb.markup']
 IPYNB_IGNORE_CSS = True
 
+AUTHOR_SAVE_AS = ''
+AUTHORS_SAVE_AS = ''
 ARTICLE_PATHS = ['blog']
 ARTICLE_URL = 'blog/{slug}.html'
 ARTICLE_SAVE_AS = ARTICLE_URL
@@ -66,3 +70,5 @@ EXTRA_PATH_METADATA = {
     'extras/README.rst': {'path': 'README.rst'},
     'extras/vlad-niculae.jpg': {'path': 'vlad-niculae.jpg'},
     'extras/CNAME': {'path': 'CNAME'}}
+
+DISQUS_SITENAME = 'vene'
