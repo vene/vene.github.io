@@ -2,18 +2,18 @@
 
 @font-face {
   font-family: "euclid-flex";
-  src: url("../fonts/EuclidFlex-Bold-WebXL.woff2") format("woff2"),
-       url("../fonts/EuclidFlex-Bold-WebXL.woff") format("woff"),
-       url("../fonts/EuclidFlex-Bold-WebXL.ttf") format("truetype");
+  src: url("../fonts/EuclidFlex-Bold-WebS.woff2") format("woff2"),
+       url("../fonts/EuclidFlex-Bold-WebS.woff") format("woff"),
+       url("../fonts/EuclidFlex-Bold-WebS.ttf") format("truetype");
   font-weight: bold;
   font-style: normal;
 }
 
 @font-face {
   font-family: "euclid-flex";
-  src: url("../fonts/EuclidFlex-BoldItalic-WebXL.woff2") format("woff2"),
-       url("../fonts/EuclidFlex-BoldItalic-WebXL.woff") format("woff"),
-       url("../fonts/EuclidFlex-BoldItalic-WebXL.ttf") format("truetype");
+  src: url("../fonts/EuclidFlex-BoldItalic-WebS.woff2") format("woff2"),
+       url("../fonts/EuclidFlex-BoldItalic-WebS.woff") format("woff"),
+       url("../fonts/EuclidFlex-BoldItalic-WebS.ttf") format("truetype");
   font-weight: bold;
   font-style: italic;
 }
@@ -36,7 +36,6 @@
   font-weight: 600;
   font-style: italic;
 }
-*/
 
 @font-face {
   font-family: "euclid-flex";
@@ -55,6 +54,7 @@
   font-weight: regular;
   font-style: italic; 
 }
+*/
 
 html { 
   font-size: 18px; 
