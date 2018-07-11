@@ -11,6 +11,7 @@ Slug: papers
 In: Proc. of *ICML 2018*.
 \[&nbsp;[arXiv](https://arxiv.org/abs/1802.04223)&nbsp;\]
 \[&nbsp;[code](https://github.com/vene/sparsemap)&nbsp;\]
+\[&nbsp;[slides](/talks/sparsemap-icml18-talk.pdf)&nbsp;\]
 
 * Vlad Niculae and Mathieu Blondel.
 A Regularized Framework for Sparse and Structured Neural Attention. In: Proc.
