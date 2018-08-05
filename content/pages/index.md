@@ -1,16 +1,18 @@
-Title: Vlad Niculae's  personal website
+Title: Vlad Niculae's site
 Status: hidden
 URL:
 save_as: index.html
 
 <img id="vladpic" class="marginnote" src="vlad-niculae.jpg" alt="Vlad Niculae" />
 
-Hi! I'm Vlad, and I'm CS PhD candidate
-at [Cornell](http://www.cs.cornell.edu/), advised by [Claire
-Cardie](http://www.cs.cornell.edu/home/cardie/).
-I work on machine learning & natural language processing,
-focusing on structure and sparsity.
-I am a [scikit-learn](http://scikit-learn.org) "alum" and
+Hi! I'm Vlad, and I'm a postdoc within [DeepSPIN](https://deep-spin.github.io/)
+at the [Instituto de Telecomunicações](https://www.it.pt), Lisbon, Portugal.
+I research machine learning & natural language processing, focusing on sparsity
+and structure.
+
+I obtained my PhD from [Cornell](http://www.cs.cornell.edu/) in 2018,
+advised by [Claire Cardie](http://www.cs.cornell.edu/home/cardie/).
+I am a [scikit-learn](http://scikit-learn.org) core dev/alum and
 I develop the [polylearn](http://contrib.scikit-learn.org/polylearn)
 library for factorization machines and polynomial networks in Python.
 
