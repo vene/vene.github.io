@@ -62,12 +62,12 @@ html {
 }
 
 body { 
+  counter-reset: sidenote-counter;
   margin: 0;
   padding: 0;
   font-family: "PT Serif", Georgia, serif;
   background-color: #F8F8FF;
   color: #111;
-  counter-reset: sidenote-counter;
   overflow-wrap: break-word;
 }
 
@@ -169,10 +169,31 @@ article.post {
 
 
 /* collapsable side-notes by default */
+.sidenote, .marginnote { display: none; }
+
+.sidenote-number:before, 
+.sidenote:before { 
+  position: relative;
+  vertical-align: baseline; 
+}
+
+.sidenote-number:before { 
+  counter-increment: sidenote-counter;
+  content: counter(sidenote-counter);
+  font-size: .6rem;
+  top: -0.5rem;
+  left: 0; }
+
+.sidenote:before { content: counter(sidenote-counter) " ";
+                   font-size: .6rem;
+                   top: -0.5rem; }
+
+
+
+input.margin-toggle { display: none; }
 label.margin-toggle:not(.sidenote-number) { display: inline; }
 label { cursor: pointer; }
-input.margin-toggle { display: none; }
-sidenote, .marginnote { display: none; }
+/* input.margin-toggle { display: none; } */
 .margin-toggle:checked + .sidenote,
 .margin-toggle:checked + .marginnote { 
   display: block;

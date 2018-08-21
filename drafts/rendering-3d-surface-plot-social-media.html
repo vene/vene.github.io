@@ -69,7 +69,290 @@
     <div class="entry-content">
       <p>It&#8217;s 2018, and your favorite meme pages on facebook constantly come up
 with quality content like&nbsp;this:</p>
-<div class="fb-post" data-href="https://www.facebook.com/theytheytheytheythey/posts/1927754023930143" data-width="100" data-show-text="true"><blockquote cite="https://www.facebook.com/theytheytheytheythey/posts/1927754023930143" class="fb-xfbml-parse-ignore"><p><span class="caps">THEY</span> ⭐️🐼⭐️&nbsp;Dimemetional</p>Posted by <a href="https://www.facebook.com/theytheytheytheythey/"><span class="caps">THEY</span></a> on&nbsp;<a href="https://www.facebook.com/theytheytheytheythey/posts/1927754023930143">Monday, August 20, 2018</a></blockquote></div>
+<iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Ftheytheytheytheythey%2Fposts%2F1927754023930143&width=350&show_text=true&height=471" width="350" height="471" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+
+<p>How can we mere researchers even begin to compete in terms of social media
+presence? What chance do we have at going viral? In this post, I show you how
+to generate 3d renders of your or your friends&#8217; cool machine learning&nbsp;research.</p>
+<iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fvlad.niculae%2Fposts%2F2040964392582536&width=350&show_text=true&height=574" width="350" height="574" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+
+<p>Without further ado, let&#8217;s make some data-driven surface plots.<label for="sn-getcode" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-getcode" class="margin-toggle"/><span class="sidenote"><em><a href="https://github.com/vene/threedposts">Get code for this&nbsp;post.</a></em></span></p>
+<h1>three.js</h1>
+<p>There seems to be a lot of 3-d modeling software out there, such as
+<a href="https://www.blender.org/">Blender</a>, but point-and-click interfaces
+don&#8217;t seem well-suited for data-driven plots.
+<label for="sn-blender" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-blender" class="margin-toggle"/><span class="sidenote">Blender does seem to have a Python <span class="caps">API</span>,
+but I couldn&#8217;t easily figure out if it supports all we&#8217;re doing here. If you know, leave a&nbsp;comment!</span></p>
+<p>After a while I settled on <a href="https://threejs.org/">three.js</a>,
+a JavaScript library for interactive 3-d graphics. I found
+<a href="http://stemkoski.github.io/Three.js/Graphulus-Function.html">Graphulus</a>: a
+three.js example that seems close to what we want. 
+Also, three.js supports exporting to <a href="https://en.wikipedia.org/wiki/GlTF"><span class="caps">GLTF</span></a>,
+the format required to <a href="https://developers.facebook.com/docs/sharing/3d-posts/">upload 3-d posts</a>.</p>
+<p>The strategy used by Graphulus uses the three.js
+<a href="https://threejs.org/docs/index.html#api/geometries/ParametricGeometry">ParametricGeometry</a>:
+a 3-d geometry defined by a function <code>z = f(x, y)</code>. This seems to be exactly
+what we want! If we can implement <code>f</code> easily in <span class="caps">JS</span>, we are&nbsp;done! </p>
+<p>In most cases, <code>f</code> is complicated and took months to implement, using Python or
+C++, so we might not be able (or willing) to rewrite it in <span class="caps">JS</span>. I see two
+possible paths to take&nbsp;here:</p>
+<ol>
+<li>Building a web app, and implementing <code>f</code> as an <span class="caps">API</span>&nbsp;call.</li>
+<li>Finding a way to draw a three.js surface plot from precomputed&nbsp;values.</li>
+</ol>
+<p>Five years ago I would have been eager to take approach 1 and build an
+overcomplicated solution, but this time I decided 2 is&nbsp;lazier.</p>
+<p>I eventually found <a href="https://bl.ocks.org/grahampullan/b3beb793b10382c13f7a34c843156a8c">this
+example</a>
+of building a 3-d plot in three.js from a grid of points. In the rest of this
+blog, I will walk through the resulting&nbsp;method.</p>
+<h1>Computing the function&nbsp;values</h1>
+<p>First thing to do is to compute the value of <code>f</code> on a grid of points. To keep
+things simple, we will plot $\operatorname{softmax}([x, y, 0])_2$
+as a function of $a$ and $b$. Recall that
+$\operatorname{softmax}(\boldsymbol{\theta}) = \boldsymbol{p}$, where
+$p_i = \frac{\exp(\theta_i)}{\sum_j&nbsp;\exp(\theta_j)}$.</p>
+<p>We can implement <code>f(x, y)</code> easily:</p>
+<div class="highlight"><pre><span></span><span class="c1"># generate.py</span>
+
+<span class="kn">import</span> <span class="nn">math</span>
+
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+   <span class="sd">&quot;&quot;&quot;computes p[1] where p = softmax([x, y, 0])</span>
+
+<span class="sd">   (it&#39;s p[1], not p[2], because in math we index from 1</span>
+<span class="sd">   &quot;&quot;&quot;</span>
+
+    <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">theta</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+
+
+<p>Now, let&#8217;s define a grid of points. This is more or less the same
+as for making a <a href="https://matplotlib.org/examples/mplot3d/surface3d_demo.html">3-d surface plot in
+matplotlib</a>.</p>
+<div class="highlight"><pre><span></span><span class="c1"># generate.py (part 2)</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="mi">111</span> 
+<span class="n">m</span> <span class="o">=</span> <span class="mi">111</span> 
+
+<span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">ys</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+
+
+<span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">)</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty_like</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+        <span class="n">Z</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">([</span><span class="n">X</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">Y</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">Z</span><span class="o">.</span><span class="n">ravel</span><span class="p">()])</span>
+</pre></div>
+
+
+<p>The easiest way to copy data between Python and <span class="caps">JS</span> is using json.
+Indeed, we can very easily generate a valid <span class="caps">JS</span>&nbsp;file:</p>
+<div class="highlight"><pre><span></span><span class="c1"># generate.py (part 3)</span>
+<span class="c1"># output points to a javascript file</span>
+
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+    <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+    <span class="s1">&#39;z&#39;</span><span class="p">:</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="n">template</span> <span class="o">=</span> <span class="n">f</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">var n = {n};</span>
+<span class="s2">var m = {m};</span>
+<span class="s2">var data = {json.dumps(data)};</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;data.js&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>  <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Run this script to obtain a <code>data.js</code> file describing the point cloud that we
+want to&nbsp;visualize.</p>
+<h1>Constructing the 3-d&nbsp;surface</h1>
+<p>Once we have the 3d points, it&#8217;s time to use three.js to construct
+the 3-d object. First, download <a href="https://github.com/mrdoob/three.js/raw/r95/build/three.js">three.js</a> itself, as well the
+<a href="https://raw.githubusercontent.com/mrdoob/three.js/r95/examples/js/exporters/GLTFExporter.js">GLTFExporter.js</a> file.<label for="sn-threejsversion" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-threejsversion" class="margin-toggle"/><span class="sidenote">The links provided are for version r95, the version I
+used. Feel free to try newer versions; new features may&nbsp;appear!</span></p>
+<p>Let&#8217;s make a minimal <span class="caps">HTML</span> file to load the required&nbsp;libraries:</p>
+<div class="highlight"><pre><span></span><span class="c">&lt;!-- plot-glb.html --&gt;</span>
+
+<span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">meta</span> <span class="na">http-equiv</span><span class="o">=</span><span class="s">&quot;content-type&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;text/html; charset=UTF-8&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;three.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;GLTFExporter.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;data.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>  <span class="c">&lt;!-- generated above --&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">a</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;download&quot;</span><span class="p">&gt;</span>Download .glb<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;plot-glb.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span> <span class="c">&lt;!-- we&#39;ll write this file below --&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+
+
+<p>Now it&#8217;s time to do the heavy lifting in <code>plot-glb.js</code>.
+First thing we must do is construct a three.js scene. This consists of a
+<em>Mesh</em>, which in turn is described by a <em>Material</em> and a 
+<em>Geometry</em> (a set of vertices and faces). The <em>Material</em> is easy to pick; the
+tricky part is the <em>Geometry</em>, which we will construct&nbsp;manually.</p>
+<div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">makeScene</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">geometry</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">Geometry</span><span class="p">();</span> 
+    <span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">Color</span><span class="p">(</span><span class="s1">&#39;tomato&#39;</span><span class="p">);</span>
+
+    <span class="c1">// make a long sequence containing our 3d points</span>
+    <span class="kd">var</span> <span class="nx">nverts</span> <span class="o">=</span> <span class="nx">n</span> <span class="o">*</span> <span class="nx">m</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">k</span> <span class="o">&lt;</span> <span class="nx">nverts</span><span class="p">;</span> <span class="o">++</span><span class="nx">k</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">newvert</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">Vector3</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">x</span><span class="p">[</span><span class="nx">k</span><span class="p">],</span> <span class="nx">data</span><span class="p">.</span><span class="nx">y</span><span class="p">[</span><span class="nx">k</span><span class="p">],</span> <span class="nx">data</span><span class="p">.</span><span class="nx">z</span><span class="p">[</span><span class="nx">k</span><span class="p">]);</span>
+        <span class="nx">geometry</span><span class="p">.</span><span class="nx">vertices</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">newvert</span><span class="p">);</span>
+    <span class="p">}</span>
+
+
+    <span class="c1">// build triangular faces (top and bottom) between adjacent points</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">j</span> <span class="o">&lt;</span> <span class="nx">m</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span> 
+            <span class="kd">var</span> <span class="nx">n0</span> <span class="o">=</span> <span class="nx">j</span> <span class="o">*</span> <span class="nx">n</span> <span class="o">+</span> <span class="nx">i</span><span class="p">;</span>
+            <span class="kd">var</span> <span class="nx">n1</span> <span class="o">=</span> <span class="nx">n0</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="kd">var</span> <span class="nx">n2</span> <span class="o">=</span> <span class="p">(</span><span class="nx">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="nx">n</span> <span class="o">+</span> <span class="nx">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="kd">var</span> <span class="nx">n3</span> <span class="o">=</span> <span class="nx">n2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="nx">face1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">Face3</span><span class="p">(</span><span class="nx">n0</span><span class="p">,</span> <span class="nx">n1</span><span class="p">,</span> <span class="nx">n2</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">,</span> <span class="nx">color</span><span class="p">);</span>
+            <span class="nx">face2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">Face3</span><span class="p">(</span><span class="nx">n2</span><span class="p">,</span> <span class="nx">n3</span><span class="p">,</span> <span class="nx">n0</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">,</span> <span class="nx">color</span><span class="p">);</span>
+            <span class="nx">geometry</span><span class="p">.</span><span class="nx">faces</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">face1</span><span class="p">);</span>
+            <span class="nx">geometry</span><span class="p">.</span><span class="nx">faces</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">face2</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Compute normals for shading</span>
+    <span class="nx">geometry</span><span class="p">.</span><span class="nx">computeFaceNormals</span><span class="p">();</span>
+    <span class="nx">geometry</span><span class="p">.</span><span class="nx">computeVertexNormals</span><span class="p">();</span>
+
+    <span class="c1">// Give it a pretty material</span>
+    <span class="kd">var</span> <span class="nx">material</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">MeshLambertMaterial</span><span class="p">(</span> <span class="p">{</span>
+        <span class="nx">side</span><span class="o">:</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">DoubleSide</span><span class="p">,</span>
+        <span class="nx">color</span><span class="o">:</span> <span class="mh">0xffffff</span><span class="p">,</span>
+        <span class="nx">vertexColors</span><span class="o">:</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">FaceColors</span><span class="p">,</span>
+        <span class="nx">emissive</span><span class="o">:</span> <span class="mh">0x111111</span><span class="p">,</span>
+    <span class="p">});</span>
+
+    <span class="kd">var</span> <span class="nx">scene</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">Scene</span><span class="p">();</span>
+    <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span> <span class="k">new</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">Mesh</span><span class="p">(</span> <span class="nx">geometry</span><span class="p">,</span> <span class="nx">material</span> <span class="p">)</span> <span class="p">);</span>
+    <span class="k">return</span> <span class="nx">scene</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>Normally, the next step would be to add
+<a href="https://threejs.org/docs/index.html#api/cameras/PerspectiveCamera">cameras</a>
+and <a href="https://threejs.org/docs/index.html#api/lights/SpotLight">lights</a>, maybe
+some <a href="https://threejs.org/docs/index.html#api/helpers/ArrowHelper">axes</a> and
+descriptive
+<a href="https://threejs.org/docs/index.html#manual/introduction/Creating-text">text</a>,
+and render to a <code>&lt;div&gt;</code>. But our goal is to make a Facebook 3-d post, so we can
+simply export the current scene as a binary <span class="caps">GLB</span>&nbsp;file. </p>
+<p>The <span class="caps">GLTF</span> exporter will give us a byte buffer that we need to download. We can
+handle with a function that modifies our&nbsp;link: </p>
+<div class="highlight"><pre><span></span><span class="c1">// plot-glb.js (part 2)</span>
+
+<span class="kd">function</span> <span class="nx">saveArrayBuffer</span><span class="p">(</span> <span class="nx">buffer</span><span class="p">,</span> <span class="nx">filename</span> <span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">blob</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Blob</span><span class="p">(</span> <span class="p">[</span> <span class="nx">buffer</span> <span class="p">],</span> <span class="p">{</span> <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;application/octet-stream&#39;</span> <span class="p">}</span> <span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">link</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span> <span class="s1">&#39;download&#39;</span> <span class="p">);</span>
+    <span class="nx">link</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="nx">URL</span><span class="p">.</span><span class="nx">createObjectURL</span><span class="p">(</span> <span class="nx">blob</span> <span class="p">);</span>
+    <span class="nx">link</span><span class="p">.</span><span class="nx">download</span> <span class="o">=</span> <span class="nx">filename</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>Finally, we use the <code>GLTFExporter</code> to generate a Facebook-compatible 3-d&nbsp;model.</p>
+<div class="highlight"><pre><span></span><span class="c1">// plot-glb.js (part 3)</span>
+
+<span class="kd">var</span> <span class="nx">scene</span> <span class="o">=</span> <span class="nx">makeScene</span><span class="p">();</span>
+
+<span class="kd">var</span> <span class="nx">exporter</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">GLTFExporter</span><span class="p">();</span>
+<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">trs</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nx">onlyVisible</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nx">truncateDrawRange</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nx">binary</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nx">forceIndices</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>  <span class="c1">// for Facebook</span>
+    <span class="nx">forcePowerOfTwoTextures</span><span class="o">:</span> <span class="kc">false</span>  <span class="c1">// for Facebook</span>
+<span class="p">};</span>
+
+<span class="nx">exporter</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span> <span class="nx">scene</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span> <span class="nx">glb</span> <span class="p">)</span> <span class="p">{</span>
+    <span class="nx">saveArrayBuffer</span><span class="p">(</span> <span class="nx">glb</span><span class="p">,</span> <span class="s1">&#39;scene.glb&#39;</span> <span class="p">);</span>
+<span class="p">},</span> <span class="nx">options</span> <span class="p">);</span>
+</pre></div>
+
+
+<p>Now, if you open <code>plot-glb.html</code> and click the Download link, you should get a
+<code>.glb</code> file that can be drag-and-dropped onto a new Facebook&nbsp;post.</p>
+<h1>But it shows up seen from above and looks&nbsp;ugly!</h1>
+<p>Indeed, there seems to be no way to specify the camera angle in a Facebook post.
+<a href="https://threejs.org/docs/index.html#api/cameras/PerspectiveCamera">Three.js cameras</a>
+are not part of the <em>scene</em>,<label for="sn-scene" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-scene" class="margin-toggle"/><span class="sidenote">Unlike the folks below, who are definitely part of <em>the scene</em>:
+<a title="By Kirsten Hartsoch [2] ([1]) [CC BY 2.0 (https://creativecommons.org/licenses/by/2.0)], via Wikimedia Commons"
+ href="https://commons.wikimedia.org/wiki/File:Scene_kids2.jpg"><img width="256"
+ alt="Scene kids2"
+ src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Scene_kids2.jpg/256px-Scene_kids2.jpg"></a>
+</span>
+so I think they don&#8217;t get exported in a <span class="caps">GLTF</span>/<span class="caps">GLB</span>.</p>
+<p>But now that we know that the default camera is somewhere along the Z axis above
+the plot, we can simply rotate our point cloud to get to a more aesthetically
+pleasing&nbsp;angle! </p>
+<div class="highlight"><pre><span></span><span class="c1"># generate.py (part 2.5)</span>
+
+<span class="k">def</span> <span class="nf">rotate3d_x</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+
+    <span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                  <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="o">-</span><span class="n">s</span><span class="p">],</span>
+                  <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">c</span><span class="p">]])</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">R</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">rotate3d_z</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+
+    <span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">c</span><span class="p">,</span> <span class="o">-</span><span class="n">s</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                  <span class="p">[</span><span class="n">s</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                  <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">R</span><span class="p">)</span>
+
+
+<span class="n">points</span> <span class="o">=</span> <span class="n">rotate3d_z</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">points</span> <span class="o">=</span> <span class="n">rotate3d_x</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mf">2.5</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Above, we used <em>rotation matrices</em> to rotate the point cloud around.<label for="sn-rotation" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-rotation" class="margin-toggle"/><span class="sidenote">Rotating a 3-d point is equivalent to multiplying by a
+certain orthogonal matrix. <a href="https://en.wikipedia.org/wiki/Rotation_matrix#Basic_rotations">The wikipedia article</a> lists formulas for
+rotation matrices against the canonical axes $x$, $y$,&nbsp;$z$. </span></p>
+<p>The result should look just like the 3-d post I made below.
+Of course, in <code>generate.py</code> we can do arbitrary complicated calculations in <code>f</code>,
+including numerical optimization, so this approach is quite powerful. May it
+bring you many&nbsp;likes!</p>
+<p><iframe
+src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fvlad.niculae%2Fposts%2F2040960132582962&width=350&show_text=true&height=535"
+width="350" height="535" style="border:none;overflow:hidden" scrolling="no"
+frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe></p>
+<p><em><a href="https://github.com/vene/threedposts">Get code for this&nbsp;post.</a></em></p>
     </div><!-- /.entry-content -->
 
   </article>
