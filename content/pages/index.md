@@ -17,6 +17,8 @@ I develop the [polylearn](http://contrib.scikit-learn.org/polylearn)
 library for factorization machines and polynomial networks in Python.
 
 # News
+  - Our paper with André & Claire, *Towards dynamic computation graphs via sparse latent structure*,
+  is accepted at EMNLP'18!
   - [*SparseMAP: Differentiable sparse structured inference*
 ](https://arxiv.org/abs/1802.04223)
   is accepted at ICML'18! [PyTorch implementation](https://github.com/vene/sparsemap) (dynet coming soon).

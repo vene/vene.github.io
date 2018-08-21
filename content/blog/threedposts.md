@@ -25,8 +25,7 @@ Without further ado, let's make some data-driven surface plots.<label for="sn-ge
 
 There seems to be a lot of 3-d modeling software out there, such as
 [Blender](https://www.blender.org/), but point-and-click interfaces
-don't seem well-suited for data-driven plots.
-<label for="sn-blender" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-blender" class="margin-toggle"/><span class="sidenote">Blender does seem to have a Python API,
+don't seem well-suited for data-driven plots.<label for="sn-blender" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-blender" class="margin-toggle"/><span class="sidenote">Blender does seem to have a Python API,
 but I couldn't easily figure out if it supports all we're doing here. If you know, leave a comment!</span>
 
 After a while I settled on [three.js](https://threejs.org/),

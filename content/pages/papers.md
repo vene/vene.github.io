@@ -21,14 +21,17 @@ of *NIPS 2017*.
 
 ## Other publications
 
-* 
-Mathieu Blondel, André F. T. Martins, Vlad Niculae. 
-Learning Classifiers with Fenchel-Young Losses: Generalized Entropies, Margins, and Algorithms.
+* Vlad Niculae, André F. T. Martins, Claire Cardie.
+Towards dynamic computation graphs via sparse latent structure.
+In: Proc. of *EMNLP 2018* (to appear). 
+
+* Mathieu Blondel, André F. T. Martins, Vlad Niculae. 
+Learning classifiers with Fenchel-Young losses: Generalized entropies, margins, and algorithms.
 2018.
 \[&nbsp;[arXiv preprint](https://arxiv.org/abs/1805.09717)&nbsp;\]
 
 * Mathieu Blondel, Vlad Niculae, Takuma Otsuka, Naonori Ueda.
-Multi-output Polynomial Networks and Factorization Machines. In: Proc. 
+Multi-output polynomial networks and factorization machines. In: Proc. 
 of *NIPS 2017*.
 \[&nbsp;[arXiv](https://arxiv.org/abs/1705.07603)&nbsp;\]
 
@@ -59,7 +62,7 @@ on an online strategy game. In: Proc. of *ACL 2015*.
 In: Proc. of *EMNLP 2014*. \[ [&nbsp;Website&nbsp;](/figurative-comparisons) \]
 
 * Vlad Niculae, Marcos Zampieri, Liviu P. Dinu, Alina Maria Ciobanu.
-Temporal Text Ranking and Automatic Dating of Texts. In: Proc. of *EACL 2014*.
+Temporal text ranking and automatic dating of texts. In: Proc. of *EACL 2014*.
 \[ [&nbsp;PDF&nbsp;](papers/eacl14-temporal.pdf) \]
 \[ [&nbsp;Slides&nbsp;](papers/eacl14-temporal-slides.pdf) \]
 
@@ -77,7 +80,7 @@ Proc. of *JSSP 2013*.
 \[ [&nbsp;PDF&nbsp;](http://aclweb.org/anthology/W/W13/W13-3829.pdf) \] \[ [poster](papers/jssp13-similes-poster.pdf) \]
 \[ [&nbsp;code&nbsp;](https://github.com/vene/comparison-pattern) \]
 
-* Vlad Niculae and Octavian Popescu. Determining is-a relationships for textual
+* Vlad Niculae and Octavian Popescu. Determining *is-a* relationships for textual
 entailment. In: Proc. of *JSSP 2013*.
 \[ [&nbsp;PDF&nbsp;](http://aclweb.org/anthology/W/W13/W13-3830.pdf) \]
 \[ [&nbsp;poster&nbsp;](papers/jssp-rte-poster.pdf) \]
