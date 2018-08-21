@@ -67,13 +67,33 @@
 </span></p>    </header>
 
     <div class="entry-content">
-      <p>It&#8217;s 2018, and your favorite meme pages on facebook constantly come up
+      <div id="fb-root"></div>
+
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+        js.src =
+        'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.1&appId=664000323973498';
+          fjs.parentNode.insertBefore(js, fjs);
+          }(document, 'script', 'facebook-jssdk'));</script>
+
+<p>It&#8217;s 2018, and your favorite meme pages on facebook constantly come up
 with quality content like&nbsp;this:</p>
 <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Ftheytheytheytheythey%2Fposts%2F1927754023930143&width=350&show_text=true&height=471" width="350" height="471" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
 
+<div class="fb-post"
+data-href="https://www.facebook.com/theytheytheytheythey/posts/1927754023930143"
+data-width="350" data-show-text="true"><blockquote
+cite="https://www.facebook.com/theytheytheytheythey/posts/1927754023930143"
+class="fb-xfbml-parse-ignore"><p><span class="caps">THEY</span> ⭐️🐼⭐️&nbsp;Dimemetional</p>Posted by <a
+href="https://www.facebook.com/theytheytheytheythey/"><span class="caps">THEY</span></a> on&nbsp;<a
+href="https://www.facebook.com/theytheytheytheythey/posts/1927754023930143">Monday,
+August 20, 2018</a></blockquote></div>
+
 <p>How can we mere researchers even begin to compete in terms of social media
 presence? What chance do we have at going viral? In this post, I show you how
-to generate 3d renders of your or your friends&#8217; cool machine learning&nbsp;research.</p>
+to generate 3-d renders of your or your friends&#8217; cool machine learning&nbsp;research.</p>
 <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fvlad.niculae%2Fposts%2F2040964392582536&width=350&show_text=true&height=574" width="350" height="574" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
 
 <p>Without further ado, let&#8217;s make some data-driven surface plots.<label for="sn-getcode" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-getcode" class="margin-toggle"/><span class="sidenote"><em><a href="https://github.com/vene/threedposts">Get code for this&nbsp;post.</a></em></span></p>
@@ -183,7 +203,7 @@ Indeed, we can very easily generate a valid <span class="caps">JS</span>&nbsp;fi
 <p>Run this script to obtain a <code>data.js</code> file describing the point cloud that we
 want to&nbsp;visualize.</p>
 <h1>Constructing the 3-d&nbsp;surface</h1>
-<p>Once we have the 3d points, it&#8217;s time to use three.js to construct
+<p>Once we have the 3-d points, it&#8217;s time to use three.js to construct
 the 3-d object. First, download <a href="https://github.com/mrdoob/three.js/raw/r95/build/three.js">three.js</a> itself, as well the
 <a href="https://raw.githubusercontent.com/mrdoob/three.js/r95/examples/js/exporters/GLTFExporter.js">GLTFExporter.js</a> file.<label for="sn-threejsversion" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-threejsversion" class="margin-toggle"/><span class="sidenote">The links provided are for version r95, the version I
 used. Feel free to try newer versions; new features may&nbsp;appear!</span></p>
@@ -216,7 +236,7 @@ tricky part is the <em>Geometry</em>, which we will construct&nbsp;manually.</p>
     <span class="kd">var</span> <span class="nx">geometry</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">Geometry</span><span class="p">();</span> 
     <span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">Color</span><span class="p">(</span><span class="s1">&#39;tomato&#39;</span><span class="p">);</span>
 
-    <span class="c1">// make a long sequence containing our 3d points</span>
+    <span class="c1">// make a long sequence containing our 3-d points</span>
     <span class="kd">var</span> <span class="nx">nverts</span> <span class="o">=</span> <span class="nx">n</span> <span class="o">*</span> <span class="nx">m</span><span class="p">;</span>
     <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">k</span> <span class="o">&lt;</span> <span class="nx">nverts</span><span class="p">;</span> <span class="o">++</span><span class="nx">k</span><span class="p">)</span> <span class="p">{</span>
         <span class="kd">var</span> <span class="nx">newvert</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">Vector3</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">x</span><span class="p">[</span><span class="nx">k</span><span class="p">],</span> <span class="nx">data</span><span class="p">.</span><span class="nx">y</span><span class="p">[</span><span class="nx">k</span><span class="p">],</span> <span class="nx">data</span><span class="p">.</span><span class="nx">z</span><span class="p">[</span><span class="nx">k</span><span class="p">]);</span>
