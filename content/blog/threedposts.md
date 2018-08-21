@@ -4,11 +4,7 @@ Author: vene
 Category: presentation 
 Slug: rendering-3d-surface-plot-social-media
 Status: published
-Summary: It's 2018, and your favorite meme pages on facebook constantly come up
-with quality 3d-post content. How can we mere researchers even begin to compete
-in terms of social media presence? What chance do we have at going viral? In
-this post, I show you how to generate 3-d renders of your or your friends' cool
-machine learning research.
+Summary: It's 2018, and your favorite meme pages on facebook constantly come up with quality 3d-post content. How can we mere researchers even begin to compete in terms of social media presence? What chance do we have at going viral? In this post, I show you how to generate 3-d renders of your or your friends' cool machine learning research.
 
 It's 2018, and your favorite meme pages on facebook constantly come up
 with quality content like this. (If you're on mobile, you will need to
