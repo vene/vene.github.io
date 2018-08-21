@@ -13,8 +13,7 @@ to generate 3-d renders of your or your friends&amp;#8217; cool machine learning
 &lt;h1&gt;three.js&lt;/h1&gt;
 &lt;p&gt;There seems to be a lot of 3-d modeling software out there, such as
 &lt;a href="https://www.blender.org/"&gt;Blender&lt;/a&gt;, but point-and-click interfaces
-don&amp;#8217;t seem well-suited for data-driven plots.
-&lt;label for="sn-blender" class="margin-toggle sidenote-number"&gt;&lt;/label&gt;&lt;input type="checkbox" id="sn-blender" class="margin-toggle"/&gt;&lt;span class="sidenote"&gt;Blender does seem to have a Python &lt;span class="caps"&gt;API&lt;/span&gt;,
+don&amp;#8217;t seem well-suited for data-driven plots.&lt;label for="sn-blender" class="margin-toggle sidenote-number"&gt;&lt;/label&gt;&lt;input type="checkbox" id="sn-blender" class="margin-toggle"/&gt;&lt;span class="sidenote"&gt;Blender does seem to have a Python &lt;span class="caps"&gt;API&lt;/span&gt;,
 but I couldn&amp;#8217;t easily figure out if it supports all we&amp;#8217;re doing here. If you know, leave a&amp;nbsp;comment!&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;After a while I settled on &lt;a href="https://threejs.org/"&gt;three.js&lt;/a&gt;,
 a JavaScript library for interactive 3-d graphics. I found
