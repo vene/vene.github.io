@@ -11,7 +11,7 @@ faster wherever I&amp;nbsp;can.&lt;/p&gt;
 recall the accomplishments and failures of this project, and all the
 lessons to be&amp;nbsp;learned.&lt;/p&gt;
 &lt;h2&gt;The &lt;em&gt;scikit-learn-speed&lt;/em&gt; benchmark&amp;nbsp;platform&lt;/h2&gt;
-&lt;p&gt;[&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2012/08/skl-speed-300x163.png" title="skl-speed"&gt;][]&lt;br&gt;
+&lt;p&gt;[&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2012/08/skl-speed-300x163.png" title="skl-speed"&gt;]&lt;a href="http://localhost:8001/wp-content/uploads/2012/08/skl-speed-300x163.png" title="skl-speed"&gt;&lt;/a&gt;&lt;br&gt;
 [&lt;em&gt;Scikit-learn-speed&lt;/em&gt;][&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2012/08/skl-speed-300x163.png" title="skl-speed"&gt;] is a continuous benchmark suite for the
 &lt;a href="http://scikit-learn.org"&gt;&lt;em&gt;scikit-learn&lt;/em&gt;&lt;/a&gt; library. It has the following&amp;nbsp;features:&lt;/p&gt;
 &lt;ul&gt;
@@ -83,7 +83,7 @@ the profiler output with one click. I jumped on the following&amp;nbsp;speed-ups
     &lt;p&gt;
     This speeds up the covariance module (especially &lt;code&gt;MinCovDet&lt;/code&gt;),
     &lt;code&gt;ARDRegression&lt;/code&gt; and the mixture models. It also lead to an [upstream
-    contribution to&amp;nbsp;Scipy][]&lt;/li&gt;
+    contribution to Scipy]&lt;a href="http://localhost:8001/wp-content/uploads/2012/08/skl-speed-300x163.png" title="skl-speed"&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;OrthogonalMatchingPursuit&lt;/code&gt; forward stepwise path for
     cross-validation (&lt;a href="https://github.com/scikit-learn/scikit-learn/pull/1042"&gt;&lt;span class="caps"&gt;PR&lt;/span&gt;&lt;/a&gt;)
     &lt;p&gt;
@@ -355,14 +355,14 @@ looks a lot nicer than last year&amp;#8217;s, thank …&lt;/p&gt;</summary><cont
 &lt;span class="caps"&gt;LREC&lt;/span&gt; conference where I presented a &lt;a href="http://vene.ro/papers/lrec12-poster.pdf"&gt;poster&lt;/a&gt;, I am back to work on the
 Google Summer of Code project. By the way, this year&amp;#8217;s logo and swag
 looks a lot nicer than last year&amp;#8217;s, thank you Google!&lt;br&gt;
-[&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2012/05/P5280194-300x225.jpg" title="GSoC swag"&gt;][]&lt;br&gt;
+[&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2012/05/P5280194-300x225.jpg" title="GSoC swag"&gt;]&lt;a href="http://localhost:8001/wp-content/uploads/2012/05/P5280194-300x225.jpg" title="GSoC swag"&gt;&lt;/a&gt;&lt;br&gt;
 The backbone of my GSoC consists of putting together a continuous
 benchmark platform. I took a good look at &lt;a href="https://github.com/pydata/vbench"&gt;vbench&lt;/a&gt; and spent an
 evening hacking Wes&amp;#8217;s benchmarks suite config into something that will
 run on my machine. These are the key points I got from this&amp;nbsp;experience.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;vbench is, at least for the moment, very specific to [Wes&amp;#8217; and
-    Pandas&amp;#8217; needs][]. This is also because there weren&amp;#8217;t so many other
+    Pandas&amp;#8217; needs]&lt;a href="http://localhost:8001/wp-content/uploads/2012/05/P5280194-300x225.jpg" title="GSoC swag"&gt;&lt;/a&gt;. This is also because there weren&amp;#8217;t so many other
     users that could have brought&amp;nbsp;contributions.&lt;/li&gt;
 &lt;li&gt;Even though it has support for some configuration and automation,
     vbench seems largely suited for running on a local machine.
@@ -391,7 +391,7 @@ would only be comparable to the numbers he gets on his own machine
 before his changes, but a developer shouldn&amp;#8217;t wait for the daily
 benchmark for knowing if he made an&amp;nbsp;improvement.&lt;/p&gt;
 &lt;p&gt;On the other hand there is &lt;a href="http://code.google.com/p/unladen-swallow/"&gt;unladen-swallow&lt;/a&gt;&amp;#8216;s &lt;a href="http://code.google.com/p/unladen-swallow/wiki/Benchmarks"&gt;benchmark system&lt;/a&gt;
-using the [&lt;code&gt;perf.py&lt;/code&gt;][] file. I didn&amp;#8217;t try it out yet, so I would like
+using the [&lt;code&gt;perf.py&lt;/code&gt;]&lt;a href="http://localhost:8001/wp-content/uploads/2012/05/P5280194-300x225.jpg" title="GSoC swag"&gt;&lt;/a&gt; file. I didn&amp;#8217;t try it out yet, so I would like
 feedback, but there are some key things that can be taken from&amp;nbsp;them:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Memory usage&amp;nbsp;benchmarking&lt;/li&gt;
@@ -1048,7 +1048,7 @@ merged into the main &lt;code&gt;scikits.learn&lt;/code&gt; repository.&lt;/p&gt
 version, by first downloading the source code as explained in the
 &lt;a href="http://scikit-learn.sourceforge.net/stable/developers/index.html#git-repo" title="installation user's guide"&gt;user&amp;#8217;s guide&lt;/a&gt;, and then running &lt;code&gt;python setup.py install&lt;/code&gt;.&lt;br&gt;
 [caption id=&amp;#8221;&amp;#8221; align=&amp;#8221;aligncenter&amp;#8221; width=&amp;#8221;400&amp;#8221; caption=&amp;#8221;Sparse &lt;span class="caps"&gt;PCA&lt;/span&gt; on
-images of the digit 3&amp;#8221;][&lt;img alt="" src="http://scikit-learn.sourceforge.net/dev/_images/plot_digits_decomposition_4.png" title="Sparse PCA on images of the digit 3"&gt;][][/caption]&lt;br&gt;
+images of the digit 3&amp;#8221;][&lt;img alt="" src="http://scikit-learn.sourceforge.net/dev/_images/plot_digits_decomposition_4.png" title="Sparse PCA on images of the digit 3"&gt;]&lt;a href="http://scikit-learn.sourceforge.net/dev/_images/plot_digits_decomposition_4.png" title="Sparse PCA on images of the digit 3"&gt;&lt;/a&gt;[/caption]&lt;br&gt;
 To see what code is needed to produce an image such as the one above,
 using &lt;code&gt;scikits.learn&lt;/code&gt;. check out this cool &lt;a href="http://scikit-learn.sourceforge.net/dev/auto_examples/decomposition/plot_digits_decomposition.html" title="decomposition example"&gt;decomposition example&lt;/a&gt;
 that compares the results of most matrix decomposition models

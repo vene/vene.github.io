@@ -74,13 +74,13 @@
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><em>I have the honor of featuring another guest post on my blog. This time, we have with us my friend <a href="https://chenhaot.com">Chenhao Tan</a>. We recently collaborated on <a href="https://chenhaot.com/pages/changemyview.html">an effort to understand how people change their minds</a> on the <a href="http://reddit.com/r/changemyview"><code>/r/ChangeMyView</code></a>&nbsp;subreddit.</em></p>
 <p><a href="http://nbviewer.jupyter.org/github/vene/vene.github.io/blob/pelican/content/blog/winning_arguments.ipynb">Source of this Jupyter&nbsp;Notebook.</a></p>
-<p>One of the many reasons why people are beautiful and fascinating is the way we change.  I get reminded of how much I have changed everytime I see a photo of myself from high school, and this always triggers memories of how my opinions and attitudes have changed over the years. Some of the beliefs I held most strongly ended up being abandonded completely, while others have not changed much. <span style='color: red'>*If you&#8217;re bored already, scroll down, this blog post has code&nbsp;too!*</span></p>
+<p>One of the many reasons why people are beautiful and fascinating is the way we change.  I get reminded of how much I have changed everytime I see a photo of myself from high school, and this always triggers memories of how my opinions and attitudes have changed over the years. Some of the beliefs I held most strongly ended up being abandonded completely, while others have not changed much. <span style="color: red">*If you&#8217;re bored already, scroll down, this blog post has code&nbsp;too!*</span></p>
 <p>Attitude change and persuasion has been an appealing research topic for a long time.  One of the more interesting theories on this issue is <a href="http://youarenotsosmart.com/2011/06/10/the-backfire-effect/"><em>the backfire effect</em></a>:</p>
 <blockquote><p>When your deepest convictions are challenged by contradictory evidence, your beliefs get&nbsp;stronger.</p>
 </blockquote>
 <p>Earlier studies, however, suggest a lot more nuance. For instance, individuals who <a href="https://en.wikipedia.org/wiki/Self-affirmation"><em>affirm their self</em></a> were <a href="https://ed.stanford.edu/sites/default/files/when_beliefs_yield.pdf">found</a> to be more likely to be persuaded by evidence.  Studying opinion change <em>in the wild</em> can be difficult.  Many times, people change their mind slowly and subtly, over a number of years, making it difficult to pinpoint the exact moment or cause of the change.  Also, a change of opinion on a minor, inconsequential topic may not be worth&nbsp;discussing.</p>
 <p>We contributed to these efforts by studying <a href="http://reddit.com/r/changemyview"><code>/r/ChangeMyView</code></a> (<span class="caps">CMV</span>), an online forum of civil, open-minded discussion where people invite other members to challenge their more controversial views.  If you&#8217;ve never visited <span class="caps">CMV</span>, the concept that people can debate hot topics without getting into flame wars on the internet might be hard to believe.  Or, if you read a lot of Youtube comments, you might be inclined to believe <em>the backfire effect</em>, and doubt that graceful concession is even possible online.  But a quick trip to this great subreddit will undoubtably make you a&nbsp;believer.</p>
-<h2 id="What-makes-/r/ChangeMyView-special?">What makes <code>/r/ChangeMyView</code> special?<a class="anchor-link" href="#What-makes-/r/ChangeMyView-special?">&#182;</a></h2><p>Some of the more interesting reasons why <span class="caps">CMV</span> is a cool lens for the study of persuasion&nbsp;is:</p>
+<h2 id="What-makes-/r/ChangeMyView-special?">What makes <code>/r/ChangeMyView</code> special?<a class="anchor-link" href="#What-makes-/r/ChangeMyView-special?">¶</a></h2><p>Some of the more interesting reasons why <span class="caps">CMV</span> is a cool lens for the study of persuasion&nbsp;is:</p>
 <ul>
 <li><p>Original posters (<span class="caps">OP</span>) select views that are important to them and controversial, but, by posting them there, manifest a <em>de facto</em> openness to&nbsp;counterarguments.</p>
 </li>
@@ -91,17 +91,16 @@
 <li><p>Even in light of <span class="caps">CMV</span> users being open-minded, <em>not all opinions are changed</em>, and not just due to a lack of trying. This gives us a chance to analyze <em>resistance to persuasion</em>.</p>
 </li>
 </ul>
-<h2 id="Taking-a-look-at-the-dataset">Taking a look at the dataset<a class="anchor-link" href="#Taking-a-look-at-the-dataset">&#182;</a></h2><p>I know what you&#8217;re thinking, a little less conversation, let&#8217;s actually look at some examples.  Sure, our pleasure! Let&#8217;s download the dataset that we&nbsp;compiled.</p>
+<h2 id="Taking-a-look-at-the-dataset">Taking a look at the dataset<a class="anchor-link" href="#Taking-a-look-at-the-dataset">¶</a></h2><p>I know what you&#8217;re thinking, a little less conversation, let&#8217;s actually look at some examples.  Sure, our pleasure! Let&#8217;s download the dataset that we&nbsp;compiled.</p>
 <p><strong>Warning:</strong> If you&#8217;re following along at home, and you don&#8217;t already have it, this will download the 321M file <code>cmv.tar.bz2</code>.  We kept the code simple, but the downside is that your Jupyter kernel will be busy until the file is downloaded.  If, by any chance, your connection drops or you interrupt it, you will have to remove the partial file, otherwise the rest of the notebook might not&nbsp;work.</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In [1]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># load the data</span>
 <span class="kn">import</span> <span class="nn">tarfile</span>
 <span class="kn">import</span> <span class="nn">os.path</span>
@@ -114,49 +113,47 @@
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 
-<span class="n">fname</span> <span class="o">=</span> <span class="s2">&quot;cmv.tar.bz2&quot;</span>
-<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://chenhaot.com/data/cmv/&quot;</span> <span class="o">+</span> <span class="n">fname</span>
+<span class="n">fname</span> <span class="o">=</span> <span class="s2">"cmv.tar.bz2"</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s2">"https://chenhaot.com/data/cmv/"</span> <span class="o">+</span> <span class="n">fname</span>
 
 <span class="c1"># download if not exists</span>
 <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">fname</span><span class="p">):</span>
     <span class="n">f</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">()</span>
-    <span class="k">with</span> <span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="k">as</span> <span class="n">resp</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f_disk</span><span class="p">:</span>
+    <span class="k">with</span> <span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="k">as</span> <span class="n">resp</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="s1">'wb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f_disk</span><span class="p">:</span>
         <span class="n">data</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
         <span class="n">f_disk</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>  <span class="c1"># save to disk too</span>
         <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
         <span class="n">f</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="s1">'rb'</span><span class="p">)</span>
 
 
-<span class="n">tar</span> <span class="o">=</span> <span class="n">tarfile</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">fileobj</span><span class="o">=</span><span class="n">f</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">)</span>
+<span class="n">tar</span> <span class="o">=</span> <span class="n">tarfile</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">fileobj</span><span class="o">=</span><span class="n">f</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">"r"</span><span class="p">)</span>
 
 <span class="c1"># Extract the file we are interested in</span>
 
-<span class="n">train_fname</span> <span class="o">=</span> <span class="s2">&quot;op_task/train_op_data.jsonlist.bz2&quot;</span>
-<span class="n">test_fname</span> <span class="o">=</span> <span class="s2">&quot;op_task/heldout_op_data.jsonlist.bz2&quot;</span>
+<span class="n">train_fname</span> <span class="o">=</span> <span class="s2">"op_task/train_op_data.jsonlist.bz2"</span>
+<span class="n">test_fname</span> <span class="o">=</span> <span class="s2">"op_task/heldout_op_data.jsonlist.bz2"</span>
 
 <span class="n">train_bzlist</span> <span class="o">=</span> <span class="n">tar</span><span class="o">.</span><span class="n">extractfile</span><span class="p">(</span><span class="n">train_fname</span><span class="p">)</span>
 
 <span class="c1"># Deserialize the JSON list</span>
 <span class="n">original_posts_train</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+    <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">'utf-8'</span><span class="p">))</span>
     <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">BZ2File</span><span class="p">(</span><span class="n">train_bzlist</span><span class="p">)</span>
 <span class="p">]</span>
 
 <span class="n">test_bzlist</span> <span class="o">=</span> <span class="n">tar</span><span class="o">.</span><span class="n">extractfile</span><span class="p">(</span><span class="n">test_fname</span><span class="p">)</span>
 
 <span class="n">original_posts_test</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+    <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">'utf-8'</span><span class="p">))</span>
     <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">BZ2File</span><span class="p">(</span><span class="n">test_bzlist</span><span class="p">)</span>
 <span class="p">]</span>
 <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -164,68 +161,53 @@
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The archive we just downloaded contains all the data we used in our experiments.  We invite you to explore the other files in there: you can use the <code>pair_task</code> folder to study pairs of similar argumentative threads made in reply to the same original post, one successful and one not (more details in Section 4 of the paper).  We also provide you with the full, non-processed data in the <code>all</code> subfolder, so that you can design new interesting&nbsp;tasks.</p>
 <p>In this blog post, we are going to focus on the original posts, rather than the arguments made in response to them.  In the final part of our paper, we explored <em>resistance to persuasion</em>: recognizing whether an <span class="caps">OP</span> is likely to be persuaded or not, given how they express their view.  We insist on this because we think it&#8217;s interesting and we know there&#8217;s plenty more work to be done on this task: we merely scratched the surface! So, hopefully, this quick tour will make you want to work on&nbsp;this.</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In [2]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">Markdown</span>
 
 
 <span class="k">def</span> <span class="nf">show_post</span><span class="p">(</span><span class="n">cmv_post</span><span class="p">):</span>
-    <span class="n">md_format</span> <span class="o">=</span> <span class="s2">&quot;**</span><span class="si">{title}</span><span class="s2">** </span><span class="se">\n\n</span><span class="s2"> </span><span class="si">{selftext}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">cmv_post</span><span class="p">)</span>
-    <span class="n">md_format</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;&gt; &quot;</span> <span class="o">+</span> <span class="n">line</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">md_format</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()])</span>
+    <span class="n">md_format</span> <span class="o">=</span> <span class="s2">"**</span><span class="si">{title}</span><span class="s2">** </span><span class="se">\n\n</span><span class="s2"> </span><span class="si">{selftext}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">cmv_post</span><span class="p">)</span>
+    <span class="n">md_format</span> <span class="o">=</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">"&gt; "</span> <span class="o">+</span> <span class="n">line</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">md_format</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()])</span>
     <span class="k">return</span> <span class="n">Markdown</span><span class="p">(</span><span class="n">md_format</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In [3]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">show_post</span><span class="p">(</span><span class="n">original_posts_train</span><span class="p">[</span><span class="mi">200</span><span class="p">])</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[3]:</div>
-
-
-
 <div class="output_markdown rendered_html output_subarea output_execute_result">
 <blockquote><p><strong><span class="caps">CMV</span>: Taxation should be voluntary, with individuals retaining the right to opt out of&nbsp;it.</strong></p>
 <p>Let me preface this argument by saying that I don&#8217;t particularly agree with the Tea Party. I&#8217;m a Democrat who votes for candidates that support ending the poverty trap, expanding social services, and wish to improve fundamental institutions like education or military service. With that said, I also believe in the concept of personal liberty. This includes the right to refuse taxation upon the basis of&#8230; well, whatever the fuck you&nbsp;want.</p>
 <p>I know what your thinking, &#8220;But how could we fund things like food stamps if shitty people are like &#8216;fuck those lazy blacks that suck up muh moneyz&#8217;?&#8221; However, in order to participate in the American system of democracy, one must agree to pay taxes unconditionally. A citizen ought not be able to decide which services he or she pays for. Instead, one can only receive protection from, say, the police if they pay every tax mandated by the local, state, or federal government.
 In my opinion, this would create a voluntary political system where individual rights are maintained. If we believe that the government overwhelmingly improves our own conditions, as I do, then only a small amount of citizens would opt out of public services because they disagree with certain elements of policy. Within the framework of government existing because it benefits the people, no one should expect a sudden drop in tax revenues because citizens are intelligent enough to understand how their own interests are promoted by the state on&nbsp;balance.</p>
 <p>So go forth and <span class="caps">CMV</span>, noble&nbsp;redditors!</p>
-<hr>
+<hr/>
 <p>&gt; <em>Hello, users of <span class="caps">CMV</span>! This is a footnote from your moderators. We&#8217;d just like to remind you of a couple of things. Firstly, please remember to</em> <strong><em><a href="http://www.reddit.com/r/changemyview/wiki/rules">read through our rules</a></em></strong>. <em>If you see a comment that has broken one, it is more effective to report it than downvote it. Speaking of which,</em> <strong>*<a href="http://www.reddit.com/r/changemyview/wiki/guidelines#wiki_upvoting.2Fdownvoting">downvotes don&#8217;t change views</a>**</strong>! If you are thinking about submitting a <span class="caps">CMV</span> yourself, please have a look through our<em> **</em><a href="http://www.reddit.com/r/changemyview/wiki/populartopics">popular topics wiki</a><strong><em> </em>first. Any questions or concerns? Feel free to<em> </em></strong><a href="http://www.reddit.com/message/compose?to=/r/changemyview">message us</a><em>**. </em>Happy&nbsp;CMVing!*</p>
 </blockquote>
-
-</div>
-
-</div>
-
 </div>
 </div>
-
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -233,135 +215,101 @@ In my opinion, this would create a voluntary political system where individual r
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>What do you think, has this <span class="caps">OP</span>&#8217;s view been&nbsp;changed?</p>
 <p><em>&#8230; drumroll&nbsp;&#8230;</em></p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In [4]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">original_posts_train</span><span class="p">[</span><span class="mi">200</span><span class="p">][</span><span class="s2">&quot;delta_label&quot;</span><span class="p">]</span>
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">original_posts_train</span><span class="p">[</span><span class="mi">200</span><span class="p">][</span><span class="s2">"delta_label"</span><span class="p">]</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[4]:</div>
-
-
-
-
 <div class="output_text output_subarea output_execute_result">
 <pre>False</pre>
 </div>
-
-</div>
-
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>This poster has not been successfully persuaded! And just in case you have any doubts that no attempts were made or something, (we checked, trust us), we could go take a look at all comments and discussion by following the <code>post_id</code> to the original post on&nbsp;Reddit:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In [5]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="n">post_id</span> <span class="o">=</span> <span class="n">original_posts_train</span><span class="p">[</span><span class="mi">200</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;http://reddit.com/r/changemyview/comments/</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">post_id</span><span class="p">))</span>
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="n">post_id</span> <span class="o">=</span> <span class="n">original_posts_train</span><span class="p">[</span><span class="mi">200</span><span class="p">][</span><span class="s1">'name'</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"_"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"http://reddit.com/r/changemyview/comments/</span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">post_id</span><span class="p">))</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt"></div>
-
-
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>http://reddit.com/r/changemyview/comments/2q03zk
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Just by reading the post, it&#8217;s obvious that some cleanup needs to be done: we should strip the moderator-added footnotes, edits and quotes. We will do this by removing lines starting with &#8220;&gt;&#8221;, lines starting with &#8220;____&#8221;, and lines where the string &#8220;edit&#8221; occurs in the first 2 &#8220;words&#8221;. <em>(In the code used for our research, we used <strong>a more careful heuristic</strong> that involves actual tokenization, but we will keep it simple here and split at white&nbsp;spaces.)</em></p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In [6]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">cleanup</span><span class="p">(</span><span class="n">cmv_post</span><span class="p">):</span>
     <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">cmv_post</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
-             <span class="k">if</span> <span class="ow">not</span> <span class="n">line</span><span class="o">.</span><span class="n">lstrip</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;&amp;gt;&quot;</span><span class="p">)</span>
-             <span class="ow">and</span> <span class="ow">not</span> <span class="n">line</span><span class="o">.</span><span class="n">lstrip</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;____&quot;</span><span class="p">)</span>
-             <span class="ow">and</span> <span class="s2">&quot;edit&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()[:</span><span class="mi">2</span><span class="p">])</span>
+             <span class="k">if</span> <span class="ow">not</span> <span class="n">line</span><span class="o">.</span><span class="n">lstrip</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"&amp;gt;"</span><span class="p">)</span>
+             <span class="ow">and</span> <span class="ow">not</span> <span class="n">line</span><span class="o">.</span><span class="n">lstrip</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"____"</span><span class="p">)</span>
+             <span class="ow">and</span> <span class="s2">"edit"</span> <span class="ow">not</span> <span class="ow">in</span> <span class="s2">" "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()[:</span><span class="mi">2</span><span class="p">])</span>
             <span class="p">]</span>
-    <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In [7]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">show_post</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="n">original_posts_train</span><span class="p">[</span><span class="mi">200</span><span class="p">][</span><span class="s1">&#39;title&#39;</span><span class="p">],</span>
-               <span class="n">selftext</span><span class="o">=</span><span class="n">cleanup</span><span class="p">(</span><span class="n">original_posts_train</span><span class="p">[</span><span class="mi">200</span><span class="p">][</span><span class="s1">&#39;selftext&#39;</span><span class="p">])))</span>
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">show_post</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="n">original_posts_train</span><span class="p">[</span><span class="mi">200</span><span class="p">][</span><span class="s1">'title'</span><span class="p">],</span>
+               <span class="n">selftext</span><span class="o">=</span><span class="n">cleanup</span><span class="p">(</span><span class="n">original_posts_train</span><span class="p">[</span><span class="mi">200</span><span class="p">][</span><span class="s1">'selftext'</span><span class="p">])))</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[7]:</div>
-
-
-
 <div class="output_markdown rendered_html output_subarea output_execute_result">
 <blockquote><p><strong><span class="caps">CMV</span>: Taxation should be voluntary, with individuals retaining the right to opt out of&nbsp;it.</strong></p>
 <p>Let me preface this argument by saying that I don&#8217;t particularly agree with the Tea Party. I&#8217;m a Democrat who votes for candidates that support ending the poverty trap, expanding social services, and wish to improve fundamental institutions like education or military service. With that said, I also believe in the concept of personal liberty. This includes the right to refuse taxation upon the basis of&#8230; well, whatever the fuck you&nbsp;want.</p>
@@ -369,14 +317,10 @@ In my opinion, this would create a voluntary political system where individual r
 In my opinion, this would create a voluntary political system where individual rights are maintained. If we believe that the government overwhelmingly improves our own conditions, as I do, then only a small amount of citizens would opt out of public services because they disagree with certain elements of policy. Within the framework of government existing because it benefits the people, no one should expect a sudden drop in tax revenues because citizens are intelligent enough to understand how their own interests are promoted by the state on&nbsp;balance.</p>
 <p>So go forth and <span class="caps">CMV</span>, noble&nbsp;redditors!</p>
 </blockquote>
-
-</div>
-
-</div>
-
 </div>
 </div>
-
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -389,7 +333,6 @@ In my opinion, this would create a voluntary political system where individual r
 <li>Lots of self-asserting: &#8220;I know, &#8220;I believe&#8221;, &#8220;I&#8217;m a Democrat&#8221;,&nbsp;etc.</li>
 </ul>
 <p>There is plenty of room for speculation, exploration, finding patterns, and connecting this to existing literature.  Let&#8217;s focus on one of our&nbsp;results:</p>
-
 </div>
 </div>
 </div>
@@ -397,115 +340,96 @@ In my opinion, this would create a voluntary political system where individual r
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Reproducing-some-results">Reproducing some results<a class="anchor-link" href="#Reproducing-some-results">&#182;</a></h2><p>One of our findings was that OPs who express their view using &#8220;we&#8221; are more stubborn than the ones who say &#8220;I&#8221;. The example above uses some plural pronouns (&#8220;If we believe&#8221;) but overall it seems the opinion is purely self-attributed.  Does this pattern hold in the&nbsp;dataset?</p>
-
+<h2 id="Reproducing-some-results">Reproducing some results<a class="anchor-link" href="#Reproducing-some-results">¶</a></h2><p>One of our findings was that OPs who express their view using &#8220;we&#8221; are more stubborn than the ones who say &#8220;I&#8221;. The example above uses some plural pronouns (&#8220;If we believe&#8221;) but overall it seems the opinion is purely self-attributed.  Does this pattern hold in the&nbsp;dataset?</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In [8]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pron_i</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ive&#39;</span><span class="p">,</span>
- <span class="s2">&quot;i&#39;d&quot;</span><span class="p">,</span>
- <span class="s2">&quot;i&#39;m&quot;</span><span class="p">,</span>
- <span class="s1">&#39;myself&#39;</span><span class="p">,</span>
- <span class="s1">&#39;mine&#39;</span><span class="p">,</span>
- <span class="s1">&#39;me&#39;</span><span class="p">,</span>
- <span class="s1">&#39;im&#39;</span><span class="p">,</span>
- <span class="s2">&quot;i&#39;ll&quot;</span><span class="p">,</span>
- <span class="s1">&#39;i&#39;</span><span class="p">,</span>
- <span class="s2">&quot;i&#39;ve&quot;</span><span class="p">,</span>
- <span class="s1">&#39;id&#39;</span><span class="p">,</span>
- <span class="s1">&#39;my&#39;</span><span class="p">]</span>
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pron_i</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'ive'</span><span class="p">,</span>
+ <span class="s2">"i'd"</span><span class="p">,</span>
+ <span class="s2">"i'm"</span><span class="p">,</span>
+ <span class="s1">'myself'</span><span class="p">,</span>
+ <span class="s1">'mine'</span><span class="p">,</span>
+ <span class="s1">'me'</span><span class="p">,</span>
+ <span class="s1">'im'</span><span class="p">,</span>
+ <span class="s2">"i'll"</span><span class="p">,</span>
+ <span class="s1">'i'</span><span class="p">,</span>
+ <span class="s2">"i've"</span><span class="p">,</span>
+ <span class="s1">'id'</span><span class="p">,</span>
+ <span class="s1">'my'</span><span class="p">]</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In [9]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pron_we</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;we&#39;d&quot;</span><span class="p">,</span>
- <span class="s2">&quot;we&#39;re&quot;</span><span class="p">,</span>
- <span class="s1">&#39;lets&#39;</span><span class="p">,</span>
- <span class="s1">&#39;weve&#39;</span><span class="p">,</span>
- <span class="s1">&#39;we&#39;</span><span class="p">,</span>
- <span class="s1">&#39;our&#39;</span><span class="p">,</span>
- <span class="s1">&#39;ourselves&#39;</span><span class="p">,</span>
- <span class="s2">&quot;let&#39;s&quot;</span><span class="p">,</span>
- <span class="s1">&#39;ours&#39;</span><span class="p">,</span>
- <span class="s1">&#39;us&#39;</span><span class="p">,</span>
- <span class="s2">&quot;we&#39;ll&quot;</span><span class="p">,</span>
- <span class="s2">&quot;we&#39;ve&quot;</span><span class="p">]</span>
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pron_we</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"we'd"</span><span class="p">,</span>
+ <span class="s2">"we're"</span><span class="p">,</span>
+ <span class="s1">'lets'</span><span class="p">,</span>
+ <span class="s1">'weve'</span><span class="p">,</span>
+ <span class="s1">'we'</span><span class="p">,</span>
+ <span class="s1">'our'</span><span class="p">,</span>
+ <span class="s1">'ourselves'</span><span class="p">,</span>
+ <span class="s2">"let's"</span><span class="p">,</span>
+ <span class="s1">'ours'</span><span class="p">,</span>
+ <span class="s1">'us'</span><span class="p">,</span>
+ <span class="s2">"we'll"</span><span class="p">,</span>
+ <span class="s2">"we've"</span><span class="p">]</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In [10]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pron_we_re</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">b(</span><span class="si">{}</span><span class="s2">)</span><span class="se">\\</span><span class="s2">b&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;|&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">pron_we</span><span class="p">)),</span> <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">)</span>
-<span class="n">pron_i_re</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">b(</span><span class="si">{}</span><span class="s2">)</span><span class="se">\\</span><span class="s2">b&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;|&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">pron_i</span><span class="p">)),</span> <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">)</span>
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pron_we_re</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">"</span><span class="se">\\</span><span class="s2">b(</span><span class="si">{}</span><span class="s2">)</span><span class="se">\\</span><span class="s2">b"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">"|"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">pron_we</span><span class="p">)),</span> <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">)</span>
+<span class="n">pron_i_re</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">"</span><span class="se">\\</span><span class="s2">b(</span><span class="si">{}</span><span class="s2">)</span><span class="se">\\</span><span class="s2">b"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">"|"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">pron_i</span><span class="p">)),</span> <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In [11]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pron_we_re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s2">&quot;We let ourselves go&quot;</span><span class="p">)</span>
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pron_we_re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s2">"We let ourselves go"</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[11]:</div>
-
-
-
-
 <div class="output_text output_subarea output_execute_result">
-<pre>[&#39;We&#39;, &#39;ourselves&#39;]</pre>
-</div>
-
-</div>
-
+<pre>['We', 'ourselves']</pre>
 </div>
 </div>
-
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In [12]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">n_we</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">n_i</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">post</span> <span class="ow">in</span> <span class="n">original_posts_train</span><span class="p">:</span>
-    <span class="n">content</span> <span class="o">=</span> <span class="n">post</span><span class="p">[</span><span class="s2">&quot;selftext&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">post</span><span class="p">[</span><span class="s2">"selftext"</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
     <span class="n">content</span> <span class="o">=</span> <span class="n">cleanup</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
     <span class="n">denom</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">content</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
     <span class="k">if</span> <span class="n">denom</span><span class="p">:</span>
@@ -513,97 +437,80 @@ In my opinion, this would create a voluntary political system where individual r
         <span class="n">n_i</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pron_i_re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">content</span><span class="p">))</span> <span class="o">/</span> <span class="n">denom</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="c1"># there is one instance that consists only of edits.</span>
-        <span class="c1"># It&#39;s possible that the OP deleted the rest of the post.</span>
+        <span class="c1"># It's possible that the OP deleted the rest of the post.</span>
         <span class="n">n_we</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
         <span class="n">n_i</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In [13]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">n_we</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">n_we</span><span class="p">)</span>
 <span class="n">n_i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">n_i</span><span class="p">)</span>
 
-<span class="n">is_malleable</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">post</span><span class="p">[</span><span class="s2">&quot;delta_label&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">post</span> <span class="ow">in</span> <span class="n">original_posts_train</span><span class="p">])</span>
+<span class="n">is_malleable</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">post</span><span class="p">[</span><span class="s2">"delta_label"</span><span class="p">]</span> <span class="k">for</span> <span class="n">post</span> <span class="ow">in</span> <span class="n">original_posts_train</span><span class="p">])</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In [14]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt"></div>
-
-
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>/home/vlad/conda/lib/python3.4/site-packages/IPython/html.py:14: ShimWarning: The `IPython.html` package has been deprecated. You should import from `notebook` instead. `IPython.html.widgets` has moved to `ipywidgets`.
-  &#34;`IPython.html.widgets` has moved to `ipywidgets`.&#34;, ShimWarning)
+  "`IPython.html.widgets` has moved to `ipywidgets`.", ShimWarning)
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In [15]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="n">green</span><span class="p">,</span> <span class="n">red</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">()</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="prompt input_prompt">In [16]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="k">import</span> <span class="n">sem</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="prompt input_prompt">In [17]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">compare_bars</span><span class="p">(</span><span class="n">feature</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
     <span class="n">pos</span> <span class="o">=</span> <span class="n">feature</span><span class="p">[</span><span class="n">y</span><span class="p">]</span>
     <span class="n">neg</span> <span class="o">=</span> <span class="n">feature</span><span class="p">[</span><span class="o">~</span><span class="n">y</span><span class="p">]</span>
@@ -611,43 +518,34 @@ In my opinion, this would create a voluntary political system where individual r
         <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
         <span class="p">[</span><span class="n">pos</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">neg</span><span class="o">.</span><span class="n">mean</span><span class="p">()],</span>
         <span class="n">yerr</span><span class="o">=</span><span class="p">[</span><span class="mf">1.96</span> <span class="o">*</span> <span class="n">sem</span><span class="p">(</span><span class="n">pos</span><span class="p">),</span> <span class="mf">1.96</span> <span class="o">*</span> <span class="n">sem</span><span class="p">(</span><span class="n">neg</span><span class="p">)],</span>  <span class="c1"># ~95% ci</span>
-        <span class="n">align</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span>
+        <span class="n">align</span><span class="o">=</span><span class="s1">'center'</span><span class="p">,</span>
         <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="n">green</span><span class="p">,</span> <span class="n">red</span><span class="p">],</span>
         <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
         <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
-        <span class="n">error_kw</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">ecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">capsize</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">capthick</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+        <span class="n">error_kw</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">ecolor</span><span class="o">=</span><span class="s1">'k'</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">capsize</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">capthick</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
     <span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">[</span><span class="s2">&quot;Malleable&quot;</span><span class="p">,</span> <span class="s2">&quot;Stubborn&quot;</span><span class="p">],</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">[</span><span class="s2">"Malleable"</span><span class="p">,</span> <span class="s2">"Stubborn"</span><span class="p">],</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">121</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;First person plural</span><span class="se">\n</span><span class="s2">(&#39;we&#39;)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"First person plural</span><span class="se">\n</span><span class="s2">('we')"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
 <span class="n">compare_bars</span><span class="p">(</span><span class="n">n_we</span><span class="p">,</span> <span class="n">is_malleable</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Proportion of words&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"Proportion of words"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;First person singular</span><span class="se">\n</span><span class="s2">(&#39;I&#39;)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"First person singular</span><span class="se">\n</span><span class="s2">('I')"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
 <span class="n">compare_bars</span><span class="p">(</span><span class="n">n_i</span><span class="p">,</span> <span class="n">is_malleable</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt"></div>
-
-
-
-
 <div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAe8AAAEVCAYAAADJgG2yAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzs3XtYVNX6wPHvZkYEBEEmUkuUuCiWKCqictFENItUlFPe
@@ -1151,67 +1049,58 @@ TwaPx5P8zEYgEOCrr76SKrNs2TKcOXMGW7Zsgba2NubPnw9PT0/JsUlJSUFERATmzJkD4PmZfnJy
 Mvh8vsK20ZO61I9ylHK0O+YoTQlKCCGEdDN02ZwQQgjpZqjzJoQQQroZ6rwJIYSQboY6b0IIIaSb
 oc6bEEII6Wao8yaEEEK6Geq8CSGEkG6GOm9CCCGkm6HOmxBCCOlm/g9pjDi5Hs4L/QAAAABJRU5E
 rkJggg==
-"
->
-</div>
-
-</div>
-
+"/>
 </div>
 </div>
-
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Training-a-simple-classifier">Training a simple classifier<a class="anchor-link" href="#Training-a-simple-classifier">&#182;</a></h2><p>We can take this one step further and train a simple bag-of-words classifier using <a href="http://scikit-learn.org/"><code>scikit-learn</code></a>.  Bag-of-words is often a good baseline, and a good <em>debugging</em> tool: sometimes, problems are simpler than we think, and bag-of-words can catch this and hint that we&#8217;re being too optimistic.  (For an example of what I mean, try running the code below without the &#8220;cleanup&#8221;&nbsp;step.)</p>
-
+<h2 id="Training-a-simple-classifier">Training a simple classifier<a class="anchor-link" href="#Training-a-simple-classifier">¶</a></h2><p>We can take this one step further and train a simple bag-of-words classifier using <a href="http://scikit-learn.org/"><code>scikit-learn</code></a>.  Bag-of-words is often a good baseline, and a good <em>debugging</em> tool: sometimes, problems are simpler than we think, and bag-of-words can catch this and hint that we&#8217;re being too optimistic.  (For an example of what I mean, try running the code below without the &#8220;cleanup&#8221;&nbsp;step.)</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="prompt input_prompt">In [18]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="k">import</span> <span class="n">TfidfVectorizer</span>
 <span class="kn">from</span> <span class="nn">sklearn.cross_validation</span> <span class="k">import</span> <span class="n">train_test_split</span>
 <span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="k">import</span> <span class="n">LogisticRegressionCV</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics.scorer</span> <span class="k">import</span> <span class="n">roc_auc_scorer</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="prompt input_prompt">In [19]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># prepare the data in Python list form</span>
 
 <span class="n">op_text_train</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="n">cleanup</span><span class="p">(</span><span class="n">original_post</span><span class="p">[</span><span class="s1">&#39;selftext&#39;</span><span class="p">])</span>
-    <span class="c1"># original_post[&#39;selftext&#39;]  # try this at home</span>
+    <span class="n">cleanup</span><span class="p">(</span><span class="n">original_post</span><span class="p">[</span><span class="s1">'selftext'</span><span class="p">])</span>
+    <span class="c1"># original_post['selftext']  # try this at home</span>
     <span class="k">for</span> <span class="n">original_post</span>
     <span class="ow">in</span> <span class="n">original_posts_train</span>
 <span class="p">]</span>
 
 <span class="n">op_text_test</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="n">cleanup</span><span class="p">(</span><span class="n">original_post</span><span class="p">[</span><span class="s1">&#39;selftext&#39;</span><span class="p">])</span>
-    <span class="c1"># original_post[&#39;selftext&#39;]  # try this at home</span>
+    <span class="n">cleanup</span><span class="p">(</span><span class="n">original_post</span><span class="p">[</span><span class="s1">'selftext'</span><span class="p">])</span>
+    <span class="c1"># original_post['selftext']  # try this at home</span>
     <span class="k">for</span> <span class="n">original_post</span>
     <span class="ow">in</span> <span class="n">original_posts_test</span>
 <span class="p">]</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -1219,112 +1108,86 @@ rkJggg==
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We will use a simple term-frequency vectorizer with no <span class="caps">IDF</span> and no data-dependent thresholds. This allows us to vectorize all of the training data once, and then do efficient model selection using LogisticRegressionCV, without having to vectorize again for each cross-validation&nbsp;fold.</p>
 <p><em>Side note: </em>This is important!  Imagine we wanted to throw away rare words, to avoid overfitting to them. We could use, for example, <code>min_df=10</code>.  This would keep all words that appear 10 times in the <em>training data</em>.  But, in a moment, we will be doing 3-fold cross-validation.  Consider the first cross-validation split: what if we encounter a word that occurs 5 times in the train fold and 5 times in the validation fold?  If we vectorized <em>outside</em> of the <span class="caps">CV</span> loop, we would keep this word, and assign it a weight estimated from very few observations.  This could lead us to overestimate our validation&nbsp;performance.</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="prompt input_prompt">In [20]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">vect</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">(</span><span class="n">use_idf</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="s1">&#39;l1&#39;</span><span class="p">)</span>
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">vect</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">(</span><span class="n">use_idf</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="s1">'l1'</span><span class="p">)</span>
 <span class="n">X_train</span> <span class="o">=</span> <span class="n">vect</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">op_text_train</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="prompt input_prompt">In [21]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">lr</span> <span class="o">=</span> <span class="n">LogisticRegressionCV</span><span class="p">(</span><span class="n">Cs</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">class_weight</span><span class="o">=</span><span class="s1">&#39;balanced&#39;</span><span class="p">,</span>
-                          <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;roc_auc&#39;</span><span class="p">,</span> <span class="n">solver</span><span class="o">=</span><span class="s1">&#39;sag&#39;</span><span class="p">,</span>
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">lr</span> <span class="o">=</span> <span class="n">LogisticRegressionCV</span><span class="p">(</span><span class="n">Cs</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">class_weight</span><span class="o">=</span><span class="s1">'balanced'</span><span class="p">,</span>
+                          <span class="n">scoring</span><span class="o">=</span><span class="s1">'roc_auc'</span><span class="p">,</span> <span class="n">solver</span><span class="o">=</span><span class="s1">'sag'</span><span class="p">,</span>
                           <span class="n">tol</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
                           <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="prompt input_prompt">In [22]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">lr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">is_malleable</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[22]:</div>
-
-
-
-
 <div class="output_text output_subarea output_execute_result">
-<pre>LogisticRegressionCV(Cs=10, class_weight=&#39;balanced&#39;, cv=None, dual=False,
+<pre>LogisticRegressionCV(Cs=10, class_weight='balanced', cv=None, dual=False,
            fit_intercept=True, intercept_scaling=1.0, max_iter=500,
-           multi_class=&#39;ovr&#39;, n_jobs=1, penalty=&#39;l2&#39;, random_state=0,
-           refit=True, scoring=&#39;roc_auc&#39;, solver=&#39;sag&#39;, tol=0.001,
+           multi_class='ovr', n_jobs=1, penalty='l2', random_state=0,
+           refit=True, scoring='roc_auc', solver='sag', tol=0.001,
            verbose=0)</pre>
 </div>
-
-</div>
-
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="prompt input_prompt">In [23]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Evaluating on the heldout data:</span>
 
 <span class="n">X_test</span> <span class="o">=</span> <span class="n">vect</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">op_text_test</span><span class="p">)</span>
-<span class="n">is_malleable_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">post</span><span class="p">[</span><span class="s2">&quot;delta_label&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">post</span> <span class="ow">in</span> <span class="n">original_posts_test</span><span class="p">])</span>
+<span class="n">is_malleable_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">post</span><span class="p">[</span><span class="s2">"delta_label"</span><span class="p">]</span> <span class="k">for</span> <span class="n">post</span> <span class="ow">in</span> <span class="n">original_posts_test</span><span class="p">])</span>
 <span class="n">test_roc</span> <span class="o">=</span> <span class="n">roc_auc_scorer</span><span class="p">(</span><span class="n">lr</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">is_malleable_test</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test ROC AUC score: </span><span class="si">{:.3f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test_roc</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Test ROC AUC score: </span><span class="si">{:.3f}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test_roc</span><span class="p">))</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt"></div>
-
-
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Test ROC AUC score: 0.531
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -1332,49 +1195,39 @@ rkJggg==
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The score is in the same ballpark as the results in our paper, with the differences coming from the more naive tokenization and preprocessing used here.  The <span class="caps">ROC</span> <span class="caps">AUC</span> score (area under the <span class="caps">ROC</span> curve) can be interpreted as the probability that, given a pair of a malleable and a stubborn <span class="caps">OP</span>, the classifier will successfully tell which is which.  This metric is particularly good for imbalanced datasets, and 50% corresponds to an uninformed classifier (one that responds randomly or always gives the same answer).  In light of this, the score is not great, confirming that this is not at all an easy problem, still open for further&nbsp;research.</p>
 <p>We point out one particular challenge: our heldout data is temporally newer than the training data, because we collected it <em>strictly after</em> developing our work on the training set.  This has the advantage of making overfitting impossible, but <em>extrapolating</em> is different than <em>interpolating</em> in time, and some attributes of the <span class="caps">CMV</span> community shift over time.  (We discuss some of them in Section 2 of our paper.) You may model malleability better by accounting for shifts both in covariates and the outcome&nbsp;variable.</p>
-<h2 id="Checking-out-the-features">Checking out the features<a class="anchor-link" href="#Checking-out-the-features">&#182;</a></h2><p>We can use the trained model to see what words have high and low weights. You could use the output for further inspiration.  For instance, this could suggest that generalizing words (&#8220;anything&#8221;, &#8220;anyone&#8221;, &#8220;nothing&#8221;) might be a sign of stubbornness.  There is plenty of potential for exploring and expanding our work further, so give it a&nbsp;try!</p>
-
+<h2 id="Checking-out-the-features">Checking out the features<a class="anchor-link" href="#Checking-out-the-features">¶</a></h2><p>We can use the trained model to see what words have high and low weights. You could use the output for further inspiration.  For instance, this could suggest that generalizing words (&#8220;anything&#8221;, &#8220;anyone&#8221;, &#8220;nothing&#8221;) might be a sign of stubbornness.  There is plenty of potential for exploring and expanding our work further, so give it a&nbsp;try!</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="prompt input_prompt">In [24]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">top_features</span><span class="p">(</span><span class="n">coef</span><span class="p">,</span> <span class="n">words</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">15</span><span class="p">):</span>
     <span class="n">order</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="o">-</span><span class="n">coef</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i_hi</span><span class="p">,</span> <span class="n">i_lo</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">order</span><span class="p">[:</span><span class="n">n</span><span class="p">],</span> <span class="n">order</span><span class="p">[:</span><span class="o">-</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
         <span class="n">row_vals</span> <span class="o">=</span> <span class="n">coef</span><span class="p">[</span><span class="n">i_hi</span><span class="p">],</span> <span class="n">words</span><span class="p">[</span><span class="n">i_hi</span><span class="p">],</span> <span class="n">coef</span><span class="p">[</span><span class="n">i_lo</span><span class="p">],</span> <span class="n">words</span><span class="p">[</span><span class="n">i_lo</span><span class="p">]</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[</span><span class="si">{:&gt;4.1f}</span><span class="s2">] </span><span class="si">{:&lt;20}</span><span class="s2">[</span><span class="si">{:&gt;4.1f}</span><span class="s2">] </span><span class="si">{:&lt;20}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="n">row_vals</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"[</span><span class="si">{:&gt;4.1f}</span><span class="s2">] </span><span class="si">{:&lt;20}</span><span class="s2">[</span><span class="si">{:&gt;4.1f}</span><span class="s2">] </span><span class="si">{:&lt;20}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="n">row_vals</span><span class="p">))</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="prompt input_prompt">In [25]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">top_features</span><span class="p">(</span><span class="n">lr</span><span class="o">.</span><span class="n">coef_</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">vect</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">())</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt"></div>
-
-
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>[ 8.9] so                  [-9.1] its                 
 [ 7.2] even                [-5.5] having              
@@ -1394,55 +1247,43 @@ rkJggg==
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Much of the social interaction we do online these days can prove useful for research.  In our work, we investigated persuasion and attitude change on <code>/r/ChangeMyView</code>.  In this post, we walked through part of the data that we collected and made available.  Hoping that this sparks some inspiration, we are looking forward to hearing what cool new things you will&nbsp;discover!</p>
-<hr>
-
+<hr/>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="prompt input_prompt">In [26]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> watermark
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[27]:</div>
+<div class="prompt input_prompt">In [27]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">watermark</span> -d -v --packages numpy,scipy,scikit-learn,seaborn -m
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt"></div>
-
-
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>2016-03-04 
 
@@ -1464,13 +1305,9 @@ interpreter: 64bit
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
- 
-
 
 <script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var mathjaxscript = document.createElement('script');

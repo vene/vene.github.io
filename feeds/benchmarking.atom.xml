@@ -184,7 +184,7 @@ there are 950 of&amp;nbsp;them:&lt;/p&gt;
 In [18]: np.sum(s \&amp;lt; 1e-10)&lt;br&gt;
 Out[18]: 950&lt;br&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
 &lt;p&gt;How do our functions behave in this case? Instead of just looking at a
-corner, let&amp;#8217;s use our gift of sight:[&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2012/08/pseudoinverses-300x218.png" title="Pseudoinverses"&gt;][]&lt;/p&gt;
+corner, let&amp;#8217;s use our gift of sight:[&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2012/08/pseudoinverses-300x218.png" title="Pseudoinverses"&gt;]&lt;a href="http://localhost:8001/wp-content/uploads/2012/08/pseudoinverses-300x218.png" title="Pseudoinverses"&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;The small eigenvalues are large enough that &lt;code&gt;inv&lt;/code&gt; thinks the matrix is
 full rank. &lt;code&gt;pinv&lt;/code&gt; does better but it still fails, you can see a group of
 high-amplitude noisy columns. &lt;code&gt;pinv2&lt;/code&gt; is faster and it also gives us a
