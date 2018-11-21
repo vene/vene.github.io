@@ -63,14 +63,13 @@
       <h1 class="entry-title">
         <a href="//vene.ro/blog/kemeny-young-optimal-rank-aggregation-in-python.html" rel="bookmark"
            title="Permalink to Kemeny-Young Optimal Rank Aggregation in Python">Kemeny-Young Optimal Rank Aggregation in&nbsp;Python</a></h1>
-<p class="subtitle"><time datetime="2014-01-22T18:00:00+01:00">Wed 22 January 2014</time><label for="kemeny-young-optimal-rank-aggregation-in-python" class="margin-toggle"> ⊕</label><input type="checkbox" id="kemeny-young-optimal-rank-aggregation-in-python" class="margin-toggle" /><span class="marginnote">Category: <a href="//vene.ro/category/python.html">python</a><br />
+<p class="subtitle"><time datetime="2014-01-22T18:00:00+01:00">qua 22 janeiro 2014</time><label for="kemeny-young-optimal-rank-aggregation-in-python" class="margin-toggle"> ⊕</label><input type="checkbox" id="kemeny-young-optimal-rank-aggregation-in-python" class="margin-toggle" /><span class="marginnote">Category: <a href="//vene.ro/category/python.html">python</a><br />
  #<a href="//vene.ro/tag/python.html">python</a> #<a href="//vene.ro/tag/rank-aggregation.html">rank aggregation</a> #<a href="//vene.ro/tag/kendall.html">kendall</a> #<a href="//vene.ro/tag/tau.html">tau</a> #<a href="//vene.ro/tag/kemeny.html">kemeny</a> #<a href="//vene.ro/tag/kemeny-young.html">kemeny-young</a> #<a href="//vene.ro/tag/voting-theory.html">voting theory</a></span></p>    </header>
 
     <div class="entry-content">
       
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Rank aggregation is a problem with many important applications and naive approaches to it go wrong in subtle&nbsp;ways.</p>
 <p>Let&#8217;s say that your national Quidditch league is dominated by five major wizard sports newspapers. Yes, the ones with moving images and everything.  Every week after the games, each of them publishes a ranking of the star players.  For now, let&#8217;s suppose that the set of players under investigation is always the same, as the problem becomes a bit more complicated&nbsp;otherwise.</p>
@@ -81,16 +80,17 @@
 <strong>The Quibbler</strong>: Debbie, Ginny, Robin, Gwendolyn, Alicia <br/></p>
 <p>As you can see, there&#8217;s quite a bit of disagreement and personal taste involved. You didn&#8217;t get to watch all of the games, but you&#8217;d like to make a decision on who the best players were, by somehow aggregating the opinions of the popular newspapers.  An easy option would be to pretend that each newspaper <em>votes</em> for the player that they rank #1, and ignore the rest.  As Alicia Spinnet is the only player getting <em>two</em> nominations for best player, she should win best player,&nbsp;right?</p>
 <p>Upon closer inspection, Alicia seems very controversial, loved by two but hated by five of the newspaper.  Ginny, on the other hand, didn&#8217;t stand out as best player to anybody, but she was <em>uniformly</em> considered runner-up.  There should be some way to account for this. It would be nice if we would have a method of finding an <em>optimal</em> ranking that maximizes some sort of agreement with the opinions we are trying to&nbsp;aggregate.</p>
-<h2 id="Kendall's-Tau-distance">Kendall&#8217;s Tau distance<a class="anchor-link" href="#Kendall's-Tau-distance">¶</a></h2><p>One of the most interesting ways to measure disagreement between rankings is the Tau statistic introduced by Kendall.  It essentially measures the number of pairwise disagreements between two rankings.  Since you can think of it as the number of flips you need to perform on a ranking to turn it into the other, it is sometimes called <em>bubble-sort distance</em>.</p>
+<h2 id="Kendall's-Tau-distance">Kendall&#8217;s Tau distance<a class="anchor-link" href="#Kendall's-Tau-distance">&#182;</a></h2><p>One of the most interesting ways to measure disagreement between rankings is the Tau statistic introduced by Kendall.  It essentially measures the number of pairwise disagreements between two rankings.  Since you can think of it as the number of flips you need to perform on a ranking to turn it into the other, it is sometimes called <em>bubble-sort distance</em>.</p>
 <p>While the closely-related Tau correlation coefficient is implemented in Scipy as <a href="http://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.kendalltau.html"><code>scipy.stats.kendalltau</code></a>, let&#8217;s code it ourselves in a simpler&nbsp;way.</p>
+
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [1]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
-<div class="input_area">
+    <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">itertools</span> <span class="k">import</span> <span class="n">combinations</span><span class="p">,</span> <span class="n">permutations</span>
@@ -103,113 +103,138 @@
                 <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">rank_b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">rank_b</span><span class="p">[</span><span class="n">j</span><span class="p">]))</span>
     <span class="k">return</span> <span class="n">tau</span>
 </pre></div>
+
+    </div>
 </div>
 </div>
-</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Now we can represent a rank as a numpy vector, with missing&nbsp;values.</p>
+
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [2]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
-<div class="input_area">
+    <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># columns in order of appearance:</span>
-<span class="n">cols</span> <span class="o">=</span> <span class="s2">"Alicia Ginny Gwendolyn Robin Debbie"</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+<span class="n">cols</span> <span class="o">=</span> <span class="s2">&quot;Alicia Ginny Gwendolyn Robin Debbie&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
 <span class="n">ranks</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
                   <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
                   <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
                   <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
                   <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
 </pre></div>
+
+    </div>
 </div>
 </div>
-</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Two rankings that agree completely should have a distance of&nbsp;0.</p>
+
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [3]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
-<div class="input_area">
+    <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">kendalltau_dist</span><span class="p">(</span><span class="n">ranks</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ranks</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 </pre></div>
+
+    </div>
 </div>
 </div>
-</div>
+
 <div class="output_wrapper">
 <div class="output">
+
+
 <div class="output_area">
-<div class="prompt output_prompt">Out[3]:</div>
+
+    <div class="prompt output_prompt">Out[3]:</div>
+
+
+
+
 <div class="output_text output_subarea output_execute_result">
 <pre>0</pre>
 </div>
+
+</div>
+
 </div>
 </div>
-</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The Athletic Wizard seems to be closer to the Daily Prophet than to Seeker&nbsp;Weekly.</p>
+
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [4]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">'d(athletic_wizard, prophet) = </span><span class="si">{}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">kendalltau_dist</span><span class="p">(</span><span class="n">ranks</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ranks</span><span class="p">[</span><span class="mi">1</span><span class="p">])))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">'d(athletic_wizard, seeker) = </span><span class="si">{}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">kendalltau_dist</span><span class="p">(</span><span class="n">ranks</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ranks</span><span class="p">[</span><span class="mi">3</span><span class="p">])))</span>
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;d(athletic_wizard, prophet) = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">kendalltau_dist</span><span class="p">(</span><span class="n">ranks</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ranks</span><span class="p">[</span><span class="mi">1</span><span class="p">])))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;d(athletic_wizard, seeker) = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">kendalltau_dist</span><span class="p">(</span><span class="n">ranks</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ranks</span><span class="p">[</span><span class="mi">3</span><span class="p">])))</span>
 </pre></div>
+
+    </div>
 </div>
 </div>
-</div>
+
 <div class="output_wrapper">
 <div class="output">
+
+
 <div class="output_area">
-<div class="prompt"></div>
+
+    <div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>d(athletic_wizard, prophet) = 1
 d(athletic_wizard, seeker) = 5
 </pre>
 </div>
 </div>
+
 </div>
 </div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Kemeny-Young-rank-aggregation">Kemeny-Young rank aggregation<a class="anchor-link" href="#Kemeny-Young-rank-aggregation">¶</a></h2><p>Now that we have a distance metric, we can formulate a loss function to minimize in rank-space.
+<h2 id="Kemeny-Young-rank-aggregation">Kemeny-Young rank aggregation<a class="anchor-link" href="#Kemeny-Young-rank-aggregation">&#182;</a></h2><p>Now that we have a distance metric, we can formulate a loss function to minimize in rank-space.
 We are looking for a ranking $\hat\tau$ that satisfies
 $$ \sum_i d(\hat\tau, \tau_i) \leq \sum_i d(\tau, \tau_i) \text{ for all } \tau&nbsp;$$</p>
 <p>This aggregation method was proposed by John Kemeny [<a href="#note1">1</a>], and later shown by Peyton Young to be a maximum likelihood estimator of pairwise preferences under the assumption that a voter will randomly flip two candidates from the <em>true</em> ranking is the same $p &lt; 0.5$ [<a href="#note2">2</a>].</p>
 <p>For rankings of small length, one way to compute this optimal aggregation is by comparing the scores of all possible rankings, in other words, a <strong>brute-force</strong>&nbsp;approach:</p>
+
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [5]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
-<div class="input_area">
+    <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">rankaggr_brute</span><span class="p">(</span><span class="n">ranks</span><span class="p">):</span>
     <span class="n">min_dist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span>
     <span class="n">best_rank</span> <span class="o">=</span> <span class="kc">None</span>
@@ -221,57 +246,68 @@ $$ \sum_i d(\hat\tau, \tau_i) \leq \sum_i d(\tau, \tau_i) \text{ for all } \tau&
             <span class="n">best_rank</span> <span class="o">=</span> <span class="n">candidate_rank</span>
     <span class="k">return</span> <span class="n">min_dist</span><span class="p">,</span> <span class="n">best_rank</span>
 </pre></div>
+
+    </div>
 </div>
 </div>
-</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [6]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
-<div class="input_area">
+    <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">dist</span><span class="p">,</span> <span class="n">aggr</span> <span class="o">=</span> <span class="n">rankaggr_brute</span><span class="p">(</span><span class="n">ranks</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"A Kemeny-Young aggregation with score </span><span class="si">{}</span><span class="s2"> is: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A Kemeny-Young aggregation with score </span><span class="si">{}</span><span class="s2"> is: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
     <span class="n">dist</span><span class="p">,</span>
-    <span class="s2">", "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cols</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">aggr</span><span class="p">))))</span>
+    <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cols</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">aggr</span><span class="p">))))</span>
 </pre></div>
+
+    </div>
 </div>
 </div>
-</div>
+
 <div class="output_wrapper">
 <div class="output">
+
+
 <div class="output_area">
-<div class="prompt"></div>
+
+    <div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>A Kemeny-Young aggregation with score 15 is: Ginny, Robin, Gwendolyn, Debbie, Alicia
 </pre>
 </div>
 </div>
+
 </div>
 </div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Integer-Programming-formulation">Integer Programming formulation<a class="anchor-link" href="#Integer-Programming-formulation">¶</a></h2><p>The brute-force approach is, as you can see, simple to understand and quick to code. However, the number of total ranks of size $n$ is $n!$, so this approach quickly becomes infeasible for real-world problems.  Unfortunately, it turns out that this problem (along with many related problems in rank-world) is <span class="caps">NP</span>-hard even for only four voters [<a href="#note3">3</a>]. There have been quite a few approaches and approximations. In many cases, such as search results aggregation, approximations are good enough.  For the cases where an exact solution is required, a formulation as a constrained integer program is given in [<a href="#note4">4</a>].</p>
+<h2 id="Integer-Programming-formulation">Integer Programming formulation<a class="anchor-link" href="#Integer-Programming-formulation">&#182;</a></h2><p>The brute-force approach is, as you can see, simple to understand and quick to code. However, the number of total ranks of size $n$ is $n!$, so this approach quickly becomes infeasible for real-world problems.  Unfortunately, it turns out that this problem (along with many related problems in rank-world) is <span class="caps">NP</span>-hard even for only four voters [<a href="#note3">3</a>]. There have been quite a few approaches and approximations. In many cases, such as search results aggregation, approximations are good enough.  For the cases where an exact solution is required, a formulation as a constrained integer program is given in [<a href="#note4">4</a>].</p>
 <p>We build a weighted directed graph $G = (V, E)$ with the candidates as vertices.  The edges are defined as such: for every pair of candidates $i, j$, let $\#\{i &gt; j\}$ denote the number of voters who rank $i$ higher than $j$.  Draw an edge $e$ between each $i, j$ with weight $w_e = |\#\{i &gt; j\} - \#\{j &gt; i\}|$ (if nonzero, of course). The orientation of the edge is from the less preferred to the more preferred&nbsp;node.</p>
 <p>The formulation is based on the alternative interpretation of the Kemeny optimal aggregation as the ranking that minimizes the weights of edges it disagrees&nbsp;with:</p>
-<p>$$
+$$
 \operatorname{minimize} \sum_{e \in E} w_e x_e &#92;
 \operatorname{subject to} &#92;
 \forall i \neq j \in V, x_{ij} + x_{ji} = 1 &#92;
-\forall i \neq j \neq k \neq i \in V, x_{ij} + x_{jk} + x_{ki} \geq 1&nbsp;$$</p>
-<p>In the above problem, all variables are integer, and effectively binary under the other constraints.  The interpretation is that $x_{ij} = 1$ if, in the aggregated rank, $i$ is ranked lower than&nbsp;$j$.</p>
+\forall i \neq j \neq k \neq i \in V, x_{ij} + x_{jk} + x_{ki} \geq 1
+$$<p>In the above problem, all variables are integer, and effectively binary under the other constraints.  The interpretation is that $x_{ij} = 1$ if, in the aggregated rank, $i$ is ranked lower than&nbsp;$j$.</p>
 <p>The constraints essentially impose that the variables define a total order. The first set of constraints enforce antisymmetry and totality: either $i$ is ranked lower than $j$ or the other way around. The second set of constraints enforce&nbsp;transitivity.</p>
+
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [7]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
-<div class="input_area">
+    <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">_build_graph</span><span class="p">(</span><span class="n">ranks</span><span class="p">):</span>
     <span class="n">n_voters</span><span class="p">,</span> <span class="n">n_candidates</span> <span class="o">=</span> <span class="n">ranks</span><span class="o">.</span><span class="n">shape</span>
     <span class="n">edge_weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_candidates</span><span class="p">,</span> <span class="n">n_candidates</span><span class="p">))</span>
@@ -287,13 +323,20 @@ $$ \sum_i d(\hat\tau, \tau_i) \leq \sum_i d(\tau, \tau_i) \text{ for all } \tau&
 
 <span class="nb">print</span><span class="p">(</span><span class="n">_build_graph</span><span class="p">(</span><span class="n">ranks</span><span class="p">))</span>
 </pre></div>
+
+    </div>
 </div>
 </div>
-</div>
+
 <div class="output_wrapper">
 <div class="output">
+
+
 <div class="output_area">
-<div class="prompt"></div>
+
+    <div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>[[ 0.  0.  0.  0.  0.]
  [ 1.  0.  3.  3.  3.]
@@ -303,26 +346,28 @@ $$ \sum_i d(\hat\tau, \tau_i) \leq \sum_i d(\tau, \tau_i) \text{ for all } \tau&
 </pre>
 </div>
 </div>
+
 </div>
 </div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Now, let&#8217;s solve the linear program with the <span class="caps">LGPL</span>-licensed <a href="http://sourceforge.net/projects/lpsolve/"><code>lpsolve</code></a>. It conveniently comes with a Python&nbsp;interface.</p>
+
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [8]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
-<div class="input_area">
+    <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">lp_solve</span> <span class="k">import</span> <span class="n">lp_solve</span>
 
 <span class="k">def</span> <span class="nf">rankaggr_lp</span><span class="p">(</span><span class="n">ranks</span><span class="p">):</span>
-    <span class="sd">"""Kemeny-Young optimal rank aggregation"""</span>
+    <span class="sd">&quot;&quot;&quot;Kemeny-Young optimal rank aggregation&quot;&quot;&quot;</span>
 
     <span class="n">n_voters</span><span class="p">,</span> <span class="n">n_candidates</span> <span class="o">=</span> <span class="n">ranks</span><span class="o">.</span><span class="n">shape</span>
     
@@ -361,53 +406,64 @@ $$ \sum_i d(\hat\tau, \tau_i) \leq \sum_i d(\tau, \tau_i) \text{ for all } \tau&
 
     <span class="k">return</span> <span class="n">obj</span><span class="p">,</span> <span class="n">aggr_rank</span>
 </pre></div>
+
+    </div>
 </div>
 </div>
-</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [9]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
-<div class="input_area">
+    <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="n">aggr</span> <span class="o">=</span> <span class="n">rankaggr_lp</span><span class="p">(</span><span class="n">ranks</span><span class="p">)</span>
 <span class="n">score</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">kendalltau_dist</span><span class="p">(</span><span class="n">aggr</span><span class="p">,</span> <span class="n">rank</span><span class="p">)</span> <span class="k">for</span> <span class="n">rank</span> <span class="ow">in</span> <span class="n">ranks</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"A Kemeny-Young aggregation with score </span><span class="si">{}</span><span class="s2"> is: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A Kemeny-Young aggregation with score </span><span class="si">{}</span><span class="s2"> is: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
     <span class="n">score</span><span class="p">,</span>
-    <span class="s2">", "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cols</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">aggr</span><span class="p">))))</span>
+    <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cols</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">aggr</span><span class="p">))))</span>
 </pre></div>
+
+    </div>
 </div>
 </div>
-</div>
+
 <div class="output_wrapper">
 <div class="output">
+
+
 <div class="output_area">
-<div class="prompt"></div>
+
+    <div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>A Kemeny-Young aggregation with score 15 is: Ginny, Robin, Gwendolyn, Debbie, Alicia
 </pre>
 </div>
 </div>
+
 </div>
 </div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We get the same result as in the brute-force case.  However, it&#8217;s much faster. Let&#8217;s verify this, and in the process, also test that we always get the same&nbsp;result.</p>
+
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [10]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
-<div class="input_area">
+    <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">time</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
-<span class="n">timings</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s2">"method rank_len n_ranks time"</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+<span class="n">timings</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s2">&quot;method rank_len n_ranks time&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
 <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">rank_len</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">9</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">n_ranks</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">20</span><span class="p">):</span>
@@ -415,14 +471,14 @@ $$ \sum_i d(\hat\tau, \tau_i) \leq \sum_i d(\tau, \tau_i) \text{ for all } \tau&
         <span class="n">ranks</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">ranks</span><span class="p">)</span>
         <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
         <span class="n">brute_score</span><span class="p">,</span> <span class="n">brute_aggr</span> <span class="o">=</span> <span class="n">rankaggr_brute</span><span class="p">(</span><span class="n">ranks</span><span class="p">)</span>
-        <span class="n">timings</span> <span class="o">=</span> <span class="n">timings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">"brute"</span><span class="p">,</span>
+        <span class="n">timings</span> <span class="o">=</span> <span class="n">timings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;brute&quot;</span><span class="p">,</span>
                                       <span class="n">rank_len</span><span class="o">=</span><span class="n">rank_len</span><span class="p">,</span>
                                       <span class="n">n_ranks</span><span class="o">=</span><span class="n">n_ranks</span><span class="p">,</span>
                                       <span class="n">time</span><span class="o">=</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">),</span>
                                  <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
         <span class="n">_</span><span class="p">,</span> <span class="n">lp_aggr</span> <span class="o">=</span> <span class="n">rankaggr_lp</span><span class="p">(</span><span class="n">ranks</span><span class="p">)</span>
-        <span class="n">timings</span> <span class="o">=</span> <span class="n">timings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">"lp"</span><span class="p">,</span>
+        <span class="n">timings</span> <span class="o">=</span> <span class="n">timings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;lp&quot;</span><span class="p">,</span>
                                       <span class="n">rank_len</span><span class="o">=</span><span class="n">rank_len</span><span class="p">,</span>
                                       <span class="n">n_ranks</span><span class="o">=</span><span class="n">n_ranks</span><span class="p">,</span>
                                       <span class="n">time</span><span class="o">=</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">),</span>
@@ -430,26 +486,28 @@ $$ \sum_i d(\hat\tau, \tau_i) \leq \sum_i d(\tau, \tau_i) \text{ for all } \tau&
         <span class="k">assert</span> <span class="p">(</span><span class="n">brute_score</span> <span class="o">==</span>
                 <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">kendalltau_dist</span><span class="p">(</span><span class="n">lp_aggr</span><span class="p">,</span> <span class="n">rank</span><span class="p">)</span> <span class="k">for</span> <span class="n">rank</span> <span class="ow">in</span> <span class="n">ranks</span><span class="p">))</span>
 
-<span class="c1"># lp is much faster, let's run it for longer rankings.</span>
+<span class="c1"># lp is much faster, let&#39;s run it for longer rankings.</span>
 <span class="k">for</span> <span class="n">rank_len</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">16</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">n_ranks</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">20</span><span class="p">):</span>
         <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
         <span class="n">_</span><span class="p">,</span> <span class="n">lp_aggr</span> <span class="o">=</span> <span class="n">rankaggr_lp</span><span class="p">(</span><span class="n">ranks</span><span class="p">)</span>
-        <span class="n">timings</span> <span class="o">=</span> <span class="n">timings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">"lp"</span><span class="p">,</span>
+        <span class="n">timings</span> <span class="o">=</span> <span class="n">timings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;lp&quot;</span><span class="p">,</span>
                                       <span class="n">rank_len</span><span class="o">=</span><span class="n">rank_len</span><span class="p">,</span>
                                       <span class="n">n_ranks</span><span class="o">=</span><span class="n">n_ranks</span><span class="p">,</span>
                                       <span class="n">time</span><span class="o">=</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">),</span>
                                  <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
+
+    </div>
 </div>
 </div>
-</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [11]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
-<div class="input_area">
+    <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
@@ -457,22 +515,31 @@ $$ \sum_i d(\hat\tau, \tau_i) \leq \sum_i d(\tau, \tau_i) \text{ for all } \tau&
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">16</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">16</span><span class="p">))</span>
 <span class="k">for</span> <span class="n">subplot</span><span class="p">,</span> <span class="n">n_ranks</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span> <span class="mi">20</span><span class="p">)):</span>
-    <span class="k">for</span> <span class="n">method</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">'brute'</span><span class="p">,</span> <span class="s1">'lp'</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">method</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;brute&#39;</span><span class="p">,</span> <span class="s1">&#39;lp&#39;</span><span class="p">):</span>
         <span class="n">this_rows</span> <span class="o">=</span> <span class="n">timings</span><span class="p">[(</span><span class="n">timings</span><span class="o">.</span><span class="n">n_ranks</span> <span class="o">==</span> <span class="n">n_ranks</span><span class="p">)</span> <span class="o">&amp;</span>
                             <span class="p">(</span><span class="n">timings</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="n">method</span><span class="p">)]</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">this_rows</span><span class="o">.</span><span class="n">rank_len</span><span class="p">,</span> <span class="n">this_rows</span><span class="o">.</span><span class="n">time</span><span class="p">,</span>
-                     <span class="n">label</span><span class="o">=</span><span class="s2">"</span><span class="si">{}</span><span class="s2"> n=</span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">n_ranks</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">"upper left"</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">"Ranking size vs. log time to solve"</span><span class="p">)</span>
+                     <span class="n">label</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> n=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">n_ranks</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper left&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Ranking size vs. log time to solve&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
+
+    </div>
 </div>
 </div>
-</div>
+
 <div class="output_wrapper">
 <div class="output">
+
+
 <div class="output_area">
-<div class="prompt"></div>
+
+    <div class="prompt"></div>
+
+
+
+
 <div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAbMAAAGPCAYAAADWVT5RAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzs3Xd8VGXe///XtEx6gFR6RzpYQURREUQEpYsNxV65v+7u
@@ -892,27 +959,33 @@ gGrZm+VtVA/V/aiu2GrMXY9yD2ptTIAHUGtk3tZ0p7O6l30XdQJ2/EP/LOZOnvwaqngcRR10/DkT
 04mZZQnQYHIGUN0NL6JaQzbUqM94nveYrA41GOULqNbzp03KMW78PfLXqK5qO2qnZNYgGeOGbTPf
 wwbqs/QN4AqqyxxUT8M/mJAF4MvA91HnfQcxb2DVja+L5Rbfi5fxx/0z4D+BUdRB4vMm5RFCCCGE
 EEIIIYQQQgghhBBCCCGEEEIIIYQQQgghhBBCCDEP/D/tC1tkXuJ7LgAAAABJRU5ErkJggg==
-"/>
+"
+>
+</div>
+
+</div>
+
 </div>
 </div>
-</div>
-</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>You can see that the brute force approach is a bit worse than exponential, while the integer programming approach is more reasonable and also is less sensitive to the number of voters being aggregated.  We therefore have a reasonably fast efficient exact solution to the rank aggregation problem on small&nbsp;datasets.</p>
-<h3 id="References">References<a class="anchor-link" href="#References">¶</a></h3><p><span id="note1"> [1] J Kemeny. [Mathematics without numbers](http://www.jstor.org/stable/10.2307/20026529), 1959 <br/> </span>
-<span id="note2"> [2] <span class="caps">HP</span> Young. [Condorcet&#8217;s theory of voting](http://www.jstor.org/stable/10.2307/1961757), 1988 <br/>
+<h3 id="References">References<a class="anchor-link" href="#References">&#182;</a></h3><p><span id="note1"> [1] J Kemeny. [Mathematics without numbers](http://www.jstor.org/stable/10.2307/20026529), 1959 <br /> </span>
+<span id="note2"> [2] <span class="caps">HP</span> Young. [Condorcet&#8217;s theory of voting](http://www.jstor.org/stable/10.2307/1961757), 1988 <br />
 </span><span id="note3"> 
-[3] <span class="caps">JJ</span> Bartholdi <span class="caps">III</span>, <span class="caps">CA</span> Tovey, <span class="caps">MA</span> Trick. [The computational difficulty of manipulating an election](http://link.springer.com/article/10.1007/<span class="caps">BF00295861</span>), 1989 <br/>
+[3] <span class="caps">JJ</span> Bartholdi <span class="caps">III</span>, <span class="caps">CA</span> Tovey, <span class="caps">MA</span> Trick. [The computational difficulty of manipulating an election](http://link.springer.com/article/10.1007/<span class="caps">BF00295861</span>), 1989 <br />
 </span><span id="note4"> 
 [4] V Conitzer, A Davenport, J Kalagnanam. [Improved bounds for computing Kemeny rankings](http://www.aaai.org/Papers/<span class="caps">AAAI</span>/2006/<span class="caps">AAAI06</span>-099.pdf),&nbsp;2006
 </span></p>
+
 </div>
 </div>
 </div>
+ 
+
 
 <script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var mathjaxscript = document.createElement('script');
