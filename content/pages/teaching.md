@@ -3,7 +3,8 @@ Slug: teaching
 
 # Teaching
 
-At the moment I am not teaching or assisting with any courses.
+  * *Fall 2018*: TA for [Deep Structured Learning](https://andre-martins.github.io/pages/deep-structured-learning-ist-fall-2018.html) (IST)
+    * Guest lecture: [Neural Attention Mechanisms](/talks/18-attention.pdf).
 
 ## Past teaching
 
