@@ -17,11 +17,13 @@ I develop the [polylearn](http://contrib.scikit-learn.org/polylearn)
 library for factorization machines and polynomial networks in Python.
 
 # News
-  - Recent & upcoming talks:
-    - Feb 1, *Learning with Sparse Latent Structure*, TBD, IF 4.31/4.33, [ILCC](http://web.inf.ed.ac.uk/ilcc), U. of Edinburgh.
-    - Nov 2, [*Towards Dynamic Computation Graphs via Sparse Latent Structure*](talks/18-sparsemap-emnlp.pdf), 15:36 / 3B, EMNLP, Brussels.
-    - Nov 1, [*Interpretable Structure Induction via Sparse Attention*](talks/18-blackbox.pdf), 11:00 at Blackbox NLP, Brussels.
-    - Oct 29, [*Learning with Sparse Latent Structure*](talks/18-sparsemap-amsterdam.pdf) at UvA ILLC.
+  - Upcoming talk Feb 1 at [ILCC](http://web.inf.ed.ac.uk/ilcc), U. of
+    Edinburgh,<br/>
+  *Learning with Sparse Latent Structure*.
+  [(*past talks*)](/talks.html)
+
+  - Co-organizing the
+  [Workshop on Structured Prediction for NLP](https://structuredprediction.github.io/SPNLP19) at NAACL 2019.
 
   - Released
 [dynet code](https://github.com/vene/sparsemap/tree/master/cpp) for our EMNLP'18

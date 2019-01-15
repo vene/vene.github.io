@@ -10,6 +10,8 @@ PATH = 'content'
 
 TIMEZONE = 'Europe/Paris'
 DEFAULT_LANG = 'en'
+DATE_FORMATS = {'en': ('en_US.utf8', '%a, %d %b %Y')}
+LOCALE=('en_US.utf8', 'en', 'usa')
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None

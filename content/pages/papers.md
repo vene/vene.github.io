@@ -5,7 +5,7 @@ Slug: papers
 
 (Full list on [Google Scholar](https://scholar.google.com/citations?user=7_3UAgQAAAAJ).)
 
-## Selected recent work 
+## Selected recent work
 
 * Vlad Niculae, André F. T. Martins, Mathieu Blondel, Claire Cardie.
 *SparseMAP:* Differentiable sparse structured inference.
@@ -16,9 +16,10 @@ In: Proc. of *ICML 2018*.
 
 * Vlad Niculae, André F. T. Martins, Claire Cardie.
 Towards dynamic computation graphs via sparse latent structure.
-In: Proc. of *EMNLP 2018*. 
+In: Proc. of *EMNLP 2018*.
 \[&nbsp;[arXiv](https://arxiv.org/abs/1809.00653)&nbsp;\]
 \[&nbsp;[code](https://github.com/vene/sparsemap/tree/master/cpp)&nbsp;\]
+\[&nbsp;[slides](/talks/18-sparsemap-emnlp.pdf)&nbsp;\]
 
 * Vlad Niculae and Mathieu Blondel.
 A regularized framework for sparse and structured neural attention.
@@ -38,7 +39,7 @@ and algorithms. In: Proc. of *AISTATS 2019* (to appear).
 \[&nbsp;[arXiv](https://arxiv.org/abs/1805.09717)&nbsp;\]
 
 * Mathieu Blondel, Vlad Niculae, Takuma Otsuka, Naonori Ueda.
-Multi-output polynomial networks and factorization machines. In: Proc. 
+Multi-output polynomial networks and factorization machines. In: Proc.
 of *NIPS 2017*.
 \[&nbsp;[arXiv](https://arxiv.org/abs/1705.07603)&nbsp;\]
 
