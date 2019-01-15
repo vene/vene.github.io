@@ -28,10 +28,14 @@ In: Proc. of *NIPS 2017*.
 
 ## Other publications
 
-* Mathieu Blondel, André F. T. Martins, Vlad Niculae. 
+* Mathieu Blondel, André F. T. Martins, Vlad Niculae.
+Learning with Fenchel-Young losses. *2019*.
+\[&nbsp;[arXiv preprint](https://arxiv.org/abs/1901.02324)&nbsp;\]
+
+* Mathieu Blondel, André F. T. Martins, Vlad Niculae.
 Learning classifiers with Fenchel-Young losses: Generalized entropies, margins,
-and algorithms. 2018.
-\[&nbsp;[arXiv preprint](https://arxiv.org/abs/1805.09717)&nbsp;\]
+and algorithms. In: Proc. of *AISTATS 2019* (to appear).
+\[&nbsp;[arXiv](https://arxiv.org/abs/1805.09717)&nbsp;\]
 
 * Mathieu Blondel, Vlad Niculae, Takuma Otsuka, Naonori Ueda.
 Multi-output polynomial networks and factorization machines. In: Proc. 
