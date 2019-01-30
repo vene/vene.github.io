@@ -6,8 +6,8 @@ Status: hidden
 
 ## Upcoming
   - Feb 1, 2019<br/>
-    *Learning with Sparse Latent Structure*,<br/>
-    Room IF 4.31/4.33, time TBA<br/>
+    [*Learning with Sparse Latent Structure*](talks/19-edinburgh.pdf),<br/>
+    Room IF 4.31/4.33, 11:00<br/>
     [ILCC](http://web.inf.ed.ac.uk/ilcc), University of Edinburgh.
 
 ## Past
