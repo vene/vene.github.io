@@ -17,9 +17,8 @@ I develop the [polylearn](http://contrib.scikit-learn.org/polylearn)
 library for factorization machines and polynomial networks in Python.
 
 # News
-  - Upcoming talk Feb 1, 11:00 at [ILCC](http://web.inf.ed.ac.uk/ilcc), U. of
-    Edinburgh,<br/>
-  [*Learning with Sparse Latent Structure*](talks/19-edinburgh.pdf).
+  - Upcoming talk Mar 7, 12:00 at the [Priberam ML Seminar](http://labs.priberam.pt/Academia-Partnerships/Seminars.aspx),<br/>
+  [*Learning with Sparse Latent Structure*](talks/19-priberam.pdf).
   [(*past talks*)](/talks.html)
 
   - Co-organizing the

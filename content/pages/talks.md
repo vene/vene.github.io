@@ -5,12 +5,21 @@ Status: hidden
 # Talk schedule
 
 ## Upcoming
-  - Feb 1, 2019<br/>
-    [*Learning with Sparse Latent Structure*](talks/19-edinburgh.pdf),<br/>
-    Room IF 4.31/4.33, 11:00<br/>
-    [ILCC](http://web.inf.ed.ac.uk/ilcc), University of Edinburgh.
+
+  - Mar 7, 2019<br/>
+    [*Learning with Sparse Latent Structure*](talks/19-priberam.pdf),<br/>
+    12:00, [Priberam ML Seminar](http://labs.priberam.pt/Academia-Partnerships/Seminars.aspx).
+
+  - Mar 21, 2019<br/>
+    [*Learning with Sparse Latent Structure*](talks/19-priberam.pdf),<br/>
+    [NLP Seminar](https://www.sheffield.ac.uk/dcs/research/groups/nlp#tab04),
+    University of Sheffield.
 
 ## Past
+  - Feb 1, 2019<br/>
+  [*Learning with Sparse Latent Structure*](talks/19-edinburgh.pdf),<br/>
+  Room IF 4.31/4.33, 11:00<br/>
+  [ILCC](http://web.inf.ed.ac.uk/ilcc), University of Edinburgh.
   - Nov 1, 2018<br/>
   [*Interpretable Structure Induction via Sparse Attention*](talks/18-blackbox.pdf)<br/>
   Contributed talk at Blackbox NLP Workshop, EMNLP, Brussels.
