@@ -8,7 +8,7 @@ Status: hidden
 
   - Mar 7, 2019<br/>
     [*Learning with Sparse Latent Structure*](talks/19-priberam.pdf),<br/>
-    12:00, [Priberam ML Seminar](http://labs.priberam.pt/Academia-Partnerships/Seminars.aspx).
+    13:00, [Priberam ML Seminar](http://labs.priberam.pt/Academia-Partnerships/Seminars.aspx).
 
   - Mar 21, 2019<br/>
     [*Learning with Sparse Latent Structure*](talks/19-priberam.pdf),<br/>
