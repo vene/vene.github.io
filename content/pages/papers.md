@@ -38,6 +38,11 @@ Learning classifiers with Fenchel-Young losses: Generalized entropies, margins,
 and algorithms. In: Proc. of *AISTATS 2019* (to appear).
 \[&nbsp;[arXiv](https://arxiv.org/abs/1805.09717)&nbsp;\]
 
+* Vlad Niculae.
+*Learning Deep Models with Linguistically-Inspired Structure.*
+Doctoral dissertation, Cornell University
+\[&nbsp;[open access doi](https://doi.org/10.7298/X4SJ1HVQ)&nbsp;\]
+
 * Mathieu Blondel, Vlad Niculae, Takuma Otsuka, Naonori Ueda.
 Multi-output polynomial networks and factorization machines. In: Proc.
 of *NIPS 2017*.
