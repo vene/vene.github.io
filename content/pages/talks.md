@@ -6,12 +6,14 @@ Status: hidden
 
 ## Upcoming
 
+  - None at the moment.
+
+## Past
+
   - Mar 21, 2019<br/>
     [*Learning with Sparse Latent Structure*](talks/19-priberam.pdf),<br/>
     [NLP Seminar](https://www.sheffield.ac.uk/dcs/research/groups/nlp#tab04),
     University of Sheffield.
-
-## Past
 
   - Mar 7, 2019<br/>
   [*Learning with Sparse Latent Structure*](talks/19-priberam.pdf),<br/>

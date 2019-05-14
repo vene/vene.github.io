@@ -29,6 +29,10 @@ In: Proc. of *NIPS 2017*.
 
 ## Other publications
 
+* Ben Peters, Vlad Niculae, André F. T. Martins.
+Sparse sequence-to-sequence models.
+In: Proc. of *ACL 2019* (to appear).
+
 * Mathieu Blondel, André F. T. Martins, Vlad Niculae.
 Learning with Fenchel-Young losses. *2019*.
 \[&nbsp;[arXiv preprint](https://arxiv.org/abs/1901.02324)&nbsp;\]

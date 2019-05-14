@@ -17,18 +17,18 @@ I develop the [polylearn](http://contrib.scikit-learn.org/polylearn)
 library for factorization machines and polynomial networks in Python.
 
 # News
-  - Upcoming talk Mar 21 at the  University of Sheffield
+
+  - ACL 2019:  (more details soon)
+    - *Sparse Seq-to-Seq Models* paper (Ben Peters, me, André Martins)
+    - Co-presenting a tutorial on Latent Structure Models for NLP. 
+
+  - Gave a talk at the  University of Sheffield
   [NLP Seminar](https://www.sheffield.ac.uk/dcs/research/groups/nlp#tab04):
   [*Learning with Sparse Latent Structure*](talks/19-priberam.pdf).
   [(*past talks*)](/talks.html)
 
   - Co-organizing the
   [Workshop on Structured Prediction for NLP](https://structuredprediction.github.io/SPNLP19) at NAACL 2019.
-
-  - Released
-[dynet code](https://github.com/vene/sparsemap/tree/master/cpp) for our EMNLP'18
-paper, [*Towards dynamic computation graphs via sparse latent
-structure.*](https://arxiv.org/abs/1809.00653)
 
 # Contact
 You can find me on twitter as
