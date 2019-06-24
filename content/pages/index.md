@@ -18,17 +18,14 @@ library for factorization machines and polynomial networks in Python.
 
 # News
 
+  - Upcoming talk June 28 at 
+    [RAAI 2019](https://conferences.unibuc.ro/raai2019/), University of Bucharest.<br/>
+    [*Sparse Sequence-to-Sequence models*](talks/19-sparse-seq.pdf).
+    [(*past talks*)](/talks.html)
+
   - ACL 2019:  (more details soon)
     - *Sparse Seq-to-Seq Models* paper (Ben Peters, me, André Martins)
     - Co-presenting a tutorial on Latent Structure Models for NLP. 
-
-  - Gave a talk at the  University of Sheffield
-  [NLP Seminar](https://www.sheffield.ac.uk/dcs/research/groups/nlp#tab04):
-  [*Learning with Sparse Latent Structure*](talks/19-priberam.pdf).
-  [(*past talks*)](/talks.html)
-
-  - Co-organizing the
-  [Workshop on Structured Prediction for NLP](https://structuredprediction.github.io/SPNLP19) at NAACL 2019.
 
 # Contact
 You can find me on twitter as

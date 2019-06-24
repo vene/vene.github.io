@@ -6,7 +6,11 @@ Status: hidden
 
 ## Upcoming
 
-  - None at the moment.
+  - June 28, 2019<br/>
+    [*Sparse Sequence-to-Sequence models*](talks/19-sparse-seq.pdf),<br/>
+    [RAAI 2019](https://conferences.unibuc.ro/raai2019/),
+    University of Bucharest.
+
 
 ## Past
 
