@@ -6,18 +6,19 @@ Status: hidden
 
 ## Upcoming
 
-  - June 28, 2019<br/>
-    [*Sparse Sequence-to-Sequence models*](talks/19-sparse-seq.pdf),<br/>
-    [RAAI 2019](https://conferences.unibuc.ro/raai2019/),
-    University of Bucharest.
-
+  - None planned.
 
 ## Past
 
+  - June 28, 2019<br/>
+  [*Sparse Sequence-to-Sequence models*](talks/19-sparse-seq.pdf),<br/>
+  [RAAI 2019](https://conferences.unibuc.ro/raai2019/),
+  University of Bucharest.
+
   - Mar 21, 2019<br/>
-    [*Learning with Sparse Latent Structure*](talks/19-priberam.pdf),<br/>
-    [NLP Seminar](https://www.sheffield.ac.uk/dcs/research/groups/nlp#tab04),
-    University of Sheffield.
+  [*Learning with Sparse Latent Structure*](talks/19-priberam.pdf),<br/>
+  [NLP Seminar](https://www.sheffield.ac.uk/dcs/research/groups/nlp#tab04),
+  University of Sheffield.
 
   - Mar 7, 2019<br/>
   [*Learning with Sparse Latent Structure*](talks/19-priberam.pdf),<br/>

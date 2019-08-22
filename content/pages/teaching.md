@@ -3,13 +3,18 @@ Slug: teaching
 
 # Teaching
 
-  * *Fall 2018*: TA for [Deep Structured Learning](https://andre-martins.github.io/pages/deep-structured-learning-ist-fall-2018.html) (IST)
-    * Guest lecture: [Neural Attention Mechanisms](/talks/18-attention.pdf).
-
 ## Past teaching
 
 ### Tutorials
+  * ACL 2019 [Tutorial on Latent Structure Models for NLP](https://deep-spin.github.io/tutorial/) 
+  with Tsvetomila Mihaylova, Nikita Nangia, and André Martins. 
+
   * *Feb. 2015,* [ASDA@UIUC](https://github.com/adsa-uiuc): NLP-centric scikit-learn tutorial \[&nbsp;[github](https://github.com/vene/adsa_uiuc_sklearn_tutorial)&nbsp;\] & lessons learned from scikit-learn \[&nbsp;[pdf](talks/LessonsLearned.pdf)&nbsp;\] \[&nbsp;[pptx](talks/LessonsLearned.pptx)&nbsp;\]
+
+### As teaching assistant at IST
+
+  * *Fall 2018*: [Deep Structured Learning](https://andre-martins.github.io/pages/deep-structured-learning-ist-fall-2018.html) (IST)
+    * Guest lecture: [Neural Attention Mechanisms](/talks/18-attention.pdf).
 
 ### As teaching assistant at Cornell
   * *Fall 2017:* [CS 4740/5740: Introduction to NLP](http://www.cs.cornell.edu/courses/cs4740/2017fa/).

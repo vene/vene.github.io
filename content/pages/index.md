@@ -18,14 +18,17 @@ library for factorization machines and polynomial networks in Python.
 
 # News
 
-  - Upcoming talk June 28 at 
+  - EMNLP 2019 accepted paper: *Adaptively Sparse Transformers*, Gonçalo M 
+  Correia, Vlad Niculae, André Martins. Details soon.
+
+  - [Tutorial on Latent Structure Models for NLP](https://deep-spin.github.io/tutorial/) 
+  with Tsvetomila Mihaylova, Nikita Nangia, and André Martins. ACL→RANLP→?
+
+  - June 28 talk at 
     [RAAI 2019](https://conferences.unibuc.ro/raai2019/), University of Bucharest.<br/>
     [*Sparse Sequence-to-Sequence models*](talks/19-sparse-seq.pdf).
     [(*past talks*)](/talks.html)
 
-  - ACL 2019:  (more details soon)
-    - *Sparse Seq-to-Seq Models* paper (Ben Peters, me, André Martins)
-    - Co-presenting a tutorial on Latent Structure Models for NLP. 
 
 # Contact
 You can find me on twitter as
