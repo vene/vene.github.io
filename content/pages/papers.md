@@ -10,7 +10,9 @@ NLP papers on the [ACL Anthology](https://aclweb.org/anthology/people/vlad-nicul
 
 * Gonçalo M. Correia, Vlad Niculae, André F. T. Martins.
 Adaptively sparse transformers.
-In: Proc. of *EMNLP 2019* (to appear). 
+In: Proc. of *EMNLP-IJCNLP 2019* (to appear). 
+\[&nbsp;[arXiv](https://arxiv.org/abs/1909.00015)&nbsp;\]
+\[&nbsp;[code](https://github.com/deep-spin/entmax)&nbsp;\]
 
 * Ben Peters, Vlad Niculae, André F. T. Martins.
 Sparse sequence-to-sequence models.

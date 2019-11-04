@@ -19,7 +19,9 @@ library for factorization machines and polynomial networks in Python.
 # News
 
   - EMNLP 2019 accepted paper: *Adaptively Sparse Transformers*, Gonçalo M 
-  Correia, Vlad Niculae, André Martins. Details soon.
+  Correia, Vlad Niculae, André Martins.
+\[&nbsp;[arXiv](https://arxiv.org/abs/1909.00015)&nbsp;\]
+\[&nbsp;[code](https://github.com/deep-spin/entmax)&nbsp;\]
 
   - [Tutorial on Latent Structure Models for NLP](https://deep-spin.github.io/tutorial/) 
   with Tsvetomila Mihaylova, Nikita Nangia, and André Martins. ACL→RANLP→?
