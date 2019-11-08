@@ -93,9 +93,9 @@ alas, incompatible with recent versions of SocketIO. According to the
 community, the most stable release is SocketIO&nbsp;0.9.16.</p>
 <h2>The problem in a&nbsp;nutshell</h2>
 <p>When debugging my app locally, I&#8217;d connect with something&nbsp;like</p>
-<div class="highlight"><pre><span></span><span class="nv">var</span> <span class="nv">socket</span> <span class="o">=</span> <span class="nv">io</span>.<span class="k">connect</span><span class="ss">(</span>
-    <span class="s1">&#39;</span><span class="s">http://</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="nv">document</span>.<span class="nv">domain</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="s">:</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="nv">location</span>.<span class="nv">port</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="s">/chat</span><span class="s1">&#39;</span>
-<span class="ss">)</span><span class="c1">;</span>
+<div class="highlight"><pre><span></span>var socket = io.connect(
+    &#39;http://&#39; + document.domain + &#39;:&#39; + location.port + &#39;/chat&#39;
+);
 </pre></div>
 
 
@@ -124,14 +124,14 @@ all other traffic over the default port.  This works like a&nbsp;charm!</p>
 <p><a href="https://gist.github.com/vene/c0657d854ae74a4511d2">My updated SocketIO client is available as a
 gist</a>, and the client-side
 connection code looks like&nbsp;this:</p>
-<div class="highlight"><pre><span></span><span class="nv">var</span> <span class="nv">socket</span> <span class="o">=</span> <span class="nv">io</span>.<span class="k">connect</span><span class="ss">(</span>
-    <span class="s1">&#39;</span><span class="s">http://</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="nv">document</span>.<span class="nv">domain</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="s">/chat</span><span class="s1">&#39;</span>,
+<div class="highlight"><pre><span></span>var socket = io.connect(
+    &#39;http://&#39; + document.domain + &#39;/chat&#39;,
     {
-        <span class="nv">port</span>: <span class="nv">location</span>.<span class="nv">port</span>,
-        <span class="nv">wsport</span>: <span class="nv">wsport</span> <span class="o">||</span> <span class="nv">location</span>.<span class="nv">port</span>,
-        <span class="s2">&quot;</span><span class="s">connect timeout</span><span class="s2">&quot;</span>: <span class="mi">5000</span>
+        port: location.port,
+        wsport: wsport || location.port,
+        &quot;connect timeout&quot;: 5000
     }
-<span class="ss">)</span><span class="c1">;</span>
+);
 </pre></div>
 
 
