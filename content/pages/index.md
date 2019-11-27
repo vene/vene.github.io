@@ -18,6 +18,8 @@ library for factorization machines and polynomial networks in Python.
 
 # News
 
+  - Nov 26 talk at the AMLAB UvA: [*Differentiable Adaptive Sparsity for Neural Networks*](talks/19-adaptive.pdf). [(*past talks*)](/talks.html)
+
   - EMNLP 2019 accepted paper: *Adaptively Sparse Transformers*, Gonçalo M 
   Correia, Vlad Niculae, André Martins.
 \[&nbsp;[arXiv](https://arxiv.org/abs/1909.00015)&nbsp;\]
@@ -26,10 +28,6 @@ library for factorization machines and polynomial networks in Python.
   - [Tutorial on Latent Structure Models for NLP](https://deep-spin.github.io/tutorial/) 
   with Tsvetomila Mihaylova, Nikita Nangia, and André Martins. ACL→RANLP→?
 
-  - June 28 talk at 
-    [RAAI 2019](https://conferences.unibuc.ro/raai2019/), University of Bucharest.<br/>
-    [*Sparse Sequence-to-Sequence models*](talks/19-sparse-seq.pdf).
-    [(*past talks*)](/talks.html)
 
 
 # Contact

@@ -6,9 +6,18 @@ Status: hidden
 
 ## Upcoming
 
-  - None planned.
+  - None at the moment.
+
 
 ## Past
+
+  - Nov 26, 2019.
+  [*Differentiable Adaptive Sparsity for Neural Networks*](talks/19-adaptive.pdf). 
+  [AMLAB UvA](http://amlab.science.uva.nl/).
+
+  - Nov 19, 2019<br/>
+  [*Learning with Sparse Latent Structure*](talks/19-limsi.pdf),<br/>
+  LIMSI TLP seminar.
 
   - June 28, 2019<br/>
   [*Sparse Sequence-to-Sequence models*](talks/19-sparse-seq.pdf),<br/>
