@@ -48,15 +48,22 @@ In: Proc. of *NeurIPS 2017*.
 
 ## Other publications
 
+* Vlad Niculae and André F. T. Martins.
+LP-SparseMAP: Differentiable relaxed optimization for sparse structured
+prediction. *2029*.
+\[&nbsp;[arXiv preprint](https://arxiv.org/abs/2001.04437)&nbsp;\]
+\[&nbsp;[code](https://github.com/deep-spin/lp-sparsemap)&nbsp;\]
 
 * Mathieu Blondel, André F. T. Martins, Vlad Niculae.
 Learning with Fenchel-Young losses. *2019*.
 \[&nbsp;[arXiv preprint](https://arxiv.org/abs/1901.02324)&nbsp;\]
+\[&nbsp;[code](https://github.com/mblondel/fenchel-young-losses)&nbsp;\]
 
 * Mathieu Blondel, André F. T. Martins, Vlad Niculae.
 Learning classifiers with Fenchel-Young losses: Generalized entropies, margins,
 and algorithms. In: Proc. of *AISTATS 2019*.
 \[&nbsp;[arXiv](https://arxiv.org/abs/1805.09717)&nbsp;\]
+\[&nbsp;[code](https://github.com/mblondel/fenchel-young-losses)&nbsp;\]
 
 * Vlad Niculae.
 *Learning Deep Models with Linguistically-Inspired Structure.*

@@ -6,13 +6,14 @@ Status: hidden
 
 ## Upcoming
 
-  - None at the moment.
-
+  - Jan 17, 2020.
+  [*Learning with Sparse Latent Structure*](talks/20-lpsparsemap.pdf),<br/>
+  [AMLAB UvA](http://amlab.science.uva.nl/).
 
 ## Past
 
   - Nov 26, 2019.
-  [*Differentiable Adaptive Sparsity for Neural Networks*](talks/19-adaptive.pdf). 
+  [*Differentiable Adaptive Sparsity for Neural Networks*](talks/19-adaptive.pdf),<br/> 
   [AMLAB UvA](http://amlab.science.uva.nl/).
 
   - Nov 19, 2019<br/>

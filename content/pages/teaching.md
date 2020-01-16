@@ -4,7 +4,6 @@ Slug: teaching
 # Teaching
 
   * *Fall 2019*: Co-instructor, [Deep Structured Learning](https://andre-martins.github.io/pages/deep-structured-learning-ist-fall-2019.html) (IST)
-      - [Lecture 7. Probabilistic Graphical Models](talks/dsl_19_l07_pgm.pdf)
 
 
 ## Past teaching
