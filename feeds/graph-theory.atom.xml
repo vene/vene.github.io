@@ -62,4 +62,4 @@ even vertex, by placing it in the middle and building a cycle around it,
 it follows that every even vertex is adjacent to all the odd vertices.
 But there are [latex]n+1[/latex] even indices, so it follows that the
 degree of any odd vertex is at least [latex]n+1[/latex], contradicting
-the initial conditions of the theorem.&amp;nbsp;[latex]\square[/latex]&lt;/p&gt;</content><category term="graph"></category><category term="graph theory"></category><category term="hamiltonian"></category><category term="nash-williams"></category><category term="Uncategorized"></category></entry></feed>
+the initial conditions of the theorem.&amp;nbsp;[latex]\square[/latex]&lt;/p&gt;</content><category term="graph theory"></category><category term="graph"></category><category term="graph theory"></category><category term="hamiltonian"></category><category term="nash-williams"></category><category term="Uncategorized"></category></entry></feed>
