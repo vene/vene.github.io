@@ -30,17 +30,17 @@ alas, incompatible with recent versions of SocketIO. According to the
 community, the most stable release is SocketIO&amp;nbsp;0.9.16.&lt;/p&gt;
 &lt;h2&gt;The problem in a&amp;nbsp;nutshell&lt;/h2&gt;
 &lt;p&gt;When debugging my app locally, I&amp;#8217;d connect with something&amp;nbsp;like&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;var&lt;/span&gt; &lt;span class="nv"&gt;socket&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;io&lt;/span&gt;.&lt;span class="k"&gt;connect&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;
-    &lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;http://&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nv"&gt;document&lt;/span&gt;.&lt;span class="nv"&gt;domain&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;:&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nv"&gt;location&lt;/span&gt;.&lt;span class="nv"&gt;port&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;/chat&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;
-&lt;span class="ss"&gt;)&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;var socket = io.connect(&lt;/span&gt;
+&lt;span class="err"&gt;    &amp;#39;http://&amp;#39; + document.domain + &amp;#39;:&amp;#39; + location.port + &amp;#39;/chat&amp;#39;&lt;/span&gt;
+&lt;span class="err"&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;When deploying on OpenShift, the &lt;code&gt;location.port&lt;/code&gt; is now different from the
 WebSocket port, so I used a Flask config that determines server-side where it&amp;#8217;s
 running&amp;nbsp;from:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;var wsport = &amp;#39;&lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt; &lt;span class="nv"&gt;config&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;WEBSOCKET_PORT&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="x"&gt;&amp;#39;;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="x"&gt;var wsport = &amp;#39;&lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt; &lt;span class="nv"&gt;config&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;WEBSOCKET_PORT&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="x"&gt;&amp;#39;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;The app now runs great both when debugging locally or on OpenShift, except if
@@ -61,15 +61,15 @@ all other traffic over the default port.  This works like a&amp;nbsp;charm!&lt;/
 &lt;p&gt;&lt;a href="https://gist.github.com/vene/c0657d854ae74a4511d2"&gt;My updated SocketIO client is available as a
 gist&lt;/a&gt;, and the client-side
 connection code looks like&amp;nbsp;this:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;var&lt;/span&gt; &lt;span class="nv"&gt;socket&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;io&lt;/span&gt;.&lt;span class="k"&gt;connect&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;
-    &lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;http://&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nv"&gt;document&lt;/span&gt;.&lt;span class="nv"&gt;domain&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;/chat&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;,
-    {
-        &lt;span class="nv"&gt;port&lt;/span&gt;: &lt;span class="nv"&gt;location&lt;/span&gt;.&lt;span class="nv"&gt;port&lt;/span&gt;,
-        &lt;span class="nv"&gt;wsport&lt;/span&gt;: &lt;span class="nv"&gt;wsport&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="nv"&gt;location&lt;/span&gt;.&lt;span class="nv"&gt;port&lt;/span&gt;,
-        &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;connect timeout&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;: &lt;span class="mi"&gt;5000&lt;/span&gt;
-    }
-&lt;span class="ss"&gt;)&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;var socket = io.connect(&lt;/span&gt;
+&lt;span class="err"&gt;    &amp;#39;http://&amp;#39; + document.domain + &amp;#39;/chat&amp;#39;,&lt;/span&gt;
+&lt;span class="err"&gt;    {&lt;/span&gt;
+&lt;span class="err"&gt;        port: location.port,&lt;/span&gt;
+&lt;span class="err"&gt;        wsport: wsport || location.port,&lt;/span&gt;
+&lt;span class="err"&gt;        &amp;quot;connect timeout&amp;quot;: 5000&lt;/span&gt;
+&lt;span class="err"&gt;    }&lt;/span&gt;
+&lt;span class="err"&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;I had to reduce the connection timeout, for a better user experience.  I&amp;#8217;m way

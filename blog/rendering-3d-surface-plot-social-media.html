@@ -113,7 +113,7 @@ as a function of $a$ and $b$. Recall that
 $\operatorname{softmax}(\boldsymbol{\theta}) = \boldsymbol{p}$, where
 $p_i = \frac{\exp(\theta_i)}{\sum_j&nbsp;\exp(\theta_j)}$.</p>
 <p>We can implement <code>f(x, y)</code> easily:</p>
-<div class="highlight"><pre><span></span><span class="c1"># generate.py</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># generate.py</span>
 
 <span class="kn">import</span> <span class="nn">math</span>
 
@@ -126,15 +126,15 @@ $p_i = \frac{\exp(\theta_i)}{\sum_j&nbsp;\exp(\theta_j)}$.</p>
     <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
     <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">theta</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>Now, let&#8217;s define a grid of points. This is more or less the same
 as for making a <a href="https://matplotlib.org/examples/mplot3d/surface3d_demo.html">3-d surface plot in
 matplotlib</a>.</p>
-<div class="highlight"><pre><span></span><span class="c1"># generate.py (part 2)</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># generate.py (part 2)</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="n">n</span> <span class="o">=</span> <span class="mi">111</span> 
 <span class="n">m</span> <span class="o">=</span> <span class="mi">111</span> 
@@ -152,12 +152,12 @@ matplotlib</a>.</p>
         <span class="n">Z</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 
 <span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">([</span><span class="n">X</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">Y</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">Z</span><span class="o">.</span><span class="n">ravel</span><span class="p">()])</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>The easiest way to copy data between Python and <span class="caps">JS</span> is using json.
 Indeed, we can very easily generate a valid <span class="caps">JS</span>&nbsp;file:</p>
-<div class="highlight"><pre><span></span><span class="c1"># generate.py (part 3)</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># generate.py (part 3)</span>
 <span class="c1"># output points to a javascript file</span>
 
 <span class="kn">import</span> <span class="nn">json</span>
@@ -168,15 +168,15 @@ Indeed, we can very easily generate a valid <span class="caps">JS</span>&nbsp;fi
     <span class="s1">&#39;z&#39;</span><span class="p">:</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
 <span class="p">}</span>
 
-<span class="n">template</span> <span class="o">=</span> <span class="n">f</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
-<span class="s2">var n = {n};</span>
-<span class="s2">var m = {m};</span>
-<span class="s2">var data = {json.dumps(data)};</span>
+<span class="n">template</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">var n = </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">;</span>
+<span class="s2">var m = </span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s2">;</span>
+<span class="s2">var data = </span><span class="si">{</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="si">}</span><span class="s2">;</span>
 <span class="s2">&quot;&quot;&quot;</span>
 
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;data.js&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>  <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
-</pre></div>
+    <span class="nb">print</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+</code></pre></div>
 
 
 <p>Run this script to obtain a <code>data.js</code> file describing the point cloud that we
@@ -187,7 +187,7 @@ the 3-d object. First, download <a href="https://github.com/mrdoob/three.js/raw/
 <a href="https://raw.githubusercontent.com/mrdoob/three.js/r95/examples/js/exporters/GLTFExporter.js">GLTFExporter.js</a> file.<label for="sn-threejsversion" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-threejsversion" class="margin-toggle"/><span class="sidenote">The links provided are for version r95, the version I
 used. Feel free to try newer versions; new features may&nbsp;appear!</span></p>
 <p>Let&#8217;s make a minimal <span class="caps">HTML</span> file to load the required&nbsp;libraries:</p>
-<div class="highlight"><pre><span></span><span class="c">&lt;!-- plot-glb.html --&gt;</span>
+<div class="highlight"><pre><span></span><code><span class="c">&lt;!-- plot-glb.html --&gt;</span>
 
 <span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
@@ -203,7 +203,7 @@ used. Feel free to try newer versions; new features may&nbsp;appear!</span></p>
 <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;plot-glb.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span> <span class="c">&lt;!-- we&#39;ll write this file below --&gt;</span>
 <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>Now it&#8217;s time to do the heavy lifting in <code>plot-glb.js</code>.
@@ -211,7 +211,7 @@ First thing we must do is construct a three.js scene. This consists of a
 <em>Mesh</em>, which in turn is described by a <em>Material</em> and a 
 <em>Geometry</em> (a set of vertices and faces). The <em>Material</em> is easy to pick; the
 tricky part is the <em>Geometry</em>, which we will construct&nbsp;manually.</p>
-<div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">makeScene</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span> <span class="nx">makeScene</span><span class="p">()</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">geometry</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">Geometry</span><span class="p">();</span> 
     <span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">Color</span><span class="p">(</span><span class="s1">&#39;tomato&#39;</span><span class="p">);</span>
 
@@ -253,7 +253,7 @@ tricky part is the <em>Geometry</em>, which we will construct&nbsp;manually.</p>
     <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span> <span class="k">new</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">Mesh</span><span class="p">(</span> <span class="nx">geometry</span><span class="p">,</span> <span class="nx">material</span> <span class="p">)</span> <span class="p">);</span>
     <span class="k">return</span> <span class="nx">scene</span><span class="p">;</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>Normally, the next step would be to add
@@ -266,7 +266,7 @@ and render to a <code>&lt;div&gt;</code>. But our goal is to make a Facebook 3-d
 simply export the current scene as a binary <span class="caps">GLB</span>&nbsp;file. </p>
 <p>The <span class="caps">GLTF</span> exporter will give us a byte buffer that we need to download. We can
 handle with a function that modifies our&nbsp;link: </p>
-<div class="highlight"><pre><span></span><span class="c1">// plot-glb.js (part 2)</span>
+<div class="highlight"><pre><span></span><code><span class="c1">// plot-glb.js (part 2)</span>
 
 <span class="kd">function</span> <span class="nx">saveArrayBuffer</span><span class="p">(</span> <span class="nx">buffer</span><span class="p">,</span> <span class="nx">filename</span> <span class="p">)</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">blob</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Blob</span><span class="p">(</span> <span class="p">[</span> <span class="nx">buffer</span> <span class="p">],</span> <span class="p">{</span> <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;application/octet-stream&#39;</span> <span class="p">}</span> <span class="p">);</span>
@@ -274,11 +274,11 @@ handle with a function that modifies our&nbsp;link: </p>
     <span class="nx">link</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="nx">URL</span><span class="p">.</span><span class="nx">createObjectURL</span><span class="p">(</span> <span class="nx">blob</span> <span class="p">);</span>
     <span class="nx">link</span><span class="p">.</span><span class="nx">download</span> <span class="o">=</span> <span class="nx">filename</span><span class="p">;</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>Finally, we use the <code>GLTFExporter</code> to generate a Facebook-compatible 3-d&nbsp;model.</p>
-<div class="highlight"><pre><span></span><span class="c1">// plot-glb.js (part 3)</span>
+<div class="highlight"><pre><span></span><code><span class="c1">// plot-glb.js (part 3)</span>
 
 <span class="kd">var</span> <span class="nx">scene</span> <span class="o">=</span> <span class="nx">makeScene</span><span class="p">();</span>
 
@@ -295,7 +295,7 @@ handle with a function that modifies our&nbsp;link: </p>
 <span class="nx">exporter</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span> <span class="nx">scene</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span> <span class="nx">glb</span> <span class="p">)</span> <span class="p">{</span>
     <span class="nx">saveArrayBuffer</span><span class="p">(</span> <span class="nx">glb</span><span class="p">,</span> <span class="s1">&#39;scene.glb&#39;</span> <span class="p">);</span>
 <span class="p">},</span> <span class="nx">options</span> <span class="p">);</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>Now, if you open <code>plot-glb.html</code> and click the Download link, you should get a
@@ -313,7 +313,7 @@ so I think they don&#8217;t get exported in a <span class="caps">GLTF</span>/<sp
 <p>But now that we know that the default camera is somewhere along the Z axis above
 the plot, we can simply rotate our point cloud to get to a more aesthetically
 pleasing&nbsp;angle! </p>
-<div class="highlight"><pre><span></span><span class="c1"># generate.py (part 2.5)</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># generate.py (part 2.5)</span>
 
 <span class="k">def</span> <span class="nf">rotate3d_x</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
     <span class="n">c</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
@@ -337,7 +337,7 @@ pleasing&nbsp;angle! </p>
 
 <span class="n">points</span> <span class="o">=</span> <span class="n">rotate3d_z</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">4</span><span class="p">)</span>
 <span class="n">points</span> <span class="o">=</span> <span class="n">rotate3d_x</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mf">2.5</span><span class="p">)</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>Above, we used <em>rotation matrices</em> to rotate the point cloud around.<label for="sn-rotation" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-rotation" class="margin-toggle"/><span class="sidenote">Rotating a 3-d point is equivalent to multiplying by a
