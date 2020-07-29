@@ -23,6 +23,13 @@ In: Proc. of *ACL 2019*.
 
 ## Selected first-author work
 
+* Vlad Niculae and André F. T. Martins.
+*LP-SparseMAP:* Differentiable relaxed optimization for sparse structured
+prediction. In: Proc. of *ICML 2020* (to appear).
+\[&nbsp;[arXiv preprint](https://arxiv.org/abs/2001.04437)&nbsp;\]
+\[&nbsp;[code](https://github.com/deep-spin/lp-sparsemap)&nbsp;\]
+
+
 * Vlad Niculae, André F. T. Martins, Mathieu Blondel, Claire Cardie.
 *SparseMAP:* Differentiable sparse structured inference.
 In: Proc. of *ICML 2018*.
@@ -48,14 +55,13 @@ In: Proc. of *NeurIPS 2017*.
 
 ## Other publications
 
-* Vlad Niculae and André F. T. Martins.
-LP-SparseMAP: Differentiable relaxed optimization for sparse structured
-prediction. *2029*.
-\[&nbsp;[arXiv preprint](https://arxiv.org/abs/2001.04437)&nbsp;\]
-\[&nbsp;[code](https://github.com/deep-spin/lp-sparsemap)&nbsp;\]
+* André F. T. Martins, Marcos Treviso, António Farinhas, Vlad Niculae, Mário A.
+T. Figueiredo, Pedro M. Q. Aguiar.
+Sparse and Continuous Attention Mechanisms. 2020.
+\[&nbsp;[arXiv preprint](https://arxiv.org/abs/2006.07214)&nbsp;\]
 
 * Mathieu Blondel, André F. T. Martins, Vlad Niculae.
-Learning with Fenchel-Young losses. *2019*.
+Learning with Fenchel-Young losses. JMLR *2020*.
 \[&nbsp;[arXiv preprint](https://arxiv.org/abs/1901.02324)&nbsp;\]
 \[&nbsp;[code](https://github.com/mblondel/fenchel-young-losses)&nbsp;\]
 

@@ -17,17 +17,14 @@ I develop the [polylearn](http://contrib.scikit-learn.org/polylearn)
 library for factorization machines and polynomial networks in Python.
 
 # News
+  - I will be joining the [University of Amsterdam, Informatics Institute](https://ivi.uva.nl/)
+  as assistant professor in September. [*PhD position opening
+  soon.*](/jobs.html)
+
+  - Our paper on [*LP-SparseMAP*](https://arxiv.org/abs/2001.04437)
+  has been accepted at ICML 2020.
 
   - Jan 17 talk at the AMLAB UvA: [*Learning with Sparse Latent Structure*](talks/20-lpsparsemap.pdf). [(*past talks*)](/talks.html)
-
-  - EMNLP 2019 accepted paper: *Adaptively Sparse Transformers*, Gonçalo M 
-  Correia, Vlad Niculae, André Martins.
-\[&nbsp;[arXiv](https://arxiv.org/abs/1909.00015)&nbsp;\]
-\[&nbsp;[code](https://github.com/deep-spin/entmax)&nbsp;\]
-
-  - [Tutorial on Latent Structure Models for NLP](https://deep-spin.github.io/tutorial/) 
-  with Tsvetomila Mihaylova, Nikita Nangia, and André Martins. ACL→RANLP→?
-
 
 # Contact
 You can find me on twitter as
