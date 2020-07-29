@@ -17,6 +17,8 @@ I develop the [polylearn](http://contrib.scikit-learn.org/polylearn)
 library for factorization machines and polynomial networks in Python.
 
 # News
+  - Jul 29 talk at the IBM Multi-lingual NLP: [*Learning with Sparse Latent Structure*](talks/20-lpsparsemap-ibm.pdf). [(*past talks*)](/talks.html)
+
   - I will be joining the [University of Amsterdam, Informatics Institute](https://ivi.uva.nl/)
   as assistant professor in September. [*PhD position opening
   soon.*](/jobs.html)
@@ -24,7 +26,6 @@ library for factorization machines and polynomial networks in Python.
   - Our paper on [*LP-SparseMAP*](https://arxiv.org/abs/2001.04437)
   has been accepted at ICML 2020.
 
-  - Jan 17 talk at the AMLAB UvA: [*Learning with Sparse Latent Structure*](talks/20-lpsparsemap.pdf). [(*past talks*)](/talks.html)
 
 # Contact
 You can find me on twitter as
