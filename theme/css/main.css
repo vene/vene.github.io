@@ -336,7 +336,7 @@ pre {
     width: 200px;
     height: 200px;
     margin-left: 1rem;
-    margin-right: -260px;
+    margin-right: -270px;
   }
 }
 
@@ -352,5 +352,8 @@ pre {
 @media only screen and (min-width: 1280px) {
   #navmenu {
     font-size: 2.76rem;
+  }
+  div#container{
+    margin-left: calc(2.5rem + (100% - 1280px) * .5);
   }
 }
