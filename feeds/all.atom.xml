@@ -40,10 +40,10 @@ of building a 3-d plot in three.js from a grid of points. In the rest of this
 blog, I will walk through the resulting&amp;nbsp;method.&lt;/p&gt;
 &lt;h1&gt;Computing the function&amp;nbsp;values&lt;/h1&gt;
 &lt;p&gt;First thing to do is to compute the value of &lt;code&gt;f&lt;/code&gt; on a grid of points. To keep
-things simple, we will plot $\operatorname{softmax}([x, y, 0])_2$
-as a function of $a$ and $b$. Recall that
-$\operatorname{softmax}(\boldsymbol{\theta}) = \boldsymbol{p}$, where
-$p_i = \frac{\exp(\theta_i)}{\sum_j&amp;nbsp;\exp(\theta_j)}$.&lt;/p&gt;
+things simple, we will plot &lt;span class="mathskip"&gt;$\operatorname{softmax}([x, y, 0])_2$&lt;/span&gt;
+as a function of &lt;span class="mathskip"&gt;$a$&lt;/span&gt; and &lt;span class="mathskip"&gt;$b$&lt;/span&gt;. Recall that
+&lt;span class="mathskip"&gt;$\operatorname{softmax}(\boldsymbol{\theta}) = \boldsymbol{p}$&lt;/span&gt;, where
+&lt;span class="mathskip"&gt;$p_i = \frac{\exp(\theta_i)}{\sum_j \exp(\theta_j)}$&lt;/span&gt;.&lt;/p&gt;
 &lt;p&gt;We can implement &lt;code&gt;f(x, y)&lt;/code&gt; easily:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# generate.py&lt;/span&gt;
 
@@ -274,7 +274,7 @@ pleasing&amp;nbsp;angle! &lt;/p&gt;
 
 &lt;p&gt;Above, we used &lt;em&gt;rotation matrices&lt;/em&gt; to rotate the point cloud around.&lt;label for="sn-rotation" class="margin-toggle sidenote-number"&gt;&lt;/label&gt;&lt;input type="checkbox" id="sn-rotation" class="margin-toggle"/&gt;&lt;span class="sidenote"&gt;Rotating a 3-d point is equivalent to multiplying by a
 certain orthogonal matrix. &lt;a href="https://en.wikipedia.org/wiki/Rotation_matrix#Basic_rotations"&gt;The wikipedia article&lt;/a&gt; lists formulas for
-rotation matrices against the canonical axes $x$, $y$,&amp;nbsp;$z$. &lt;/span&gt;&lt;/p&gt;
+rotation matrices against the canonical axes &lt;span class="mathskip"&gt;$x$&lt;/span&gt;, &lt;span class="mathskip"&gt;$y$&lt;/span&gt;, &lt;span class="mathskip"&gt;$z$&lt;/span&gt;. &lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;The result should look just like the 3-d post I made below.
 Of course, in &lt;code&gt;generate.py&lt;/code&gt; we can do arbitrary complicated calculations in &lt;code&gt;f&lt;/code&gt;,
 including numerical optimization, so this approach is quite powerful. May it
@@ -2912,7 +2912,7 @@ $$ \sum_i d(\hat\tau, \tau_i) \leq \sum_i d(\tau, \tau_i) \text{ for all } \tau&
 &lt;p&gt;The formulation is based on the alternative interpretation of the Kemeny optimal aggregation as the ranking that minimizes the weights of edges it disagrees&amp;nbsp;with:&lt;/p&gt;
 $$
 \operatorname{minimize} \sum_{e \in E} w_e x_e &amp;#92;
-\operatorname{subject to} &amp;#92;
+\text{subject to} &amp;#92;
 \forall i \neq j \in V, x_{ij} + x_{ji} = 1 &amp;#92;
 \forall i \neq j \neq k \neq i \in V, x_{ij} + x_{jk} + x_{ki} \geq 1
 $$&lt;p&gt;In the above problem, all variables are integer, and effectively binary under the other constraints.  The interpretation is that $x_{ij} = 1$ if, in the aggregated rank, $i$ is ranked lower than&amp;nbsp;$j$.&lt;/p&gt;
@@ -6562,4 +6562,6 @@ on&lt;a href="http://scikit-learn.sourceforge.net/" title="scikits-learn"&gt;sci
 for work on this machine learning&amp;nbsp;library.&lt;/p&gt;
 &lt;p&gt;I will also post related work that I do in the machine learning&amp;nbsp;field.&lt;/p&gt;
 &lt;p&gt;I hope to prove an enjoyable read for everybody who stumbles on to this
-site, or for those who will be forced to review it&amp;nbsp;:)&lt;/p&gt;</content><category term="Uncategorized"></category><category term="Uncategorized"></category></entry></feed>
+site, or for those who will be forced to review it&amp;nbsp;:)&lt;/p&gt;</content><category term="Uncategorized"></category><category term="Uncategorized"></category></entry><entry><title>My super title</title><link href="//vene.ro/blog/my-super-post.html" rel="alternate"></link><published>2010-10-03T10:20:00+02:00</published><updated>2010-10-04T18:40:00+02:00</updated><author><name>Vlad Niculae</name></author><id>tag:vene.ro,2010-10-03:/blog/my-super-post.html</id><summary type="html">&lt;p class="first last"&gt;Short version for index and&amp;nbsp;feeds&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;can i just write &lt;span class="formula"&gt;2 +&amp;nbsp;2&lt;/span&gt;&lt;/p&gt;
+</content><category term="yeah"></category><category term="thats"></category><category term="awesome"></category></entry></feed>

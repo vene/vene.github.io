@@ -1133,7 +1133,7 @@ $$ \sum_i d(\hat\tau, \tau_i) \leq \sum_i d(\tau, \tau_i) \text{ for all } \tau&
 &lt;p&gt;The formulation is based on the alternative interpretation of the Kemeny optimal aggregation as the ranking that minimizes the weights of edges it disagrees&amp;nbsp;with:&lt;/p&gt;
 $$
 \operatorname{minimize} \sum_{e \in E} w_e x_e &amp;#92;
-\operatorname{subject to} &amp;#92;
+\text{subject to} &amp;#92;
 \forall i \neq j \in V, x_{ij} + x_{ji} = 1 &amp;#92;
 \forall i \neq j \neq k \neq i \in V, x_{ij} + x_{jk} + x_{ki} \geq 1
 $$&lt;p&gt;In the above problem, all variables are integer, and effectively binary under the other constraints.  The interpretation is that $x_{ij} = 1$ if, in the aggregated rank, $i$ is ranked lower than&amp;nbsp;$j$.&lt;/p&gt;

@@ -22,29 +22,29 @@
   <meta property="og:type" content="website"/>
   <meta property="og:description" content=""/>
   <meta property="og:url" content="//vene.ro"/>
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      extensions: ["tex2jax.js"],
-      jax: ["input/TeX", "output/HTML-CSS"],
-      tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-        processEscapes: true
-      },
-      displayAlign: 'left',
-      TeX: {
-        Macros: {
-          RR: "{\\mathbb{R}}",
-          argmin: "{\\mathop{\\mathrm{arg\\,min}}}",
-          bold: ["{\\bf #1}",1]
-        }
-        },
-      "HTML-CSS": { availableFonts: ["TeX"] }
-    });
-  </script>
 
-  <script type="text/javascript" async
-          src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"
+  integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4"
+  crossorigin="anonymous"></script>
+  <script defer
+          src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+          integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"
+          crossorigin="anonymous"> </script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function() {
+    renderMathInElement(document.body, {
+       macros: {"\\reals": "\\mathbb{R}"},
+       throwOnError: true,
+       delimiters: [
+               {left: "$$", right: "$$", display: true},
+               {left: "$", right: "$", display: false},
+               {left: "\\(", right: "\\)", display: false},
+               {left: "\\[", right: "\\]", display: true}
+       ],
+     });
+  })
   </script>
 
 </head>
@@ -86,6 +86,16 @@ on<a href="http://scikit-learn.sourceforge.net/" title="scikits-learn">scikits-l
 for work on this machine learning&nbsp;library.</p>
 <p>I will also post related work that I do in the machine learning&nbsp;field.</p>
 <p>I hope to prove …</p>	
+</article>
+<article class="hentry">
+<header>
+<h1><a href="//vene.ro/blog/my-super-post.html"
+       rel="bookmark"
+       title="Permalink to My super title">My super&nbsp;title</a></h1>
+</header>
+<p class="subtitle"><time datetime="2010-10-03T10:20:00+02:00">Sun, 03 Oct 2010</time><label for="my-super-post" class="margin-toggle"> ⊕</label><input type="checkbox" id="my-super-post" class="margin-toggle" /><span class="marginnote">Category: <a href="//vene.ro/category/yeah.html">yeah</a><br />
+ #<a href="//vene.ro/tag/thats.html">thats</a> #<a href="//vene.ro/tag/awesome.html">awesome</a></span></p><p class="first last">Short version for index and&nbsp;feeds</p>
+	
 </article>
 </main>
 <div class="blognav">

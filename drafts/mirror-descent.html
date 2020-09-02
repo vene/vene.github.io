@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Optimizing with constraints:reparametrization and geometry.</title>
+  <meta name="author" content="Vlad" />
+  <base href="//vene.ro">
+  <link rel="stylesheet" type="text/css" 
+        href="//vene.ro/theme/css/main.css" />
+  <link rel="stylesheet" type="text/css" 
+        href="//vene.ro/theme/css/pygment.css" />
+  <link rel="stylesheet" type="text/css" 
+        href="//vene.ro/theme/css/typogrify.css" />
+  <link rel="shortcut icon" href="//vene.ro/favicon.ico" />
+  <link href="//vene.ro/" type="application/atom+xml"
+        rel="alternate" title="Vlad Niculae ALL Atom Feed" />
+  <link href="//fonts.googleapis.com/css?family=PT+Mono|PT+Serif" rel="stylesheet"> 
+
+  <!-- OpenGraph Info -->
+
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"
+  integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4"
+  crossorigin="anonymous"></script>
+  <script defer
+          src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+          integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"
+          crossorigin="anonymous"> </script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function() {
+    renderMathInElement(document.body, {
+       macros: {"\\reals": "\\mathbb{R}"},
+       throwOnError: true,
+       delimiters: [
+               {left: "$$", right: "$$", display: true},
+               {left: "$", right: "$", display: false},
+               {left: "\\(", right: "\\)", display: false},
+               {left: "\\[", right: "\\]", display: true}
+       ],
+     });
+  })
+  </script>
+
+</head>
+
+<body>
+<div id="container">
+<header>
+  <nav class="navmenu" id="navmenu">
+    <li id="homelink"><a href="/">Vlad Niculae</a>
+    </li><li class="menu"><a href="//vene.ro/papers.html">Papers</a>
+    </li><li class="menu"><a href="//vene.ro/blog/">Blog</a>
+    </li><li class="menu"><a href="//vene.ro/teaching.html">Teaching</a>
+   </li>
+   </nav>
+ </header>
+ <div id="main">
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="//vene.ro/drafts/mirror-descent.html" rel="bookmark"
+           title="Permalink to Optimizing with constraints:reparametrization and geometry.">Optimizing with constraints:<br>reparametrization and&nbsp;geometry.</a></h1>
+<p class="subtitle"><time datetime="2020-08-01T00:00:00+02:00">Sat, 01 Aug 2020</time><label for="mirror-descent" class="margin-toggle"> ⊕</label><input type="checkbox" id="mirror-descent" class="margin-toggle" /><span class="marginnote">Category: <a href="//vene.ro/category/presentation.html">presentation</a><br />
+</span></p>    </header>
+
+    <div class="entry-content">
+      <div style="display: none">
+$$\gdef\foo{bar}$$
+</div>
+
+<p>When training machine learning models, and deep networks in particular,
+we typically use gradient-based methods. But if we require the weights to
+satisfy some constraints, things quickly get more&nbsp;complicated.</p>
+<p>I&#8217;ve recently learned that a few ways for handling constraints are deeply connected.
+In this post, we will explore these connections and demonstrate them in PyTorch on a friendly&nbsp;example. </p>
+<h1>Why constraints are&nbsp;challenging</h1>
+<p>In many machine learning models, we fit a model to data by minimizing some
+error-like&nbsp;objective,</p>
+<p><span class="mathskip">$$\min_{x \in \mathcal{X}} f(x).&nbsp;\tag{OPT}$$</span></p>
+<p>Here, <span class="mathskip">$x$</span> denote the neural network weights, the parameters to be learned. They
+typically take values in <span class="mathskip">$\mathcal{X}=\reals$</span>, and we train networks by
+by choosing an initial configuration <span class="mathskip">$x^{(0)}$</span> and successively applying
+an update of the&nbsp;form</p>
+<p><span class="mathskip">$$
+x^{(t+1)} \leftarrow x^{(t)} - \alpha^{(t)} g(x^{(t)}).&nbsp;$$</span></p>
+<p>If <span class="mathskip">$f$</span> is convex and differentiable and <span class="mathskip">$g = Df$</span> is the gradient of <span class="mathskip">$f$</span>, this is
+the acclaimed <em>gradient descent</em> method. In deep learning, we typically get
+stochastic, non-descent methods that nonetheless perform well and are efficient.
+Here, we will focus on a &#8220;nice&#8221;, differentiable <span class="mathskip">$f$</span>, and we will see that even
+so,  constraints quickly complicate&nbsp;things.</p>
+<p>hi!</p>
+<!--
+
+Rest number two <label for="sn-blah" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-blah" class="margin-toggle"/><span class="sidenote">hello</span>
+
+and rest number two <label for="sn-proprietary-monotype-bimbo" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-proprietary-monotype-bimbo" class="margin-toggle"/><span class="sidenote">hello again</span>
+
+-->
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+ </div>
+<footer>
+  <p>Powered by <a href="http://pelican.readthedocs.org">Pelican</a>.
+  <a href="/privacy.html">Privacy policy</a>.</p>
+</footer>
+</div>
+</body>
+</html>

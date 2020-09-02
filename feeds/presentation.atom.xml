@@ -40,10 +40,10 @@ of building a 3-d plot in three.js from a grid of points. In the rest of this
 blog, I will walk through the resulting&amp;nbsp;method.&lt;/p&gt;
 &lt;h1&gt;Computing the function&amp;nbsp;values&lt;/h1&gt;
 &lt;p&gt;First thing to do is to compute the value of &lt;code&gt;f&lt;/code&gt; on a grid of points. To keep
-things simple, we will plot $\operatorname{softmax}([x, y, 0])_2$
-as a function of $a$ and $b$. Recall that
-$\operatorname{softmax}(\boldsymbol{\theta}) = \boldsymbol{p}$, where
-$p_i = \frac{\exp(\theta_i)}{\sum_j&amp;nbsp;\exp(\theta_j)}$.&lt;/p&gt;
+things simple, we will plot &lt;span class="mathskip"&gt;$\operatorname{softmax}([x, y, 0])_2$&lt;/span&gt;
+as a function of &lt;span class="mathskip"&gt;$a$&lt;/span&gt; and &lt;span class="mathskip"&gt;$b$&lt;/span&gt;. Recall that
+&lt;span class="mathskip"&gt;$\operatorname{softmax}(\boldsymbol{\theta}) = \boldsymbol{p}$&lt;/span&gt;, where
+&lt;span class="mathskip"&gt;$p_i = \frac{\exp(\theta_i)}{\sum_j \exp(\theta_j)}$&lt;/span&gt;.&lt;/p&gt;
 &lt;p&gt;We can implement &lt;code&gt;f(x, y)&lt;/code&gt; easily:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# generate.py&lt;/span&gt;
 
@@ -274,7 +274,7 @@ pleasing&amp;nbsp;angle! &lt;/p&gt;
 
 &lt;p&gt;Above, we used &lt;em&gt;rotation matrices&lt;/em&gt; to rotate the point cloud around.&lt;label for="sn-rotation" class="margin-toggle sidenote-number"&gt;&lt;/label&gt;&lt;input type="checkbox" id="sn-rotation" class="margin-toggle"/&gt;&lt;span class="sidenote"&gt;Rotating a 3-d point is equivalent to multiplying by a
 certain orthogonal matrix. &lt;a href="https://en.wikipedia.org/wiki/Rotation_matrix#Basic_rotations"&gt;The wikipedia article&lt;/a&gt; lists formulas for
-rotation matrices against the canonical axes $x$, $y$,&amp;nbsp;$z$. &lt;/span&gt;&lt;/p&gt;
+rotation matrices against the canonical axes &lt;span class="mathskip"&gt;$x$&lt;/span&gt;, &lt;span class="mathskip"&gt;$y$&lt;/span&gt;, &lt;span class="mathskip"&gt;$z$&lt;/span&gt;. &lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;The result should look just like the 3-d post I made below.
 Of course, in &lt;code&gt;generate.py&lt;/code&gt; we can do arbitrary complicated calculations in &lt;code&gt;f&lt;/code&gt;,
 including numerical optimization, so this approach is quite powerful. May it
