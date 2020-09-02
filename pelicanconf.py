@@ -2,6 +2,9 @@
 # -*- coding: utf-8 -*- #
 from __future__ import unicode_literals
 
+from defusedxml import ElementTree
+import markdown
+
 AUTHOR = 'Vlad'
 SITENAME = 'Vlad Niculae'
 SITEURL = ''
@@ -33,14 +36,16 @@ DEFAULT_PAGINATION = 3
 #RELATIVE_URLS = True
 
 TYPOGRIFY = True
+TYPOGRIFY_IGNORE_TAGS = [".mathskip"]
 
 THEME = 'themes/vene-tufte'
 
-# IPython Notebook plugin
-MARKUP = ('md', 'ipynb')
-PLUGIN_PATHS = ['./plugins']
-PLUGINS = ['pelican-ipynb.markup']
+# Jupyter Notebook plugin
+MARKUP = ('md', 'ipynb', 'rst')
+from pelican_jupyter import markup as nb_markup
+PLUGINS = [nb_markup, "plugins.wrap_math", "plugins.tufte_footnote"]
 IPYNB_IGNORE_CSS = True
+IPYNB_SKIP_CSS = True
 
 AUTHOR_SAVE_AS = ''
 AUTHORS_SAVE_AS = ''

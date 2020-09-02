@@ -85,7 +85,7 @@ p.subtitle {
 }
 
 .marginnote, .sidenote {
-  font-size: .8rem;
+  font-size: .7rem;
   line-height: 1.1rem;
 }
 
@@ -296,7 +296,7 @@ pre {
     margin-left: 2.5rem;
   }
   div#main{
-    width: 33rem;
+    width: 29rem;
   }
 }
 
@@ -325,11 +325,11 @@ pre {
   
   .sidenote, .marginnote { 
     display: block;
-    float: none;
-    position: absolute;
-    left: 35.5rem;
-    margin: 0 1rem;
-    max-width: 250px
+    float: right;
+    clear: right;
+    width: 255px;
+    margin-right: -270px;
+    margin-top: .3rem;
   }
 
   #vladpic {
@@ -338,12 +338,14 @@ pre {
     margin-left: 1rem;
     margin-right: 1rem;
   }
-
 }
 
 @media only screen and (min-width: 1024px) {
   html { 
     font-size: 21px; 
+  }
+  div#main{
+    width: 33rem;
   }
 }
 

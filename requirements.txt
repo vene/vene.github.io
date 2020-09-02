@@ -3,3 +3,4 @@ Markdown
 ghp-import
 typogrify
 nbconvert
+pelican-jupyter
