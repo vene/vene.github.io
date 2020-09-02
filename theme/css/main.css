@@ -354,6 +354,6 @@ pre {
     font-size: 2.76rem;
   }
   div#container{
-    margin-left: calc(2.5rem + (100% - 1280px) * .5);
+    margin-left: calc(2.5rem + (100vw - 1280px) * .5);
   }
 }
