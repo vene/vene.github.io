@@ -2,9 +2,6 @@
 # -*- coding: utf-8 -*- #
 from __future__ import unicode_literals
 
-from defusedxml import ElementTree
-import markdown
-
 AUTHOR = 'Vlad'
 SITENAME = 'Vlad Niculae'
 SITEURL = ''
@@ -26,24 +23,29 @@ AUTHOR_FEED_RSS = None
 # Blogroll
 LINKS = None
 
-# Social widget
-#  SOCIAL = (('You can add links in your config file', '#'),
-          #  ('Another social link', '#'),)
-
 DEFAULT_PAGINATION = 3
 
 # Uncomment following line if you want document-relative URLs when developing
 #RELATIVE_URLS = True
 
 TYPOGRIFY = True
-TYPOGRIFY_IGNORE_TAGS = [".mathskip"]
+TYPOGRIFY_IGNORE_TAGS = [".arithmatex"]
 
 THEME = 'themes/vene-tufte'
+
+MARKDOWN = {
+    'extension_configs': {
+        'pymdownx.arithmatex' : {
+            'generic': True,
+            'smart_dollar': False,
+        }
+    }
+}
 
 # Jupyter Notebook plugin
 MARKUP = ('md', 'ipynb', 'rst')
 from pelican_jupyter import markup as nb_markup
-PLUGINS = [nb_markup, "plugins.wrap_math", "plugins.tufte_footnote"]
+PLUGINS = [nb_markup, "plugins.tufte_footnote"]
 IPYNB_IGNORE_CSS = True
 IPYNB_SKIP_CSS = True
 

@@ -4,3 +4,4 @@ ghp-import
 typogrify
 nbconvert
 pelican-jupyter
+pymdown-extensions
