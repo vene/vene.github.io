@@ -230,18 +230,17 @@ function make_rules() {
 
 However, in dimension two or more, clipping no longer works, because of
 interactions between the variables. We demonstate this on a quadratic problem
-which will become the main focus of the rest of this post.
+which will become the main focus of the rest of this post,
 
 $$ \min_{x \in \mathcal{X}} 
-f(x) \coloneqq \frac{1}{2}~(x - x_0)^\top Q (x - x_0) \tag{QP} $$
+f(x) \coloneqq \frac{1}{2}~(x - x_0)^\top Q (x - x_0).\tag{QP} $$
 
-taking $\mathcal{X} = [0,1] \times [0,1] \subset \reals^2$,
-$x_0 = (1.5, .1)$, and 
+Let us visualize this problem for the specific case of
+the unit square $\mathcal{X} = [0,1] \times [0,1] \subset \reals^2$,
+with $x_0 = (1.5, .1)$, and 
 $Q = \left(\begin{smallmatrix}3 & 2 \\\\ 2 & 3 \end{smallmatrix}\right)$.
-
-Here is what the contours of this function look like. You can see below that the
-constrained minimum $x^\star$ is not the same as the unconstrained minimum
-clipped to the box.[ref]
+The constrained minimum $x^\star$ is not the same as the
+result of clipping the unconstrained minimum to the box.[ref]
 There is an important special case where (QP) can be solved exactly: the
 case $Q = I$. In this case, the problem becomes
 $\arg\min_{x \in \mathcal{X}} \| x - x_0 \|^2_2,$
@@ -261,10 +260,12 @@ most practitioners would turn to.[ref]This turns out to be a handy personality
 quiz to see if somebody resonates more with neural networks or with convex
 optimization.[/ref]
 
- 1. *Reparamtrization (REP).* Instead of using constrained variables $x$, replace them
-    with unconstrained $u$ such that $x_i = \sigma(u_i)$, where $\sigma : \reals
-    \to \mathcal{X}$ is a
-    ``squishing'' nonlinearity. For $\mathcal{X}=[0,1]^d$, we may use the logistic
+ 1. *Reparamtrization (REP).* Circumvent the constraints on $x$, 
+    by expressing the function in terms of unconstrained variables $u$
+    such that $x_i = \sigma(u_i)$, where $\sigma : \reals \to \mathcal{X}$ is a
+    ``squishing'' nonlinearity.
+    We can then perform unconstrained minimiziation on $f \circ \sigma$.
+    For $\mathcal{X}=[0,1]^d$, we may use the logistic
     function[ref]General intervals $[a,b]$ are obtained by affinely
     transforming $[0,1]$.[/ref]
 
@@ -286,8 +287,8 @@ because it can be implemented just by changing our model, without requiring
 modifications to the optimization code. However, the resulting problem (after
 reparametrization) is no longer convex in $u$, even if the original problem was
 convex in $x$. PG directly solves the convex optimization problem (QP), but
-the intermediate iterates $x^{(t+0.5)}$ leave the domain, which may be less
-stable or too aggressive. 
+the intermediate iterates $x^{(t+0.5)}$ can leave $\mathcal{X}$,
+leading to a possibly less stable or too aggressive trajectory.
 
 In this post, we will explore the connection between the two by studying *mirror
 descent* and its information-geometric interpretation as natural gradient
