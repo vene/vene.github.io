@@ -322,10 +322,12 @@ quiz to see if somebody resonates more with neural networks or with convex&nbsp;
 <ol>
 <li>
 <p><em>Reparamtrization (<span class="caps">REP</span>).</em> Instead of using constrained variables <span class="arithmatex">\(x\)</span>, replace them
-    with unconstrained <span class="arithmatex">\(u\)</span> such that <span class="arithmatex">\(x = \sigma(u)\)</span>, where <span class="arithmatex">\(\sigma\)</span> is a
-    &#8220;squishing&#8221; nonlinearity from <span class="arithmatex">\(\reals\)</span> to <span class="arithmatex">\(\mathcal{X}\)</span>. If
-    <span class="arithmatex">\(\mathcal{X}=[0,1]^d\)</span>, we may use the logistic&nbsp;function</p>
-<div class="arithmatex">\[ [\sigma(u)]_i = \frac{1}{1 - \exp(-u_i)}. \]</div>
+    with unconstrained <span class="arithmatex">\(u\)</span> such that <span class="arithmatex">\(x_i = \sigma(u_i)\)</span>, where <span class="arithmatex">\(\sigma : \reals
+    \to \mathcal{X}\)</span> is a
+    &#8220;squishing&#8221; nonlinearity. For <span class="arithmatex">\(\mathcal{X}=[0,1]^d\)</span>, we may use the logistic
+    function<label for="sn-3" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-3" class="margin-toggle"/><span class="sidenote">General intervals <span class="arithmatex">\([a,b]\)</span> are obtained by affinely
+    transforming <span class="arithmatex">\([0,1]\)</span>.</span></p>
+<div class="arithmatex">\[ \sigma(u) = \frac{1}{1 + \exp(-u)}.\]</div>
 </li>
 <li>
 <p><em>Projected gradient (<span class="caps">PG</span>).</em> Perform unconstrained gradient updates, then
@@ -346,6 +348,9 @@ reparametrization) is no longer convex in <span class="arithmatex">\(u\)</span>,
 convex in <span class="arithmatex">\(x\)</span>. <span class="caps">PG</span> directly solves the convex optimization problem (<span class="caps">QP</span>), but
 the intermediate iterates <span class="arithmatex">\(x^{(t+0.5)}\)</span> leave the domain, which may be less
 stable or too&nbsp;aggressive. </p>
+<p>In this post, we will explore the connection between the two by studying <em>mirror
+descent</em> and its information-geometric interpretation as natural gradient
+in a dual space. But first, let&#8217;s implement and test out our main ideas so&nbsp;far.</p>
     </div><!-- /.entry-content -->
 
   </article>
