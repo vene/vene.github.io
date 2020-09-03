@@ -1,4 +1,4 @@
-Title: Optimizing with constraints:<br>reparametrization and geometry.
+Title: Optimizing with constraints: <br>reparametrization and geometry.
 Date: 2020-08-01
 Author: vene
 Category: presentation 
@@ -262,21 +262,33 @@ quiz to see if somebody resonates more with neural networks or with convex
 optimization.[/ref]
 
  1. *Reparamtrization (REP).* Instead of using constrained variables $x$, replace them
-    with unconstrained $u$ such that $x = \sigma(u)$, where $\sigma$ is a
-    ``squishing'' nonlinearity from $\reals$ to $\mathcal{X}$. If
-    $\mathcal{X}=[0,1]^d$, we may use the logistic function
+    with unconstrained $u$ such that $x_i = \sigma(u_i)$, where $\sigma : \reals
+    \to \mathcal{X}$ is a
+    ``squishing'' nonlinearity. For $\mathcal{X}=[0,1]^d$, we may use the logistic
+    function[ref]General intervals $[a,b]$ are obtained by affinely
+    transforming $[0,1]$.[/ref]
 
-    $$ [\sigma(u)]_i = \frac{1}{1 - \exp(-u_i)}. $$
+    $$ \sigma(u) = \frac{1}{1 + \exp(-u)}.$$
 
  2. *Projected gradient (PG).* Perform unconstrained gradient updates, then
     project back onto the domain after each update:
 
     $$
-    x^{(t+1)} \leftarrow \operatorname{Proj}_\mathcal{X}\big(x^{(t)} - \alpha^{(t)} g(x^{(t)})\big).
+    \begin{aligned}
+    x^{(t+0.5)} &\leftarrow x^{(t)} - \alpha^{(t)} g(x^{(t)}) \\
+    x^{(t+1)} &\leftarrow \operatorname{Proj}_\mathcal{X}\big(x^{(t+0.5)}\big)
+    \\
+    \end{aligned}
     $$
 
 REP is convenient when working with neural network libraries like PyTorch,
 because it can be implemented just by changing our model, without requiring
 modifications to the optimization code. However, the resulting problem (after
 reparametrization) is no longer convex in $u$, even if the original problem was
-convex in $x$. PG directly solves the convex optimization problem (QP), but.[ref]come up with a downside[/ref]
+convex in $x$. PG directly solves the convex optimization problem (QP), but
+the intermediate iterates $x^{(t+0.5)}$ leave the domain, which may be less
+stable or too aggressive. 
+
+In this post, we will explore the connection between the two by studying *mirror
+descent* and its information-geometric interpretation as natural gradient
+in a dual space. But first, let's implement and test out our main ideas so far.
