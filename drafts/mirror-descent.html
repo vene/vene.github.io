@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Optimizing with constraints:reparametrization and geometry.</title>
+  <title>Optimizing with constraints: reparametrization and geometry.</title>
   <meta name="author" content="Vlad" />
   <base href="//vene.ro">
   <link rel="stylesheet" type="text/css" 
@@ -93,7 +93,7 @@ var katexMath = (function () {
     <header>
       <h1 class="entry-title">
         <a href="//vene.ro/drafts/mirror-descent.html" rel="bookmark"
-           title="Permalink to Optimizing with constraints:reparametrization and geometry.">Optimizing with constraints:<br>reparametrization and&nbsp;geometry.</a></h1>
+           title="Permalink to Optimizing with constraints: reparametrization and geometry.">Optimizing with constraints: <br>reparametrization and&nbsp;geometry.</a></h1>
 <p class="subtitle"><time datetime="2020-08-01T00:00:00+02:00">Sat, 01 Aug 2020</time><label for="mirror-descent" class="margin-toggle"> ⊕</label><input type="checkbox" id="mirror-descent" class="margin-toggle" /><span class="marginnote">Category: <a href="//vene.ro/category/presentation.html">presentation</a><br />
 </span></p>    </header>
 
@@ -331,7 +331,11 @@ quiz to see if somebody resonates more with neural networks or with convex&nbsp;
 <p><em>Projected gradient (<span class="caps">PG</span>).</em> Perform unconstrained gradient updates, then
     project back onto the domain after each&nbsp;update:</p>
 <div class="arithmatex">\[
-x^{(t+1)} \leftarrow \operatorname{Proj}_\mathcal{X}\big(x^{(t)} - \alpha^{(t)} g(x^{(t)})\big).
+\begin{aligned}
+x^{(t+0.5)} &amp;\leftarrow x^{(t)} - \alpha^{(t)} g(x^{(t)}) \\
+x^{(t+1)} &amp;\leftarrow \operatorname{Proj}_\mathcal{X}\big(x^{(t+0.5)}\big)
+\\
+\end{aligned}
 \]</div>
 </li>
 </ol>
@@ -339,7 +343,9 @@ x^{(t+1)} \leftarrow \operatorname{Proj}_\mathcal{X}\big(x^{(t)} - \alpha^{(t)} 
 because it can be implemented just by changing our model, without requiring
 modifications to the optimization code. However, the resulting problem (after
 reparametrization) is no longer convex in <span class="arithmatex">\(u\)</span>, even if the original problem was
-convex in <span class="arithmatex">\(x\)</span>. <span class="caps">PG</span> directly solves the convex optimization problem (<span class="caps">QP</span>), but.<label for="sn-3" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-3" class="margin-toggle"/><span class="sidenote">come up with a&nbsp;downside</span></p>
+convex in <span class="arithmatex">\(x\)</span>. <span class="caps">PG</span> directly solves the convex optimization problem (<span class="caps">QP</span>), but
+the intermediate iterates <span class="arithmatex">\(x^{(t+0.5)}\)</span> leave the domain, which may be less
+stable or too&nbsp;aggressive. </p>
     </div><!-- /.entry-content -->
 
   </article>
