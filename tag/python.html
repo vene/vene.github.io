@@ -28,23 +28,54 @@
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"
   integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4"
   crossorigin="anonymous"></script>
-  <script defer
-          src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
-          integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"
-          crossorigin="anonymous"> </script>
   <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    renderMathInElement(document.body, {
-       macros: {"\\reals": "\\mathbb{R}"},
-       throwOnError: true,
-       delimiters: [
-               {left: "$$", right: "$$", display: true},
-               {left: "$", right: "$", display: false},
-               {left: "\\(", right: "\\)", display: false},
-               {left: "\\[", right: "\\]", display: true}
-       ],
-     });
-  })
+
+ (function () {
+'use strict';
+
+var macros = {};
+
+var katexMath = (function () {
+    var maths = document.querySelectorAll('.arithmatex'),
+        tex;
+
+    for (var i = 0; i < maths.length; i++) {
+      tex = maths[i].textContent || maths[i].innerText;
+      if (tex.startsWith('\\(') && tex.endsWith('\\)')) {
+        katex.render(tex.slice(2, -2), maths[i], {
+            'macros': macros,
+            'displayMode': false,
+            'globalGroup': true});
+      } else if (tex.startsWith('\\[') && tex.endsWith('\\]')) {
+        katex.render(tex.slice(2, -2), maths[i], {
+            'macros': macros,
+            'displayMode': true,
+            'globalGroup': true});
+      }
+    }
+});
+
+(function () {
+  var onReady = function onReady(fn) {
+    if (document.addEventListener) {
+      document.addEventListener("DOMContentLoaded", fn);
+    } else {
+      document.attachEvent("onreadystatechange", function () {
+        if (document.readyState === "interactive") {
+          fn();
+        }
+      });
+    }
+  };
+
+  onReady(function () {
+    if (typeof katex !== "undefined") {
+      katexMath();
+    }
+  });
+})();
+
+}());
   </script>
 
 </head>
@@ -94,8 +125,8 @@ faster wherever I&nbsp;can.</p>
 <p class="subtitle"><time datetime="2012-08-18T19:41:00+02:00">Sat, 18 Aug 2012</time><label for="inverses-pseudoinverses-numerical-issues-speed-symmetry" class="margin-toggle"> ⊕</label><input type="checkbox" id="inverses-pseudoinverses-numerical-issues-speed-symmetry" class="margin-toggle" /><span class="marginnote">Category: <a href="//vene.ro/category/benchmarking.html">benchmarking</a><br />
  #<a href="//vene.ro/tag/inv.html">inv</a> #<a href="//vene.ro/tag/matrix-inverse.html">matrix inverse</a> #<a href="//vene.ro/tag/numerical-analysis.html">numerical analysis</a> #<a href="//vene.ro/tag/numerical-methods.html">numerical methods</a> #<a href="//vene.ro/tag/pinv.html">pinv</a> #<a href="//vene.ro/tag/pinvh.html">pinvh</a> #<a href="//vene.ro/tag/positive-semidefinite.html">positive semidefinite</a> #<a href="//vene.ro/tag/pseudoinverse.html">pseudoinverse</a> #<a href="//vene.ro/tag/symmetric.html">symmetric</a> #<a href="//vene.ro/tag/benchmarking.html">benchmarking</a> #<a href="//vene.ro/tag/python.html">python</a></span></p><p>The matrix inverse is a cornerstone of linear algebra, taught, along
 with its applications, since high school. The inverse of a matrix
-\$latex A\$, if it exists, is the matrix \$latex A\^{-1}\$ such that
-\$latex <span class="caps">AA</span>\^{-1} = A\^{-1}A = I_n\$. Based on the requirement that the
+$latex A$, if it exists, is the matrix $latex A\^{-1}$ such that
+$latex <span class="caps">AA</span>\^{-1} = A\^{-1}A = I_n$. Based on the requirement that the
 left and …</p>	
 </article>
 </main>

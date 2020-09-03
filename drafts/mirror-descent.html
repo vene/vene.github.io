@@ -24,23 +24,54 @@
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"
   integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4"
   crossorigin="anonymous"></script>
-  <script defer
-          src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
-          integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"
-          crossorigin="anonymous"> </script>
   <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    renderMathInElement(document.body, {
-       macros: {"\\reals": "\\mathbb{R}"},
-       throwOnError: true,
-       delimiters: [
-               {left: "$$", right: "$$", display: true},
-               {left: "$", right: "$", display: false},
-               {left: "\\(", right: "\\)", display: false},
-               {left: "\\[", right: "\\]", display: true}
-       ],
-     });
-  })
+
+ (function () {
+'use strict';
+
+var macros = {};
+
+var katexMath = (function () {
+    var maths = document.querySelectorAll('.arithmatex'),
+        tex;
+
+    for (var i = 0; i < maths.length; i++) {
+      tex = maths[i].textContent || maths[i].innerText;
+      if (tex.startsWith('\\(') && tex.endsWith('\\)')) {
+        katex.render(tex.slice(2, -2), maths[i], {
+            'macros': macros,
+            'displayMode': false,
+            'globalGroup': true});
+      } else if (tex.startsWith('\\[') && tex.endsWith('\\]')) {
+        katex.render(tex.slice(2, -2), maths[i], {
+            'macros': macros,
+            'displayMode': true,
+            'globalGroup': true});
+      }
+    }
+});
+
+(function () {
+  var onReady = function onReady(fn) {
+    if (document.addEventListener) {
+      document.addEventListener("DOMContentLoaded", fn);
+    } else {
+      document.attachEvent("onreadystatechange", function () {
+        if (document.readyState === "interactive") {
+          fn();
+        }
+      });
+    }
+  };
+
+  onReady(function () {
+    if (typeof katex !== "undefined") {
+      katexMath();
+    }
+  });
+})();
+
+}());
   </script>
 
 </head>
@@ -67,9 +98,38 @@
 </span></p>    </header>
 
     <div class="entry-content">
-      <div style="display: none">
-$$\gdef\foo{bar}$$
-</div>
+      <script src="https://unpkg.com/d3@3/d3.min.js"></script>
+
+<style type="text/css">
+
+#plotdiv {text-align: center;}
+
+.rules line, .rules path {
+  shape-rendering: crispEdges;
+  stroke: #00000;
+}
+
+.series path {
+  fill: none;
+  stroke: #348;
+}
+
+.labels {
+    font-family: sans-serif;
+    font-size: .7em;
+}
+
+.thick {
+  stroke-width: 4px;
+}
+
+.dashed {
+    stroke-width: 1px;
+}
+
+.unconstr{ fill: gray };
+.constr{ fill: black };
+</style>
 
 <p>When training machine learning models, and deep networks in particular,
 we typically use gradient-based methods. But if we require the weights to
@@ -79,26 +139,207 @@ In this post, we will explore these connections and demonstrate them in PyTorch 
 <h1>Why constraints are&nbsp;challenging</h1>
 <p>In many machine learning models, we fit a model to data by minimizing some
 error-like&nbsp;objective,</p>
-<p><span class="mathskip">$$\min_{x \in \mathcal{X}} f(x).&nbsp;\tag{OPT}$$</span></p>
-<p>Here, <span class="mathskip">$x$</span> denote the neural network weights, the parameters to be learned. They
-typically take values in <span class="mathskip">$\mathcal{X}=\reals$</span>, and we train networks by
-by choosing an initial configuration <span class="mathskip">$x^{(0)}$</span> and successively applying
-an update of the&nbsp;form</p>
-<p><span class="mathskip">$$
-x^{(t+1)} \leftarrow x^{(t)} - \alpha^{(t)} g(x^{(t)}).&nbsp;$$</span></p>
-<p>If <span class="mathskip">$f$</span> is convex and differentiable and <span class="mathskip">$g = Df$</span> is the gradient of <span class="mathskip">$f$</span>, this is
+<div class="arithmatex">\[\min_{x \in \mathcal{X}} f(x). \tag{OPT}\]</div>
+<p>Here, <span class="arithmatex">\(x\)</span> denote the neural network weights, the parameters to be learned. They
+typically take values in <span class="arithmatex">\(\mathcal{X}=\reals\)</span>, and we train networks by
+by choosing an initial configuration <span class="arithmatex">\(x^{(0)}\)</span> and successively applying
+updates of the&nbsp;form:</p>
+<div class="arithmatex">\[
+x^{(t+1)} \leftarrow x^{(t)} - \alpha^{(t)} g(x^{(t)}).
+\]</div>
+<p>If <span class="arithmatex">\(f\)</span> is convex and differentiable and <span class="arithmatex">\(g = Df\)</span> is the gradient of <span class="arithmatex">\(f\)</span>, this is
 the acclaimed <em>gradient descent</em> method. In deep learning, we typically get
 stochastic, non-descent methods that nonetheless perform well and are efficient.
-Here, we will focus on a &#8220;nice&#8221;, differentiable <span class="mathskip">$f$</span>, and we will see that even
-so,  constraints quickly complicate&nbsp;things.</p>
-<p>hi!</p>
-<!--
+Here, we will focus on a &#8220;nice&#8221;, differentiable <span class="arithmatex">\(f\)</span>, and we will see that even
+so, constraints quickly complicate&nbsp;things.</p>
+<p>For modeling reasons, we might want to impose <strong>constraints</strong> on some of the weights
+<span class="arithmatex">\(x\)</span>.  Perhaps one of the parameter corresponds to the variance of a
+distribution, and thus it cannot be negative. Or perhaps a parameter denotes
+some sort of &#8220;gate&#8221;, or mixture between two alternatives <span class="arithmatex">\(xa_1 + (1-x)a_2\)</span>. 
+In this case, we would need to constrain <span class="arithmatex">\(x \in [0, 1]\)</span>. This is often called a
+<em>box constraint</em> and it is one of the most friendly types of inequality
+constraint we might deal&nbsp;with.</p>
+<p>For one-dimensional convex problems, <em>i.e.,</em> <span class="arithmatex">\(\mathcal{X} = [a, b] \subset
+\reals\)</span>, box constraints do not complicate the problem: we can solve the
+unconstrained problem <span class="arithmatex">\(x_{\text{unc}}^* = \arg\min_{x\in\reals} f(x)\)</span>.  If the
+answer satisfies the constraint, then it must be the solution of the constrained
+problem as well. If not, the answer can be found by <em>clipping</em> to the&nbsp;interval:</p>
+<div class="arithmatex">\[ x^\star = \operatorname{clip}_{[a,b]}(x_\text{unc}^\star)
+\coloneqq \min(a, \max(b, x_\text{unc}^\star)).
+\]</div>
+<details class="note"><summary>Proof</summary><p>We add non-negative dual variables <span class="arithmatex">\(\mu_a\)</span> and <span class="arithmatex">\(\mu_b\)</span> to handle the inequality
+constraints <span class="arithmatex">\(x \geq a\)</span> and <span class="arithmatex">\(x \leq b\)</span>, and write the&nbsp;lagrangian,</p>
+<div class="arithmatex">\[\mathcal{L}(x) = f(x) + \mu_a (a-x) + \mu_b(x-b).\]</div>
+<p>An optimal <span class="arithmatex">\(x^\star\)</span> must satisfiy the original constraints <span class="arithmatex">\((a \leq x^\star \leq b)\)</span>
+and be a stationary point of the&nbsp;lagrangian:</p>
+<div class="arithmatex">\[ 
+D_x \mathcal{L}(x^\star) = 0 \iff f'(x^\star) = \mu_a - \mu_b.
+\tag{F}
+\]</div>
+<p>The dual variables must be non-negative and satisfy
+complementary&nbsp;slackness:</p>
+<div class="arithmatex">\[
+\mu_a (a - x^\star) = 0, \quad\text{and}\quad \mu_b (x^\star - b) = 0.
+\]</div>
+<p>Let <span class="arithmatex">\(x^\star_\text{unc}\)</span> be the solution of the unconstrained problem,
+satisfying  <span class="arithmatex">\(f'(x^\star_\text{unc})=0\)</span>. If 
+<span class="arithmatex">\(a \leq x^\star_\text{unc} \leq b\)</span>, then <span class="arithmatex">\(x^\star=x^\star_\text{unc}\)</span>, and
+choosing <span class="arithmatex">\(\mu_a=\mu_b=0\)</span> satisfies all&nbsp;conditions.</p>
+<p>Otherwise, <span class="arithmatex">\(x^\star_\text{unc}\)</span> is either too small or too large.
+Assume <span class="arithmatex">\(x^\star_\text{unc} &gt; a\)</span> and take <span class="arithmatex">\(x^\star = a\)</span>. Then we have <span class="arithmatex">\(\mu_b=0\)</span>,
+and from (F) we must have <span class="arithmatex">\(\mu_a = f'(a)\)</span>. Is this a valid value for the
+dual variable? We must check that <span class="arithmatex">\(f'(a) \geq 0\)</span>. Convex <span class="arithmatex">\(f\)</span> satisfies
+<span class="arithmatex">\( f(a) - f(x) \leq f'(a)(a-x) \)</span>
+for any <span class="arithmatex">\(x\)</span>, including the minimizer <span class="arithmatex">\(x=x^\star_\text{unc}\)</span>.
+By assumption, <span class="arithmatex">\(a-x^\star_\text{unc} &gt; 0\)</span>, so we may divide by it&nbsp;yielding</p>
+<div class="arithmatex">\[ \mu_a = f'(a) \geq \frac{f(a)-f(x^\star_\text{unc})}{a-x^\star_\text{unc}} \geq 0. \]</div>
+<p>The case <span class="arithmatex">\( x^\star_\text{unc} &gt; b \)</span> follows&nbsp;similarly.</p>
+</details>
+<p>The following animation might convince you that this is&nbsp;true:</p>
+<p><div id="plotdiv">
+  <svg id="onedimplot" width=550 height=150></svg> <br />
+    <input type="range" min="-1" max="2" step=".001" oninput="plot(this.value)" onchange="plot(this.value)">
+  </div></p>
+<script>
+var w = 500;
+var h = 100;
 
-Rest number two <label for="sn-blah" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-blah" class="margin-toggle"/><span class="sidenote">hello</span>
+var x = d3.scale.linear().domain([-2, 3]).range([0, w]);
+var xint = d3.scale.linear().domain([0, 1]);
+var y = d3.scale.linear().domain([ 0, 1]).range([h, 0]);
 
-and rest number two <label for="sn-proprietary-monotype-bimbo" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-proprietary-monotype-bimbo" class="margin-toggle"/><span class="sidenote">hello again</span>
+//  var svg = d3.select("body").append("svg")
+//  .attr("width", w + 50)
+//  .attr("height", h + 50);
+var svg = d3.select("#onedimplot");
+    var vis = svg.append("svg:g").attr("transform", "translate(25,25)")
+    make_rules();
 
--->
+    plot(0.5);
+
+
+    function plot(x0) {
+        var quadratic = make_quadratic(x0);
+        chart_line(quadratic, x0);
+    }
+
+    function make_quadratic(x0) {
+            return (function(t) {
+                    return 0.5 * (t - x0) * (t - x0) + 0.2;
+            });
+    }
+
+function chart_line(func, x0) {
+            vis.selectAll('.dots').remove();
+            vis.selectAll('.series').remove();
+    var g = vis.append("svg:g").classed("series", true)
+
+    g.append("svg:path")
+        .classed("dashed", true)
+        .attr("d", function(d) { return d3.svg.line()(
+          x.ticks(100).map(function(t) {
+            return [ x(t), y(func(t)) ]
+          })
+         )})
+
+    g.append("svg:path")
+        .classed("thick", true)
+        .attr("d", function(d) { return d3.svg.line()(
+          xint.ticks(100).map(function(t) {
+            return [ x(t), y(func(t)) ]
+          })
+                    )})
+
+
+            vis.append('circle')
+                .classed("dots", true)
+                .classed("unconstr", true)
+                .attr("r", 5)
+                .attr("cx", function(d) { return x(x0); })
+                .attr("cy", function(d) { return y(func(x0)); })
+
+          var xstar = Math.min(Math.max(x0, 0), 1);
+
+            vis.append('circle')
+                .classed("dots", true)
+                .classed("constr", true)
+                .attr("r", 5)
+                .attr("cx", function(d) { return x(xstar); })
+                .attr("cy", function(d) { return y(func(xstar)); })
+}
+
+function make_rules() {
+    var rules = vis.append("svg:g").classed("rules", true)
+
+    function make_x_axis() {
+        return d3.svg.axis()
+                .scale(x)
+                .orient("bottom")
+                .ticks(10)
+    }
+
+
+    rules.append("svg:g").classed("grid x_grid", true)
+            .attr("transform", "translate(0,"+h+")")
+            .call(make_x_axis()
+                .tickSize(0,0,0)
+                .tickFormat("")
+            )
+
+    rules.append("svg:g").classed("labels x_labels", true)
+            .attr("transform", "translate(0,"+h+")")
+            .call(make_x_axis()
+                .tickSize(1)
+            )
+}
+</script>
+
+<p>However, in dimension two or more, clipping no longer works, because of
+interactions between the variables. We demonstate this on a quadratic problem
+which will become the main focus of the rest of this&nbsp;post.</p>
+<div class="arithmatex">\[ \min_{x \in \mathcal{X}} 
+f(x) \coloneqq \frac{1}{2}~(x - x_0)^\top Q (x - x_0) \tag{QP} \]</div>
+<p>taking <span class="arithmatex">\(\mathcal{X} = [0,1] \times [0,1] \subset \reals^2\)</span>,
+<span class="arithmatex">\(x_0 = (1.5, .1)\)</span>, and 
+<span class="arithmatex">\(Q = \left(\begin{smallmatrix}3 &amp; 2 \\\\ 2 &amp; 3 \end{smallmatrix}\right)\)</span>.</p>
+<p>Here is what the contours of this function look like. You can see below that the
+constrained minimum <span class="arithmatex">\(x^\star\)</span> is not the same as the unconstrained minimum
+clipped to the box.<label for="sn-1" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-1" class="margin-toggle"/><span class="sidenote">
+There is an important special case where (<span class="caps">QP</span>) can be solved exactly: the
+case <span class="arithmatex">\(Q = I\)</span>. In this case, the problem becomes
+<span class="arithmatex">\(\arg\min_{x \in \mathcal{X}} \| x - x_0 \|^2_2,\)</span>
+which is known as the <em>euclidean projection</em> of <span class="arithmatex">\(x_0\)</span> onto <span class="arithmatex">\(\mathcal{X}\)</span>.
+If <span class="arithmatex">\(\mathcal{X}\)</span> are box constraints, the projection decomposes into a series of
+independent 1-d projections, which we&#8217;ve seen can be solved by
+clipping.</span>
+This means that, in general, we cannot simply ignore the constraints and apply
+them at the end, but we need to bake them into our optimization&nbsp;strategy.</p>
+<p><img alt="quadratic landscape" src="/images/mirror_quad_landscape.png"></img></p>
+<h2>Ways to deal with&nbsp;constraints.</h2>
+<p>When faced with a box-constrained optimization problem, these are the ideas that
+most practitioners would turn to.<label for="sn-2" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-2" class="margin-toggle"/><span class="sidenote">This turns out to be a handy personality
+quiz to see if somebody resonates more with neural networks or with convex&nbsp;optimization.</span></p>
+<ol>
+<li>
+<p><em>Reparamtrization (<span class="caps">REP</span>).</em> Instead of using constrained variables <span class="arithmatex">\(x\)</span>, replace them
+    with unconstrained <span class="arithmatex">\(u\)</span> such that <span class="arithmatex">\(x = \sigma(u)\)</span>, where <span class="arithmatex">\(\sigma\)</span> is a
+    &#8220;squishing&#8221; nonlinearity from <span class="arithmatex">\(\reals\)</span> to <span class="arithmatex">\(\mathcal{X}\)</span>. If
+    <span class="arithmatex">\(\mathcal{X}=[0,1]^d\)</span>, we may use the logistic&nbsp;function</p>
+<div class="arithmatex">\[ [\sigma(u)]_i = \frac{1}{1 - \exp(-u_i)}. \]</div>
+</li>
+<li>
+<p><em>Projected gradient (<span class="caps">PG</span>).</em> Perform unconstrained gradient updates, then
+    project back onto the domain after each&nbsp;update:</p>
+<div class="arithmatex">\[
+x^{(t+1)} \leftarrow \operatorname{Proj}_\mathcal{X}\big(x^{(t)} - \alpha^{(t)} g(x^{(t)})\big).
+\]</div>
+</li>
+</ol>
+<p><span class="caps">REP</span> is convenient when working with neural network libraries like PyTorch,
+because it can be implemented just by changing our model, without requiring
+modifications to the optimization code. However, the resulting problem (after
+reparametrization) is no longer convex in <span class="arithmatex">\(u\)</span>, even if the original problem was
+convex in <span class="arithmatex">\(x\)</span>. <span class="caps">PG</span> directly solves the convex optimization problem (<span class="caps">QP</span>), but.<label for="sn-3" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-3" class="margin-toggle"/><span class="sidenote">come up with a&nbsp;downside</span></p>
     </div><!-- /.entry-content -->
 
   </article>

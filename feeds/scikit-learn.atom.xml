@@ -11,21 +11,21 @@ faster wherever I&amp;nbsp;can.&lt;/p&gt;
 recall the accomplishments and failures of this project, and all the
 lessons to be&amp;nbsp;learned.&lt;/p&gt;
 &lt;h2&gt;The &lt;em&gt;scikit-learn-speed&lt;/em&gt; benchmark&amp;nbsp;platform&lt;/h2&gt;
-&lt;p&gt;[&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2012/08/skl-speed-300x163.png" title="skl-speed"&gt;]&lt;a href="http://localhost:8001/wp-content/uploads/2012/08/skl-speed-300x163.png" title="skl-speed"&gt;&lt;/a&gt;&lt;br&gt;
-[&lt;em&gt;Scikit-learn-speed&lt;/em&gt;][&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2012/08/skl-speed-300x163.png" title="skl-speed"&gt;] is a continuous benchmark suite for the
+&lt;p&gt;[&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2012/08/skl-speed-300x163.png" title="skl-speed" /&gt;]&lt;a href="http://localhost:8001/wp-content/uploads/2012/08/skl-speed-300x163.png" title="skl-speed"&gt;&lt;/a&gt;&lt;br /&gt;
+[&lt;em&gt;Scikit-learn-speed&lt;/em&gt;][&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2012/08/skl-speed-300x163.png" title="skl-speed" /&gt;] is a continuous benchmark suite for the
 &lt;a href="http://scikit-learn.org"&gt;&lt;em&gt;scikit-learn&lt;/em&gt;&lt;/a&gt; library. It has the following&amp;nbsp;features:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;em&gt;vbench&lt;/em&gt;-powered integration with&amp;nbsp;Git&lt;/li&gt;
 &lt;li&gt;Easily triggered build and report generation: just type &lt;code&gt;make&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;Easily readable and writeable template for benchmarks:
     &lt;p&gt;
-    [sourcecode lang=&amp;#8221;python&amp;#8221;]&lt;br&gt;
-    {&lt;br&gt;
-    &amp;#8216;obj&amp;#8217;: &amp;#8216;LogisticRegression&amp;#8217;,&lt;br&gt;
-    &amp;#8216;init_params&amp;#8217;: {&amp;#8216;C&amp;#8217;: 1e5},&lt;br&gt;
-    &amp;#8216;datasets&amp;#8217;: (&amp;#8216;arcene&amp;#8217;, &amp;#8216;madelon&amp;#8217;),&lt;br&gt;
-    &amp;#8216;statements&amp;#8217;: (&amp;#8216;fit&amp;#8217;, &amp;#8216;predict&amp;#8217;)&lt;br&gt;
-    }, &amp;#8230;&lt;br&gt;&amp;nbsp;[/sourcecode]&lt;/li&gt;
+    [sourcecode lang=&amp;#8221;python&amp;#8221;]&lt;br /&gt;
+    {&lt;br /&gt;
+    &amp;#8216;obj&amp;#8217;: &amp;#8216;LogisticRegression&amp;#8217;,&lt;br /&gt;
+    &amp;#8216;init_params&amp;#8217;: {&amp;#8216;C&amp;#8217;: 1e5},&lt;br /&gt;
+    &amp;#8216;datasets&amp;#8217;: (&amp;#8216;arcene&amp;#8217;, &amp;#8216;madelon&amp;#8217;),&lt;br /&gt;
+    &amp;#8216;statements&amp;#8217;: (&amp;#8216;fit&amp;#8217;, &amp;#8216;predict&amp;#8217;)&lt;br /&gt;
+    }, &amp;#8230;&lt;br /&gt;&amp;nbsp;[/sourcecode]&lt;/li&gt;
 &lt;li&gt;Many attributes recorded: time (w/ estimated standard deviation),
     memory usage, cProfiler output, line_profiler output,&amp;nbsp;tracebacks&lt;/li&gt;
 &lt;li&gt;Multi-step benchmarks: i.e. &lt;code&gt;fit&lt;/code&gt; followed by &lt;code&gt;predict&lt;/code&gt;&lt;/li&gt;
@@ -75,7 +75,7 @@ the profiler output with one click. I jumped on the following&amp;nbsp;speed-ups
 &lt;li&gt;Speed up &lt;code&gt;euclidean_distances&lt;/code&gt; by rewriting in Cython. (&lt;a href="https://github.com/scikit-learn/scikit-learn/pull/1006"&gt;&lt;span class="caps"&gt;PR&lt;/span&gt;&lt;/a&gt;)
     &lt;p&gt;
     This meant making more operations support an &lt;code&gt;out&lt;/code&gt; argument, for
-    passing preallocated memory. This touches many&lt;br&gt;
+    passing preallocated memory. This touches many&lt;br /&gt;
     different objects in the codebase: clustering, manifold learning,
     nearest neighbour&amp;nbsp;methods.&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://localhost:8001/2012/08/18/inverses-pseudoinverses-numerical-issues-speed-symmetry/" title="Inverses and pseudoinverses. Numerical issues, speed, symmetry."&gt;Insight into inverse and pseudoinverse computation&lt;/a&gt;, new &lt;code&gt;pinvh&lt;/code&gt;
@@ -104,23 +104,23 @@ computations that are orders of magnitude slower. However, there is an
 elephant in the room: the assumption that making code faster invariably
 makes it less clear, and takes a lot of&amp;nbsp;effort.&lt;/p&gt;
 &lt;p&gt;The following code is a part of scipy&amp;#8217;s &lt;code&gt;pinv2&lt;/code&gt; function as it currently
-is written:&lt;br&gt;
-[sourcecode lang=&amp;#8221;python&amp;#8221;]&lt;br&gt;
-cutoff = cond*np.maximum.reduce(s)&lt;br&gt;
-psigma = np.zeros((m, n), t)&lt;br&gt;
-for i in range(len(s)):&lt;br&gt;
-if s[i] &gt; cutoff:&lt;br&gt;
-psigma[i,i] = 1.0/np.conjugate(s[i])&lt;br&gt;
-return np.transpose(np.conjugate(np.dot(np.dot(u,psigma),vh)))&lt;br&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
+is written:&lt;br /&gt;
+[sourcecode lang=&amp;#8221;python&amp;#8221;]&lt;br /&gt;
+cutoff = cond*np.maximum.reduce(s)&lt;br /&gt;
+psigma = np.zeros((m, n), t)&lt;br /&gt;
+for i in range(len(s)):&lt;br /&gt;
+if s[i] &gt; cutoff:&lt;br /&gt;
+psigma[i,i] = 1.0/np.conjugate(s[i])&lt;br /&gt;
+return np.transpose(np.conjugate(np.dot(np.dot(u,psigma),vh)))&lt;br /&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;psigma&lt;/code&gt; is a diagonal matrix, and some time and memory can be saved
 with simple vectorization. However, this part of the code dominated by
 an above call to &lt;code&gt;svd&lt;/code&gt;. The profiler output would say that we shouldn&amp;#8217;t
 bother, but is it really a bother? Look at Jake&amp;#8217;s new&amp;nbsp;version:&lt;/p&gt;
-&lt;p&gt;[sourcecode lang=&amp;#8221;python&amp;#8221;]&lt;br&gt;
-above_cutoff = (s &gt; cond * np.max(s))&lt;br&gt;
-psigma_diag = np.zeros_like(s)&lt;br&gt;
+&lt;p&gt;[sourcecode lang=&amp;#8221;python&amp;#8221;]&lt;br /&gt;
+above_cutoff = (s &gt; cond * np.max(s))&lt;br /&gt;
+psigma_diag = np.zeros_like(s)&lt;br /&gt;
 psigma_diag[above_cutoff] = 1.0 /&amp;nbsp;s[above_cutoff]&lt;/p&gt;
-&lt;p&gt;return np.transpose(np.conjugate(np.dot(u * psigma_diag, vh)))&lt;br&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
+&lt;p&gt;return np.transpose(np.conjugate(np.dot(u * psigma_diag, vh)))&lt;br /&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
 &lt;p&gt;It&amp;#8217;s shorter, more elegant, easier to read, and nevertheless faster. I
 would say it is worth&amp;nbsp;it.&lt;/p&gt;
 &lt;h3&gt;Small speed-ups can&amp;nbsp;propagate&lt;/h3&gt;
@@ -139,7 +139,7 @@ large number of speed-ups, but a few considerable ones nonetheless. And
 I venture the claim that the &lt;em&gt;scikit-learn-speed&lt;/em&gt; tool will prove useful
 over time, and that the efforts deployed during this project have
 stretched beyond the boundary of the &lt;em&gt;scikit-learn&lt;/em&gt;.&lt;/p&gt;
-&lt;p&gt;[&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2012/08/skl-speed-300x163.png" title="skl-speed"&gt;]:&amp;nbsp;http://jenkins-scikit-learn.github.com/scikit-learn-speed/&lt;/p&gt;</content><category term="scikit-learn"></category><category term="gsoc"></category><category term="optimization"></category><category term="scikit-learn-speed"></category><category term="speedup"></category><category term="summary"></category><category term="vbench"></category><category term="benchmarking"></category><category term="python"></category><category term="scikit-learn"></category></entry><entry><title>The scikit-learn-speed ship has set sail! Faster than ever, with multi-step benchmarks!</title><link href="//vene.ro/blog/the-scikit-learn-speed-ship-has-set-sail-faster-than-ever-with-multi-step-benchmarks.html" rel="alternate"></link><published>2012-08-11T17:32:00+02:00</published><updated>2012-08-11T17:32:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2012-08-11:/blog/the-scikit-learn-speed-ship-has-set-sail-faster-than-ever-with-multi-step-benchmarks.html</id><summary type="html">&lt;p&gt;I am pleased to announce that last night at 2:03 &lt;span class="caps"&gt;AM&lt;/span&gt;, the first fully
+&lt;p&gt;[&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2012/08/skl-speed-300x163.png" title="skl-speed" /&gt;]:&amp;nbsp;http://jenkins-scikit-learn.github.com/scikit-learn-speed/&lt;/p&gt;</content><category term="scikit-learn"></category><category term="gsoc"></category><category term="optimization"></category><category term="scikit-learn-speed"></category><category term="speedup"></category><category term="summary"></category><category term="vbench"></category><category term="benchmarking"></category><category term="python"></category><category term="scikit-learn"></category></entry><entry><title>The scikit-learn-speed ship has set sail! Faster than ever, with multi-step benchmarks!</title><link href="//vene.ro/blog/the-scikit-learn-speed-ship-has-set-sail-faster-than-ever-with-multi-step-benchmarks.html" rel="alternate"></link><published>2012-08-11T17:32:00+02:00</published><updated>2012-08-11T17:32:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2012-08-11:/blog/the-scikit-learn-speed-ship-has-set-sail-faster-than-ever-with-multi-step-benchmarks.html</id><summary type="html">&lt;p&gt;I am pleased to announce that last night at 2:03 &lt;span class="caps"&gt;AM&lt;/span&gt;, the first fully
 automated run of the scikit-learn-speed test suite has run on our
 Jenkins instance! You can admire it at &lt;a href="http://jenkins-scikit-learn.github.com/scikit-learn-speed/"&gt;its temporary home&lt;/a&gt; for now.
 As soon as we verify that everything is good, we will move …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I am pleased to announce that last night at 2:03 &lt;span class="caps"&gt;AM&lt;/span&gt;, the first fully
@@ -170,10 +170,10 @@ complicated algorithms to fit them, but evaluation is a simple
 matrix-vector product that Numpy handles&amp;nbsp;perfectly.&lt;/p&gt;
 &lt;p&gt;But many of scikit-learn&amp;#8217;s estimators have both steps interesting. Let&amp;#8217;s
 take Non-negative Matrix Factorization. It has three interesting
-functions: The &lt;code&gt;fit&lt;/code&gt; that computes \$latex X = &lt;span class="caps"&gt;WH&lt;/span&gt; \$, the &lt;code&gt;transform&lt;/code&gt;
+functions: The &lt;code&gt;fit&lt;/code&gt; that computes $latex X = &lt;span class="caps"&gt;WH&lt;/span&gt; $, the &lt;code&gt;transform&lt;/code&gt;
 that computes a non-negative projection on the components learned in
 &lt;code&gt;fit&lt;/code&gt;, and &lt;code&gt;fit_transform&lt;/code&gt; that takes advantage of the observation that
-when fitting, we also get the transformed \$latex X \$ for&amp;nbsp;free.&lt;/p&gt;
+when fitting, we also get the transformed $latex X $ for&amp;nbsp;free.&lt;/p&gt;
 &lt;p&gt;When benchmarking &lt;span class="caps"&gt;NMF&lt;/span&gt;, we initially had to design 3&amp;nbsp;benchmarks:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;setup =&lt;/code&gt;standard, &lt;code&gt;code = obj.fit(X)&lt;/code&gt;&lt;/li&gt;
@@ -196,17 +196,17 @@ sequence of strings, instead of just a string. On the database side,
 every benchmark result entry gets an extra component in the primary key,
 the number of the step it&amp;nbsp;measures.&lt;/p&gt;
 &lt;p&gt;In the benchmark description files, nothing is&amp;nbsp;changed:&lt;/p&gt;
-&lt;p&gt;[sourcecode lang=&amp;#8221;python&amp;#8221;]&lt;br&gt;
-{&lt;br&gt;
-&amp;#8216;obj&amp;#8217;: &amp;#8216;&lt;span class="caps"&gt;NMF&lt;/span&gt;&amp;#8217;,&lt;br&gt;
-&amp;#8216;init_params&amp;#8217;: {&amp;#8216;n_components&amp;#8217;: 2},&lt;br&gt;
-&amp;#8216;datasets&amp;#8217;: (&amp;#8216;blobs&amp;#8217;,),&lt;br&gt;
-&amp;#8216;statements&amp;#8217;: (&amp;#8216;fit_unsup&amp;#8217;, &amp;#8216;transform_unsup&amp;#8217;, &amp;#8216;fit_transform&amp;#8217;)&lt;br&gt;
-},&lt;br&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
+&lt;p&gt;[sourcecode lang=&amp;#8221;python&amp;#8221;]&lt;br /&gt;
+{&lt;br /&gt;
+&amp;#8216;obj&amp;#8217;: &amp;#8216;&lt;span class="caps"&gt;NMF&lt;/span&gt;&amp;#8217;,&lt;br /&gt;
+&amp;#8216;init_params&amp;#8217;: {&amp;#8216;n_components&amp;#8217;: 2},&lt;br /&gt;
+&amp;#8216;datasets&amp;#8217;: (&amp;#8216;blobs&amp;#8217;,),&lt;br /&gt;
+&amp;#8216;statements&amp;#8217;: (&amp;#8216;fit_unsup&amp;#8217;, &amp;#8216;transform_unsup&amp;#8217;, &amp;#8216;fit_transform&amp;#8217;)&lt;br /&gt;
+},&lt;br /&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
 &lt;p&gt;But before, we would take the cartesian product of datasets and
 statements, and build a &lt;code&gt;Benchmark&lt;/code&gt; object for every pairing. Now, we
 just pass the tuple as it is, and vbench is smart enough to do the right
-thing.&lt;br&gt;
+thing.&lt;br /&gt;
 We avoided the extra calls to &lt;code&gt;fit&lt;/code&gt; in a lot of benchmarks. The whole
 suite now takes almost half the time to&amp;nbsp;run!&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Note:&lt;/em&gt; This trick is currently hosted in the
@@ -240,7 +240,7 @@ want to have a huge, monolithic &lt;code&gt;Benchmark&lt;/code&gt; class that wa
 what we want in scikit-learn-speed. So on this branch, I set up a
 mixin/multiple inheritance hierarchy of benchmark&amp;nbsp;classes.&lt;/p&gt;
 &lt;p&gt;The &lt;code&gt;Benchmark&lt;/code&gt; class in vbench is now an abstract base class, with some
-common functionality and structure.&lt;br&gt;
+common functionality and structure.&lt;br /&gt;
 Our &lt;code&gt;SklBenchmark&lt;/code&gt; class is defined in scikit-learn-speed&amp;nbsp;as:&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;class SklBenchmark(CProfileBenchmarkMixin,  MemoryBenchmarkMixin, PythonBenchmark):&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;Let&amp;#8217;s read this from right to&amp;nbsp;left:&lt;/p&gt;
@@ -301,24 +301,24 @@ before engineering such a solution, I wanted to test out how to generate
 three related benchmarks using different arguments for the dataset
 generation&amp;nbsp;function.&lt;/p&gt;
 &lt;p&gt;This is what I came up&amp;nbsp;with:&lt;/p&gt;
-&lt;p&gt;[sourcecode language=&amp;#8221;python&amp;#8221;]&lt;br&gt;
+&lt;p&gt;[sourcecode language=&amp;#8221;python&amp;#8221;]&lt;br /&gt;
 from vbench.benchmark import&amp;nbsp;Benchmark&lt;/p&gt;
-&lt;p&gt;_setup = &amp;#8220;&amp;#8221;&amp;#8220;&lt;br&gt;
+&lt;p&gt;_setup = &amp;#8220;&amp;#8221;&amp;#8220;&lt;br /&gt;
 from deps import&amp;nbsp;*&lt;/p&gt;
-&lt;p&gt;kwargs = %s&lt;br&gt;
-X, y = make_regression(random_state=0, **kwargs)&lt;br&gt;
-lr = LinearRegression()&lt;br&gt;&amp;nbsp;&amp;#8220;&amp;#8221;&amp;#8220;&lt;/p&gt;
-&lt;p&gt;_configurations = [&lt;br&gt;
-(&amp;#8216;linear_regression_many_samples&amp;#8217;,&lt;br&gt;
-{&amp;#8216;n_samples&amp;#8217;: 10000, &amp;#8216;n_features&amp;#8217;: 100}),&lt;br&gt;
-(&amp;#8216;linear_regression_many_features&amp;#8217;,&lt;br&gt;
-{&amp;#8216;n_samples&amp;#8217;: 100, &amp;#8216;n_features&amp;#8217;: 10000}),&lt;br&gt;
-(&amp;#8216;linear_regression_many_targets&amp;#8217;,&lt;br&gt;
-{&amp;#8216;n_samples&amp;#8217;: 1000, &amp;#8216;n_features&amp;#8217;: 100, &amp;#8216;n_targets&amp;#8217;: 100})&lt;br&gt;&amp;nbsp;]&lt;/p&gt;
+&lt;p&gt;kwargs = %s&lt;br /&gt;
+X, y = make_regression(random_state=0, **kwargs)&lt;br /&gt;
+lr = LinearRegression()&lt;br /&gt;&amp;nbsp;&amp;#8220;&amp;#8221;&amp;#8220;&lt;/p&gt;
+&lt;p&gt;_configurations = [&lt;br /&gt;
+(&amp;#8216;linear_regression_many_samples&amp;#8217;,&lt;br /&gt;
+{&amp;#8216;n_samples&amp;#8217;: 10000, &amp;#8216;n_features&amp;#8217;: 100}),&lt;br /&gt;
+(&amp;#8216;linear_regression_many_features&amp;#8217;,&lt;br /&gt;
+{&amp;#8216;n_samples&amp;#8217;: 100, &amp;#8216;n_features&amp;#8217;: 10000}),&lt;br /&gt;
+(&amp;#8216;linear_regression_many_targets&amp;#8217;,&lt;br /&gt;
+{&amp;#8216;n_samples&amp;#8217;: 1000, &amp;#8216;n_features&amp;#8217;: 100, &amp;#8216;n_targets&amp;#8217;: 100})&lt;br /&gt;&amp;nbsp;]&lt;/p&gt;
 &lt;p&gt;_statement = &amp;#8220;lr.fit(X,&amp;nbsp;y)&amp;#8221;&lt;/p&gt;
-&lt;p&gt;_globs = globals()&lt;br&gt;
+&lt;p&gt;_globs = globals()&lt;br /&gt;
 _globs.update({name: Benchmark(_statement, _setup % str(kwargs),
-name=name)&lt;br&gt;
+name=name)&lt;br /&gt;
 for name, kwargs in&amp;nbsp;_configurations})&lt;/p&gt;
 &lt;p&gt;[/sourcecode]&lt;/p&gt;
 &lt;p&gt;It works perfectly, but I don&amp;#8217;t like having to hack the globals to make
@@ -336,14 +336,14 @@ that anything was&amp;nbsp;wrong.&lt;/p&gt;
 &lt;p&gt;So what was the problem? My fault, of course, whitespace. But in all
 fairness, we should add better&amp;nbsp;feedback.&lt;/p&gt;
 &lt;p&gt;This is what I was doing to generate the setup&amp;nbsp;string:&lt;/p&gt;
-&lt;p&gt;[sourcecode lang=&amp;#8221;python&amp;#8221;]&lt;br&gt;
-def _make_setup(kwargs):&lt;br&gt;
-return &amp;#8220;&amp;#8221;&amp;#8220;&lt;br&gt;
+&lt;p&gt;[sourcecode lang=&amp;#8221;python&amp;#8221;]&lt;br /&gt;
+def _make_setup(kwargs):&lt;br /&gt;
+return &amp;#8220;&amp;#8221;&amp;#8220;&lt;br /&gt;
 from deps import&amp;nbsp;*&lt;/p&gt;
-&lt;p&gt;kwargs = %s&lt;br&gt;
-X, y = make_regression(random_state=0, **kwargs)&lt;br&gt;
-lr = LinearRegression()&lt;br&gt;
-&amp;#8220;&amp;#8221;&amp;#8221; % str(kwargs)&lt;br&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
+&lt;p&gt;kwargs = %s&lt;br /&gt;
+X, y = make_regression(random_state=0, **kwargs)&lt;br /&gt;
+lr = LinearRegression()&lt;br /&gt;
+&amp;#8220;&amp;#8221;&amp;#8221; % str(kwargs)&lt;br /&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
 &lt;p&gt;It&amp;#8217;s clear as daylight now that I overzealously indented the multiline
 string. But man, was it hard to debug! Also, in this example, the bug
 led to a refactoring that made the whole thing nicer and more direct.
@@ -354,8 +354,8 @@ Google Summer of Code project. By the way, this year&amp;#8217;s logo and swag
 looks a lot nicer than last year&amp;#8217;s, thank …&lt;/p&gt;</summary><content type="html">&lt;p&gt;With a slight delay caused by going to lovely lovely Istanbul for the
 &lt;span class="caps"&gt;LREC&lt;/span&gt; conference where I presented a &lt;a href="http://vene.ro/papers/lrec12-poster.pdf"&gt;poster&lt;/a&gt;, I am back to work on the
 Google Summer of Code project. By the way, this year&amp;#8217;s logo and swag
-looks a lot nicer than last year&amp;#8217;s, thank you Google!&lt;br&gt;
-[&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2012/05/P5280194-300x225.jpg" title="GSoC swag"&gt;]&lt;a href="http://localhost:8001/wp-content/uploads/2012/05/P5280194-300x225.jpg" title="GSoC swag"&gt;&lt;/a&gt;&lt;br&gt;
+looks a lot nicer than last year&amp;#8217;s, thank you Google!&lt;br /&gt;
+[&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2012/05/P5280194-300x225.jpg" title="GSoC swag" /&gt;]&lt;a href="http://localhost:8001/wp-content/uploads/2012/05/P5280194-300x225.jpg" title="GSoC swag"&gt;&lt;/a&gt;&lt;br /&gt;
 The backbone of my GSoC consists of putting together a continuous
 benchmark platform. I took a good look at &lt;a href="https://github.com/pydata/vbench"&gt;vbench&lt;/a&gt; and spent an
 evening hacking Wes&amp;#8217;s benchmarks suite config into something that will
@@ -411,18 +411,18 @@ features from &lt;code&gt;perf.py&lt;/code&gt;). While I continue exploring this
 to hear feedback from people who had to do with similar issues. As for
 the GSoC timeline, I plan to join forces with Immanuel and design a
 solid benchmark suite for the linear models over the next 2&amp;nbsp;weeks.&lt;/p&gt;
-&lt;p&gt;[&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2012/05/P5280194-300x225.jpg" title="GSoC swag"&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2012/05/P5280194.jpg&lt;/p&gt;</content><category term="scikit-learn"></category><category term="benchmarks"></category><category term="perf.py"></category><category term="performance"></category><category term="vbench"></category><category term="scikit-learn"></category></entry><entry><title>Support vector regression on Anscombe’s dataset</title><link href="//vene.ro/blog/support-vector-regression-on-anscombes-dataset.html" rel="alternate"></link><published>2012-05-27T21:59:00+02:00</published><updated>2012-05-27T21:59:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2012-05-27:/blog/support-vector-regression-on-anscombes-dataset.html</id><summary type="html">&lt;p&gt;&lt;a href="http://en.wikipedia.org/wiki/Anscombe's_quartet" title="Anscombe's quartet"&gt;Anscombe&amp;#8217;s quartet&lt;/a&gt; is a set of four toy datasets that look very
+&lt;p&gt;[&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2012/05/P5280194-300x225.jpg" title="GSoC swag" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2012/05/P5280194.jpg&lt;/p&gt;</content><category term="scikit-learn"></category><category term="benchmarks"></category><category term="perf.py"></category><category term="performance"></category><category term="vbench"></category><category term="scikit-learn"></category></entry><entry><title>Support vector regression on Anscombe’s dataset</title><link href="//vene.ro/blog/support-vector-regression-on-anscombes-dataset.html" rel="alternate"></link><published>2012-05-27T21:59:00+02:00</published><updated>2012-05-27T21:59:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2012-05-27:/blog/support-vector-regression-on-anscombes-dataset.html</id><summary type="html">&lt;p&gt;&lt;a href="http://en.wikipedia.org/wiki/Anscombe's_quartet" title="Anscombe's quartet"&gt;Anscombe&amp;#8217;s quartet&lt;/a&gt; is a set of four toy datasets that look very
 different, but many of their statistics coincide. They were developed by
 Francis Anscombe as a striking visual to show that even for small
 datasets, blindly examining their statistical properties without
 considering their structure can&amp;nbsp;mislead.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Anscombe's datasets" src="http://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Anscombe%27s_quartet_3.svg/640px-Anscombe%27s_quartet_3.svg.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Anscombe's datasets" src="http://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Anscombe%27s_quartet_3.svg/640px-Anscombe%27s_quartet_3.svg.png" /&gt;&lt;/p&gt;
 &lt;p&gt;Particularly, the …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a href="http://en.wikipedia.org/wiki/Anscombe's_quartet" title="Anscombe's quartet"&gt;Anscombe&amp;#8217;s quartet&lt;/a&gt; is a set of four toy datasets that look very
 different, but many of their statistics coincide. They were developed by
 Francis Anscombe as a striking visual to show that even for small
 datasets, blindly examining their statistical properties without
 considering their structure can&amp;nbsp;mislead.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Anscombe's datasets" src="http://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Anscombe%27s_quartet_3.svg/640px-Anscombe%27s_quartet_3.svg.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Anscombe's datasets" src="http://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Anscombe%27s_quartet_3.svg/640px-Anscombe%27s_quartet_3.svg.png" /&gt;&lt;/p&gt;
 &lt;p&gt;Particularly, the four datasets have the same &lt;a href="http://scikit-learn.org/stable/modules/linear_model.html#ordinary-least-squares" title="Ordinary least squares regression"&gt;least squares regression
 line&lt;/a&gt;. While the second dataset is a clear example of a nonlinear
 correlation which cannot be accurately captured by any linear model, the
@@ -440,7 +440,7 @@ the outlier and on two other points. For [latex]\epsilon=0[/latex], you
 can see that every point except a non-outlier is highlighted. This is
 actually the perfect solution but very&amp;nbsp;dense.&lt;/p&gt;
 &lt;p&gt;[&lt;img alt="Support vector regression on Anscombe's third dataset with no
-noise" src=""&gt;][]&lt;/p&gt;
+noise" src="" /&gt;][]&lt;/p&gt;
 &lt;p&gt;Every frame displays the global mean squared error and the true mean
 squared error, &lt;em&gt;i.e.&lt;/em&gt; over the inlying points. If the epsilon size is
 well chosen, &lt;span class="caps"&gt;SVR&lt;/span&gt; can perform robustly with a sparse solution. Since our
@@ -450,7 +450,7 @@ is often useful because of variability in the data. When adding noise,
 &lt;span class="caps"&gt;SVR&lt;/span&gt; still manages to avoid the outlier, but when the tube width becomes
 zero, the solution is again very dense, very&amp;nbsp;non-parametric.&lt;/p&gt;
 &lt;p&gt;[&lt;img alt="Support vector regression on Anscombe's third dataset with
-noise" src="http://localhost:8001/wp-content/uploads/2012/05/svr_noise.gif" title="SVR on Anscombe's dataset with noise"&gt;][]&lt;/p&gt;
+noise" src="http://localhost:8001/wp-content/uploads/2012/05/svr_noise.gif" title="SVR on Anscombe's dataset with noise" /&gt;][]&lt;/p&gt;
 &lt;p&gt;Here is the code you can use to play around with&amp;nbsp;this.&lt;/p&gt;
 &lt;p&gt;[gist&amp;nbsp;id=2815589]&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c"&gt;http://localhost:8001/wp-content/uploads/2012/05/svr.gif&lt;/span&gt;
@@ -459,9 +459,9 @@ noise" src="http://localhost:8001/wp-content/uploads/2012/05/svr_noise.gif" titl
 
 
 &lt;p&gt;[&lt;img alt="Support vector regression on Anscombe's third dataset with no
-  noise" src=""&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2012/05/svr.gif&lt;/p&gt;
+  noise" src="" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2012/05/svr.gif&lt;/p&gt;
 &lt;p&gt;[&lt;img alt="Support vector regression on Anscombe's third dataset with
-  noise" src="http://localhost:8001/wp-content/uploads/2012/05/svr_noise.gif" title="SVR on Anscombe's dataset with noise"&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2012/05/svr_noise.gif&lt;/p&gt;</content><category term="scikit-learn"></category><category term="anscombe"></category><category term="outlier"></category><category term="robust regression"></category><category term="support vector regression"></category><category term="svm"></category><category term="svr"></category><category term="python"></category><category term="scikit-learn"></category></entry><entry><title>GSoC 2012 proposal: Need for scikit-learn speed</title><link href="//vene.ro/blog/gsoc-2012-proposal-need-for-scikit-learn-speed.html" rel="alternate"></link><published>2012-04-16T00:37:00+02:00</published><updated>2012-04-16T00:37:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2012-04-16:/blog/gsoc-2012-proposal-need-for-scikit-learn-speed.html</id><summary type="html">&lt;p&gt;This summer I hope to be able to put in another full-time amount of
+  noise" src="http://localhost:8001/wp-content/uploads/2012/05/svr_noise.gif" title="SVR on Anscombe's dataset with noise" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2012/05/svr_noise.gif&lt;/p&gt;</content><category term="scikit-learn"></category><category term="anscombe"></category><category term="outlier"></category><category term="robust regression"></category><category term="support vector regression"></category><category term="svm"></category><category term="svr"></category><category term="python"></category><category term="scikit-learn"></category></entry><entry><title>GSoC 2012 proposal: Need for scikit-learn speed</title><link href="//vene.ro/blog/gsoc-2012-proposal-need-for-scikit-learn-speed.html" rel="alternate"></link><published>2012-04-16T00:37:00+02:00</published><updated>2012-04-16T00:37:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2012-04-16:/blog/gsoc-2012-proposal-need-for-scikit-learn-speed.html</id><summary type="html">&lt;p&gt;This summer I hope to be able to put in another full-time amount of
 effort into scikit-learn. After a successful Google Summer of Code
 project last year on dictionary learning, I now plan to do some
 low-level work. The title of my proposal is: &amp;#8220;Need for scikit-learn
@@ -533,9 +533,9 @@ a similar (or maybe even identical) outcome, in theory. So lucky that
 Alejandro pointed out to him the existence of the scikit-learn
 implementation, and that Bob&amp;#8217;s code &lt;a href="http://media.aau.dk/null_space_pursuits/2011/10/omp-in-python-strange-results.html"&gt;exposed a bug&lt;/a&gt; that all the test
 coverage didn&amp;#8217;t catch! This plot should increase, certainly not
-decrease! Something is clearly wrong here.&lt;br&gt;
+decrease! Something is clearly wrong here.&lt;br /&gt;
 &lt;a href="http://media.aau.dk/null_space_pursuits/2011/10/omp-in-python-strange-results.html"&gt;&lt;img alt="OMP buggy phase transition, decreasing instead of
-increasing" src="http://media.aau.dk/null_space_pursuits/2011/10/17/OMPscikit.png" title="OMP buggy phase transition"&gt;&lt;/a&gt;&lt;br&gt;
+increasing" src="http://media.aau.dk/null_space_pursuits/2011/10/17/OMPscikit.png" title="OMP buggy phase transition" /&gt;&lt;/a&gt;&lt;br /&gt;
 Luckily we were able to find it and &lt;a href="http://media.aau.dk/null_space_pursuits/2011/10/to-the-rescue.html"&gt;fix it&lt;/a&gt; very quickly. I have
 updated the old entries I wrote on the &lt;span class="caps"&gt;OMP&lt;/span&gt; optimizations, so they no
 longer include the bug. But I take this opportunity to explain what
@@ -555,23 +555,23 @@ leading to more zero entries than we should have. A keen eye could have
 noticed that the first `n_nonzero_coefs` entries in &lt;span class="caps"&gt;OMP&lt;/span&gt; solution
 vectors were never non-zero. But alas, my eye was not a keen one at&amp;nbsp;all.&lt;/p&gt;
 &lt;p&gt;In other words, the following test (that was written after the bug was
-found, unfortunately) was failing:&lt;br&gt;
-[sourcecode lang=&amp;#8221;Python&amp;#8221;]&lt;br&gt;
-def test_swapped_regressors():&lt;br&gt;
-gamma = np.zeros(n_features)&lt;br&gt;
-# X[:, 21] should be selected first, then X[:, 0] selected second,&lt;br&gt;
-# which will take X[:, 21]&amp;#8217;s place in case the algorithm does&lt;br&gt;
-# column swapping for optimization (which is the case at the moment)&lt;br&gt;
-gamma[21] = 1.0&lt;br&gt;
-gamma[0] = 0.5&lt;br&gt;
-new_y = np.dot(X, gamma)&lt;br&gt;
-new_Xy = np.dot(X.T, new_y)&lt;br&gt;
-gamma_hat = orthogonal_mp(X, new_y, 2)&lt;br&gt;
-gamma_hat_gram = orthogonal_mp_gram(G, new_Xy, 2)&lt;br&gt;
-# active indices should be [0, 21], but prior to the bugfix&lt;br&gt;
-# the algorithm would update only [21] but twice&lt;br&gt;
-assert_equal(np.flatnonzero(gamma_hat), [0, 21])&lt;br&gt;
-assert_equal(np.flatnonzero(gamma_hat_gram), [0, 21])&lt;br&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
+found, unfortunately) was failing:&lt;br /&gt;
+[sourcecode lang=&amp;#8221;Python&amp;#8221;]&lt;br /&gt;
+def test_swapped_regressors():&lt;br /&gt;
+gamma = np.zeros(n_features)&lt;br /&gt;
+# X[:, 21] should be selected first, then X[:, 0] selected second,&lt;br /&gt;
+# which will take X[:, 21]&amp;#8217;s place in case the algorithm does&lt;br /&gt;
+# column swapping for optimization (which is the case at the moment)&lt;br /&gt;
+gamma[21] = 1.0&lt;br /&gt;
+gamma[0] = 0.5&lt;br /&gt;
+new_y = np.dot(X, gamma)&lt;br /&gt;
+new_Xy = np.dot(X.T, new_y)&lt;br /&gt;
+gamma_hat = orthogonal_mp(X, new_y, 2)&lt;br /&gt;
+gamma_hat_gram = orthogonal_mp_gram(G, new_Xy, 2)&lt;br /&gt;
+# active indices should be [0, 21], but prior to the bugfix&lt;br /&gt;
+# the algorithm would update only [21] but twice&lt;br /&gt;
+assert_equal(np.flatnonzero(gamma_hat), [0, 21])&lt;br /&gt;
+assert_equal(np.flatnonzero(gamma_hat_gram), [0, 21])&lt;br /&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
 &lt;p&gt;Note that this bug has been fixed for a while, but I didn&amp;#8217;t get the free
 time to write this post until now. Good news is: we fixed it, and did so
 very quickly after the report. So you can still trust me, I&amp;nbsp;guess!&lt;/p&gt;</content><category term="scikit-learn"></category><category term="bug"></category><category term="omp"></category><category term="orthogonal matching pursuit"></category><category term="dictionary learning"></category><category term="scikit-learn"></category></entry><entry><title>Dictionary learning in scikit-learn 0.9</title><link href="//vene.ro/blog/dictionary-learning-in-scikit-learn-0-9.html" rel="alternate"></link><published>2011-09-19T19:15:00+02:00</published><updated>2011-09-19T19:15:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-09-19:/blog/dictionary-learning-in-scikit-learn-0-9.html</id><summary type="html">&lt;p&gt;Thanks to Olivier, Gaël and Alex, who reviewed the code heavily the last
@@ -583,8 +583,8 @@ couple of days, and with apologies for my lack of activity during a
 sequence of conferences, Dictionary learning has officially been merged
 into scikit-learn master, and just in time for the new scikit-learn 0.9
 release. Here are some glimpses of the examples you can run for&amp;nbsp;yourself:&lt;/p&gt;
-&lt;p&gt;[&lt;img alt="Dictionary learned from Lena patches" src="http://localhost:8001/wp-content/uploads/2011/09/plot_image_denoising_1.png" title="plot_image_denoising_1"&gt;][]&lt;/p&gt;
-&lt;p&gt;[&lt;img alt="Noisy image for denoising" src="http://localhost:8001/wp-content/uploads/2011/09/plot_image_denoising_24.png" title="plot_image_denoising_24"&gt;][]&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="Dictionary learned from Lena patches" src="http://localhost:8001/wp-content/uploads/2011/09/plot_image_denoising_1.png" title="plot_image_denoising_1" /&gt;][]&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="Noisy image for denoising" src="http://localhost:8001/wp-content/uploads/2011/09/plot_image_denoising_24.png" title="plot_image_denoising_24" /&gt;][]&lt;/p&gt;
 &lt;p&gt;[![Image denoising with Dictionary learning and Orthogonal matching&amp;nbsp;pursuit][]][]&lt;/p&gt;
 &lt;p&gt;The stars of this new release are: the manifold learning module by Jake
 Vanderplas and Fabian Pedregosa, the Dirichlet process gaussian mixture
@@ -594,8 +594,8 @@ this post with permanent&amp;nbsp;links).&lt;/p&gt;
 &lt;p&gt;The release is due tomorrow. I will also be in charge with building the
 Windows installers for this release, let&amp;#8217;s hope I do a good job and you
 can think of me and smile when&amp;nbsp;installing!&lt;/p&gt;
-&lt;p&gt;[&lt;img alt="Dictionary learned from Lena patches" src="http://localhost:8001/wp-content/uploads/2011/09/plot_image_denoising_1.png" title="plot_image_denoising_1"&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/09/plot_image_denoising_1.png&lt;/p&gt;
-&lt;p&gt;[&lt;img alt="Noisy image for denoising" src="http://localhost:8001/wp-content/uploads/2011/09/plot_image_denoising_24.png" title="plot_image_denoising_24"&gt;]: http://localhost:8001/wp-content/uploads/2011/09/plot_image_denoising_24.png
+&lt;p&gt;[&lt;img alt="Dictionary learned from Lena patches" src="http://localhost:8001/wp-content/uploads/2011/09/plot_image_denoising_1.png" title="plot_image_denoising_1" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/09/plot_image_denoising_1.png&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="Noisy image for denoising" src="http://localhost:8001/wp-content/uploads/2011/09/plot_image_denoising_24.png" title="plot_image_denoising_24" /&gt;]: http://localhost:8001/wp-content/uploads/2011/09/plot_image_denoising_24.png
   [Image denoising with Dictionary learning and Orthogonal matching
   pursuit]: http://localhost:8001/wp-content/uploads/2011/09/plot_image_denoising_44.png
     &amp;#8220;Image denoising with Dictionary learning and Orthogonal matching pursuit&amp;#8221;
@@ -620,7 +620,7 @@ and it forcefully overwrites &lt;code&gt;b&lt;/code&gt;. Even though if weren&am
 should still be used: &lt;code&gt;scikits.learn&lt;/code&gt; aims to be as backwards-compatible
 with SciPy as possible, and &lt;code&gt;linalg.solve_triangular&lt;/code&gt; was added in
 0.9.0. Anyway, let&amp;#8217;s just see whether it&amp;#8217;s&amp;nbsp;faster:&lt;/p&gt;
-&lt;p&gt;[sourcecode language=&amp;#8221;python&amp;#8221;]&lt;br&gt;
+&lt;p&gt;[sourcecode language=&amp;#8221;python&amp;#8221;]&lt;br /&gt;
 In &lt;a href="#footnote-1"&gt;1&lt;/a&gt;: import numpy as&amp;nbsp;np&lt;/p&gt;
 &lt;p&gt;In &lt;a href="#footnote-2"&gt;2&lt;/a&gt;: from scipy import&amp;nbsp;linalg&lt;/p&gt;
 &lt;p&gt;In [3]: from scikits.learn.datasets import&amp;nbsp;make_spd_matrix&lt;/p&gt;
@@ -629,11 +629,11 @@ In &lt;a href="#footnote-1"&gt;1&lt;/a&gt;: import numpy as&amp;nbsp;np&lt;/p&gt
 &lt;p&gt;In [6]: L = linalg.cholesky(G,&amp;nbsp;lower=True)&lt;/p&gt;
 &lt;p&gt;In [7]: x =&amp;nbsp;np.random.randn(1000)&lt;/p&gt;
 &lt;p&gt;In [8]: y =&amp;nbsp;x.copy()&lt;/p&gt;
-&lt;p&gt;In [9]: timeit solve_triangular(L, x)&lt;br&gt;
+&lt;p&gt;In [9]: timeit solve_triangular(L, x)&lt;br /&gt;
 100 loops, best of 3: 3.45 ms per&amp;nbsp;loop&lt;/p&gt;
 &lt;p&gt;In [10]: timeit linalg.solve_triangular(L, y, lower=True,
-overwrite_b=True)&lt;br&gt;
-10 loops, best of 3: 134 ms per loop&lt;br&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
+overwrite_b=True)&lt;br /&gt;
+10 loops, best of 3: 134 ms per loop&lt;br /&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
 &lt;p&gt;Wow! That&amp;#8217;s 40x faster. We&amp;#8217;re catching two rabbits with one stone here,
 let&amp;#8217;s do the change! Notice that we can just copy [latex]
 \mathbf{v}[/latex] into the appropriate place in [latex] L[/latex] and
@@ -655,53 +655,53 @@ wrapper around this, the &lt;code&gt;linalg.cho_solve&lt;/code&gt; function.&lt;
 from &lt;span class="caps"&gt;LAPACK&lt;/span&gt;, through the use of &lt;code&gt;linalg.lapack.get_lapack_funcs&lt;/code&gt;. Let&amp;#8217;s
 see how the low-level &lt;span class="caps"&gt;LAPACK&lt;/span&gt; function compares to the SciPy wrapper, for
 our use&amp;nbsp;case:&lt;/p&gt;
-&lt;p&gt;[sourcecode language=&amp;#8221;python&amp;#8221;]&lt;br&gt;
+&lt;p&gt;[sourcecode language=&amp;#8221;python&amp;#8221;]&lt;br /&gt;
 In [11]: x =&amp;nbsp;np.random.randn(1000)&lt;/p&gt;
 &lt;p&gt;In [12]: y =&amp;nbsp;x.copy()&lt;/p&gt;
-&lt;p&gt;In [13]: timeit linalg.cho_solve((L, True), x)&lt;br&gt;
+&lt;p&gt;In [13]: timeit linalg.cho_solve((L, True), x)&lt;br /&gt;
 1 loops, best of 3: 95.4 ms per&amp;nbsp;loop&lt;/p&gt;
 &lt;p&gt;In [14]: potrs, = linalg.lapack.get_lapack_funcs((&amp;#8216;potrs&amp;#8217;,),&amp;nbsp;(G,))&lt;/p&gt;
-&lt;p&gt;In [15]: potrs&lt;br&gt;
+&lt;p&gt;In [15]: potrs&lt;br /&gt;
 Out[15]: &amp;lt;fortran&amp;nbsp;object&amp;gt;&lt;/p&gt;
-&lt;p&gt;In [16]: timeit potrs(L, y)&lt;br&gt;
-100 loops, best of 3: 9.49 ms per loop&lt;br&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
+&lt;p&gt;In [16]: timeit potrs(L, y)&lt;br /&gt;
+100 loops, best of 3: 9.49 ms per loop&lt;br /&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
 &lt;p&gt;That&amp;#8217;s 10 times faster! So now we found an obvious way to optimize the&amp;nbsp;code:&lt;/p&gt;
-&lt;p&gt;[sourcecode language=&amp;#8221;python&amp;#8221;]&lt;br&gt;
-def cholesky_omp(X, y, n_nonzero_coefs, eps=None):&lt;br&gt;
-min_float = np.finfo(X.dtype).eps&lt;br&gt;
-potrs, = get_lapack_funcs((&amp;#8216;potrs&amp;#8217;,), (X,))&lt;br&gt;
-alpha = np.dot(X.T, y)&lt;br&gt;
-residual = y&lt;br&gt;
-n_active = 0&lt;br&gt;
+&lt;p&gt;[sourcecode language=&amp;#8221;python&amp;#8221;]&lt;br /&gt;
+def cholesky_omp(X, y, n_nonzero_coefs, eps=None):&lt;br /&gt;
+min_float = np.finfo(X.dtype).eps&lt;br /&gt;
+potrs, = get_lapack_funcs((&amp;#8216;potrs&amp;#8217;,), (X,))&lt;br /&gt;
+alpha = np.dot(X.T, y)&lt;br /&gt;
+residual = y&lt;br /&gt;
+n_active = 0&lt;br /&gt;
 idx =&amp;nbsp;[]&lt;/p&gt;
-&lt;p&gt;max_features = X.shape&lt;a href="#footnote-1"&gt;1&lt;/a&gt; if eps is not None else n_nonzero_coefs&lt;br&gt;
-L = np.empty((max_features, max_features), dtype=X.dtype)&lt;br&gt;
+&lt;p&gt;max_features = X.shape&lt;a href="#footnote-1"&gt;1&lt;/a&gt; if eps is not None else n_nonzero_coefs&lt;br /&gt;
+L = np.empty((max_features, max_features), dtype=X.dtype)&lt;br /&gt;
 L[0, 0] =&amp;nbsp;1.&lt;/p&gt;
-&lt;p&gt;while 1:&lt;br&gt;
-lam = np.abs(np.dot(X.T, residual)).argmax()&lt;br&gt;
-if lam &amp;lt; n_active or alpha[lam] ** 2 &amp;lt; min_float:&lt;br&gt;
-# atom already selected or inner product too small&lt;br&gt;
-warn(&amp;#8220;Stopping early&amp;#8221;)&lt;br&gt;
-break&lt;br&gt;
-if n_active &amp;gt; 0:&lt;br&gt;
-# Updates the Cholesky decomposition of X&amp;#8217; X&lt;br&gt;
-L[n_active, :n_active] = np.dot(X[:, idx].T, X[:, lam]&lt;br&gt;
-solve_triangular(L[:n_active, :n_active], L[n_active, :n_active])&lt;br&gt;
-d = np.dot(L[n_active, :n_active].T, L[n_active, :n_active])&lt;br&gt;
-if 1 - d &amp;lt;= min_float: # selected atoms are dependent&lt;br&gt;
-warn(&amp;#8220;Stopping early&amp;#8221;)&lt;br&gt;
-break&lt;br&gt;
-L[n_active, n_active] = np.sqrt(1 - d)&lt;br&gt;
-idx.append(lam)&lt;br&gt;
-# solve &lt;span class="caps"&gt;LL&lt;/span&gt;&amp;#8217;x = y in two steps:&lt;br&gt;
-gamma, _ = potrs(L[:n_active, :n_active], alpha[idx], lower=True,&lt;br&gt;
-overwrite_b=False)&lt;br&gt;
-residual = y - np.dot(X[:, idx], gamma)&lt;br&gt;
-if eps is not None and np.dot(residual.T, residual) &amp;lt;= eps:&lt;br&gt;
-break&lt;br&gt;
-elif n_active == max_features:&lt;br&gt;
-break&lt;br&gt;
-return gamma, idx&lt;br&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
+&lt;p&gt;while 1:&lt;br /&gt;
+lam = np.abs(np.dot(X.T, residual)).argmax()&lt;br /&gt;
+if lam &amp;lt; n_active or alpha[lam] ** 2 &amp;lt; min_float:&lt;br /&gt;
+# atom already selected or inner product too small&lt;br /&gt;
+warn(&amp;#8220;Stopping early&amp;#8221;)&lt;br /&gt;
+break&lt;br /&gt;
+if n_active &amp;gt; 0:&lt;br /&gt;
+# Updates the Cholesky decomposition of X&amp;#8217; X&lt;br /&gt;
+L[n_active, :n_active] = np.dot(X[:, idx].T, X[:, lam]&lt;br /&gt;
+solve_triangular(L[:n_active, :n_active], L[n_active, :n_active])&lt;br /&gt;
+d = np.dot(L[n_active, :n_active].T, L[n_active, :n_active])&lt;br /&gt;
+if 1 - d &amp;lt;= min_float: # selected atoms are dependent&lt;br /&gt;
+warn(&amp;#8220;Stopping early&amp;#8221;)&lt;br /&gt;
+break&lt;br /&gt;
+L[n_active, n_active] = np.sqrt(1 - d)&lt;br /&gt;
+idx.append(lam)&lt;br /&gt;
+# solve &lt;span class="caps"&gt;LL&lt;/span&gt;&amp;#8217;x = y in two steps:&lt;br /&gt;
+gamma, _ = potrs(L[:n_active, :n_active], alpha[idx], lower=True,&lt;br /&gt;
+overwrite_b=False)&lt;br /&gt;
+residual = y - np.dot(X[:, idx], gamma)&lt;br /&gt;
+if eps is not None and np.dot(residual.T, residual) &amp;lt;= eps:&lt;br /&gt;
+break&lt;br /&gt;
+elif n_active == max_features:&lt;br /&gt;
+break&lt;br /&gt;
+return gamma, idx&lt;br /&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
 &lt;p&gt;Woohoo! But we still lag behind. Now that we delegated the trickiest
 parts of the code to fast and reliable solvers, it&amp;#8217;s time to use a
 profiler and see what the bottleneck is now. Python has excellent tools
@@ -722,76 +722,76 @@ we can replace &lt;code&gt;X[:, idx]&lt;/code&gt; with &lt;code&gt;X[:, :n_activ
 if the array is stored in Fortran-contiguous order (ie. column
 contiguous order, as opposed to row contiguous order, as in C), swapping
 two columns is a very fast operation!. Let&amp;#8217;s see some more&amp;nbsp;benchmarks!&lt;/p&gt;
-&lt;p&gt;[sourcecode language=&amp;#8221;python&amp;#8221;]&lt;br&gt;
+&lt;p&gt;[sourcecode language=&amp;#8221;python&amp;#8221;]&lt;br /&gt;
 In [17]: X = np.random.randn(5000,&amp;nbsp;5000)&lt;/p&gt;
 &lt;p&gt;In [18]: Y = X.copy(&amp;#8216;F&amp;#8217;) #&amp;nbsp;fortran-ordered&lt;/p&gt;
 &lt;p&gt;In [19]: a, b = 1000,&amp;nbsp;2500&lt;/p&gt;
 &lt;p&gt;In [20]: swap, = linalg.get_blas_funcs((&amp;#8216;swap&amp;#8217;,),&amp;nbsp;(X,))&lt;/p&gt;
-&lt;p&gt;In [21]: timeit X[:, a], X[:, b] = swap(X[:, a], X[:, b])&lt;br&gt;
+&lt;p&gt;In [21]: timeit X[:, a], X[:, b] = swap(X[:, a], X[:, b])&lt;br /&gt;
 100 loops, best of 3: 6.29 ms per&amp;nbsp;loop&lt;/p&gt;
-&lt;p&gt;In [22]: timeit Y[:, a], Y[:, b] = swap(Y[:, a], Y[:, b])&lt;br&gt;
-10000 loops, best of 3: 111 us per loop&lt;br&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
+&lt;p&gt;In [22]: timeit Y[:, a], Y[:, b] = swap(Y[:, a], Y[:, b])&lt;br /&gt;
+10000 loops, best of 3: 111 us per loop&lt;br /&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
 &lt;p&gt;We can see that using Fortran-order takes us from the order of
 miliseconds to the order of&amp;nbsp;microseconds!&lt;/p&gt;
 &lt;p&gt;Side note: I almost fell into the trap of swapping columns the pythonic
-way. That doesn&amp;#8217;t work:&lt;br&gt;
-[sourcecode language=&amp;#8221;python&amp;#8221;]&lt;br&gt;
+way. That doesn&amp;#8217;t work:&lt;br /&gt;
+[sourcecode language=&amp;#8221;python&amp;#8221;]&lt;br /&gt;
 In [23]: X[:, a], X[:, b] = X[:, b], X[:,&amp;nbsp;a]&lt;/p&gt;
 &lt;p&gt;In [24]: np.testing.assert_array_equal(X[:, a], X[:,&amp;nbsp;b])&lt;/p&gt;
-&lt;p&gt;In [25]:&lt;br&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
+&lt;p&gt;In [25]:&lt;br /&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
 &lt;p&gt;However this trick works great for swapping elements of one-dimensional&amp;nbsp;arrays.&lt;/p&gt;
 &lt;p&gt;Another small optimization that we can do: I found that on my system,
 it&amp;#8217;s slightly faster to compute the norm using the &lt;span class="caps"&gt;BLAS&lt;/span&gt; function &lt;code&gt;nrm2&lt;/code&gt;.
 So by putting all of these together, we end up with the final version of
 our&amp;nbsp;code:&lt;/p&gt;
-&lt;p&gt;[sourcecode language=&amp;#8221;python&amp;#8221;]&lt;br&gt;
+&lt;p&gt;[sourcecode language=&amp;#8221;python&amp;#8221;]&lt;br /&gt;
 def cholesky_omp(X, y, n_nonzero_coefs, eps=None,
-overwrite_X=False):&lt;br&gt;
-if not overwrite_X:&lt;br&gt;
-X = X.copy(&amp;#8216;F&amp;#8217;)&lt;br&gt;
+overwrite_X=False):&lt;br /&gt;
+if not overwrite_X:&lt;br /&gt;
+X = X.copy(&amp;#8216;F&amp;#8217;)&lt;br /&gt;
 else: # even if we are allowed to overwrite, still copy it if bad
-order&lt;br&gt;
+order&lt;br /&gt;
 X =&amp;nbsp;np.asfortranarray(X)&lt;/p&gt;
-&lt;p&gt;min_float = np.finfo(X.dtype).eps&lt;br&gt;
-nrm2, swap = linalg.get_blas_funcs((&amp;#8216;nrm2&amp;#8217;, &amp;#8216;swap&amp;#8217;), (X,))&lt;br&gt;
+&lt;p&gt;min_float = np.finfo(X.dtype).eps&lt;br /&gt;
+nrm2, swap = linalg.get_blas_funcs((&amp;#8216;nrm2&amp;#8217;, &amp;#8216;swap&amp;#8217;), (X,))&lt;br /&gt;
 potrs, = get_lapack_funcs((&amp;#8216;potrs&amp;#8217;,),&amp;nbsp;(X,))&lt;/p&gt;
-&lt;p&gt;indices = range(len(Gram)) # keeping track of swapping&lt;br&gt;
-alpha = np.dot(X.T, y)&lt;br&gt;
-residual = y&lt;br&gt;
+&lt;p&gt;indices = range(len(Gram)) # keeping track of swapping&lt;br /&gt;
+alpha = np.dot(X.T, y)&lt;br /&gt;
+residual = y&lt;br /&gt;
 n_active =&amp;nbsp;0&lt;/p&gt;
-&lt;p&gt;max_features = X.shape&lt;a href="#footnote-1"&gt;1&lt;/a&gt; if eps is not None else n_nonzero_coefs&lt;br&gt;
-L = np.empty((max_features, max_features), dtype=X.dtype)&lt;br&gt;
+&lt;p&gt;max_features = X.shape&lt;a href="#footnote-1"&gt;1&lt;/a&gt; if eps is not None else n_nonzero_coefs&lt;br /&gt;
+L = np.empty((max_features, max_features), dtype=X.dtype)&lt;br /&gt;
 L[0, 0] =&amp;nbsp;1.&lt;/p&gt;
-&lt;p&gt;while True:&lt;br&gt;
-lam = np.abs(np.dot(X.T, residual)).argmax()&lt;br&gt;
-if lam &amp;lt; n_active or alpha[lam] ** 2 &amp;lt; min_float:&lt;br&gt;
-# atom already selected or inner product too small&lt;br&gt;
-warn(&amp;#8220;Stopping early&amp;#8221;)&lt;br&gt;
-break&lt;br&gt;
-if n_active &amp;gt; 0:&lt;br&gt;
-# Updates the Cholesky decomposition of X&amp;#8217; X&lt;br&gt;
-L[n_active, :n_active] = np.dot(X[:, :n_active].T, X[:, lam])&lt;br&gt;
-solve_triangular(L[:n_active, :n_active], L[n_active, :n_active])&lt;br&gt;
-v = nrm2(L[n_active, :n_active]) ** 2&lt;br&gt;
-if 1 - v &amp;lt;= min_float: # selected atoms are dependent&lt;br&gt;
-warn(&amp;#8220;Stopping early&amp;#8221;)&lt;br&gt;
-break&lt;br&gt;
-L[n_active, n_active] = np.sqrt(1 - v)&lt;br&gt;
-X.T[n_active], X.T[lam] = swap(X.T[n_active], X.T[lam])&lt;br&gt;
-alpha[n_active], alpha[lam] = alpha[lam], alpha[n_active]&lt;br&gt;
-indices[n_active], indices[lam] = indices[lam], indices[n_active]&lt;br&gt;
-n_active += 1&lt;br&gt;
-# solves &lt;span class="caps"&gt;LL&lt;/span&gt;&amp;#8217;x = y as a composition of two triangular systems&lt;br&gt;
+&lt;p&gt;while True:&lt;br /&gt;
+lam = np.abs(np.dot(X.T, residual)).argmax()&lt;br /&gt;
+if lam &amp;lt; n_active or alpha[lam] ** 2 &amp;lt; min_float:&lt;br /&gt;
+# atom already selected or inner product too small&lt;br /&gt;
+warn(&amp;#8220;Stopping early&amp;#8221;)&lt;br /&gt;
+break&lt;br /&gt;
+if n_active &amp;gt; 0:&lt;br /&gt;
+# Updates the Cholesky decomposition of X&amp;#8217; X&lt;br /&gt;
+L[n_active, :n_active] = np.dot(X[:, :n_active].T, X[:, lam])&lt;br /&gt;
+solve_triangular(L[:n_active, :n_active], L[n_active, :n_active])&lt;br /&gt;
+v = nrm2(L[n_active, :n_active]) ** 2&lt;br /&gt;
+if 1 - v &amp;lt;= min_float: # selected atoms are dependent&lt;br /&gt;
+warn(&amp;#8220;Stopping early&amp;#8221;)&lt;br /&gt;
+break&lt;br /&gt;
+L[n_active, n_active] = np.sqrt(1 - v)&lt;br /&gt;
+X.T[n_active], X.T[lam] = swap(X.T[n_active], X.T[lam])&lt;br /&gt;
+alpha[n_active], alpha[lam] = alpha[lam], alpha[n_active]&lt;br /&gt;
+indices[n_active], indices[lam] = indices[lam], indices[n_active]&lt;br /&gt;
+n_active += 1&lt;br /&gt;
+# solves &lt;span class="caps"&gt;LL&lt;/span&gt;&amp;#8217;x = y as a composition of two triangular systems&lt;br /&gt;
 gamma, _ = potrs(L[:n_active, :n_active], alpha[:n_active],
-lower=True,&lt;br&gt;&amp;nbsp;overwrite_b=False)&lt;/p&gt;
-&lt;p&gt;residual = y - np.dot(X[:, :n_active], gamma)&lt;br&gt;
-if eps is not None and nrm2(residual) ** 2 &amp;lt;= eps:&lt;br&gt;
-break&lt;br&gt;
-elif n_active == max_features:&lt;br&gt;&amp;nbsp;break&lt;/p&gt;
-&lt;p&gt;return gamma, indices[:n_active]&lt;br&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
+lower=True,&lt;br /&gt;&amp;nbsp;overwrite_b=False)&lt;/p&gt;
+&lt;p&gt;residual = y - np.dot(X[:, :n_active], gamma)&lt;br /&gt;
+if eps is not None and nrm2(residual) ** 2 &amp;lt;= eps:&lt;br /&gt;
+break&lt;br /&gt;
+elif n_active == max_features:&lt;br /&gt;&amp;nbsp;break&lt;/p&gt;
+&lt;p&gt;return gamma, indices[:n_active]&lt;br /&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
 &lt;p&gt;Now, the benchmark at [&lt;a href="#footnote-1"&gt;1&lt;/a&gt;] indicates victory over least-angle
 regression! I hope you have enjoyed this short tour. See you next&amp;nbsp;time!&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://github.com/scikit-learn/scikit-learn/blob/master/benchmarks/bench_plot_omp_lars.py" title="Orthogonal matching pursuit versus least-angle regression"&gt;&lt;span id="footnote-1"&gt;1&lt;/span&gt;&lt;/a&gt;[]&lt;br&gt;
+&lt;p&gt;&lt;a href="https://github.com/scikit-learn/scikit-learn/blob/master/benchmarks/bench_plot_omp_lars.py" title="Orthogonal matching pursuit versus least-angle regression"&gt;&lt;span id="footnote-1"&gt;1&lt;/span&gt;&lt;/a&gt;[]&lt;br /&gt;
 &lt;a href="http://scikit-learn.sourceforge.net/dev/developers/performance.html#profiling-python-code" title="Profiling Python code"&gt;&lt;span id="footnote-2"&gt;2&lt;/span&gt;&lt;/a&gt;[]&lt;/p&gt;</content><category term="scikit-learn"></category><category term="blas"></category><category term="efficient"></category><category term="lapack"></category><category term="numpy"></category><category term="omp"></category><category term="orthogonal matching pursuit"></category><category term="potrs"></category><category term="scipy"></category><category term="dictionary learning"></category><category term="python"></category><category term="scikit-learn"></category></entry><entry><title>Optimizing Orthogonal Matching Pursuit code in Numpy, part 1</title><link href="//vene.ro/blog/optimizing-orthogonal-matching-pursuit-code-in-numpy-part-1.html" rel="alternate"></link><published>2011-08-07T20:50:00+02:00</published><updated>2011-08-07T20:50:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-08-07:/blog/optimizing-orthogonal-matching-pursuit-code-in-numpy-part-1.html</id><summary type="html">&lt;p&gt;After intense code optimization work, my implementation of &lt;span class="caps"&gt;OMP&lt;/span&gt; finally
 beat least-angle regression! This was the primary issue discussed during
 the pull request, so once performance was taken care of, the code was
@@ -814,40 +814,40 @@ to find hot&amp;nbsp;spots.&lt;/p&gt;
 finding a sparse solution [latex] \gamma[/latex] to a linear regression
 problem [latex] X\gamma = y[/latex]. Mathematically, it approximates
 the solution of the optimization&amp;nbsp;problem:&lt;/p&gt;
-&lt;p&gt;\$\$ \text{argmin} {\big|\big|} \gamma {\big|\big|} _0 \text{
+&lt;p&gt;$$ \text{argmin} {\big|\big|} \gamma {\big|\big|} _0 \text{
 subject to }{\big |\big|}y-X\gamma{\big|\big|}_2\^2 \leq
-\epsilon \$\$&lt;br&gt;
-or (under a different parametrization):&lt;br&gt;
-\$\$\text{argmin} {\big |\big|}y - X\gamma{\big |\big|}_2\^2
+\epsilon $$&lt;br /&gt;
+or (under a different parametrization):&lt;br /&gt;
+$$\text{argmin} {\big |\big|}y - X\gamma{\big |\big|}_2\^2
 \text{ subject to } {\big|\big|}\gamma{\big|\big|}_0 \leq
-n_{\text{nonzero&amp;nbsp;coefs}}\$\$&lt;/p&gt;
+n_{\text{nonzero&amp;nbsp;coefs}}$$&lt;/p&gt;
 &lt;p&gt;In the code samples in this post I will omit the docstrings, but I will
 follow the notation in the formulas&amp;nbsp;above.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Important note:&lt;/strong&gt; The regressors/dictionary atoms (the columns of
 [latex] X[/latex]) are assumed to be normalized throughout this post (as
 well as usually any discussion of &lt;span class="caps"&gt;OMP&lt;/span&gt;). We also assume the following
-imports:&lt;br&gt;
-[sourcecode language=&amp;#8221;Python&amp;#8221;]&lt;br&gt;
-import numpy as np&lt;br&gt;
-from scipy import linalg&lt;br&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
+imports:&lt;br /&gt;
+[sourcecode language=&amp;#8221;Python&amp;#8221;]&lt;br /&gt;
+import numpy as np&lt;br /&gt;
+from scipy import linalg&lt;br /&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
 &lt;p&gt;Orthogonal matching pursuit is a very simple algorithm in pseudocode,
 and as I stated before, it almost writes itself in Numpy. For this
 reason, instead of stating the pseudocode here, I will start with how
 naively implemented &lt;span class="caps"&gt;OMP&lt;/span&gt; looks like in&amp;nbsp;Python:&lt;/p&gt;
-&lt;p&gt;[sourcecode language=&amp;#8221;Python&amp;#8221;]&lt;br&gt;
-def orthogonal_mp(X, y, n_nonzero_coefs, eps=None):&lt;br&gt;
-residual = y&lt;br&gt;
-idx = []&lt;br&gt;
-if eps == None:&lt;br&gt;
-stopping_condition = lambda: len(idx) == n_nonzero_coefs&lt;br&gt;
-else:&lt;br&gt;
-stopping_condition = lambda: np.inner(residual, residual) &amp;lt;= eps&lt;br&gt;
-while not stopping_condition():&lt;br&gt;
-lam = np.abs(np.dot(residual, X)).argmax()&lt;br&gt;
-idx.append(lam)&lt;br&gt;
-gamma, _, _, _ = linalg.lstsq(X[:, idx], y)&lt;br&gt;
-residual = y - np.dot(X[:, idx], gamma)&lt;br&gt;
-return gamma, idx&lt;br&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
+&lt;p&gt;[sourcecode language=&amp;#8221;Python&amp;#8221;]&lt;br /&gt;
+def orthogonal_mp(X, y, n_nonzero_coefs, eps=None):&lt;br /&gt;
+residual = y&lt;br /&gt;
+idx = []&lt;br /&gt;
+if eps == None:&lt;br /&gt;
+stopping_condition = lambda: len(idx) == n_nonzero_coefs&lt;br /&gt;
+else:&lt;br /&gt;
+stopping_condition = lambda: np.inner(residual, residual) &amp;lt;= eps&lt;br /&gt;
+while not stopping_condition():&lt;br /&gt;
+lam = np.abs(np.dot(residual, X)).argmax()&lt;br /&gt;
+idx.append(lam)&lt;br /&gt;
+gamma, _, _, _ = linalg.lstsq(X[:, idx], y)&lt;br /&gt;
+residual = y - np.dot(X[:, idx], gamma)&lt;br /&gt;
+return gamma, idx&lt;br /&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
 &lt;p&gt;Using lambda expressions as stopping conditions never looked like a
 brilliant idea, but it seems to me like the most elegant way to specify
 such a variable stopping condition. However, the biggest slowdown in
@@ -866,9 +866,9 @@ X_{\text{idx}}[/latex] grows by exactly one column at each iteration,
 [latex] A = \begin{pmatrix} \tilde{A} &lt;span class="amp"&gt;&amp;amp;&lt;/span&gt; \mathbf{v}&amp;#8217; &amp;#92; \mathbf{v}
 &lt;span class="amp"&gt;&amp;amp;&lt;/span&gt; c \end{pmatrix}[/latex], and knowing the decomposition of [latex]
 \tilde{A} = \tilde{L}\tilde{L}&amp;#8217;[/latex], the Cholesky decomposition
-[latex] A = &lt;span class="caps"&gt;LL&lt;/span&gt;&amp;#8217;[/latex] is given by \$\$ L = \begin{pmatrix}\tilde{L}
+[latex] A = &lt;span class="caps"&gt;LL&lt;/span&gt;&amp;#8217;[/latex] is given by $$ L = \begin{pmatrix}\tilde{L}
 &lt;span class="amp"&gt;&amp;amp;&lt;/span&gt; \mathbf{0} &amp;#92; \mathbf{w}&amp;#8217; &lt;span class="amp"&gt;&amp;amp;&lt;/span&gt; \sqrt{c - \mathbf{w}&amp;#8217;\mathbf{w}}
-\end{pmatrix}, \text{ where } \tilde{L}\mathbf{w} =&amp;nbsp;\mathbf{v}\$\$&lt;/p&gt;
+\end{pmatrix}, \text{ where } \tilde{L}\mathbf{w} =&amp;nbsp;\mathbf{v}$$&lt;/p&gt;
 &lt;p&gt;Even if you are unfamiliar with the mathematical properties of the
 Cholesky decomposition, you can see from the construction detailed above
 that [latex] L[/latex] is always going to be a lower triangular matrix
@@ -879,31 +879,31 @@ X_{\text{idx}}\gamma = y[/latex] with two much simpler computations:
 solving [latex] \tilde{L}\mathbf{w} = \mathbf{v}[/latex] and solving
 [latex] &lt;span class="caps"&gt;LL&lt;/span&gt;&amp;#8217;\gamma = X_{\text{idx}}&amp;#8217;y[/latex]. Due to the [latex]
 L[/latex]&amp;#8217;s structure, these are much quicker operations than a least
-squares projection.&lt;br&gt;
+squares projection.&lt;br /&gt;
 Here is the initial way I implemented&amp;nbsp;this:&lt;/p&gt;
 &lt;p&gt;[sourcecode&amp;nbsp;language=&amp;#8221;Python&amp;#8221;]&lt;/p&gt;
-&lt;p&gt;def cholesky_omp(X, y, n_nonzero_coefs, eps=None):&lt;br&gt;
-if eps == None:&lt;br&gt;
-stopping_condition = lambda: it == n_nonzero_coefs&lt;br&gt;
-else:&lt;br&gt;
+&lt;p&gt;def cholesky_omp(X, y, n_nonzero_coefs, eps=None):&lt;br /&gt;
+if eps == None:&lt;br /&gt;
+stopping_condition = lambda: it == n_nonzero_coefs&lt;br /&gt;
+else:&lt;br /&gt;
 stopping_condition = lambda: np.inner(residual, residual) \&amp;lt;=&amp;nbsp;eps&lt;/p&gt;
-&lt;p&gt;alpha = np.dot(X.T, y)&lt;br&gt;
-residual = y&lt;br&gt;
-idx = []&lt;br&gt;
+&lt;p&gt;alpha = np.dot(X.T, y)&lt;br /&gt;
+residual = y&lt;br /&gt;
+idx = []&lt;br /&gt;
 L =&amp;nbsp;np.ones((1,1))&lt;/p&gt;
-&lt;p&gt;while not stopping_condition():&lt;br&gt;
-lam = np.abs(np.dot(residual, X)).argmax()&lt;br&gt;
-if len(idx) &amp;gt; 0:&lt;br&gt;
-w = linalg.solve_triangular(L, np.dot(X[:, idx].T, X[:, lam]),&lt;br&gt;
-lower=True)&lt;br&gt;
-L = np.r_[np.c_[L, np.zeros(len(L))],&lt;br&gt;
-np.atleast_2d(np.append(w, np.sqrt(1 - np.dot(w.T, w))))]&lt;br&gt;
-idx.append(lam)&lt;br&gt;
-# solve &lt;span class="caps"&gt;LL&lt;/span&gt;&amp;#8217;x = y in two steps:&lt;br&gt;
-Ltx = linalg.solve_triangular(L, alpha[idx], lower=True)&lt;br&gt;
-gamma = linalg.solve_triangular(L, Ltx, trans=1, lower=True)&lt;br&gt;
+&lt;p&gt;while not stopping_condition():&lt;br /&gt;
+lam = np.abs(np.dot(residual, X)).argmax()&lt;br /&gt;
+if len(idx) &amp;gt; 0:&lt;br /&gt;
+w = linalg.solve_triangular(L, np.dot(X[:, idx].T, X[:, lam]),&lt;br /&gt;
+lower=True)&lt;br /&gt;
+L = np.r_[np.c_[L, np.zeros(len(L))],&lt;br /&gt;
+np.atleast_2d(np.append(w, np.sqrt(1 - np.dot(w.T, w))))]&lt;br /&gt;
+idx.append(lam)&lt;br /&gt;
+# solve &lt;span class="caps"&gt;LL&lt;/span&gt;&amp;#8217;x = y in two steps:&lt;br /&gt;
+Ltx = linalg.solve_triangular(L, alpha[idx], lower=True)&lt;br /&gt;
+gamma = linalg.solve_triangular(L, Ltx, trans=1, lower=True)&lt;br /&gt;
 residual = y - np.dot(X[:, idx],&amp;nbsp;gamma)&lt;/p&gt;
-&lt;p&gt;return gamma, idx&lt;br&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
+&lt;p&gt;return gamma, idx&lt;br /&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
 &lt;p&gt;Note that a lot of the code remained unchanged, this is the same
 algorithm as before, only the Cholesky trick is used to improve
 performance. According to the plot in [&lt;a href="#footnote-3"&gt;3&lt;/a&gt;], we can see that the naive
@@ -923,7 +923,7 @@ can be found in the &lt;code&gt;scikits.learn&lt;/code&gt; repository [&lt;a hre
 moved on to code other things, since &lt;span class="caps"&gt;OMP&lt;/span&gt; was passing tests and the
 signal recovery example was working. The following issues popped up
 during&amp;nbsp;review:&lt;/p&gt;
-&lt;p&gt;​1. The lambda stopping condition does not pickle.&lt;br&gt;
+&lt;p&gt;​1. The lambda stopping condition does not pickle.&lt;br /&gt;
 2. For well-constructed signals and data matrices, assuming normal
 atoms, [latex] \mathbf{w}[/latex] on line 14 will never have norm
 greater than or equal to zero, unless the chosen feature happens to be
@@ -932,7 +932,7 @@ since we do an orthogonal projection at each step. However, if the
 matrix [latex] X[/latex] is not well-behaved (for example, if it has two
 identical columns, and [latex] y[/latex] is built using non-zero
 coefficients for those columns), then we end up with the square root of
-a negative value on line 17.&lt;br&gt;
+a negative value on line 17.&lt;br /&gt;
 3. It was orders of magnitude slower than least-angle regression, given
 the same number of nonzero&amp;nbsp;coefficients.&lt;/p&gt;
 &lt;p&gt;1 was an easy fix. 2 was a bit tricky since it was a little hidden: the
@@ -956,44 +956,44 @@ obvious thing was the way I was building the matrix [latex] L[/latex]
 was clearly suboptimal, reallocating it at each&amp;nbsp;iteration.&lt;/p&gt;
 &lt;p&gt;This leads to the following&amp;nbsp;code:&lt;/p&gt;
 &lt;p&gt;[sourcecode&amp;nbsp;language=&amp;#8221;Python&amp;#8221;]&lt;/p&gt;
-&lt;p&gt;def cholesky_omp(X, y, n_nonzero_coefs, eps=None):&lt;br&gt;
-min_float = np.finfo(X.dtype).eps&lt;br&gt;
-alpha = np.dot(X.T, y)&lt;br&gt;
-residual = y&lt;br&gt;
-n_active = 0&lt;br&gt;
+&lt;p&gt;def cholesky_omp(X, y, n_nonzero_coefs, eps=None):&lt;br /&gt;
+min_float = np.finfo(X.dtype).eps&lt;br /&gt;
+alpha = np.dot(X.T, y)&lt;br /&gt;
+residual = y&lt;br /&gt;
+n_active = 0&lt;br /&gt;
 idx =&amp;nbsp;[]&lt;/p&gt;
-&lt;p&gt;max_features = X.shape&lt;a href="#footnote-1"&gt;1&lt;/a&gt; if eps is not None else n_nonzero_coefs&lt;br&gt;
-L = np.empty((max_features, max_features), dtype=X.dtype)&lt;br&gt;
+&lt;p&gt;max_features = X.shape&lt;a href="#footnote-1"&gt;1&lt;/a&gt; if eps is not None else n_nonzero_coefs&lt;br /&gt;
+L = np.empty((max_features, max_features), dtype=X.dtype)&lt;br /&gt;
 L[0, 0] =&amp;nbsp;1.&lt;/p&gt;
-&lt;p&gt;while 1:&lt;br&gt;
-lam = np.abs(np.dot(X.T, residual)).argmax()&lt;br&gt;
-if lam \&amp;lt; n_active or alpha[lam] ** 2 &gt; min_float:&lt;br&gt;
-# atom already selected or inner product too small&lt;br&gt;
-warn(&amp;#8220;Stopping early&amp;#8221;)&lt;br&gt;
-break&lt;br&gt;
-if n_active &amp;gt; 0:&lt;br&gt;
-# Updates the Cholesky decomposition of X&amp;#8217; X&lt;br&gt;
-w = linalg.solve_triangular(L[:n_active, :n_active],&lt;br&gt;
-np.dot(X[:, idx].T, X[:, lam]),&lt;br&gt;
-lower=True)&lt;br&gt;
-L[n_active, :n_active] = w&lt;br&gt;
-d = np.dot(w.T, w)&lt;br&gt;
-if 1 - d &amp;lt;= min_float: # selected atoms are dependent&lt;br&gt;
-warn(&amp;#8220;Stopping early&amp;#8221;)&lt;br&gt;
-break&lt;br&gt;
-L[n_active, n_active] = np.sqrt(1 - d)&lt;br&gt;
-idx.append(lam)&lt;br&gt;
-# solve &lt;span class="caps"&gt;LL&lt;/span&gt;&amp;#8217;x = y in two steps:&lt;br&gt;
+&lt;p&gt;while 1:&lt;br /&gt;
+lam = np.abs(np.dot(X.T, residual)).argmax()&lt;br /&gt;
+if lam \&amp;lt; n_active or alpha[lam] ** 2 &gt; min_float:&lt;br /&gt;
+# atom already selected or inner product too small&lt;br /&gt;
+warn(&amp;#8220;Stopping early&amp;#8221;)&lt;br /&gt;
+break&lt;br /&gt;
+if n_active &amp;gt; 0:&lt;br /&gt;
+# Updates the Cholesky decomposition of X&amp;#8217; X&lt;br /&gt;
+w = linalg.solve_triangular(L[:n_active, :n_active],&lt;br /&gt;
+np.dot(X[:, idx].T, X[:, lam]),&lt;br /&gt;
+lower=True)&lt;br /&gt;
+L[n_active, :n_active] = w&lt;br /&gt;
+d = np.dot(w.T, w)&lt;br /&gt;
+if 1 - d &amp;lt;= min_float: # selected atoms are dependent&lt;br /&gt;
+warn(&amp;#8220;Stopping early&amp;#8221;)&lt;br /&gt;
+break&lt;br /&gt;
+L[n_active, n_active] = np.sqrt(1 - d)&lt;br /&gt;
+idx.append(lam)&lt;br /&gt;
+# solve &lt;span class="caps"&gt;LL&lt;/span&gt;&amp;#8217;x = y in two steps:&lt;br /&gt;
 Ltx = linalg.solve_triangular(L[:n_active, :n_active], alpha[idx],
-lower=True)&lt;br&gt;
+lower=True)&lt;br /&gt;
 gamma = linalg.solve_triangular(L[:n_active, :n_active], Ltx,
-trans=1, lower=True)&lt;br&gt;
-residual = y - np.dot(X[:, idx], gamma)&lt;br&gt;
-if eps is not None and np.dot(residual.T, residual) &amp;lt;= eps:&lt;br&gt;
-break&lt;br&gt;
-elif n_active == max_features:&lt;br&gt;
-break&lt;br&gt;
-return gamma, idx&lt;br&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
+trans=1, lower=True)&lt;br /&gt;
+residual = y - np.dot(X[:, idx], gamma)&lt;br /&gt;
+if eps is not None and np.dot(residual.T, residual) &amp;lt;= eps:&lt;br /&gt;
+break&lt;br /&gt;
+elif n_active == max_features:&lt;br /&gt;
+break&lt;br /&gt;
+return gamma, idx&lt;br /&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
 &lt;p&gt;What should be noted here, apart from the obvious fix for #1, are the
 early stopping conditions. It is natural to stop if the same feature
 gets picked twice: the residual is always orthogonalized with respect to
@@ -1015,13 +1015,13 @@ and beneath is initialized before access. Luckily, the
 least-angle regression. In the next part of the article we will see how
 we can make it beat &lt;span class="caps"&gt;LARS&lt;/span&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;span id="footnote-1"&gt;&lt;a href="#footnote-1"&gt;1&lt;/a&gt;&lt;/span&gt; I always wanted to use this word in a
-serious context :P&lt;br&gt;
+serious context :P&lt;br /&gt;
 &lt;span id="footnote-2"&gt;&lt;a href="#footnote-2"&gt;2&lt;/a&gt;&lt;/span&gt; Rubinstein, R., Zibulevsky, M. and
 Elad, M., [Efficient Implementation of the K-&lt;span class="caps"&gt;SVD&lt;/span&gt; Algorithm using Batch
 Orthogonal Matching Pursuit][] Technical Report - &lt;span class="caps"&gt;CS&lt;/span&gt; Technion, April
-2008.&lt;br&gt;
+2008.&lt;br /&gt;
 &lt;span id="footnote-3"&gt;&lt;a href="#footnote-3"&gt;3&lt;/a&gt;&lt;/span&gt; [First thoughts on Orthogonal
-Matching Pursuit][] on this blog.&lt;br&gt;
+Matching Pursuit][] on this blog.&lt;br /&gt;
 &lt;span id="footnote-4"&gt;&lt;a href="#footnote-4"&gt;4&lt;/a&gt;&lt;/span&gt; &lt;a href="https://github.com/scikit-learn/scikit-learn/blob/master/scikits/learn/linear_model/omp.py"&gt;omp.py&lt;/a&gt; on&amp;nbsp;github.&lt;/p&gt;
 &lt;p&gt;[Efficient Implementation of the K-&lt;span class="caps"&gt;SVD&lt;/span&gt; Algorithm using Batch
   Orthogonal Matching Pursuit]: http://www.cs.technion.ac.il/~ronrubin/Publications/&lt;span class="caps"&gt;KSVD&lt;/span&gt;-&lt;span class="caps"&gt;OMP&lt;/span&gt;-v2.pdf&lt;/p&gt;</content><category term="scikit-learn"></category><category term="efficient"></category><category term="numpy"></category><category term="omp"></category><category term="orthogonal matching pursuit"></category><category term="scipy"></category><category term="dictionary learning"></category><category term="scikit-learn"></category><category term="python"></category></entry><entry><title>Progress on Orthogonal Matching Pursuit</title><link href="//vene.ro/blog/progress-on-orthogonal-matching-pursuit.html" rel="alternate"></link><published>2011-08-02T16:56:00+02:00</published><updated>2011-08-02T16:56:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-08-02:/blog/progress-on-orthogonal-matching-pursuit.html</id><summary type="html">&lt;p&gt;Since orthogonal matching pursuit (&lt;span class="caps"&gt;OMP&lt;/span&gt;) is an important part of signal
@@ -1036,7 +1036,7 @@ regression, so it is natural to bench them against one&amp;nbsp;another.&lt;/p&g
 &lt;p&gt;This has helped find a couple of bottlenecks. Time has been gained by
 preallocating the array to store the Cholesky decomposition. Also, using
 the &lt;span class="caps"&gt;LAPACK&lt;/span&gt; &lt;code&gt;potrs&lt;/code&gt; function in order to solve a system of the shape
-\$latex &lt;span class="caps"&gt;LL&lt;/span&gt;&amp;#8217;x=y\$ is faster than using &lt;code&gt;solve_triangular&lt;/code&gt; twice.&lt;/p&gt;
+$latex &lt;span class="caps"&gt;LL&lt;/span&gt;&amp;#8217;x=y$ is faster than using &lt;code&gt;solve_triangular&lt;/code&gt; twice.&lt;/p&gt;
 &lt;p&gt;I am still trying to optimize the code. We are working hard to make sure
 that scikits.learn contributions are up to standards before&amp;nbsp;merging.&lt;/p&gt;</content><category term="scikit-learn"></category><category term="omp"></category><category term="orthogonal matching pursuit"></category><category term="scikit-learn"></category></entry><entry><title>SparsePCA in scikits.learn-git</title><link href="//vene.ro/blog/sparsepca-in-scikits-learn-git.html" rel="alternate"></link><published>2011-07-19T12:01:00+02:00</published><updated>2011-07-19T12:01:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-07-19:/blog/sparsepca-in-scikits-learn-git.html</id><summary type="html">&lt;p&gt;I am happy to announce that the Sparse &lt;span class="caps"&gt;PCA&lt;/span&gt; code has been reviewed and
 merged into the main &lt;code&gt;scikits.learn&lt;/code&gt; repository.&lt;/p&gt;
@@ -1046,9 +1046,9 @@ version, by first downloading the source code as explained in the
 merged into the main &lt;code&gt;scikits.learn&lt;/code&gt; repository.&lt;/p&gt;
 &lt;p&gt;You can use it if you install the bleeding edge &lt;code&gt;scikits.learn&lt;/code&gt; git
 version, by first downloading the source code as explained in the
-&lt;a href="http://scikit-learn.sourceforge.net/stable/developers/index.html#git-repo" title="installation user's guide"&gt;user&amp;#8217;s guide&lt;/a&gt;, and then running &lt;code&gt;python setup.py install&lt;/code&gt;.&lt;br&gt;
+&lt;a href="http://scikit-learn.sourceforge.net/stable/developers/index.html#git-repo" title="installation user's guide"&gt;user&amp;#8217;s guide&lt;/a&gt;, and then running &lt;code&gt;python setup.py install&lt;/code&gt;.&lt;br /&gt;
 [caption id=&amp;#8221;&amp;#8221; align=&amp;#8221;aligncenter&amp;#8221; width=&amp;#8221;400&amp;#8221; caption=&amp;#8221;Sparse &lt;span class="caps"&gt;PCA&lt;/span&gt; on
-images of the digit 3&amp;#8221;][&lt;img alt="" src="http://scikit-learn.sourceforge.net/dev/_images/plot_digits_decomposition_4.png" title="Sparse PCA on images of the digit 3"&gt;]&lt;a href="http://scikit-learn.sourceforge.net/dev/_images/plot_digits_decomposition_4.png" title="Sparse PCA on images of the digit 3"&gt;&lt;/a&gt;[/caption]&lt;br&gt;
+images of the digit 3&amp;#8221;][&lt;img alt="" src="http://scikit-learn.sourceforge.net/dev/_images/plot_digits_decomposition_4.png" title="Sparse PCA on images of the digit 3" /&gt;]&lt;a href="http://scikit-learn.sourceforge.net/dev/_images/plot_digits_decomposition_4.png" title="Sparse PCA on images of the digit 3"&gt;&lt;/a&gt;[/caption]&lt;br /&gt;
 To see what code is needed to produce an image such as the one above,
 using &lt;code&gt;scikits.learn&lt;/code&gt;. check out this cool &lt;a href="http://scikit-learn.sourceforge.net/dev/auto_examples/decomposition/plot_digits_decomposition.html" title="decomposition example"&gt;decomposition example&lt;/a&gt;
 that compares the results of most matrix decomposition models
@@ -1057,7 +1057,7 @@ implemented at the&amp;nbsp;moment.&lt;/p&gt;
 contributors, such as support for sparse matrices in &lt;a href="http://scikit-learn.sourceforge.net/dev/modules/clustering.html#mini-batch-k-means" title="minibatch K-means"&gt;minibatch
 K-means&lt;/a&gt;, and the &lt;a href="http://scikit-learn.sourceforge.net/dev/modules/mixture.html#infinite-gaussian-mixtures-dpgmm-classifier" title="variational infinite gaussian mixture model"&gt;variational infinite gaussian mixture model&lt;/a&gt;, so
 I invite you to take a&amp;nbsp;look!&lt;/p&gt;
-&lt;p&gt;[&lt;img alt="" src="http://scikit-learn.sourceforge.net/dev/_images/plot_digits_decomposition_4.png" title="Sparse PCA on images of the digit 3"&gt;]:&amp;nbsp;http://scikit-learn.sourceforge.net/dev/_images/plot_digits_decomposition_4.png&lt;/p&gt;</content><category term="scikit-learn"></category><category term="pca"></category><category term="principal components analysis"></category><category term="scikit-learn"></category><category term="sparse pca"></category><category term="SparsePCA"></category><category term="spca"></category></entry><entry><title>K-Means for dictionary learning</title><link href="//vene.ro/blog/k-means-for-dictionary-learning.html" rel="alternate"></link><published>2011-07-10T14:27:00+02:00</published><updated>2011-07-10T14:27:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-07-10:/blog/k-means-for-dictionary-learning.html</id><summary type="html">&lt;p&gt;[![Dictionary learned with K-Means on the &lt;span class="caps"&gt;LFW&lt;/span&gt; dataset with whitening
+&lt;p&gt;[&lt;img alt="" src="http://scikit-learn.sourceforge.net/dev/_images/plot_digits_decomposition_4.png" title="Sparse PCA on images of the digit 3" /&gt;]:&amp;nbsp;http://scikit-learn.sourceforge.net/dev/_images/plot_digits_decomposition_4.png&lt;/p&gt;</content><category term="scikit-learn"></category><category term="pca"></category><category term="principal components analysis"></category><category term="scikit-learn"></category><category term="sparse pca"></category><category term="SparsePCA"></category><category term="spca"></category></entry><entry><title>K-Means for dictionary learning</title><link href="//vene.ro/blog/k-means-for-dictionary-learning.html" rel="alternate"></link><published>2011-07-10T14:27:00+02:00</published><updated>2011-07-10T14:27:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-07-10:/blog/k-means-for-dictionary-learning.html</id><summary type="html">&lt;p&gt;[![Dictionary learned with K-Means on the &lt;span class="caps"&gt;LFW&lt;/span&gt; dataset with whitening
 &lt;span class="caps"&gt;PCA&lt;/span&gt;][]][][![Dictionary learned with K-Means on the &lt;span class="caps"&gt;LFW&lt;/span&gt; dataset without
 whitening &lt;span class="caps"&gt;PCA&lt;/span&gt;][]][]&lt;/p&gt;
 &lt;p&gt;One of the simplest, and yet most heavily constrained form of matrix
@@ -1083,7 +1083,7 @@ each point as one of the codewords, we allow a scalar multiplication
 invariance: [latex] x_i \approx \alpha_ih_k[/latex]. This model
 requires considerably more storage (each data point needs a floating
 point number and an unsigned index, as opposed to just the index), but
-it leads to a much better approximation.&lt;br&gt;
+it leads to a much better approximation.&lt;br /&gt;
 Gain-shape &lt;span class="caps"&gt;VQ&lt;/span&gt; can equivalently be accomplished by normalizing each data
 vector prior to fitting the&amp;nbsp;codebook.&lt;/p&gt;
 &lt;p&gt;In order to fit a codebook [latex] H[/latex] for efficient &lt;span class="caps"&gt;VQ&lt;/span&gt; use, the
@@ -1143,13 +1143,13 @@ local scikits-learn fork. Coming soon near&amp;nbsp;you!&lt;/p&gt;
 &lt;p&gt;The 400 square pixels area covering Lena&amp;#8217;s face was distorted by
 additive gaussian noise with a standard deviation of 50 (pixel values
 are ranged&amp;nbsp;0-256.)&lt;/p&gt;
-&lt;p&gt;[&lt;img alt="Lena image denoising using dictionary learning" src="http://localhost:8001/wp-content/uploads/2011/07/denoise3.png" title="Lena denoising"&gt;][]&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="Lena image denoising using dictionary learning" src="http://localhost:8001/wp-content/uploads/2011/07/denoise3.png" title="Lena denoising" /&gt;][]&lt;/p&gt;
 &lt;p&gt;The dictionary contains 100 atoms …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I am presenting an image denoising example that fully runs under my
 local scikits-learn fork. Coming soon near&amp;nbsp;you!&lt;/p&gt;
 &lt;p&gt;The 400 square pixels area covering Lena&amp;#8217;s face was distorted by
 additive gaussian noise with a standard deviation of 50 (pixel values
 are ranged&amp;nbsp;0-256.)&lt;/p&gt;
-&lt;p&gt;[&lt;img alt="Lena image denoising using dictionary learning" src="http://localhost:8001/wp-content/uploads/2011/07/denoise3.png" title="Lena denoising"&gt;][]&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="Lena image denoising using dictionary learning" src="http://localhost:8001/wp-content/uploads/2011/07/denoise3.png" title="Lena denoising" /&gt;][]&lt;/p&gt;
 &lt;p&gt;The dictionary contains 100 atoms of shape 4x4 and was trained using
 10000 random patches extracted from the undistorted image. Then, each
 one of the four 100 square pixel areas was reconstructed using the
@@ -1178,36 +1178,36 @@ the Twenty-Eighth International Conference on Machine Learning, 2011.][]
 
 &lt;/div&gt;
 
-&lt;p&gt;[&lt;img alt="Lena image denoising using dictionary learning" src="http://localhost:8001/wp-content/uploads/2011/07/denoise3.png" title="Lena denoising"&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/07/denoise3.png&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="Lena image denoising using dictionary learning" src="http://localhost:8001/wp-content/uploads/2011/07/denoise3.png" title="Lena denoising" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/07/denoise3.png&lt;/p&gt;
 &lt;p&gt;[&lt;strong&gt;The importance of encoding versus training with sparse coding and
   vector quantization&lt;/strong&gt;, Adam Coates and Andrew Y. Ng. In Proceedings of
   the Twenty-Eighth International Conference on Machine Learning,
   2011.]:&amp;nbsp;http://ai.stanford.edu/~ang/papers/icml11-EncodingVsTraining.pdf&lt;/p&gt;</content><category term="scikit-learn"></category><category term="denoising"></category><category term="dictionary learning"></category><category term="scikit-learn"></category></entry><entry><title>Summer of Code roadmap, part 1</title><link href="//vene.ro/blog/summer-of-code-roadmap-part-1.html" rel="alternate"></link><published>2011-06-12T14:28:00+02:00</published><updated>2011-06-12T14:28:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-06-12:/blog/summer-of-code-roadmap-part-1.html</id><summary type="html">&lt;p&gt;After a little busy while, I have graduated and entered the summer
 vacation, which means time for serious GSoC&amp;nbsp;work.&lt;/p&gt;
-&lt;p&gt;[&lt;img alt="Me on graduation day" src="http://localhost:8001/wp-content/uploads/2011/06/p1080283.jpg" title="Graduation day"&gt;][]&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="Me on graduation day" src="http://localhost:8001/wp-content/uploads/2011/06/p1080283.jpg" title="Graduation day" /&gt;][]&lt;/p&gt;
 &lt;p&gt;So we had a little conference in order to discuss what will be done and
 when. We gathered quite a few code snippets since the official start of
 the project …&lt;/p&gt;</summary><content type="html">&lt;p&gt;After a little busy while, I have graduated and entered the summer
 vacation, which means time for serious GSoC&amp;nbsp;work.&lt;/p&gt;
-&lt;p&gt;[&lt;img alt="Me on graduation day" src="http://localhost:8001/wp-content/uploads/2011/06/p1080283.jpg" title="Graduation day"&gt;][]&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="Me on graduation day" src="http://localhost:8001/wp-content/uploads/2011/06/p1080283.jpg" title="Graduation day" /&gt;][]&lt;/p&gt;
 &lt;p&gt;So we had a little conference in order to discuss what will be done and
 when. We gathered quite a few code snippets since the official start of
 the project, but it&amp;#8217;s now time to talk about integration and pull&amp;nbsp;requests.&lt;/p&gt;
 &lt;p&gt;Here is the&amp;nbsp;plan:&lt;/p&gt;
 &lt;h4&gt;SparsePCA&lt;/h4&gt;
-&lt;p&gt;First pull request due: &lt;strong&gt;June 15&lt;/strong&gt;&lt;br&gt;
+&lt;p&gt;First pull request due: &lt;strong&gt;June 15&lt;/strong&gt;&lt;br /&gt;
 This will be the use case I blogged about &lt;a href="http://venefrombucharest.wordpress.com/2011/05/23/sparse-pca/" title="Sparse PCA"&gt;before&lt;/a&gt;. Specifically, we
 want to learn a dictionary of sparse atoms, but representations of the
 data will be&amp;nbsp;dense.&lt;/p&gt;
 &lt;h4&gt;SparseCoder&lt;/h4&gt;
-&lt;p&gt;First pull request due: &lt;strong&gt;June 25&lt;/strong&gt;&lt;br&gt;
+&lt;p&gt;First pull request due: &lt;strong&gt;June 25&lt;/strong&gt;&lt;br /&gt;
 This is the transpose of the SparsePCA problem. We are learning the
 optimal, dense dictionary for sparse representations of the&amp;nbsp;data.&lt;/p&gt;
 &lt;h4&gt;KMeansCoder&lt;/h4&gt;
-&lt;p&gt;First pull request due: &lt;strong&gt;June 30&lt;/strong&gt;&lt;br&gt;
+&lt;p&gt;First pull request due: &lt;strong&gt;June 30&lt;/strong&gt;&lt;br /&gt;
 This method builds the dictionary out of cluster centers found by&amp;nbsp;K-means.&lt;/p&gt;
 &lt;h4&gt;OnlineSparseCoder&lt;/h4&gt;
-&lt;p&gt;First pull request due: &lt;strong&gt;July 10&lt;/strong&gt;&lt;br&gt;
+&lt;p&gt;First pull request due: &lt;strong&gt;July 10&lt;/strong&gt;&lt;br /&gt;
 This will involve the online learning tricks suggested in Julien
 Mairal&amp;#8217;s work and will allow for faster computations of both sparse &lt;span class="caps"&gt;PCA&lt;/span&gt;
 and sparse coding. In the case of sparse coding, it will make use of the
@@ -1218,20 +1218,20 @@ this will depend on more factors. As long as the pull requests are up,
 the code review system will push it forward towards the merge. The focus
 is on teamwork and on feedback cycles as short as possible, as opposed
 to falling into the trap of delaying work until the night before the&amp;nbsp;deadline.&lt;/p&gt;
-&lt;p&gt;[&lt;img alt="Me on graduation day" src="http://localhost:8001/wp-content/uploads/2011/06/p1080283.jpg" title="Graduation day"&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/06/p1080283.jpg&lt;/p&gt;</content><category term="scikit-learn"></category><category term="gsoc"></category><category term="Uncategorized"></category></entry><entry><title>First thoughts on Orthogonal Matching Pursuit</title><link href="//vene.ro/blog/first-thoughts-on-orthogonal-matching-pursuit.html" rel="alternate"></link><published>2011-05-30T13:02:00+02:00</published><updated>2011-05-30T13:02:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-05-30:/blog/first-thoughts-on-orthogonal-matching-pursuit.html</id><summary type="html">&lt;p&gt;I am working on implementing the Orthogonal Matching Pursuit (&lt;span class="caps"&gt;OMP&lt;/span&gt;)
+&lt;p&gt;[&lt;img alt="Me on graduation day" src="http://localhost:8001/wp-content/uploads/2011/06/p1080283.jpg" title="Graduation day" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/06/p1080283.jpg&lt;/p&gt;</content><category term="scikit-learn"></category><category term="gsoc"></category><category term="Uncategorized"></category></entry><entry><title>First thoughts on Orthogonal Matching Pursuit</title><link href="//vene.ro/blog/first-thoughts-on-orthogonal-matching-pursuit.html" rel="alternate"></link><published>2011-05-30T13:02:00+02:00</published><updated>2011-05-30T13:02:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-05-30:/blog/first-thoughts-on-orthogonal-matching-pursuit.html</id><summary type="html">&lt;p&gt;I am working on implementing the Orthogonal Matching Pursuit (&lt;span class="caps"&gt;OMP&lt;/span&gt;)
 algorithm for the scikit. It is an elegant algorithm (that almost writes
 itself in Numpy!) to compute a greedy approximation to the solution of a
 sparse coding&amp;nbsp;problem:&lt;/p&gt;
-&lt;p&gt;\$\$ \text{argmin} \big|\big|\gamma\big|\big|_0 \text{ subject
+&lt;p&gt;$$ \text{argmin} \big|\big|\gamma\big|\big|_0 \text{ subject
 to }\big …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I am working on implementing the Orthogonal Matching Pursuit (&lt;span class="caps"&gt;OMP&lt;/span&gt;)
 algorithm for the scikit. It is an elegant algorithm (that almost writes
 itself in Numpy!) to compute a greedy approximation to the solution of a
 sparse coding&amp;nbsp;problem:&lt;/p&gt;
-&lt;p&gt;\$\$ \text{argmin} \big|\big|\gamma\big|\big|_0 \text{ subject
-to }\big|\big|x-D\gamma\big|\big|_2\^2 \leq&amp;nbsp;\epsilon\$\$&lt;/p&gt;
+&lt;p&gt;$$ \text{argmin} \big|\big|\gamma\big|\big|_0 \text{ subject
+to }\big|\big|x-D\gamma\big|\big|_2\^2 \leq&amp;nbsp;\epsilon$$&lt;/p&gt;
 &lt;p&gt;or (in a different&amp;nbsp;parametrization)&lt;/p&gt;
-&lt;p&gt;\$\$ \text{argmin} \big|\big|x - D\gamma\big|\big|_2\^2\text{
-subject to }\big|\big|\gamma\big|\big|_0 \leq&amp;nbsp;m\$\$&lt;/p&gt;
+&lt;p&gt;$$ \text{argmin} \big|\big|x - D\gamma\big|\big|_2\^2\text{
+subject to }\big|\big|\gamma\big|\big|_0 \leq&amp;nbsp;m$$&lt;/p&gt;
 &lt;p&gt;The second formulation is interesting in that it gives one of the few
 algorithms for sparse coding that can control the actual number of
 non-zero entries in the solution. Some dictionary learning methods need
@@ -1255,14 +1255,14 @@ precomputing the Gram matrix [latex]&amp;nbsp;G=D&amp;#8217;D[/latex].&lt;/p&gt;
 &lt;p&gt;Based on my experiments, their batch update is the fastest, even though
 it lags behind if invoked with too small a batch. As soon as I make sure
 the implementation is robust and ready for use, I will make some&amp;nbsp;benchmarks.&lt;/p&gt;
-&lt;p&gt;Update: Here&amp;#8217;s a little proof that it works!&lt;br&gt;
-[&lt;img alt="Stem plot for sparse signals recovered by OMP" src="http://localhost:8001/wp-content/uploads/2011/06/omp.png" title="Orthogonal Matching Pursuit sparse signal recovery"&gt;][]&lt;/p&gt;
-&lt;p&gt;Update 2: Here&amp;#8217;s a little benchmark:&lt;br&gt;
-[&lt;img alt="Orthogonal Matching Pursuit benchmark" src="http://localhost:8001/wp-content/uploads/2011/06/omp_bench.png" title="OMP benchmark, time and error"&gt;][]&lt;br&gt;
+&lt;p&gt;Update: Here&amp;#8217;s a little proof that it works!&lt;br /&gt;
+[&lt;img alt="Stem plot for sparse signals recovered by OMP" src="http://localhost:8001/wp-content/uploads/2011/06/omp.png" title="Orthogonal Matching Pursuit sparse signal recovery" /&gt;][]&lt;/p&gt;
+&lt;p&gt;Update 2: Here&amp;#8217;s a little benchmark:&lt;br /&gt;
+[&lt;img alt="Orthogonal Matching Pursuit benchmark" src="http://localhost:8001/wp-content/uploads/2011/06/omp_bench.png" title="OMP benchmark, time and error" /&gt;][]&lt;br /&gt;
 [1]
 http://www.cs.technion.ac.il/\~ronrubin/Publications/&lt;span class="caps"&gt;KSVD&lt;/span&gt;-&lt;span class="caps"&gt;OMP&lt;/span&gt;-v2.pdf&lt;/p&gt;
-&lt;p&gt;[&lt;img alt="Stem plot for sparse signals recovered by OMP" src="http://localhost:8001/wp-content/uploads/2011/06/omp.png" title="Orthogonal Matching Pursuit sparse signal recovery"&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/06/omp.png&lt;/p&gt;
-&lt;p&gt;[&lt;img alt="Orthogonal Matching Pursuit benchmark" src="http://localhost:8001/wp-content/uploads/2011/06/omp_bench.png" title="OMP benchmark, time and error"&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/06/omp_bench.png&lt;/p&gt;</content><category term="scikit-learn"></category><category term="Uncategorized"></category><category term="dictionary learning"></category><category term="omp"></category><category term="orthogonal matching pursuit"></category></entry><entry><title>Sparse PCA</title><link href="//vene.ro/blog/sparse-pca.html" rel="alternate"></link><published>2011-05-23T15:19:00+02:00</published><updated>2011-05-23T15:19:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-05-23:/blog/sparse-pca.html</id><summary type="html">&lt;p&gt;I have been working on the integration into the scikits.learn codebase
+&lt;p&gt;[&lt;img alt="Stem plot for sparse signals recovered by OMP" src="http://localhost:8001/wp-content/uploads/2011/06/omp.png" title="Orthogonal Matching Pursuit sparse signal recovery" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/06/omp.png&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="Orthogonal Matching Pursuit benchmark" src="http://localhost:8001/wp-content/uploads/2011/06/omp_bench.png" title="OMP benchmark, time and error" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/06/omp_bench.png&lt;/p&gt;</content><category term="scikit-learn"></category><category term="Uncategorized"></category><category term="dictionary learning"></category><category term="omp"></category><category term="orthogonal matching pursuit"></category></entry><entry><title>Sparse PCA</title><link href="//vene.ro/blog/sparse-pca.html" rel="alternate"></link><published>2011-05-23T15:19:00+02:00</published><updated>2011-05-23T15:19:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-05-23:/blog/sparse-pca.html</id><summary type="html">&lt;p&gt;I have been working on the integration into the scikits.learn codebase
 of a sparse principal components analysis (SparsePCA) algorithm coded by
 Gaël and Alexandre and based on [[1]][]. Because the name &amp;#8220;sparse &lt;span class="caps"&gt;PCA&lt;/span&gt;&amp;#8221;
 has some inherent ambiguity, I will describe in greater depth what
@@ -1273,15 +1273,15 @@ has some inherent ambiguity, I will describe in greater depth what
 problem we are actually solving, and what it can be used&amp;nbsp;for.&lt;/p&gt;
 &lt;h1&gt;The&amp;nbsp;problem&lt;/h1&gt;
 &lt;p&gt;Mathematically, this implementation of Sparse &lt;span class="caps"&gt;PCA&lt;/span&gt;&amp;nbsp;solves:&lt;/p&gt;
-&lt;p&gt;\$latex (U\^*,
-V\^*)=\underset{U,V}{\mathrm{argmin\,}}\frac{1}{2}||X-&lt;span class="caps"&gt;UV&lt;/span&gt;||_2\^2+\alpha||V||_1\$&lt;/p&gt;
-&lt;p&gt;with \$latex || U_k ||_2 = 1\$ for all \$latex 0 \leq k \&amp;lt;&amp;nbsp;n_{atoms}\$&lt;/p&gt;
+&lt;p&gt;$latex (U\^*,
+V\^*)=\underset{U,V}{\mathrm{argmin\,}}\frac{1}{2}||X-&lt;span class="caps"&gt;UV&lt;/span&gt;||_2\^2+\alpha||V||_1$&lt;/p&gt;
+&lt;p&gt;with $latex || U_k ||_2 = 1$ for all $latex 0 \leq k \&amp;lt;&amp;nbsp;n_{atoms}$&lt;/p&gt;
 &lt;p&gt;This looks really abstract so let&amp;#8217;s try to interpret it. We are looking
-for a matrix factorization \$latex &lt;span class="caps"&gt;UV&lt;/span&gt;\$ of \$latex X \in
-\mathbf{R}\^{n_{samples}\times n_{features}}\$, just like in
-ordinary &lt;span class="caps"&gt;PCA&lt;/span&gt;. The interpretation is that the \$latex n_{atoms}\$ lines
-of \$latex V\$ are the extracted components, while the lines of \$latex
-U\$ are the coordinates of the samples in this&amp;nbsp;projection.&lt;/p&gt;
+for a matrix factorization $latex &lt;span class="caps"&gt;UV&lt;/span&gt;$ of $latex X \in
+\mathbf{R}\^{n_{samples}\times n_{features}}$, just like in
+ordinary &lt;span class="caps"&gt;PCA&lt;/span&gt;. The interpretation is that the $latex n_{atoms}$ lines
+of $latex V$ are the extracted components, while the lines of $latex
+U$ are the coordinates of the samples in this&amp;nbsp;projection.&lt;/p&gt;
 &lt;p&gt;The most important difference between this and &lt;span class="caps"&gt;PCA&lt;/span&gt; is that we enforce
 sparsity on the &lt;em&gt;components&lt;/em&gt;. In other words, we look for a
 representation of the data as a linear combination of sparse&amp;nbsp;signals.&lt;/p&gt;
@@ -1293,11 +1293,11 @@ the list for this summer, but I&amp;nbsp;digress.&lt;/p&gt;
 &lt;p&gt;As usual, such optimization problems are solved by alternatively
 minimizing one of the variables while keeping the other fixed, until
 convergence is&amp;nbsp;reached.&lt;/p&gt;
-&lt;p&gt;The update of \$latex V\$ (the dictionary) is computed as the solution
+&lt;p&gt;The update of $latex V$ (the dictionary) is computed as the solution
 of a Lasso least squares problem.  We allow the user to choose between
 the least angle regression method (&lt;span class="caps"&gt;LARS&lt;/span&gt;) or stochastic gradient descent
 as algorithms to solve the Lasso&amp;nbsp;problem.&lt;/p&gt;
-&lt;p&gt;The update of \$latex U\$ is block coordinate descent with warm restart.
+&lt;p&gt;The update of $latex U$ is block coordinate descent with warm restart.
 This is a batch adaptation of an online algorithm proposed by Mairal et
 al. in&amp;nbsp;[[1]][].&lt;/p&gt;
 &lt;h1&gt;Sparse &lt;span class="caps"&gt;PCA&lt;/span&gt; as a&amp;nbsp;transformer&lt;/h1&gt;
@@ -1306,7 +1306,7 @@ refactored into a scikits.learn transformer object, just like
 &lt;code&gt;scikits.learn.decomposition.pca&lt;/code&gt;. This means that the optimization
 problem described above corresponds to the fitting stage. The post-fit
 state of the transformer is given by the learned components (the matrix
-\$latex V\$&amp;nbsp;above).&lt;/p&gt;
+$latex V$&amp;nbsp;above).&lt;/p&gt;
 &lt;p&gt;In order to transform new data according to the learned sparse &lt;span class="caps"&gt;PCA&lt;/span&gt; model
 (for example, prior to classification of the test data), we simply need
 to do a least squares projection of the new data on the sparse&amp;nbsp;components.&lt;/p&gt;
@@ -1318,7 +1318,7 @@ couple of components, and it can show discrimination or clusters. The
 biggest problem is that the maximum variance components found by &lt;span class="caps"&gt;PCA&lt;/span&gt;
 have very dense expressions as linear combinations of the initial
 features. In practice, sometimes interpretation is made by simply
-marking the \$latex k\$ variables with the highest coefficients in this
+marking the $latex k$ variables with the highest coefficients in this
 representation, and basically interpreting as if the rest are truncated
 to 0 (this has been taught to me in a class on &lt;span class="caps"&gt;PCA&lt;/span&gt;&amp;nbsp;interpretation).&lt;/p&gt;
 &lt;p&gt;Such an approximation can be highly misleading, and now we offer you the
@@ -1378,7 +1378,7 @@ complex object. In this case, we would like a classifier that receives a
 string as input, and directly outputs its label. We wouldn&amp;#8217;t want the
 user to have to manually use the feature extractor prior to&amp;nbsp;classification.&lt;/p&gt;
 &lt;p&gt;The pipeline is very easy to&amp;nbsp;build:  &lt;/p&gt;
-&lt;p&gt;&lt;code&gt;pipeline = Pipeline([('extr', InfinitivesExtractor()), ('svc', LinearSVC(multi_class=True))])&lt;/code&gt;&lt;br&gt;
+&lt;p&gt;&lt;code&gt;pipeline = Pipeline([('extr', InfinitivesExtractor()), ('svc', LinearSVC(multi_class=True))])&lt;/code&gt;&lt;br /&gt;
 The pipeline object now works exactly as expected: we can call fit and
 predict on it. It also exposes the parameters of its constituents, by
 prefixing them with the name of that component. For example, the support

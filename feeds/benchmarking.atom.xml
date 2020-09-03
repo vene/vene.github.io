@@ -1,51 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>Vlad Niculae - benchmarking</title><link href="//vene.ro/" rel="alternate"></link><link href="//vene.ro/feeds/benchmarking.atom.xml" rel="self"></link><id>//vene.ro/</id><updated>2012-08-18T19:41:00+02:00</updated><entry><title>Inverses and pseudoinverses. Numerical issues, speed, symmetry.</title><link href="//vene.ro/blog/inverses-pseudoinverses-numerical-issues-speed-symmetry.html" rel="alternate"></link><published>2012-08-18T19:41:00+02:00</published><updated>2012-08-18T19:41:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2012-08-18:/blog/inverses-pseudoinverses-numerical-issues-speed-symmetry.html</id><summary type="html">&lt;p&gt;The matrix inverse is a cornerstone of linear algebra, taught, along
 with its applications, since high school. The inverse of a matrix
-\$latex A\$, if it exists, is the matrix \$latex A\^{-1}\$ such that
-\$latex &lt;span class="caps"&gt;AA&lt;/span&gt;\^{-1} = A\^{-1}A = I_n\$. Based on the requirement that the
+$latex A$, if it exists, is the matrix $latex A\^{-1}$ such that
+$latex &lt;span class="caps"&gt;AA&lt;/span&gt;\^{-1} = A\^{-1}A = I_n$. Based on the requirement that the
 left and …&lt;/p&gt;</summary><content type="html">&lt;p&gt;The matrix inverse is a cornerstone of linear algebra, taught, along
 with its applications, since high school. The inverse of a matrix
-\$latex A\$, if it exists, is the matrix \$latex A\^{-1}\$ such that
-\$latex &lt;span class="caps"&gt;AA&lt;/span&gt;\^{-1} = A\^{-1}A = I_n\$. Based on the requirement that the
+$latex A$, if it exists, is the matrix $latex A\^{-1}$ such that
+$latex &lt;span class="caps"&gt;AA&lt;/span&gt;\^{-1} = A\^{-1}A = I_n$. Based on the requirement that the
 left and right multiplications should be equal, it follows that it only
 makes sense to speak of inverting square matrices. But just the square
-shape is not enough: for a matrix \$latex A\$ to have an inverse,
-\$latex A\$ must be full&amp;nbsp;rank.&lt;/p&gt;
+shape is not enough: for a matrix $latex A$ to have an inverse,
+$latex A$ must be full&amp;nbsp;rank.&lt;/p&gt;
 &lt;p&gt;The inverse provides an elegant (on paper) method of finding solutions
-to systems of \$latex n\$ equations with \$latex n\$ unknowns, which
-correspond to solving \$latex Ax = b\$ for \$latex x\$. If we&amp;#8217;re lucky
-and \$latex A\^{-1}\$ exists, then we can find \$latex x = A\^{-1}b\$.
+to systems of $latex n$ equations with $latex n$ unknowns, which
+correspond to solving $latex Ax = b$ for $latex x$. If we&amp;#8217;re lucky
+and $latex A\^{-1}$ exists, then we can find $latex x = A\^{-1}b$.
 For this to work, it must be the case&amp;nbsp;that:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;We have exactly as many unknowns as&amp;nbsp;equations&lt;/li&gt;
 &lt;li&gt;No equation is redundant, i.e. can be expressed as a linear
     combination of the&amp;nbsp;others&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;In this setting, there is a unique solution for \$latex&amp;nbsp;x\$.&lt;/p&gt;
+&lt;p&gt;In this setting, there is a unique solution for $latex&amp;nbsp;x$.&lt;/p&gt;
 &lt;h2&gt;The Moore-Penrose&amp;nbsp;pseudoinverse&lt;/h2&gt;
 &lt;p&gt;What if we have more equations than unknowns? It is most likely the case
 that we cannot satisfy all the equations perfectly, so let&amp;#8217;s settle for
 a solution that best fits the constraints, in the sense of minimising
-the sum of squared errors. We solve \$latex \operatorname{arg\,min}_x
-||b -&amp;nbsp;Ax||\$.&lt;/p&gt;
+the sum of squared errors. We solve $latex \operatorname{arg\,min}_x
+||b -&amp;nbsp;Ax||$.&lt;/p&gt;
 &lt;p&gt;And how about the other extreme, where we have a lot of unknowns, but
 just a few equations constraining them. We will probably have an
 infinity of solutions, how can we choose one? A popular choice is to
-take the one of least \$latex \ell_2\$ norm: \$latex
-\operatorname{arg\,min}_x ||x|| \operatorname{s.t.} Ax = b\$. Is
+take the one of least $latex \ell_2$ norm: $latex
+\operatorname{arg\,min}_x ||x|| \operatorname{s.t.} Ax = b$. Is
 there a way to generalize the idea of a matrix inverse for this&amp;nbsp;setting?&lt;/p&gt;
-&lt;p&gt;The pseudoinverse of an arbitrary-shaped matrix \$latex A\$, written
-\$latex A\^{+}\$, has the same shape as \$latex A\^{T}\$ and solves our
+&lt;p&gt;The pseudoinverse of an arbitrary-shaped matrix $latex A$, written
+$latex A\^{+}$, has the same shape as $latex A\^{T}$ and solves our
 problem: the answer to both optimization methods above is given by
-\$latex x =&amp;nbsp;A\^{+}y\$.&lt;/p&gt;
+$latex x =&amp;nbsp;A\^{+}y$.&lt;/p&gt;
 &lt;p&gt;The theoretical definition of the pseudoinverse is given by the
 following conditions. The intuitive way to read them is as properties of
-\$latex &lt;span class="caps"&gt;AA&lt;/span&gt;\^+\$ or \$latex&amp;nbsp;A\^+A\$:&lt;/p&gt;
+$latex &lt;span class="caps"&gt;AA&lt;/span&gt;\^+$ or $latex&amp;nbsp;A\^+A$:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;\$latex &lt;span class="caps"&gt;AA&lt;/span&gt;\^+A =&amp;nbsp;A\$&lt;/li&gt;
-&lt;li&gt;\$latex A\^+&lt;span class="caps"&gt;AA&lt;/span&gt;\^+ =&amp;nbsp;A\^+\$&lt;/li&gt;
-&lt;li&gt;\$latex (&lt;span class="caps"&gt;AA&lt;/span&gt;\^+)\^T = &lt;span class="caps"&gt;AA&lt;/span&gt;\^+\$&lt;/li&gt;
-&lt;li&gt;\$latex (A\^+A)\^T =&amp;nbsp;A\^+A\$&lt;/li&gt;
+&lt;li&gt;$latex &lt;span class="caps"&gt;AA&lt;/span&gt;\^+A =&amp;nbsp;A$&lt;/li&gt;
+&lt;li&gt;$latex A\^+&lt;span class="caps"&gt;AA&lt;/span&gt;\^+ =&amp;nbsp;A\^+$&lt;/li&gt;
+&lt;li&gt;$latex (&lt;span class="caps"&gt;AA&lt;/span&gt;\^+)\^T = &lt;span class="caps"&gt;AA&lt;/span&gt;\^+$&lt;/li&gt;
+&lt;li&gt;$latex (A\^+A)\^T =&amp;nbsp;A\^+A$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;These conditions do not however give us a way to get our hands on a
 pseudoinverse, so we need something&amp;nbsp;else.&lt;/p&gt;
@@ -53,66 +53,66 @@ pseudoinverse, so we need something&amp;nbsp;else.&lt;/p&gt;
 &lt;p&gt;The first time I ran into the pseudoinverse, I didn&amp;#8217;t even know its
 definition, only the expression of the closed-form solution of such a
 problem, and given&amp;nbsp;as:&lt;/p&gt;
-&lt;p&gt;\$latex A\^+ = (A\^T&amp;nbsp;A)\^{-1}A\^T\$&lt;/p&gt;
+&lt;p&gt;$latex A\^+ = (A\^T&amp;nbsp;A)\^{-1}A\^T$&lt;/p&gt;
 &lt;p&gt;What can we see from this&amp;nbsp;expression:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;It gives us a way to compute the pseudoinverse, and hence to solve
     the&amp;nbsp;problem&lt;/li&gt;
-&lt;li&gt;If \$latex A\$ is actually invertible, it means \$latex A\^T\$ is
-    invertible, so we have \$latex A\^+ = A\^{-1}(A\^T)\^{-1}A\^T =&amp;nbsp;A\^{-1}\$&lt;/li&gt;
-&lt;li&gt;Something bad happens if \$latex A\^&lt;span class="caps"&gt;TA&lt;/span&gt;\$ is not&amp;nbsp;invertible.&lt;/li&gt;
+&lt;li&gt;If $latex A$ is actually invertible, it means $latex A\^T$ is
+    invertible, so we have $latex A\^+ = A\^{-1}(A\^T)\^{-1}A\^T =&amp;nbsp;A\^{-1}$&lt;/li&gt;
+&lt;li&gt;Something bad happens if $latex A\^&lt;span class="caps"&gt;TA&lt;/span&gt;$ is not&amp;nbsp;invertible.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;The pseudoinverse is still defined, and unique, when \$latex A\^&lt;span class="caps"&gt;TA&lt;/span&gt;\$ is
+&lt;p&gt;The pseudoinverse is still defined, and unique, when $latex A\^&lt;span class="caps"&gt;TA&lt;/span&gt;$ is
 not invertible, but we cannot use the expression above to compute&amp;nbsp;it.&lt;/p&gt;
 &lt;h2&gt;Numerical&amp;nbsp;issues&lt;/h2&gt;
 &lt;p&gt;Before going on, we should clarify and demystify some of the urban
 legends about numerical computation of least squares problems. You might
 have heard the following unwritten&amp;nbsp;rules:&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;Never compute \$latex A\^{-1}\$, solve the system&amp;nbsp;directly&lt;/li&gt;
-&lt;li&gt;If you really need \$latex A\^{-1}\$, use &lt;code&gt;pinv&lt;/code&gt; and not &lt;code&gt;inv&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Never compute $latex A\^{-1}$, solve the system&amp;nbsp;directly&lt;/li&gt;
+&lt;li&gt;If you really need $latex A\^{-1}$, use &lt;code&gt;pinv&lt;/code&gt; and not &lt;code&gt;inv&lt;/code&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;The first of these rules is based on some misguided beliefs, but is
 still good advice. If your goal is a one-shot answer to a system,
 there&amp;#8217;s no use in explicitly computing a possibly large inverse, when
-all you need is \$latex x\$. But &lt;a href="http://arxiv.org/abs/1201.6035"&gt;this paper&lt;/a&gt; shows that computing the
+all you need is $latex x$. But &lt;a href="http://arxiv.org/abs/1201.6035"&gt;this paper&lt;/a&gt; shows that computing the
 inverse is not necessarily a bad thing. The key to this is conditional
 accuracy, and as long as the &lt;code&gt;inv&lt;/code&gt; function used has good conditional
 bounds, you will get as good results as with a least squares&amp;nbsp;solver.&lt;/p&gt;
 &lt;p&gt;The second rule comes from numerical stability, and will definitely bite
-you if misunderstood. If \$latex A\$ is a square matrix with a row full
+you if misunderstood. If $latex A$ is a square matrix with a row full
 of zeros, it&amp;#8217;s clearly not invertible, so an algorithm attempting to
 compute the inverse will fail and you will be able to catch that
 failure. But what if the row is not exactly zero, but the sum of several
 other rows, and a slight loss of precision is propagated at every&amp;nbsp;step?&lt;/p&gt;
 &lt;h2&gt;Numerical rank vs. actual&amp;nbsp;rank&lt;/h2&gt;
-&lt;p&gt;The rank of a matrix \$latex A\$ is defined as the number of linearly
-independent rows (or equivalently, columns) in \$latex A\$. In other
+&lt;p&gt;The rank of a matrix $latex A$ is defined as the number of linearly
+independent rows (or equivalently, columns) in $latex A$. In other
 words, the number of non-redundant equations in the system. We&amp;#8217;ve seen
 before that if the rank is less than the total number of rows, the
-system cannot have a unique solution anymore, so the matrix \$latex A\$
+system cannot have a unique solution anymore, so the matrix $latex A$
 is not&amp;nbsp;invertible.&lt;/p&gt;
 &lt;p&gt;The rank of a matrix is a computationally tricky problem. On paper, with
 small matrices, you would look at minors of decreasing size, until you
 find the first non-zero one. This is unfeasible to implement on a
 computer, so numerical analysis has a different approach. Enter the
 singular value&amp;nbsp;decomposition!&lt;/p&gt;
-&lt;p&gt;The &lt;span class="caps"&gt;SVD&lt;/span&gt; of a matrix \$latex A\$ is \$latex A = &lt;span class="caps"&gt;USV&lt;/span&gt;\^{T}\$, where \$latex
-S\$ is diagonal and \$latex U, V\$ are orthogonal. The elements on the
-diagonal of \$latex S\$ are called the singular values of \$latex A\$.
+&lt;p&gt;The &lt;span class="caps"&gt;SVD&lt;/span&gt; of a matrix $latex A$ is $latex A = &lt;span class="caps"&gt;USV&lt;/span&gt;\^{T}$, where $latex
+S$ is diagonal and $latex U, V$ are orthogonal. The elements on the
+diagonal of $latex S$ are called the singular values of $latex A$.
 It can be seen that to get a row full of zeros when multiplying three
 such matrices, a singular value needs to be exactly&amp;nbsp;zero.&lt;/p&gt;
 &lt;p&gt;The ugly thing that could happen is that one (or usually more) singular
 values are not exactly zero, but very low values, due to propagated
 imprecision. Why is this a problem? By looking at the &lt;span class="caps"&gt;SVD&lt;/span&gt; and noting its
-properties, it becomes clear that \$latex A\^{-1} = &lt;span class="caps"&gt;VS&lt;/span&gt;\^{-1}U\^{T}\$ and
-since \$latex S\$ is diagonal, its inverse is formed by taking the
+properties, it becomes clear that $latex A\^{-1} = &lt;span class="caps"&gt;VS&lt;/span&gt;\^{-1}U\^{T}$ and
+since $latex S$ is diagonal, its inverse is formed by taking the
 inverse of all the elements on the diagonal. But if a singular value is
 very small but not quite zero, its inverse is very large and it will
 blow up the whole computation of the inverse. The right thing to do here
-is either to tell the user that \$latex A\$ is numerically rank
+is either to tell the user that $latex A$ is numerically rank
 deficient, or to return a pseudoinverse instead. A pseudoinverse would
-mean: give up on trying to get \$latex &lt;span class="caps"&gt;AA&lt;/span&gt;\^+\$ to be the identity
+mean: give up on trying to get $latex &lt;span class="caps"&gt;AA&lt;/span&gt;\^+$ to be the identity
 matrix, simply aim for a diagonal matrix with approximately ones and
 zeroes. In other words, when singular values are very low, set them to&amp;nbsp;0.&lt;/p&gt;
 &lt;p&gt;How do you set the threshold? This is actually a delicate issue, being
@@ -122,69 +122,69 @@ discussed on &lt;a href="http://thread.gmane.org/gmane.comp.python.numeric.gener
 that ancient but crazy robust code that&amp;#8217;s been used since the 70s, to
 first compute a pivoted &lt;span class="caps"&gt;LU&lt;/span&gt; decomposition that is then used to compute
 the inverse. &lt;code&gt;pinv&lt;/code&gt; also uses &lt;span class="caps"&gt;LAPACK&lt;/span&gt;, but for computing the
-least-squares solution to the system \$latex &lt;span class="caps"&gt;AX&lt;/span&gt; = I\$. &lt;code&gt;pinv2&lt;/code&gt; computes
+least-squares solution to the system $latex &lt;span class="caps"&gt;AX&lt;/span&gt; = I$. &lt;code&gt;pinv2&lt;/code&gt; computes
 the &lt;span class="caps"&gt;SVD&lt;/span&gt; and transposes everything like shown above. Both &lt;code&gt;pinv&lt;/code&gt; and
 &lt;code&gt;pinv2&lt;/code&gt; expose &lt;code&gt;cond&lt;/code&gt; and &lt;code&gt;rcond&lt;/code&gt; arguments to handle the treatment of
 very small singular values, but (&lt;em&gt;attention!&lt;/em&gt;) they behave&amp;nbsp;differently!&lt;/p&gt;
 &lt;p&gt;The different implementations also lead to different speed. Let&amp;#8217;s look
 at inverting a random square&amp;nbsp;matrix:&lt;/p&gt;
-&lt;p&gt;[sourcecode lang=&amp;#8221;python&amp;#8221;]&lt;br&gt;
+&lt;p&gt;[sourcecode lang=&amp;#8221;python&amp;#8221;]&lt;br /&gt;
 In [1]: import numpy as&amp;nbsp;np&lt;/p&gt;
 &lt;p&gt;In [2]: from scipy import&amp;nbsp;linalg&lt;/p&gt;
 &lt;p&gt;In [3]: a = np.random.randn(1000,&amp;nbsp;1000)&lt;/p&gt;
-&lt;p&gt;In [4]: timeit linalg.inv(a)&lt;br&gt;
+&lt;p&gt;In [4]: timeit linalg.inv(a)&lt;br /&gt;
 10 loops, best of 3: 132 ms per&amp;nbsp;loop&lt;/p&gt;
-&lt;p&gt;In [5]: timeit linalg.pinv(a)&lt;br&gt;
+&lt;p&gt;In [5]: timeit linalg.pinv(a)&lt;br /&gt;
 1 loops, best of 3: 18.8 s per&amp;nbsp;loop&lt;/p&gt;
-&lt;p&gt;In [6]: timeit linalg.pinv2(a)&lt;br&gt;
-1 loops, best of 3: 1.58 s per loop&lt;br&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
+&lt;p&gt;In [6]: timeit linalg.pinv2(a)&lt;br /&gt;
+1 loops, best of 3: 1.58 s per loop&lt;br /&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
 &lt;p&gt;Woah, huge difference! But do all three methods return the &amp;#8220;right&amp;#8221;&amp;nbsp;result?&lt;/p&gt;
-&lt;p&gt;[sourcecode lang=&amp;#8221;python&amp;#8221;]&lt;br&gt;
-In [7]: linalg.inv(a)[:3, :3]&lt;br&gt;
-Out[7]:&lt;br&gt;
-array([[ 0.03636918, 0.01641725, 0.00736503],&lt;br&gt;
-[-0.04575771, 0.03578062, 0.02937733],&lt;br&gt;
+&lt;p&gt;[sourcecode lang=&amp;#8221;python&amp;#8221;]&lt;br /&gt;
+In [7]: linalg.inv(a)[:3, :3]&lt;br /&gt;
+Out[7]:&lt;br /&gt;
+array([[ 0.03636918, 0.01641725, 0.00736503],&lt;br /&gt;
+[-0.04575771, 0.03578062, 0.02937733],&lt;br /&gt;
 [ 0.00542367, 0.01246306, 0.0122156&amp;nbsp;]])&lt;/p&gt;
-&lt;p&gt;In [8]: linalg.pinv(a)[:3, :3]&lt;br&gt;
-Out[8]:&lt;br&gt;
-array([[ 0.03636918, 0.01641725, 0.00736503],&lt;br&gt;
-[-0.04575771, 0.03578062, 0.02937733],&lt;br&gt;
+&lt;p&gt;In [8]: linalg.pinv(a)[:3, :3]&lt;br /&gt;
+Out[8]:&lt;br /&gt;
+array([[ 0.03636918, 0.01641725, 0.00736503],&lt;br /&gt;
+[-0.04575771, 0.03578062, 0.02937733],&lt;br /&gt;
 [ 0.00542367, 0.01246306, 0.0122156&amp;nbsp;]])&lt;/p&gt;
-&lt;p&gt;In [9]: linalg.pinv2(a)[:3, :3]&lt;br&gt;
-Out[9]:&lt;br&gt;
-array([[ 0.03636918, 0.01641725, 0.00736503],&lt;br&gt;
-[-0.04575771, 0.03578062, 0.02937733],&lt;br&gt;
+&lt;p&gt;In [9]: linalg.pinv2(a)[:3, :3]&lt;br /&gt;
+Out[9]:&lt;br /&gt;
+array([[ 0.03636918, 0.01641725, 0.00736503],&lt;br /&gt;
+[-0.04575771, 0.03578062, 0.02937733],&lt;br /&gt;
 [ 0.00542367, 0.01246306, 0.0122156&amp;nbsp;]])&lt;/p&gt;
 &lt;p&gt;In [10]: np.testing.assert_array_almost_equal(linalg.inv(a),&amp;nbsp;linalg.pinv(a))&lt;/p&gt;
 &lt;p&gt;In [11]: np.testing.assert_array_almost_equal(linalg.inv(a),
-linalg.pinv2(a))&lt;br&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
+linalg.pinv2(a))&lt;br /&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
 &lt;p&gt;Looks good! This is because we got lucky, though, and &lt;code&gt;a&lt;/code&gt; was invertible
 to start with. Let&amp;#8217;s look at its&amp;nbsp;spectrum:&lt;/p&gt;
-&lt;p&gt;[sourcecode lang=&amp;#8221;python&amp;#8221;]&lt;br&gt;
+&lt;p&gt;[sourcecode lang=&amp;#8221;python&amp;#8221;]&lt;br /&gt;
 In [12]: _, s, _ =&amp;nbsp;linalg.svd(a)&lt;/p&gt;
-&lt;p&gt;In [13]: np.min(s), np.max(s)&lt;br&gt;
-Out[13]: (0.029850235603382822, 62.949785645178906)&lt;br&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
+&lt;p&gt;In [13]: np.min(s), np.max(s)&lt;br /&gt;
+Out[13]: (0.029850235603382822, 62.949785645178906)&lt;br /&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
 &lt;p&gt;This is a lovely range for the singular values of a matrix, not too
 small, not too large. But what if we built the matrix in a way that
 would always pose problems? Specifically, let&amp;#8217;s look at the case of
 covariance&amp;nbsp;matrices:&lt;/p&gt;
-&lt;p&gt;[sourcecode lang=&amp;#8221;python&amp;#8221;]&lt;br&gt;
+&lt;p&gt;[sourcecode lang=&amp;#8221;python&amp;#8221;]&lt;br /&gt;
 In [14]: a = np.random.randn(1000,&amp;nbsp;50)&lt;/p&gt;
 &lt;p&gt;In [15]: a = np.dot(a,&amp;nbsp;a.T)&lt;/p&gt;
 &lt;p&gt;In [16]: _, s, _ =&amp;nbsp;linalg.svd(a)&lt;/p&gt;
-&lt;p&gt;In [17]: s[-9:]&lt;br&gt;
-Out[17]:&lt;br&gt;
-array([ 7.40548924e-14, 6.48102455e-14, 5.75803505e-14,&lt;br&gt;
-5.44263048e-14, 4.51528730e-14, 3.55317976e-14,&lt;br&gt;
+&lt;p&gt;In [17]: s[-9:]&lt;br /&gt;
+Out[17]:&lt;br /&gt;
+array([ 7.40548924e-14, 6.48102455e-14, 5.75803505e-14,&lt;br /&gt;
+5.44263048e-14, 4.51528730e-14, 3.55317976e-14,&lt;br /&gt;
 2.46939141e-14, 1.54186776e-14,&amp;nbsp;5.08135874e-15])&lt;/p&gt;
 &lt;p&gt;[/sourcecode]&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;a&lt;/code&gt; has at least 9 tiny singular values. Actually it&amp;#8217;s easy to see why
 there are 950 of&amp;nbsp;them:&lt;/p&gt;
-&lt;p&gt;[sourcecode lang=&amp;#8221;python&amp;#8221;]&lt;br&gt;
-In [18]: np.sum(s \&amp;lt; 1e-10)&lt;br&gt;
-Out[18]: 950&lt;br&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
+&lt;p&gt;[sourcecode lang=&amp;#8221;python&amp;#8221;]&lt;br /&gt;
+In [18]: np.sum(s \&amp;lt; 1e-10)&lt;br /&gt;
+Out[18]: 950&lt;br /&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
 &lt;p&gt;How do our functions behave in this case? Instead of just looking at a
-corner, let&amp;#8217;s use our gift of sight:[&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2012/08/pseudoinverses-300x218.png" title="Pseudoinverses"&gt;]&lt;a href="http://localhost:8001/wp-content/uploads/2012/08/pseudoinverses-300x218.png" title="Pseudoinverses"&gt;&lt;/a&gt;&lt;/p&gt;
+corner, let&amp;#8217;s use our gift of sight:[&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2012/08/pseudoinverses-300x218.png" title="Pseudoinverses" /&gt;]&lt;a href="http://localhost:8001/wp-content/uploads/2012/08/pseudoinverses-300x218.png" title="Pseudoinverses"&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;The small eigenvalues are large enough that &lt;code&gt;inv&lt;/code&gt; thinks the matrix is
 full rank. &lt;code&gt;pinv&lt;/code&gt; does better but it still fails, you can see a group of
 high-amplitude noisy columns. &lt;code&gt;pinv2&lt;/code&gt; is faster and it also gives us a
@@ -193,16 +193,16 @@ useful result in this&amp;nbsp;case.&lt;/p&gt;
 &lt;p&gt;Not quite. Remember, we are now trying to actually invert matrices, and
 degrade gracefully in case of rank deficiency. But what if we need the
 pseudoinverse to solve an actual non-square, wide or tall&amp;nbsp;system?&lt;/p&gt;
-&lt;p&gt;[sourcecode lang=&amp;#8221;python&amp;#8221;]&lt;br&gt;
+&lt;p&gt;[sourcecode lang=&amp;#8221;python&amp;#8221;]&lt;br /&gt;
 In [19]: a = np.random.randn(1000,&amp;nbsp;50)&lt;/p&gt;
-&lt;p&gt;In [20]: timeit linalg.pinv(a)&lt;br&gt;
+&lt;p&gt;In [20]: timeit linalg.pinv(a)&lt;br /&gt;
 10 loops, best of 3: 104 ms per&amp;nbsp;loop&lt;/p&gt;
-&lt;p&gt;In [21]: timeit linalg.pinv(a.T)&lt;br&gt;
+&lt;p&gt;In [21]: timeit linalg.pinv(a.T)&lt;br /&gt;
 100 loops, best of 3: 7.08 ms per&amp;nbsp;loop&lt;/p&gt;
-&lt;p&gt;In [22]: timeit linalg.pinv2(a)&lt;br&gt;
+&lt;p&gt;In [22]: timeit linalg.pinv2(a)&lt;br /&gt;
 10 loops, best of 3: 114 ms per&amp;nbsp;loop&lt;/p&gt;
-&lt;p&gt;In [23]: timeit linalg.pinv2(a.T)&lt;br&gt;
-10 loops, best of 3: 126 ms per loop&lt;br&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
+&lt;p&gt;In [23]: timeit linalg.pinv2(a.T)&lt;br /&gt;
+10 loops, best of 3: 126 ms per loop&lt;br /&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
 &lt;p&gt;Huge victory for &lt;code&gt;pinv&lt;/code&gt; in the wide case! Hurray! With all this insight,
 we can draw a line and see what we&amp;nbsp;learned.&lt;/p&gt;
 &lt;ul&gt;
@@ -214,23 +214,23 @@ we can draw a line and see what we&amp;nbsp;learned.&lt;/p&gt;
     for speed and numerical&amp;nbsp;gain.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2&gt;Improving the symmetric&amp;nbsp;case&lt;/h2&gt;
-&lt;p&gt;But wait a second, can&amp;#8217;t we do better? \$latex &lt;span class="caps"&gt;AA&lt;/span&gt;\^T\$ is symmetric,
+&lt;p&gt;But wait a second, can&amp;#8217;t we do better? $latex &lt;span class="caps"&gt;AA&lt;/span&gt;\^T$ is symmetric,
 can&amp;#8217;t we make use of that to speed up the computation even more?
-Clearly, if \$latex A\$ is symmetric, in its &lt;span class="caps"&gt;SVD&lt;/span&gt; \$latex A = &lt;span class="caps"&gt;USV&lt;/span&gt;\^T\$,
-we must have \$latex U = V\$. But this is exactly the eigendecomposition
-of a symmetric matrix \$latex A\$. The eigendecomposition can be
+Clearly, if $latex A$ is symmetric, in its &lt;span class="caps"&gt;SVD&lt;/span&gt; $latex A = &lt;span class="caps"&gt;USV&lt;/span&gt;\^T$,
+we must have $latex U = V$. But this is exactly the eigendecomposition
+of a symmetric matrix $latex A$. The eigendecomposition can be
 computed cheaper than the &lt;span class="caps"&gt;SVD&lt;/span&gt; using Scipy &lt;code&gt;eigh&lt;/code&gt;, that uses &lt;span class="caps"&gt;LAPACK&lt;/span&gt;&amp;#8217;s
 &lt;code&gt;*evr&lt;/code&gt;. As part of my GSoC this year, with help from &lt;a href="http://jakevdp.github.com/"&gt;Jake
 VanderPlas&lt;/a&gt;, we made a &lt;a href="https://github.com/scipy/scipy/pull/289"&gt;pull request to Scipy&lt;/a&gt; containing a &lt;code&gt;pinvh&lt;/code&gt;
 function that is equivalent to &lt;code&gt;pinv2&lt;/code&gt; but faster for symmetric&amp;nbsp;matrices.&lt;/p&gt;
-&lt;p&gt;[sourcecode lang=&amp;#8221;python&amp;#8221;]&lt;br&gt;
-In [24]: timeit linalg.pinv2(a)&lt;br&gt;
+&lt;p&gt;[sourcecode lang=&amp;#8221;python&amp;#8221;]&lt;br /&gt;
+In [24]: timeit linalg.pinv2(a)&lt;br /&gt;
 1 loops, best of 3: 1.54 s per&amp;nbsp;loop&lt;/p&gt;
-&lt;p&gt;In [25]: timeit linalg.pinvh(a)&lt;br&gt;
+&lt;p&gt;In [25]: timeit linalg.pinvh(a)&lt;br /&gt;
 1 loops, best of 3: 621 ms per&amp;nbsp;loop&lt;/p&gt;
 &lt;p&gt;In [26]: np.testing.assert_array_almost_equal(linalg.pinv2(a),
-linalg.pinvh(a))&lt;br&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
-&lt;p&gt;[&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2012/08/pseudoinverses-300x218.png" title="Pseudoinverses"&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2012/08/pseudoinverses.png&lt;/p&gt;</content><category term="benchmarking"></category><category term="inv"></category><category term="matrix inverse"></category><category term="numerical analysis"></category><category term="numerical methods"></category><category term="pinv"></category><category term="pinvh"></category><category term="positive semidefinite"></category><category term="pseudoinverse"></category><category term="symmetric"></category><category term="benchmarking"></category><category term="python"></category></entry><entry><title>Memory benchmarking with vbench</title><link href="//vene.ro/blog/memory-benchmarking-with-vbench.html" rel="alternate"></link><published>2012-07-05T12:38:00+02:00</published><updated>2012-07-05T12:38:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2012-07-05:/blog/memory-benchmarking-with-vbench.html</id><summary type="html">&lt;p&gt;The &lt;a href="https://github.com/vene/scikit-learn-speed"&gt;scikit-learn-speed project&lt;/a&gt; now has memory usage&amp;nbsp;benchmarking!&lt;/p&gt;
+linalg.pinvh(a))&lt;br /&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2012/08/pseudoinverses-300x218.png" title="Pseudoinverses" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2012/08/pseudoinverses.png&lt;/p&gt;</content><category term="benchmarking"></category><category term="inv"></category><category term="matrix inverse"></category><category term="numerical analysis"></category><category term="numerical methods"></category><category term="pinv"></category><category term="pinvh"></category><category term="positive semidefinite"></category><category term="pseudoinverse"></category><category term="symmetric"></category><category term="benchmarking"></category><category term="python"></category></entry><entry><title>Memory benchmarking with vbench</title><link href="//vene.ro/blog/memory-benchmarking-with-vbench.html" rel="alternate"></link><published>2012-07-05T12:38:00+02:00</published><updated>2012-07-05T12:38:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2012-07-05:/blog/memory-benchmarking-with-vbench.html</id><summary type="html">&lt;p&gt;The &lt;a href="https://github.com/vene/scikit-learn-speed"&gt;scikit-learn-speed project&lt;/a&gt; now has memory usage&amp;nbsp;benchmarking!&lt;/p&gt;
 &lt;p&gt;This was accomplished by building on what I described in my recent
 posts, specifically the extensions to Fabian&amp;#8217;s [memory_profiler][] that
 you can find in &lt;a href="https://github.com/vene/memory_profiler"&gt;my fork&lt;/a&gt;, but they will be merged upstream soon. The
@@ -268,7 +268,7 @@ calls make it crash. I will start this post with a reminder of a pretty
 important&amp;nbsp;bug:&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;[On MacOS X (10.7 but maybe more), after forking a new process, there
 is a segfault in Grand Central Dispatch on the &lt;span class="caps"&gt;BLAS&lt;/span&gt; &lt;span class="caps"&gt;DGEMM&lt;/span&gt; function from
-Accelerate.][]&lt;br&gt;
+Accelerate.][]&lt;br /&gt;
 &lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;&lt;span class="caps"&gt;EDIT&lt;/span&gt; 1:&lt;/strong&gt; In a hurry, I forgot to mention how &lt;a href="http://twitter.com/ogrisel/"&gt;Olivier Grisel&lt;/a&gt; and
 &lt;a href="https://github.com/cournape"&gt;David Cournapeau&lt;/a&gt; spent some time narrowing down this issue, starting
@@ -282,66 +282,66 @@ measuring the current memory, running the command, and measuring the
 memory again. The problem is the results are not consistent, because
 Python &lt;a href="http://effbot.org/pyfaq/why-doesnt-python-release-the-memory-when-i-delete-a-large-object.htm"&gt;tries to reuse already allocated memory whenever it can&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Using memory_profiler, here&amp;#8217;s an example illustrating this elastic
-memory management:&lt;br&gt;
-[sourcecode lang=&amp;#8221;python&amp;#8221;]&lt;br&gt;
-# mem_test.py&lt;br&gt;
+memory management:&lt;br /&gt;
+[sourcecode lang=&amp;#8221;python&amp;#8221;]&lt;br /&gt;
+# mem_test.py&lt;br /&gt;
 import numpy as&amp;nbsp;np&lt;/p&gt;
-&lt;p&gt;def make_a_large_array():&lt;br&gt;
+&lt;p&gt;def make_a_large_array():&lt;br /&gt;
 return np.ones((1000,&amp;nbsp;1000))&lt;/p&gt;
-&lt;p&gt;def main():&lt;br&gt;
-make_a_large_array()&lt;br&gt;
-make_a_large_array()&lt;br&gt;&amp;nbsp;make_a_large_array()&lt;/p&gt;
-&lt;p&gt;# in IPython:&lt;br&gt;
+&lt;p&gt;def main():&lt;br /&gt;
+make_a_large_array()&lt;br /&gt;
+make_a_large_array()&lt;br /&gt;&amp;nbsp;make_a_large_array()&lt;/p&gt;
+&lt;p&gt;# in IPython:&lt;br /&gt;
 In [1]: import&amp;nbsp;mem_test&lt;/p&gt;
-&lt;p&gt;In [2]: %mprun -f mem_test.main mem_test.main()&lt;br&gt;
+&lt;p&gt;In [2]: %mprun -f mem_test.main mem_test.main()&lt;br /&gt;
 Filename:&amp;nbsp;mem_test.py&lt;/p&gt;
 &lt;h1&gt;Line # Mem usage Increment Line&amp;nbsp;Contents&lt;/h1&gt;
-&lt;p&gt;8 24.8477 &lt;span class="caps"&gt;MB&lt;/span&gt; 0.0000 &lt;span class="caps"&gt;MB&lt;/span&gt; def main():&lt;br&gt;
-9 24.8633 &lt;span class="caps"&gt;MB&lt;/span&gt; 0.0156 &lt;span class="caps"&gt;MB&lt;/span&gt; make_a_large_array()&lt;br&gt;
-10 32.4688 &lt;span class="caps"&gt;MB&lt;/span&gt; 7.6055 &lt;span class="caps"&gt;MB&lt;/span&gt; make_a_large_array()&lt;br&gt;
-11 32.4688 &lt;span class="caps"&gt;MB&lt;/span&gt; 0.0000 &lt;span class="caps"&gt;MB&lt;/span&gt; make_a_large_array()&lt;br&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
+&lt;p&gt;8 24.8477 &lt;span class="caps"&gt;MB&lt;/span&gt; 0.0000 &lt;span class="caps"&gt;MB&lt;/span&gt; def main():&lt;br /&gt;
+9 24.8633 &lt;span class="caps"&gt;MB&lt;/span&gt; 0.0156 &lt;span class="caps"&gt;MB&lt;/span&gt; make_a_large_array()&lt;br /&gt;
+10 32.4688 &lt;span class="caps"&gt;MB&lt;/span&gt; 7.6055 &lt;span class="caps"&gt;MB&lt;/span&gt; make_a_large_array()&lt;br /&gt;
+11 32.4688 &lt;span class="caps"&gt;MB&lt;/span&gt; 0.0000 &lt;span class="caps"&gt;MB&lt;/span&gt; make_a_large_array()&lt;br /&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
 &lt;p&gt;If this was in an IPython environment, and one would like to see how
 much memory &lt;code&gt;make_a_large_array()&lt;/code&gt; uses, you could say we can simply run
 it a few times and take the maximum. However, if you happened to
 accidentally call &lt;code&gt;main()&lt;/code&gt; once before, you will no longer get a good&amp;nbsp;result:&lt;/p&gt;
-&lt;p&gt;[sourcecode lang=&amp;#8221;python&amp;#8221;]&lt;br&gt;
-In [3]: %mprun -f mem_test.main mem_test.main()&lt;br&gt;
+&lt;p&gt;[sourcecode lang=&amp;#8221;python&amp;#8221;]&lt;br /&gt;
+In [3]: %mprun -f mem_test.main mem_test.main()&lt;br /&gt;
 Filename:&amp;nbsp;mem_test.py&lt;/p&gt;
 &lt;h1&gt;Line # Mem usage Increment Line&amp;nbsp;Contents&lt;/h1&gt;
-&lt;p&gt;8 32.4922 &lt;span class="caps"&gt;MB&lt;/span&gt; 0.0000 &lt;span class="caps"&gt;MB&lt;/span&gt; def main():&lt;br&gt;
-9 32.5234 &lt;span class="caps"&gt;MB&lt;/span&gt; 0.0312 &lt;span class="caps"&gt;MB&lt;/span&gt; make_a_large_array()&lt;br&gt;
-10 32.5234 &lt;span class="caps"&gt;MB&lt;/span&gt; 0.0000 &lt;span class="caps"&gt;MB&lt;/span&gt; make_a_large_array()&lt;br&gt;
-11 32.5234 &lt;span class="caps"&gt;MB&lt;/span&gt; 0.0000 &lt;span class="caps"&gt;MB&lt;/span&gt; make_a_large_array()&lt;br&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
+&lt;p&gt;8 32.4922 &lt;span class="caps"&gt;MB&lt;/span&gt; 0.0000 &lt;span class="caps"&gt;MB&lt;/span&gt; def main():&lt;br /&gt;
+9 32.5234 &lt;span class="caps"&gt;MB&lt;/span&gt; 0.0312 &lt;span class="caps"&gt;MB&lt;/span&gt; make_a_large_array()&lt;br /&gt;
+10 32.5234 &lt;span class="caps"&gt;MB&lt;/span&gt; 0.0000 &lt;span class="caps"&gt;MB&lt;/span&gt; make_a_large_array()&lt;br /&gt;
+11 32.5234 &lt;span class="caps"&gt;MB&lt;/span&gt; 0.0000 &lt;span class="caps"&gt;MB&lt;/span&gt; make_a_large_array()&lt;br /&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
 &lt;p&gt;So how can we get consistent results for the memory usage of an
 instruction? We could run it in a fresh, new process. I implemented this
 in %memit and it&amp;nbsp;shows:&lt;/p&gt;
-&lt;p&gt;[sourcecode lang=&amp;#8221;python&amp;#8221;]&lt;br&gt;
-In [5]: %memit mem_test.make_a_large_array()&lt;br&gt;
+&lt;p&gt;[sourcecode lang=&amp;#8221;python&amp;#8221;]&lt;br /&gt;
+In [5]: %memit mem_test.make_a_large_array()&lt;br /&gt;
 maximum of 3: 8.039062 &lt;span class="caps"&gt;MB&lt;/span&gt; per&amp;nbsp;loop&lt;/p&gt;
-&lt;p&gt;In [6]: %memit mem_test.make_a_large_array()&lt;br&gt;
+&lt;p&gt;In [6]: %memit mem_test.make_a_large_array()&lt;br /&gt;
 maximum of 3: 8.035156 &lt;span class="caps"&gt;MB&lt;/span&gt; per&amp;nbsp;loop&lt;/p&gt;
-&lt;p&gt;In [7]: %memit mem_test.make_a_large_array()&lt;br&gt;
-maximum of 3: 8.042969 &lt;span class="caps"&gt;MB&lt;/span&gt; per loop&lt;br&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
+&lt;p&gt;In [7]: %memit mem_test.make_a_large_array()&lt;br /&gt;
+maximum of 3: 8.042969 &lt;span class="caps"&gt;MB&lt;/span&gt; per loop&lt;br /&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
 &lt;p&gt;This way you can also realistically benchmark&amp;nbsp;assignments:&lt;/p&gt;
-&lt;p&gt;[sourcecode lang=&amp;#8221;python&amp;#8221;]&lt;br&gt;
-In [8]: %memit X = mem_test.make_a_large_array()&lt;br&gt;
+&lt;p&gt;[sourcecode lang=&amp;#8221;python&amp;#8221;]&lt;br /&gt;
+In [8]: %memit X = mem_test.make_a_large_array()&lt;br /&gt;
 maximum of 3: 8.054688 &lt;span class="caps"&gt;MB&lt;/span&gt; per&amp;nbsp;loop&lt;/p&gt;
-&lt;p&gt;In [9]: %memit X = mem_test.make_a_large_array()&lt;br&gt;
+&lt;p&gt;In [9]: %memit X = mem_test.make_a_large_array()&lt;br /&gt;
 maximum of 3: 8.058594 &lt;span class="caps"&gt;MB&lt;/span&gt; per&amp;nbsp;loop&lt;/p&gt;
-&lt;p&gt;In [10]: %memit X = mem_test.make_a_large_array()&lt;br&gt;
-maximum of 3: 8.058594 &lt;span class="caps"&gt;MB&lt;/span&gt; per loop&lt;br&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
+&lt;p&gt;In [10]: %memit X = mem_test.make_a_large_array()&lt;br /&gt;
+maximum of 3: 8.058594 &lt;span class="caps"&gt;MB&lt;/span&gt; per loop&lt;br /&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
 &lt;p&gt;If we don&amp;#8217;t spawn a subprocess, &lt;code&gt;del&lt;/code&gt; doesn&amp;#8217;t help, but allocating new
-variables does:&lt;br&gt;
-[sourcecode lang=&amp;#8221;python&amp;#8221;]&lt;br&gt;
-In [11]: %memit -i X = mem_test.make_a_large_array()&lt;br&gt;
+variables does:&lt;br /&gt;
+[sourcecode lang=&amp;#8221;python&amp;#8221;]&lt;br /&gt;
+In [11]: %memit -i X = mem_test.make_a_large_array()&lt;br /&gt;
 maximum of 3: 7.632812 &lt;span class="caps"&gt;MB&lt;/span&gt; per&amp;nbsp;loop&lt;/p&gt;
 &lt;p&gt;In [12]: del&amp;nbsp;X&lt;/p&gt;
-&lt;p&gt;In [13]: %memit -i X = mem_test.make_a_large_array()&lt;br&gt;
+&lt;p&gt;In [13]: %memit -i X = mem_test.make_a_large_array()&lt;br /&gt;
 maximum of 3: 0.000000 &lt;span class="caps"&gt;MB&lt;/span&gt; per&amp;nbsp;loop&lt;/p&gt;
-&lt;p&gt;In [14]: %memit -i Y = mem_test.make_a_large_array()&lt;br&gt;
+&lt;p&gt;In [14]: %memit -i Y = mem_test.make_a_large_array()&lt;br /&gt;
 maximum of 3: 7.632812 &lt;span class="caps"&gt;MB&lt;/span&gt; per&amp;nbsp;loop&lt;/p&gt;
-&lt;p&gt;In [15]: %memit -i Z = mem_test.make_a_large_array()&lt;br&gt;
-maximum of 3: 7.632812 &lt;span class="caps"&gt;MB&lt;/span&gt; per loop&lt;br&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
+&lt;p&gt;In [15]: %memit -i Z = mem_test.make_a_large_array()&lt;br /&gt;
+maximum of 3: 7.632812 &lt;span class="caps"&gt;MB&lt;/span&gt; per loop&lt;br /&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
 &lt;p&gt;Now, the problem is that when the function that you are benchmarking
 contains calls to &lt;code&gt;np.dot&lt;/code&gt; (matrix multiplication), the subprocess will
 consistently fail with &lt;span class="caps"&gt;SIGSEGV&lt;/span&gt; on affected &lt;span class="caps"&gt;OS&lt;/span&gt; X systems. These are
@@ -376,28 +376,28 @@ reports, without having to go in and add the &lt;code&gt;@profile&lt;/code&gt; d
 &lt;p&gt;In [3]: X, y = np.array([[1, 2], [3, 4], [5, 6]]), np.array([2, 4,&amp;nbsp;6])&lt;/p&gt;
 &lt;p&gt;In [4]: %mprun -f ridge_regression ridge_regression(X, y,&amp;nbsp;1.0)&lt;/p&gt;
 &lt;p&gt;(&amp;#8230;)&lt;/p&gt;
-&lt;p&gt;109 41.6406 &lt;span class="caps"&gt;MB&lt;/span&gt; 0.0000 &lt;span class="caps"&gt;MB&lt;/span&gt; if n_features &gt; n_samples or \&lt;br&gt;
-110 41.6406 &lt;span class="caps"&gt;MB&lt;/span&gt; 0.0000 &lt;span class="caps"&gt;MB&lt;/span&gt; isinstance(sample_weight, np.ndarray) or \&lt;br&gt;
-111 41.6406 &lt;span class="caps"&gt;MB&lt;/span&gt; 0.0000 &lt;span class="caps"&gt;MB&lt;/span&gt; sample_weight != 1.0:&lt;br&gt;
-112&lt;br&gt;
-113 # kernel ridge&lt;br&gt;
-114 # w = X.T * inv(X X\^t + alpha*Id) y&lt;br&gt;
-115 A = np.dot(X, X.T)&lt;br&gt;
-116 A.flat[::n_samples + 1] += alpha * sample_weight&lt;br&gt;
-117 coef = np.dot(X.T, _solve(A, y, solver, tol))&lt;br&gt;
-118 else:&lt;br&gt;
-119 # ridge&lt;br&gt;
-120 # w = inv(X\^t X + alpha*Id) * X.T y&lt;br&gt;
-121 41.6484 &lt;span class="caps"&gt;MB&lt;/span&gt; 0.0078 &lt;span class="caps"&gt;MB&lt;/span&gt; A = np.dot(X.T, X)&lt;br&gt;
-122 41.6875 &lt;span class="caps"&gt;MB&lt;/span&gt; 0.0391 &lt;span class="caps"&gt;MB&lt;/span&gt; A.flat[::n_features + 1] += alpha&lt;br&gt;
+&lt;p&gt;109 41.6406 &lt;span class="caps"&gt;MB&lt;/span&gt; 0.0000 &lt;span class="caps"&gt;MB&lt;/span&gt; if n_features &gt; n_samples or \&lt;br /&gt;
+110 41.6406 &lt;span class="caps"&gt;MB&lt;/span&gt; 0.0000 &lt;span class="caps"&gt;MB&lt;/span&gt; isinstance(sample_weight, np.ndarray) or \&lt;br /&gt;
+111 41.6406 &lt;span class="caps"&gt;MB&lt;/span&gt; 0.0000 &lt;span class="caps"&gt;MB&lt;/span&gt; sample_weight != 1.0:&lt;br /&gt;
+112&lt;br /&gt;
+113 # kernel ridge&lt;br /&gt;
+114 # w = X.T * inv(X X\^t + alpha*Id) y&lt;br /&gt;
+115 A = np.dot(X, X.T)&lt;br /&gt;
+116 A.flat[::n_samples + 1] += alpha * sample_weight&lt;br /&gt;
+117 coef = np.dot(X.T, _solve(A, y, solver, tol))&lt;br /&gt;
+118 else:&lt;br /&gt;
+119 # ridge&lt;br /&gt;
+120 # w = inv(X\^t X + alpha*Id) * X.T y&lt;br /&gt;
+121 41.6484 &lt;span class="caps"&gt;MB&lt;/span&gt; 0.0078 &lt;span class="caps"&gt;MB&lt;/span&gt; A = np.dot(X.T, X)&lt;br /&gt;
+122 41.6875 &lt;span class="caps"&gt;MB&lt;/span&gt; 0.0391 &lt;span class="caps"&gt;MB&lt;/span&gt; A.flat[::n_features + 1] += alpha&lt;br /&gt;
 123 41.7344 &lt;span class="caps"&gt;MB&lt;/span&gt; 0.0469 &lt;span class="caps"&gt;MB&lt;/span&gt; coef = _solve(A, np.dot(X.T, y), solver,
-tol)&lt;br&gt;
-124&lt;br&gt;
+tol)&lt;br /&gt;
+124&lt;br /&gt;
 125 41.7344 &lt;span class="caps"&gt;MB&lt;/span&gt; 0.0000 &lt;span class="caps"&gt;MB&lt;/span&gt; return&amp;nbsp;coef.T&lt;/p&gt;
 &lt;p&gt;[/sourcecode]&lt;/p&gt;
 &lt;h2&gt;%memit&lt;/h2&gt;
 &lt;p&gt;As described in my previous post, this is a &lt;code&gt;%timeit&lt;/code&gt;-like magic for
-quickly seeing how much memory a Python command uses.&lt;br&gt;
+quickly seeing how much memory a Python command uses.&lt;br /&gt;
 Unlike %timeit, however, the command needs to be executed in a fresh
 process. I have to dig in some more to debug this, but if the command is
 run in the current process, very often the difference in memory usage
@@ -405,16 +405,16 @@ will be insignificant, I assume because preallocated memory is used. The
 problem is that when running in a new process, some functions that I
 tried to bench crash with &lt;code&gt;SIGSEGV&lt;/code&gt;. For a lot of stuff, though,
 &lt;code&gt;%memit&lt;/code&gt; is currently&amp;nbsp;usable:&lt;/p&gt;
-&lt;p&gt;[sourcecode lang=&amp;#8221;python&amp;#8221;]&lt;br&gt;
+&lt;p&gt;[sourcecode lang=&amp;#8221;python&amp;#8221;]&lt;br /&gt;
 In [1]: import numpy as&amp;nbsp;np&lt;/p&gt;
 &lt;p&gt;In [2]: X = np.ones((1000,&amp;nbsp;1000))&lt;/p&gt;
-&lt;p&gt;In [3]: %memit X.T&lt;br&gt;
+&lt;p&gt;In [3]: %memit X.T&lt;br /&gt;
 worst of 3: 0.242188 &lt;span class="caps"&gt;MB&lt;/span&gt; per&amp;nbsp;loop&lt;/p&gt;
-&lt;p&gt;In [4]: %memit np.asfortranarray(X)&lt;br&gt;
+&lt;p&gt;In [4]: %memit np.asfortranarray(X)&lt;br /&gt;
 worst of 3: 15.687500 &lt;span class="caps"&gt;MB&lt;/span&gt; per&amp;nbsp;loop&lt;/p&gt;
 &lt;p&gt;In [5]: Y =&amp;nbsp;X.copy(&amp;#8216;F&amp;#8217;)&lt;/p&gt;
-&lt;p&gt;In [6]: %memit np.asfortranarray(Y)&lt;br&gt;
-worst of 3: 0.324219 &lt;span class="caps"&gt;MB&lt;/span&gt; per loop&lt;br&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
+&lt;p&gt;In [6]: %memit np.asfortranarray(Y)&lt;br /&gt;
+worst of 3: 0.324219 &lt;span class="caps"&gt;MB&lt;/span&gt; per loop&lt;br /&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
 &lt;p&gt;It is very easy, using this small tool, to see what forces memory
 copying and what does&amp;nbsp;not.&lt;/p&gt;
 &lt;h2&gt;Installation&amp;nbsp;instructions&lt;/h2&gt;
@@ -422,36 +422,36 @@ copying and what does&amp;nbsp;not.&lt;/p&gt;
 memory_profiler. Then, it depends on your version of IPython. If you
 have 0.10, you have to edit &lt;code&gt;~/.ipython/ipy_user_conf.py&lt;/code&gt; like this:
 (once again, instructions &lt;em&gt;borrowed&lt;/em&gt; from&amp;nbsp;[line_profiler][])&lt;/p&gt;
-&lt;p&gt;[sourcecode lang=&amp;#8221;python&amp;#8221;]&lt;br&gt;
-# These two lines are standard and probably already there.&lt;br&gt;
-import IPython.ipapi&lt;br&gt;
+&lt;p&gt;[sourcecode lang=&amp;#8221;python&amp;#8221;]&lt;br /&gt;
+# These two lines are standard and probably already there.&lt;br /&gt;
+import IPython.ipapi&lt;br /&gt;
 ip =&amp;nbsp;IPython.ipapi.get()&lt;/p&gt;
-&lt;p&gt;# These two are the important ones.&lt;br&gt;
-import memory_profiler&lt;br&gt;
-ip.expose_magic(&amp;#8216;mprun&amp;#8217;, memory_profiler.magic_mprun)&lt;br&gt;
-ip.expose_magic(&amp;#8216;memit&amp;#8217;, memory_profiler.magic_memit)&lt;br&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
+&lt;p&gt;# These two are the important ones.&lt;br /&gt;
+import memory_profiler&lt;br /&gt;
+ip.expose_magic(&amp;#8216;mprun&amp;#8217;, memory_profiler.magic_mprun)&lt;br /&gt;
+ip.expose_magic(&amp;#8216;memit&amp;#8217;, memory_profiler.magic_memit)&lt;br /&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
 &lt;p&gt;If you&amp;#8217;re using IPython 0.11 or newer, the steps are different. First
-create a configuration profile:&lt;br&gt;
-[sourcecode lang=&amp;#8221;bash&amp;#8221;]&lt;br&gt;
-\$ ipython profile create&lt;br&gt;
-[/sourcecode]&lt;br&gt;
+create a configuration profile:&lt;br /&gt;
+[sourcecode lang=&amp;#8221;bash&amp;#8221;]&lt;br /&gt;
+$ ipython profile create&lt;br /&gt;
+[/sourcecode]&lt;br /&gt;
 Then create a file named &lt;code&gt;~/.ipython/extensions/memory_profiler_ext.py&lt;/code&gt;
 with the following&amp;nbsp;content:&lt;/p&gt;
-&lt;p&gt;[sourcecode lang=&amp;#8221;python&amp;#8221;]&lt;br&gt;
+&lt;p&gt;[sourcecode lang=&amp;#8221;python&amp;#8221;]&lt;br /&gt;
 import&amp;nbsp;memory_profiler&lt;/p&gt;
-&lt;p&gt;def load_ipython_extension(ip):&lt;br&gt;
-ip.define_magic(&amp;#8216;mprun&amp;#8217;, memory_profiler.magic_mprun)&lt;br&gt;
-ip.define_magic(&amp;#8216;memit&amp;#8217;, memory_profiler.magic_memit)&lt;br&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
+&lt;p&gt;def load_ipython_extension(ip):&lt;br /&gt;
+ip.define_magic(&amp;#8216;mprun&amp;#8217;, memory_profiler.magic_mprun)&lt;br /&gt;
+ip.define_magic(&amp;#8216;memit&amp;#8217;, memory_profiler.magic_memit)&lt;br /&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
 &lt;p&gt;Then register it in &lt;code&gt;~/.ipython/profile_default/ipython_config.py&lt;/code&gt;, like
 this. Of course, if you already have other extensions such as
 &lt;code&gt;line_profiler_ext&lt;/code&gt;, just add the new one to the&amp;nbsp;list.&lt;/p&gt;
-&lt;p&gt;[sourcecode lang=&amp;#8221;python&amp;#8221;]&lt;br&gt;
-c.TerminalIPythonApp.extensions = [&lt;br&gt;
-&amp;#8216;memory_profiler_ext&amp;#8217;,&lt;br&gt;
-]&lt;br&gt;
-c.InteractiveShellApp.extensions = [&lt;br&gt;
-&amp;#8216;memory_profiler_ext&amp;#8217;,&lt;br&gt;
-]&lt;br&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
+&lt;p&gt;[sourcecode lang=&amp;#8221;python&amp;#8221;]&lt;br /&gt;
+c.TerminalIPythonApp.extensions = [&lt;br /&gt;
+&amp;#8216;memory_profiler_ext&amp;#8217;,&lt;br /&gt;
+]&lt;br /&gt;
+c.InteractiveShellApp.extensions = [&lt;br /&gt;
+&amp;#8216;memory_profiler_ext&amp;#8217;,&lt;br /&gt;
+]&lt;br /&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
 &lt;p&gt;Now launch IPython and you can use the new magics like in the examples&amp;nbsp;above.&lt;/p&gt;</content><category term="benchmarking"></category><category term="IPython"></category><category term="magic"></category><category term="memit"></category><category term="memory"></category><category term="memory_profiler"></category><category term="mprun"></category><category term="benchmarking"></category><category term="python"></category></entry><entry><title>Quick memory usage benchmarking in IPython</title><link href="//vene.ro/blog/quick-memory-usage-benchmarking-in-ipython.html" rel="alternate"></link><published>2012-06-30T08:53:00+02:00</published><updated>2012-06-30T08:53:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2012-06-30:/blog/quick-memory-usage-benchmarking-in-ipython.html</id><summary type="html">&lt;p&gt;Everybody loves &lt;code&gt;%timeit&lt;/code&gt;, there&amp;#8217;s no doubt about it. So why not have
 something like that, but for measuring how much memory your line takes?
 Well, now you can; grab a hold of the script in the following gist and

@@ -24,23 +24,54 @@
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"
   integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4"
   crossorigin="anonymous"></script>
-  <script defer
-          src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
-          integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"
-          crossorigin="anonymous"> </script>
   <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    renderMathInElement(document.body, {
-       macros: {"\\reals": "\\mathbb{R}"},
-       throwOnError: true,
-       delimiters: [
-               {left: "$$", right: "$$", display: true},
-               {left: "$", right: "$", display: false},
-               {left: "\\(", right: "\\)", display: false},
-               {left: "\\[", right: "\\]", display: true}
-       ],
-     });
-  })
+
+ (function () {
+'use strict';
+
+var macros = {};
+
+var katexMath = (function () {
+    var maths = document.querySelectorAll('.arithmatex'),
+        tex;
+
+    for (var i = 0; i < maths.length; i++) {
+      tex = maths[i].textContent || maths[i].innerText;
+      if (tex.startsWith('\\(') && tex.endsWith('\\)')) {
+        katex.render(tex.slice(2, -2), maths[i], {
+            'macros': macros,
+            'displayMode': false,
+            'globalGroup': true});
+      } else if (tex.startsWith('\\[') && tex.endsWith('\\]')) {
+        katex.render(tex.slice(2, -2), maths[i], {
+            'macros': macros,
+            'displayMode': true,
+            'globalGroup': true});
+      }
+    }
+});
+
+(function () {
+  var onReady = function onReady(fn) {
+    if (document.addEventListener) {
+      document.addEventListener("DOMContentLoaded", fn);
+    } else {
+      document.attachEvent("onreadystatechange", function () {
+        if (document.readyState === "interactive") {
+          fn();
+        }
+      });
+    }
+  };
+
+  onReady(function () {
+    if (typeof katex !== "undefined") {
+      katexMath();
+    }
+  });
+})();
+
+}());
   </script>
 
 </head>
@@ -71,11 +102,11 @@
 algorithm for the scikit. It is an elegant algorithm (that almost writes
 itself in Numpy!) to compute a greedy approximation to the solution of a
 sparse coding&nbsp;problem:</p>
-<p>\$\$ \text{argmin} \big|\big|\gamma\big|\big|_0 \text{ subject
-to }\big|\big|x-D\gamma\big|\big|_2\^2 \leq&nbsp;\epsilon\$\$</p>
+<p>$$ \text{argmin} \big|\big|\gamma\big|\big|_0 \text{ subject
+to }\big|\big|x-D\gamma\big|\big|_2\^2 \leq&nbsp;\epsilon$$</p>
 <p>or (in a different&nbsp;parametrization)</p>
-<p>\$\$ \text{argmin} \big|\big|x - D\gamma\big|\big|_2\^2\text{
-subject to }\big|\big|\gamma\big|\big|_0 \leq&nbsp;m\$\$</p>
+<p>$$ \text{argmin} \big|\big|x - D\gamma\big|\big|_2\^2\text{
+subject to }\big|\big|\gamma\big|\big|_0 \leq&nbsp;m$$</p>
 <p>The second formulation is interesting in that it gives one of the few
 algorithms for sparse coding that can control the actual number of
 non-zero entries in the solution. Some dictionary learning methods need
@@ -99,14 +130,14 @@ precomputing the Gram matrix [latex]&nbsp;G=D&#8217;D[/latex].</p>
 <p>Based on my experiments, their batch update is the fastest, even though
 it lags behind if invoked with too small a batch. As soon as I make sure
 the implementation is robust and ready for use, I will make some&nbsp;benchmarks.</p>
-<p>Update: Here&#8217;s a little proof that it works!<br>
-[<img alt="Stem plot for sparse signals recovered by OMP" src="http://localhost:8001/wp-content/uploads/2011/06/omp.png" title="Orthogonal Matching Pursuit sparse signal recovery">][]</p>
-<p>Update 2: Here&#8217;s a little benchmark:<br>
-[<img alt="Orthogonal Matching Pursuit benchmark" src="http://localhost:8001/wp-content/uploads/2011/06/omp_bench.png" title="OMP benchmark, time and error">][]<br>
+<p>Update: Here&#8217;s a little proof that it works!<br />
+[<img alt="Stem plot for sparse signals recovered by OMP" src="http://localhost:8001/wp-content/uploads/2011/06/omp.png" title="Orthogonal Matching Pursuit sparse signal recovery" />][]</p>
+<p>Update 2: Here&#8217;s a little benchmark:<br />
+[<img alt="Orthogonal Matching Pursuit benchmark" src="http://localhost:8001/wp-content/uploads/2011/06/omp_bench.png" title="OMP benchmark, time and error" />][]<br />
 [1]
 http://www.cs.technion.ac.il/\~ronrubin/Publications/<span class="caps">KSVD</span>-<span class="caps">OMP</span>-v2.pdf</p>
-<p>[<img alt="Stem plot for sparse signals recovered by OMP" src="http://localhost:8001/wp-content/uploads/2011/06/omp.png" title="Orthogonal Matching Pursuit sparse signal recovery">]:&nbsp;http://localhost:8001/wp-content/uploads/2011/06/omp.png</p>
-<p>[<img alt="Orthogonal Matching Pursuit benchmark" src="http://localhost:8001/wp-content/uploads/2011/06/omp_bench.png" title="OMP benchmark, time and error">]:&nbsp;http://localhost:8001/wp-content/uploads/2011/06/omp_bench.png</p>
+<p>[<img alt="Stem plot for sparse signals recovered by OMP" src="http://localhost:8001/wp-content/uploads/2011/06/omp.png" title="Orthogonal Matching Pursuit sparse signal recovery" />]:&nbsp;http://localhost:8001/wp-content/uploads/2011/06/omp.png</p>
+<p>[<img alt="Orthogonal Matching Pursuit benchmark" src="http://localhost:8001/wp-content/uploads/2011/06/omp_bench.png" title="OMP benchmark, time and error" />]:&nbsp;http://localhost:8001/wp-content/uploads/2011/06/omp_bench.png</p>
     </div><!-- /.entry-content -->
     <div class="comments">
       <h2>Comments !</h2>

@@ -13,7 +13,7 @@ share&amp;nbsp;here.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Theorem.&lt;/strong&gt; Let [latex]G=(V, E)[/latex] be an [latex]n[/latex]-regular
 graph with [latex]|V| = 2n + 1[/latex]. Then, [latex]G[/latex] is&amp;nbsp;Hamiltonian.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Proof.&lt;/strong&gt; We first remark that [latex]n[/latex] must be even, since
-\$\$\sum_{x \in V} d(x) = n(2n + 1) = 2|E|\$\$ We might try to apply
+$$\sum_{x \in V} d(x) = n(2n + 1) = 2|E|$$ We might try to apply
 Dirac&amp;#8217;s theorem, which would give us a Hamiltonian cycle if [latex]
 \forall x \in V, d(x) \geq \frac{|V|}{2}[/latex]. But in the current
 case, [latex]\forall x \in V, d(x) = n \&amp;lt;&amp;nbsp;\frac{2n+1}{2}[/latex].&lt;/p&gt;
@@ -24,7 +24,7 @@ connecting it to all [latex] x \in V [/latex]. In this new graph
 passes through [latex]w[/latex] and in which, [latex]w[/latex] is
 adjacent to two vertices [latex]x[/latex] and [latex]y \in V[/latex].
 Therefore this cycle induces a Hamiltonian path in [latex]G[/latex]:
-\$\$P = [x = v_0, v_1, &amp;#8230;, v_{2n-1}, v_{2n}=y]&amp;nbsp;\$\$&lt;/p&gt;
+$$P = [x = v_0, v_1, &amp;#8230;, v_{2n-1}, v_{2n}=y]&amp;nbsp;$$&lt;/p&gt;
 &lt;p&gt;Suppose that [latex]G[/latex] is not Hamiltonian. It follows that if
 [latex] v_0v_i \in E [/latex], then [latex] v_{i-1}v_{2n} \notin
 E[/latex] and also that if [latex] v_0v_i \notin E [/latex], then

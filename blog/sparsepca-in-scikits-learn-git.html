@@ -24,23 +24,54 @@
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"
   integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4"
   crossorigin="anonymous"></script>
-  <script defer
-          src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
-          integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"
-          crossorigin="anonymous"> </script>
   <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    renderMathInElement(document.body, {
-       macros: {"\\reals": "\\mathbb{R}"},
-       throwOnError: true,
-       delimiters: [
-               {left: "$$", right: "$$", display: true},
-               {left: "$", right: "$", display: false},
-               {left: "\\(", right: "\\)", display: false},
-               {left: "\\[", right: "\\]", display: true}
-       ],
-     });
-  })
+
+ (function () {
+'use strict';
+
+var macros = {};
+
+var katexMath = (function () {
+    var maths = document.querySelectorAll('.arithmatex'),
+        tex;
+
+    for (var i = 0; i < maths.length; i++) {
+      tex = maths[i].textContent || maths[i].innerText;
+      if (tex.startsWith('\\(') && tex.endsWith('\\)')) {
+        katex.render(tex.slice(2, -2), maths[i], {
+            'macros': macros,
+            'displayMode': false,
+            'globalGroup': true});
+      } else if (tex.startsWith('\\[') && tex.endsWith('\\]')) {
+        katex.render(tex.slice(2, -2), maths[i], {
+            'macros': macros,
+            'displayMode': true,
+            'globalGroup': true});
+      }
+    }
+});
+
+(function () {
+  var onReady = function onReady(fn) {
+    if (document.addEventListener) {
+      document.addEventListener("DOMContentLoaded", fn);
+    } else {
+      document.attachEvent("onreadystatechange", function () {
+        if (document.readyState === "interactive") {
+          fn();
+        }
+      });
+    }
+  };
+
+  onReady(function () {
+    if (typeof katex !== "undefined") {
+      katexMath();
+    }
+  });
+})();
+
+}());
   </script>
 
 </head>
@@ -71,9 +102,9 @@
 merged into the main <code>scikits.learn</code> repository.</p>
 <p>You can use it if you install the bleeding edge <code>scikits.learn</code> git
 version, by first downloading the source code as explained in the
-<a href="http://scikit-learn.sourceforge.net/stable/developers/index.html#git-repo" title="installation user's guide">user&#8217;s guide</a>, and then running <code>python setup.py install</code>.<br>
+<a href="http://scikit-learn.sourceforge.net/stable/developers/index.html#git-repo" title="installation user's guide">user&#8217;s guide</a>, and then running <code>python setup.py install</code>.<br />
 [caption id=&#8221;&#8221; align=&#8221;aligncenter&#8221; width=&#8221;400&#8221; caption=&#8221;Sparse <span class="caps">PCA</span> on
-images of the digit 3&#8221;][<img alt="" src="http://scikit-learn.sourceforge.net/dev/_images/plot_digits_decomposition_4.png" title="Sparse PCA on images of the digit 3">]<a href="http://scikit-learn.sourceforge.net/dev/_images/plot_digits_decomposition_4.png" title="Sparse PCA on images of the digit 3"></a>[/caption]<br>
+images of the digit 3&#8221;][<img alt="" src="http://scikit-learn.sourceforge.net/dev/_images/plot_digits_decomposition_4.png" title="Sparse PCA on images of the digit 3" />]<a href="http://scikit-learn.sourceforge.net/dev/_images/plot_digits_decomposition_4.png" title="Sparse PCA on images of the digit 3"></a>[/caption]<br />
 To see what code is needed to produce an image such as the one above,
 using <code>scikits.learn</code>. check out this cool <a href="http://scikit-learn.sourceforge.net/dev/auto_examples/decomposition/plot_digits_decomposition.html" title="decomposition example">decomposition example</a>
 that compares the results of most matrix decomposition models
@@ -82,7 +113,7 @@ implemented at the&nbsp;moment.</p>
 contributors, such as support for sparse matrices in <a href="http://scikit-learn.sourceforge.net/dev/modules/clustering.html#mini-batch-k-means" title="minibatch K-means">minibatch
 K-means</a>, and the <a href="http://scikit-learn.sourceforge.net/dev/modules/mixture.html#infinite-gaussian-mixtures-dpgmm-classifier" title="variational infinite gaussian mixture model">variational infinite gaussian mixture model</a>, so
 I invite you to take a&nbsp;look!</p>
-<p>[<img alt="" src="http://scikit-learn.sourceforge.net/dev/_images/plot_digits_decomposition_4.png" title="Sparse PCA on images of the digit 3">]:&nbsp;http://scikit-learn.sourceforge.net/dev/_images/plot_digits_decomposition_4.png</p>
+<p>[<img alt="" src="http://scikit-learn.sourceforge.net/dev/_images/plot_digits_decomposition_4.png" title="Sparse PCA on images of the digit 3" />]:&nbsp;http://scikit-learn.sourceforge.net/dev/_images/plot_digits_decomposition_4.png</p>
     </div><!-- /.entry-content -->
     <div class="comments">
       <h2>Comments !</h2>

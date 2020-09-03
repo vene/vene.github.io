@@ -24,23 +24,54 @@
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"
   integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4"
   crossorigin="anonymous"></script>
-  <script defer
-          src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
-          integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"
-          crossorigin="anonymous"> </script>
   <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    renderMathInElement(document.body, {
-       macros: {"\\reals": "\\mathbb{R}"},
-       throwOnError: true,
-       delimiters: [
-               {left: "$$", right: "$$", display: true},
-               {left: "$", right: "$", display: false},
-               {left: "\\(", right: "\\)", display: false},
-               {left: "\\[", right: "\\]", display: true}
-       ],
-     });
-  })
+
+ (function () {
+'use strict';
+
+var macros = {};
+
+var katexMath = (function () {
+    var maths = document.querySelectorAll('.arithmatex'),
+        tex;
+
+    for (var i = 0; i < maths.length; i++) {
+      tex = maths[i].textContent || maths[i].innerText;
+      if (tex.startsWith('\\(') && tex.endsWith('\\)')) {
+        katex.render(tex.slice(2, -2), maths[i], {
+            'macros': macros,
+            'displayMode': false,
+            'globalGroup': true});
+      } else if (tex.startsWith('\\[') && tex.endsWith('\\]')) {
+        katex.render(tex.slice(2, -2), maths[i], {
+            'macros': macros,
+            'displayMode': true,
+            'globalGroup': true});
+      }
+    }
+});
+
+(function () {
+  var onReady = function onReady(fn) {
+    if (document.addEventListener) {
+      document.addEventListener("DOMContentLoaded", fn);
+    } else {
+      document.attachEvent("onreadystatechange", function () {
+        if (document.readyState === "interactive") {
+          fn();
+        }
+      });
+    }
+  };
+
+  onReady(function () {
+    if (typeof katex !== "undefined") {
+      katexMath();
+    }
+  });
+})();
+
+}());
   </script>
 
 </head>
@@ -108,10 +139,10 @@ of building a 3-d plot in three.js from a grid of points. In the rest of this
 blog, I will walk through the resulting&nbsp;method.</p>
 <h1>Computing the function&nbsp;values</h1>
 <p>First thing to do is to compute the value of <code>f</code> on a grid of points. To keep
-things simple, we will plot <span class="mathskip">$\operatorname{softmax}([x, y, 0])_2$</span>
-as a function of <span class="mathskip">$a$</span> and <span class="mathskip">$b$</span>. Recall that
-<span class="mathskip">$\operatorname{softmax}(\boldsymbol{\theta}) = \boldsymbol{p}$</span>, where
-<span class="mathskip">$p_i = \frac{\exp(\theta_i)}{\sum_j \exp(\theta_j)}$</span>.</p>
+things simple, we will plot <span class="arithmatex">\(\operatorname{softmax}([x, y, 0])_2\)</span>
+as a function of <span class="arithmatex">\(a\)</span> and <span class="arithmatex">\(b\)</span>. Recall that
+<span class="arithmatex">\(\operatorname{softmax}(\boldsymbol{\theta}) = \boldsymbol{p}\)</span>, where
+<span class="arithmatex">\(p_i = \frac{\exp(\theta_i)}{\sum_j \exp(\theta_j)}\)</span>.</p>
 <p>We can implement <code>f(x, y)</code> easily:</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># generate.py</span>
 
@@ -342,7 +373,7 @@ pleasing&nbsp;angle! </p>
 
 <p>Above, we used <em>rotation matrices</em> to rotate the point cloud around.<label for="sn-rotation" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-rotation" class="margin-toggle"/><span class="sidenote">Rotating a 3-d point is equivalent to multiplying by a
 certain orthogonal matrix. <a href="https://en.wikipedia.org/wiki/Rotation_matrix#Basic_rotations">The wikipedia article</a> lists formulas for
-rotation matrices against the canonical axes <span class="mathskip">$x$</span>, <span class="mathskip">$y$</span>, <span class="mathskip">$z$</span>. </span></p>
+rotation matrices against the canonical axes <span class="arithmatex">\(x\)</span>, <span class="arithmatex">\(y\)</span>, <span class="arithmatex">\(z\)</span>. </span></p>
 <p>The result should look just like the 3-d post I made below.
 Of course, in <code>generate.py</code> we can do arbitrary complicated calculations in <code>f</code>,
 including numerical optimization, so this approach is quite powerful. May it

@@ -24,23 +24,54 @@
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"
   integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4"
   crossorigin="anonymous"></script>
-  <script defer
-          src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
-          integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"
-          crossorigin="anonymous"> </script>
   <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    renderMathInElement(document.body, {
-       macros: {"\\reals": "\\mathbb{R}"},
-       throwOnError: true,
-       delimiters: [
-               {left: "$$", right: "$$", display: true},
-               {left: "$", right: "$", display: false},
-               {left: "\\(", right: "\\)", display: false},
-               {left: "\\[", right: "\\]", display: true}
-       ],
-     });
-  })
+
+ (function () {
+'use strict';
+
+var macros = {};
+
+var katexMath = (function () {
+    var maths = document.querySelectorAll('.arithmatex'),
+        tex;
+
+    for (var i = 0; i < maths.length; i++) {
+      tex = maths[i].textContent || maths[i].innerText;
+      if (tex.startsWith('\\(') && tex.endsWith('\\)')) {
+        katex.render(tex.slice(2, -2), maths[i], {
+            'macros': macros,
+            'displayMode': false,
+            'globalGroup': true});
+      } else if (tex.startsWith('\\[') && tex.endsWith('\\]')) {
+        katex.render(tex.slice(2, -2), maths[i], {
+            'macros': macros,
+            'displayMode': true,
+            'globalGroup': true});
+      }
+    }
+});
+
+(function () {
+  var onReady = function onReady(fn) {
+    if (document.addEventListener) {
+      document.addEventListener("DOMContentLoaded", fn);
+    } else {
+      document.attachEvent("onreadystatechange", function () {
+        if (document.readyState === "interactive") {
+          fn();
+        }
+      });
+    }
+  };
+
+  onReady(function () {
+    if (typeof katex !== "undefined") {
+      katexMath();
+    }
+  });
+})();
+
+}());
   </script>
 
 </head>
@@ -72,7 +103,7 @@ local scikits-learn fork. Coming soon near&nbsp;you!</p>
 <p>The 400 square pixels area covering Lena&#8217;s face was distorted by
 additive gaussian noise with a standard deviation of 50 (pixel values
 are ranged&nbsp;0-256.)</p>
-<p>[<img alt="Lena image denoising using dictionary learning" src="http://localhost:8001/wp-content/uploads/2011/07/denoise3.png" title="Lena denoising">][]</p>
+<p>[<img alt="Lena image denoising using dictionary learning" src="http://localhost:8001/wp-content/uploads/2011/07/denoise3.png" title="Lena denoising" />][]</p>
 <p>The dictionary contains 100 atoms of shape 4x4 and was trained using
 10000 random patches extracted from the undistorted image. Then, each
 one of the four 100 square pixel areas was reconstructed using the
@@ -101,7 +132,7 @@ the Twenty-Eighth International Conference on Machine Learning, 2011.][]
 
 </div>
 
-<p>[<img alt="Lena image denoising using dictionary learning" src="http://localhost:8001/wp-content/uploads/2011/07/denoise3.png" title="Lena denoising">]:&nbsp;http://localhost:8001/wp-content/uploads/2011/07/denoise3.png</p>
+<p>[<img alt="Lena image denoising using dictionary learning" src="http://localhost:8001/wp-content/uploads/2011/07/denoise3.png" title="Lena denoising" />]:&nbsp;http://localhost:8001/wp-content/uploads/2011/07/denoise3.png</p>
 <p>[<strong>The importance of encoding versus training with sparse coding and
   vector quantization</strong>, Adam Coates and Andrew Y. Ng. In Proceedings of
   the Twenty-Eighth International Conference on Machine Learning,

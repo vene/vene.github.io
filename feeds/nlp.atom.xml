@@ -92,7 +92,7 @@ meaning. The idiom is never used. &lt;span class="caps"&gt;OEC&lt;/span&gt;: 135
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;Letting the cat out of the&amp;nbsp;bag&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;We just looked for cooccurrences of &lt;em&gt;cat&lt;/em&gt; in the context of the
-phrase &lt;em&gt;out of the bag&lt;/em&gt;.&lt;br&gt;
+phrase &lt;em&gt;out of the bag&lt;/em&gt;.&lt;br /&gt;
 &lt;span class="caps"&gt;BNC&lt;/span&gt;: 19, out of which 3 metalinguistic/literal. &lt;span class="caps"&gt;OEC&lt;/span&gt;: 298, and out
 of a sample of 19, all were&amp;nbsp;idiomatic.&lt;/p&gt;
 &lt;/li&gt;
@@ -105,13 +105,13 @@ of a sample of 19, all were&amp;nbsp;idiomatic.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;When pigs fly&lt;/strong&gt;
     &lt;p&gt;
     We looked for the lemma &lt;em&gt;fly&lt;/em&gt; before the word &lt;em&gt;pigs&lt;/em&gt; therefore
-    catching multiple variations.&lt;br&gt;
+    catching multiple variations.&lt;br /&gt;
     &lt;span class="caps"&gt;BNC&lt;/span&gt;: 17 hits, &lt;span class="caps"&gt;OEC&lt;/span&gt;:&amp;nbsp;240.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;Judging a book by its&amp;nbsp;cover&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;We looked for the fixed phrase &lt;em&gt;book by its cover&lt;/em&gt;, because the
-leading verb might vary.&lt;br&gt;
+leading verb might vary.&lt;br /&gt;
 In the &lt;span class="caps"&gt;BNC&lt;/span&gt;, 11 instances (1 of them with tell instead of judge). In
 &lt;span class="caps"&gt;OEC&lt;/span&gt;, 195 instances. Sampling 11, all were&amp;nbsp;idiomatic.&lt;/p&gt;
 &lt;/li&gt;
@@ -213,12 +213,12 @@ linguistics is a reliable way to measure the social salience of language
 patterns It should always be used to verify and back empty claims of the
 form &lt;em&gt;X is correct&lt;/em&gt;, &lt;em&gt;Y is frequent&lt;/em&gt; or &lt;em&gt;Nobody says Z&lt;/em&gt;.&lt;/p&gt;
 &lt;p&gt;[&lt;span id="f1"&gt;1&lt;/span&gt;] Patrick Hanks, &lt;a href="http://www.patrickhanks.com/uploads/5/1/4/9/5149363/howpeopleusewordstomakemeanings.pdf"&gt;How people use words to make
-meanings&lt;/a&gt;.&lt;br&gt;
+meanings&lt;/a&gt;.&lt;br /&gt;
 [&lt;span id="f2"&gt;2&lt;/span&gt;] Patrick Hanks, &lt;a href="http://www.amazon.com/Lexical-Analysis-Exploitations-Patrick-Hanks/dp/0262018578"&gt;Lexical Analysis: Norms and
-Exploitations&lt;/a&gt;. The &lt;span class="caps"&gt;MIT&lt;/span&gt; Press (January 25, 2013)&lt;br&gt;
+Exploitations&lt;/a&gt;. The &lt;span class="caps"&gt;MIT&lt;/span&gt; Press (January 25, 2013)&lt;br /&gt;
 [&lt;span id="f3"&gt;3&lt;/span&gt;] Liviu P. Dinu, Florin Manea. &lt;a href="http://dl.acm.org/citation.cfm?id=1167105"&gt;An efficient
 approach for the rank aggregation problem&lt;/a&gt;. In: Theoretical Computer
-Science, Volume 359 Issue 1, 14 August 2006. Pages 455 - 461.&lt;br&gt;
+Science, Volume 359 Issue 1, 14 August 2006. Pages 455 - 461.&lt;br /&gt;
 [&lt;span id="f4"&gt;4&lt;/span&gt;] Liviu P. Dinu, [On the Classification and
 Aggregation of Hierarchies with Different Constitutive Elements][].
 Fundam. Inform. 55(1): 39-50&amp;nbsp;(2003)&lt;/p&gt;
@@ -393,11 +393,11 @@ out of such a representation which does not encode a lot of&amp;nbsp;information
 &lt;p&gt;After building the data matrix from the list of verbs, I plotted a 2D
 &lt;span class="caps"&gt;PCA&lt;/span&gt; projection and here are the results. I am only posting a teaser for
 now, but the results are&amp;nbsp;encouraging:&lt;/p&gt;
-&lt;p&gt;[&lt;img alt="Romanian infinitives as 2D projection" src="http://localhost:8001/wp-content/uploads/2011/04/infinitives_pca.png" title="infinitives_pca"&gt;][]&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="Romanian infinitives as 2D projection" src="http://localhost:8001/wp-content/uploads/2011/04/infinitives_pca.png" title="infinitives_pca" /&gt;][]&lt;/p&gt;
 &lt;p&gt;From the image it is clear that n-gram representations of the
 infinitives induce clusters. Further results suggest that for certain
 subclasses of the dataset, such a representation (or even a simpler one)
 is enough to clearly answer whether a verb does not exhibit
 alternations. This encourages further exploration of this path,
 especially supervised and semi-supervised&amp;nbsp;approaches.&lt;/p&gt;
-&lt;p&gt;[&lt;img alt="Romanian infinitives as 2D projection" src="http://localhost:8001/wp-content/uploads/2011/04/infinitives_pca.png" title="infinitives_pca"&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/04/infinitives_pca.png&lt;/p&gt;</content><category term="nlp"></category><category term="alternations"></category><category term="computational linguistics"></category><category term="infinitives"></category><category term="pca"></category><category term="principal components analysis"></category><category term="nlp"></category><category term="scikit-learn"></category></entry></feed>
+&lt;p&gt;[&lt;img alt="Romanian infinitives as 2D projection" src="http://localhost:8001/wp-content/uploads/2011/04/infinitives_pca.png" title="infinitives_pca" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/04/infinitives_pca.png&lt;/p&gt;</content><category term="nlp"></category><category term="alternations"></category><category term="computational linguistics"></category><category term="infinitives"></category><category term="pca"></category><category term="principal components analysis"></category><category term="nlp"></category><category term="scikit-learn"></category></entry></feed>

@@ -24,23 +24,54 @@
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"
   integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4"
   crossorigin="anonymous"></script>
-  <script defer
-          src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
-          integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"
-          crossorigin="anonymous"> </script>
   <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    renderMathInElement(document.body, {
-       macros: {"\\reals": "\\mathbb{R}"},
-       throwOnError: true,
-       delimiters: [
-               {left: "$$", right: "$$", display: true},
-               {left: "$", right: "$", display: false},
-               {left: "\\(", right: "\\)", display: false},
-               {left: "\\[", right: "\\]", display: true}
-       ],
-     });
-  })
+
+ (function () {
+'use strict';
+
+var macros = {};
+
+var katexMath = (function () {
+    var maths = document.querySelectorAll('.arithmatex'),
+        tex;
+
+    for (var i = 0; i < maths.length; i++) {
+      tex = maths[i].textContent || maths[i].innerText;
+      if (tex.startsWith('\\(') && tex.endsWith('\\)')) {
+        katex.render(tex.slice(2, -2), maths[i], {
+            'macros': macros,
+            'displayMode': false,
+            'globalGroup': true});
+      } else if (tex.startsWith('\\[') && tex.endsWith('\\]')) {
+        katex.render(tex.slice(2, -2), maths[i], {
+            'macros': macros,
+            'displayMode': true,
+            'globalGroup': true});
+      }
+    }
+});
+
+(function () {
+  var onReady = function onReady(fn) {
+    if (document.addEventListener) {
+      document.addEventListener("DOMContentLoaded", fn);
+    } else {
+      document.attachEvent("onreadystatechange", function () {
+        if (document.readyState === "interactive") {
+          fn();
+        }
+      });
+    }
+  };
+
+  onReady(function () {
+    if (typeof katex !== "undefined") {
+      katexMath();
+    }
+  });
+})();
+
+}());
   </script>
 
 </head>
@@ -72,8 +103,8 @@ couple of days, and with apologies for my lack of activity during a
 sequence of conferences, Dictionary learning has officially been merged
 into scikit-learn master, and just in time for the new scikit-learn 0.9
 release. Here are some glimpses of the examples you can run for&nbsp;yourself:</p>
-<p>[<img alt="Dictionary learned from Lena patches" src="http://localhost:8001/wp-content/uploads/2011/09/plot_image_denoising_1.png" title="plot_image_denoising_1">][]</p>
-<p>[<img alt="Noisy image for denoising" src="http://localhost:8001/wp-content/uploads/2011/09/plot_image_denoising_24.png" title="plot_image_denoising_24">][]</p>
+<p>[<img alt="Dictionary learned from Lena patches" src="http://localhost:8001/wp-content/uploads/2011/09/plot_image_denoising_1.png" title="plot_image_denoising_1" />][]</p>
+<p>[<img alt="Noisy image for denoising" src="http://localhost:8001/wp-content/uploads/2011/09/plot_image_denoising_24.png" title="plot_image_denoising_24" />][]</p>
 <p>[![Image denoising with Dictionary learning and Orthogonal matching&nbsp;pursuit][]][]</p>
 <p>The stars of this new release are: the manifold learning module by Jake
 Vanderplas and Fabian Pedregosa, the Dirichlet process gaussian mixture
@@ -83,8 +114,8 @@ this post with permanent&nbsp;links).</p>
 <p>The release is due tomorrow. I will also be in charge with building the
 Windows installers for this release, let&#8217;s hope I do a good job and you
 can think of me and smile when&nbsp;installing!</p>
-<p>[<img alt="Dictionary learned from Lena patches" src="http://localhost:8001/wp-content/uploads/2011/09/plot_image_denoising_1.png" title="plot_image_denoising_1">]:&nbsp;http://localhost:8001/wp-content/uploads/2011/09/plot_image_denoising_1.png</p>
-<p>[<img alt="Noisy image for denoising" src="http://localhost:8001/wp-content/uploads/2011/09/plot_image_denoising_24.png" title="plot_image_denoising_24">]: http://localhost:8001/wp-content/uploads/2011/09/plot_image_denoising_24.png
+<p>[<img alt="Dictionary learned from Lena patches" src="http://localhost:8001/wp-content/uploads/2011/09/plot_image_denoising_1.png" title="plot_image_denoising_1" />]:&nbsp;http://localhost:8001/wp-content/uploads/2011/09/plot_image_denoising_1.png</p>
+<p>[<img alt="Noisy image for denoising" src="http://localhost:8001/wp-content/uploads/2011/09/plot_image_denoising_24.png" title="plot_image_denoising_24" />]: http://localhost:8001/wp-content/uploads/2011/09/plot_image_denoising_24.png
   [Image denoising with Dictionary learning and Orthogonal matching
   pursuit]: http://localhost:8001/wp-content/uploads/2011/09/plot_image_denoising_44.png
     &#8220;Image denoising with Dictionary learning and Orthogonal matching pursuit&#8221;

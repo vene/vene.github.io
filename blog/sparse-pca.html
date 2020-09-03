@@ -24,23 +24,54 @@
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"
   integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4"
   crossorigin="anonymous"></script>
-  <script defer
-          src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
-          integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"
-          crossorigin="anonymous"> </script>
   <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    renderMathInElement(document.body, {
-       macros: {"\\reals": "\\mathbb{R}"},
-       throwOnError: true,
-       delimiters: [
-               {left: "$$", right: "$$", display: true},
-               {left: "$", right: "$", display: false},
-               {left: "\\(", right: "\\)", display: false},
-               {left: "\\[", right: "\\]", display: true}
-       ],
-     });
-  })
+
+ (function () {
+'use strict';
+
+var macros = {};
+
+var katexMath = (function () {
+    var maths = document.querySelectorAll('.arithmatex'),
+        tex;
+
+    for (var i = 0; i < maths.length; i++) {
+      tex = maths[i].textContent || maths[i].innerText;
+      if (tex.startsWith('\\(') && tex.endsWith('\\)')) {
+        katex.render(tex.slice(2, -2), maths[i], {
+            'macros': macros,
+            'displayMode': false,
+            'globalGroup': true});
+      } else if (tex.startsWith('\\[') && tex.endsWith('\\]')) {
+        katex.render(tex.slice(2, -2), maths[i], {
+            'macros': macros,
+            'displayMode': true,
+            'globalGroup': true});
+      }
+    }
+});
+
+(function () {
+  var onReady = function onReady(fn) {
+    if (document.addEventListener) {
+      document.addEventListener("DOMContentLoaded", fn);
+    } else {
+      document.attachEvent("onreadystatechange", function () {
+        if (document.readyState === "interactive") {
+          fn();
+        }
+      });
+    }
+  };
+
+  onReady(function () {
+    if (typeof katex !== "undefined") {
+      katexMath();
+    }
+  });
+})();
+
+}());
   </script>
 
 </head>
@@ -74,15 +105,15 @@ has some inherent ambiguity, I will describe in greater depth what
 problem we are actually solving, and what it can be used&nbsp;for.</p>
 <h1>The&nbsp;problem</h1>
 <p>Mathematically, this implementation of Sparse <span class="caps">PCA</span>&nbsp;solves:</p>
-<p>\$latex (U\^*,
-V\^*)=\underset{U,V}{\mathrm{argmin\,}}\frac{1}{2}||X-<span class="caps">UV</span>||_2\^2+\alpha||V||_1\$</p>
-<p>with \$latex || U_k ||_2 = 1\$ for all \$latex 0 \leq k \&lt;&nbsp;n_{atoms}\$</p>
+<p>$latex (U\^*,
+V\^*)=\underset{U,V}{\mathrm{argmin\,}}\frac{1}{2}||X-<span class="caps">UV</span>||_2\^2+\alpha||V||_1$</p>
+<p>with $latex || U_k ||_2 = 1$ for all $latex 0 \leq k \&lt;&nbsp;n_{atoms}$</p>
 <p>This looks really abstract so let&#8217;s try to interpret it. We are looking
-for a matrix factorization \$latex <span class="caps">UV</span>\$ of \$latex X \in
-\mathbf{R}\^{n_{samples}\times n_{features}}\$, just like in
-ordinary <span class="caps">PCA</span>. The interpretation is that the \$latex n_{atoms}\$ lines
-of \$latex V\$ are the extracted components, while the lines of \$latex
-U\$ are the coordinates of the samples in this&nbsp;projection.</p>
+for a matrix factorization $latex <span class="caps">UV</span>$ of $latex X \in
+\mathbf{R}\^{n_{samples}\times n_{features}}$, just like in
+ordinary <span class="caps">PCA</span>. The interpretation is that the $latex n_{atoms}$ lines
+of $latex V$ are the extracted components, while the lines of $latex
+U$ are the coordinates of the samples in this&nbsp;projection.</p>
 <p>The most important difference between this and <span class="caps">PCA</span> is that we enforce
 sparsity on the <em>components</em>. In other words, we look for a
 representation of the data as a linear combination of sparse&nbsp;signals.</p>
@@ -94,11 +125,11 @@ the list for this summer, but I&nbsp;digress.</p>
 <p>As usual, such optimization problems are solved by alternatively
 minimizing one of the variables while keeping the other fixed, until
 convergence is&nbsp;reached.</p>
-<p>The update of \$latex V\$ (the dictionary) is computed as the solution
+<p>The update of $latex V$ (the dictionary) is computed as the solution
 of a Lasso least squares problem.  We allow the user to choose between
 the least angle regression method (<span class="caps">LARS</span>) or stochastic gradient descent
 as algorithms to solve the Lasso&nbsp;problem.</p>
-<p>The update of \$latex U\$ is block coordinate descent with warm restart.
+<p>The update of $latex U$ is block coordinate descent with warm restart.
 This is a batch adaptation of an online algorithm proposed by Mairal et
 al. in&nbsp;[[1]][].</p>
 <h1>Sparse <span class="caps">PCA</span> as a&nbsp;transformer</h1>
@@ -107,7 +138,7 @@ refactored into a scikits.learn transformer object, just like
 <code>scikits.learn.decomposition.pca</code>. This means that the optimization
 problem described above corresponds to the fitting stage. The post-fit
 state of the transformer is given by the learned components (the matrix
-\$latex V\$&nbsp;above).</p>
+$latex V$&nbsp;above).</p>
 <p>In order to transform new data according to the learned sparse <span class="caps">PCA</span> model
 (for example, prior to classification of the test data), we simply need
 to do a least squares projection of the new data on the sparse&nbsp;components.</p>
@@ -119,7 +150,7 @@ couple of components, and it can show discrimination or clusters. The
 biggest problem is that the maximum variance components found by <span class="caps">PCA</span>
 have very dense expressions as linear combinations of the initial
 features. In practice, sometimes interpretation is made by simply
-marking the \$latex k\$ variables with the highest coefficients in this
+marking the $latex k$ variables with the highest coefficients in this
 representation, and basically interpreting as if the rest are truncated
 to 0 (this has been taught to me in a class on <span class="caps">PCA</span>&nbsp;interpretation).</p>
 <p>Such an approximation can be highly misleading, and now we offer you the

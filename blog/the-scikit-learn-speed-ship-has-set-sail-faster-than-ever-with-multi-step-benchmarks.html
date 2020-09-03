@@ -24,23 +24,54 @@
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"
   integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4"
   crossorigin="anonymous"></script>
-  <script defer
-          src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
-          integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"
-          crossorigin="anonymous"> </script>
   <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    renderMathInElement(document.body, {
-       macros: {"\\reals": "\\mathbb{R}"},
-       throwOnError: true,
-       delimiters: [
-               {left: "$$", right: "$$", display: true},
-               {left: "$", right: "$", display: false},
-               {left: "\\(", right: "\\)", display: false},
-               {left: "\\[", right: "\\]", display: true}
-       ],
-     });
-  })
+
+ (function () {
+'use strict';
+
+var macros = {};
+
+var katexMath = (function () {
+    var maths = document.querySelectorAll('.arithmatex'),
+        tex;
+
+    for (var i = 0; i < maths.length; i++) {
+      tex = maths[i].textContent || maths[i].innerText;
+      if (tex.startsWith('\\(') && tex.endsWith('\\)')) {
+        katex.render(tex.slice(2, -2), maths[i], {
+            'macros': macros,
+            'displayMode': false,
+            'globalGroup': true});
+      } else if (tex.startsWith('\\[') && tex.endsWith('\\]')) {
+        katex.render(tex.slice(2, -2), maths[i], {
+            'macros': macros,
+            'displayMode': true,
+            'globalGroup': true});
+      }
+    }
+});
+
+(function () {
+  var onReady = function onReady(fn) {
+    if (document.addEventListener) {
+      document.addEventListener("DOMContentLoaded", fn);
+    } else {
+      document.attachEvent("onreadystatechange", function () {
+        if (document.readyState === "interactive") {
+          fn();
+        }
+      });
+    }
+  };
+
+  onReady(function () {
+    if (typeof katex !== "undefined") {
+      katexMath();
+    }
+  });
+})();
+
+}());
   </script>
 
 </head>
@@ -95,10 +126,10 @@ complicated algorithms to fit them, but evaluation is a simple
 matrix-vector product that Numpy handles&nbsp;perfectly.</p>
 <p>But many of scikit-learn&#8217;s estimators have both steps interesting. Let&#8217;s
 take Non-negative Matrix Factorization. It has three interesting
-functions: The <code>fit</code> that computes \$latex X = <span class="caps">WH</span> \$, the <code>transform</code>
+functions: The <code>fit</code> that computes $latex X = <span class="caps">WH</span> $, the <code>transform</code>
 that computes a non-negative projection on the components learned in
 <code>fit</code>, and <code>fit_transform</code> that takes advantage of the observation that
-when fitting, we also get the transformed \$latex X \$ for&nbsp;free.</p>
+when fitting, we also get the transformed $latex X $ for&nbsp;free.</p>
 <p>When benchmarking <span class="caps">NMF</span>, we initially had to design 3&nbsp;benchmarks:</p>
 <ul>
 <li><code>setup =</code>standard, <code>code = obj.fit(X)</code></li>
@@ -121,17 +152,17 @@ sequence of strings, instead of just a string. On the database side,
 every benchmark result entry gets an extra component in the primary key,
 the number of the step it&nbsp;measures.</p>
 <p>In the benchmark description files, nothing is&nbsp;changed:</p>
-<p>[sourcecode lang=&#8221;python&#8221;]<br>
-{<br>
-&#8216;obj&#8217;: &#8216;<span class="caps">NMF</span>&#8217;,<br>
-&#8216;init_params&#8217;: {&#8216;n_components&#8217;: 2},<br>
-&#8216;datasets&#8217;: (&#8216;blobs&#8217;,),<br>
-&#8216;statements&#8217;: (&#8216;fit_unsup&#8217;, &#8216;transform_unsup&#8217;, &#8216;fit_transform&#8217;)<br>
-},<br>&nbsp;[/sourcecode]</p>
+<p>[sourcecode lang=&#8221;python&#8221;]<br />
+{<br />
+&#8216;obj&#8217;: &#8216;<span class="caps">NMF</span>&#8217;,<br />
+&#8216;init_params&#8217;: {&#8216;n_components&#8217;: 2},<br />
+&#8216;datasets&#8217;: (&#8216;blobs&#8217;,),<br />
+&#8216;statements&#8217;: (&#8216;fit_unsup&#8217;, &#8216;transform_unsup&#8217;, &#8216;fit_transform&#8217;)<br />
+},<br />&nbsp;[/sourcecode]</p>
 <p>But before, we would take the cartesian product of datasets and
 statements, and build a <code>Benchmark</code> object for every pairing. Now, we
 just pass the tuple as it is, and vbench is smart enough to do the right
-thing.<br>
+thing.<br />
 We avoided the extra calls to <code>fit</code> in a lot of benchmarks. The whole
 suite now takes almost half the time to&nbsp;run!</p>
 <p><em>Note:</em> This trick is currently hosted in the

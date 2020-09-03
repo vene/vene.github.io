@@ -18,7 +18,7 @@ the kind of results you can&amp;nbsp;expect.&lt;/p&gt;
 &lt;p&gt;Here is how a dictionary obtained from 8x8 patches of Lena looks like.
 Pretty much it looks as expected: gabor-like wavelets with different
 rotations and shifts, which means things are&amp;nbsp;working!&lt;/p&gt;
-&lt;p&gt;[&lt;img alt="Dictionary learned from lena patches" src="http://localhost:8001/wp-content/uploads/2011/06/image.png" title="Dictionary learned from lena patches"&gt;][]&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="Dictionary learned from lena patches" src="http://localhost:8001/wp-content/uploads/2011/06/image.png" title="Dictionary learned from lena patches" /&gt;][]&lt;/p&gt;
 &lt;p&gt;And here is how it works for denoising Lena. On the left is the noisy
 image and on the right is the reconstruction from a learned dictionary.
 The sparse code code producing the result on the right is found using
@@ -27,9 +27,9 @@ orthogonal matching&amp;nbsp;pursuit.&lt;/p&gt;
 moment how to tweak the patch sizes and the model parameters to obtain a
 better result. This is just a sneak peek and pretty soon you will see
 better&amp;nbsp;stuff!&lt;/p&gt;
-&lt;p&gt;[&lt;img alt="Denoising Lena with dictionary learning and OMP" src="http://localhost:8001/wp-content/uploads/2011/06/denoise.png" title="Denoising Lena"&gt;][]&lt;/p&gt;
-&lt;p&gt;[&lt;img alt="Dictionary learned from lena patches" src="http://localhost:8001/wp-content/uploads/2011/06/image.png" title="Dictionary learned from lena patches"&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/06/image.png&lt;/p&gt;
-&lt;p&gt;[&lt;img alt="Denoising Lena with dictionary learning and OMP" src="http://localhost:8001/wp-content/uploads/2011/06/denoise.png" title="Denoising Lena"&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/06/denoise.png&lt;/p&gt;</content><category term="Uncategorized"></category><category term="Uncategorized"></category></entry><entry><title>Hello world!</title><link href="//vene.ro/blog/hello-world-2.html" rel="alternate"></link><published>2011-03-30T08:59:00+02:00</published><updated>2011-03-30T08:59:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-03-30:/blog/hello-world-2.html</id><summary type="html">&lt;p&gt;This is the blog where I will post updates regarding my work
+&lt;p&gt;[&lt;img alt="Denoising Lena with dictionary learning and OMP" src="http://localhost:8001/wp-content/uploads/2011/06/denoise.png" title="Denoising Lena" /&gt;][]&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="Dictionary learned from lena patches" src="http://localhost:8001/wp-content/uploads/2011/06/image.png" title="Dictionary learned from lena patches" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/06/image.png&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="Denoising Lena with dictionary learning and OMP" src="http://localhost:8001/wp-content/uploads/2011/06/denoise.png" title="Denoising Lena" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/06/denoise.png&lt;/p&gt;</content><category term="Uncategorized"></category><category term="Uncategorized"></category></entry><entry><title>Hello world!</title><link href="//vene.ro/blog/hello-world-2.html" rel="alternate"></link><published>2011-03-30T08:59:00+02:00</published><updated>2011-03-30T08:59:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-03-30:/blog/hello-world-2.html</id><summary type="html">&lt;p&gt;This is the blog where I will post updates regarding my work
 on&lt;a href="http://scikit-learn.sourceforge.net/" title="scikits-learn"&gt;scikits-learn.&lt;/a&gt; I am applying as a GSoC 2011 student with the &lt;span class="caps"&gt;PSF&lt;/span&gt;
 for work on this machine learning&amp;nbsp;library.&lt;/p&gt;
 &lt;p&gt;I will also post related work that I do in the machine learning&amp;nbsp;field.&lt;/p&gt;

@@ -24,23 +24,54 @@
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"
   integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4"
   crossorigin="anonymous"></script>
-  <script defer
-          src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
-          integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"
-          crossorigin="anonymous"> </script>
   <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    renderMathInElement(document.body, {
-       macros: {"\\reals": "\\mathbb{R}"},
-       throwOnError: true,
-       delimiters: [
-               {left: "$$", right: "$$", display: true},
-               {left: "$", right: "$", display: false},
-               {left: "\\(", right: "\\)", display: false},
-               {left: "\\[", right: "\\]", display: true}
-       ],
-     });
-  })
+
+ (function () {
+'use strict';
+
+var macros = {};
+
+var katexMath = (function () {
+    var maths = document.querySelectorAll('.arithmatex'),
+        tex;
+
+    for (var i = 0; i < maths.length; i++) {
+      tex = maths[i].textContent || maths[i].innerText;
+      if (tex.startsWith('\\(') && tex.endsWith('\\)')) {
+        katex.render(tex.slice(2, -2), maths[i], {
+            'macros': macros,
+            'displayMode': false,
+            'globalGroup': true});
+      } else if (tex.startsWith('\\[') && tex.endsWith('\\]')) {
+        katex.render(tex.slice(2, -2), maths[i], {
+            'macros': macros,
+            'displayMode': true,
+            'globalGroup': true});
+      }
+    }
+});
+
+(function () {
+  var onReady = function onReady(fn) {
+    if (document.addEventListener) {
+      document.addEventListener("DOMContentLoaded", fn);
+    } else {
+      document.attachEvent("onreadystatechange", function () {
+        if (document.readyState === "interactive") {
+          fn();
+        }
+      });
+    }
+  };
+
+  onReady(function () {
+    if (typeof katex !== "undefined") {
+      katexMath();
+    }
+  });
+})();
+
+}());
   </script>
 
 </head>
@@ -72,7 +103,7 @@ different, but many of their statistics coincide. They were developed by
 Francis Anscombe as a striking visual to show that even for small
 datasets, blindly examining their statistical properties without
 considering their structure can&nbsp;mislead.</p>
-<p><img alt="Anscombe's datasets" src="http://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Anscombe%27s_quartet_3.svg/640px-Anscombe%27s_quartet_3.svg.png"></p>
+<p><img alt="Anscombe's datasets" src="http://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Anscombe%27s_quartet_3.svg/640px-Anscombe%27s_quartet_3.svg.png" /></p>
 <p>Particularly, the four datasets have the same <a href="http://scikit-learn.org/stable/modules/linear_model.html#ordinary-least-squares" title="Ordinary least squares regression">least squares regression
 line</a>. While the second dataset is a clear example of a nonlinear
 correlation which cannot be accurately captured by any linear model, the
@@ -90,7 +121,7 @@ the outlier and on two other points. For [latex]\epsilon=0[/latex], you
 can see that every point except a non-outlier is highlighted. This is
 actually the perfect solution but very&nbsp;dense.</p>
 <p>[<img alt="Support vector regression on Anscombe's third dataset with no
-noise" src="">][]</p>
+noise" src="" />][]</p>
 <p>Every frame displays the global mean squared error and the true mean
 squared error, <em>i.e.</em> over the inlying points. If the epsilon size is
 well chosen, <span class="caps">SVR</span> can perform robustly with a sparse solution. Since our
@@ -100,7 +131,7 @@ is often useful because of variability in the data. When adding noise,
 <span class="caps">SVR</span> still manages to avoid the outlier, but when the tube width becomes
 zero, the solution is again very dense, very&nbsp;non-parametric.</p>
 <p>[<img alt="Support vector regression on Anscombe's third dataset with
-noise" src="http://localhost:8001/wp-content/uploads/2012/05/svr_noise.gif" title="SVR on Anscombe's dataset with noise">][]</p>
+noise" src="http://localhost:8001/wp-content/uploads/2012/05/svr_noise.gif" title="SVR on Anscombe's dataset with noise" />][]</p>
 <p>Here is the code you can use to play around with&nbsp;this.</p>
 <p>[gist&nbsp;id=2815589]</p>
 <div class="highlight"><pre><span></span><code><span class="c">http://localhost:8001/wp-content/uploads/2012/05/svr.gif</span>
@@ -109,9 +140,9 @@ noise" src="http://localhost:8001/wp-content/uploads/2012/05/svr_noise.gif" titl
 
 
 <p>[<img alt="Support vector regression on Anscombe's third dataset with no
-  noise" src="">]:&nbsp;http://localhost:8001/wp-content/uploads/2012/05/svr.gif</p>
+  noise" src="" />]:&nbsp;http://localhost:8001/wp-content/uploads/2012/05/svr.gif</p>
 <p>[<img alt="Support vector regression on Anscombe's third dataset with
-  noise" src="http://localhost:8001/wp-content/uploads/2012/05/svr_noise.gif" title="SVR on Anscombe's dataset with noise">]:&nbsp;http://localhost:8001/wp-content/uploads/2012/05/svr_noise.gif</p>
+  noise" src="http://localhost:8001/wp-content/uploads/2012/05/svr_noise.gif" title="SVR on Anscombe's dataset with noise" />]:&nbsp;http://localhost:8001/wp-content/uploads/2012/05/svr_noise.gif</p>
     </div><!-- /.entry-content -->
     <div class="comments">
       <h2>Comments !</h2>

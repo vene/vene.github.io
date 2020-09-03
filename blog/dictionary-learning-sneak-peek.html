@@ -24,23 +24,54 @@
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"
   integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4"
   crossorigin="anonymous"></script>
-  <script defer
-          src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
-          integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"
-          crossorigin="anonymous"> </script>
   <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    renderMathInElement(document.body, {
-       macros: {"\\reals": "\\mathbb{R}"},
-       throwOnError: true,
-       delimiters: [
-               {left: "$$", right: "$$", display: true},
-               {left: "$", right: "$", display: false},
-               {left: "\\(", right: "\\)", display: false},
-               {left: "\\[", right: "\\]", display: true}
-       ],
-     });
-  })
+
+ (function () {
+'use strict';
+
+var macros = {};
+
+var katexMath = (function () {
+    var maths = document.querySelectorAll('.arithmatex'),
+        tex;
+
+    for (var i = 0; i < maths.length; i++) {
+      tex = maths[i].textContent || maths[i].innerText;
+      if (tex.startsWith('\\(') && tex.endsWith('\\)')) {
+        katex.render(tex.slice(2, -2), maths[i], {
+            'macros': macros,
+            'displayMode': false,
+            'globalGroup': true});
+      } else if (tex.startsWith('\\[') && tex.endsWith('\\]')) {
+        katex.render(tex.slice(2, -2), maths[i], {
+            'macros': macros,
+            'displayMode': true,
+            'globalGroup': true});
+      }
+    }
+});
+
+(function () {
+  var onReady = function onReady(fn) {
+    if (document.addEventListener) {
+      document.addEventListener("DOMContentLoaded", fn);
+    } else {
+      document.attachEvent("onreadystatechange", function () {
+        if (document.readyState === "interactive") {
+          fn();
+        }
+      });
+    }
+  };
+
+  onReady(function () {
+    if (typeof katex !== "undefined") {
+      katexMath();
+    }
+  });
+})();
+
+}());
   </script>
 
 </head>
@@ -74,7 +105,7 @@ the kind of results you can&nbsp;expect.</p>
 <p>Here is how a dictionary obtained from 8x8 patches of Lena looks like.
 Pretty much it looks as expected: gabor-like wavelets with different
 rotations and shifts, which means things are&nbsp;working!</p>
-<p>[<img alt="Dictionary learned from lena patches" src="http://localhost:8001/wp-content/uploads/2011/06/image.png" title="Dictionary learned from lena patches">][]</p>
+<p>[<img alt="Dictionary learned from lena patches" src="http://localhost:8001/wp-content/uploads/2011/06/image.png" title="Dictionary learned from lena patches" />][]</p>
 <p>And here is how it works for denoising Lena. On the left is the noisy
 image and on the right is the reconstruction from a learned dictionary.
 The sparse code code producing the result on the right is found using
@@ -83,9 +114,9 @@ orthogonal matching&nbsp;pursuit.</p>
 moment how to tweak the patch sizes and the model parameters to obtain a
 better result. This is just a sneak peek and pretty soon you will see
 better&nbsp;stuff!</p>
-<p>[<img alt="Denoising Lena with dictionary learning and OMP" src="http://localhost:8001/wp-content/uploads/2011/06/denoise.png" title="Denoising Lena">][]</p>
-<p>[<img alt="Dictionary learned from lena patches" src="http://localhost:8001/wp-content/uploads/2011/06/image.png" title="Dictionary learned from lena patches">]:&nbsp;http://localhost:8001/wp-content/uploads/2011/06/image.png</p>
-<p>[<img alt="Denoising Lena with dictionary learning and OMP" src="http://localhost:8001/wp-content/uploads/2011/06/denoise.png" title="Denoising Lena">]:&nbsp;http://localhost:8001/wp-content/uploads/2011/06/denoise.png</p>
+<p>[<img alt="Denoising Lena with dictionary learning and OMP" src="http://localhost:8001/wp-content/uploads/2011/06/denoise.png" title="Denoising Lena" />][]</p>
+<p>[<img alt="Dictionary learned from lena patches" src="http://localhost:8001/wp-content/uploads/2011/06/image.png" title="Dictionary learned from lena patches" />]:&nbsp;http://localhost:8001/wp-content/uploads/2011/06/image.png</p>
+<p>[<img alt="Denoising Lena with dictionary learning and OMP" src="http://localhost:8001/wp-content/uploads/2011/06/denoise.png" title="Denoising Lena" />]:&nbsp;http://localhost:8001/wp-content/uploads/2011/06/denoise.png</p>
     </div><!-- /.entry-content -->
     <div class="comments">
       <h2>Comments !</h2>

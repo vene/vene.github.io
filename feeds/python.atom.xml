@@ -1903,13 +1903,13 @@ functions. Essentially, given a density function over [latex]
 0[/latex], [latex] H = \int h(x)dX[/latex]). Given a parameter [latex]
 c &gt; 0 [/latex] and a parametrization [latex]\phi[/latex] from [latex]
 \mathbb{R}\^{m+1}[/latex] to [latex] \mathbb{R}\^{m}[/latex] expressed
-as: \$\$ \phi(v_0, v_1, &amp;#8230;, v_m) = \left ( \frac{v_1}{v_0\^c},
-\frac{v_2}{v_0\^c}, &amp;#8230;, \frac{v_m}{v_0\^c} \right )\$\$&lt;br&gt;
+as: $$ \phi(v_0, v_1, &amp;#8230;, v_m) = \left ( \frac{v_1}{v_0\^c},
+\frac{v_2}{v_0\^c}, &amp;#8230;, \frac{v_m}{v_0\^c} \right )$$&lt;br /&gt;
 Define the set [latex] \mathcal{C} = \{\mathbf{v} \big |
 \gamma(\mathbf{v}) \leq 0, v_0 &gt; 0\} \in
-\mathbb{R}\^{m+1}[/latex] where&lt;br&gt;
-\$\$\gamma(\mathbf{v}) = \log v_0 - \frac{\log h(\phi(v_0,
-v_1, &amp;#8230;, v_m))}{mc + 1}\$\$ If [latex] \mathcal{C}[/latex] is
+\mathbb{R}\^{m+1}[/latex] where&lt;br /&gt;
+$$\gamma(\mathbf{v}) = \log v_0 - \frac{\log h(\phi(v_0,
+v_1, &amp;#8230;, v_m))}{mc + 1}$$ If [latex] \mathcal{C}[/latex] is
 bounded and we sample a uniform vector [latex] \mathbf{V} \sim
 \text{Uniform}(\mathcal{C})[/latex] then [latex] \phi(\mathbf{V})
 \sim f(x)[/latex]. Also note that the measure (volume) of the set
@@ -1918,30 +1918,30 @@ not have any references for the proof, except for a book in Romanian,
 but if you are interested, just leave me a comment and I&amp;#8217;ll do a
 follow-up post with the&amp;nbsp;proofs.&lt;/p&gt;
 &lt;h3&gt;Univariate&amp;nbsp;scenario&lt;/h3&gt;
-&lt;p&gt;For the univariate case, all the above simplifies to \$\$ \mathcal{C} =
-\left \{(u, v) \Big | 0 \&amp;lt; u \&amp;lt; \sqrt&lt;br&gt;
-{h\left (\frac{v}{u\^c}\right )} \right \} \$\$. We generate
+&lt;p&gt;For the univariate case, all the above simplifies to $$ \mathcal{C} =
+\left \{(u, v) \Big | 0 \&amp;lt; u \&amp;lt; \sqrt&lt;br /&gt;
+{h\left (\frac{v}{u\^c}\right )} \right \} $$. We generate
 [latex] (U, V) \sim \text{Uniform}(\mathcal{C})[/latex] and take
-[latex] \frac{V}{U\^c} \sim f(x)[/latex].&lt;br&gt;
+[latex] \frac{V}{U\^c} \sim f(x)[/latex].&lt;br /&gt;
 Since we are looking at the (univariate) Gamma distribution, described
-by: \$\$ f(x; \nu, \theta) = \frac{x\^{\mu - 1}
-\exp(\frac{-x}{\theta})}{\theta\^k\Gamma(k)}\$\$ [latex]
+by: $$ f(x; \nu, \theta) = \frac{x\^{\mu - 1}
+\exp(\frac{-x}{\theta})}{\theta\^k\Gamma(k)}$$ [latex]
 \nu[/latex] is the shape parameter and [latex] \theta[/latex] is the
-scale parameter.&lt;br&gt;
+scale parameter.&lt;br /&gt;
 But because of the property that if [latex] X \sim \text{Gamma}(\nu,
 \theta)[/latex], then for any [latex] k &gt; 0[/latex], [latex] kX \sim
 \text{Gamma}(\nu, k\theta)[/latex], we conclude that we can fix
 [latex] \theta[/latex] to 1 without loss of generality. Replacing in
 the style of the definition in the previous section, we have [latex]
 h(x; \nu) = x\^{\nu-1}e\^{-x}[/latex] and [latex] H_\nu =
-\Gamma(\nu)[/latex].&lt;br&gt;
+\Gamma(\nu)[/latex].&lt;br /&gt;
 This allows us to compute the equation of the boundary of the set
 [latex] \mathcal{C}[/latex] which ends up being described by
 [latex]\gamma(u, v) = \log{u} - \frac{\nu - 1}{c + 1}
 \log{\left(\frac{v}{u\^c}\right)} + \frac{1}{c+1}
 \frac{v}{u\^c}[/latex]. For visualisation purposes, here is how it
 would look like for [latex] \nu=6, c=1[/latex] (plotted using &lt;a href="http://www.wolframalpha.com/" title="Wolfram Alpha"&gt;Wolfram
-Alpha&lt;/a&gt;):[&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2011/10/regiunea.png" title="The accepting set C"&gt;]&lt;a href="http://localhost:8001/wp-content/uploads/2011/10/regiunea.png" title="The accepting set C"&gt;&lt;/a&gt;&lt;/p&gt;
+Alpha&lt;/a&gt;):[&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2011/10/regiunea.png" title="The accepting set C" /&gt;]&lt;a href="http://localhost:8001/wp-content/uploads/2011/10/regiunea.png" title="The accepting set C"&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h3&gt;Sampling&amp;nbsp;algorithm&lt;/h3&gt;
 &lt;p&gt;In order to uniformly sample from this set, we can apply basic rejection
 sampling: just uniformly sample from a rectangular region surrounding
@@ -1951,18 +1951,18 @@ minimal bounding box, which can be done by solving a couple of
 optimization problems using Lagrange multipliers and the &lt;span class="caps"&gt;KKT&lt;/span&gt; conditions.
 Also by looking closely at the image, you can see that the lower left
 corner is exactly the origin: this turns out not to be a coincidence. I
-won&amp;#8217;t go into detail here, but here are the bounds I derived:&lt;br&gt;
-\$\$ 0 \&amp;lt; u \&amp;lt; (\nu - 1)\^\frac{\nu - 1}{c + 1} e \^ {-\frac{\nu -
+won&amp;#8217;t go into detail here, but here are the bounds I derived:&lt;br /&gt;
+$$ 0 \&amp;lt; u \&amp;lt; (\nu - 1)\^\frac{\nu - 1}{c + 1} e \^ {-\frac{\nu -
 1}{c + 1}} \text{ and } 0\&amp;lt; v \&amp;lt; \left(\frac{c\nu +
-1}{c}\right)\^{\frac{c\nu + 1}{c + 1}} e \^ {- \frac {c\nu +&amp;nbsp;1}{c+1}}\$\$&lt;/p&gt;
+1}{c}\right)\^{\frac{c\nu + 1}{c + 1}} e \^ {- \frac {c\nu +&amp;nbsp;1}{c+1}}$$&lt;/p&gt;
 &lt;p&gt;The probability of acceptance (which can be seen as the efficiency) of
 the rejection sampling method is given by the ratio of the areas of the
 set [latex] \mathcal{C}[/latex] and the bounding box. The larger this
 probability, the less points we throw away and the more efficient the
-algorithm is. Using the values derived above, this probability is: \$\$
+algorithm is. Using the values derived above, this probability is: $$
 p(\nu, c) = \frac{\Gamma(\nu)e\^{\nu}}{(c+1) (\nu -
 1)\^{\frac{\nu - 1}{c + 1}} \left(\frac{c\nu +
-1}{c}\right)\^{\frac{c\nu + 1}{c +&amp;nbsp;1}}}\$\$&lt;/p&gt;
+1}{c}\right)\^{\frac{c\nu + 1}{c +&amp;nbsp;1}}}$$&lt;/p&gt;
 &lt;p&gt;Personally I got stumped here. The idea would be to determine the ideal
 [latex] c[/latex] for a given [latex] \nu[/latex] in order to maximize
 the probability, but I didn&amp;#8217;t manage to do it (I leave it as an exercise
@@ -1973,49 +1973,49 @@ Also note that the case when [latex] 0 \&amp;lt; \nu \&amp;lt; 1[/latex] needed 
 treated separately, which I did using the following property: Let
 [latex] \nu \in (0, 1)[/latex]. If [latex] X&amp;#8217; \sim
 \text{Gamma}(1+\nu, 1), U \sim \text{Uniform}(0, 1)[/latex] then
-\$\$ X = X&amp;#8217; \cdot \sqrt[\nu]{U} \sim \text{Gamma}(\nu, 1)\$\$ For
+$$ X = X&amp;#8217; \cdot \sqrt[\nu]{U} \sim \text{Gamma}(\nu, 1)$$ For
 a proof of this fact, see [&lt;a href="#footnote-1"&gt;1&lt;/a&gt;], which is a great article on
 generating Gamma&amp;nbsp;variates.&lt;/p&gt;
 &lt;h3&gt;Implementation&lt;/h3&gt;
-&lt;p&gt;[sourcecode language=&amp;#8221;python&amp;#8221;]&lt;br&gt;
+&lt;p&gt;[sourcecode language=&amp;#8221;python&amp;#8221;]&lt;br /&gt;
 from import numpy as&amp;nbsp;np&lt;/p&gt;
-&lt;p&gt;def _cond(u, v, k, c):&lt;br&gt;
-&amp;#8220;&amp;#8221;&amp;#8220;Identity function describing the acceptance region&amp;#8221;&amp;#8220;&amp;#8221;&lt;br&gt;
-x = v / u ** c&lt;br&gt;
+&lt;p&gt;def _cond(u, v, k, c):&lt;br /&gt;
+&amp;#8220;&amp;#8221;&amp;#8220;Identity function describing the acceptance region&amp;#8221;&amp;#8220;&amp;#8221;&lt;br /&gt;
+x = v / u ** c&lt;br /&gt;
 return (c + 1) * np.log(u) \&amp;lt;= (k - 1) * np.log(x) -&amp;nbsp;x&lt;/p&gt;
-&lt;p&gt;def vn_standard_gamma(k, c=1.0, rng=np.random):&lt;br&gt;
-&amp;#8220;&amp;#8221;&amp;#8220;Generates a single standard gamma random variate&amp;#8221;&amp;#8220;&amp;#8221;&lt;br&gt;
-if k \&amp;lt;= 0:&lt;br&gt;
-raise ValueError(&amp;#8220;Gamma shape should be positive&amp;#8221;)&lt;br&gt;
-elif k \&amp;lt; 1:&lt;br&gt;
+&lt;p&gt;def vn_standard_gamma(k, c=1.0, rng=np.random):&lt;br /&gt;
+&amp;#8220;&amp;#8221;&amp;#8220;Generates a single standard gamma random variate&amp;#8221;&amp;#8220;&amp;#8221;&lt;br /&gt;
+if k \&amp;lt;= 0:&lt;br /&gt;
+raise ValueError(&amp;#8220;Gamma shape should be positive&amp;#8221;)&lt;br /&gt;
+elif k \&amp;lt; 1:&lt;br /&gt;
 return vn_standard_gamma(1 + k, c, rng) * rng.uniform() ** (1 /
-k)&lt;br&gt;
-elif k == 1:&lt;br&gt;
-return rng.standard_exponential()&lt;br&gt;
-else:&lt;br&gt;
-a, b = get_bounds(k, c)&lt;br&gt;
-while True:&lt;br&gt;
-u, v = rng.uniform(0, a), rng.uniform(0, b)&lt;br&gt;
-if _cond(u, v, k, c):&lt;br&gt;
-break;&lt;br&gt;
+k)&lt;br /&gt;
+elif k == 1:&lt;br /&gt;
+return rng.standard_exponential()&lt;br /&gt;
+else:&lt;br /&gt;
+a, b = get_bounds(k, c)&lt;br /&gt;
+while True:&lt;br /&gt;
+u, v = rng.uniform(0, a), rng.uniform(0, b)&lt;br /&gt;
+if _cond(u, v, k, c):&lt;br /&gt;
+break;&lt;br /&gt;
 return v / u **&amp;nbsp;c&lt;/p&gt;
-&lt;p&gt;def vn_gamma(k, t, shape=1, c=1.0, rng=np.random):&lt;br&gt;
-&amp;#8220;&amp;#8221;&amp;#8220;Vectorized function to generate multiple gamma variates&amp;#8221;&amp;#8220;&amp;#8221;&lt;br&gt;
-generator = lambda x: t * vn_standard_gamma(k, c, rng)&lt;br&gt;
-generator = np.vectorize(generator)&lt;br&gt;
+&lt;p&gt;def vn_gamma(k, t, shape=1, c=1.0, rng=np.random):&lt;br /&gt;
+&amp;#8220;&amp;#8221;&amp;#8220;Vectorized function to generate multiple gamma variates&amp;#8221;&amp;#8220;&amp;#8221;&lt;br /&gt;
+generator = lambda x: t * vn_standard_gamma(k, c, rng)&lt;br /&gt;
+generator = np.vectorize(generator)&lt;br /&gt;
 return&amp;nbsp;generator(np.empty(shape))&lt;/p&gt;
-&lt;p&gt;def get_bounds(k, c=1.0):&lt;br&gt;
+&lt;p&gt;def get_bounds(k, c=1.0):&lt;br /&gt;
 &amp;#8220;&amp;#8221;&amp;#8220;Computes the minimal upper bounds surrounding the acceptance
-region&amp;#8221;&amp;#8220;&amp;#8221;&lt;br&gt;
-a = ((k - 1) / np.e) ** ((k - 1) / (c + 1))&lt;br&gt;
-b = ((c * k + 1) / (c * np.e)) ** ((c * k + 1) / (c + 1))&lt;br&gt;
+region&amp;#8221;&amp;#8220;&amp;#8221;&lt;br /&gt;
+a = ((k - 1) / np.e) ** ((k - 1) / (c + 1))&lt;br /&gt;
+b = ((c * k + 1) / (c * np.e)) ** ((c * k + 1) / (c + 1))&lt;br /&gt;
 return a,&amp;nbsp;b&lt;/p&gt;
-&lt;p&gt;def prob_acc(k, c=1.0):&lt;br&gt;
+&lt;p&gt;def prob_acc(k, c=1.0):&lt;br /&gt;
 &amp;#8220;&amp;#8221;&amp;#8220;Calculates the probability of acceptance for the given
-parameters&amp;#8221;&amp;#8220;&amp;#8221;&lt;br&gt;
-from scipy.special import gamma&lt;br&gt;
-a, b = get_bounds(k, c)&lt;br&gt;
-return gamma(k) / ((c + 1) * a * b)&lt;br&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
+parameters&amp;#8221;&amp;#8220;&amp;#8221;&lt;br /&gt;
+from scipy.special import gamma&lt;br /&gt;
+a, b = get_bounds(k, c)&lt;br /&gt;
+return gamma(k) / ((c + 1) * a * b)&lt;br /&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
 &lt;h3&gt;Results&lt;/h3&gt;
 &lt;p&gt;And of course I should show you that it works. Here are some histograms
 for various values of [latex] \nu[/latex], with the theoretical density
@@ -2023,15 +2023,15 @@ plotted in dotted red, after sampling [latex] 10\^5[/latex] values. The
 y-axis is the frequency (sorry for labeling in Romanian), and for the
 red dotted line it can be interpreted as the theoretical probability.
 You can clearly see the goodness of fit is&amp;nbsp;excellent.&lt;/p&gt;
-&lt;p&gt;[&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2011/10/hist1.png" title="Histogram for nu=6"&gt;]&lt;a href="http://localhost:8001/wp-content/uploads/2011/10/regiunea.png" title="The accepting set C"&gt;&lt;/a&gt;[&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2011/10/hist2.png" title="Histogram for nu=100"&gt;]&lt;a href="http://localhost:8001/wp-content/uploads/2011/10/regiunea.png" title="The accepting set C"&gt;&lt;/a&gt;[&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2011/10/hist3.png" title="Histogram for nu=0.66"&gt;]&lt;a href="http://localhost:8001/wp-content/uploads/2011/10/regiunea.png" title="The accepting set C"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2011/10/hist1.png" title="Histogram for nu=6" /&gt;]&lt;a href="http://localhost:8001/wp-content/uploads/2011/10/regiunea.png" title="The accepting set C"&gt;&lt;/a&gt;[&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2011/10/hist2.png" title="Histogram for nu=100" /&gt;]&lt;a href="http://localhost:8001/wp-content/uploads/2011/10/regiunea.png" title="The accepting set C"&gt;&lt;/a&gt;[&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2011/10/hist3.png" title="Histogram for nu=0.66" /&gt;]&lt;a href="http://localhost:8001/wp-content/uploads/2011/10/regiunea.png" title="The accepting set C"&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;span id="footnote-1"&gt;&lt;a href="#footnote-1"&gt;1&lt;/a&gt;&lt;/span&gt;: George Marsaglia and Wai Wan Tsang.
 1998. &lt;a href="http://www.jstatsoft.org/v03/i03/paper"&gt;The Monty Python method for generating random variables&lt;/a&gt;. &lt;span class="caps"&gt;ACM&lt;/span&gt;
 Trans. Math. Softw. 24, 3 (September 1998), 341-350.
 &lt;a href="http://doi.acm.org/10.1145/292395.292453"&gt;&lt;span class="caps"&gt;DOI&lt;/span&gt;=10.1145/292395.292453&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;[&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2011/10/regiunea.png" title="The accepting set C"&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/10/regiunea.png&lt;/p&gt;
-&lt;p&gt;[&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2011/10/hist1.png" title="Histogram for nu=6"&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/10/hist1.png&lt;/p&gt;
-&lt;p&gt;[&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2011/10/hist2.png" title="Histogram for nu=100"&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/10/hist2.png&lt;/p&gt;
-&lt;p&gt;[&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2011/10/hist3.png" title="Histogram for nu=0.66"&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/10/hist3.png&lt;/p&gt;</content><category term="python"></category><category term="monte carlo"></category><category term="numpy"></category><category term="random sampling"></category><category term="ratio-of-uniforms"></category><category term="scipy"></category><category term="python"></category></entry><entry><title>Newton interpolation and numerical differentiation</title><link href="//vene.ro/blog/newton-interpolation-and-numerical-differentiation.html" rel="alternate"></link><published>2011-04-15T13:34:00+02:00</published><updated>2011-04-15T13:34:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-04-15:/blog/newton-interpolation-and-numerical-differentiation.html</id><summary type="html">&lt;p&gt;I am sharing some Python code code that I wrote as a school assignment.
+&lt;p&gt;[&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2011/10/regiunea.png" title="The accepting set C" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/10/regiunea.png&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2011/10/hist1.png" title="Histogram for nu=6" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/10/hist1.png&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2011/10/hist2.png" title="Histogram for nu=100" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/10/hist2.png&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2011/10/hist3.png" title="Histogram for nu=0.66" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/10/hist3.png&lt;/p&gt;</content><category term="python"></category><category term="monte carlo"></category><category term="numpy"></category><category term="random sampling"></category><category term="ratio-of-uniforms"></category><category term="scipy"></category><category term="python"></category></entry><entry><title>Newton interpolation and numerical differentiation</title><link href="//vene.ro/blog/newton-interpolation-and-numerical-differentiation.html" rel="alternate"></link><published>2011-04-15T13:34:00+02:00</published><updated>2011-04-15T13:34:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-04-15:/blog/newton-interpolation-and-numerical-differentiation.html</id><summary type="html">&lt;p&gt;I am sharing some Python code code that I wrote as a school assignment.
 This computes the Newton form of the interpolation polynomial of a given
 set of points, and allows for the evaluation of both the polynomial and
 its derivative, at a given point. This is an accurate way …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I am sharing some Python code code that I wrote as a school assignment.
@@ -2053,7 +2053,7 @@ abstract objects, designed for consistency in print as well as on
 screen, tweaking their layout can get&amp;nbsp;tricky.&lt;/p&gt;
 &lt;h3&gt;An&amp;nbsp;example&lt;/h3&gt;
 &lt;p&gt;The following code is taken from the &lt;a href="http://scikit-learn.sourceforge.net/auto_examples/applications/plot_face_recognition.html" title="face recognition example"&gt;face recognition example&lt;/a&gt; in
-scikits.learn:&lt;br&gt;
+scikits.learn:&lt;br /&gt;
 &lt;code&gt;pl.figure(figsize=(1.8 * n_col, 2.4 * n_row))&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;This is very confusing at first, for somebody used to work on screen:
 the quantities in there are actually inches! These are converted
@@ -2061,7 +2061,7 @@ implicitly to pixels through the dpi parameter, which is left as default
 (80 dpi) in this&amp;nbsp;example.&lt;/p&gt;
 &lt;p&gt;Then, it gets even worse: In order to tweak the positioning of the
 subplots, this is what is&amp;nbsp;done:  &lt;/p&gt;
-&lt;p&gt;&lt;code&gt;pl.subplots_adjust(bottom=0, left=.01, right=.99, top=.90, hspace=.35)&lt;/code&gt;&lt;br&gt;
+&lt;p&gt;&lt;code&gt;pl.subplots_adjust(bottom=0, left=.01, right=.99, top=.90, hspace=.35)&lt;/code&gt;&lt;br /&gt;
 Now, all of these are percents of the image height/width. The margins
 are sort of like &lt;span class="caps"&gt;CSS&lt;/span&gt;-style margins, only relative to the bottom left
 corner. In other words, &lt;code&gt;right=.99&lt;/code&gt; means that the right margin is 1%
@@ -2108,7 +2108,7 @@ setuptools-based project are as&amp;nbsp;follows:&lt;/p&gt;
 &lt;li&gt;Update the &lt;code&gt;__init__.py __all__&lt;/code&gt; attribute in the parent folder (ie.
     &lt;code&gt;/scikits/learn/__init__.py&lt;/code&gt;)&lt;/li&gt;
 &lt;li&gt;Update the &lt;code&gt;setup.py&lt;/code&gt; in the parent folder (ie.
-    &lt;code&gt;/scikits/learn/setup.py&lt;/code&gt;) by adding something like:&lt;br&gt;
+    &lt;code&gt;/scikits/learn/setup.py&lt;/code&gt;) by adding something like:&lt;br /&gt;
 &lt;code&gt;config.add_subpackage('decomposition')&lt;/code&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;Don&amp;#8217;t forget to do the same for the tests&amp;nbsp;subfolder!&lt;/p&gt;

@@ -28,23 +28,54 @@
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"
   integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4"
   crossorigin="anonymous"></script>
-  <script defer
-          src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
-          integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"
-          crossorigin="anonymous"> </script>
   <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    renderMathInElement(document.body, {
-       macros: {"\\reals": "\\mathbb{R}"},
-       throwOnError: true,
-       delimiters: [
-               {left: "$$", right: "$$", display: true},
-               {left: "$", right: "$", display: false},
-               {left: "\\(", right: "\\)", display: false},
-               {left: "\\[", right: "\\]", display: true}
-       ],
-     });
-  })
+
+ (function () {
+'use strict';
+
+var macros = {};
+
+var katexMath = (function () {
+    var maths = document.querySelectorAll('.arithmatex'),
+        tex;
+
+    for (var i = 0; i < maths.length; i++) {
+      tex = maths[i].textContent || maths[i].innerText;
+      if (tex.startsWith('\\(') && tex.endsWith('\\)')) {
+        katex.render(tex.slice(2, -2), maths[i], {
+            'macros': macros,
+            'displayMode': false,
+            'globalGroup': true});
+      } else if (tex.startsWith('\\[') && tex.endsWith('\\]')) {
+        katex.render(tex.slice(2, -2), maths[i], {
+            'macros': macros,
+            'displayMode': true,
+            'globalGroup': true});
+      }
+    }
+});
+
+(function () {
+  var onReady = function onReady(fn) {
+    if (document.addEventListener) {
+      document.addEventListener("DOMContentLoaded", fn);
+    } else {
+      document.attachEvent("onreadystatechange", function () {
+        if (document.readyState === "interactive") {
+          fn();
+        }
+      });
+    }
+  };
+
+  onReady(function () {
+    if (typeof katex !== "undefined") {
+      katexMath();
+    }
+  });
+})();
+
+}());
   </script>
 
 </head>
@@ -75,7 +106,7 @@ local scikits-learn fork. Coming soon near&nbsp;you!</p>
 <p>The 400 square pixels area covering Lena&#8217;s face was distorted by
 additive gaussian noise with a standard deviation of 50 (pixel values
 are ranged&nbsp;0-256.)</p>
-<p>[<img alt="Lena image denoising using dictionary learning" src="http://localhost:8001/wp-content/uploads/2011/07/denoise3.png" title="Lena denoising">][]</p>
+<p>[<img alt="Lena image denoising using dictionary learning" src="http://localhost:8001/wp-content/uploads/2011/07/denoise3.png" title="Lena denoising" />][]</p>
 <p>The dictionary contains 100 atoms …</p>	
 </article>
 <article class="hentry">
@@ -87,7 +118,7 @@ are ranged&nbsp;0-256.)</p>
 <p class="subtitle"><time datetime="2011-06-12T14:28:00+02:00">Sun, 12 Jun 2011</time><label for="summer-of-code-roadmap-part-1" class="margin-toggle"> ⊕</label><input type="checkbox" id="summer-of-code-roadmap-part-1" class="margin-toggle" /><span class="marginnote">Category: <a href="//vene.ro/category/scikit-learn.html">scikit-learn</a><br />
  #<a href="//vene.ro/tag/gsoc.html">gsoc</a> #<a href="//vene.ro/tag/uncategorized.html">Uncategorized</a></span></p><p>After a little busy while, I have graduated and entered the summer
 vacation, which means time for serious GSoC&nbsp;work.</p>
-<p>[<img alt="Me on graduation day" src="http://localhost:8001/wp-content/uploads/2011/06/p1080283.jpg" title="Graduation day">][]</p>
+<p>[<img alt="Me on graduation day" src="http://localhost:8001/wp-content/uploads/2011/06/p1080283.jpg" title="Graduation day" />][]</p>
 <p>So we had a little conference in order to discuss what will be done and
 when. We gathered quite a few code snippets since the official start of
 the project …</p>	
@@ -103,7 +134,7 @@ the project …</p>
 algorithm for the scikit. It is an elegant algorithm (that almost writes
 itself in Numpy!) to compute a greedy approximation to the solution of a
 sparse coding&nbsp;problem:</p>
-<p>\$\$ \text{argmin} \big|\big|\gamma\big|\big|_0 \text{ subject
+<p>$$ \text{argmin} \big|\big|\gamma\big|\big|_0 \text{ subject
 to }\big …</p>	
 </article>
 </main>
