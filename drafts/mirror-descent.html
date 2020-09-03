@@ -296,15 +296,15 @@ function make_rules() {
 
 <p>However, in dimension two or more, clipping no longer works, because of
 interactions between the variables. We demonstate this on a quadratic problem
-which will become the main focus of the rest of this&nbsp;post.</p>
+which will become the main focus of the rest of this&nbsp;post,</p>
 <div class="arithmatex">\[ \min_{x \in \mathcal{X}} 
-f(x) \coloneqq \frac{1}{2}~(x - x_0)^\top Q (x - x_0) \tag{QP} \]</div>
-<p>taking <span class="arithmatex">\(\mathcal{X} = [0,1] \times [0,1] \subset \reals^2\)</span>,
-<span class="arithmatex">\(x_0 = (1.5, .1)\)</span>, and 
-<span class="arithmatex">\(Q = \left(\begin{smallmatrix}3 &amp; 2 \\\\ 2 &amp; 3 \end{smallmatrix}\right)\)</span>.</p>
-<p>Here is what the contours of this function look like. You can see below that the
-constrained minimum <span class="arithmatex">\(x^\star\)</span> is not the same as the unconstrained minimum
-clipped to the box.<label for="sn-1" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-1" class="margin-toggle"/><span class="sidenote">
+f(x) \coloneqq \frac{1}{2}~(x - x_0)^\top Q (x - x_0).\tag{QP} \]</div>
+<p>Let us visualize this problem for the specific case of
+the unit square <span class="arithmatex">\(\mathcal{X} = [0,1] \times [0,1] \subset \reals^2\)</span>,
+with <span class="arithmatex">\(x_0 = (1.5, .1)\)</span>, and 
+<span class="arithmatex">\(Q = \left(\begin{smallmatrix}3 &amp; 2 \\\\ 2 &amp; 3 \end{smallmatrix}\right)\)</span>.
+The constrained minimum <span class="arithmatex">\(x^\star\)</span> is not the same as the
+result of clipping the unconstrained minimum to the box.<label for="sn-1" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-1" class="margin-toggle"/><span class="sidenote">
 There is an important special case where (<span class="caps">QP</span>) can be solved exactly: the
 case <span class="arithmatex">\(Q = I\)</span>. In this case, the problem becomes
 <span class="arithmatex">\(\arg\min_{x \in \mathcal{X}} \| x - x_0 \|^2_2,\)</span>
@@ -321,10 +321,12 @@ most practitioners would turn to.<label for="sn-2" class="margin-toggle sidenote
 quiz to see if somebody resonates more with neural networks or with convex&nbsp;optimization.</span></p>
 <ol>
 <li>
-<p><em>Reparamtrization (<span class="caps">REP</span>).</em> Instead of using constrained variables <span class="arithmatex">\(x\)</span>, replace them
-    with unconstrained <span class="arithmatex">\(u\)</span> such that <span class="arithmatex">\(x_i = \sigma(u_i)\)</span>, where <span class="arithmatex">\(\sigma : \reals
-    \to \mathcal{X}\)</span> is a
-    &#8220;squishing&#8221; nonlinearity. For <span class="arithmatex">\(\mathcal{X}=[0,1]^d\)</span>, we may use the logistic
+<p><em>Reparamtrization (<span class="caps">REP</span>).</em> Circumvent the constraints on <span class="arithmatex">\(x\)</span>, 
+    by expressing the function in terms of unconstrained variables <span class="arithmatex">\(u\)</span>
+    such that <span class="arithmatex">\(x_i = \sigma(u_i)\)</span>, where <span class="arithmatex">\(\sigma : \reals \to \mathcal{X}\)</span> is a
+    &#8220;squishing&#8221; nonlinearity.
+    We can then perform unconstrained minimiziation on <span class="arithmatex">\(f \circ \sigma\)</span>.
+    For <span class="arithmatex">\(\mathcal{X}=[0,1]^d\)</span>, we may use the logistic
     function<label for="sn-3" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-3" class="margin-toggle"/><span class="sidenote">General intervals <span class="arithmatex">\([a,b]\)</span> are obtained by affinely
     transforming <span class="arithmatex">\([0,1]\)</span>.</span></p>
 <div class="arithmatex">\[ \sigma(u) = \frac{1}{1 + \exp(-u)}.\]</div>
@@ -346,8 +348,8 @@ because it can be implemented just by changing our model, without requiring
 modifications to the optimization code. However, the resulting problem (after
 reparametrization) is no longer convex in <span class="arithmatex">\(u\)</span>, even if the original problem was
 convex in <span class="arithmatex">\(x\)</span>. <span class="caps">PG</span> directly solves the convex optimization problem (<span class="caps">QP</span>), but
-the intermediate iterates <span class="arithmatex">\(x^{(t+0.5)}\)</span> leave the domain, which may be less
-stable or too&nbsp;aggressive. </p>
+the intermediate iterates <span class="arithmatex">\(x^{(t+0.5)}\)</span> can leave <span class="arithmatex">\(\mathcal{X}\)</span>,
+leading to a possibly less stable or too aggressive&nbsp;trajectory.</p>
 <p>In this post, we will explore the connection between the two by studying <em>mirror
 descent</em> and its information-geometric interpretation as natural gradient
 in a dual space. But first, let&#8217;s implement and test out our main ideas so&nbsp;far.</p>
