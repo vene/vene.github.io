@@ -298,13 +298,13 @@ pre {
   div#main{
     width: 29rem;
   }
+  img {
+    width: 28rem;
+    margin-left: 1rem;
+  }
 }
 
 @media only screen and (min-width: 860px) {
-  img {
-    width: 80%;
-    margin-left: 10%;
-  }
   #navmenu {
     font-size: 2.11rem;
     margin-bottom: 3rem;

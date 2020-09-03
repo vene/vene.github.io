@@ -34,7 +34,15 @@ TYPOGRIFY_IGNORE_TAGS = [".arithmatex"]
 THEME = 'themes/vene-tufte'
 
 MARKDOWN = {
+    'extensions': [
+        'markdown.extensions.codehilite',
+        'markdown.extensions.extra',
+        'markdown.extensions.meta',
+        'pymdownx.arithmatex',
+        'pymdownx.details'
+    ],
     'extension_configs': {
+        'markdown.extensions.codehilite': {'css_class': 'highlight'},
         'pymdownx.arithmatex' : {
             'generic': True,
             'smart_dollar': False,
