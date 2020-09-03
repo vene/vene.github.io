@@ -128,7 +128,7 @@ $$
 The following animation might convince you that this is true:
 
   <div id="plotdiv">
-  <svg id="onedimplot" width=550 height=150></svg> <br />
+  <svg id="onedimplot" preserveAspectRatio="xMinYMin meet" viewBox="0 0 550 150"></svg> <br />
 	<input type="range" min="-1" max="2" step=".001" oninput="plot(this.value)" onchange="plot(this.value)">
   </div>
 
