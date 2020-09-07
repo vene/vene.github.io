@@ -352,7 +352,88 @@ the intermediate iterates <span class="arithmatex">\(x^{(t+0.5)}\)</span> can le
 leading to a possibly less stable or too aggressive&nbsp;trajectory.</p>
 <p>In this post, we will explore the connection between the two by studying <em>mirror
 descent</em> and its information-geometric interpretation as natural gradient
-in a dual space. But first, let&#8217;s implement and test out our main ideas so&nbsp;far.</p>
+in a dual space. But first, let&#8217;s explore our two initial&nbsp;ideas.</p>
+<h3>Reparametrization.</h3>
+<p>Instead of optimizing w.r.t.\ the constrained variables <span class="arithmatex">\(x\)</span>, we introduce an
+underlying variable <span class="arithmatex">\(u\)</span>, such that <span class="arithmatex">\(x_i = \sigma(u_i)\)</span>.<label for="sn-4" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-4" class="margin-toggle"/><span class="sidenote">This seems to be the
+more common method among neural network practitioners; one
+place where it shows up often is <em>neural variational inference</em>, where we would
+constrain the variance of a learned distribution using a <em>softplus</em>
+function.</span>
+In our case, we use a logistic sigmoid reparametrization to get the
+unconstrained non-convex&nbsp;problem</p>
+<div class="arithmatex">\[ \min_{u \in \reals^2} f(\sigma(u)), \]</div>
+<p>where <span class="arithmatex">\(\sigma\)</span> is applied element-wise.  Let&#8217;s first implement our function
+<span class="arithmatex">\(f(x) = \frac{1}{2} (x - x_0)^\top Q (x - x_0)\)</span>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">x_star</span>
+    <span class="n">Qz</span> <span class="o">=</span> <span class="n">z</span> <span class="o">@</span> <span class="n">Q</span>
+    <span class="k">return</span> <span class="o">.</span><span class="mi">5</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;ij,ij,i&quot;</span><span class="p">,</span> <span class="n">Qz</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
+</code></pre></div>
+
+
+<p>When reparametrizing, <span class="arithmatex">\(x\)</span> is no longer a learned parameter, but a function of
+the learned parameter <span class="arithmatex">\(u\)</span>. The chain rule&nbsp;gives</p>
+<div class="arithmatex">\[ D_u f(\sigma(u)) = {D_x}f(\sigma(u)) \cdot D_u\sigma(u),\]</div>
+<p>but PyTorch autodiff does this automatically for us.
+We may now write a minimalist gradient-based optimization&nbsp;loop:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">optim_reparam</span><span class="p">(</span><span class="n">u_init</span><span class="p">,</span> <span class="n">lr</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100000</span><span class="p">):</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">u_init</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_iter</span><span class="p">):</span>
+        <span class="n">u_</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span><span class="o">.</span><span class="n">requires_grad_</span><span class="p">()</span>
+        <span class="n">f</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">u_</span><span class="p">))</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>  <span class="c1"># compute grad wrt u_</span>
+        <span class="n">u</span> <span class="o">-=</span> <span class="n">lr</span> <span class="o">*</span> <span class="n">grad</span>  <span class="c1"># take gradient step</span>
+    <span class="k">return</span> <span class="n">u</span>
+</code></pre></div>
+
+
+<p>With a very small learning rate, we get a glimpse into the dynamics of this
+method. For comparison, we include the unconstrained&nbsp;trajectory.</p>
+<p><img alt="quadratic landscape" src="/images/mirror_quad_lr0.010_reparam.png"></img></p>
+<p>In practice, we would use a much larger learning rate to accelerate&nbsp;optimization:</p>
+<p><img alt="quadratic landscape" src="/images/mirror_quad_lr0.200_reparam.png"></img></p>
+<p>We can see that even with a large learning rate, the reparametrization method
+takes much smaller steps, especially as it gets closer to the boundary of the
+domain. At any point <span class="arithmatex">\(u\)</span>, the reparametrized gradient consists of the
+unconstrained gradient at <span class="arithmatex">\(x=\sigma(u)\)</span> rescaled by <span class="arithmatex">\(D_u \sigma(u)\)</span>. Let&#8217;s take
+a closer look at the latter factor. Since <span class="arithmatex">\(\sigma\)</span> acts elementwise, this is a
+diagonal Jacobian matrix.
+The derivative of the logistic sigmoid is
+<span class="arithmatex">\(D\sigma(u_i) = \sigma(u_i)(1 - \sigma(u_i) = x_i (1 - x_i).\)</span> We can thus see
+that as <span class="arithmatex">\(x_i\)</span> approaches <span class="arithmatex">\(0\)</span> or <span class="arithmatex">\(1\)</span>, the reparametrization <em>rescales</em> the
+gradient severly, bringing the effective step size toward 0. Remember, this
+happens <em>automatically</em> via the chain rule! But, although slowly, and along a
+slightly winding trajectory, our method finds the right&nbsp;answer.</p>
+<h3>Projected&nbsp;Gradient</h3>
+<p>The projected gradient method is particularly well suited to handling &#8220;simple&#8221; constraints
+like the box case, but, unlike reparametrization, requires a different kind of
+expertise to get running in the case of complicated constraints.
+<label for="sn-5" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-5" class="margin-toggle"/><span class="sidenote"><span class="caps">PG</span> is very popular in convex optimization, useful both for theory and for
+practice. However, it does not seem to be so widely used in the pure neural
+network world, perhaps mostly because it is not directly supported by the
+built-in optimizers in major frameworks.</span>
+For box constraints, the projection can be computed efficiently, since
+<span class="arithmatex">\(\big[\!\operatorname{Proj}_{[0,1]^d}(x)\big]_i = \operatorname{clip}_{[0,1]}(x_i).\)</span>
+The implementation&nbsp;follows:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">optim_pg</span><span class="p">(</span><span class="n">x_init</span><span class="p">,</span> <span class="n">lr</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100000</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x_init</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_iter</span><span class="p">):</span>
+        <span class="n">x_</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span><span class="o">.</span><span class="n">requires_grad_</span><span class="p">()</span>
+        <span class="n">f</span><span class="p">(</span><span class="n">x_</span><span class="p">)</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>  <span class="c1"># compute grad wrt x_</span>
+        <span class="n">x</span> <span class="o">-=</span> <span class="n">lr</span> <span class="o">*</span> <span class="n">grad</span>  <span class="c1"># take gradient step</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># project</span>
+    <span class="k">return</span> <span class="n">x</span>
+</code></pre></div>
+
+
+<p><img alt="quadratic landscape" src="/images/mirror_quad_lr0.010_pg.png"></img></p>
+<p>It looks like the projected gradient method tends to follow the unconstrained
+trajectory while sticking to the boundary of the domain. Of course, with larger
+steps, the differences become more&nbsp;pronounced.</p>
+<p><img alt="quadratic landscape" src="/images/mirror_quad_lr0.200_pg.png"></img></p>
+<p>In this instance, <span class="caps">PG</span> is the clear winner: look how fast it makes progress. With
+less well-behaved and non-convex functions this need not be the case. So we are
+motivated to delve deeper and explore how <span class="caps">PG</span> and <span class="caps">REP</span> relate, despite seeming so&nbsp;different. </p>
     </div><!-- /.entry-content -->
 
   </article>
