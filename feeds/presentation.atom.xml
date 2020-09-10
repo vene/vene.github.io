@@ -10,7 +10,7 @@ to generate 3-d renders of your or your friends&amp;#8217; cool machine learning
 &lt;iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fvlad.niculae%2Fposts%2F2040964392582536&amp;width=350&amp;show_text=true&amp;height=574" width="350" height="574" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"&gt;&lt;/iframe&gt;
 
 &lt;p&gt;Without further ado, let&amp;#8217;s make some data-driven surface plots.&lt;label for="sn-getcode" class="margin-toggle sidenote-number"&gt;&lt;/label&gt;&lt;input type="checkbox" id="sn-getcode" class="margin-toggle"/&gt;&lt;span class="sidenote"&gt;&lt;em&gt;&lt;a href="https://github.com/vene/threedposts"&gt;Get code for this&amp;nbsp;post.&lt;/a&gt;&lt;/em&gt;&lt;/span&gt;&lt;/p&gt;
-&lt;h1&gt;three.js&lt;/h1&gt;
+&lt;h1 id="threejs"&gt;three.js&lt;a class="headerlink" href="#threejs" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;There seems to be a lot of 3-d modeling software out there, such as
 &lt;a href="https://www.blender.org/"&gt;Blender&lt;/a&gt;, but point-and-click interfaces
 don&amp;#8217;t seem well-suited for data-driven plots.&lt;label for="sn-blender" class="margin-toggle sidenote-number"&gt;&lt;/label&gt;&lt;input type="checkbox" id="sn-blender" class="margin-toggle"/&gt;&lt;span class="sidenote"&gt;Blender does seem to have a Python &lt;span class="caps"&gt;API&lt;/span&gt;,
@@ -38,7 +38,7 @@ overcomplicated solution, but this time I decided 2 is&amp;nbsp;lazier.&lt;/p&gt
 example&lt;/a&gt;
 of building a 3-d plot in three.js from a grid of points. In the rest of this
 blog, I will walk through the resulting&amp;nbsp;method.&lt;/p&gt;
-&lt;h1&gt;Computing the function&amp;nbsp;values&lt;/h1&gt;
+&lt;h1 id="computing-the-function-values"&gt;Computing the function values&lt;a class="headerlink" href="#computing-the-function-values" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;First thing to do is to compute the value of &lt;code&gt;f&lt;/code&gt; on a grid of points. To keep
 things simple, we will plot &lt;span class="arithmatex"&gt;\(\operatorname{softmax}([x, y, 0])_2\)&lt;/span&gt;
 as a function of &lt;span class="arithmatex"&gt;\(a\)&lt;/span&gt; and &lt;span class="arithmatex"&gt;\(b\)&lt;/span&gt;. Recall that
@@ -113,7 +113,7 @@ Indeed, we can very easily generate a valid &lt;span class="caps"&gt;JS&lt;/span
 
 &lt;p&gt;Run this script to obtain a &lt;code&gt;data.js&lt;/code&gt; file describing the point cloud that we
 want to&amp;nbsp;visualize.&lt;/p&gt;
-&lt;h1&gt;Constructing the 3-d&amp;nbsp;surface&lt;/h1&gt;
+&lt;h1 id="constructing-the-3-d-surface"&gt;Constructing the 3-d surface&lt;a class="headerlink" href="#constructing-the-3-d-surface" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;Once we have the 3-d points, it&amp;#8217;s time to use three.js to construct
 the 3-d object. First, download &lt;a href="https://github.com/mrdoob/three.js/raw/r95/build/three.js"&gt;three.js&lt;/a&gt; itself, as well the
 &lt;a href="https://raw.githubusercontent.com/mrdoob/three.js/r95/examples/js/exporters/GLTFExporter.js"&gt;GLTFExporter.js&lt;/a&gt; file.&lt;label for="sn-threejsversion" class="margin-toggle sidenote-number"&gt;&lt;/label&gt;&lt;input type="checkbox" id="sn-threejsversion" class="margin-toggle"/&gt;&lt;span class="sidenote"&gt;The links provided are for version r95, the version I
@@ -232,7 +232,7 @@ handle with a function that modifies our&amp;nbsp;link: &lt;/p&gt;
 
 &lt;p&gt;Now, if you open &lt;code&gt;plot-glb.html&lt;/code&gt; and click the Download link, you should get a
 &lt;code&gt;.glb&lt;/code&gt; file that can be drag-and-dropped onto a new Facebook&amp;nbsp;post.&lt;/p&gt;
-&lt;h1&gt;But it shows up seen from above and looks&amp;nbsp;ugly!&lt;/h1&gt;
+&lt;h1 id="but-it-shows-up-seen-from-above-and-looks-ugly"&gt;But it shows up seen from above and looks ugly!&lt;a class="headerlink" href="#but-it-shows-up-seen-from-above-and-looks-ugly" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;Indeed, there seems to be no way to specify the camera angle in a Facebook post.
 &lt;a href="https://threejs.org/docs/index.html#api/cameras/PerspectiveCamera"&gt;Three.js cameras&lt;/a&gt;
 are not part of the &lt;em&gt;scene&lt;/em&gt;,&lt;label for="sn-scene" class="margin-toggle sidenote-number"&gt;&lt;/label&gt;&lt;input type="checkbox" id="sn-scene" class="margin-toggle"/&gt;&lt;span class="sidenote"&gt;Unlike the folks below, who are definitely part of &lt;em&gt;the scene&lt;/em&gt;:

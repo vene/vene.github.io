@@ -140,7 +140,7 @@ we typically use gradient-based methods. But if we require the weights to
 satisfy some constraints, things quickly get more&nbsp;complicated.</p>
 <p>I&#8217;ve recently learned that a few ways for handling constraints are deeply connected.
 In this post, we will explore these connections and demonstrate them in PyTorch on a friendly&nbsp;example. </p>
-<h1>Why constraints are&nbsp;challenging</h1>
+<h1 id="why-constraints-are-challenging">Why constraints are challenging<a class="headerlink" href="#why-constraints-are-challenging" title="Permanent link">&para;</a></h1>
 <p>In machine learning, we fit models to data by minimizing an&nbsp;objective,</p>
 <div class="arithmatex">\[\min_{x \in \mathcal{X}} f(x). \tag{OPT}\]</div>
 <p>Here, <span class="arithmatex">\(x\)</span> denotes the parameters to be learned, for instance, the neural network weights.
@@ -320,7 +320,7 @@ case <span class="arithmatex">\(Q = I\)</span>. In this case, the problem become
 which is known as the <em>euclidean projection</em> of <span class="arithmatex">\(x_0\)</span> onto <span class="arithmatex">\(\mathcal{X}\)</span>.
 If <span class="arithmatex">\(\mathcal{X}\)</span> are box constraints, the projection decomposes into a series of
 independent 1-d projections, which we&#8217;ve seen can be solved by&nbsp;clipping.</span></p>
-<h2>Ways to deal with&nbsp;constraints.</h2>
+<h2 id="ways-to-deal-with-constraints">Ways to deal with constraints.<a class="headerlink" href="#ways-to-deal-with-constraints" title="Permanent link">&para;</a></h2>
 <p>When faced with a box-constrained optimization problem, these are the ideas that
 most practitioners would turn to.<label for="sn-3" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-3" class="margin-toggle"/><span class="sidenote">This turns out to be a handy personality
 quiz to see if somebody resonates more with neural networks or with convex&nbsp;optimization.</span></p>
@@ -358,7 +358,7 @@ leading to a possibly less stable or too aggressive&nbsp;trajectory.</p>
 <p>In this post, we will explore the connection between the two by studying <em>mirror
 descent</em> and its information-geometric interpretation as natural gradient
 in a dual space. But first, let&#8217;s explore our two initial&nbsp;ideas.</p>
-<h3>Reparametrization.</h3>
+<h3 id="reparametrization">Reparametrization.<a class="headerlink" href="#reparametrization" title="Permanent link">&para;</a></h3>
 <p>Instead of optimizing w.r.t. the constrained variables <span class="arithmatex">\(x\)</span>, we introduce an
 underlying variable <span class="arithmatex">\(u\)</span>, such that <span class="arithmatex">\(x_i = \sigma(u_i)\)</span>.<label for="sn-5" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-5" class="margin-toggle"/><span class="sidenote">This seems to be the
 more common method among neural network practitioners; one
@@ -418,7 +418,7 @@ that as <span class="arithmatex">\(x_i\)</span> approaches <span class="arithmat
 gradient <strong>severely</strong>, bringing the effective step size toward 0. Remember, this
 happens <em>automatically</em> via the chain rule! But, although slowly, and along a
 slightly winding trajectory, our method finds the right&nbsp;answer.</p>
-<h3>Projected&nbsp;Gradient</h3>
+<h3 id="projected-gradient">Projected Gradient<a class="headerlink" href="#projected-gradient" title="Permanent link">&para;</a></h3>
 <p>The projected gradient method is particularly well suited to handling &#8220;simple&#8221; constraints
 like the box case, but, unlike reparametrization, requires a different kind of
 expertise to get running in the case of complicated constraints.
@@ -448,7 +448,7 @@ steps, the differences become more&nbsp;pronounced.</p>
 <p>In this instance, <span class="caps">PG</span> is the clear winner: look how fast it makes progress. With
 less well-behaved and non-convex functions this need not be the case. So we are
 motivated to delve deeper and explore how <span class="caps">PG</span> and <span class="caps">REP</span> relate, despite seeming so&nbsp;different. </p>
-<h2>Generalizing the projected gradient method with&nbsp;divergences</h2>
+<h2 id="generalizing-the-projected-gradient-method-with-divergences">Generalizing the projected gradient method with divergences<a class="headerlink" href="#generalizing-the-projected-gradient-method-with-divergences" title="Permanent link">&para;</a></h2>
 <p>In the projected gradient method, we take unconstrained steps, which might take
 us outside of <span class="arithmatex">\(\mathcal{X}\)</span>, and then move the solution back to <span class="arithmatex">\(\mathcal{X}\)</span> by&nbsp;projection:</p>
 <div class="arithmatex">\[ x^{(t+1)} \leftarrow \operatorname{Proj}_\mathcal{X}\big(x^{(t+0.5)}\big). \]</div>

@@ -117,7 +117,7 @@ For this to work, it must be the case&nbsp;that:</p>
     combination of the&nbsp;others</li>
 </ul>
 <p>In this setting, there is a unique solution for $latex&nbsp;x$.</p>
-<h2>The Moore-Penrose&nbsp;pseudoinverse</h2>
+<h2 id="the-moore-penrose-pseudoinverse">The Moore-Penrose pseudoinverse<a class="headerlink" href="#the-moore-penrose-pseudoinverse" title="Permanent link">&para;</a></h2>
 <p>What if we have more equations than unknowns? It is most likely the case
 that we cannot satisfy all the equations perfectly, so let&#8217;s settle for
 a solution that best fits the constraints, in the sense of minimising
@@ -144,7 +144,7 @@ $latex <span class="caps">AA</span>\^+$ or $latex&nbsp;A\^+A$:</p>
 </ul>
 <p>These conditions do not however give us a way to get our hands on a
 pseudoinverse, so we need something&nbsp;else.</p>
-<h2>How to compute the pseudoinverse on&nbsp;paper</h2>
+<h2 id="how-to-compute-the-pseudoinverse-on-paper">How to compute the pseudoinverse on paper<a class="headerlink" href="#how-to-compute-the-pseudoinverse-on-paper" title="Permanent link">&para;</a></h2>
 <p>The first time I ran into the pseudoinverse, I didn&#8217;t even know its
 definition, only the expression of the closed-form solution of such a
 problem, and given&nbsp;as:</p>
@@ -159,7 +159,7 @@ problem, and given&nbsp;as:</p>
 </ul>
 <p>The pseudoinverse is still defined, and unique, when $latex A\^<span class="caps">TA</span>$ is
 not invertible, but we cannot use the expression above to compute&nbsp;it.</p>
-<h2>Numerical&nbsp;issues</h2>
+<h2 id="numerical-issues">Numerical issues<a class="headerlink" href="#numerical-issues" title="Permanent link">&para;</a></h2>
 <p>Before going on, we should clarify and demystify some of the urban
 legends about numerical computation of least squares problems. You might
 have heard the following unwritten&nbsp;rules:</p>
@@ -180,7 +180,7 @@ of zeros, it&#8217;s clearly not invertible, so an algorithm attempting to
 compute the inverse will fail and you will be able to catch that
 failure. But what if the row is not exactly zero, but the sum of several
 other rows, and a slight loss of precision is propagated at every&nbsp;step?</p>
-<h2>Numerical rank vs. actual&nbsp;rank</h2>
+<h2 id="numerical-rank-vs-actual-rank">Numerical rank vs. actual rank<a class="headerlink" href="#numerical-rank-vs-actual-rank" title="Permanent link">&para;</a></h2>
 <p>The rank of a matrix $latex A$ is defined as the number of linearly
 independent rows (or equivalently, columns) in $latex A$. In other
 words, the number of non-redundant equations in the system. We&#8217;ve seen
@@ -212,7 +212,7 @@ matrix, simply aim for a diagonal matrix with approximately ones and
 zeroes. In other words, when singular values are very low, set them to&nbsp;0.</p>
 <p>How do you set the threshold? This is actually a delicate issue, being
 discussed on <a href="http://thread.gmane.org/gmane.comp.python.numeric.general/50396/focus=50912">the numeric Python mailing list</a>.</p>
-<h2>Scipy&nbsp;implementations</h2>
+<h2 id="scipy-implementations">Scipy implementations<a class="headerlink" href="#scipy-implementations" title="Permanent link">&para;</a></h2>
 <p>Scipy exposes <code>inv</code>, <code>pinv</code> and <code>pinv2</code>. <code>inv</code> secretly invokes <span class="caps">LAPACK</span>,
 that ancient but crazy robust code that&#8217;s been used since the 70s, to
 first compute a pivoted <span class="caps">LU</span> decomposition that is then used to compute
@@ -308,7 +308,7 @@ we can draw a line and see what we&nbsp;learned.</p>
 <li>If your matrix is square but might be rank deficient, use <code>pinv2</code>
     for speed and numerical&nbsp;gain.</li>
 </ul>
-<h2>Improving the symmetric&nbsp;case</h2>
+<h2 id="improving-the-symmetric-case">Improving the symmetric case<a class="headerlink" href="#improving-the-symmetric-case" title="Permanent link">&para;</a></h2>
 <p>But wait a second, can&#8217;t we do better? $latex <span class="caps">AA</span>\^T$ is symmetric,
 can&#8217;t we make use of that to speed up the computation even more?
 Clearly, if $latex A$ is symmetric, in its <span class="caps">SVD</span> $latex A = <span class="caps">USV</span>\^T$,

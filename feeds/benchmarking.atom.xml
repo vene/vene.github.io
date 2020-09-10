@@ -22,7 +22,7 @@ For this to work, it must be the case&amp;nbsp;that:&lt;/p&gt;
     combination of the&amp;nbsp;others&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;In this setting, there is a unique solution for $latex&amp;nbsp;x$.&lt;/p&gt;
-&lt;h2&gt;The Moore-Penrose&amp;nbsp;pseudoinverse&lt;/h2&gt;
+&lt;h2 id="the-moore-penrose-pseudoinverse"&gt;The Moore-Penrose pseudoinverse&lt;a class="headerlink" href="#the-moore-penrose-pseudoinverse" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;What if we have more equations than unknowns? It is most likely the case
 that we cannot satisfy all the equations perfectly, so let&amp;#8217;s settle for
 a solution that best fits the constraints, in the sense of minimising
@@ -49,7 +49,7 @@ $latex &lt;span class="caps"&gt;AA&lt;/span&gt;\^+$ or $latex&amp;nbsp;A\^+A$:&l
 &lt;/ul&gt;
 &lt;p&gt;These conditions do not however give us a way to get our hands on a
 pseudoinverse, so we need something&amp;nbsp;else.&lt;/p&gt;
-&lt;h2&gt;How to compute the pseudoinverse on&amp;nbsp;paper&lt;/h2&gt;
+&lt;h2 id="how-to-compute-the-pseudoinverse-on-paper"&gt;How to compute the pseudoinverse on paper&lt;a class="headerlink" href="#how-to-compute-the-pseudoinverse-on-paper" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;The first time I ran into the pseudoinverse, I didn&amp;#8217;t even know its
 definition, only the expression of the closed-form solution of such a
 problem, and given&amp;nbsp;as:&lt;/p&gt;
@@ -64,7 +64,7 @@ problem, and given&amp;nbsp;as:&lt;/p&gt;
 &lt;/ul&gt;
 &lt;p&gt;The pseudoinverse is still defined, and unique, when $latex A\^&lt;span class="caps"&gt;TA&lt;/span&gt;$ is
 not invertible, but we cannot use the expression above to compute&amp;nbsp;it.&lt;/p&gt;
-&lt;h2&gt;Numerical&amp;nbsp;issues&lt;/h2&gt;
+&lt;h2 id="numerical-issues"&gt;Numerical issues&lt;a class="headerlink" href="#numerical-issues" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Before going on, we should clarify and demystify some of the urban
 legends about numerical computation of least squares problems. You might
 have heard the following unwritten&amp;nbsp;rules:&lt;/p&gt;
@@ -85,7 +85,7 @@ of zeros, it&amp;#8217;s clearly not invertible, so an algorithm attempting to
 compute the inverse will fail and you will be able to catch that
 failure. But what if the row is not exactly zero, but the sum of several
 other rows, and a slight loss of precision is propagated at every&amp;nbsp;step?&lt;/p&gt;
-&lt;h2&gt;Numerical rank vs. actual&amp;nbsp;rank&lt;/h2&gt;
+&lt;h2 id="numerical-rank-vs-actual-rank"&gt;Numerical rank vs. actual rank&lt;a class="headerlink" href="#numerical-rank-vs-actual-rank" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;The rank of a matrix $latex A$ is defined as the number of linearly
 independent rows (or equivalently, columns) in $latex A$. In other
 words, the number of non-redundant equations in the system. We&amp;#8217;ve seen
@@ -117,7 +117,7 @@ matrix, simply aim for a diagonal matrix with approximately ones and
 zeroes. In other words, when singular values are very low, set them to&amp;nbsp;0.&lt;/p&gt;
 &lt;p&gt;How do you set the threshold? This is actually a delicate issue, being
 discussed on &lt;a href="http://thread.gmane.org/gmane.comp.python.numeric.general/50396/focus=50912"&gt;the numeric Python mailing list&lt;/a&gt;.&lt;/p&gt;
-&lt;h2&gt;Scipy&amp;nbsp;implementations&lt;/h2&gt;
+&lt;h2 id="scipy-implementations"&gt;Scipy implementations&lt;a class="headerlink" href="#scipy-implementations" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Scipy exposes &lt;code&gt;inv&lt;/code&gt;, &lt;code&gt;pinv&lt;/code&gt; and &lt;code&gt;pinv2&lt;/code&gt;. &lt;code&gt;inv&lt;/code&gt; secretly invokes &lt;span class="caps"&gt;LAPACK&lt;/span&gt;,
 that ancient but crazy robust code that&amp;#8217;s been used since the 70s, to
 first compute a pivoted &lt;span class="caps"&gt;LU&lt;/span&gt; decomposition that is then used to compute
@@ -213,7 +213,7 @@ we can draw a line and see what we&amp;nbsp;learned.&lt;/p&gt;
 &lt;li&gt;If your matrix is square but might be rank deficient, use &lt;code&gt;pinv2&lt;/code&gt;
     for speed and numerical&amp;nbsp;gain.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2&gt;Improving the symmetric&amp;nbsp;case&lt;/h2&gt;
+&lt;h2 id="improving-the-symmetric-case"&gt;Improving the symmetric case&lt;a class="headerlink" href="#improving-the-symmetric-case" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;But wait a second, can&amp;#8217;t we do better? $latex &lt;span class="caps"&gt;AA&lt;/span&gt;\^T$ is symmetric,
 can&amp;#8217;t we make use of that to speed up the computation even more?
 Clearly, if $latex A$ is symmetric, in its &lt;span class="caps"&gt;SVD&lt;/span&gt; $latex A = &lt;span class="caps"&gt;USV&lt;/span&gt;\^T$,
@@ -295,7 +295,7 @@ make_a_large_array()&lt;br /&gt;&amp;nbsp;make_a_large_array()&lt;/p&gt;
 In [1]: import&amp;nbsp;mem_test&lt;/p&gt;
 &lt;p&gt;In [2]: %mprun -f mem_test.main mem_test.main()&lt;br /&gt;
 Filename:&amp;nbsp;mem_test.py&lt;/p&gt;
-&lt;h1&gt;Line # Mem usage Increment Line&amp;nbsp;Contents&lt;/h1&gt;
+&lt;h1 id="line-mem-usage-increment-line-contents"&gt;Line # Mem usage Increment Line Contents&lt;a class="headerlink" href="#line-mem-usage-increment-line-contents" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;8 24.8477 &lt;span class="caps"&gt;MB&lt;/span&gt; 0.0000 &lt;span class="caps"&gt;MB&lt;/span&gt; def main():&lt;br /&gt;
 9 24.8633 &lt;span class="caps"&gt;MB&lt;/span&gt; 0.0156 &lt;span class="caps"&gt;MB&lt;/span&gt; make_a_large_array()&lt;br /&gt;
 10 32.4688 &lt;span class="caps"&gt;MB&lt;/span&gt; 7.6055 &lt;span class="caps"&gt;MB&lt;/span&gt; make_a_large_array()&lt;br /&gt;
@@ -307,7 +307,7 @@ accidentally call &lt;code&gt;main()&lt;/code&gt; once before, you will no longe
 &lt;p&gt;[sourcecode lang=&amp;#8221;python&amp;#8221;]&lt;br /&gt;
 In [3]: %mprun -f mem_test.main mem_test.main()&lt;br /&gt;
 Filename:&amp;nbsp;mem_test.py&lt;/p&gt;
-&lt;h1&gt;Line # Mem usage Increment Line&amp;nbsp;Contents&lt;/h1&gt;
+&lt;h1 id="line-mem-usage-increment-line-contents_1"&gt;Line # Mem usage Increment Line Contents&lt;a class="headerlink" href="#line-mem-usage-increment-line-contents_1" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;8 32.4922 &lt;span class="caps"&gt;MB&lt;/span&gt; 0.0000 &lt;span class="caps"&gt;MB&lt;/span&gt; def main():&lt;br /&gt;
 9 32.5234 &lt;span class="caps"&gt;MB&lt;/span&gt; 0.0312 &lt;span class="caps"&gt;MB&lt;/span&gt; make_a_large_array()&lt;br /&gt;
 10 32.5234 &lt;span class="caps"&gt;MB&lt;/span&gt; 0.0000 &lt;span class="caps"&gt;MB&lt;/span&gt; make_a_large_array()&lt;br /&gt;
@@ -365,7 +365,7 @@ backwards-compatible one from the previous&amp;nbsp;version.&lt;/p&gt;
 &lt;p&gt;You can find this work-in-progress as a [pull request on
 memory_profiler][] from where you can trace it to my GitHub repo.
 Here&amp;#8217;s what you can do with&amp;nbsp;it:&lt;/p&gt;
-&lt;h2&gt;%mprun&lt;/h2&gt;
+&lt;h2 id="mprun"&gt;%mprun&lt;a class="headerlink" href="#mprun" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Copying the spirit of &lt;code&gt;%lprun&lt;/code&gt;, since imitation is the most sincere form
 of flattery, you can use %mprun to easily view line-by-line memory usage
 reports, without having to go in and add the &lt;code&gt;@profile&lt;/code&gt; decorator.&lt;/p&gt;
@@ -395,7 +395,7 @@ tol)&lt;br /&gt;
 124&lt;br /&gt;
 125 41.7344 &lt;span class="caps"&gt;MB&lt;/span&gt; 0.0000 &lt;span class="caps"&gt;MB&lt;/span&gt; return&amp;nbsp;coef.T&lt;/p&gt;
 &lt;p&gt;[/sourcecode]&lt;/p&gt;
-&lt;h2&gt;%memit&lt;/h2&gt;
+&lt;h2 id="memit"&gt;%memit&lt;a class="headerlink" href="#memit" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;As described in my previous post, this is a &lt;code&gt;%timeit&lt;/code&gt;-like magic for
 quickly seeing how much memory a Python command uses.&lt;br /&gt;
 Unlike %timeit, however, the command needs to be executed in a fresh
@@ -417,7 +417,7 @@ worst of 3: 15.687500 &lt;span class="caps"&gt;MB&lt;/span&gt; per&amp;nbsp;loop
 worst of 3: 0.324219 &lt;span class="caps"&gt;MB&lt;/span&gt; per loop&lt;br /&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
 &lt;p&gt;It is very easy, using this small tool, to see what forces memory
 copying and what does&amp;nbsp;not.&lt;/p&gt;
-&lt;h2&gt;Installation&amp;nbsp;instructions&lt;/h2&gt;
+&lt;h2 id="installation-instructions"&gt;Installation instructions&lt;a class="headerlink" href="#installation-instructions" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;First, you have to get the source code of this version of
 memory_profiler. Then, it depends on your version of IPython. If you
 have 0.10, you have to edit &lt;code&gt;~/.ipython/ipy_user_conf.py&lt;/code&gt; like this:

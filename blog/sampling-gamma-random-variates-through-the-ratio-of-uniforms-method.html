@@ -102,7 +102,7 @@ var katexMath = (function () {
 with prof. Ion Văduva, and my assignment for the class was to implement
 exactly what it says in the title of the blog post. I am going to walk
 you through the idea behind&nbsp;this.</p>
-<h3>General&nbsp;formulation</h3>
+<h3 id="general-formulation">General formulation<a class="headerlink" href="#general-formulation" title="Permanent link">&para;</a></h3>
 <p>The ratio-of-uniforms is a method that can be applied to many density
 functions. Essentially, given a density function over [latex]
 \mathbb{R}\^m[/latex], [latex] f(x) = \frac{h(x)}{H}[/latex] where
@@ -124,7 +124,7 @@ bounded and we sample a uniform vector [latex] \mathbf{V} \sim
 not have any references for the proof, except for a book in Romanian,
 but if you are interested, just leave me a comment and I&#8217;ll do a
 follow-up post with the&nbsp;proofs.</p>
-<h3>Univariate&nbsp;scenario</h3>
+<h3 id="univariate-scenario">Univariate scenario<a class="headerlink" href="#univariate-scenario" title="Permanent link">&para;</a></h3>
 <p>For the univariate case, all the above simplifies to $$ \mathcal{C} =
 \left \{(u, v) \Big | 0 \&lt; u \&lt; \sqrt<br />
 {h\left (\frac{v}{u\^c}\right )} \right \} $$. We generate
@@ -149,7 +149,7 @@ This allows us to compute the equation of the boundary of the set
 \frac{v}{u\^c}[/latex]. For visualisation purposes, here is how it
 would look like for [latex] \nu=6, c=1[/latex] (plotted using <a href="http://www.wolframalpha.com/" title="Wolfram Alpha">Wolfram
 Alpha</a>):[<img alt="" src="http://localhost:8001/wp-content/uploads/2011/10/regiunea.png" title="The accepting set C" />]<a href="http://localhost:8001/wp-content/uploads/2011/10/regiunea.png" title="The accepting set C"></a></p>
-<h3>Sampling&nbsp;algorithm</h3>
+<h3 id="sampling-algorithm">Sampling algorithm<a class="headerlink" href="#sampling-algorithm" title="Permanent link">&para;</a></h3>
 <p>In order to uniformly sample from this set, we can apply basic rejection
 sampling: just uniformly sample from a rectangular region surrounding
 the set, and reject the points that do not satisfy the condition. In
@@ -183,7 +183,7 @@ treated separately, which I did using the following property: Let
 $$ X = X&#8217; \cdot \sqrt[\nu]{U} \sim \text{Gamma}(\nu, 1)$$ For
 a proof of this fact, see [<a href="#footnote-1">1</a>], which is a great article on
 generating Gamma&nbsp;variates.</p>
-<h3>Implementation</h3>
+<h3 id="implementation">Implementation<a class="headerlink" href="#implementation" title="Permanent link">&para;</a></h3>
 <p>[sourcecode language=&#8221;python&#8221;]<br />
 from import numpy as&nbsp;np</p>
 <p>def _cond(u, v, k, c):<br />
@@ -223,7 +223,7 @@ parameters&#8221;&#8220;&#8221;<br />
 from scipy.special import gamma<br />
 a, b = get_bounds(k, c)<br />
 return gamma(k) / ((c + 1) * a * b)<br />&nbsp;[/sourcecode]</p>
-<h3>Results</h3>
+<h3 id="results">Results<a class="headerlink" href="#results" title="Permanent link">&para;</a></h3>
 <p>And of course I should show you that it works. Here are some histograms
 for various values of [latex] \nu[/latex], with the theoretical density
 plotted in dotted red, after sampling [latex] 10\^5[/latex] values. The

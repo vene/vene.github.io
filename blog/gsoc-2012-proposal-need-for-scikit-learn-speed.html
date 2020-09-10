@@ -109,7 +109,7 @@ implementations at a non-trivial level (i.e. faster than using <a href="http://d
 generic optimizers in scipy</a>). However, not all modules are equal:
 some have received more attention for speed than others (for example the
 <span class="caps">SGD</span> classes). I intend to raise the bar towards a more uniform&nbsp;level.</p>
-<h2>Are you crazy, can you really do&nbsp;this?</h2>
+<h2 id="are-you-crazy-can-you-really-do-this">Are you crazy, can you really do this?<a class="headerlink" href="#are-you-crazy-can-you-really-do-this" title="Permanent link">&para;</a></h2>
 <p>Well, of course. This might not the usual GSoC proposal, but I can show
 how I can do it and how it&#8217;s easily quantifiable. Actually, a very
 important part of the work will be to make scikit-learn&#8217;s speed easily&nbsp;measurable.</p>
@@ -129,7 +129,7 @@ example, a <a href="http://cython.org/">Cython</a> implementation of the <code>e
 function that is able to use preallocated memory will improve the
 performance of raw NearestNeighbours queries as well as of the KMeans
 and hierarchical clustering&nbsp;algorithms.</p>
-<h2>How will we be able to tell if you&nbsp;succeed?</h2>
+<h2 id="how-will-we-be-able-to-tell-if-you-succeed">How will we be able to tell if you succeed?<a class="headerlink" href="#how-will-we-be-able-to-tell-if-you-succeed" title="Permanent link">&para;</a></h2>
 <p>A key part of the GSoC project is setting up a
 <abbr title="Continuous Integration"><span class="caps">CI</span></abbr>-style benchmark platform.
 The point is to be able to track how the speed of certain operations
@@ -145,7 +145,7 @@ improvements, thanks to the positive reinforcement it&nbsp;gives.</p>
 scikit-learn algorithms with other well-known libraries in the
 <a href="http://scikit-learn.sourceforge.net/ml-benchmarks/">ml-benchmarks</a> project. It would be very helpful to have such a
 benchmark suite that automatically keeps&nbsp;up-to-date.</p>
-<h2>Side&nbsp;effects</h2>
+<h2 id="side-effects">Side effects<a class="headerlink" href="#side-effects" title="Permanent link">&para;</a></h2>
 <p>The cool thing about such a project is that it should raise the overall
 quality of the scikit. The refactoring will lead to an increase in test
 coverage, because the low-coverage modules are expected to be less

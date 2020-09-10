@@ -10,7 +10,7 @@ faster wherever I&amp;nbsp;can.&lt;/p&gt;
 &lt;p&gt;On the official closing day of this work, I&amp;#8217;d like to take a moment and
 recall the accomplishments and failures of this project, and all the
 lessons to be&amp;nbsp;learned.&lt;/p&gt;
-&lt;h2&gt;The &lt;em&gt;scikit-learn-speed&lt;/em&gt; benchmark&amp;nbsp;platform&lt;/h2&gt;
+&lt;h2 id="the-scikit-learn-speed-benchmark-platform"&gt;The &lt;em&gt;scikit-learn-speed&lt;/em&gt; benchmark platform&lt;a class="headerlink" href="#the-scikit-learn-speed-benchmark-platform" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;[&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2012/08/skl-speed-300x163.png" title="skl-speed" /&gt;]&lt;a href="http://localhost:8001/wp-content/uploads/2012/08/skl-speed-300x163.png" title="skl-speed"&gt;&lt;/a&gt;&lt;br /&gt;
 [&lt;em&gt;Scikit-learn-speed&lt;/em&gt;][&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2012/08/skl-speed-300x163.png" title="skl-speed" /&gt;] is a continuous benchmark suite for the
 &lt;a href="http://scikit-learn.org"&gt;&lt;em&gt;scikit-learn&lt;/em&gt;&lt;/a&gt; library. It has the following&amp;nbsp;features:&lt;/p&gt;
@@ -31,7 +31,7 @@ lessons to be&amp;nbsp;learned.&lt;/p&gt;
 &lt;li&gt;Multi-step benchmarks: i.e. &lt;code&gt;fit&lt;/code&gt; followed by &lt;code&gt;predict&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;What were the lessons I learned&amp;nbsp;here?&lt;/p&gt;
-&lt;h3&gt;Make your work reusable: the trade-off between good design and&amp;nbsp;get-it-working-now&lt;/h3&gt;
+&lt;h3 id="make-your-work-reusable-the-trade-off-between-good-design-and-get-it-working-now"&gt;Make your work reusable: the trade-off between good design and get-it-working-now&lt;a class="headerlink" href="#make-your-work-reusable-the-trade-off-between-good-design-and-get-it-working-now" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;For the task of rolling out a continuous benchmarking platform, we
 decided pretty early in the project to adopt Wes McKinney&amp;#8217;s &lt;em&gt;vbench&lt;/em&gt;. If
 my goal would&amp;#8217;ve been to maintain &lt;em&gt;vbench&lt;/em&gt; and extend it into a
@@ -47,7 +47,7 @@ is fine for a project with a tight deadline such as this one: after it&amp;#8217
 done, I will just spend another weekend on cleaning the work up and
 making sure it&amp;#8217;s appreciated upstream. This will be easier because of
 the constraint to keep compatibility with &lt;em&gt;scikit-learn-speed&lt;/em&gt;.&lt;/p&gt;
-&lt;h3&gt;Never work quietly (unless you&amp;#8217;re a&amp;nbsp;ninja)&lt;/h3&gt;
+&lt;h3 id="never-work-quietly-unless-youre-a-ninja"&gt;Never work quietly (unless you&amp;#8217;re a ninja)&lt;a class="headerlink" href="#never-work-quietly-unless-youre-a-ninja" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;I know some students who prefer that the professor doesn&amp;#8217;t even know
 they exist until the final, when they would score an A, and (supposedly)
 leave the professor amazed. In real life, plenty of people would be
@@ -62,7 +62,7 @@ attend conferences, meetups, coding&amp;nbsp;sprints.&lt;/p&gt;
 contacted me about my new &lt;em&gt;vbench&lt;/em&gt; features (Hi Jon and Joel!), I have
 shaped my design slightly towards their requirements as well, and
 hopefully the result will be a more general &lt;em&gt;vbench&lt;/em&gt;.&lt;/p&gt;
-&lt;h2&gt;The&amp;nbsp;speedups&lt;/h2&gt;
+&lt;h2 id="the-speedups"&gt;The speedups&lt;a class="headerlink" href="#the-speedups" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Once &lt;em&gt;scikit-learn-speed&lt;/em&gt; was up and running, I couldn&amp;#8217;t believe how
 useful it is to be able to scroll, catch slow code and jump straight at
 the profiler output with one click. I jumped on the following&amp;nbsp;speed-ups:&lt;/p&gt;
@@ -91,13 +91,13 @@ the profiler output with one click. I jumped on the following&amp;nbsp;speed-ups
     optimization of the &lt;code&gt;OMP&lt;/code&gt; sparsity&amp;nbsp;parameter.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Lessons? These will be pretty&amp;nbsp;obvious.&lt;/p&gt;
-&lt;h3&gt;Write tests, tests,&amp;nbsp;tests!&lt;/h3&gt;
+&lt;h3 id="write-tests-tests-tests"&gt;Write tests, tests, tests!&lt;a class="headerlink" href="#write-tests-tests-tests" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;This is a no-brainer, but it still didn&amp;#8217;t stick. In that one case out of
 10 that I didn&amp;#8217;t explicitly test, a bug was obviously hiding. When you
 want to add a new feature, it&amp;#8217;s best to start by writing a failing test,
 and then &lt;a href="http://c2.com/cgi/wiki?MakeItWorkMakeItRightMakeItFast"&gt;making it pass&lt;/a&gt;. Sure, you will miss tricky bugs, but you
 will never have embarrassing, obvious bugs in your code&amp;nbsp;:)&lt;/p&gt;
-&lt;h3&gt;Optimization doesn&amp;#8217;t have to be&amp;nbsp;ugly&lt;/h3&gt;
+&lt;h3 id="optimization-doesnt-have-to-be-ugly"&gt;Optimization doesn&amp;#8217;t have to be ugly&lt;a class="headerlink" href="#optimization-doesnt-have-to-be-ugly" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Developers often shun optimization. It&amp;#8217;s true, you should profile first,
 and you shouldn&amp;#8217;t focus on speeding up stuff that is dominated by other
 computations that are orders of magnitude slower. However, there is an
@@ -123,7 +123,7 @@ psigma_diag[above_cutoff] = 1.0 /&amp;nbsp;s[above_cutoff]&lt;/p&gt;
 &lt;p&gt;return np.transpose(np.conjugate(np.dot(u * psigma_diag, vh)))&lt;br /&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
 &lt;p&gt;It&amp;#8217;s shorter, more elegant, easier to read, and nevertheless faster. I
 would say it is worth&amp;nbsp;it.&lt;/p&gt;
-&lt;h3&gt;Small speed-ups can&amp;nbsp;propagate&lt;/h3&gt;
+&lt;h3 id="small-speed-ups-can-propagate"&gt;Small speed-ups can propagate&lt;a class="headerlink" href="#small-speed-ups-can-propagate" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Sure, it&amp;#8217;s great if you can compute an inverse two times faster, say in
 0.5s instead of 1s. But if some algorithm calls this function in a loop
 that might iterate 100, 300, or 1000 times, this small speed-up seems
@@ -151,7 +151,7 @@ official scikit-learn&amp;nbsp;page.&lt;/p&gt;
 changeset. We made running the benchmark suite tons simpler by adding a
 friendly Makefile. You can read more about its usage in the guide. But
 by far, our coolest new toy&amp;nbsp;is:&lt;/p&gt;
-&lt;h2&gt;Multi-step&amp;nbsp;benchmarks&lt;/h2&gt;
+&lt;h2 id="multi-step-benchmarks"&gt;Multi-step benchmarks&lt;a class="headerlink" href="#multi-step-benchmarks" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;A standard vbench benchmark has three units of code, represented as
 strings: &lt;code&gt;code&lt;/code&gt;, &lt;code&gt;setup&lt;/code&gt; and &lt;code&gt;cleanup&lt;/code&gt;. With the original timeit-based
 benchmarks, this means that for every run, the setup would be executed
@@ -180,7 +180,7 @@ when fitting, we also get the transformed $latex X $ for&amp;nbsp;free.&lt;/p&gt
 &lt;li&gt;&lt;code&gt;setup =&lt;/code&gt;standard, &lt;code&gt;code = obj.fit_transform(X)&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;setup =&lt;/code&gt;standard&lt;code&gt;+ obj.fit(X)&lt;/code&gt;, &lt;code&gt;code = obj.transform(X)&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2&gt;How much time were we&amp;nbsp;wasting?&lt;/h2&gt;
+&lt;h2 id="how-much-time-were-we-wasting"&gt;How much time were we wasting?&lt;a class="headerlink" href="#how-much-time-were-we-wasting" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Let&amp;#8217;s say it takes 10 seconds. For every benchmark, we time the code by
 running it 3 times. We run it once more to measure memory usage, once
 more for &lt;code&gt;cProfile&lt;/code&gt; and one last time for &lt;code&gt;line_profiler&lt;/code&gt;. This is a
@@ -190,7 +190,7 @@ fit before predicting, we do it 12 extra times. If a fit takes 5
 seconds, this means one minute wasted on benchmarking just one
 estimator. &lt;em&gt;Wouldn&amp;#8217;t it be nice to &lt;code&gt;fit&lt;/code&gt;, &lt;code&gt;fit_transform&lt;/code&gt; and
 &lt;code&gt;transform&lt;/code&gt; in a&amp;nbsp;sequence?&lt;/em&gt;&lt;/p&gt;
-&lt;h2&gt;Behind the&amp;nbsp;scenes&lt;/h2&gt;
+&lt;h2 id="behind-the-scenes"&gt;Behind the scenes&lt;a class="headerlink" href="#behind-the-scenes" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;We made the &lt;code&gt;PythonBenchmark code&lt;/code&gt; parameter also support getting a
 sequence of strings, instead of just a string. On the database side,
 every benchmark result entry gets an extra component in the primary key,
@@ -215,13 +215,13 @@ working on, called &lt;a href="https://github.com/vene/scikit-learn-speed"&gt;sc
 benchmarking suite that runs and generates &lt;span class="caps"&gt;HTML&lt;/span&gt; reports using Wes
 McKinney&amp;#8217;s &lt;a href="http://wesmckinney.com/blog/?p=373"&gt;vbench&lt;/a&gt; framework, to which I had to make some (useful, I
 hope)&amp;nbsp;additions.&lt;/p&gt;
-&lt;h2&gt;What it looks like&amp;nbsp;now&lt;/h2&gt;
+&lt;h2 id="what-it-looks-like-now"&gt;What it looks like now&lt;a class="headerlink" href="#what-it-looks-like-now" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;You …&lt;/p&gt;</summary><content type="html">&lt;p&gt;This post is about the &lt;a href="http://scikit-learn.org"&gt;scikit-learn&lt;/a&gt;benchmarking project that I am
 working on, called &lt;a href="https://github.com/vene/scikit-learn-speed"&gt;scikit-learn-speed&lt;/a&gt;. This is a continuous
 benchmarking suite that runs and generates &lt;span class="caps"&gt;HTML&lt;/span&gt; reports using Wes
 McKinney&amp;#8217;s &lt;a href="http://wesmckinney.com/blog/?p=373"&gt;vbench&lt;/a&gt; framework, to which I had to make some (useful, I
 hope)&amp;nbsp;additions.&lt;/p&gt;
-&lt;h2&gt;What it looks like&amp;nbsp;now&lt;/h2&gt;
+&lt;h2 id="what-it-looks-like-now"&gt;What it looks like now&lt;a class="headerlink" href="#what-it-looks-like-now" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;You can check out a &lt;a href="http://vene.github.com/scikit-learn-speed"&gt;teaser/demo&lt;/a&gt; that was run on equidistant releases
 from the last two months. What has changed since the last version?
 Here&amp;#8217;s a list in order of&amp;nbsp;obviousness:&lt;/p&gt;
@@ -234,7 +234,7 @@ Here&amp;#8217;s a list in order of&amp;nbsp;obviousness:&lt;/p&gt;
 &lt;li&gt;There now is an improved &lt;a href="http://vene.github.com/scikit-learn-speed/quick_start.html"&gt;Quick Start guide&lt;/a&gt; to running vbench on
     your&amp;nbsp;machine&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2&gt;What made this&amp;nbsp;possible&lt;/h2&gt;
+&lt;h2 id="what-made-this-possible"&gt;What made this possible&lt;a class="headerlink" href="#what-made-this-possible" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;I have done some more refactoring in my vbench fork, because I didn&amp;#8217;t
 want to have a huge, monolithic &lt;code&gt;Benchmark&lt;/code&gt; class that was specific to
 what we want in scikit-learn-speed. So on this branch, I set up a
@@ -284,11 +284,11 @@ benchmarks show the biggest jump in performance (but this could become a
 historical wall of fame or&amp;nbsp;shame).&lt;/p&gt;</content><category term="scikit-learn"></category><category term="gsoc"></category><category term="scikit-learn-speed"></category><category term="vbench"></category><category term="benchmarking"></category><category term="python"></category><category term="scikit-learn"></category></entry><entry><title>Dynamically generated benchmarks with vbench</title><link href="//vene.ro/blog/dynamically-generated-benchmarks-with-vbench.html" rel="alternate"></link><published>2012-06-07T01:57:00+02:00</published><updated>2012-06-07T01:57:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2012-06-07:/blog/dynamically-generated-benchmarks-with-vbench.html</id><summary type="html">&lt;p&gt;To construct a &lt;code&gt;vbench&lt;/code&gt; benchmark you need a setup string and a code
 string. The constructor&amp;#8217;s signature&amp;nbsp;is:  &lt;/p&gt;
 &lt;p&gt;&lt;code&gt;Benchmark(self, code, setup, ncalls=None, repeat=3, cleanup=None, name=None, description=None, start_date=None, logy=False)&lt;/code&gt;.&lt;/p&gt;
-&lt;h2&gt;Why generate benchmarks&amp;nbsp;dynamically?&lt;/h2&gt;
+&lt;h2 id="why-generate-benchmarks-dynamically"&gt;Why generate benchmarks dynamically?&lt;a class="headerlink" href="#why-generate-benchmarks-dynamically" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;For most &lt;code&gt;scikit-learn&lt;/code&gt; purposes, the &lt;code&gt;code&lt;/code&gt; string will be …&lt;/p&gt;</summary><content type="html">&lt;p&gt;To construct a &lt;code&gt;vbench&lt;/code&gt; benchmark you need a setup string and a code
 string. The constructor&amp;#8217;s signature&amp;nbsp;is:  &lt;/p&gt;
 &lt;p&gt;&lt;code&gt;Benchmark(self, code, setup, ncalls=None, repeat=3, cleanup=None, name=None, description=None, start_date=None, logy=False)&lt;/code&gt;.&lt;/p&gt;
-&lt;h2&gt;Why generate benchmarks&amp;nbsp;dynamically?&lt;/h2&gt;
+&lt;h2 id="why-generate-benchmarks-dynamically"&gt;Why generate benchmarks dynamically?&lt;a class="headerlink" href="#why-generate-benchmarks-dynamically" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;For most &lt;code&gt;scikit-learn&lt;/code&gt; purposes, the &lt;code&gt;code&lt;/code&gt; string will be very close
 to &lt;code&gt;"algorithm.fit(X, y)"&lt;/code&gt;, &lt;code&gt;"algorithm.transform(X)"&lt;/code&gt; or
 &lt;code&gt;"algorithm.predict(X)"&lt;/code&gt;. We can generate a lot of benchmarks by
@@ -326,7 +326,7 @@ the benchmarks detectable. This is because of the way the vbench suite
 gathers benchmarks. In &lt;code&gt;__init__.py&lt;/code&gt; we have to do
 &lt;code&gt;from linear_regression import *&lt;/code&gt;. With a small update to the detection
 method, we could replace the hacky part with a public lists of Benchmark&amp;nbsp;objects.&lt;/p&gt;
-&lt;h2&gt;Exposed&amp;nbsp;issues&lt;/h2&gt;
+&lt;h2 id="exposed-issues"&gt;Exposed issues&lt;a class="headerlink" href="#exposed-issues" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;While working on this, after my first attempt, I was surprised to see
 that there were no results added to the database, and output plots were
 empty. It turns out that the generated benchmarks weren&amp;#8217;t running, even
@@ -476,7 +476,7 @@ implementations at a non-trivial level (i.e. faster than using &lt;a href="http:
 generic optimizers in scipy&lt;/a&gt;). However, not all modules are equal:
 some have received more attention for speed than others (for example the
 &lt;span class="caps"&gt;SGD&lt;/span&gt; classes). I intend to raise the bar towards a more uniform&amp;nbsp;level.&lt;/p&gt;
-&lt;h2&gt;Are you crazy, can you really do&amp;nbsp;this?&lt;/h2&gt;
+&lt;h2 id="are-you-crazy-can-you-really-do-this"&gt;Are you crazy, can you really do this?&lt;a class="headerlink" href="#are-you-crazy-can-you-really-do-this" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Well, of course. This might not the usual GSoC proposal, but I can show
 how I can do it and how it&amp;#8217;s easily quantifiable. Actually, a very
 important part of the work will be to make scikit-learn&amp;#8217;s speed easily&amp;nbsp;measurable.&lt;/p&gt;
@@ -496,7 +496,7 @@ example, a &lt;a href="http://cython.org/"&gt;Cython&lt;/a&gt; implementation of
 function that is able to use preallocated memory will improve the
 performance of raw NearestNeighbours queries as well as of the KMeans
 and hierarchical clustering&amp;nbsp;algorithms.&lt;/p&gt;
-&lt;h2&gt;How will we be able to tell if you&amp;nbsp;succeed?&lt;/h2&gt;
+&lt;h2 id="how-will-we-be-able-to-tell-if-you-succeed"&gt;How will we be able to tell if you succeed?&lt;a class="headerlink" href="#how-will-we-be-able-to-tell-if-you-succeed" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;A key part of the GSoC project is setting up a
 &lt;abbr title="Continuous Integration"&gt;&lt;span class="caps"&gt;CI&lt;/span&gt;&lt;/abbr&gt;-style benchmark platform.
 The point is to be able to track how the speed of certain operations
@@ -512,7 +512,7 @@ improvements, thanks to the positive reinforcement it&amp;nbsp;gives.&lt;/p&gt;
 scikit-learn algorithms with other well-known libraries in the
 &lt;a href="http://scikit-learn.sourceforge.net/ml-benchmarks/"&gt;ml-benchmarks&lt;/a&gt; project. It would be very helpful to have such a
 benchmark suite that automatically keeps&amp;nbsp;up-to-date.&lt;/p&gt;
-&lt;h2&gt;Side&amp;nbsp;effects&lt;/h2&gt;
+&lt;h2 id="side-effects"&gt;Side effects&lt;a class="headerlink" href="#side-effects" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;The cool thing about such a project is that it should raise the overall
 quality of the scikit. The refactoring will lead to an increase in test
 coverage, because the low-coverage modules are expected to be less
@@ -1194,19 +1194,19 @@ vacation, which means time for serious GSoC&amp;nbsp;work.&lt;/p&gt;
 when. We gathered quite a few code snippets since the official start of
 the project, but it&amp;#8217;s now time to talk about integration and pull&amp;nbsp;requests.&lt;/p&gt;
 &lt;p&gt;Here is the&amp;nbsp;plan:&lt;/p&gt;
-&lt;h4&gt;SparsePCA&lt;/h4&gt;
+&lt;h4 id="sparsepca"&gt;SparsePCA&lt;a class="headerlink" href="#sparsepca" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h4&gt;
 &lt;p&gt;First pull request due: &lt;strong&gt;June 15&lt;/strong&gt;&lt;br /&gt;
 This will be the use case I blogged about &lt;a href="http://venefrombucharest.wordpress.com/2011/05/23/sparse-pca/" title="Sparse PCA"&gt;before&lt;/a&gt;. Specifically, we
 want to learn a dictionary of sparse atoms, but representations of the
 data will be&amp;nbsp;dense.&lt;/p&gt;
-&lt;h4&gt;SparseCoder&lt;/h4&gt;
+&lt;h4 id="sparsecoder"&gt;SparseCoder&lt;a class="headerlink" href="#sparsecoder" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h4&gt;
 &lt;p&gt;First pull request due: &lt;strong&gt;June 25&lt;/strong&gt;&lt;br /&gt;
 This is the transpose of the SparsePCA problem. We are learning the
 optimal, dense dictionary for sparse representations of the&amp;nbsp;data.&lt;/p&gt;
-&lt;h4&gt;KMeansCoder&lt;/h4&gt;
+&lt;h4 id="kmeanscoder"&gt;KMeansCoder&lt;a class="headerlink" href="#kmeanscoder" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h4&gt;
 &lt;p&gt;First pull request due: &lt;strong&gt;June 30&lt;/strong&gt;&lt;br /&gt;
 This method builds the dictionary out of cluster centers found by&amp;nbsp;K-means.&lt;/p&gt;
-&lt;h4&gt;OnlineSparseCoder&lt;/h4&gt;
+&lt;h4 id="onlinesparsecoder"&gt;OnlineSparseCoder&lt;a class="headerlink" href="#onlinesparsecoder" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h4&gt;
 &lt;p&gt;First pull request due: &lt;strong&gt;July 10&lt;/strong&gt;&lt;br /&gt;
 This will involve the online learning tricks suggested in Julien
 Mairal&amp;#8217;s work and will allow for faster computations of both sparse &lt;span class="caps"&gt;PCA&lt;/span&gt;
@@ -1271,7 +1271,7 @@ of a sparse principal components analysis (SparsePCA) algorithm coded by
 Gaël and Alexandre and based on [[1]][]. Because the name &amp;#8220;sparse &lt;span class="caps"&gt;PCA&lt;/span&gt;&amp;#8221;
 has some inherent ambiguity, I will describe in greater depth what
 problem we are actually solving, and what it can be used&amp;nbsp;for.&lt;/p&gt;
-&lt;h1&gt;The&amp;nbsp;problem&lt;/h1&gt;
+&lt;h1 id="the-problem"&gt;The problem&lt;a class="headerlink" href="#the-problem" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;Mathematically, this implementation of Sparse &lt;span class="caps"&gt;PCA&lt;/span&gt;&amp;nbsp;solves:&lt;/p&gt;
 &lt;p&gt;$latex (U\^*,
 V\^*)=\underset{U,V}{\mathrm{argmin\,}}\frac{1}{2}||X-&lt;span class="caps"&gt;UV&lt;/span&gt;||_2\^2+\alpha||V||_1$&lt;/p&gt;
@@ -1289,7 +1289,7 @@ representation of the data as a linear combination of sparse&amp;nbsp;signals.&l
 be orthogonal, just to consist of normalized column vectors. There are
 different approaches where this constraint appears too, and they are on
 the list for this summer, but I&amp;nbsp;digress.&lt;/p&gt;
-&lt;h1&gt;The&amp;nbsp;approach&lt;/h1&gt;
+&lt;h1 id="the-approach"&gt;The approach&lt;a class="headerlink" href="#the-approach" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;As usual, such optimization problems are solved by alternatively
 minimizing one of the variables while keeping the other fixed, until
 convergence is&amp;nbsp;reached.&lt;/p&gt;
@@ -1300,7 +1300,7 @@ as algorithms to solve the Lasso&amp;nbsp;problem.&lt;/p&gt;
 &lt;p&gt;The update of $latex U$ is block coordinate descent with warm restart.
 This is a batch adaptation of an online algorithm proposed by Mairal et
 al. in&amp;nbsp;[[1]][].&lt;/p&gt;
-&lt;h1&gt;Sparse &lt;span class="caps"&gt;PCA&lt;/span&gt; as a&amp;nbsp;transformer&lt;/h1&gt;
+&lt;h1 id="sparse-pca-as-a-transformer"&gt;Sparse &lt;span class="caps"&gt;PCA&lt;/span&gt; as a transformer&lt;a class="headerlink" href="#sparse-pca-as-a-transformer" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;Of course, in order to be of practical use, the code needs to be
 refactored into a scikits.learn transformer object, just like
 &lt;code&gt;scikits.learn.decomposition.pca&lt;/code&gt;. This means that the optimization
@@ -1310,7 +1310,7 @@ $latex V$&amp;nbsp;above).&lt;/p&gt;
 &lt;p&gt;In order to transform new data according to the learned sparse &lt;span class="caps"&gt;PCA&lt;/span&gt; model
 (for example, prior to classification of the test data), we simply need
 to do a least squares projection of the new data on the sparse&amp;nbsp;components.&lt;/p&gt;
-&lt;h1&gt;What is it good&amp;nbsp;for?&lt;/h1&gt;
+&lt;h1 id="what-is-it-good-for"&gt;What is it good for?&lt;a class="headerlink" href="#what-is-it-good-for" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;For applications such as text and image processing, its great advantage
 is interpretability. When running a regular &lt;span class="caps"&gt;PCA&lt;/span&gt; on a set of documents in
 bag of words format, we can find an interesting visualisation on a
@@ -1340,7 +1340,7 @@ this is extremely easy to do using inheritance and using the pipeline&amp;nbsp;m
 many different application, that it is often very helpful to be able to
 extend its &lt;span class="caps"&gt;API&lt;/span&gt; to better integrate with your code. With scikits.learn,
 this is extremely easy to do using inheritance and using the pipeline&amp;nbsp;module.&lt;/p&gt;
-&lt;h2&gt;The&amp;nbsp;problem&lt;/h2&gt;
+&lt;h2 id="the-problem"&gt;The problem&lt;a class="headerlink" href="#the-problem" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;While continuing the &lt;a href="http://venefrombucharest.wordpress.com/2011/04/14/a-look-at-romanian-verbs-with-scikits-learn/" title="A look at Romanian verbs with scikits-learn"&gt;morphophonetic analysis of Romanian verbal
 forms&lt;/a&gt;, I found the need to streamline my workflow to allow for more
 complex models. There were a lot of free model parameters and it would
@@ -1362,7 +1362,7 @@ thing that needed to be adjusted: by default, its analyzer uses a
 preprocessor that strips accented characters, and I had strong reasons
 to believe that Romanian diacritics are very relevant for the learning
 task. So, I needed to extend the&amp;nbsp;vectorizer.&lt;/p&gt;
-&lt;h2&gt;The&amp;nbsp;solution&lt;/h2&gt;
+&lt;h2 id="the-solution"&gt;The solution&lt;a class="headerlink" href="#the-solution" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;The code I came up with is &lt;a href="https://github.com/vene/misc-nlp/blob/master/conjugation/grid_search_example/preprocess.py"&gt;here&lt;/a&gt;. I tried to build a class that would
 be as specific to my needs as possible. It is important to retain the
 full &lt;span class="caps"&gt;API&lt;/span&gt;, however. Note the &lt;code&gt;y=None&lt;/code&gt; parameter in the fit functions. Its
@@ -1401,7 +1401,7 @@ indeed, using binary features instead of occurence counts improves
 performance. I also found that the optimal n-gram length is 5, but the
 gain is not that big when compared to a length of 3, which generates a
 lot less&amp;nbsp;features.&lt;/p&gt;
-&lt;h2&gt;Conclusions&lt;/h2&gt;
+&lt;h2 id="conclusions"&gt;Conclusions&lt;a class="headerlink" href="#conclusions" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;I hope that I managed to show the strength of a well-designed &lt;span class="caps"&gt;API&lt;/span&gt;.
 Because of it, it would be very easy to add, for example, an extra layer
 for dimensionality reduction before classification. It would only
@@ -1422,7 +1422,7 @@ Though I live far from every nucleus of scikits-learn developers, I
 efficiently participated via &lt;span class="caps"&gt;IRC&lt;/span&gt;. This way, I also got the chance to
 help out a bit on Mathieu Blondel&amp;#8217;s Kernel &lt;span class="caps"&gt;PCA&lt;/span&gt; code, which will also be
 merged into main&amp;nbsp;soon.&lt;/p&gt;
-&lt;h2&gt;How it felt&amp;nbsp;like&lt;/h2&gt;
+&lt;h2 id="how-it-felt-like"&gt;How it felt like&lt;a class="headerlink" href="#how-it-felt-like" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Short answer:&amp;nbsp;awesome!&lt;/p&gt;
 &lt;p&gt;Slightly longer answer: Everybody was very encouraging  and helpful.
 They gave me a lot of feedback from which I learned a lot, and they
@@ -1432,7 +1432,7 @@ collaborators are so good to work&amp;nbsp;with.&lt;/p&gt;
 &lt;p&gt;But the main reason why it makes me feel so good is that I&amp;#8217;m proud to
 able to contribute on a project that I consider very significant and the
 best in the field from many points of&amp;nbsp;view.&lt;/p&gt;
-&lt;h2&gt;What I got&amp;nbsp;done&lt;/h2&gt;
+&lt;h2 id="what-i-got-done"&gt;What I got done&lt;a class="headerlink" href="#what-i-got-done" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Most of my work was on the non-negative matrix factorization module that
 I began some while back, but only intermitently worked on. It is now a
 solid module with high test coverage, documentation, and a cool simple
@@ -1447,7 +1447,7 @@ initializations are more fit for sparsity settings, while others are
 more fit for dense&amp;nbsp;settings.&lt;/p&gt;
 &lt;p&gt;I have a theory that I plan to test out, regarding the use of different
 initialization methods for components and for data in a sparse&amp;nbsp;setting.&lt;/p&gt;
-&lt;h2&gt;What I&amp;nbsp;learned&lt;/h2&gt;
+&lt;h2 id="what-i-learned"&gt;What I learned&lt;a class="headerlink" href="#what-i-learned" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;I think my greatest improvement was in terms of workflow and efficiency.
 While my code was under review, I was receiving frequent comments on my
 git pull request, and eventually I ended up responding to some comments

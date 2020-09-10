@@ -101,6 +101,7 @@ blockquote footer {
 /* headers */
 h1 a:link {background: none;}
 
+
 h1,h2,h3,h4 {
   font-family: "euclid-flex", sans;
   font-style: normal;
@@ -133,6 +134,9 @@ a.anchor-link {display: none;}
 
 /* Links: replicate underline that clears descenders */
 a:link, a:visited { color: inherit; }
+
+a.headerlink:link,
+a.headerlink:visited {color: lightgray; background: none}
 
 a:link { 
   text-decoration: none;

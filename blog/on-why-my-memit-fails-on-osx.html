@@ -131,7 +131,7 @@ make_a_large_array()<br />&nbsp;make_a_large_array()</p>
 In [1]: import&nbsp;mem_test</p>
 <p>In [2]: %mprun -f mem_test.main mem_test.main()<br />
 Filename:&nbsp;mem_test.py</p>
-<h1>Line # Mem usage Increment Line&nbsp;Contents</h1>
+<h1 id="line-mem-usage-increment-line-contents">Line # Mem usage Increment Line Contents<a class="headerlink" href="#line-mem-usage-increment-line-contents" title="Permanent link">&para;</a></h1>
 <p>8 24.8477 <span class="caps">MB</span> 0.0000 <span class="caps">MB</span> def main():<br />
 9 24.8633 <span class="caps">MB</span> 0.0156 <span class="caps">MB</span> make_a_large_array()<br />
 10 32.4688 <span class="caps">MB</span> 7.6055 <span class="caps">MB</span> make_a_large_array()<br />
@@ -143,7 +143,7 @@ accidentally call <code>main()</code> once before, you will no longer get a good
 <p>[sourcecode lang=&#8221;python&#8221;]<br />
 In [3]: %mprun -f mem_test.main mem_test.main()<br />
 Filename:&nbsp;mem_test.py</p>
-<h1>Line # Mem usage Increment Line&nbsp;Contents</h1>
+<h1 id="line-mem-usage-increment-line-contents_1">Line # Mem usage Increment Line Contents<a class="headerlink" href="#line-mem-usage-increment-line-contents_1" title="Permanent link">&para;</a></h1>
 <p>8 32.4922 <span class="caps">MB</span> 0.0000 <span class="caps">MB</span> def main():<br />
 9 32.5234 <span class="caps">MB</span> 0.0312 <span class="caps">MB</span> make_a_large_array()<br />
 10 32.5234 <span class="caps">MB</span> 0.0000 <span class="caps">MB</span> make_a_large_array()<br />

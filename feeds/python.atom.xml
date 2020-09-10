@@ -1854,19 +1854,19 @@ EEIIIYQQQgghhBBCCCGEEEIIIYQQQgghhBBCCDEP/D/tC1tkXuJ7LgAAAABJRU5ErkJggg==
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
 &lt;/script&gt;
-</content><category term="python"></category><category term="python"></category><category term="rank aggregation"></category><category term="kendall"></category><category term="tau"></category><category term="kemeny"></category><category term="kemeny-young"></category><category term="voting theory"></category></entry><entry><title>BibTeX-powered publications list for Pelican with pelican-bibtex</title><link href="//vene.ro/blog/bibtex-powered-publications-list-for-pelican-with-pelican-bibtex.html" rel="alternate"></link><published>2013-04-22T10:45:00+02:00</published><updated>2013-04-22T10:45:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2013-04-22:/blog/bibtex-powered-publications-list-for-pelican-with-pelican-bibtex.html</id><summary type="html">&lt;h2&gt;Hook&lt;/h2&gt;
+</content><category term="python"></category><category term="python"></category><category term="rank aggregation"></category><category term="kendall"></category><category term="tau"></category><category term="kemeny"></category><category term="kemeny-young"></category><category term="voting theory"></category></entry><entry><title>BibTeX-powered publications list for Pelican with pelican-bibtex</title><link href="//vene.ro/blog/bibtex-powered-publications-list-for-pelican-with-pelican-bibtex.html" rel="alternate"></link><published>2013-04-22T10:45:00+02:00</published><updated>2013-04-22T10:45:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2013-04-22:/blog/bibtex-powered-publications-list-for-pelican-with-pelican-bibtex.html</id><summary type="html">&lt;h2 id="hook"&gt;Hook&lt;a class="headerlink" href="#hook" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Wouldn&amp;#8217;t you like to manage your academic publications list easily
 within the context of your static website? Without resorting to external
 services, or to software like &lt;em&gt;bibtex2html&lt;/em&gt;, which is very nice but will
 then require restyling to fit your&amp;nbsp;templates?&lt;/p&gt;
-&lt;p&gt;Look no more, with the help of &lt;a href="https://github.com/vene/pelican-bibtex"&gt;pelican-bibtex …&lt;/a&gt;&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Hook&lt;/h2&gt;
+&lt;p&gt;Look no more, with the help of &lt;a href="https://github.com/vene/pelican-bibtex"&gt;pelican-bibtex …&lt;/a&gt;&lt;/p&gt;</summary><content type="html">&lt;h2 id="hook"&gt;Hook&lt;a class="headerlink" href="#hook" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Wouldn&amp;#8217;t you like to manage your academic publications list easily
 within the context of your static website? Without resorting to external
 services, or to software like &lt;em&gt;bibtex2html&lt;/em&gt;, which is very nice but will
 then require restyling to fit your&amp;nbsp;templates?&lt;/p&gt;
 &lt;p&gt;Look no more, with the help of &lt;a href="https://github.com/vene/pelican-bibtex"&gt;pelican-bibtex&lt;/a&gt; you can now manage
 your papers from within&amp;nbsp;Pelican!&lt;/p&gt;
-&lt;h2&gt;Backstory&lt;/h2&gt;
+&lt;h2 id="backstory"&gt;Backstory&lt;a class="headerlink" href="#backstory" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;At &lt;a href="http://fseoane.net"&gt;Fabian&lt;/a&gt;&amp;#8216;s advice, I started playing around with &lt;a href="http://getpelican.com"&gt;Pelican&lt;/a&gt;, a
 static website/blog generator for Python. I like it better than the
 other generators I used before, so I chose it the next time I had to set
@@ -1882,7 +1882,7 @@ GitHub&amp;nbsp;account.&lt;/p&gt;
 &lt;p&gt;You can see it in action in the &lt;a href="https://github.com/nlp-unibuc/nlp-unibuc-website/"&gt;source code&lt;/a&gt; for the website I am
 working on at the moment, the home page of my research group. Example
 output generated using pelican-bibtex can be seen &lt;a href="http://nlp-unibuc.github.io/publications.html"&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;h2&gt;Possible&amp;nbsp;extensions&lt;/h2&gt;
+&lt;h2 id="possible-extensions"&gt;Possible extensions&lt;a class="headerlink" href="#possible-extensions" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;I have not dug in too deeply but I believe this plugin can be extended,
 with not much difficulty, to support referencing in Pelican blogs, and
 render BibTeX references at the end of every post. This idea was
@@ -1895,7 +1895,7 @@ you through the idea behind&amp;nbsp;this …&lt;/p&gt;</summary><content type="
 with prof. Ion Văduva, and my assignment for the class was to implement
 exactly what it says in the title of the blog post. I am going to walk
 you through the idea behind&amp;nbsp;this.&lt;/p&gt;
-&lt;h3&gt;General&amp;nbsp;formulation&lt;/h3&gt;
+&lt;h3 id="general-formulation"&gt;General formulation&lt;a class="headerlink" href="#general-formulation" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;The ratio-of-uniforms is a method that can be applied to many density
 functions. Essentially, given a density function over [latex]
 \mathbb{R}\^m[/latex], [latex] f(x) = \frac{h(x)}{H}[/latex] where
@@ -1917,7 +1917,7 @@ bounded and we sample a uniform vector [latex] \mathbf{V} \sim
 not have any references for the proof, except for a book in Romanian,
 but if you are interested, just leave me a comment and I&amp;#8217;ll do a
 follow-up post with the&amp;nbsp;proofs.&lt;/p&gt;
-&lt;h3&gt;Univariate&amp;nbsp;scenario&lt;/h3&gt;
+&lt;h3 id="univariate-scenario"&gt;Univariate scenario&lt;a class="headerlink" href="#univariate-scenario" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;For the univariate case, all the above simplifies to $$ \mathcal{C} =
 \left \{(u, v) \Big | 0 \&amp;lt; u \&amp;lt; \sqrt&lt;br /&gt;
 {h\left (\frac{v}{u\^c}\right )} \right \} $$. We generate
@@ -1942,7 +1942,7 @@ This allows us to compute the equation of the boundary of the set
 \frac{v}{u\^c}[/latex]. For visualisation purposes, here is how it
 would look like for [latex] \nu=6, c=1[/latex] (plotted using &lt;a href="http://www.wolframalpha.com/" title="Wolfram Alpha"&gt;Wolfram
 Alpha&lt;/a&gt;):[&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2011/10/regiunea.png" title="The accepting set C" /&gt;]&lt;a href="http://localhost:8001/wp-content/uploads/2011/10/regiunea.png" title="The accepting set C"&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;h3&gt;Sampling&amp;nbsp;algorithm&lt;/h3&gt;
+&lt;h3 id="sampling-algorithm"&gt;Sampling algorithm&lt;a class="headerlink" href="#sampling-algorithm" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;In order to uniformly sample from this set, we can apply basic rejection
 sampling: just uniformly sample from a rectangular region surrounding
 the set, and reject the points that do not satisfy the condition. In
@@ -1976,7 +1976,7 @@ treated separately, which I did using the following property: Let
 $$ X = X&amp;#8217; \cdot \sqrt[\nu]{U} \sim \text{Gamma}(\nu, 1)$$ For
 a proof of this fact, see [&lt;a href="#footnote-1"&gt;1&lt;/a&gt;], which is a great article on
 generating Gamma&amp;nbsp;variates.&lt;/p&gt;
-&lt;h3&gt;Implementation&lt;/h3&gt;
+&lt;h3 id="implementation"&gt;Implementation&lt;a class="headerlink" href="#implementation" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;[sourcecode language=&amp;#8221;python&amp;#8221;]&lt;br /&gt;
 from import numpy as&amp;nbsp;np&lt;/p&gt;
 &lt;p&gt;def _cond(u, v, k, c):&lt;br /&gt;
@@ -2016,7 +2016,7 @@ parameters&amp;#8221;&amp;#8220;&amp;#8221;&lt;br /&gt;
 from scipy.special import gamma&lt;br /&gt;
 a, b = get_bounds(k, c)&lt;br /&gt;
 return gamma(k) / ((c + 1) * a * b)&lt;br /&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
-&lt;h3&gt;Results&lt;/h3&gt;
+&lt;h3 id="results"&gt;Results&lt;a class="headerlink" href="#results" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;And of course I should show you that it works. Here are some histograms
 for various values of [latex] \nu[/latex], with the theoretical density
 plotted in dotted red, after sampling [latex] 10\^5[/latex] values. The
@@ -2046,12 +2046,12 @@ polynomial at the horizontal position of the mouse cursor is&amp;nbsp;plotted.&l
 pretty with the default configuration. Since matplotlib figures are
 abstract objects, designed for consistency in print as well as on
 screen, tweaking their layout can get&amp;nbsp;tricky.&lt;/p&gt;
-&lt;h3&gt;An&amp;nbsp;example&lt;/h3&gt;
+&lt;h3 id="an-example"&gt;An example&lt;a class="headerlink" href="#an-example" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;The following code is taken from the &lt;a href="http://scikit-learn.sourceforge.net/auto_examples/applications/plot_face_recognition.html" title="face recognition example"&gt;face recognition example&lt;/a&gt; in …&lt;/p&gt;</summary><content type="html">&lt;p&gt;When plotting multiple subplots using matplotlib, the axes rarely look
 pretty with the default configuration. Since matplotlib figures are
 abstract objects, designed for consistency in print as well as on
 screen, tweaking their layout can get&amp;nbsp;tricky.&lt;/p&gt;
-&lt;h3&gt;An&amp;nbsp;example&lt;/h3&gt;
+&lt;h3 id="an-example"&gt;An example&lt;a class="headerlink" href="#an-example" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;The following code is taken from the &lt;a href="http://scikit-learn.sourceforge.net/auto_examples/applications/plot_face_recognition.html" title="face recognition example"&gt;face recognition example&lt;/a&gt; in
 scikits.learn:&lt;br /&gt;
 &lt;code&gt;pl.figure(figsize=(1.8 * n_col, 2.4 * n_row))&lt;/code&gt;&lt;/p&gt;
@@ -2069,7 +2069,7 @@ away from the right&amp;nbsp;edge.&lt;/p&gt;
 &lt;p&gt;The parameters &lt;code&gt;hspace&lt;/code&gt; and &lt;code&gt;wspace&lt;/code&gt; control the spacing between the
 subplots. However these are kind of hard to get right, because,
 obviously, there are more settings than there are degrees of&amp;nbsp;freedom.&lt;/p&gt;
-&lt;h3&gt;My&amp;nbsp;tip&lt;/h3&gt;
+&lt;h3 id="my-tip"&gt;My tip&lt;a class="headerlink" href="#my-tip" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;On my system, the default matplotlib backend is TkAgg. The matplotlib
 backend controls the graphical environment that builds the plot windows,
 as well as the rendering engine used. TkAgg has a &amp;#8220;configure subplots&amp;#8221;
@@ -2112,7 +2112,7 @@ setuptools-based project are as&amp;nbsp;follows:&lt;/p&gt;
 &lt;code&gt;config.add_subpackage('decomposition')&lt;/code&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;Don&amp;#8217;t forget to do the same for the tests&amp;nbsp;subfolder!&lt;/p&gt;
-&lt;h2&gt;Conclusions&lt;/h2&gt;
+&lt;h2 id="conclusions"&gt;Conclusions&lt;a class="headerlink" href="#conclusions" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;While wasting so much time due to a simple beginner&amp;#8217;s mistake is not
 very pleasant, I am not frustrated with setuptools. On the contrary, now
 that I understand it better I can appreciate its flexibility and

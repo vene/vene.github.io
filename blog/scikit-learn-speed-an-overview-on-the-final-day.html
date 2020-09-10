@@ -105,7 +105,7 @@ faster wherever I&nbsp;can.</p>
 <p>On the official closing day of this work, I&#8217;d like to take a moment and
 recall the accomplishments and failures of this project, and all the
 lessons to be&nbsp;learned.</p>
-<h2>The <em>scikit-learn-speed</em> benchmark&nbsp;platform</h2>
+<h2 id="the-scikit-learn-speed-benchmark-platform">The <em>scikit-learn-speed</em> benchmark platform<a class="headerlink" href="#the-scikit-learn-speed-benchmark-platform" title="Permanent link">&para;</a></h2>
 <p>[<img alt="" src="http://localhost:8001/wp-content/uploads/2012/08/skl-speed-300x163.png" title="skl-speed" />]<a href="http://localhost:8001/wp-content/uploads/2012/08/skl-speed-300x163.png" title="skl-speed"></a><br />
 [<em>Scikit-learn-speed</em>][<img alt="" src="http://localhost:8001/wp-content/uploads/2012/08/skl-speed-300x163.png" title="skl-speed" />] is a continuous benchmark suite for the
 <a href="http://scikit-learn.org"><em>scikit-learn</em></a> library. It has the following&nbsp;features:</p>
@@ -126,7 +126,7 @@ lessons to be&nbsp;learned.</p>
 <li>Multi-step benchmarks: i.e. <code>fit</code> followed by <code>predict</code></li>
 </ul>
 <p>What were the lessons I learned&nbsp;here?</p>
-<h3>Make your work reusable: the trade-off between good design and&nbsp;get-it-working-now</h3>
+<h3 id="make-your-work-reusable-the-trade-off-between-good-design-and-get-it-working-now">Make your work reusable: the trade-off between good design and get-it-working-now<a class="headerlink" href="#make-your-work-reusable-the-trade-off-between-good-design-and-get-it-working-now" title="Permanent link">&para;</a></h3>
 <p>For the task of rolling out a continuous benchmarking platform, we
 decided pretty early in the project to adopt Wes McKinney&#8217;s <em>vbench</em>. If
 my goal would&#8217;ve been to maintain <em>vbench</em> and extend it into a
@@ -142,7 +142,7 @@ is fine for a project with a tight deadline such as this one: after it&#8217;s
 done, I will just spend another weekend on cleaning the work up and
 making sure it&#8217;s appreciated upstream. This will be easier because of
 the constraint to keep compatibility with <em>scikit-learn-speed</em>.</p>
-<h3>Never work quietly (unless you&#8217;re a&nbsp;ninja)</h3>
+<h3 id="never-work-quietly-unless-youre-a-ninja">Never work quietly (unless you&#8217;re a ninja)<a class="headerlink" href="#never-work-quietly-unless-youre-a-ninja" title="Permanent link">&para;</a></h3>
 <p>I know some students who prefer that the professor doesn&#8217;t even know
 they exist until the final, when they would score an A, and (supposedly)
 leave the professor amazed. In real life, plenty of people would be
@@ -157,7 +157,7 @@ attend conferences, meetups, coding&nbsp;sprints.</p>
 contacted me about my new <em>vbench</em> features (Hi Jon and Joel!), I have
 shaped my design slightly towards their requirements as well, and
 hopefully the result will be a more general <em>vbench</em>.</p>
-<h2>The&nbsp;speedups</h2>
+<h2 id="the-speedups">The speedups<a class="headerlink" href="#the-speedups" title="Permanent link">&para;</a></h2>
 <p>Once <em>scikit-learn-speed</em> was up and running, I couldn&#8217;t believe how
 useful it is to be able to scroll, catch slow code and jump straight at
 the profiler output with one click. I jumped on the following&nbsp;speed-ups:</p>
@@ -186,13 +186,13 @@ the profiler output with one click. I jumped on the following&nbsp;speed-ups:</p
     optimization of the <code>OMP</code> sparsity&nbsp;parameter.</li>
 </ul>
 <p>Lessons? These will be pretty&nbsp;obvious.</p>
-<h3>Write tests, tests,&nbsp;tests!</h3>
+<h3 id="write-tests-tests-tests">Write tests, tests, tests!<a class="headerlink" href="#write-tests-tests-tests" title="Permanent link">&para;</a></h3>
 <p>This is a no-brainer, but it still didn&#8217;t stick. In that one case out of
 10 that I didn&#8217;t explicitly test, a bug was obviously hiding. When you
 want to add a new feature, it&#8217;s best to start by writing a failing test,
 and then <a href="http://c2.com/cgi/wiki?MakeItWorkMakeItRightMakeItFast">making it pass</a>. Sure, you will miss tricky bugs, but you
 will never have embarrassing, obvious bugs in your code&nbsp;:)</p>
-<h3>Optimization doesn&#8217;t have to be&nbsp;ugly</h3>
+<h3 id="optimization-doesnt-have-to-be-ugly">Optimization doesn&#8217;t have to be ugly<a class="headerlink" href="#optimization-doesnt-have-to-be-ugly" title="Permanent link">&para;</a></h3>
 <p>Developers often shun optimization. It&#8217;s true, you should profile first,
 and you shouldn&#8217;t focus on speeding up stuff that is dominated by other
 computations that are orders of magnitude slower. However, there is an
@@ -218,7 +218,7 @@ psigma_diag[above_cutoff] = 1.0 /&nbsp;s[above_cutoff]</p>
 <p>return np.transpose(np.conjugate(np.dot(u * psigma_diag, vh)))<br />&nbsp;[/sourcecode]</p>
 <p>It&#8217;s shorter, more elegant, easier to read, and nevertheless faster. I
 would say it is worth&nbsp;it.</p>
-<h3>Small speed-ups can&nbsp;propagate</h3>
+<h3 id="small-speed-ups-can-propagate">Small speed-ups can propagate<a class="headerlink" href="#small-speed-ups-can-propagate" title="Permanent link">&para;</a></h3>
 <p>Sure, it&#8217;s great if you can compute an inverse two times faster, say in
 0.5s instead of 1s. But if some algorithm calls this function in a loop
 that might iterate 100, 300, or 1000 times, this small speed-up seems

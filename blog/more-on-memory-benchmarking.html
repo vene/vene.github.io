@@ -106,7 +106,7 @@ backwards-compatible one from the previous&nbsp;version.</p>
 <p>You can find this work-in-progress as a [pull request on
 memory_profiler][] from where you can trace it to my GitHub repo.
 Here&#8217;s what you can do with&nbsp;it:</p>
-<h2>%mprun</h2>
+<h2 id="mprun">%mprun<a class="headerlink" href="#mprun" title="Permanent link">&para;</a></h2>
 <p>Copying the spirit of <code>%lprun</code>, since imitation is the most sincere form
 of flattery, you can use %mprun to easily view line-by-line memory usage
 reports, without having to go in and add the <code>@profile</code> decorator.</p>
@@ -136,7 +136,7 @@ tol)<br />
 124<br />
 125 41.7344 <span class="caps">MB</span> 0.0000 <span class="caps">MB</span> return&nbsp;coef.T</p>
 <p>[/sourcecode]</p>
-<h2>%memit</h2>
+<h2 id="memit">%memit<a class="headerlink" href="#memit" title="Permanent link">&para;</a></h2>
 <p>As described in my previous post, this is a <code>%timeit</code>-like magic for
 quickly seeing how much memory a Python command uses.<br />
 Unlike %timeit, however, the command needs to be executed in a fresh
@@ -158,7 +158,7 @@ worst of 3: 15.687500 <span class="caps">MB</span> per&nbsp;loop</p>
 worst of 3: 0.324219 <span class="caps">MB</span> per loop<br />&nbsp;[/sourcecode]</p>
 <p>It is very easy, using this small tool, to see what forces memory
 copying and what does&nbsp;not.</p>
-<h2>Installation&nbsp;instructions</h2>
+<h2 id="installation-instructions">Installation instructions<a class="headerlink" href="#installation-instructions" title="Permanent link">&para;</a></h2>
 <p>First, you have to get the source code of this version of
 memory_profiler. Then, it depends on your version of IPython. If you
 have 0.10, you have to edit <code>~/.ipython/ipy_user_conf.py</code> like this:

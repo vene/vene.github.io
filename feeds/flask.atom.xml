@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Vlad Niculae - flask</title><link href="//vene.ro/" rel="alternate"></link><link href="//vene.ro/feeds/flask.atom.xml" rel="self"></link><id>//vene.ro/</id><updated>2015-07-06T00:00:00+02:00</updated><entry><title>Flask-SocketIO on OpenShift: fallback on another port</title><link href="//vene.ro/blog/flask-socketio-openshift-fallback-xhr-polling.html" rel="alternate"></link><published>2015-07-06T00:00:00+02:00</published><updated>2015-07-06T00:00:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2015-07-06:/blog/flask-socketio-openshift-fallback-xhr-polling.html</id><summary type="html">&lt;h2&gt;&lt;span class="caps"&gt;TL&lt;/span&gt;; &lt;span class="caps"&gt;DR&lt;/span&gt;&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Vlad Niculae - flask</title><link href="//vene.ro/" rel="alternate"></link><link href="//vene.ro/feeds/flask.atom.xml" rel="self"></link><id>//vene.ro/</id><updated>2015-07-06T00:00:00+02:00</updated><entry><title>Flask-SocketIO on OpenShift: fallback on another port</title><link href="//vene.ro/blog/flask-socketio-openshift-fallback-xhr-polling.html" rel="alternate"></link><published>2015-07-06T00:00:00+02:00</published><updated>2015-07-06T00:00:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2015-07-06:/blog/flask-socketio-openshift-fallback-xhr-polling.html</id><summary type="html">&lt;h2 id="tl-dr"&gt;&lt;span class="caps"&gt;TL&lt;/span&gt;; &lt;span class="caps"&gt;DR&lt;/span&gt;&lt;a class="headerlink" href="#tl-dr" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;I hacked the &lt;a href="https://gist.github.com/vene/c0657d854ae74a4511d2"&gt;SocketIO client
 0.9.16&lt;/a&gt; to support
 specifying a special port (&lt;code&gt;wsport&lt;/code&gt;) to use only for the WebSocket protocol,
 while keeping all other traffic on the default port. This is required by setups
-such as OpenShift which require WebSocket traffic to come over a different …&lt;/p&gt;</summary><content type="html">&lt;h2&gt;&lt;span class="caps"&gt;TL&lt;/span&gt;; &lt;span class="caps"&gt;DR&lt;/span&gt;&lt;/h2&gt;
+such as OpenShift which require WebSocket traffic to come over a different …&lt;/p&gt;</summary><content type="html">&lt;h2 id="tl-dr"&gt;&lt;span class="caps"&gt;TL&lt;/span&gt;; &lt;span class="caps"&gt;DR&lt;/span&gt;&lt;a class="headerlink" href="#tl-dr" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;I hacked the &lt;a href="https://gist.github.com/vene/c0657d854ae74a4511d2"&gt;SocketIO client
 0.9.16&lt;/a&gt; to support
 specifying a special port (&lt;code&gt;wsport&lt;/code&gt;) to use only for the WebSocket protocol,
 while keeping all other traffic on the default port. This is required by setups
 such as OpenShift which require WebSocket traffic to come over a different port
 (say &lt;code&gt;8000&lt;/code&gt; rather than &lt;code&gt;80&lt;/code&gt;).&lt;/p&gt;
-&lt;h2&gt;The current state of&amp;nbsp;affairs&lt;/h2&gt;
+&lt;h2 id="the-current-state-of-affairs"&gt;The current state of affairs&lt;a class="headerlink" href="#the-current-state-of-affairs" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;I&amp;#8217;ve been trying to host an interactive web app with WebSockets on
 &lt;a href="https://www.openshift.com/"&gt;OpenShift&lt;/a&gt;. Since I&amp;#8217;m a poor student and this
 is a research app, I wanted a reasonably powerful free hosting&amp;nbsp;option.&lt;/p&gt;
@@ -28,7 +28,7 @@ the best way to use SocketIO from Flask is with the &lt;a href="https://flask-so
 &lt;a href="http://gevent-socketio.readthedocs.org/"&gt;gevent-socketio&lt;/a&gt; combo, which is,
 alas, incompatible with recent versions of SocketIO. According to the
 community, the most stable release is SocketIO&amp;nbsp;0.9.16.&lt;/p&gt;
-&lt;h2&gt;The problem in a&amp;nbsp;nutshell&lt;/h2&gt;
+&lt;h2 id="the-problem-in-a-nutshell"&gt;The problem in a nutshell&lt;a class="headerlink" href="#the-problem-in-a-nutshell" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;When debugging my app locally, I&amp;#8217;d connect with something&amp;nbsp;like&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;var socket = io.connect(&lt;/span&gt;
 &lt;span class="err"&gt;    &amp;#39;http://&amp;#39; + document.domain + &amp;#39;:&amp;#39; + location.port + &amp;#39;/chat&amp;#39;&lt;/span&gt;
@@ -48,7 +48,7 @@ for some reason the WebSocket connection fails (either if the browser is old
 or because of strict firewalls).  This happens because long polling uses normal
 &lt;span class="caps"&gt;HTTP&lt;/span&gt; requests and should be done over the default port, rather than the
 OpenShift-specific&amp;nbsp;one.&lt;/p&gt;
-&lt;h2&gt;Making things&amp;nbsp;work&lt;/h2&gt;
+&lt;h2 id="making-things-work"&gt;Making things work&lt;a class="headerlink" href="#making-things-work" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;My first thought was to work around it by &lt;a href="http://stackoverflow.com/questions/8588689/node-js-socket-io-client-connect-failed-event"&gt;manually implementing the fallback
 client-side&lt;/a&gt;.  This, surprisingly, failed: it turns out that
 SocketIO 0.9.16 first attempts a handshake to find out what transports the

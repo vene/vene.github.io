@@ -103,7 +103,7 @@ of a sparse principal components analysis (SparsePCA) algorithm coded by
 Gaël and Alexandre and based on [[1]][]. Because the name &#8220;sparse <span class="caps">PCA</span>&#8221;
 has some inherent ambiguity, I will describe in greater depth what
 problem we are actually solving, and what it can be used&nbsp;for.</p>
-<h1>The&nbsp;problem</h1>
+<h1 id="the-problem">The problem<a class="headerlink" href="#the-problem" title="Permanent link">&para;</a></h1>
 <p>Mathematically, this implementation of Sparse <span class="caps">PCA</span>&nbsp;solves:</p>
 <p>$latex (U\^*,
 V\^*)=\underset{U,V}{\mathrm{argmin\,}}\frac{1}{2}||X-<span class="caps">UV</span>||_2\^2+\alpha||V||_1$</p>
@@ -121,7 +121,7 @@ representation of the data as a linear combination of sparse&nbsp;signals.</p>
 be orthogonal, just to consist of normalized column vectors. There are
 different approaches where this constraint appears too, and they are on
 the list for this summer, but I&nbsp;digress.</p>
-<h1>The&nbsp;approach</h1>
+<h1 id="the-approach">The approach<a class="headerlink" href="#the-approach" title="Permanent link">&para;</a></h1>
 <p>As usual, such optimization problems are solved by alternatively
 minimizing one of the variables while keeping the other fixed, until
 convergence is&nbsp;reached.</p>
@@ -132,7 +132,7 @@ as algorithms to solve the Lasso&nbsp;problem.</p>
 <p>The update of $latex U$ is block coordinate descent with warm restart.
 This is a batch adaptation of an online algorithm proposed by Mairal et
 al. in&nbsp;[[1]][].</p>
-<h1>Sparse <span class="caps">PCA</span> as a&nbsp;transformer</h1>
+<h1 id="sparse-pca-as-a-transformer">Sparse <span class="caps">PCA</span> as a transformer<a class="headerlink" href="#sparse-pca-as-a-transformer" title="Permanent link">&para;</a></h1>
 <p>Of course, in order to be of practical use, the code needs to be
 refactored into a scikits.learn transformer object, just like
 <code>scikits.learn.decomposition.pca</code>. This means that the optimization
@@ -142,7 +142,7 @@ $latex V$&nbsp;above).</p>
 <p>In order to transform new data according to the learned sparse <span class="caps">PCA</span> model
 (for example, prior to classification of the test data), we simply need
 to do a least squares projection of the new data on the sparse&nbsp;components.</p>
-<h1>What is it good&nbsp;for?</h1>
+<h1 id="what-is-it-good-for">What is it good for?<a class="headerlink" href="#what-is-it-good-for" title="Permanent link">&para;</a></h1>
 <p>For applications such as text and image processing, its great advantage
 is interpretability. When running a regular <span class="caps">PCA</span> on a set of documents in
 bag of words format, we can find an interesting visualisation on a

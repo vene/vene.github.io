@@ -98,14 +98,14 @@ var katexMath = (function () {
  #<a href="//vene.ro/tag/flask-socketio.html">flask-socketio</a> #<a href="//vene.ro/tag/flask.html">flask</a> #<a href="//vene.ro/tag/socketio.html">socketio</a> #<a href="//vene.ro/tag/openshift.html">openshift</a></span></p>    </header>
 
     <div class="entry-content">
-      <h2><span class="caps">TL</span>; <span class="caps">DR</span></h2>
+      <h2 id="tl-dr"><span class="caps">TL</span>; <span class="caps">DR</span><a class="headerlink" href="#tl-dr" title="Permanent link">&para;</a></h2>
 <p>I hacked the <a href="https://gist.github.com/vene/c0657d854ae74a4511d2">SocketIO client
 0.9.16</a> to support
 specifying a special port (<code>wsport</code>) to use only for the WebSocket protocol,
 while keeping all other traffic on the default port. This is required by setups
 such as OpenShift which require WebSocket traffic to come over a different port
 (say <code>8000</code> rather than <code>80</code>).</p>
-<h2>The current state of&nbsp;affairs</h2>
+<h2 id="the-current-state-of-affairs">The current state of affairs<a class="headerlink" href="#the-current-state-of-affairs" title="Permanent link">&para;</a></h2>
 <p>I&#8217;ve been trying to host an interactive web app with WebSockets on
 <a href="https://www.openshift.com/">OpenShift</a>. Since I&#8217;m a poor student and this
 is a research app, I wanted a reasonably powerful free hosting&nbsp;option.</p>
@@ -122,7 +122,7 @@ the best way to use SocketIO from Flask is with the <a href="https://flask-socke
 <a href="http://gevent-socketio.readthedocs.org/">gevent-socketio</a> combo, which is,
 alas, incompatible with recent versions of SocketIO. According to the
 community, the most stable release is SocketIO&nbsp;0.9.16.</p>
-<h2>The problem in a&nbsp;nutshell</h2>
+<h2 id="the-problem-in-a-nutshell">The problem in a nutshell<a class="headerlink" href="#the-problem-in-a-nutshell" title="Permanent link">&para;</a></h2>
 <p>When debugging my app locally, I&#8217;d connect with something&nbsp;like</p>
 <div class="highlight"><pre><span></span><code><span class="err">var socket = io.connect(</span>
 <span class="err">    &#39;http://&#39; + document.domain + &#39;:&#39; + location.port + &#39;/chat&#39;</span>
@@ -142,7 +142,7 @@ for some reason the WebSocket connection fails (either if the browser is old
 or because of strict firewalls).  This happens because long polling uses normal
 <span class="caps">HTTP</span> requests and should be done over the default port, rather than the
 OpenShift-specific&nbsp;one.</p>
-<h2>Making things&nbsp;work</h2>
+<h2 id="making-things-work">Making things work<a class="headerlink" href="#making-things-work" title="Permanent link">&para;</a></h2>
 <p>My first thought was to work around it by <a href="http://stackoverflow.com/questions/8588689/node-js-socket-io-client-connect-failed-event">manually implementing the fallback
 client-side</a>.  This, surprisingly, failed: it turns out that
 SocketIO 0.9.16 first attempts a handshake to find out what transports the

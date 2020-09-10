@@ -102,7 +102,7 @@ var katexMath = (function () {
 many different application, that it is often very helpful to be able to
 extend its <span class="caps">API</span> to better integrate with your code. With scikits.learn,
 this is extremely easy to do using inheritance and using the pipeline&nbsp;module.</p>
-<h2>The&nbsp;problem</h2>
+<h2 id="the-problem">The problem<a class="headerlink" href="#the-problem" title="Permanent link">&para;</a></h2>
 <p>While continuing the <a href="http://venefrombucharest.wordpress.com/2011/04/14/a-look-at-romanian-verbs-with-scikits-learn/" title="A look at Romanian verbs with scikits-learn">morphophonetic analysis of Romanian verbal
 forms</a>, I found the need to streamline my workflow to allow for more
 complex models. There were a lot of free model parameters and it would
@@ -124,7 +124,7 @@ thing that needed to be adjusted: by default, its analyzer uses a
 preprocessor that strips accented characters, and I had strong reasons
 to believe that Romanian diacritics are very relevant for the learning
 task. So, I needed to extend the&nbsp;vectorizer.</p>
-<h2>The&nbsp;solution</h2>
+<h2 id="the-solution">The solution<a class="headerlink" href="#the-solution" title="Permanent link">&para;</a></h2>
 <p>The code I came up with is <a href="https://github.com/vene/misc-nlp/blob/master/conjugation/grid_search_example/preprocess.py">here</a>. I tried to build a class that would
 be as specific to my needs as possible. It is important to retain the
 full <span class="caps">API</span>, however. Note the <code>y=None</code> parameter in the fit functions. Its
@@ -163,7 +163,7 @@ indeed, using binary features instead of occurence counts improves
 performance. I also found that the optimal n-gram length is 5, but the
 gain is not that big when compared to a length of 3, which generates a
 lot less&nbsp;features.</p>
-<h2>Conclusions</h2>
+<h2 id="conclusions">Conclusions<a class="headerlink" href="#conclusions" title="Permanent link">&para;</a></h2>
 <p>I hope that I managed to show the strength of a well-designed <span class="caps">API</span>.
 Because of it, it would be very easy to add, for example, an extra layer
 for dimensionality reduction before classification. It would only

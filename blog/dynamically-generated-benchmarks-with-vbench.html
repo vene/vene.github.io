@@ -101,7 +101,7 @@ var katexMath = (function () {
       <p>To construct a <code>vbench</code> benchmark you need a setup string and a code
 string. The constructor&#8217;s signature&nbsp;is:  </p>
 <p><code>Benchmark(self, code, setup, ncalls=None, repeat=3, cleanup=None, name=None, description=None, start_date=None, logy=False)</code>.</p>
-<h2>Why generate benchmarks&nbsp;dynamically?</h2>
+<h2 id="why-generate-benchmarks-dynamically">Why generate benchmarks dynamically?<a class="headerlink" href="#why-generate-benchmarks-dynamically" title="Permanent link">&para;</a></h2>
 <p>For most <code>scikit-learn</code> purposes, the <code>code</code> string will be very close
 to <code>"algorithm.fit(X, y)"</code>, <code>"algorithm.transform(X)"</code> or
 <code>"algorithm.predict(X)"</code>. We can generate a lot of benchmarks by
@@ -139,7 +139,7 @@ the benchmarks detectable. This is because of the way the vbench suite
 gathers benchmarks. In <code>__init__.py</code> we have to do
 <code>from linear_regression import *</code>. With a small update to the detection
 method, we could replace the hacky part with a public lists of Benchmark&nbsp;objects.</p>
-<h2>Exposed&nbsp;issues</h2>
+<h2 id="exposed-issues">Exposed issues<a class="headerlink" href="#exposed-issues" title="Permanent link">&para;</a></h2>
 <p>While working on this, after my first attempt, I was surprised to see
 that there were no results added to the database, and output plots were
 empty. It turns out that the generated benchmarks weren&#8217;t running, even

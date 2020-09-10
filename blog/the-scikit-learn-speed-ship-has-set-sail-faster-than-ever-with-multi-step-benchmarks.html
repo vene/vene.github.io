@@ -107,7 +107,7 @@ official scikit-learn&nbsp;page.</p>
 changeset. We made running the benchmark suite tons simpler by adding a
 friendly Makefile. You can read more about its usage in the guide. But
 by far, our coolest new toy&nbsp;is:</p>
-<h2>Multi-step&nbsp;benchmarks</h2>
+<h2 id="multi-step-benchmarks">Multi-step benchmarks<a class="headerlink" href="#multi-step-benchmarks" title="Permanent link">&para;</a></h2>
 <p>A standard vbench benchmark has three units of code, represented as
 strings: <code>code</code>, <code>setup</code> and <code>cleanup</code>. With the original timeit-based
 benchmarks, this means that for every run, the setup would be executed
@@ -136,7 +136,7 @@ when fitting, we also get the transformed $latex X $ for&nbsp;free.</p>
 <li><code>setup =</code>standard, <code>code = obj.fit_transform(X)</code></li>
 <li><code>setup =</code>standard<code>+ obj.fit(X)</code>, <code>code = obj.transform(X)</code></li>
 </ul>
-<h2>How much time were we&nbsp;wasting?</h2>
+<h2 id="how-much-time-were-we-wasting">How much time were we wasting?<a class="headerlink" href="#how-much-time-were-we-wasting" title="Permanent link">&para;</a></h2>
 <p>Let&#8217;s say it takes 10 seconds. For every benchmark, we time the code by
 running it 3 times. We run it once more to measure memory usage, once
 more for <code>cProfile</code> and one last time for <code>line_profiler</code>. This is a
@@ -146,7 +146,7 @@ fit before predicting, we do it 12 extra times. If a fit takes 5
 seconds, this means one minute wasted on benchmarking just one
 estimator. <em>Wouldn&#8217;t it be nice to <code>fit</code>, <code>fit_transform</code> and
 <code>transform</code> in a&nbsp;sequence?</em></p>
-<h2>Behind the&nbsp;scenes</h2>
+<h2 id="behind-the-scenes">Behind the scenes<a class="headerlink" href="#behind-the-scenes" title="Permanent link">&para;</a></h2>
 <p>We made the <code>PythonBenchmark code</code> parameter also support getting a
 sequence of strings, instead of just a string. On the database side,
 every benchmark result entry gets an extra component in the primary key,
