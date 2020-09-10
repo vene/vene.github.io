@@ -38,6 +38,10 @@ Summary: test
 .constr{ fill: black };
 </style>
 
+$$
+\newcommand\pfrac[2]{\frac{\partial #1}{\partial #2}}
+\newcommand\DP[2]{\left\langle #1, #2 \right\rangle}
+$$
 
 When training machine learning models, and deep networks in particular,
 we typically use gradient-based methods. But if we require the weights to
@@ -48,21 +52,20 @@ In this post, we will explore these connections and demonstrate them in PyTorch 
 
 # Why constraints are challenging 
 
-In many machine learning models, we fit a model to data by minimizing some
-error-like objective,
+In machine learning, we fit models to data by minimizing an objective,
 
 $$\min_{x \in \mathcal{X}} f(x). \tag{OPT}$$
 
-Here, $x$ denote the neural network weights, the parameters to be learned. They
-typically take values in $\mathcal{X}=\reals$, and we train networks by
-by choosing an initial configuration $x^{(0)}$ and successively applying
+Here, $x$ denotes the parameters to be learned, for instance, the neural network weights.
+They typically take values in $\mathcal{X}=\reals$, and we train networks by
+choosing an initial configuration $x^{(0)}$ and successively applying
 updates of the form:
 
 $$
 x^{(t+1)} \leftarrow x^{(t)} - \alpha^{(t)} g(x^{(t)}).
 $$
 
-If $f$ is convex and differentiable and $g = Df$ is the gradient of $f$, this is
+If $f$ is convex and differentiable and $g(x) = \nabla f(x)$ is the gradient of $f,$ this is
 the acclaimed *gradient descent* method. In deep learning, we typically get
 stochastic, non-descent methods that nonetheless perform well and are efficient.
 Here, we will focus on a "nice", differentiable $f$, and we will see that even
@@ -239,8 +242,16 @@ Let us visualize this problem for the specific case of
 the unit square $\mathcal{X} = [0,1] \times [0,1] \subset \reals^2$,
 with $x_0 = (1.5, .1)$, and 
 $Q = \left(\begin{smallmatrix}3 & 2 \\\\ 2 & 3 \end{smallmatrix}\right)$.
-The constrained minimum $x^\star$ is not the same as the
-result of clipping the unconstrained minimum to the box.[ref]
+If not for the constraints, since $Q$ is positive definite, the minimum
+would be $x^\star_\text{unc} = x_0$.[ref]Because $f(x_0)=0,$ and positive
+definiteness guarantess $f(x) > 0$ for any $x \neq x_0$.[/ref]
+But a contour plot shows that the constrained minimum $x^\star$ is not the same as the
+result of clipping the unconstrained minimum to the box.
+
+<img alt="quadratic landscape" src="/images/mirror_quad_landscape.png"></img>
+
+This means that, in general, we cannot simply ignore the constraints and apply
+them at the end, but we need to bake them into our optimization strategy.[ref]
 There is an important special case where (QP) can be solved exactly: the
 case $Q = I$. In this case, the problem becomes
 $\arg\min_{x \in \mathcal{X}} \| x - x_0 \|^2_2,$
@@ -248,10 +259,7 @@ which is known as the *euclidean projection* of $x_0$ onto $\mathcal{X}$.
 If $\mathcal{X}$ are box constraints, the projection decomposes into a series of
 independent 1-d projections, which we've seen can be solved by
 clipping.[/ref]
-This means that, in general, we cannot simply ignore the constraints and apply
-them at the end, but we need to bake them into our optimization strategy.
 
-<img alt="quadratic landscape" src="/images/mirror_quad_landscape.png"></img>
 
 ## Ways to deal with constraints.
 
@@ -292,4 +300,259 @@ leading to a possibly less stable or too aggressive trajectory.
 
 In this post, we will explore the connection between the two by studying *mirror
 descent* and its information-geometric interpretation as natural gradient
-in a dual space. But first, let's implement and test out our main ideas so far.
+in a dual space. But first, let's explore our two initial ideas.
+
+### Reparametrization.
+
+Instead of optimizing w.r.t. the constrained variables $x$, we introduce an
+underlying variable $u$, such that $x_i = \sigma(u_i)$.[ref]This seems to be the
+more common method among neural network practitioners; one
+place where it shows up often is *neural variational inference*, where we would
+constrain the variance of a learned distribution using a *softplus*
+function.[/ref]
+In our case, we use a logistic sigmoid reparametrization to get the
+unconstrained non-convex problem
+
+$$ \min_{u \in \reals^2} f(\sigma(u)), $$
+
+where $\sigma$ is applied element-wise.  Let's first implement our function
+$f(x) = \frac{1}{2} (x - x_0)^\top Q (x - x_0)$:
+
+```python
+
+def f(x):
+    z = x - x_star
+    Qz = z @ Q
+    return .5 * torch.einsum("ij,ij,i", Qz, z)
+```
+
+When reparametrizing, $x$ is no longer a learned parameter, but a function of
+the learned parameter $u$. The chain rule gives
+
+<!--%$$ D_u f(\sigma(u)) = {D_x}f(\sigma(u)) \cdot D_u\sigma(u),$$-->
+
+$$ \pfrac{}{u} f(\sigma(u)) = \pfrac{f(x)}{x}\biggr\rvert_{x=\sigma(u)} \pfrac{\sigma(u)}{u} $$
+
+<!--
+$$ \pfrac{}{u} f(\sigma(u)) = \pfrac{f(\sigma(u))}{x} \pfrac{\sigma(u)}{u} $$
+
+$$ \nabla_{u} f(\sigma(u)) = \nabla_x f(\sigma(u))  \pfrac{\sigma(u)}{u} $$
+
+$$ \nabla_{u} f(\sigma(u)) = \nabla_x f(\sigma(u))  J_\sigma(u) $$
+-->
+
+but PyTorch autodiff does this automatically for us.
+We may now write a minimalist gradient-based optimization loop:
+
+```python
+
+def optim_reparam(u_init, lr, max_iter=100000):
+    u = u_init.clone()
+    for i in range(max_iter):
+        u_ = u.clone().requires_grad_()
+        f(torch.sigmoid(u_)).backward()  # compute grad wrt u_
+        u -= lr * grad  # take gradient step
+    return u
+```
+
+With a very small learning rate, we get a glimpse into the dynamics of this
+method. For comparison, we include the unconstrained trajectory.
+
+<img alt="quadratic landscape" src="/images/mirror_quad_lr0.010_reparam.png"></img>
+
+In practice, we would use a much larger learning rate to accelerate
+optimization:
+
+<img alt="quadratic landscape" src="/images/mirror_quad_lr0.200_reparam.png"></img>
+
+We can see that even with a large learning rate, the reparametrization method
+takes much smaller steps, especially as it gets closer to the boundary of the
+domain. At any point $u$, recall the reparametrized gradient:
+
+$$ \pfrac{}{u} f(\sigma(u)) = \pfrac{f(x)}{x}\biggr\rvert_{x=\sigma(u)} \pfrac{\sigma(u)}{u}. $$
+
+This is the unconstrained gradient at $x=\sigma(u)$, rescaled by the Jacobian of $\sigma$.
+Since $\sigma$ acts elementwise, its Jacobian is a diagonal matrix, with
+$\pfrac{\sigma(u)_i}{u_i}  = \sigma(u_i)(1 - \sigma(u_i)) = x_i (1 - x_i).$ We can thus see
+that as $x_i$ approaches $0$ or $1$, the reparametrization rescales the
+gradient **severely**, bringing the effective step size toward 0. Remember, this
+happens *automatically* via the chain rule! But, although slowly, and along a
+slightly winding trajectory, our method finds the right answer.
+
+### Projected Gradient
+
+The projected gradient method is particularly well suited to handling ``simple'' constraints
+like the box case, but, unlike reparametrization, requires a different kind of
+expertise to get running in the case of complicated constraints.
+[ref]PG is very popular in convex optimization, useful both for theory and for
+practice. However, it does not seem to be so widely used in the pure neural
+network world, perhaps mostly because it is not directly supported by the
+built-in optimizers in major frameworks.[/ref]
+For box constraints, the projection can be computed efficiently, since
+$\big[\!\operatorname{Proj}_{[0,1]^d}(x)\big]_i = \operatorname{clip}_{[0,1]}(x_i).$
+The implementation follows:
+
+```python
+
+def optim_pg(x_init, lr, max_iter=100000):
+    x = x_init.clone()
+    for i in range(max_iter):
+        x_ = x.clone().requires_grad_()
+        f(x_).backward()  # compute grad wrt x_
+        x -= lr * grad  # take gradient step
+        x = torch.clamp(x, min=0, max=1)  # project
+    return x
+```
+
+<img alt="quadratic landscape" src="/images/mirror_quad_lr0.010_pg.png"></img>
+
+It looks like the projected gradient method tends to follow the unconstrained
+trajectory while sticking to the boundary of the domain. Of course, with larger
+steps, the differences become more pronounced.
+
+<img alt="quadratic landscape" src="/images/mirror_quad_lr0.200_pg.png"></img>
+
+In this instance, PG is the clear winner: look how fast it makes progress. With
+less well-behaved and non-convex functions this need not be the case. So we are
+motivated to delve deeper and explore how PG and REP relate, despite seeming so
+different. 
+
+## Generalizing the projected gradient method with divergences
+In the projected gradient method, we take unconstrained steps, which might take
+us outside of $\mathcal{X}$, and then move the solution back to $\mathcal{X}$ by
+projection:
+
+$$ x^{(t+1)} \leftarrow \operatorname{Proj}_\mathcal{X}\big(x^{(t+0.5)}\big). $$
+
+Projection finds the point $x \in \mathcal{X}$ closest to $x^{(t+0.5)}$, i.e.,
+
+$$ \operatorname{Proj}_\mathcal{X}\big(x^{(t+0.5)}\big) = \argmin_{x \in \mathcal{X}} \| x - x^{(t+0.5)} \|. $$
+
+This update is motivated by a locally-linear approximation,
+
+$$ x^{(t+1)} \leftarrow \arg\min_{x \in \mathcal{X}}  \DP{\nabla f(x^{(t)})}{x} + \frac{1}{2\alpha_t}\|x - x^{(t)}\|^2. \tag{GD}
+$$
+
+??? note "Explanation"
+
+    Why does this update make sense, and where does it come from? We are trying to
+    minimize a function $f(x)$, but we don't know what it looks like globally: we only
+    have access to its value $f(x)$ and its gradient $\nabla f(x)$ at points $x$
+    that we may query one at a time. At any point $x_0$,
+    the first-order Taylor expansion is:
+
+    $$ f(x_0 + \delta) = f(x_0) + \DP{\nabla f(x_0)}{\delta} + o(\|\delta\|). $$
+
+    To get a linear approximation of $f$ we can plug in $\delta = x - x_0$:
+
+    $$ f(x) =  f(x_0) + \DP{\nabla f(x_0)}{x - x_0} + o(\|x - x_0\|). $$
+
+    So as long as $x$ is not too far from $x_0$, we have 
+
+    $$f(x) \approx \tilde{f}_{x_0}(x) \coloneqq f(x_0) + \DP{\nabla f(x_0)}{x - x_0}.$$
+
+    This affine approximation is much easier to
+    minimize, but it is only accurate locally, therefore, we use it iteratively,
+    taking a small step, then updating the approximation:
+
+    $$ 
+    x^{(t+1)} \leftarrow \arg\min_{x \in \mathcal{X}} \tilde f_{x^{(t)}}(x) + \frac{1}{2\alpha_t}\|x - x^{(t)}\|^2. 
+    $$
+
+    where the term on the right keeps us close to $x^{(t)}$ to ensure the
+    approximation is not too bad. Clearing up the constant terms from inside the
+    $\arg\min$ yields the desired expression.
+
+If $\mathcal{X}=\reals$, the problem (GD) can be solved by setting the gradient
+to 0, which recovers the gradient descent update. Otherwise, we get exactly the
+projected gradient update.
+
+??? note "Derivation"
+    
+    $$
+    \begin{aligned}
+     & \arg\min_{x \in \mathcal{X}} \DP{x}{\nabla f(x^{(t)})} + \frac{1}{2\alpha_t} \|x-x^{(t)}\|^2 \\
+    =& \arg\min_{x \in \mathcal{X}} \DP{x}{\nabla f(x^{(t)})} + \frac{1}{2\alpha_t} \|x\|^2 - \frac{1}{\alpha_t} \DP{x}{x^{(t)}} \\
+    =& \arg\min_{x \in \mathcal{X}} \alpha_t \DP{x}{\nabla f(x^{(t)})} + \frac{1}{2} \|x\|^2 - \DP{x}{x^{(t)}} \\
+    =& \arg\min_{x \in \mathcal{X}} \DP{x}{\underbrace{\alpha_t \nabla f(x^{(t)}) - x^{(t)}}_{-x^{(t+0.5)}}} + \frac{1}{2} \|x\|^2 \\
+    =& \arg\min_{x \in \mathcal{X}} \frac{1}{2} \| x - x^{(t+0.5)} \|^2 \textcolor{gray}{ - \frac{1}{2} \|x^{(t+0.5)}\|} \\
+    =& \operatorname{Proj}_{\mathcal{X}} (x^{(t+0.5)}).
+    \end{aligned}
+    $$
+
+
+The function $D(x, y) = \| x - y \|^2 = \sum_i (x_i - y_i)^2$ is the *squared Euclidean distance*.
+Here, geometry starts to come into play!  Euclidean geometry is
+convenient and comfortable for thinking about spaces like $\reals^d,$ but not
+all quantities are well characterized by it. Our case of variables constrained
+on $[0, 1]$ provide a good example: the difference between .50 and .51 seems
+like should not be the same as the difference between .98 and .99. A useful
+generalization of distances is provided by the Bregman divergence[ref]Formally,
+$\psi$ must be continuously differentiable and strictly convex.[/ref]
+
+$$ D_\Psi(x, y) = \Psi(x) - \Psi(y) - \DP{\nabla \Psi(y)}{x - y}, $$
+
+which induces the **mirror descent** algorithm,
+
+$$ x^{(t+1)} \leftarrow \arg\min_{x \in \mathcal{X}}  \DP{\nabla f(x^{(t)})}{x} + \frac{1}{\alpha_t}D_\psi(x, x^{(t)}). \tag{MD}
+$$
+
+which after derivation gives
+
+$$ x^{(t+1)} = \psi^{-1}(\psi(x^{(t)}) - \alpha_t \nabla f(x^{(t)})).
+$$
+
+where $\psi(x) \coloneqq \nabla \Psi(x)$. Let's make this more concrete.
+
+Notice that $D_{\| \cdot \|^2}$ is the squared Euclidean distance, which we've
+seen induces the projected gradient method, but now we can
+plug other interesting functions $\psi$ in order to alter the geometry.
+Values in $\mathcal{X}=[0,1]$ may be interpreted as *coin flip* probabilities:
+the higher, the more likely an event is to happen. An important property of a
+binary random variable is its entropy. If $x_i \in [0, 1]$ denotes the
+probability associated with coin $i$, the entropy is
+
+$$H(x_i) = -x_i \log x_i - (1 - x_i) \log (1 - x_i).$$
+
+We may extend this additively to vectors as $H(x) = \sum_i H(x_i)$.
+On $\mathcal{X}=[0, 1]$, entropy is continuously differentiable and strictly
+**concave**, maximized at $x=0.5$ and minimized at $x=0$ and $x=1$.[ref]$H(0.5) =
+\log 2,$<br>$H(0)=H(1)=0$.[/ref]
+Its gradient is 
+
+$$ (-h)(x) \coloneqq \nabla(-H)(x) = \log(x) - \log(1-x), $$
+
+an invertible function with inverse
+
+$$ (-h)^{-1}(u) = \sigma(u). $$
+
+<!--
+The entropy induces a Bregman divergence $D_{-H}$, which after some manipulation
+can be written as
+
+$$D_{-H}(x, y) = x \log \frac{x}{y} - (1-x) \log \frac{1-x}{1-y}. $$
+-->
+
+The mirror descent update induced by the negative entropy thus takes the (remarkable!) form
+
+$$ x^{(t+1)} = \sigma(\sigma^{-1}(x^{(t)}) - \alpha_t \nabla f(x^{(t)})). $$
+
+Things are beginning to clear up! We can think of the pair of inverse functions
+$(-h, \sigma)$ as maps between $[0, 1]^d$ and $\reals^d$. We will call these
+the **primal** and **dual** spaces, respectively. Mirror descent thus
+first moves into dual (unconstrained) space, performs an update there, and then moves
+back. Reparametrization rewrites the problem in dual coordinates and performs
+gradient descent: this is not the same, and the trajectories are quite
+different!
+
+<img alt="quadratic landscape" src="/images/mirror_quad_lr0.010_md.png"></img>
+
+With a larger step size, we see that mirror descent takes much larger steps than
+reparametrization does.
+
+<img alt="quadratic landscape" src="/images/mirror_quad_lr0.200_md.png"></img>
+
+Now that we figured out that we may think about the problem in primal or dual
+coordinates, we may also visualize the optimization trajectory in dual coordinates.
+
+<img alt="quadratic landscape" src="/images/quad_lr0.010_md.png"></img>
