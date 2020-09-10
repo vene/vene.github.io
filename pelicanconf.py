@@ -38,10 +38,12 @@ MARKDOWN = {
         'markdown.extensions.codehilite',
         'markdown.extensions.extra',
         'markdown.extensions.meta',
+        'markdown.extensions.toc',
         'pymdownx.arithmatex',
         'pymdownx.details'
     ],
     'extension_configs': {
+        'markdown.extensions.toc': {'permalink': True},
         'markdown.extensions.codehilite': {'css_class': 'highlight'},
         'pymdownx.arithmatex' : {
             'generic': True,
