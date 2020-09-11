@@ -52,7 +52,7 @@ In this post, we will explore these connections and demonstrate them in PyTorch 
 
 $$
 \newcommand\pfrac[2]{\frac{\partial #1}{\partial #2}}
-\newcommand\DP[2]{{#1}^\top#2}
+\newcommand\DP[2]{\left\langle #1, #2 \right\rangle}
 $$
 
 
@@ -64,22 +64,22 @@ $$\min_{x \in \mathcal{X}} f(x). \tag{OPT}$$
 
 Here, $x$ denotes the parameters to be learned, for instance, the neural network weights.
 They typically take values in $\mathcal{X}=\reals$, and we train networks by
-choosing an initial configuration $x^{(0)}$ and successively applying
-updates of the form:
+some variant of the *gradient* method: we choose an initial configuration $x^{(0)}$
+and successively applying updates of the form:
 
 $$
-x^{(t+1)} \leftarrow x^{(t)} - \alpha^{(t)} g(x^{(t)}).
+x^{(t+1)} \leftarrow x^{(t)} - \alpha^{(t)} \nabla f(x).
 $$
 
-If $f$ is convex and differentiable and $g(x) = \nabla f(x)$ is the gradient of $f,$ this is
-the acclaimed *gradient descent* method. In deep learning, we typically get
-stochastic, non-descent methods that nonetheless perform well and are efficient.
-Here, we will focus on a "nice", differentiable $f$, and we will see that even
-so, constraints quickly complicate things.
+In deep learning, we typically use stochastic flavors that
+nonetheless perform well and are efficient.  Here, we will focus on a "nice",
+differentiable $f$, and we will see that, even in this case, constraints quickly complicate
+things.
 
-For modeling reasons, we might want to impose **constraints** on some of the weights
+**Why constrain?**
+For modeling reasons, we might want to impose restrictions on some of the weights
 $x$.  Perhaps one of the parameter corresponds to the variance of a
-distribution, and thus it cannot be negative. Or perhaps a parameter denotes
+distribution, so it cannot be negative. Or perhaps a parameter denotes
 some sort of ``gate'', or mixture between two alternatives $xa_1 + (1-x)a_2$. 
 In this case, we would need to constrain $x \in [0, 1]$. This is often called a
 *box constraint* and it is one of the most friendly types of inequality
@@ -266,6 +266,38 @@ If $\mathcal{X}$ are box constraints, the projection decomposes into a series of
 independent 1-d projections, which we've seen can be solved by
 clipping.[/ref]
 
+As a warm up, let us implement our quadratic function
+$f(x) = \frac{1}{2} (x - x_0)^\top Q (x - x_0)$ in PyTorch, 
+as well as a minimal gradient descent from scratch.
+
+```python
+import torch
+
+torch.set_default_dtype(torch.double)
+
+x0 = torch.tensor([1.5, .1])
+Q = torch.tensor([[3.0, 2.0],
+                  [2.0, 3.0]])
+
+def f(x):
+    z = x - x0
+    Qz = z @ Q
+    return 0.5 * torch.sum(z * Qz, dim=1)
+
+
+def optim_grad(x_init, lr=.1, max_iter=100):
+    x = x_init.clone().requires_grad_()
+
+    for i in range(max_iter):
+        f(x).backward()
+        x.data -= lr * x.grad
+        x.grad.zero_()
+
+    return x
+```
+
+This procedure quickly converges to $x^\star_\text{unc} = (1.5, .1)$.
+
 
 # Ways to deal with constraints.
 
@@ -290,7 +322,7 @@ optimization.[/ref]
 
     $$
     \begin{aligned}
-    x^{(t+0.5)} &\leftarrow x^{(t)} - \alpha^{(t)} g(x^{(t)}) \\
+    x^{(t+0.5)} &\leftarrow x^{(t)} - \alpha^{(t)} \nabla f(x^{(t)}) \\
     x^{(t+1)} &\leftarrow \operatorname{Proj}_\mathcal{X}\big(x^{(t+0.5)}\big)
     \\
     \end{aligned}
@@ -321,43 +353,21 @@ unconstrained non-convex problem
 
 $$ \min_{u \in \reals^2} f(\sigma(u)), $$
 
-where $\sigma$ is applied element-wise.  Let's first implement our function
-$f(x) = \frac{1}{2} (x - x_0)^\top Q (x - x_0)$:
-
-```python
-
-def f(x):
-    z = x - x_star
-    Qz = z @ Q
-    return .5 * torch.einsum("ij,ij,i", Qz, z)
-```
-
+where $\sigma$ is applied element-wise.  
 When reparametrizing, $x$ is no longer a learned parameter, but a function of
-the learned parameter $u$. The chain rule gives
-
-<!--%$$ D_u f(\sigma(u)) = {D_x}f(\sigma(u)) \cdot D_u\sigma(u),$$-->
-
-$$ \pfrac{}{u} f(\sigma(u)) = \pfrac{f(x)}{x}\biggr\rvert_{x=\sigma(u)} \pfrac{\sigma(u)}{u} $$
-
-<!--
-$$ \pfrac{}{u} f(\sigma(u)) = \pfrac{f(\sigma(u))}{x} \pfrac{\sigma(u)}{u} $$
-
-$$ \nabla_{u} f(\sigma(u)) = \nabla_x f(\sigma(u))  \pfrac{\sigma(u)}{u} $$
-
-$$ \nabla_{u} f(\sigma(u)) = \nabla_x f(\sigma(u))  J_\sigma(u) $$
--->
-
-but PyTorch autodiff does this automatically for us.
-We may now write a minimalist gradient-based optimization loop:
+the learned parameter $u$. The gradient with respect to $u$ can be handled
+automatically by PyTorch autodiff:
 
 ```python
 
-def optim_reparam(u_init, lr, max_iter=100000):
-    u = u_init.clone()
+def optim_reparam(u_init, lr=.1, max_iter=100000):
+    u = u_init.clone().requires_grad_()
+
     for i in range(max_iter):
-        u_ = u.clone().requires_grad_()
-        f(torch.sigmoid(u_)).backward()  # compute grad wrt u_
-        u -= lr * grad  # take gradient step
+        f(torch.sigmoid(u)).backward()  # compute grad wrt u
+        u.data -= lr * u.grad  # take gradient step
+        u.grad.zero_()
+
     return u
 ```
 
@@ -373,7 +383,8 @@ optimization:
 
 We can see that even with a large learning rate, the reparametrization method
 takes much smaller steps, especially as it gets closer to the boundary of the
-domain. At any point $u$, recall the reparametrized gradient:
+domain. At any point $u$, the reparametrized gradient can be written using the
+chain rule:
 
 $$ \pfrac{}{u} f(\sigma(u)) = \pfrac{f(x)}{x}\biggr\rvert_{x=\sigma(u)} \pfrac{\sigma(u)}{u}. $$
 
@@ -389,8 +400,8 @@ slightly winding trajectory, our method finds the right answer.
 
 The projected gradient method is particularly well suited to handling ``simple'' constraints
 like the box case, but, unlike reparametrization, requires a different kind of
-expertise to get running in the case of complicated constraints.
-[ref]PG is very popular in convex optimization, useful both for theory and for
+expertise to get running in the case of complicated constraints.[ref]PG
+is very popular in convex optimization, useful both for theory and for
 practice. However, it does not seem to be so widely used in the pure neural
 network world, perhaps mostly because it is not directly supported by the
 built-in optimizers in major frameworks.[/ref]
@@ -400,13 +411,15 @@ The implementation follows:
 
 ```python
 
-def optim_pg(x_init, lr, max_iter=100000):
-    x = x_init.clone()
+def optim_pg(x_init, lr=.1, max_iter=100):
+    x = x_init.clone().requires_grad_()
+
     for i in range(max_iter):
-        x_ = x.clone().requires_grad_()
-        f(x_).backward()  # compute grad wrt x_
-        x -= lr * grad  # take gradient step
-        x = torch.clamp(x, min=0, max=1)  # project
+        f(x).backward() 
+        x.data -= lr * grad  # take gradient step
+        x.data = torch.clamp(x.data, min=0, max=1)  # project
+        x.grad.zero_()
+
     return x
 ```
 
@@ -437,7 +450,7 @@ $$ \operatorname{Proj}_\mathcal{X}\big(x^{(t+0.5)}\big) = \argmin_{x \in \mathca
 This update can be interpreted as approximately minimizing a regularized linearization of
 $f,$
 
-$$ x^{(t+1)} \leftarrow \arg\min_{x \in \mathcal{X}}  \DP{\nabla f(x^{(t)})}{x} + \frac{1}{2\alpha_t}\|x - x^{(t)}\|^2. \tag{GD}
+$$ x^{(t+1)} \leftarrow \arg\min_{x \in \mathcal{X}}  \DP{\nabla f(x^{(t)})}{x} + \frac{1}{2\alpha_t}\|x - x^{(t)}\|^2.
 $$
 
 ??? note "Explanation"
@@ -470,9 +483,10 @@ $$
     approximation is not too bad. Clearing up the constant terms from inside the
     $\arg\min$ yields the desired expression.
 
-If $\mathcal{X}=\reals$, the problem (GD) can be solved by setting the gradient
-to 0, which recovers the gradient descent update. Otherwise, we get exactly the
-projected gradient update.
+Manipulating this minimization reveals exactly the projected gradient update,
+
+$$ x^{(t+1)} \leftarrow \operatorname{Proj}_{\mathcal{X}}\big(
+x^{(t)} - \alpha_t \nabla f(x^{(t)})\big).$$
 
 ??? note "Derivation"
     
@@ -487,15 +501,15 @@ projected gradient update.
     \end{aligned}
     $$
 
-
-The function $D(x, y) = \| x - y \|^2 = \sum_i (x_i - y_i)^2$ is the *squared Euclidean distance*.
-Here, geometry starts to come into play!  Euclidean geometry is
+Now, let's pay special attention to 
+the function $D(x, y) = \| x - y \|^2 = \sum_i (x_i - y_i)^2$, the *squared euclidean distance*.
+We employ this function to ensure that each update stays close to $x^{(t)}$,
+because the linear approximation is not good if we go to far. But this is not
+the only good measure of closeness:
+here, geometry enters the stage!  Euclidean geometry is
 convenient and comfortable for thinking about spaces like $\reals^d,$ but
 it is not always the best model.
-<!--all quantities are well characterized by it.
-Our case of variables constrained
-on $[0, 1]$ provide a good example: the difference between .50 and .51 seems
-like should not be the same as the difference between .98 and .99.-->
+
 The **Bregman divergence** provides a convenient generalization of the squared
 euclidean distance: given strictly convex, twice-differentiable $\Psi$,
 
@@ -560,7 +574,7 @@ can be written as
 $$D_{-H}(x, y) = x \log \frac{x}{y} - (1-x) \log \frac{1-x}{1-y}. $$
 -->
 
-o, written in terms of the familiar sigmoid, the mirror descent update induced by the negative entropy takes the (remarkable!) form
+So, written in terms of the familiar sigmoid, the mirror descent update induced by the negative entropy takes the (remarkable!) form
 
 $$ x^{(t+1)} = \sigma(\sigma^{-1}(x^{(t)}) - \alpha_t \nabla f(x^{(t)})). $$
 
