@@ -53,7 +53,12 @@ we typically use gradient-based methods. But if we require the weights to
 satisfy some constraints, things quickly get more&nbsp;complicated.</p>
 <p>Some of the most popular strategies for handling constraints, while seemingly
 very different at first sight, are deeply connected. In this post, we will
-explore these connections and demonstrate them in PyTorch on a friendly&nbsp;example. </p>
+explore these connections and demonstrate them in&nbsp;PyTorch.</p>
+<p>In particular, we show that mirror descent is equivalent to
+gradient descent on a reparametrized objective with straight-through gradients: 
+replacing a constrained variable <span class="arithmatex">\(x\)</span>
+with <span class="arithmatex">\(\sigma(u)\)</span>, but treating <span class="arithmatex">\(\sigma\)</span> as if it were the identity in the
+backward&nbsp;pass.</p>
 <p><strong>Outline.</strong> </p>
 <div class="toc">
 <ul>
@@ -534,6 +539,7 @@ binary random variable is its entropy. If <span class="arithmatex">\(x_i \in [0,
 probability associated with coin <span class="arithmatex">\(i\)</span>, the entropy&nbsp;is</p>
 <div class="arithmatex">\[H(x_i) = -x_i \log x_i - (1 - x_i) \log (1 - x_i).\]</div>
 <p>We may extend this additively to vectors as <span class="arithmatex">\(H(x) = \sum_i H(x_i)\)</span>.
+This is sometimes called the Fermi-Dirac entropy.
 On <span class="arithmatex">\(\mathcal{X}=[0, 1]\)</span>, entropy is continuously differentiable and strictly
 <strong>concave</strong>, maximized at <span class="arithmatex">\(x=0.5\)</span> and minimized at <span class="arithmatex">\(x=0\)</span> and <span class="arithmatex">\(x=1\)</span>.<label for="sn-10" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-10" class="margin-toggle"/><span class="sidenote"><span class="arithmatex">\(H(0.5) =
 \log 2,\)</span><br><span class="arithmatex">\(H(0)=H(1)=0\)</span>.</span> </p>
@@ -654,7 +660,16 @@ none other&nbsp;than</p>
 <p>so natural gradient cancels out the Jacobian of <span class="arithmatex">\(\phi\)</span> in the chain rule!
 In our case, this is as if we used a sigmoid nonlinearity that acts as the
 identity in the backward pass! This suggests an alternative implementation,
-reminiscent of <em>straight through</em>&nbsp;tricks:</p>
+reminiscent of <em>straight-through</em> tricks: we use a reparametrization function
+<span class="arithmatex">\(\sigma\)</span> that acts as a sigmoid in the forward pass, but acts as if it were the
+identity function in the backward pass.<label for="sn-14" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-14" class="margin-toggle"/><span class="sidenote">
+Such &#8220;straight-through&#8221; heuristics are very popular for dealing with
+stochastic or piecewise-constant functions (like <em>argmax</em> or <em>floor</em> functions.)
+To my knowledge, the idea was introduced by G. Hinton in the Neural Networks for
+Machine Learning online lectures in 2012. For a detailed treatment, see:
+Y. Bengio, N. Léonard, A Courville. 2013. 
+Estimating or Propagating Gradients Through Stochastic Neurons for Conditional Computation
+<a href="https://arxiv.org/abs/1308.3432">arxiv 1308.3432</a>&nbsp;</span></p>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">SigmoidStraightThrough</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">autograd</span><span class="o">.</span><span class="n">Function</span><span class="p">):</span>
 
     <span class="nd">@staticmethod</span>
@@ -707,14 +722,14 @@ real tasks. But this was not the main&nbsp;point&#8212;</p>
 optimization and its connections to geometry. 
 Geometric insights have been key to advances in learning over constrained spaces of
 matrices, such as symmetric, low-rank, orthonormal, s.p.d. matrices, etc.
-<label for="sn-14" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-14" class="margin-toggle"/><span class="sidenote">
+<label for="sn-15" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-15" class="margin-toggle"/><span class="sidenote">
 P.-A. Absil, R. Mahoney, and Rodolphe Sepulchre. 2008.
 <a href="https://press.princeton.edu/absil">Optimization Algorithms on Matrix
 Manifolds</a>.
 Princeton University Press. <span class="caps">ISBN</span> 978-0-691-13298-3
 </span> 
 Recently, the duality between mirror descent and natural gradient has been used
-to derive powerful algorithms for minimax problems.<label for="sn-15" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-15" class="margin-toggle"/><span class="sidenote">
+to derive powerful algorithms for minimax problems.<label for="sn-16" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-16" class="margin-toggle"/><span class="sidenote">
 F. Schäfer, A. Anandkumar, H. Owhadi. 2020.
 Competitive Mirror Descent.
 <a href="https://arxiv.org/abs/2006.10179">arxiv:2006.10179</a>.&nbsp;</span></p>
@@ -723,7 +738,7 @@ Competitive Mirror Descent.
 talk</a> at the 
 <span class="caps">IAS</span> Seminar on Theoretical Machine Learning. Before this talk, I had no idea
 about anything in the second part of this post.
-Thanks to Caio Corro for feedback on the blog post.
+Thanks to Mathieu Blondel and Caio Corro for feedback on the blog post.
 Blogging is work, so I acknowledge my funding from the European Research Council
 StG DeepSPIN 758969 and Fundação para a Ciência e Tecnologia contract <span class="caps">UIDB</span>/50008/2020. </p>
     </div><!-- /.entry-content -->
