@@ -1,17 +1,21 @@
 Title: Optimizing with constraints: <br>reparametrization and geometry.
-Date: 2020-08-01
+Date: 2020-09-11
 Author: vene
-Category: presentation 
+Category: optimization 
 Slug: mirror-descent
 Status: draft
-Summary: test
+Summary:  Gradient methods are popular for training machine learning models.
+    But if we require the weights to satisfy some constraints, things quickly get more complicated.
+    Popular strategies for handling constraints, while seemingly different, are
+    in fact deeply connected! We explore this with code samples.
 
 When training machine learning models, and deep networks in particular,
 we typically use gradient-based methods. But if we require the weights to
 satisfy some constraints, things quickly get more complicated.
 
-I've recently learned that a few ways for handling constraints are deeply connected.
-In this post, we will explore these connections and demonstrate them in PyTorch on a friendly example. 
+Some of the most popular strategies for handling constraints, while seemingly
+very different at first sight, are deeply connected. In this post, we will
+explore these connections and demonstrate them in PyTorch on a friendly example. 
 
 **Outline.** 
 
@@ -72,8 +76,9 @@ x^{(t+1)} \leftarrow x^{(t)} - \alpha^{(t)} \nabla f(x).
 $$
 
 In deep learning, we typically use stochastic flavors that
-nonetheless perform well and are efficient.  Here, we will focus on a "nice",
-differentiable $f$, and we will see that, even in this case, constraints quickly complicate
+nonetheless perform well and are efficient.  Here, we will focus on a relatively
+nice example: a convex quadratic function $f$.
+We will see that, even in this case, constraints quickly complicate
 things.
 
 **Why constrain?**
@@ -134,7 +139,9 @@ $$
 
     The case $ x^\star_\text{unc} > b $ follows similarly.
 
-The following animation might convince you that this is true:
+The following interactive demo might convince you that this is true. We show the
+1-d function $f(x) = (x - x_0)^2 / 2$ and its minimizer constrained to $[0, 1]$.
+Drag the slider to change the location of the unconstrained minimizer $x_0$.
 
   <div id="plotdiv">
   <svg id="onedimplot" preserveAspectRatio="xMinYMin meet" viewBox="0 0 550 150"></svg> <br />
@@ -454,10 +461,10 @@ $$ x^{(t+1)} \leftarrow \operatorname{Proj}_\mathcal{X}\big(x^{(t+0.5)}\big). $$
 
 Projection finds the point $x \in \mathcal{X}$ closest to $x^{(t+0.5)}$, i.e.,
 
-$$ \operatorname{Proj}_\mathcal{X}\big(x^{(t+0.5)}\big) = \argmin_{x \in \mathcal{X}} \| x - x^{(t+0.5)} \|. $$
+$$ \operatorname{Proj}_\mathcal{X}\big(x^{(t+0.5)}\big) \coloneqq \argmin_{x \in \mathcal{X}} \| x - x^{(t+0.5)} \|^2. $$
 
-This update can be interpreted as approximately minimizing a regularized linearization of
-$f,$
+The projected gradient update can be interpreted as minimizing a regularized linearization of
+$f$ around the current iterate,
 
 $$ x^{(t+1)} \leftarrow \arg\min_{x \in \mathcal{X}}  \DP{\nabla f(x^{(t)})}{x} + 
 {\frac{1}{2\alpha_t}\|x - x^{(t)}\|^2}.
@@ -493,7 +500,7 @@ $$
     approximation is not too bad. Clearing up the constant terms from inside the
     $\arg\min$ yields the desired expression.
 
-Manipulating this minimization reveals exactly the projected gradient update,
+Rearranging the terms reveals exactly the projected gradient update,
 
 $$ x^{(t+1)} \leftarrow \operatorname{Proj}_{\mathcal{X}}\big(
 x^{(t)} - \alpha_t \nabla f(x^{(t)})\big).$$
@@ -520,8 +527,15 @@ here, geometry enters the stage!  Euclidean geometry is
 convenient and comfortable for thinking about spaces like $\reals^d,$ but
 it is not always the best model.
 
-**Bregman divergences** provide a convenient generalization of the squared
-Euclidean distance: given strictly convex, twice-differentiable $\Psi$,
+**Bregman divergences**
+provide a convenient generalization of the squared
+Euclidean distance:[ref]
+Divergences measures of dissimilarity between objects, with weaker requirements
+than distance functions: simply that $D(x,y) \geq 0$ and $D(x,y)=0$ iff. $x =
+y$. [Bregman divergences](https://en.wikipedia.org/wiki/Bregman_divergence) 
+are an important class of divergences. They are convex in the first argument, but not the second.
+[/ref]
+given strictly convex, twice-differentiable $\Psi$,
 
 $$ D_\Psi(x, y) \coloneqq \Psi(x) - \Psi(y) - \DP{\nabla \Psi(y)}{x - y}. $$
 
@@ -725,7 +739,7 @@ $$ [\nabla^2\Phi(u)]^{-1} \nabla_u f(\phi(u)) =
 {\pfrac{f(x)}{x}\biggr\rvert_{x=\phi(u)}}  $$
 
 so natural gradient cancels out the Jacobian of $\phi$ in the chain rule!
-In our case, this is as if we use a sigmoid nonlinearity that acts as the
+In our case, this is as if we used a sigmoid nonlinearity that acts as the
 identity in the backward pass! This suggests an alternative implementation,
 reminiscent of *straight through* tricks:
 
@@ -761,11 +775,11 @@ def optim_rep_natural_st(u_init, lr=.1, max_iter=100):
 
 With this `sigmoid_straight_through` nonlinearity, we can now use mirror descent
 / natural gradient to learn constrained parameters without any changes to the
-optimizer.  This strategy is aware of the geometry of the dual space
-$(\mathcal{U}, \nabla^2\Phi)$ and thus avoids taking extra small steps while
-still ensuring that all the iterates remain feasible.
+optimizer, and with improved numerical stability.  This strategy is aware of the
+geometry of the dual space $(\mathcal{U}, \nabla^2\Phi)$ and thus avoids taking
+extra small steps while still ensuring that all the iterates remain feasible.
 
-# Conclusions
+# Conclusions.
 
 We have explored the two most popular strategies for dealing with simple
 constraints: reparametrization and projected gradient optimization. We have
