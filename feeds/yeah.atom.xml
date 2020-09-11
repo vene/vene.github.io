@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Vlad Niculae - yeah</title><link href="//vene.ro/" rel="alternate"></link><link href="//vene.ro/feeds/yeah.atom.xml" rel="self"></link><id>//vene.ro/</id><updated>2010-10-04T18:40:00+02:00</updated><entry><title>My super title</title><link href="//vene.ro/blog/my-super-post.html" rel="alternate"></link><published>2010-10-03T10:20:00+02:00</published><updated>2010-10-04T18:40:00+02:00</updated><author><name>Vlad Niculae</name></author><id>tag:vene.ro,2010-10-03:/blog/my-super-post.html</id><summary type="html">&lt;p class="first last"&gt;Short version for index and&amp;nbsp;feeds&lt;/p&gt;
-</summary><content type="html">&lt;p&gt;can i just write &lt;span class="formula"&gt;2 +&amp;nbsp;2&lt;/span&gt;&lt;/p&gt;
-</content><category term="yeah"></category><category term="thats"></category><category term="awesome"></category></entry></feed>

@@ -63,7 +63,8 @@ In this post, we will explore these connections and demonstrate them in PyTorch 
 </ul>
 </li>
 <li><a href="#generalizing-the-projected-gradient-method-with-divergences">Generalizing the projected gradient method with&nbsp;divergences.</a></li>
-<li><a href="#duality-between-mirror-descent-and-natural-gradient">Duality between mirror descent and natural&nbsp;gradient.</a></li>
+<li><a href="#duality-between-mirror-descent-and-naturalgradient">Duality between mirror descent and&nbsp;natural&nbsp;gradient.</a></li>
+<li><a href="#conclusions">Conclusions</a></li>
 <li><a href="#acknowledgements">Acknowledgements.</a></li>
 </ul>
 </div>
@@ -280,7 +281,7 @@ them at the end, but we need to bake them into our optimization strategy.<label 
 There is an important special case where (<span class="caps">QP</span>) can be solved exactly: the
 case <span class="arithmatex">\(Q = I\)</span>. In this case, the problem becomes
 <span class="arithmatex">\(\arg\min_{x \in \mathcal{X}} \| x - x_0 \|^2_2,\)</span>
-which is known as the <em>euclidean projection</em> of <span class="arithmatex">\(x_0\)</span> onto <span class="arithmatex">\(\mathcal{X}\)</span>.
+which is known as the <em>Euclidean projection</em> of <span class="arithmatex">\(x_0\)</span> onto <span class="arithmatex">\(\mathcal{X}\)</span>.
 If <span class="arithmatex">\(\mathcal{X}\)</span> are box constraints, the projection decomposes into a series of
 independent 1-d projections, which we&#8217;ve seen can be solved by&nbsp;clipping.</span></p>
 <p>As a warm up, let us implement our quadratic function
@@ -365,7 +366,7 @@ unconstrained non-convex&nbsp;problem</p>
 When reparametrizing, <span class="arithmatex">\(x\)</span> is no longer a learned parameter, but a function of
 the learned parameter <span class="arithmatex">\(u\)</span>. The gradient with respect to <span class="arithmatex">\(u\)</span> can be handled
 automatically by PyTorch&nbsp;autodiff:</p>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">optim_reparam</span><span class="p">(</span><span class="n">u_init</span><span class="p">,</span> <span class="n">lr</span><span class="o">=.</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100000</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">optim_reparam</span><span class="p">(</span><span class="n">u_init</span><span class="p">,</span> <span class="n">lr</span><span class="o">=.</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
     <span class="n">u</span> <span class="o">=</span> <span class="n">u_init</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span><span class="o">.</span><span class="n">requires_grad_</span><span class="p">()</span>
 
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_iter</span><span class="p">):</span>
@@ -378,15 +379,21 @@ automatically by PyTorch&nbsp;autodiff:</p>
 
 
 <p>With a very small learning rate, we get a glimpse into the dynamics of this
-method. For comparison, we include the unconstrained&nbsp;trajectory.</p>
-<p><img alt="quadratic landscape" src="/images/mirror_quad_lr0.010_reparam.png"></img></p>
+method.<label for="sn-6" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-6" class="margin-toggle"/><span class="sidenote">Technically, as the learning rate goes to zero, we are simulating a
+continuous <em>gradient flow</em>, of which gradient descent is a discretized
+approximation. For more about gradient flows, check out <a href="https://francisbach.com/gradient-flows/">Francis Bach&#8217;s post</a>.</span>
+For comparison, we include the unconstrained&nbsp;trajectory.</p>
+<p><img alt="quadratic landscape" src="/images/mirror_primal_lr0.010_reparam.png"></img></p>
 <p>In practice, we would use a much larger learning rate to accelerate&nbsp;optimization:</p>
-<p><img alt="quadratic landscape" src="/images/mirror_quad_lr0.200_reparam.png"></img></p>
+<p><img alt="quadratic landscape" src="/images/mirror_primal_lr0.200_reparam.png"></img></p>
 <p>We can see that even with a large learning rate, the reparametrization method
 takes much smaller steps, especially as it gets closer to the boundary of the
-domain. At any point <span class="arithmatex">\(u\)</span>, the reparametrized gradient can be written using the
+domain. The steps are so small, that we only show the first 20 markers, to avoid
+clutter. Why does this happen? At any point <span class="arithmatex">\(u\)</span>, the reparametrized gradient can be written using the
 chain&nbsp;rule:</p>
-<div class="arithmatex">\[ \pfrac{}{u} f(\sigma(u)) = \pfrac{f(x)}{x}\biggr\rvert_{x=\sigma(u)} \pfrac{\sigma(u)}{u}. \]</div>
+<div class="arithmatex">\[ \pfrac{}{u} f(\sigma(u)) = 
+\pfrac{\sigma(u)}{u} 
+\pfrac{f(x)}{x}\biggr\rvert_{x=\sigma(u)} \]</div>
 <p>This is the unconstrained gradient at <span class="arithmatex">\(x=\sigma(u)\)</span>, rescaled by the Jacobian of <span class="arithmatex">\(\sigma\)</span>.
 Since <span class="arithmatex">\(\sigma\)</span> acts elementwise, its Jacobian is a diagonal matrix, with
 <span class="arithmatex">\(\pfrac{\sigma(u)_i}{u_i}  = \sigma(u_i)(1 - \sigma(u_i)) = x_i (1 - x_i).\)</span> We can thus see
@@ -397,7 +404,7 @@ slightly winding trajectory, our method finds the right&nbsp;answer.</p>
 <h3 id="projected-gradient">Projected gradient.<a class="headerlink" href="#projected-gradient" title="Permanent link">&para;</a></h3>
 <p>The projected gradient method is particularly well suited to handling &#8220;simple&#8221; constraints
 like the box case, but, unlike reparametrization, requires a different kind of
-expertise to get running in the case of complicated constraints.<label for="sn-6" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-6" class="margin-toggle"/><span class="sidenote"><span class="caps">PG</span>
+expertise to get running in the case of complicated constraints.<label for="sn-7" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-7" class="margin-toggle"/><span class="sidenote"><span class="caps">PG</span>
 is very popular in convex optimization, useful both for theory and for
 practice. However, it does not seem to be so widely used in the pure neural
 network world, perhaps mostly because it is not directly supported by the
@@ -418,11 +425,13 @@ The implementation&nbsp;follows:</p>
 </code></pre></div>
 
 
-<p><img alt="quadratic landscape" src="/images/mirror_quad_lr0.010_pg.png"></img></p>
+<p>Let&#8217;s visualize the trajectory. From now on, we will zoom in a bit on the region
+of&nbsp;interest.</p>
+<p><img alt="quadratic landscape" src="/images/mirror_primal_lr0.010_pg.png"></img></p>
 <p>It looks like the projected gradient method tends to follow the unconstrained
 trajectory while sticking to the boundary of the domain. Of course, with larger
 steps, the differences become more&nbsp;pronounced.</p>
-<p><img alt="quadratic landscape" src="/images/mirror_quad_lr0.200_pg.png"></img></p>
+<p><img alt="quadratic landscape" src="/images/mirror_primal_lr0.200_pg.png"></img></p>
 <p>In this instance, <span class="caps">PG</span> is the clear winner: look how fast it makes progress. With
 less well-behaved and non-convex functions this need not be the case. So we are
 motivated to delve deeper and explore how <span class="caps">PG</span> and <span class="caps">REP</span> relate, despite seeming so&nbsp;different. </p>
@@ -472,17 +481,17 @@ x^{(t)} - \alpha_t \nabla f(x^{(t)})\big).\]</div>
 \]</div>
 </details>
 <p>Now, let&#8217;s pay special attention to 
-the function <span class="arithmatex">\(D(x, y) = \| x - y \|^2 = \sum_i (x_i - y_i)^2\)</span>, the <em>squared euclidean distance</em>.
+the function <span class="arithmatex">\(D(x, y) = \| x - y \|^2 = \sum_i (x_i - y_i)^2\)</span>, the <em>squared Euclidean distance</em>.
 We employ this function to ensure that each update stays close to <span class="arithmatex">\(x^{(t)}\)</span>,
 because the linear approximation is not good if we go to far. But this is not
 the only good measure of closeness:
 here, geometry enters the stage!  Euclidean geometry is
 convenient and comfortable for thinking about spaces like <span class="arithmatex">\(\reals^d,\)</span> but
 it is not always the best&nbsp;model.</p>
-<p>The <strong>Bregman divergence</strong> provides a convenient generalization of the squared
-euclidean distance: given strictly convex, twice-differentiable <span class="arithmatex">\(\Psi\)</span>,</p>
+<p><strong>Bregman divergences</strong> provide a convenient generalization of the squared
+Euclidean distance: given strictly convex, twice-differentiable <span class="arithmatex">\(\Psi\)</span>,</p>
 <div class="arithmatex">\[ D_\Psi(x, y) \coloneqq \Psi(x) - \Psi(y) - \DP{\nabla \Psi(y)}{x - y}. \]</div>
-<p>For <span class="arithmatex">\(\Psi = \frac{1}{2} \| \cdot \|^2\)</span>, this recovers the squared euclidean
+<p>For <span class="arithmatex">\(\Psi = \frac{1}{2} \| \cdot \|^2\)</span>, this recovers the squared Euclidean
 distance. Replacing <span class="arithmatex">\(\frac{1}{2}\|\cdot\|^2\)</span> by <span class="arithmatex">\(D_\Psi\)</span> in the projected
 gradient algorithm leads to a generalization known as <strong>mirror descent</strong>,</p>
 <div class="arithmatex">\[
@@ -491,9 +500,9 @@ x^{(t+1)} \leftarrow \arg\min_{x \in \mathcal{X}}  \DP{\nabla f(x^{(t)})}{x} +
 \]</div>
 <p>Since <span class="arithmatex">\(\Psi\)</span> is twice differentiable and strongly convex, it has a gradient
 <span class="arithmatex">\(\psi = \nabla\Psi\)</span> which is invertible. Solving for the mirror descent update
-yields a so-called Bregman projection,<label for="sn-7" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-7" class="margin-toggle"/><span class="sidenote">Not technically a projection, 
+yields a so-called Bregman projection,<label for="sn-8" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-8" class="margin-toggle"/><span class="sidenote">Not technically a projection, 
 since iterating it twice need not give the same
-result, but the term emphasizes the parallel to the euclidean&nbsp;case.</span></p>
+result, but the term emphasizes the parallel to the Euclidean&nbsp;case.</span></p>
 <div class="arithmatex">\[
 \begin{aligned}
 u^{(t+0.5)} &amp;\leftarrow \psi(x^{(t)}) - \alpha_t \nabla f(x^{(t)}) \\ 
@@ -515,7 +524,7 @@ probability associated with coin <span class="arithmatex">\(i\)</span>, the entr
 <div class="arithmatex">\[H(x_i) = -x_i \log x_i - (1 - x_i) \log (1 - x_i).\]</div>
 <p>We may extend this additively to vectors as <span class="arithmatex">\(H(x) = \sum_i H(x_i)\)</span>.
 On <span class="arithmatex">\(\mathcal{X}=[0, 1]\)</span>, entropy is continuously differentiable and strictly
-<strong>concave</strong>, maximized at <span class="arithmatex">\(x=0.5\)</span> and minimized at <span class="arithmatex">\(x=0\)</span> and <span class="arithmatex">\(x=1\)</span>.<label for="sn-8" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-8" class="margin-toggle"/><span class="sidenote"><span class="arithmatex">\(H(0.5) =
+<strong>concave</strong>, maximized at <span class="arithmatex">\(x=0.5\)</span> and minimized at <span class="arithmatex">\(x=0\)</span> and <span class="arithmatex">\(x=1\)</span>.<label for="sn-9" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-9" class="margin-toggle"/><span class="sidenote"><span class="arithmatex">\(H(0.5) =
 \log 2,\)</span><br><span class="arithmatex">\(H(0)=H(1)=0\)</span>.</span> </p>
 <p>Let us thus take <span class="arithmatex">\(\Psi = -H\)</span>. Its gradient is <span class="arithmatex">\(\psi : \mathcal{X} \rightarrow \mathcal{U}\)</span>,</p>
 <div class="arithmatex">\[ \psi(x) \coloneqq -\nabla H(x) = \log(x) - \log(1-x), \]</div>
@@ -536,20 +545,176 @@ the <strong>primal</strong> and <strong>dual</strong> spaces, respectively. Mirr
 first moves into dual (unconstrained) space, performs an update there, and then moves
 back. Reparametrization rewrites the problem in dual coordinates and performs
 gradient descent: this is not the same, and the trajectories are quite&nbsp;different!</p>
-<p><img alt="quadratic landscape" src="/images/mirror_quad_lr0.010_md.png"></img></p>
+<p><img alt="quadratic landscape" src="/images/mirror_primal_lr0.010_md.png"></img></p>
 <p>With a larger step size, we see that mirror descent takes much larger steps than
 reparametrization&nbsp;does.</p>
-<p><img alt="quadratic landscape" src="/images/mirror_quad_lr0.200_md.png"></img></p>
+<p><img alt="quadratic landscape" src="/images/mirror_primal_lr0.200_md.png"></img></p>
 <p>Now that we figured out that we may think about the problem in primal or dual
 coordinates, we may also visualize the optimization trajectory in dual&nbsp;coordinates.</p>
-<p><img alt="quadratic landscape" src="/images/quad_lr0.010_md.png"></img></p>
+<p><img alt="quadratic landscape" src="/images/mirror_dual_lr0.010_md.png"></img></p>
 <p>Yet, the way that mirror descent leans on moving from <span class="arithmatex">\(\mathcal{X}\)</span> to
 <span class="arithmatex">\(\mathcal{U}\)</span> is very familiar to the reparametrization strategy. Is there a
 deeper connection between the two? We illuminate it&nbsp;next.</p>
-<h1 id="duality-between-mirror-descent-and-natural-gradient">Duality between mirror descent <br/>and natural gradient.<a class="headerlink" href="#duality-between-mirror-descent-and-natural-gradient" title="Permanent link">&para;</a></h1>
-<p>The main&nbsp;result.</p>
+<h1 id="duality-between-mirror-descent-and-naturalgradient">Duality between mirror descent and natural&nbsp;gradient.<a class="headerlink" href="#duality-between-mirror-descent-and-naturalgradient" title="Permanent link">&para;</a></h1>
+<p>We have seen that different choices of <span class="arithmatex">\(\Psi\)</span> induce different geometries
+even on top of the same space. (Case in point: entropy vs. <span class="arithmatex">\(\frac{1}{2}\|\cdot\|^2\)</span>).
+To handle this ambiguity, we need a structure that attaches the geometry along
+with the underlying space. This, (with some handwaving), is a <em>Riemannian
+manifold</em>: a pair <span class="arithmatex">\((\mathcal{U}, G)\)</span> where <span class="arithmatex">\(\mathcal{X} \subseteq \reals^d\)</span>
+is an underlying space<label for="sn-10" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-10" class="margin-toggle"/><span class="sidenote">Riemannian manifolds are more general than this, but
+in this post, for simplicity, we only look at the case where <span class="arithmatex">\(\mathcal{X}\subseteq \reals^d\)</span>.
+To be fully general, the notation ramps up quickly.
+See <a href="https://wiseodd.github.io/techblog/2019/02/22/riemannian-geometry/">Agustinus Kristiadi&#8217;s
+post</a> 
+and <a href="https://arxiv.org/abs/1808.08271">Frank Nielsen&#8217;s tutorial</a>
+for an introduction.
+</span>
+and the <em>metric tensor</em> <span class="arithmatex">\(G: \mathcal{U} \rightarrow \reals^{d \times d}\)</span>
+is a function such that <span class="arithmatex">\(G(u_0)\)</span> is a p.s.d. matrix that induces a 
+squared distance around <span class="arithmatex">\(u_0\)</span>:</p>
+<div class="arithmatex">\[ d^2_{u_0}(u, v) = \frac{1}{2} (u-v)^\top G(u_0) (u - v). \]</div>
+<p>What we observed earlier is in fact a duality between the Riemannian manifolds
+<span class="arithmatex">\((\mathcal{X}, \nabla^2 \Psi)\)</span> and <span class="arithmatex">\((\mathcal{U}, \nabla^2 \Phi),\)</span> 
+where <span class="arithmatex">\(\Phi\)</span> is the antiderivative of <span class="arithmatex">\(\phi\)</span>, i.e., <span class="arithmatex">\(\nabla\Phi=\phi\)</span>.
+This is an important duality studied in the field of information geometry.<label for="sn-11" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-11" class="margin-toggle"/><span class="sidenote">
+S. Amari, A. Cichocki. 2010. 
+<a href="http://fluid.ippt.gov.pl/bulletin/(58-1)183.pdf">Information geometry of divergence
+functions.</a>
+Bulletin of the Polish Academy of Sciences, 58(1).&nbsp;</span></p>
+<p>We may now revisit the reparametrization strategy, in light of what we learned
+so far. To reparametrize the constraint away, we work in <strong>dual coordinates</strong>
+<span class="arithmatex">\(u \in \mathcal{U}\)</span>, and&nbsp;update:</p>
+<div class="arithmatex">\[ u^{(t+1)} \leftarrow u^{(t)} - \nabla_u f(\phi(u)). \]</div>
+<p>In our case <span class="arithmatex">\(\mathcal{U}=\reals^2\)</span> and <span class="arithmatex">\(\phi = \sigma\)</span>, but let&#8217;s use the more
+general notation. The update above ignores the geometry of <span class="arithmatex">\(\mathcal{U}\)</span>, in
+other words, operates on the trivial manifold <span class="arithmatex">\((\mathcal{U}, I_d)\)</span> &#8212; the
+metric tensor is the identity matrix everywhere.  When optimizing some function <span class="arithmatex">\(\tilde{f}(u)\)</span>
+over a manifold <span class="arithmatex">\((\mathcal{U}, G)\)</span>, a convenient algorithm is natural gradient, which takes the&nbsp;form</p>
+<div class="arithmatex">\[ u^{(t+1)} \leftarrow u^{(t)} - \alpha_t [G(u)]^{-1} \nabla \tilde{f}(u^{(t)}). \]</div>
+<details class="note"><summary>Derivation</summary><p>We follow the same steps as for gradient descent, but we use the induced distance
+<span class="arithmatex">\(d_{u^{(t)}}\)</span> to find an update direction. We must solve the&nbsp;problem</p>
+<div class="arithmatex">\[ \argmin_{u\in\mathcal{U}} \DP{u}{\nabla \tilde{f}(u^{(t)})} + \frac{1}{2\alpha_t} 
+{(u - u^{(t)})^\top G(u^{(t)}) (u - u^{(t)}).} \]</div>
+<p>Rearranging gives the equivalent&nbsp;problem</p>
+<div class="arithmatex">\[ \argmin_{u\in\mathcal{U}} d^2_{u^{(t)}}
+(u, u^{(t)} - \alpha_t[G(u^{(t)})]^{-1} \nabla \tilde{f}(u^{(t)})).\]</div>
+<p>Assuming no constraints (i.e., <span class="arithmatex">\(\mathcal{U}=\reals^d\)</span>), this yields the
+desired&nbsp;update.</p>
+</details>
+<p>It turns out that for a pair of Bregman dual manifolds
+<span class="arithmatex">\((\mathcal{X}, \nabla^2 \Psi)\)</span> and <span class="arithmatex">\((\mathcal{U}, \nabla^2 \Phi),\)</span> 
+<strong>mirror descent in the primal space is equivalent to natural gradient in the
+dual space!</strong> This result, due to Raskutti and Mukherjee (2015),<label for="sn-12" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-12" class="margin-toggle"/><span class="sidenote">
+G. Raskutti and S. Mukherjee. 2015. <em>The information geometry of mirror descent.</em>
+In: <span class="caps">IEEE</span> Transactions on Information Theory, vol. 61, issue 3.
+<a href="https://arxiv.org/abs/1310.7780">arXiv:1310.7780</a>.</span>
+means we can get a geometry-aware flavor of the
+<span class="caps">REP</span>&nbsp;algorithm,</p>
+<div class="arithmatex">\[ u^{(t+1)} \leftarrow u^{(t)} - \alpha_t [\nabla^2 \Phi(u)]^{-1} \nabla_u {f}(\phi(u^{(t)})). \]</div>
+<p>This algorithm takes the exact same steps as mirror descent, is arguably easier
+to implement, and &#8212; since it maintains iterates in dual space &#8212; is more
+numerically&nbsp;stable.</p>
+<p>A first attempt at implementing this would&nbsp;be:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">optim_rep_natural</span><span class="p">(</span><span class="n">u_init</span><span class="p">,</span> <span class="n">lr</span><span class="o">=.</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+
+    <span class="n">u</span> <span class="o">=</span> <span class="n">u_init</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span><span class="o">.</span><span class="n">requires_grad_</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_iter</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+        <span class="n">dsigmoid</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">x</span><span class="p">))</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span>  <span class="c1"># diagonal of ∇²Φ(u)</span>
+        <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+        <span class="n">u</span><span class="o">.</span><span class="n">data</span> <span class="o">-=</span> <span class="n">lr</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">grad</span> <span class="o">/</span> <span class="n">dsigmoid</span>
+        <span class="n">u</span><span class="o">.</span><span class="n">grad</span><span class="o">.</span><span class="n">zero_</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">u</span>
+</code></pre></div>
+
+
+<p>and we can visually check that we get exactly the same trajectory as mirror&nbsp;descent.</p>
+<p><img alt="quadratic landscape" src="/images/mirror_primal_lr0.010_nat.png"></img></p>
+<p>But let&#8217;s look a bit closer! Since <span class="arithmatex">\(\phi = \nabla\Phi\)</span>, our metric tensor is
+none other&nbsp;than</p>
+<div class="arithmatex">\[ \nabla^2\Phi(u) = \pfrac{\phi(u)}{u}, \]</div>
+<p>and, putting the whole update together, we see&nbsp;that</p>
+<div class="arithmatex">\[ [\nabla^2\Phi(u)]^{-1} \nabla_u f(\phi(u)) = 
+{\left(\pfrac{\phi(u)}{u}\right)^{-1}}
+{\pfrac{\phi(u)}{u}}
+{\pfrac{f(x)}{x}\biggr\rvert_{x=\phi(u)}}  \]</div>
+<p>so natural gradient cancels out the Jacobian of <span class="arithmatex">\(\phi\)</span> in the chain rule!
+In our case, this is as if we use a sigmoid nonlinearity that acts as the
+identity in the backward pass! This suggests an alternative implementation,
+reminiscent of <em>straight through</em>&nbsp;tricks:</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">SigmoidStraightThrough</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">autograd</span><span class="o">.</span><span class="n">Function</span><span class="p">):</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">u</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">backward</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">dx</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">dx</span>
+
+
+<span class="k">def</span> <span class="nf">sigmoid_straight_through</span><span class="p">(</span><span class="n">u</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">SigmoidStraightThrough</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">optim_rep_natural_st</span><span class="p">(</span><span class="n">u_init</span><span class="p">,</span> <span class="n">lr</span><span class="o">=.</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+
+    <span class="n">u</span> <span class="o">=</span> <span class="n">u_init</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span><span class="o">.</span><span class="n">requires_grad_</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_iter</span><span class="p">):</span>
+        <span class="n">f</span><span class="p">(</span><span class="n">sigmoid_straight_through</span><span class="p">(</span><span class="n">u</span><span class="p">))</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+        <span class="n">u</span><span class="o">.</span><span class="n">data</span> <span class="o">-=</span> <span class="n">lr</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">grad</span>
+        <span class="n">u</span><span class="o">.</span><span class="n">grad</span><span class="o">.</span><span class="n">zero_</span><span class="p">()</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">data</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">u</span>
+</code></pre></div>
+
+
+<p>With this <code>sigmoid_straight_through</code> nonlinearity, we can now use mirror descent
+/ natural gradient to learn constrained parameters without any changes to the
+optimizer.  This strategy is aware of the geometry of the dual space
+<span class="arithmatex">\((\mathcal{U}, \nabla^2\Phi)\)</span> and thus avoids taking extra small steps while
+still ensuring that all the iterates remain&nbsp;feasible.</p>
+<h1 id="conclusions">Conclusions<a class="headerlink" href="#conclusions" title="Permanent link">&para;</a></h1>
+<p>We have explored the two most popular strategies for dealing with simple
+constraints: reparametrization and projected gradient optimization. We have
+looked into an information geometric generalization of projected gradient, which
+turns out to lead to an equivalent <em>dual</em> algorithm that resembles
+reparametrization, but with a gradient correction that improves its performance.
+(And, if <span class="arithmatex">\(f\)</span> is convex, results in a convex optimization procedure, unlike the
+reparametrized&nbsp;case.)</p>
+<p>Of course, we only looked at a simple quadratic test case, and we did not check
+what happens when using accelerated methods or adaptive learning rates (e.g,.
+Adam).  It would be interesting to see if the drop-in straight-through sigmoid
+can improve performance compared to direct reparametrization in
+real tasks. But this was not the main&nbsp;point&#8212;</p>
+<p>With this post, I have hopefully stirred your interest into constrained
+optimization and its connections to geometry. 
+Geometric insights have been key to advances in learning over constrained spaces of
+matrices, such as symmetric, low-rank, orthonormal, s.p.d. matrices, etc.
+<label for="sn-13" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-13" class="margin-toggle"/><span class="sidenote">
+P.-A. Absil, R. Mahoney, and Rodolphe Sepulchre. 2008.
+<a href="https://press.princeton.edu/absil">Optimization Algorithms on Matrix
+Manifolds</a>.
+Princeton University Press. <span class="caps">ISBN</span> 978-0-691-13298-3
+</span> 
+Recently, the duality between mirror descent and natural gradient has been used
+to derive powerful algorithms for minimax problems.<label for="sn-14" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-14" class="margin-toggle"/><span class="sidenote">
+F. Schäfer, A. Anandkumar, H. Owhadi. 2020.
+Competitive Mirror Descent.
+<a href="https://arxiv.org/abs/2006.10179">arxiv:2006.10179</a>.&nbsp;</span></p>
 <h1 id="acknowledgements">Acknowledgements.<a class="headerlink" href="#acknowledgements" title="Permanent link">&para;</a></h1>
-<p>Anima Anandkumar&#8217;s talk and paper,&nbsp;Caio.</p>
+<p>This post was inspired by <a href="https://video.ias.edu/machinelearning/2020/0709-AnimaAnandkumar">Anima Anandkumar&#8217;s
+talk</a> at the 
+<span class="caps">IAS</span> Seminar on Theoretical Machine Learning. Before this talk, I had no idea
+about anything in the second part of this post.
+Thanks to Caio Corro for feedback on the blog post.
+Blogging is work, so I acknowledge my funding from the European Research Council
+StG DeepSPIN 758969 and Fundação para a Ciência e Tecnologia contract <span class="caps">UIDB</span>/50008/2020. </p>
     </div><!-- /.entry-content -->
 
   </article>
