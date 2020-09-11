@@ -7,7 +7,9 @@ Status: draft
 Summary:  Gradient methods are popular for training machine learning models.
     But if we require the weights to satisfy some constraints, things quickly get more complicated.
     Popular strategies for handling constraints, while seemingly different, are
-    in fact deeply connected! We explore this with code samples.
+    in fact deeply connected. In particular, mirror descent is equivalent to
+    reparametrization with a straight-through gradient.
+
 
 When training machine learning models, and deep networks in particular,
 we typically use gradient-based methods. But if we require the weights to
@@ -16,6 +18,12 @@ satisfy some constraints, things quickly get more complicated.
 Some of the most popular strategies for handling constraints, while seemingly
 very different at first sight, are deeply connected. In this post, we will
 explore these connections and demonstrate them in PyTorch on a friendly example. 
+
+In particular, we show that mirror descent is equivalent to
+gradient descent on a reparametrized objective with straight-through gradients: 
+replacing a constrained variable $x$
+with $\sigma(u)$, but treating $\sigma$ as if it were the identity in the
+backward pass.
 
 **Outline.** 
 
@@ -580,6 +588,7 @@ probability associated with coin $i$, the entropy is
 $$H(x_i) = -x_i \log x_i - (1 - x_i) \log (1 - x_i).$$
 
 We may extend this additively to vectors as $H(x) = \sum_i H(x_i)$.
+This is sometimes called the Fermi-Dirac entropy.
 On $\mathcal{X}=[0, 1]$, entropy is continuously differentiable and strictly
 **concave**, maximized at $x=0.5$ and minimized at $x=0$ and $x=1$.[ref]$H(0.5) =
 \log 2,$<br>$H(0)=H(1)=0$.[/ref] 
@@ -741,7 +750,17 @@ $$ [\nabla^2\Phi(u)]^{-1} \nabla_u f(\phi(u)) =
 so natural gradient cancels out the Jacobian of $\phi$ in the chain rule!
 In our case, this is as if we used a sigmoid nonlinearity that acts as the
 identity in the backward pass! This suggests an alternative implementation,
-reminiscent of *straight through* tricks:
+reminiscent of *straight-through* tricks: we use a reparametrization function
+$\sigma$ that acts as a sigmoid in the forward pass, but acts as if it were the
+identity function in the backward pass.[ref]
+Such ``straight-through'' heuristics are very popular for dealing with
+stochastic or piecewise-constant functions (like *argmax* or *floor* functions.)
+To my knowledge, the idea was introduced by G. Hinton in the Neural Networks for
+Machine Learning online lectures in 2012. For a detailed treatment, see:
+Y. Bengio, N. Léonard, A Courville. 2013. 
+Estimating or Propagating Gradients Through Stochastic Neurons for Conditional Computation
+[arxiv 1308.3432](https://arxiv.org/abs/1308.3432)
+[/ref]
 
 ```python
 class SigmoidStraightThrough(torch.autograd.Function):
