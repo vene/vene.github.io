@@ -44,15 +44,16 @@
       <h1 class="entry-title">
         <a href="//vene.ro/drafts/mirror-descent.html" rel="bookmark"
            title="Permalink to Optimizing with constraints: reparametrization and geometry.">Optimizing with constraints: <br>reparametrization and&nbsp;geometry.</a></h1>
-<p class="subtitle"><time datetime="2020-08-01T00:00:00+02:00">Sat, 01 Aug 2020</time><label for="mirror-descent" class="margin-toggle"> ⊕</label><input type="checkbox" id="mirror-descent" class="margin-toggle" /><span class="marginnote">Category: <a href="//vene.ro/category/presentation.html">presentation</a><br />
+<p class="subtitle"><time datetime="2020-09-11T00:00:00+02:00">Fri, 11 Sep 2020</time><label for="mirror-descent" class="margin-toggle"> ⊕</label><input type="checkbox" id="mirror-descent" class="margin-toggle" /><span class="marginnote">Category: <a href="//vene.ro/category/optimization.html">optimization</a><br />
 </span></p>    </header>
 
     <div class="entry-content">
       <p>When training machine learning models, and deep networks in particular,
 we typically use gradient-based methods. But if we require the weights to
 satisfy some constraints, things quickly get more&nbsp;complicated.</p>
-<p>I&#8217;ve recently learned that a few ways for handling constraints are deeply connected.
-In this post, we will explore these connections and demonstrate them in PyTorch on a friendly&nbsp;example. </p>
+<p>Some of the most popular strategies for handling constraints, while seemingly
+very different at first sight, are deeply connected. In this post, we will
+explore these connections and demonstrate them in PyTorch on a friendly&nbsp;example. </p>
 <p><strong>Outline.</strong> </p>
 <div class="toc">
 <ul>
@@ -64,7 +65,7 @@ In this post, we will explore these connections and demonstrate them in PyTorch 
 </li>
 <li><a href="#generalizing-the-projected-gradient-method-with-divergences">Generalizing the projected gradient method with&nbsp;divergences.</a></li>
 <li><a href="#duality-between-mirror-descent-and-naturalgradient">Duality between mirror descent and&nbsp;natural&nbsp;gradient.</a></li>
-<li><a href="#conclusions">Conclusions</a></li>
+<li><a href="#conclusions">Conclusions.</a></li>
 <li><a href="#acknowledgements">Acknowledgements.</a></li>
 </ul>
 </div>
@@ -116,8 +117,9 @@ and successively applying updates of the&nbsp;form:</p>
 x^{(t+1)} \leftarrow x^{(t)} - \alpha^{(t)} \nabla f(x).
 \]</div>
 <p>In deep learning, we typically use stochastic flavors that
-nonetheless perform well and are efficient.  Here, we will focus on a &#8220;nice&#8221;,
-differentiable <span class="arithmatex">\(f\)</span>, and we will see that, even in this case, constraints quickly complicate&nbsp;things.</p>
+nonetheless perform well and are efficient.  Here, we will focus on a relatively
+nice example: a convex quadratic function <span class="arithmatex">\(f\)</span>.
+We will see that, even in this case, constraints quickly complicate&nbsp;things.</p>
 <p><strong>Why constrain?</strong>
 For modeling reasons, we might want to impose restrictions on some of the weights
 <span class="arithmatex">\(x\)</span>.  Perhaps one of the parameter corresponds to the variance of a
@@ -162,7 +164,9 @@ By assumption, <span class="arithmatex">\(a-x^\star_\text{unc} &gt; 0\)</span>, 
 <div class="arithmatex">\[ \mu_a = f'(a) \geq \frac{f(a)-f(x^\star_\text{unc})}{a-x^\star_\text{unc}} \geq 0. \]</div>
 <p>The case <span class="arithmatex">\( x^\star_\text{unc} &gt; b \)</span> follows&nbsp;similarly.</p>
 </details>
-<p>The following animation might convince you that this is&nbsp;true:</p>
+<p>The following interactive demo might convince you that this is true. We show the
+1-d function <span class="arithmatex">\(f(x) = (x - x_0)^2 / 2\)</span> and its minimizer constrained to <span class="arithmatex">\([0, 1]\)</span>.
+Drag the slider to change the location of the unconstrained minimizer <span class="arithmatex">\(x_0\)</span>.</p>
 <p><div id="plotdiv">
   <svg id="onedimplot" preserveAspectRatio="xMinYMin meet" viewBox="0 0 550 150"></svg> <br />
     <input type="range" min="-1" max="2" step=".001" oninput="plot(this.value)" onchange="plot(this.value)">
@@ -440,9 +444,9 @@ motivated to delve deeper and explore how <span class="caps">PG</span> and <span
 us outside of <span class="arithmatex">\(\mathcal{X}\)</span>, and then move the solution back to <span class="arithmatex">\(\mathcal{X}\)</span> by&nbsp;projection:</p>
 <div class="arithmatex">\[ x^{(t+1)} \leftarrow \operatorname{Proj}_\mathcal{X}\big(x^{(t+0.5)}\big). \]</div>
 <p>Projection finds the point <span class="arithmatex">\(x \in \mathcal{X}\)</span> closest to <span class="arithmatex">\(x^{(t+0.5)}\)</span>,&nbsp;i.e.,</p>
-<div class="arithmatex">\[ \operatorname{Proj}_\mathcal{X}\big(x^{(t+0.5)}\big) = \argmin_{x \in \mathcal{X}} \| x - x^{(t+0.5)} \|. \]</div>
-<p>This update can be interpreted as approximately minimizing a regularized linearization of
-<span class="arithmatex">\(f,\)</span></p>
+<div class="arithmatex">\[ \operatorname{Proj}_\mathcal{X}\big(x^{(t+0.5)}\big) \coloneqq \argmin_{x \in \mathcal{X}} \| x - x^{(t+0.5)} \|^2. \]</div>
+<p>The projected gradient update can be interpreted as minimizing a regularized linearization of
+<span class="arithmatex">\(f\)</span> around the current&nbsp;iterate,</p>
 <div class="arithmatex">\[ x^{(t+1)} \leftarrow \arg\min_{x \in \mathcal{X}}  \DP{\nabla f(x^{(t)})}{x} + 
 {\frac{1}{2\alpha_t}\|x - x^{(t)}\|^2}.
 \]</div>
@@ -466,7 +470,7 @@ x^{(t+1)} \leftarrow \arg\min_{x \in \mathcal{X}} \tilde f_{x^{(t)}}(x) + \frac{
 approximation is not too bad. Clearing up the constant terms from inside the
 <span class="arithmatex">\(\arg\min\)</span> yields the desired&nbsp;expression.</p>
 </details>
-<p>Manipulating this minimization reveals exactly the projected gradient&nbsp;update,</p>
+<p>Rearranging the terms reveals exactly the projected gradient&nbsp;update,</p>
 <div class="arithmatex">\[ x^{(t+1)} \leftarrow \operatorname{Proj}_{\mathcal{X}}\big(
 x^{(t)} - \alpha_t \nabla f(x^{(t)})\big).\]</div>
 <details class="note"><summary>Derivation</summary><div class="arithmatex">\[
@@ -488,8 +492,15 @@ the only good measure of closeness:
 here, geometry enters the stage!  Euclidean geometry is
 convenient and comfortable for thinking about spaces like <span class="arithmatex">\(\reals^d,\)</span> but
 it is not always the best&nbsp;model.</p>
-<p><strong>Bregman divergences</strong> provide a convenient generalization of the squared
-Euclidean distance: given strictly convex, twice-differentiable <span class="arithmatex">\(\Psi\)</span>,</p>
+<p><strong>Bregman divergences</strong>
+provide a convenient generalization of the squared
+Euclidean distance:<label for="sn-8" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-8" class="margin-toggle"/><span class="sidenote">
+Divergences measures of dissimilarity between objects, with weaker requirements
+than distance functions: simply that <span class="arithmatex">\(D(x,y) \geq 0\)</span> and <span class="arithmatex">\(D(x,y)=0\)</span> iff. <span class="arithmatex">\(x =
+y\)</span>. <a href="https://en.wikipedia.org/wiki/Bregman_divergence">Bregman divergences</a> 
+are an important class of divergences. They are convex in the first argument, but not the second.
+</span>
+given strictly convex, twice-differentiable <span class="arithmatex">\(\Psi\)</span>,</p>
 <div class="arithmatex">\[ D_\Psi(x, y) \coloneqq \Psi(x) - \Psi(y) - \DP{\nabla \Psi(y)}{x - y}. \]</div>
 <p>For <span class="arithmatex">\(\Psi = \frac{1}{2} \| \cdot \|^2\)</span>, this recovers the squared Euclidean
 distance. Replacing <span class="arithmatex">\(\frac{1}{2}\|\cdot\|^2\)</span> by <span class="arithmatex">\(D_\Psi\)</span> in the projected
@@ -500,7 +511,7 @@ x^{(t+1)} \leftarrow \arg\min_{x \in \mathcal{X}}  \DP{\nabla f(x^{(t)})}{x} +
 \]</div>
 <p>Since <span class="arithmatex">\(\Psi\)</span> is twice differentiable and strongly convex, it has a gradient
 <span class="arithmatex">\(\psi = \nabla\Psi\)</span> which is invertible. Solving for the mirror descent update
-yields a so-called Bregman projection,<label for="sn-8" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-8" class="margin-toggle"/><span class="sidenote">Not technically a projection, 
+yields a so-called Bregman projection,<label for="sn-9" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-9" class="margin-toggle"/><span class="sidenote">Not technically a projection, 
 since iterating it twice need not give the same
 result, but the term emphasizes the parallel to the Euclidean&nbsp;case.</span></p>
 <div class="arithmatex">\[
@@ -524,7 +535,7 @@ probability associated with coin <span class="arithmatex">\(i\)</span>, the entr
 <div class="arithmatex">\[H(x_i) = -x_i \log x_i - (1 - x_i) \log (1 - x_i).\]</div>
 <p>We may extend this additively to vectors as <span class="arithmatex">\(H(x) = \sum_i H(x_i)\)</span>.
 On <span class="arithmatex">\(\mathcal{X}=[0, 1]\)</span>, entropy is continuously differentiable and strictly
-<strong>concave</strong>, maximized at <span class="arithmatex">\(x=0.5\)</span> and minimized at <span class="arithmatex">\(x=0\)</span> and <span class="arithmatex">\(x=1\)</span>.<label for="sn-9" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-9" class="margin-toggle"/><span class="sidenote"><span class="arithmatex">\(H(0.5) =
+<strong>concave</strong>, maximized at <span class="arithmatex">\(x=0.5\)</span> and minimized at <span class="arithmatex">\(x=0\)</span> and <span class="arithmatex">\(x=1\)</span>.<label for="sn-10" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-10" class="margin-toggle"/><span class="sidenote"><span class="arithmatex">\(H(0.5) =
 \log 2,\)</span><br><span class="arithmatex">\(H(0)=H(1)=0\)</span>.</span> </p>
 <p>Let us thus take <span class="arithmatex">\(\Psi = -H\)</span>. Its gradient is <span class="arithmatex">\(\psi : \mathcal{X} \rightarrow \mathcal{U}\)</span>,</p>
 <div class="arithmatex">\[ \psi(x) \coloneqq -\nabla H(x) = \log(x) - \log(1-x), \]</div>
@@ -561,7 +572,7 @@ even on top of the same space. (Case in point: entropy vs. <span class="arithmat
 To handle this ambiguity, we need a structure that attaches the geometry along
 with the underlying space. This, (with some handwaving), is a <em>Riemannian
 manifold</em>: a pair <span class="arithmatex">\((\mathcal{U}, G)\)</span> where <span class="arithmatex">\(\mathcal{X} \subseteq \reals^d\)</span>
-is an underlying space<label for="sn-10" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-10" class="margin-toggle"/><span class="sidenote">Riemannian manifolds are more general than this, but
+is an underlying space<label for="sn-11" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-11" class="margin-toggle"/><span class="sidenote">Riemannian manifolds are more general than this, but
 in this post, for simplicity, we only look at the case where <span class="arithmatex">\(\mathcal{X}\subseteq \reals^d\)</span>.
 To be fully general, the notation ramps up quickly.
 See <a href="https://wiseodd.github.io/techblog/2019/02/22/riemannian-geometry/">Agustinus Kristiadi&#8217;s
@@ -576,7 +587,7 @@ squared distance around <span class="arithmatex">\(u_0\)</span>:</p>
 <p>What we observed earlier is in fact a duality between the Riemannian manifolds
 <span class="arithmatex">\((\mathcal{X}, \nabla^2 \Psi)\)</span> and <span class="arithmatex">\((\mathcal{U}, \nabla^2 \Phi),\)</span> 
 where <span class="arithmatex">\(\Phi\)</span> is the antiderivative of <span class="arithmatex">\(\phi\)</span>, i.e., <span class="arithmatex">\(\nabla\Phi=\phi\)</span>.
-This is an important duality studied in the field of information geometry.<label for="sn-11" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-11" class="margin-toggle"/><span class="sidenote">
+This is an important duality studied in the field of information geometry.<label for="sn-12" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-12" class="margin-toggle"/><span class="sidenote">
 S. Amari, A. Cichocki. 2010. 
 <a href="http://fluid.ippt.gov.pl/bulletin/(58-1)183.pdf">Information geometry of divergence
 functions.</a>
@@ -604,7 +615,7 @@ desired&nbsp;update.</p>
 <p>It turns out that for a pair of Bregman dual manifolds
 <span class="arithmatex">\((\mathcal{X}, \nabla^2 \Psi)\)</span> and <span class="arithmatex">\((\mathcal{U}, \nabla^2 \Phi),\)</span> 
 <strong>mirror descent in the primal space is equivalent to natural gradient in the
-dual space!</strong> This result, due to Raskutti and Mukherjee (2015),<label for="sn-12" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-12" class="margin-toggle"/><span class="sidenote">
+dual space!</strong> This result, due to Raskutti and Mukherjee (2015),<label for="sn-13" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-13" class="margin-toggle"/><span class="sidenote">
 G. Raskutti and S. Mukherjee. 2015. <em>The information geometry of mirror descent.</em>
 In: <span class="caps">IEEE</span> Transactions on Information Theory, vol. 61, issue 3.
 <a href="https://arxiv.org/abs/1310.7780">arXiv:1310.7780</a>.</span>
@@ -641,7 +652,7 @@ none other&nbsp;than</p>
 {\pfrac{\phi(u)}{u}}
 {\pfrac{f(x)}{x}\biggr\rvert_{x=\phi(u)}}  \]</div>
 <p>so natural gradient cancels out the Jacobian of <span class="arithmatex">\(\phi\)</span> in the chain rule!
-In our case, this is as if we use a sigmoid nonlinearity that acts as the
+In our case, this is as if we used a sigmoid nonlinearity that acts as the
 identity in the backward pass! This suggests an alternative implementation,
 reminiscent of <em>straight through</em>&nbsp;tricks:</p>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">SigmoidStraightThrough</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">autograd</span><span class="o">.</span><span class="n">Function</span><span class="p">):</span>
@@ -676,10 +687,10 @@ reminiscent of <em>straight through</em>&nbsp;tricks:</p>
 
 <p>With this <code>sigmoid_straight_through</code> nonlinearity, we can now use mirror descent
 / natural gradient to learn constrained parameters without any changes to the
-optimizer.  This strategy is aware of the geometry of the dual space
-<span class="arithmatex">\((\mathcal{U}, \nabla^2\Phi)\)</span> and thus avoids taking extra small steps while
-still ensuring that all the iterates remain&nbsp;feasible.</p>
-<h1 id="conclusions">Conclusions<a class="headerlink" href="#conclusions" title="Permanent link">&para;</a></h1>
+optimizer, and with improved numerical stability.  This strategy is aware of the
+geometry of the dual space <span class="arithmatex">\((\mathcal{U}, \nabla^2\Phi)\)</span> and thus avoids taking
+extra small steps while still ensuring that all the iterates remain&nbsp;feasible.</p>
+<h1 id="conclusions">Conclusions.<a class="headerlink" href="#conclusions" title="Permanent link">&para;</a></h1>
 <p>We have explored the two most popular strategies for dealing with simple
 constraints: reparametrization and projected gradient optimization. We have
 looked into an information geometric generalization of projected gradient, which
@@ -696,14 +707,14 @@ real tasks. But this was not the main&nbsp;point&#8212;</p>
 optimization and its connections to geometry. 
 Geometric insights have been key to advances in learning over constrained spaces of
 matrices, such as symmetric, low-rank, orthonormal, s.p.d. matrices, etc.
-<label for="sn-13" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-13" class="margin-toggle"/><span class="sidenote">
+<label for="sn-14" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-14" class="margin-toggle"/><span class="sidenote">
 P.-A. Absil, R. Mahoney, and Rodolphe Sepulchre. 2008.
 <a href="https://press.princeton.edu/absil">Optimization Algorithms on Matrix
 Manifolds</a>.
 Princeton University Press. <span class="caps">ISBN</span> 978-0-691-13298-3
 </span> 
 Recently, the duality between mirror descent and natural gradient has been used
-to derive powerful algorithms for minimax problems.<label for="sn-14" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-14" class="margin-toggle"/><span class="sidenote">
+to derive powerful algorithms for minimax problems.<label for="sn-15" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-15" class="margin-toggle"/><span class="sidenote">
 F. Schäfer, A. Anandkumar, H. Owhadi. 2020.
 Competitive Mirror Descent.
 <a href="https://arxiv.org/abs/2006.10179">arxiv:2006.10179</a>.&nbsp;</span></p>
