@@ -837,7 +837,7 @@ This post was inspired by [Anima Anandkumar's
 talk](https://video.ias.edu/machinelearning/2020/0709-AnimaAnandkumar) at the 
 IAS Seminar on Theoretical Machine Learning. Before this talk, I had no idea
 about anything in the second part of this post.
-Thanks to Mathieu Blondel and Caio Corro for feedback on the blog post.
+Thanks to Mathieu Blondel, Caio Corro, and Fabian Pedregosa for feedback on the blog post.
 Blogging is work, so I acknowledge my funding from the European Research Council
 StG DeepSPIN 758969 and Fundação para a Ciência e Tecnologia contract UIDB/50008/2020. 
 
