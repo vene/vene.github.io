@@ -450,7 +450,8 @@ $$ \operatorname{Proj}_\mathcal{X}\big(x^{(t+0.5)}\big) = \argmin_{x \in \mathca
 This update can be interpreted as approximately minimizing a regularized linearization of
 $f,$
 
-$$ x^{(t+1)} \leftarrow \arg\min_{x \in \mathcal{X}}  \DP{\nabla f(x^{(t)})}{x} + \frac{1}{2\alpha_t}\|x - x^{(t)}\|^2.
+$$ x^{(t+1)} \leftarrow \arg\min_{x \in \mathcal{X}}  \DP{\nabla f(x^{(t)})}{x} + 
+{\frac{1}{2\alpha_t}\|x - x^{(t)}\|^2}.
 $$
 
 ??? note "Explanation"
@@ -520,7 +521,8 @@ distance. Replacing $\frac{1}{2}\|\cdot\|^2$ by $D_\Psi$ in the projected
 gradient algorithm leads to a generalization known as **mirror descent**,
 
 $$
-x^{(t+1)} \leftarrow \arg\min_{x \in \mathcal{X}}  \DP{\nabla f(x^{(t)})}{x} + \frac{1}{\alpha_t}D_\psi(x, x^{(t)}).
+x^{(t+1)} \leftarrow \arg\min_{x \in \mathcal{X}}  \DP{\nabla f(x^{(t)})}{x} + 
+{\frac{1}{\alpha_t}D_\psi(x, x^{(t)})}.
 $$
 
 Since $\Psi$ is twice differentiable and strongly convex, it has a gradient

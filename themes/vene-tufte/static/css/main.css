@@ -298,6 +298,19 @@ pre {
   margin-top: 1rem;
 }
 
+/* katex */
+
+.katex {
+  font-size: 1rem;
+}
+
+.katex-display > .katex {
+  white-space: normal;
+  /*white-space: nowrap;
+  overflow-x: scroll;
+  overflow-y: hidden;*/
+}
+
 
 /* details and summary */
 
@@ -373,6 +386,10 @@ details.no-details:not([open]) summary {
   img {
     width: 28rem;
     margin-left: 1rem;
+  }
+
+  .katex {
+    font-size: 1.21rem;
   }
 }
 
