@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Optimizing with constraints: reparametrization and geometry.</title>
   <meta name="author" content="Vlad" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"
+  integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4"
+  crossorigin="anonymous"></script>
   <link rel="stylesheet" type="text/css" 
         href="//vene.ro/theme/css/main.css" />
   <link rel="stylesheet" type="text/css" 
@@ -18,11 +22,6 @@
 
   <!-- OpenGraph Info -->
 
-
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"
-  integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4"
-  crossorigin="anonymous"></script>
   <script src="//vene.ro/theme/js/main.js"></script>
 
 </head>
@@ -435,7 +434,8 @@ us outside of <span class="arithmatex">\(\mathcal{X}\)</span>, and then move the
 <div class="arithmatex">\[ \operatorname{Proj}_\mathcal{X}\big(x^{(t+0.5)}\big) = \argmin_{x \in \mathcal{X}} \| x - x^{(t+0.5)} \|. \]</div>
 <p>This update can be interpreted as approximately minimizing a regularized linearization of
 <span class="arithmatex">\(f,\)</span></p>
-<div class="arithmatex">\[ x^{(t+1)} \leftarrow \arg\min_{x \in \mathcal{X}}  \DP{\nabla f(x^{(t)})}{x} + \frac{1}{2\alpha_t}\|x - x^{(t)}\|^2.
+<div class="arithmatex">\[ x^{(t+1)} \leftarrow \arg\min_{x \in \mathcal{X}}  \DP{\nabla f(x^{(t)})}{x} + 
+{\frac{1}{2\alpha_t}\|x - x^{(t)}\|^2}.
 \]</div>
 <details class="note"><summary>Explanation</summary><p>Why does this update make sense, and where does it come from? We are trying to
 minimize a function <span class="arithmatex">\(f(x)\)</span>, but we don&#8217;t know what it looks like globally: we only
@@ -486,7 +486,8 @@ euclidean distance: given strictly convex, twice-differentiable <span class="ari
 distance. Replacing <span class="arithmatex">\(\frac{1}{2}\|\cdot\|^2\)</span> by <span class="arithmatex">\(D_\Psi\)</span> in the projected
 gradient algorithm leads to a generalization known as <strong>mirror descent</strong>,</p>
 <div class="arithmatex">\[
-x^{(t+1)} \leftarrow \arg\min_{x \in \mathcal{X}}  \DP{\nabla f(x^{(t)})}{x} + \frac{1}{\alpha_t}D_\psi(x, x^{(t)}).
+x^{(t+1)} \leftarrow \arg\min_{x \in \mathcal{X}}  \DP{\nabla f(x^{(t)})}{x} + 
+{\frac{1}{\alpha_t}D_\psi(x, x^{(t)})}.
 \]</div>
 <p>Since <span class="arithmatex">\(\Psi\)</span> is twice differentiable and strongly convex, it has a gradient
 <span class="arithmatex">\(\psi = \nabla\Psi\)</span> which is invertible. Solving for the mirror descent update
