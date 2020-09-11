@@ -261,7 +261,7 @@ them at the end, but we need to bake them into our optimization strategy.[ref]
 There is an important special case where (QP) can be solved exactly: the
 case $Q = I$. In this case, the problem becomes
 $\arg\min_{x \in \mathcal{X}} \| x - x_0 \|^2_2,$
-which is known as the *euclidean projection* of $x_0$ onto $\mathcal{X}$.
+which is known as the *Euclidean projection* of $x_0$ onto $\mathcal{X}$.
 If $\mathcal{X}$ are box constraints, the projection decomposes into a series of
 independent 1-d projections, which we've seen can be solved by
 clipping.[/ref]
@@ -360,7 +360,7 @@ automatically by PyTorch autodiff:
 
 ```python
 
-def optim_reparam(u_init, lr=.1, max_iter=100000):
+def optim_reparam(u_init, lr=.1, max_iter=100):
     u = u_init.clone().requires_grad_()
 
     for i in range(max_iter):
@@ -372,21 +372,27 @@ def optim_reparam(u_init, lr=.1, max_iter=100000):
 ```
 
 With a very small learning rate, we get a glimpse into the dynamics of this
-method. For comparison, we include the unconstrained trajectory.
+method.[ref]Technically, as the learning rate goes to zero, we are simulating a
+continuous *gradient flow*, of which gradient descent is a discretized
+approximation. For more about gradient flows, check out [Francis Bach's post](https://francisbach.com/gradient-flows/).[/ref]
+For comparison, we include the unconstrained trajectory.
 
-<img alt="quadratic landscape" src="/images/mirror_quad_lr0.010_reparam.png"></img>
+<img alt="quadratic landscape" src="/images/mirror_primal_lr0.010_reparam.png"></img>
 
 In practice, we would use a much larger learning rate to accelerate
 optimization:
 
-<img alt="quadratic landscape" src="/images/mirror_quad_lr0.200_reparam.png"></img>
+<img alt="quadratic landscape" src="/images/mirror_primal_lr0.200_reparam.png"></img>
 
 We can see that even with a large learning rate, the reparametrization method
 takes much smaller steps, especially as it gets closer to the boundary of the
-domain. At any point $u$, the reparametrized gradient can be written using the
+domain. The steps are so small, that we only show the first 20 markers, to avoid
+clutter. Why does this happen? At any point $u$, the reparametrized gradient can be written using the
 chain rule:
 
-$$ \pfrac{}{u} f(\sigma(u)) = \pfrac{f(x)}{x}\biggr\rvert_{x=\sigma(u)} \pfrac{\sigma(u)}{u}. $$
+$$ \pfrac{}{u} f(\sigma(u)) = 
+\pfrac{\sigma(u)}{u} 
+\pfrac{f(x)}{x}\biggr\rvert_{x=\sigma(u)} $$
 
 This is the unconstrained gradient at $x=\sigma(u)$, rescaled by the Jacobian of $\sigma$.
 Since $\sigma$ acts elementwise, its Jacobian is a diagonal matrix, with
@@ -423,13 +429,16 @@ def optim_pg(x_init, lr=.1, max_iter=100):
     return x
 ```
 
-<img alt="quadratic landscape" src="/images/mirror_quad_lr0.010_pg.png"></img>
+Let's visualize the trajectory. From now on, we will zoom in a bit on the region
+of interest.
+
+<img alt="quadratic landscape" src="/images/mirror_primal_lr0.010_pg.png"></img>
 
 It looks like the projected gradient method tends to follow the unconstrained
 trajectory while sticking to the boundary of the domain. Of course, with larger
 steps, the differences become more pronounced.
 
-<img alt="quadratic landscape" src="/images/mirror_quad_lr0.200_pg.png"></img>
+<img alt="quadratic landscape" src="/images/mirror_primal_lr0.200_pg.png"></img>
 
 In this instance, PG is the clear winner: look how fast it makes progress. With
 less well-behaved and non-convex functions this need not be the case. So we are
@@ -503,7 +512,7 @@ x^{(t)} - \alpha_t \nabla f(x^{(t)})\big).$$
     $$
 
 Now, let's pay special attention to 
-the function $D(x, y) = \| x - y \|^2 = \sum_i (x_i - y_i)^2$, the *squared euclidean distance*.
+the function $D(x, y) = \| x - y \|^2 = \sum_i (x_i - y_i)^2$, the *squared Euclidean distance*.
 We employ this function to ensure that each update stays close to $x^{(t)}$,
 because the linear approximation is not good if we go to far. But this is not
 the only good measure of closeness:
@@ -511,12 +520,12 @@ here, geometry enters the stage!  Euclidean geometry is
 convenient and comfortable for thinking about spaces like $\reals^d,$ but
 it is not always the best model.
 
-The **Bregman divergence** provides a convenient generalization of the squared
-euclidean distance: given strictly convex, twice-differentiable $\Psi$,
+**Bregman divergences** provide a convenient generalization of the squared
+Euclidean distance: given strictly convex, twice-differentiable $\Psi$,
 
 $$ D_\Psi(x, y) \coloneqq \Psi(x) - \Psi(y) - \DP{\nabla \Psi(y)}{x - y}. $$
 
-For $\Psi = \frac{1}{2} \| \cdot \|^2$, this recovers the squared euclidean
+For $\Psi = \frac{1}{2} \| \cdot \|^2$, this recovers the squared Euclidean
 distance. Replacing $\frac{1}{2}\|\cdot\|^2$ by $D_\Psi$ in the projected
 gradient algorithm leads to a generalization known as **mirror descent**,
 
@@ -529,7 +538,7 @@ Since $\Psi$ is twice differentiable and strongly convex, it has a gradient
 $\psi = \nabla\Psi$ which is invertible. Solving for the mirror descent update
 yields a so-called Bregman projection,[ref]Not technically a projection, 
 since iterating it twice need not give the same
-result, but the term emphasizes the parallel to the euclidean case.[/ref]
+result, but the term emphasizes the parallel to the Euclidean case.[/ref]
 
 $$
 \begin{aligned}
@@ -588,28 +597,216 @@ back. Reparametrization rewrites the problem in dual coordinates and performs
 gradient descent: this is not the same, and the trajectories are quite
 different!
 
-<img alt="quadratic landscape" src="/images/mirror_quad_lr0.010_md.png"></img>
+<img alt="quadratic landscape" src="/images/mirror_primal_lr0.010_md.png"></img>
 
 With a larger step size, we see that mirror descent takes much larger steps than
 reparametrization does.
 
-<img alt="quadratic landscape" src="/images/mirror_quad_lr0.200_md.png"></img>
+<img alt="quadratic landscape" src="/images/mirror_primal_lr0.200_md.png"></img>
 
 Now that we figured out that we may think about the problem in primal or dual
 coordinates, we may also visualize the optimization trajectory in dual coordinates.
 
-<img alt="quadratic landscape" src="/images/quad_lr0.010_md.png"></img>
+<img alt="quadratic landscape" src="/images/mirror_dual_lr0.010_md.png"></img>
 
 Yet, the way that mirror descent leans on moving from $\mathcal{X}$ to
 $\mathcal{U}$ is very familiar to the reparametrization strategy. Is there a
 deeper connection between the two? We illuminate it next.
 
-# Duality between mirror descent <br/>and natural gradient.
+# Duality between mirror descent and natural&nbsp;gradient.
 
-The main result.
+We have seen that different choices of $\Psi$ induce different geometries
+even on top of the same space. (Case in point: entropy vs. $\frac{1}{2}\|\cdot\|^2$).
+To handle this ambiguity, we need a structure that attaches the geometry along
+with the underlying space. This, (with some handwaving), is a *Riemannian
+manifold*: a pair $(\mathcal{U}, G)$ where $\mathcal{X} \subseteq \reals^d$
+is an underlying space[ref]Riemannian manifolds are more general than this, but
+in this post, for simplicity, we only look at the case where $\mathcal{X}\subseteq \reals^d$.
+To be fully general, the notation ramps up quickly.
+See [Agustinus Kristiadi's
+post](https://wiseodd.github.io/techblog/2019/02/22/riemannian-geometry/) 
+and [Frank Nielsen's tutorial](https://arxiv.org/abs/1808.08271)
+for an introduction.
+[/ref]
+and the *metric tensor* $G: \mathcal{U} \rightarrow \reals^{d \times d}$
+is a function such that $G(u_0)$ is a p.s.d. matrix that induces a 
+squared distance around $u_0$:
+
+$$ d^2_{u_0}(u, v) = \frac{1}{2} (u-v)^\top G(u_0) (u - v). $$
+
+What we observed earlier is in fact a duality between the Riemannian manifolds
+$(\mathcal{X}, \nabla^2 \Psi)$ and $(\mathcal{U}, \nabla^2 \Phi),$ 
+where $\Phi$ is the antiderivative of $\phi$, i.e., $\nabla\Phi=\phi$.
+This is an important duality studied in the field of information geometry.[ref]
+S. Amari, A. Cichocki. 2010. 
+[Information geometry of divergence
+functions.](http://fluid.ippt.gov.pl/bulletin/(58-1)183.pdf)
+Bulletin of the Polish Academy of Sciences, 58(1).
+[/ref]
+
+We may now revisit the reparametrization strategy, in light of what we learned
+so far. To reparametrize the constraint away, we work in **dual coordinates**
+$u \in \mathcal{U}$, and update:
+
+$$ u^{(t+1)} \leftarrow u^{(t)} - \nabla_u f(\phi(u)). $$
+
+In our case $\mathcal{U}=\reals^2$ and $\phi = \sigma$, but let's use the more
+general notation. The update above ignores the geometry of $\mathcal{U}$, in
+other words, operates on the trivial manifold $(\mathcal{U}, I_d)$ -- the
+metric tensor is the identity matrix everywhere.  When optimizing some function $\tilde{f}(u)$
+over a manifold $(\mathcal{U}, G)$, a convenient algorithm is natural gradient, which takes the
+form
+
+$$ u^{(t+1)} \leftarrow u^{(t)} - \alpha_t [G(u)]^{-1} \nabla \tilde{f}(u^{(t)}). $$
+
+??? note "Derivation"
+
+    We follow the same steps as for gradient descent, but we use the induced distance
+    $d_{u^{(t)}}$ to find an update direction. We must solve the problem
+
+    $$ \argmin_{u\in\mathcal{U}} \DP{u}{\nabla \tilde{f}(u^{(t)})} + \frac{1}{2\alpha_t} 
+    {(u - u^{(t)})^\top G(u^{(t)}) (u - u^{(t)}).} $$
+
+    Rearranging gives the equivalent problem
+
+    $$ \argmin_{u\in\mathcal{U}} d^2_{u^{(t)}}
+    (u, u^{(t)} - \alpha_t[G(u^{(t)})]^{-1} \nabla \tilde{f}(u^{(t)})).$$
+
+    Assuming no constraints (i.e., $\mathcal{U}=\reals^d$), this yields the
+    desired update.
+
+It turns out that for a pair of Bregman dual manifolds
+$(\mathcal{X}, \nabla^2 \Psi)$ and $(\mathcal{U}, \nabla^2 \Phi),$ 
+**mirror descent in the primal space is equivalent to natural gradient in the
+dual space!** This result, due to Raskutti and Mukherjee (2015),[ref]
+G. Raskutti and S. Mukherjee. 2015. *The information geometry of mirror descent.*
+In: IEEE Transactions on Information Theory, vol. 61, issue 3.
+[arXiv:1310.7780](https://arxiv.org/abs/1310.7780).[/ref]
+means we can get a geometry-aware flavor of the
+REP algorithm,
+
+$$ u^{(t+1)} \leftarrow u^{(t)} - \alpha_t [\nabla^2 \Phi(u)]^{-1} \nabla_u {f}(\phi(u^{(t)})). $$
+
+This algorithm takes the exact same steps as mirror descent, is arguably easier
+to implement, and -- since it maintains iterates in dual space -- is more
+numerically stable.
+
+A first attempt at implementing this would be:
+
+```python
+def optim_rep_natural(u_init, lr=.1, max_iter=100):
+
+    u = u_init.clone().requires_grad_()
+
+    for i in range(max_iter):
+        x = torch.sigmoid(u)
+        dsigmoid = (x * (1 - x)).detach()  # diagonal of ∇²Φ(u)
+        f(x).backward()
+        u.data -= lr * u.grad / dsigmoid
+        u.grad.zero_()
+
+    return u
+```
+
+and we can visually check that we get exactly the same trajectory as mirror descent.
+
+<img alt="quadratic landscape" src="/images/mirror_primal_lr0.010_nat.png"></img>
+
+But let's look a bit closer! Since $\phi = \nabla\Phi$, our metric tensor is
+none other than
+
+$$ \nabla^2\Phi(u) = \pfrac{\phi(u)}{u}, $$
+
+and, putting the whole update together, we see that
+
+$$ [\nabla^2\Phi(u)]^{-1} \nabla_u f(\phi(u)) = 
+{\left(\pfrac{\phi(u)}{u}\right)^{-1}}
+{\pfrac{\phi(u)}{u}}
+{\pfrac{f(x)}{x}\biggr\rvert_{x=\phi(u)}}  $$
+
+so natural gradient cancels out the Jacobian of $\phi$ in the chain rule!
+In our case, this is as if we use a sigmoid nonlinearity that acts as the
+identity in the backward pass! This suggests an alternative implementation,
+reminiscent of *straight through* tricks:
+
+```python
+class SigmoidStraightThrough(torch.autograd.Function):
+
+    @staticmethod
+    def forward(ctx, u):
+        return torch.sigmoid(u)
+
+    @staticmethod
+    def backward(ctx, dx):
+        return dx
+
+
+def sigmoid_straight_through(u):
+    return SigmoidStraightThrough.apply(u)
+
+
+def optim_rep_natural_st(u_init, lr=.1, max_iter=100):
+
+    u = u_init.clone().requires_grad_()
+
+    for i in range(max_iter):
+        f(sigmoid_straight_through(u)).backward()
+        u.data -= lr * u.grad
+        u.grad.zero_()
+
+        print(u.data, torch.sigmoid(u.data))
+
+    return u
+```
+
+With this `sigmoid_straight_through` nonlinearity, we can now use mirror descent
+/ natural gradient to learn constrained parameters without any changes to the
+optimizer.  This strategy is aware of the geometry of the dual space
+$(\mathcal{U}, \nabla^2\Phi)$ and thus avoids taking extra small steps while
+still ensuring that all the iterates remain feasible.
+
+# Conclusions
+
+We have explored the two most popular strategies for dealing with simple
+constraints: reparametrization and projected gradient optimization. We have
+looked into an information geometric generalization of projected gradient, which
+turns out to lead to an equivalent *dual* algorithm that resembles
+reparametrization, but with a gradient correction that improves its performance.
+(And, if $f$ is convex, results in a convex optimization procedure, unlike the
+reparametrized case.)
+
+Of course, we only looked at a simple quadratic test case, and we did not check
+what happens when using accelerated methods or adaptive learning rates (e.g,.
+Adam).  It would be interesting to see if the drop-in straight-through sigmoid
+can improve performance compared to direct reparametrization in
+real tasks. But this was not the main point--
+
+With this post, I have hopefully stirred your interest into constrained
+optimization and its connections to geometry. 
+Geometric insights have been key to advances in learning over constrained spaces of
+matrices, such as symmetric, low-rank, orthonormal, s.p.d. matrices, etc.
+[ref]
+P.-A. Absil, R. Mahoney, and Rodolphe Sepulchre. 2008.
+[Optimization Algorithms on Matrix
+Manifolds](https://press.princeton.edu/absil).
+Princeton University Press. ISBN 978-0-691-13298-3
+[/ref] 
+Recently, the duality between mirror descent and natural gradient has been used
+to derive powerful algorithms for minimax problems.[ref]
+F. Schäfer, A. Anandkumar, H. Owhadi. 2020.
+Competitive Mirror Descent.
+[arxiv:2006.10179](https://arxiv.org/abs/2006.10179).
+[/ref]
+
 
 # Acknowledgements.
 
-Anima Anandkumar's talk and paper, Caio.
+This post was inspired by [Anima Anandkumar's
+talk](https://video.ias.edu/machinelearning/2020/0709-AnimaAnandkumar) at the 
+IAS Seminar on Theoretical Machine Learning. Before this talk, I had no idea
+about anything in the second part of this post.
+Thanks to Caio Corro for feedback on the blog post.
+Blogging is work, so I acknowledge my funding from the European Research Council
+StG DeepSPIN 758969 and Fundação para a Ciência e Tecnologia contract UIDB/50008/2020. 
 
 

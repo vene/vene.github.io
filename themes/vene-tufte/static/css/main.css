@@ -80,6 +80,11 @@ p, li {
   vertical-align: baseline;
 }
 
+li ul li,
+li ol li {
+  margin-top: 1rem;
+}
+
 p.subtitle {
   font-style: italic;
 }
