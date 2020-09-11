@@ -565,7 +565,7 @@ $$
 \begin{aligned}
 u^{(t+½)} &\leftarrow \psi(x^{(t)}) - \alpha_t \nabla f(x^{(t)})\,, \\ 
 x^{(t+1)} &\leftarrow 
-\argmin_{x \in \mathcal{X}} D_\Psi\big(x,  \psi^{-1}(u^{(t+0.5)})\big)\,. \\
+\argmin_{x \in \mathcal{X}} D_\Psi\big(x,  \psi^{-1}(u^{(t+½)})\big)\,. \\
 \end{aligned}
 $$
 
@@ -744,11 +744,10 @@ and, putting the whole update together, we see that
 $$ [\nabla^2\Phi(u)]^{-1} \nabla_u f(\phi(u)) = 
 {\left(\pfrac{\phi(u)}{u}\right)^{-1}}
 {\pfrac{\phi(u)}{u}}
-{\pfrac{f(x)}{x}\biggr\rvert_{x=\phi(u)}}\,,  $$
+{\pfrac{f(x)}{x}\biggr\rvert_{x=\phi(u)}} $$
 
-so natural gradient cancels out the Jacobian of $\phi$ in the chain rule!
-In our case, this is as if we used a sigmoid nonlinearity that acts as the
-identity in the backward pass! This suggests an alternative implementation,
+Natural gradient cancels out the Jacobian of $\phi$ in the chain rule!
+This suggests an alternative implementation,
 reminiscent of *straight-through* tricks: we use a reparametrization function
 $\sigma$ that acts as a sigmoid in the forward pass, but acts as if it were the
 identity function in the backward pass.[ref]
