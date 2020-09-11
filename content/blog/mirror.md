@@ -10,7 +10,6 @@ Summary:  Gradient methods are popular for training machine learning models.
     in fact deeply connected. In particular, mirror descent is equivalent to
     reparametrization with a straight-through gradient.
 
-
 When training machine learning models, and deep networks in particular,
 we typically use gradient-based methods. But if we require the weights to
 satisfy some constraints, things quickly get more complicated.
@@ -72,7 +71,7 @@ $$
 
 In machine learning, we fit models to data by minimizing an objective,
 
-$$\min_{x \in \mathcal{X}} f(x). \tag{OPT}$$
+$$\min_{x \in \mathcal{X}} f(x)\,. \tag{OPT}$$
 
 Here, $x$ denotes the parameters to be learned, for instance, the neural network weights.
 They typically take values in $\mathcal{X}=\reals$, and we train networks by
@@ -80,7 +79,7 @@ some variant of the *gradient* method: we choose an initial configuration $x^{(0
 and successively applying updates of the form:
 
 $$
-x^{(t+1)} \leftarrow x^{(t)} - \alpha^{(t)} \nabla f(x).
+x^{(t+1)} \leftarrow x^{(t)} - \alpha^{(t)} \nabla f(x^{(t)})\,.
 $$
 
 In deep learning, we typically use stochastic flavors that
@@ -100,26 +99,26 @@ constraint we might deal with.
 
 For one-dimensional convex problems, *i.e.,* $\mathcal{X} = [a, b] \subset
 \reals$, box constraints do not complicate the problem: we can solve the
-unconstrained problem $x_{\text{unc}}^* = \arg\min_{x\in\reals} f(x)$.  If the
+unconstrained problem $x_{\text{unc}}^* = \argmin_{x\in\reals} f(x)$.  If the
 answer satisfies the constraint, then it must be the solution of the constrained
 problem as well. If not, the answer can be found by *clipping* to the interval:
 
 $$ x^\star = \operatorname{clip}_{[a,b]}(x_\text{unc}^\star)
-\coloneqq \min(a, \max(b, x_\text{unc}^\star)).
+\coloneqq \min(a, \max(b, x_\text{unc}^\star))\,.
 $$
 
 ??? note "Proof"
 
     We add non-negative dual variables $\mu_a$ and $\mu_b$ to handle the inequality
-    constraints $x \geq a$ and $x \leq b$, and write the lagrangian,
+    constraints $x \geq a$ and $x \leq b$, and write the Lagrangian,
 
-    $$\mathcal{L}(x) = f(x) + \mu_a (a-x) + \mu_b(x-b).$$
+    $$\mathcal{L}(x) = f(x) + \mu_a (a-x) + \mu_b(x-b)\,.$$
 
     An optimal $x^\star$ must satisfiy the original constraints $(a \leq x^\star \leq b)$
-    and be a stationary point of the lagrangian:
+    and be a stationary point of the Lagrangian:
 
     $$ 
-    D_x \mathcal{L}(x^\star) = 0 \iff f'(x^\star) = \mu_a - \mu_b.
+    D_x \mathcal{L}(x^\star) = 0 \iff f'(x^\star) = \mu_a - \mu_b\,.
     \tag{F}
     $$ 
 
@@ -127,7 +126,7 @@ $$
     complementary slackness:
 
     $$
-    \mu_a (a - x^\star) = 0, \quad\text{and}\quad \mu_b (x^\star - b) = 0.
+    \mu_a (a - x^\star) = 0, \quad\text{and}\quad \mu_b (x^\star - b) = 0\,.
     $$
 
     Let $x^\star_\text{unc}$ be the solution of the unconstrained problem,
@@ -257,7 +256,7 @@ interactions between the variables. We demonstate this on a quadratic problem
 which will become the main focus of the rest of this post,
 
 $$ \min_{x \in \mathcal{X}} 
-f(x) \coloneqq \frac{1}{2}~(x - x_0)^\top Q (x - x_0).\tag{QP} $$
+f(x) \coloneqq \frac{1}{2}~(x - x_0)^\top Q (x - x_0)\,.\tag{QP} $$
 
 Let us visualize this problem for the specific case of
 the unit square $\mathcal{X} = [0,1] \times [0,1] \subset \reals^2$,
@@ -271,19 +270,19 @@ result of clipping the unconstrained minimum to the box.
 
 <img alt="quadratic landscape" src="/images/mirror_quad_landscape.png"></img>
 
-This means that, in general, we cannot simply ignore the constraints and apply
-them at the end, but we need to bake them into our optimization strategy.[ref]
+Constraint handling cannot be left as an afterthought: 
+it needs to be baked into the optimization strategy.[ref]
 There is an important special case where (QP) can be solved exactly: the
 case $Q = I$. In this case, the problem becomes
-$\arg\min_{x \in \mathcal{X}} \| x - x_0 \|^2_2,$
+$\argmin_{x \in \mathcal{X}} \| x - x_0 \|^2_2,$
 which is known as the *Euclidean projection* of $x_0$ onto $\mathcal{X}$.
 If $\mathcal{X}$ are box constraints, the projection decomposes into a series of
 independent 1-d projections, which we've seen can be solved by
 clipping.[/ref]
 
 As a warm up, let us implement our quadratic function
-$f(x) = \frac{1}{2} (x - x_0)^\top Q (x - x_0)$ in PyTorch, 
-as well as a minimal gradient descent from scratch.
+$f(x) = \frac{1}{2} {(x - x_0)^\top}Q{(x - x_0)}$ in PyTorch, 
+as well as a minimal gradient descent loop from scratch.
 
 ```python
 import torch
@@ -330,15 +329,15 @@ optimization.[/ref]
     function,[ref]General intervals $[a,b]$ are obtained by affinely
     transforming $[0,1]$.[/ref]
 
-    $$ \sigma(u) = \frac{1}{1 + \exp(-u)}.$$
+    $$ \sigma(u) = \frac{1}{1 + \exp(-u)}\,.$$
 
  2. *Projected gradient (PG).* Perform unconstrained gradient updates, then
     project back onto the domain after each update:
 
     $$
     \begin{aligned}
-    x^{(t+0.5)} &\leftarrow x^{(t)} - \alpha^{(t)} \nabla f(x^{(t)}) \\
-    x^{(t+1)} &\leftarrow \operatorname{Proj}_\mathcal{X}\big(x^{(t+0.5)}\big)
+    x^{(t+½)} &\leftarrow x^{(t)} - \alpha^{(t)} \nabla f(x^{(t)})\,, \\
+    x^{(t+1)} &\leftarrow \operatorname{Proj}_\mathcal{X}\big(x^{(t+½)}\big)\,.
     \\
     \end{aligned}
     $$
@@ -366,7 +365,7 @@ function.[/ref]
 In our case, we use a logistic sigmoid reparametrization to get the
 unconstrained non-convex problem
 
-$$ \min_{u \in \reals^2} f(\sigma(u)), $$
+$$ \min_{u \in \reals^2} f(\sigma(u))\,, $$
 
 where $\sigma$ is applied element-wise.  
 When reparametrizing, $x$ is no longer a learned parameter, but a function of
@@ -387,7 +386,7 @@ def optim_reparam(u_init, lr=.1, max_iter=100):
 ```
 
 With a very small learning rate, we get a glimpse into the dynamics of this
-method.[ref]Technically, as the learning rate goes to zero, we are simulating a
+method.[ref]As the learning rate goes to zero, we are simulating a
 continuous *gradient flow*, of which gradient descent is a discretized
 approximation. For more about gradient flows, check out [Francis Bach's post](https://francisbach.com/gradient-flows/).[/ref]
 For comparison, we include the unconstrained trajectory.
@@ -465,17 +464,17 @@ In the projected gradient method, we take unconstrained steps, which might take
 us outside of $\mathcal{X}$, and then move the solution back to $\mathcal{X}$ by
 projection:
 
-$$ x^{(t+1)} \leftarrow \operatorname{Proj}_\mathcal{X}\big(x^{(t+0.5)}\big). $$
+$$ x^{(t+1)} \leftarrow \operatorname{Proj}_\mathcal{X}\big(x^{(t+½)}\big)\,. $$
 
-Projection finds the point $x \in \mathcal{X}$ closest to $x^{(t+0.5)}$, i.e.,
+Projection finds the point $x \in \mathcal{X}$ closest to $x^{(t+½)}$, i.e.,
 
-$$ \operatorname{Proj}_\mathcal{X}\big(x^{(t+0.5)}\big) \coloneqq \argmin_{x \in \mathcal{X}} \| x - x^{(t+0.5)} \|^2. $$
+$$ \operatorname{Proj}_\mathcal{X}\big(x^{(t+½)}\big) \coloneqq \argmin_{x \in \mathcal{X}} \| x - x^{(t+½)} \|^2\,. $$
 
 The projected gradient update can be interpreted as minimizing a regularized linearization of
 $f$ around the current iterate,
 
-$$ x^{(t+1)} \leftarrow \arg\min_{x \in \mathcal{X}}  \DP{\nabla f(x^{(t)})}{x} + 
-{\frac{1}{2\alpha_t}\|x - x^{(t)}\|^2}.
+$$ x^{(t+1)} \leftarrow \argmin_{x \in \mathcal{X}}  \DP{\nabla f(x^{(t)})}{x} + 
+{\frac{1}{2\alpha_t}\|x - x^{(t)}\|^2}\,.
 $$
 
 ??? note "Explanation"
@@ -486,43 +485,43 @@ $$
     that we may query one at a time. At any point $x_0$,
     the first-order Taylor expansion is:
 
-    $$ f(x_0 + \delta) = f(x_0) + \DP{\nabla f(x_0)}{\delta} + o(\|\delta\|). $$
+    $$ f(x_0 + \delta) = f(x_0) + \DP{\nabla f(x_0)}{\delta} + o(\|\delta\|)\,. $$
 
     To get a linear approximation of $f$ we can plug in $\delta = x - x_0$:
 
-    $$ f(x) =  f(x_0) + \DP{\nabla f(x_0)}{x - x_0} + o(\|x - x_0\|). $$
+    $$ f(x) =  f(x_0) + \DP{\nabla f(x_0)}{x - x_0} + o(\|x - x_0\|)\,. $$
 
     So as long as $x$ is not too far from $x_0$, we have 
 
-    $$f(x) \approx \tilde{f}_{x_0}(x) \coloneqq f(x_0) + \DP{\nabla f(x_0)}{x - x_0}.$$
+    $$f(x) \approx \tilde{f}_{x_0}(x) \coloneqq f(x_0) + \DP{\nabla f(x_0)}{x - x_0}\,.$$
 
     This affine approximation is much easier to
     minimize, but it is only accurate locally, therefore, we use it iteratively,
     taking a small step, then updating the approximation:
 
     $$ 
-    x^{(t+1)} \leftarrow \arg\min_{x \in \mathcal{X}} \tilde f_{x^{(t)}}(x) + \frac{1}{2\alpha_t}\|x - x^{(t)}\|^2. 
+    x^{(t+1)} \leftarrow \argmin_{x \in \mathcal{X}} \tilde f_{x^{(t)}}(x) + \frac{1}{2\alpha_t}\|x - x^{(t)}\|^2\,. 
     $$
 
     where the term on the right keeps us close to $x^{(t)}$ to ensure the
     approximation is not too bad. Clearing up the constant terms from inside the
-    $\arg\min$ yields the desired expression.
+    $\argmin$ yields the desired expression.
 
 Rearranging the terms reveals exactly the projected gradient update,
 
 $$ x^{(t+1)} \leftarrow \operatorname{Proj}_{\mathcal{X}}\big(
-x^{(t)} - \alpha_t \nabla f(x^{(t)})\big).$$
+x^{(t)} - \alpha_t \nabla f(x^{(t)})\big)\,.$$
 
 ??? note "Derivation"
     
     $$
     \begin{aligned}
-     & \arg\min_{x \in \mathcal{X}} \DP{x}{\nabla f(x^{(t)})} + \frac{1}{2\alpha_t} \|x-x^{(t)}\|^2 \\
-    =& \arg\min_{x \in \mathcal{X}} \DP{x}{\nabla f(x^{(t)})} + \frac{1}{2\alpha_t} \|x\|^2 - \frac{1}{\alpha_t} \DP{x}{x^{(t)}} \\
-    =& \arg\min_{x \in \mathcal{X}} \alpha_t \DP{x}{\nabla f(x^{(t)})} + \frac{1}{2} \|x\|^2 - \DP{x}{x^{(t)}} \\
-    =& \arg\min_{x \in \mathcal{X}} \DP{x}{\underbrace{\alpha_t \nabla f(x^{(t)}) - x^{(t)}}_{-x^{(t+0.5)}}} + \frac{1}{2} \|x\|^2 \\
-    =& \arg\min_{x \in \mathcal{X}} \frac{1}{2} \| x - x^{(t+0.5)} \|^2 \textcolor{gray}{ - \frac{1}{2} \|x^{(t+0.5)}\|} \\
-    =& \operatorname{Proj}_{\mathcal{X}} (x^{(t+0.5)}).
+     & \argmin_{x \in \mathcal{X}} \DP{x}{\nabla f(x^{(t)})} + \frac{1}{2\alpha_t} \|x-x^{(t)}\|^2 \\
+    =& \argmin_{x \in \mathcal{X}} \DP{x}{\nabla f(x^{(t)})} + \frac{1}{2\alpha_t} \|x\|^2 - \frac{1}{\alpha_t} \DP{x}{x^{(t)}} \\
+    =& \argmin_{x \in \mathcal{X}} \alpha_t \DP{x}{\nabla f(x^{(t)})} + \frac{1}{2} \|x\|^2 - \DP{x}{x^{(t)}} \\
+    =& \argmin_{x \in \mathcal{X}} \DP{x}{\underbrace{\alpha_t \nabla f(x^{(t)}) - x^{(t)}}_{-x^{(t+½)}}} + \frac{1}{2} \|x\|^2 \\
+    =& \argmin_{x \in \mathcal{X}} \frac{1}{2} \| x - x^{(t+½)} \|^2 \textcolor{gray}{ - \frac{1}{2} \|x^{(t+½)}\|} \\
+    =& \operatorname{Proj}_{\mathcal{X}} (x^{(t+½)})\,.
     \end{aligned}
     $$
 
@@ -545,15 +544,15 @@ are an important class of divergences. They are convex in the first argument, bu
 [/ref]
 given strictly convex, twice-differentiable $\Psi$,
 
-$$ D_\Psi(x, y) \coloneqq \Psi(x) - \Psi(y) - \DP{\nabla \Psi(y)}{x - y}. $$
+$$ D_\Psi(x, y) \coloneqq \Psi(x) - \Psi(y) - \DP{\nabla \Psi(y)}{x - y}\,. $$
 
 For $\Psi = \frac{1}{2} \| \cdot \|^2$, this recovers the squared Euclidean
 distance. Replacing $\frac{1}{2}\|\cdot\|^2$ by $D_\Psi$ in the projected
 gradient algorithm leads to a generalization known as **mirror descent**,
 
 $$
-x^{(t+1)} \leftarrow \arg\min_{x \in \mathcal{X}}  \DP{\nabla f(x^{(t)})}{x} + 
-{\frac{1}{\alpha_t}D_\psi(x, x^{(t)})}.
+x^{(t+1)} \leftarrow \argmin_{x \in \mathcal{X}}  \DP{\nabla f(x^{(t)})}{x} + 
+{\frac{1}{\alpha_t}D_\psi(x, x^{(t)})}\,.
 $$
 
 Since $\Psi$ is twice differentiable and strongly convex, it has a gradient
@@ -564,9 +563,9 @@ result, but the term emphasizes the parallel to the Euclidean case.[/ref]
 
 $$
 \begin{aligned}
-u^{(t+0.5)} &\leftarrow \psi(x^{(t)}) - \alpha_t \nabla f(x^{(t)}) \\ 
+u^{(t+½)} &\leftarrow \psi(x^{(t)}) - \alpha_t \nabla f(x^{(t)})\,, \\ 
 x^{(t+1)} &\leftarrow 
-\argmin_{x \in \mathcal{X}} D_\Psi\big(x,  \psi^{-1}(u^{(t+0.5)})\big). \\
+\argmin_{x \in \mathcal{X}} D_\Psi\big(x,  \psi^{-1}(u^{(t+0.5)})\big)\,. \\
 \end{aligned}
 $$
 
@@ -575,7 +574,7 @@ $u \in \mathcal{U}$, then the Bregman projection step is trivial, yielding
 
 $$ x^{(t+1)} \leftarrow \psi^{-1}\big(
 \psi(x^{(t)}) - \alpha_t \nabla f(x^{(t)})
-\big). $$
+\big)\,. $$
 
 Let's make this more concrete.
 
@@ -585,7 +584,7 @@ the higher, the more likely an event is to happen. An important property of a
 binary random variable is its entropy. If $x_i \in [0, 1]$ denotes the
 probability associated with coin $i$, the entropy is
 
-$$H(x_i) = -x_i \log x_i - (1 - x_i) \log (1 - x_i).$$
+$$H(x_i) = -x_i \log x_i - (1 - x_i) \log (1 - x_i)\,.$$
 
 We may extend this additively to vectors as $H(x) = \sum_i H(x_i)$.
 This is sometimes called the Fermi-Dirac entropy.
@@ -595,11 +594,11 @@ On $\mathcal{X}=[0, 1]$, entropy is continuously differentiable and strictly
 
 Let us thus take $\Psi = -H$. Its gradient is $\psi : \mathcal{X} \rightarrow \mathcal{U}$,
 
-$$ \psi(x) \coloneqq -\nabla H(x) = \log(x) - \log(1-x), $$
+$$ \psi(x) \coloneqq -\nabla H(x) = \log(x) - \log(1-x)\,, $$
 
 with inverse $\phi : \mathcal{U} \rightarrow \mathcal{X}$,
 
-$$ \phi(u) \coloneqq \psi^{-1}(u) = \frac{1}{1 + \exp(-u)} = \sigma(u). $$
+$$ \phi(u) \coloneqq \psi^{-1}(u) = \frac{1}{1 + \exp(-u)} = \sigma(u)\,. $$
 
 <!--
 The entropy induces a Bregman divergence $D_{-H}$, which after some manipulation
@@ -610,7 +609,7 @@ $$D_{-H}(x, y) = x \log \frac{x}{y} - (1-x) \log \frac{1-x}{1-y}. $$
 
 So, written in terms of the familiar sigmoid, the mirror descent update induced by the negative entropy takes the (remarkable!) form
 
-$$ x^{(t+1)} = \sigma(\sigma^{-1}(x^{(t)}) - \alpha_t \nabla f(x^{(t)})). $$
+$$ x^{(t+1)} = \sigma(\sigma^{-1}(x^{(t)}) - \alpha_t \nabla f(x^{(t)}))\,. $$
 
 Things are beginning to clear up! We can think of the pair of inverse functions
 $(\psi, \phi)$ as maps between $\mathcal{X}$ and $\mathcal{U}$.  We will call these
@@ -655,7 +654,7 @@ and the *metric tensor* $G: \mathcal{U} \rightarrow \reals^{d \times d}$
 is a function such that $G(u_0)$ is a p.s.d. matrix that induces a 
 squared distance around $u_0$:
 
-$$ d^2_{u_0}(u, v) = \frac{1}{2} (u-v)^\top G(u_0) (u - v). $$
+$$ d^2_{u_0}(u, v) = \frac{1}{2} (u-v)^\top G(u_0) (u - v)\,. $$
 
 What we observed earlier is in fact a duality between the Riemannian manifolds
 $(\mathcal{X}, \nabla^2 \Psi)$ and $(\mathcal{U}, \nabla^2 \Phi),$ 
@@ -671,7 +670,7 @@ We may now revisit the reparametrization strategy, in light of what we learned
 so far. To reparametrize the constraint away, we work in **dual coordinates**
 $u \in \mathcal{U}$, and update:
 
-$$ u^{(t+1)} \leftarrow u^{(t)} - \nabla_u f(\phi(u)). $$
+$$ u^{(t+1)} \leftarrow u^{(t)} - \nabla_u f(\phi(u))\,. $$
 
 In our case $\mathcal{U}=\reals^2$ and $\phi = \sigma$, but let's use the more
 general notation. The update above ignores the geometry of $\mathcal{U}$, in
@@ -680,7 +679,7 @@ metric tensor is the identity matrix everywhere.  When optimizing some function 
 over a manifold $(\mathcal{U}, G)$, a convenient algorithm is natural gradient, which takes the
 form
 
-$$ u^{(t+1)} \leftarrow u^{(t)} - \alpha_t [G(u)]^{-1} \nabla \tilde{f}(u^{(t)}). $$
+$$ u^{(t+1)} \leftarrow u^{(t)} - \alpha_t [G(u)]^{-1} \nabla \tilde{f}(u^{(t)})\,. $$
 
 ??? note "Derivation"
 
@@ -688,12 +687,12 @@ $$ u^{(t+1)} \leftarrow u^{(t)} - \alpha_t [G(u)]^{-1} \nabla \tilde{f}(u^{(t)})
     $d_{u^{(t)}}$ to find an update direction. We must solve the problem
 
     $$ \argmin_{u\in\mathcal{U}} \DP{u}{\nabla \tilde{f}(u^{(t)})} + \frac{1}{2\alpha_t} 
-    {(u - u^{(t)})^\top G(u^{(t)}) (u - u^{(t)}).} $$
+    {(u - u^{(t)})^\top G(u^{(t)}) (u - u^{(t)})}\, $$
 
     Rearranging gives the equivalent problem
 
     $$ \argmin_{u\in\mathcal{U}} d^2_{u^{(t)}}
-    (u, u^{(t)} - \alpha_t[G(u^{(t)})]^{-1} \nabla \tilde{f}(u^{(t)})).$$
+    (u, u^{(t)} - \alpha_t[G(u^{(t)})]^{-1} \nabla \tilde{f}(u^{(t)}))\,.$$
 
     Assuming no constraints (i.e., $\mathcal{U}=\reals^d$), this yields the
     desired update.
@@ -708,7 +707,7 @@ In: IEEE Transactions on Information Theory, vol. 61, issue 3.
 means we can get a geometry-aware flavor of the
 REP algorithm,
 
-$$ u^{(t+1)} \leftarrow u^{(t)} - \alpha_t [\nabla^2 \Phi(u)]^{-1} \nabla_u {f}(\phi(u^{(t)})). $$
+$$ u^{(t+1)} \leftarrow u^{(t)} - \alpha_t [\nabla^2 \Phi(u)]^{-1} \nabla_u {f}(\phi(u^{(t)}))\,. $$
 
 This algorithm takes the exact same steps as mirror descent, is arguably easier
 to implement, and -- since it maintains iterates in dual space -- is more
@@ -738,14 +737,14 @@ and we can visually check that we get exactly the same trajectory as mirror desc
 But let's look a bit closer! Since $\phi = \nabla\Phi$, our metric tensor is
 none other than
 
-$$ \nabla^2\Phi(u) = \pfrac{\phi(u)}{u}, $$
+$$ \nabla^2\Phi(u) = \pfrac{\phi(u)}{u}\,, $$
 
 and, putting the whole update together, we see that
 
 $$ [\nabla^2\Phi(u)]^{-1} \nabla_u f(\phi(u)) = 
 {\left(\pfrac{\phi(u)}{u}\right)^{-1}}
 {\pfrac{\phi(u)}{u}}
-{\pfrac{f(x)}{x}\biggr\rvert_{x=\phi(u)}}  $$
+{\pfrac{f(x)}{x}\biggr\rvert_{x=\phi(u)}}\,,  $$
 
 so natural gradient cancels out the Jacobian of $\phi$ in the chain rule!
 In our case, this is as if we used a sigmoid nonlinearity that acts as the
