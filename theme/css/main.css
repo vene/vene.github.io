@@ -301,7 +301,7 @@ pre {
 /* katex */
 
 .katex {
-  font-size: 1rem;
+  font-size: 1em;
 }
 
 .katex-display > .katex {
@@ -389,7 +389,7 @@ details.no-details:not([open]) summary {
   }
 
   .katex {
-    font-size: 1.21rem;
+    font-size: 1.21em;
   }
 }
 
