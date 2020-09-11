@@ -6,6 +6,17 @@ Slug: mirror-descent
 Status: draft
 Summary: test
 
+When training machine learning models, and deep networks in particular,
+we typically use gradient-based methods. But if we require the weights to
+satisfy some constraints, things quickly get more complicated.
+
+I've recently learned that a few ways for handling constraints are deeply connected.
+In this post, we will explore these connections and demonstrate them in PyTorch on a friendly example. 
+
+**Outline.** 
+
+[TOC]
+
 <script src="https://unpkg.com/d3@3/d3.min.js"></script>
 <style type="text/css">
 
@@ -38,19 +49,14 @@ Summary: test
 .constr{ fill: black };
 </style>
 
+
 $$
 \newcommand\pfrac[2]{\frac{\partial #1}{\partial #2}}
-\newcommand\DP[2]{\left\langle #1, #2 \right\rangle}
+\newcommand\DP[2]{{#1}^\top#2}
 $$
 
-When training machine learning models, and deep networks in particular,
-we typically use gradient-based methods. But if we require the weights to
-satisfy some constraints, things quickly get more complicated.
 
-I've recently learned that a few ways for handling constraints are deeply connected.
-In this post, we will explore these connections and demonstrate them in PyTorch on a friendly example. 
-
-# Why constraints are challenging 
+# Why are constraints challenging? 
 
 In machine learning, we fit models to data by minimizing an objective,
 
@@ -261,7 +267,7 @@ independent 1-d projections, which we've seen can be solved by
 clipping.[/ref]
 
 
-## Ways to deal with constraints.
+# Ways to deal with constraints.
 
 When faced with a box-constrained optimization problem, these are the ideas that
 most practitioners would turn to.[ref]This turns out to be a handy personality
@@ -379,7 +385,7 @@ gradient **severely**, bringing the effective step size toward 0. Remember, this
 happens *automatically* via the chain rule! But, although slowly, and along a
 slightly winding trajectory, our method finds the right answer.
 
-### Projected Gradient
+### Projected gradient.
 
 The projected gradient method is particularly well suited to handling ``simple'' constraints
 like the box case, but, unlike reparametrization, requires a different kind of
@@ -417,7 +423,7 @@ less well-behaved and non-convex functions this need not be the case. So we are
 motivated to delve deeper and explore how PG and REP relate, despite seeming so
 different. 
 
-## Generalizing the projected gradient method with divergences
+# Generalizing the projected gradient method with divergences.
 In the projected gradient method, we take unconstrained steps, which might take
 us outside of $\mathcal{X}$, and then move the solution back to $\mathcal{X}$ by
 projection:
@@ -428,7 +434,8 @@ Projection finds the point $x \in \mathcal{X}$ closest to $x^{(t+0.5)}$, i.e.,
 
 $$ \operatorname{Proj}_\mathcal{X}\big(x^{(t+0.5)}\big) = \argmin_{x \in \mathcal{X}} \| x - x^{(t+0.5)} \|. $$
 
-This update is motivated by a locally-linear approximation,
+This update can be interpreted as approximately minimizing a regularized linearization of
+$f,$
 
 $$ x^{(t+1)} \leftarrow \arg\min_{x \in \mathcal{X}}  \DP{\nabla f(x^{(t)})}{x} + \frac{1}{2\alpha_t}\|x - x^{(t)}\|^2. \tag{GD}
 $$
@@ -483,31 +490,50 @@ projected gradient update.
 
 The function $D(x, y) = \| x - y \|^2 = \sum_i (x_i - y_i)^2$ is the *squared Euclidean distance*.
 Here, geometry starts to come into play!  Euclidean geometry is
-convenient and comfortable for thinking about spaces like $\reals^d,$ but not
-all quantities are well characterized by it. Our case of variables constrained
+convenient and comfortable for thinking about spaces like $\reals^d,$ but
+it is not always the best model.
+<!--all quantities are well characterized by it.
+Our case of variables constrained
 on $[0, 1]$ provide a good example: the difference between .50 and .51 seems
-like should not be the same as the difference between .98 and .99. A useful
-generalization of distances is provided by the Bregman divergence[ref]Formally,
-$\psi$ must be continuously differentiable and strictly convex.[/ref]
+like should not be the same as the difference between .98 and .99.-->
+The **Bregman divergence** provides a convenient generalization of the squared
+euclidean distance: given strictly convex, twice-differentiable $\Psi$,
 
-$$ D_\Psi(x, y) = \Psi(x) - \Psi(y) - \DP{\nabla \Psi(y)}{x - y}, $$
+$$ D_\Psi(x, y) \coloneqq \Psi(x) - \Psi(y) - \DP{\nabla \Psi(y)}{x - y}. $$
 
-which induces the **mirror descent** algorithm,
+For $\Psi = \frac{1}{2} \| \cdot \|^2$, this recovers the squared euclidean
+distance. Replacing $\frac{1}{2}\|\cdot\|^2$ by $D_\Psi$ in the projected
+gradient algorithm leads to a generalization known as **mirror descent**,
 
-$$ x^{(t+1)} \leftarrow \arg\min_{x \in \mathcal{X}}  \DP{\nabla f(x^{(t)})}{x} + \frac{1}{\alpha_t}D_\psi(x, x^{(t)}). \tag{MD}
+$$
+x^{(t+1)} \leftarrow \arg\min_{x \in \mathcal{X}}  \DP{\nabla f(x^{(t)})}{x} + \frac{1}{\alpha_t}D_\psi(x, x^{(t)}). \tag{MD}
 $$
 
-which after derivation gives
+Since $\Psi$ is twice differentiable and strongly convex, it has a gradient
+$\psi = \nabla\Psi$ which is invertible. Solving (MD) gives the update in the
+form of a so-called Bregman projection,[ref]Not technically a projection, 
+since iterating it twice need not give the same
+result, but the term emphasizes the parallel to the euclidean case.[/ref]
 
-$$ x^{(t+1)} = \psi^{-1}(\psi(x^{(t)}) - \alpha_t \nabla f(x^{(t)})).
+$$
+\begin{aligned}
+u^{(t+0.5)} &\leftarrow \psi(x^{(t)}) - \alpha_t \nabla f(x^{(t)}) \\ 
+x^{(t+1)} &\leftarrow 
+\argmin_{x \in \mathcal{X}} D_\Psi\big(x,  \psi^{-1}(u^{(t+0.5)})\big). \\
+\end{aligned}
 $$
 
-where $\psi(x) \coloneqq \nabla \Psi(x)$. Let's make this more concrete.
+If $\Psi$ is carefully chosen such that $\psi^{-1}(u) \in \mathcal{X}$ for all
+$u \in \mathcal{U}$, then the Bregman projection step is trivial, yielding
 
-Notice that $D_{\| \cdot \|^2}$ is the squared Euclidean distance, which we've
-seen induces the projected gradient method, but now we can
-plug other interesting functions $\psi$ in order to alter the geometry.
-Values in $\mathcal{X}=[0,1]$ may be interpreted as *coin flip* probabilities:
+$$ x^{(t+1)} \leftarrow \psi^{-1}\big(
+\psi(x^{(t)}) - \alpha_t \nabla f(x^{(t)})
+\big). $$
+
+Let's make this more concrete.
+
+The choice of $\Psi$ will define the *geometry* of our space.
+Values in $[0,1]$ may be interpreted as *coin flip* probabilities:
 the higher, the more likely an event is to happen. An important property of a
 binary random variable is its entropy. If $x_i \in [0, 1]$ denotes the
 probability associated with coin $i$, the entropy is
@@ -517,14 +543,15 @@ $$H(x_i) = -x_i \log x_i - (1 - x_i) \log (1 - x_i).$$
 We may extend this additively to vectors as $H(x) = \sum_i H(x_i)$.
 On $\mathcal{X}=[0, 1]$, entropy is continuously differentiable and strictly
 **concave**, maximized at $x=0.5$ and minimized at $x=0$ and $x=1$.[ref]$H(0.5) =
-\log 2,$<br>$H(0)=H(1)=0$.[/ref]
-Its gradient is 
+\log 2,$<br>$H(0)=H(1)=0$.[/ref] 
 
-$$ (-h)(x) \coloneqq \nabla(-H)(x) = \log(x) - \log(1-x), $$
+Let us thus take $\Psi = -H$. Its gradient is $\psi : \mathcal{X} \rightarrow \mathcal{U}$,
 
-an invertible function with inverse
+$$ \psi(x) \coloneqq -\nabla H(x) = \log(x) - \log(1-x), $$
 
-$$ (-h)^{-1}(u) = \sigma(u). $$
+with inverse $\phi : \mathcal{U} \rightarrow \mathcal{X}$,
+
+$$ \phi(u) \coloneqq \psi^{-1}(u) = \frac{1}{1 + \exp(-u)} = \sigma(u). $$
 
 <!--
 The entropy induces a Bregman divergence $D_{-H}$, which after some manipulation
@@ -533,12 +560,12 @@ can be written as
 $$D_{-H}(x, y) = x \log \frac{x}{y} - (1-x) \log \frac{1-x}{1-y}. $$
 -->
 
-The mirror descent update induced by the negative entropy thus takes the (remarkable!) form
+o, written in terms of the familiar sigmoid, the mirror descent update induced by the negative entropy takes the (remarkable!) form
 
 $$ x^{(t+1)} = \sigma(\sigma^{-1}(x^{(t)}) - \alpha_t \nabla f(x^{(t)})). $$
 
 Things are beginning to clear up! We can think of the pair of inverse functions
-$(-h, \sigma)$ as maps between $[0, 1]^d$ and $\reals^d$. We will call these
+$(\psi, \phi)$ as maps between $\mathcal{X}$ and $\mathcal{U}$.  We will call these
 the **primal** and **dual** spaces, respectively. Mirror descent thus
 first moves into dual (unconstrained) space, performs an update there, and then moves
 back. Reparametrization rewrites the problem in dual coordinates and performs
@@ -556,3 +583,17 @@ Now that we figured out that we may think about the problem in primal or dual
 coordinates, we may also visualize the optimization trajectory in dual coordinates.
 
 <img alt="quadratic landscape" src="/images/quad_lr0.010_md.png"></img>
+
+Yet, the way that mirror descent leans on moving from $\mathcal{X}$ to
+$\mathcal{U}$ is very familiar to the reparametrization strategy. Is there a
+deeper connection between the two? We illuminate it next.
+
+# Duality between mirror descent <br/>and natural gradient.
+
+The main result.
+
+# Acknowledgements.
+
+Anima Anandkumar's talk and paper, Caio.
+
+
