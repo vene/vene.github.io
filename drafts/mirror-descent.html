@@ -335,7 +335,7 @@ quiz to see if somebody resonates more with neural networks or with convex&nbsp;
     &#8220;squishing&#8221; nonlinearity.
     We can then perform unconstrained minimiziation on <span class="arithmatex">\(f \circ \sigma\)</span>.
     For <span class="arithmatex">\(\mathcal{X}=[0,1]^d\)</span>, we may use the logistic
-    function<label for="sn-4" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-4" class="margin-toggle"/><span class="sidenote">General intervals <span class="arithmatex">\([a,b]\)</span> are obtained by affinely
+    function,<label for="sn-4" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-4" class="margin-toggle"/><span class="sidenote">General intervals <span class="arithmatex">\([a,b]\)</span> are obtained by affinely
     transforming <span class="arithmatex">\([0,1]\)</span>.</span></p>
 <div class="arithmatex">\[ \sigma(u) = \frac{1}{1 + \exp(-u)}.\]</div>
 </li>
@@ -577,9 +577,9 @@ deeper connection between the two? We illuminate it&nbsp;next.</p>
 even on top of the same space. (Case in point: entropy vs. <span class="arithmatex">\(\frac{1}{2}\|\cdot\|^2\)</span>).
 To handle this ambiguity, we need a structure that attaches the geometry along
 with the underlying space. This, (with some handwaving), is a <em>Riemannian
-manifold</em>: a pair <span class="arithmatex">\((\mathcal{U}, G)\)</span> where <span class="arithmatex">\(\mathcal{X} \subseteq \reals^d\)</span>
+manifold</em>: a pair <span class="arithmatex">\((\mathcal{U}, G)\)</span> where <span class="arithmatex">\(\mathcal{U} \subseteq \reals^d\)</span>
 is an underlying space<label for="sn-11" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-11" class="margin-toggle"/><span class="sidenote">Riemannian manifolds are more general than this, but
-in this post, for simplicity, we only look at the case where <span class="arithmatex">\(\mathcal{X}\subseteq \reals^d\)</span>.
+in this post, for simplicity, we only look at the case where <span class="arithmatex">\(\mathcal{U}\subseteq \reals^d\)</span>.
 To be fully general, the notation ramps up quickly.
 See <a href="https://wiseodd.github.io/techblog/2019/02/22/riemannian-geometry/">Agustinus Kristiadi&#8217;s
 post</a> 
@@ -721,8 +721,7 @@ real tasks. But this was not the main&nbsp;point&#8212;</p>
 <p>With this post, I have hopefully stirred your interest into constrained
 optimization and its connections to geometry. 
 Geometric insights have been key to advances in learning over constrained spaces of
-matrices, such as symmetric, low-rank, orthonormal, s.p.d. matrices, etc.
-<label for="sn-15" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-15" class="margin-toggle"/><span class="sidenote">
+matrices, such as symmetric, low-rank, orthonormal, s.p.d. matrices, etc.<label for="sn-15" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-15" class="margin-toggle"/><span class="sidenote">
 P.-A. Absil, R. Mahoney, and Rodolphe Sepulchre. 2008.
 <a href="https://press.princeton.edu/absil">Optimization Algorithms on Matrix
 Manifolds</a>.
@@ -738,7 +737,7 @@ Competitive Mirror Descent.
 talk</a> at the 
 <span class="caps">IAS</span> Seminar on Theoretical Machine Learning. Before this talk, I had no idea
 about anything in the second part of this post.
-Thanks to Mathieu Blondel and Caio Corro for feedback on the blog post.
+Thanks to Mathieu Blondel, Caio Corro, and Fabian Pedregosa for feedback on the blog post.
 Blogging is work, so I acknowledge my funding from the European Research Council
 StG DeepSPIN 758969 and Fundação para a Ciência e Tecnologia contract <span class="caps">UIDB</span>/50008/2020. </p>
     </div><!-- /.entry-content -->
