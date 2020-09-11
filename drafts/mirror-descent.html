@@ -113,13 +113,13 @@ backward&nbsp;pass.</p>
 \]</div>
 <h1 id="why-are-constraints-challenging">Why are constraints challenging?<a class="headerlink" href="#why-are-constraints-challenging" title="Permanent link">&para;</a></h1>
 <p>In machine learning, we fit models to data by minimizing an&nbsp;objective,</p>
-<div class="arithmatex">\[\min_{x \in \mathcal{X}} f(x). \tag{OPT}\]</div>
+<div class="arithmatex">\[\min_{x \in \mathcal{X}} f(x)\,. \tag{OPT}\]</div>
 <p>Here, <span class="arithmatex">\(x\)</span> denotes the parameters to be learned, for instance, the neural network weights.
 They typically take values in <span class="arithmatex">\(\mathcal{X}=\reals\)</span>, and we train networks by
 some variant of the <em>gradient</em> method: we choose an initial configuration <span class="arithmatex">\(x^{(0)}\)</span>
 and successively applying updates of the&nbsp;form:</p>
 <div class="arithmatex">\[
-x^{(t+1)} \leftarrow x^{(t)} - \alpha^{(t)} \nabla f(x).
+x^{(t+1)} \leftarrow x^{(t)} - \alpha^{(t)} \nabla f(x^{(t)})\,.
 \]</div>
 <p>In deep learning, we typically use stochastic flavors that
 nonetheless perform well and are efficient.  Here, we will focus on a relatively
@@ -135,25 +135,25 @@ In this case, we would need to constrain <span class="arithmatex">\(x \in [0, 1]
 constraint we might deal&nbsp;with.</p>
 <p>For one-dimensional convex problems, <em>i.e.,</em> <span class="arithmatex">\(\mathcal{X} = [a, b] \subset
 \reals\)</span>, box constraints do not complicate the problem: we can solve the
-unconstrained problem <span class="arithmatex">\(x_{\text{unc}}^* = \arg\min_{x\in\reals} f(x)\)</span>.  If the
+unconstrained problem <span class="arithmatex">\(x_{\text{unc}}^* = \argmin_{x\in\reals} f(x)\)</span>.  If the
 answer satisfies the constraint, then it must be the solution of the constrained
 problem as well. If not, the answer can be found by <em>clipping</em> to the&nbsp;interval:</p>
 <div class="arithmatex">\[ x^\star = \operatorname{clip}_{[a,b]}(x_\text{unc}^\star)
-\coloneqq \min(a, \max(b, x_\text{unc}^\star)).
+\coloneqq \min(a, \max(b, x_\text{unc}^\star))\,.
 \]</div>
 <details class="note"><summary>Proof</summary><p>We add non-negative dual variables <span class="arithmatex">\(\mu_a\)</span> and <span class="arithmatex">\(\mu_b\)</span> to handle the inequality
-constraints <span class="arithmatex">\(x \geq a\)</span> and <span class="arithmatex">\(x \leq b\)</span>, and write the&nbsp;lagrangian,</p>
-<div class="arithmatex">\[\mathcal{L}(x) = f(x) + \mu_a (a-x) + \mu_b(x-b).\]</div>
+constraints <span class="arithmatex">\(x \geq a\)</span> and <span class="arithmatex">\(x \leq b\)</span>, and write the&nbsp;Lagrangian,</p>
+<div class="arithmatex">\[\mathcal{L}(x) = f(x) + \mu_a (a-x) + \mu_b(x-b)\,.\]</div>
 <p>An optimal <span class="arithmatex">\(x^\star\)</span> must satisfiy the original constraints <span class="arithmatex">\((a \leq x^\star \leq b)\)</span>
-and be a stationary point of the&nbsp;lagrangian:</p>
+and be a stationary point of the&nbsp;Lagrangian:</p>
 <div class="arithmatex">\[ 
-D_x \mathcal{L}(x^\star) = 0 \iff f'(x^\star) = \mu_a - \mu_b.
+D_x \mathcal{L}(x^\star) = 0 \iff f'(x^\star) = \mu_a - \mu_b\,.
 \tag{F}
 \]</div>
 <p>The dual variables must be non-negative and satisfy
 complementary&nbsp;slackness:</p>
 <div class="arithmatex">\[
-\mu_a (a - x^\star) = 0, \quad\text{and}\quad \mu_b (x^\star - b) = 0.
+\mu_a (a - x^\star) = 0, \quad\text{and}\quad \mu_b (x^\star - b) = 0\,.
 \]</div>
 <p>Let <span class="arithmatex">\(x^\star_\text{unc}\)</span> be the solution of the unconstrained problem,
 satisfying  <span class="arithmatex">\(f'(x^\star_\text{unc})=0\)</span>. If 
@@ -274,7 +274,7 @@ function make_rules() {
 interactions between the variables. We demonstate this on a quadratic problem
 which will become the main focus of the rest of this&nbsp;post,</p>
 <div class="arithmatex">\[ \min_{x \in \mathcal{X}} 
-f(x) \coloneqq \frac{1}{2}~(x - x_0)^\top Q (x - x_0).\tag{QP} \]</div>
+f(x) \coloneqq \frac{1}{2}~(x - x_0)^\top Q (x - x_0)\,.\tag{QP} \]</div>
 <p>Let us visualize this problem for the specific case of
 the unit square <span class="arithmatex">\(\mathcal{X} = [0,1] \times [0,1] \subset \reals^2\)</span>,
 with <span class="arithmatex">\(x_0 = (1.5, .1)\)</span>, and 
@@ -285,17 +285,17 @@ definiteness guarantess <span class="arithmatex">\(f(x) &gt; 0\)</span> for any 
 But a contour plot shows that the constrained minimum <span class="arithmatex">\(x^\star\)</span> is not the same as the
 result of clipping the unconstrained minimum to the&nbsp;box.</p>
 <p><img alt="quadratic landscape" src="/images/mirror_quad_landscape.png"></img></p>
-<p>This means that, in general, we cannot simply ignore the constraints and apply
-them at the end, but we need to bake them into our optimization strategy.<label for="sn-2" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-2" class="margin-toggle"/><span class="sidenote">
+<p>Constraint handling cannot be left as an afterthought: 
+it needs to be baked into the optimization strategy.<label for="sn-2" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-2" class="margin-toggle"/><span class="sidenote">
 There is an important special case where (<span class="caps">QP</span>) can be solved exactly: the
 case <span class="arithmatex">\(Q = I\)</span>. In this case, the problem becomes
-<span class="arithmatex">\(\arg\min_{x \in \mathcal{X}} \| x - x_0 \|^2_2,\)</span>
+<span class="arithmatex">\(\argmin_{x \in \mathcal{X}} \| x - x_0 \|^2_2,\)</span>
 which is known as the <em>Euclidean projection</em> of <span class="arithmatex">\(x_0\)</span> onto <span class="arithmatex">\(\mathcal{X}\)</span>.
 If <span class="arithmatex">\(\mathcal{X}\)</span> are box constraints, the projection decomposes into a series of
 independent 1-d projections, which we&#8217;ve seen can be solved by&nbsp;clipping.</span></p>
 <p>As a warm up, let us implement our quadratic function
-<span class="arithmatex">\(f(x) = \frac{1}{2} (x - x_0)^\top Q (x - x_0)\)</span> in PyTorch, 
-as well as a minimal gradient descent from&nbsp;scratch.</p>
+<span class="arithmatex">\(f(x) = \frac{1}{2} {(x - x_0)^\top}Q{(x - x_0)}\)</span> in PyTorch, 
+as well as a minimal gradient descent loop from&nbsp;scratch.</p>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">torch</span>
 
 <span class="n">torch</span><span class="o">.</span><span class="n">set_default_dtype</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">double</span><span class="p">)</span>
@@ -337,15 +337,15 @@ quiz to see if somebody resonates more with neural networks or with convex&nbsp;
     For <span class="arithmatex">\(\mathcal{X}=[0,1]^d\)</span>, we may use the logistic
     function,<label for="sn-4" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-4" class="margin-toggle"/><span class="sidenote">General intervals <span class="arithmatex">\([a,b]\)</span> are obtained by affinely
     transforming <span class="arithmatex">\([0,1]\)</span>.</span></p>
-<div class="arithmatex">\[ \sigma(u) = \frac{1}{1 + \exp(-u)}.\]</div>
+<div class="arithmatex">\[ \sigma(u) = \frac{1}{1 + \exp(-u)}\,.\]</div>
 </li>
 <li>
 <p><em>Projected gradient (<span class="caps">PG</span>).</em> Perform unconstrained gradient updates, then
     project back onto the domain after each&nbsp;update:</p>
 <div class="arithmatex">\[
 \begin{aligned}
-x^{(t+0.5)} &amp;\leftarrow x^{(t)} - \alpha^{(t)} \nabla f(x^{(t)}) \\
-x^{(t+1)} &amp;\leftarrow \operatorname{Proj}_\mathcal{X}\big(x^{(t+0.5)}\big)
+x^{(t+½)} &amp;\leftarrow x^{(t)} - \alpha^{(t)} \nabla f(x^{(t)})\,, \\
+x^{(t+1)} &amp;\leftarrow \operatorname{Proj}_\mathcal{X}\big(x^{(t+½)}\big)\,.
 \\
 \end{aligned}
 \]</div>
@@ -370,7 +370,7 @@ constrain the variance of a learned distribution using a <em>softplus</em>
 function.</span>
 In our case, we use a logistic sigmoid reparametrization to get the
 unconstrained non-convex&nbsp;problem</p>
-<div class="arithmatex">\[ \min_{u \in \reals^2} f(\sigma(u)), \]</div>
+<div class="arithmatex">\[ \min_{u \in \reals^2} f(\sigma(u))\,, \]</div>
 <p>where <span class="arithmatex">\(\sigma\)</span> is applied element-wise.<br />
 When reparametrizing, <span class="arithmatex">\(x\)</span> is no longer a learned parameter, but a function of
 the learned parameter <span class="arithmatex">\(u\)</span>. The gradient with respect to <span class="arithmatex">\(u\)</span> can be handled
@@ -388,7 +388,7 @@ automatically by PyTorch&nbsp;autodiff:</p>
 
 
 <p>With a very small learning rate, we get a glimpse into the dynamics of this
-method.<label for="sn-6" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-6" class="margin-toggle"/><span class="sidenote">Technically, as the learning rate goes to zero, we are simulating a
+method.<label for="sn-6" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-6" class="margin-toggle"/><span class="sidenote">As the learning rate goes to zero, we are simulating a
 continuous <em>gradient flow</em>, of which gradient descent is a discretized
 approximation. For more about gradient flows, check out <a href="https://francisbach.com/gradient-flows/">Francis Bach&#8217;s post</a>.</span>
 For comparison, we include the unconstrained&nbsp;trajectory.</p>
@@ -447,45 +447,45 @@ motivated to delve deeper and explore how <span class="caps">PG</span> and <span
 <h1 id="generalizing-the-projected-gradient-method-with-divergences">Generalizing the projected gradient method with divergences.<a class="headerlink" href="#generalizing-the-projected-gradient-method-with-divergences" title="Permanent link">&para;</a></h1>
 <p>In the projected gradient method, we take unconstrained steps, which might take
 us outside of <span class="arithmatex">\(\mathcal{X}\)</span>, and then move the solution back to <span class="arithmatex">\(\mathcal{X}\)</span> by&nbsp;projection:</p>
-<div class="arithmatex">\[ x^{(t+1)} \leftarrow \operatorname{Proj}_\mathcal{X}\big(x^{(t+0.5)}\big). \]</div>
-<p>Projection finds the point <span class="arithmatex">\(x \in \mathcal{X}\)</span> closest to <span class="arithmatex">\(x^{(t+0.5)}\)</span>,&nbsp;i.e.,</p>
-<div class="arithmatex">\[ \operatorname{Proj}_\mathcal{X}\big(x^{(t+0.5)}\big) \coloneqq \argmin_{x \in \mathcal{X}} \| x - x^{(t+0.5)} \|^2. \]</div>
+<div class="arithmatex">\[ x^{(t+1)} \leftarrow \operatorname{Proj}_\mathcal{X}\big(x^{(t+½)}\big)\,. \]</div>
+<p>Projection finds the point <span class="arithmatex">\(x \in \mathcal{X}\)</span> closest to <span class="arithmatex">\(x^{(t+½)}\)</span>,&nbsp;i.e.,</p>
+<div class="arithmatex">\[ \operatorname{Proj}_\mathcal{X}\big(x^{(t+½)}\big) \coloneqq \argmin_{x \in \mathcal{X}} \| x - x^{(t+½)} \|^2\,. \]</div>
 <p>The projected gradient update can be interpreted as minimizing a regularized linearization of
 <span class="arithmatex">\(f\)</span> around the current&nbsp;iterate,</p>
-<div class="arithmatex">\[ x^{(t+1)} \leftarrow \arg\min_{x \in \mathcal{X}}  \DP{\nabla f(x^{(t)})}{x} + 
-{\frac{1}{2\alpha_t}\|x - x^{(t)}\|^2}.
+<div class="arithmatex">\[ x^{(t+1)} \leftarrow \argmin_{x \in \mathcal{X}}  \DP{\nabla f(x^{(t)})}{x} + 
+{\frac{1}{2\alpha_t}\|x - x^{(t)}\|^2}\,.
 \]</div>
 <details class="note"><summary>Explanation</summary><p>Why does this update make sense, and where does it come from? We are trying to
 minimize a function <span class="arithmatex">\(f(x)\)</span>, but we don&#8217;t know what it looks like globally: we only
 have access to its value <span class="arithmatex">\(f(x)\)</span> and its gradient <span class="arithmatex">\(\nabla f(x)\)</span> at points <span class="arithmatex">\(x\)</span>
 that we may query one at a time. At any point <span class="arithmatex">\(x_0\)</span>,
 the first-order Taylor expansion&nbsp;is:</p>
-<div class="arithmatex">\[ f(x_0 + \delta) = f(x_0) + \DP{\nabla f(x_0)}{\delta} + o(\|\delta\|). \]</div>
+<div class="arithmatex">\[ f(x_0 + \delta) = f(x_0) + \DP{\nabla f(x_0)}{\delta} + o(\|\delta\|)\,. \]</div>
 <p>To get a linear approximation of <span class="arithmatex">\(f\)</span> we can plug in <span class="arithmatex">\(\delta = x - x_0\)</span>:</p>
-<div class="arithmatex">\[ f(x) =  f(x_0) + \DP{\nabla f(x_0)}{x - x_0} + o(\|x - x_0\|). \]</div>
+<div class="arithmatex">\[ f(x) =  f(x_0) + \DP{\nabla f(x_0)}{x - x_0} + o(\|x - x_0\|)\,. \]</div>
 <p>So as long as <span class="arithmatex">\(x\)</span> is not too far from <span class="arithmatex">\(x_0\)</span>, we&nbsp;have </p>
-<div class="arithmatex">\[f(x) \approx \tilde{f}_{x_0}(x) \coloneqq f(x_0) + \DP{\nabla f(x_0)}{x - x_0}.\]</div>
+<div class="arithmatex">\[f(x) \approx \tilde{f}_{x_0}(x) \coloneqq f(x_0) + \DP{\nabla f(x_0)}{x - x_0}\,.\]</div>
 <p>This affine approximation is much easier to
 minimize, but it is only accurate locally, therefore, we use it iteratively,
 taking a small step, then updating the&nbsp;approximation:</p>
 <div class="arithmatex">\[ 
-x^{(t+1)} \leftarrow \arg\min_{x \in \mathcal{X}} \tilde f_{x^{(t)}}(x) + \frac{1}{2\alpha_t}\|x - x^{(t)}\|^2. 
+x^{(t+1)} \leftarrow \argmin_{x \in \mathcal{X}} \tilde f_{x^{(t)}}(x) + \frac{1}{2\alpha_t}\|x - x^{(t)}\|^2\,. 
 \]</div>
 <p>where the term on the right keeps us close to <span class="arithmatex">\(x^{(t)}\)</span> to ensure the
 approximation is not too bad. Clearing up the constant terms from inside the
-<span class="arithmatex">\(\arg\min\)</span> yields the desired&nbsp;expression.</p>
+<span class="arithmatex">\(\argmin\)</span> yields the desired&nbsp;expression.</p>
 </details>
 <p>Rearranging the terms reveals exactly the projected gradient&nbsp;update,</p>
 <div class="arithmatex">\[ x^{(t+1)} \leftarrow \operatorname{Proj}_{\mathcal{X}}\big(
-x^{(t)} - \alpha_t \nabla f(x^{(t)})\big).\]</div>
+x^{(t)} - \alpha_t \nabla f(x^{(t)})\big)\,.\]</div>
 <details class="note"><summary>Derivation</summary><div class="arithmatex">\[
 \begin{aligned}
- &amp; \arg\min_{x \in \mathcal{X}} \DP{x}{\nabla f(x^{(t)})} + \frac{1}{2\alpha_t} \|x-x^{(t)}\|^2 \\
-=&amp; \arg\min_{x \in \mathcal{X}} \DP{x}{\nabla f(x^{(t)})} + \frac{1}{2\alpha_t} \|x\|^2 - \frac{1}{\alpha_t} \DP{x}{x^{(t)}} \\
-=&amp; \arg\min_{x \in \mathcal{X}} \alpha_t \DP{x}{\nabla f(x^{(t)})} + \frac{1}{2} \|x\|^2 - \DP{x}{x^{(t)}} \\
-=&amp; \arg\min_{x \in \mathcal{X}} \DP{x}{\underbrace{\alpha_t \nabla f(x^{(t)}) - x^{(t)}}_{-x^{(t+0.5)}}} + \frac{1}{2} \|x\|^2 \\
-=&amp; \arg\min_{x \in \mathcal{X}} \frac{1}{2} \| x - x^{(t+0.5)} \|^2 \textcolor{gray}{ - \frac{1}{2} \|x^{(t+0.5)}\|} \\
-=&amp; \operatorname{Proj}_{\mathcal{X}} (x^{(t+0.5)}).
+ &amp; \argmin_{x \in \mathcal{X}} \DP{x}{\nabla f(x^{(t)})} + \frac{1}{2\alpha_t} \|x-x^{(t)}\|^2 \\
+=&amp; \argmin_{x \in \mathcal{X}} \DP{x}{\nabla f(x^{(t)})} + \frac{1}{2\alpha_t} \|x\|^2 - \frac{1}{\alpha_t} \DP{x}{x^{(t)}} \\
+=&amp; \argmin_{x \in \mathcal{X}} \alpha_t \DP{x}{\nabla f(x^{(t)})} + \frac{1}{2} \|x\|^2 - \DP{x}{x^{(t)}} \\
+=&amp; \argmin_{x \in \mathcal{X}} \DP{x}{\underbrace{\alpha_t \nabla f(x^{(t)}) - x^{(t)}}_{-x^{(t+½)}}} + \frac{1}{2} \|x\|^2 \\
+=&amp; \argmin_{x \in \mathcal{X}} \frac{1}{2} \| x - x^{(t+½)} \|^2 \textcolor{gray}{ - \frac{1}{2} \|x^{(t+½)}\|} \\
+=&amp; \operatorname{Proj}_{\mathcal{X}} (x^{(t+½)})\,.
 \end{aligned}
 \]</div>
 </details>
@@ -506,13 +506,13 @@ y\)</span>. <a href="https://en.wikipedia.org/wiki/Bregman_divergence">Bregman d
 are an important class of divergences. They are convex in the first argument, but not the second.
 </span>
 given strictly convex, twice-differentiable <span class="arithmatex">\(\Psi\)</span>,</p>
-<div class="arithmatex">\[ D_\Psi(x, y) \coloneqq \Psi(x) - \Psi(y) - \DP{\nabla \Psi(y)}{x - y}. \]</div>
+<div class="arithmatex">\[ D_\Psi(x, y) \coloneqq \Psi(x) - \Psi(y) - \DP{\nabla \Psi(y)}{x - y}\,. \]</div>
 <p>For <span class="arithmatex">\(\Psi = \frac{1}{2} \| \cdot \|^2\)</span>, this recovers the squared Euclidean
 distance. Replacing <span class="arithmatex">\(\frac{1}{2}\|\cdot\|^2\)</span> by <span class="arithmatex">\(D_\Psi\)</span> in the projected
 gradient algorithm leads to a generalization known as <strong>mirror descent</strong>,</p>
 <div class="arithmatex">\[
-x^{(t+1)} \leftarrow \arg\min_{x \in \mathcal{X}}  \DP{\nabla f(x^{(t)})}{x} + 
-{\frac{1}{\alpha_t}D_\psi(x, x^{(t)})}.
+x^{(t+1)} \leftarrow \argmin_{x \in \mathcal{X}}  \DP{\nabla f(x^{(t)})}{x} + 
+{\frac{1}{\alpha_t}D_\psi(x, x^{(t)})}\,.
 \]</div>
 <p>Since <span class="arithmatex">\(\Psi\)</span> is twice differentiable and strongly convex, it has a gradient
 <span class="arithmatex">\(\psi = \nabla\Psi\)</span> which is invertible. Solving for the mirror descent update
@@ -521,32 +521,32 @@ since iterating it twice need not give the same
 result, but the term emphasizes the parallel to the Euclidean&nbsp;case.</span></p>
 <div class="arithmatex">\[
 \begin{aligned}
-u^{(t+0.5)} &amp;\leftarrow \psi(x^{(t)}) - \alpha_t \nabla f(x^{(t)}) \\ 
+u^{(t+½)} &amp;\leftarrow \psi(x^{(t)}) - \alpha_t \nabla f(x^{(t)})\,, \\ 
 x^{(t+1)} &amp;\leftarrow 
-\argmin_{x \in \mathcal{X}} D_\Psi\big(x,  \psi^{-1}(u^{(t+0.5)})\big). \\
+\argmin_{x \in \mathcal{X}} D_\Psi\big(x,  \psi^{-1}(u^{(t+½)})\big)\,. \\
 \end{aligned}
 \]</div>
 <p>If <span class="arithmatex">\(\Psi\)</span> is carefully chosen such that <span class="arithmatex">\(\psi^{-1}(u) \in \mathcal{X}\)</span> for all
 <span class="arithmatex">\(u \in \mathcal{U}\)</span>, then the Bregman projection step is trivial,&nbsp;yielding</p>
 <div class="arithmatex">\[ x^{(t+1)} \leftarrow \psi^{-1}\big(
 \psi(x^{(t)}) - \alpha_t \nabla f(x^{(t)})
-\big). \]</div>
+\big)\,. \]</div>
 <p>Let&#8217;s make this more&nbsp;concrete.</p>
 <p>The choice of <span class="arithmatex">\(\Psi\)</span> will define the <em>geometry</em> of our space.
 Values in <span class="arithmatex">\([0,1]\)</span> may be interpreted as <em>coin flip</em> probabilities:
 the higher, the more likely an event is to happen. An important property of a
 binary random variable is its entropy. If <span class="arithmatex">\(x_i \in [0, 1]\)</span> denotes the
 probability associated with coin <span class="arithmatex">\(i\)</span>, the entropy&nbsp;is</p>
-<div class="arithmatex">\[H(x_i) = -x_i \log x_i - (1 - x_i) \log (1 - x_i).\]</div>
+<div class="arithmatex">\[H(x_i) = -x_i \log x_i - (1 - x_i) \log (1 - x_i)\,.\]</div>
 <p>We may extend this additively to vectors as <span class="arithmatex">\(H(x) = \sum_i H(x_i)\)</span>.
 This is sometimes called the Fermi-Dirac entropy.
 On <span class="arithmatex">\(\mathcal{X}=[0, 1]\)</span>, entropy is continuously differentiable and strictly
 <strong>concave</strong>, maximized at <span class="arithmatex">\(x=0.5\)</span> and minimized at <span class="arithmatex">\(x=0\)</span> and <span class="arithmatex">\(x=1\)</span>.<label for="sn-10" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-10" class="margin-toggle"/><span class="sidenote"><span class="arithmatex">\(H(0.5) =
 \log 2,\)</span><br><span class="arithmatex">\(H(0)=H(1)=0\)</span>.</span> </p>
 <p>Let us thus take <span class="arithmatex">\(\Psi = -H\)</span>. Its gradient is <span class="arithmatex">\(\psi : \mathcal{X} \rightarrow \mathcal{U}\)</span>,</p>
-<div class="arithmatex">\[ \psi(x) \coloneqq -\nabla H(x) = \log(x) - \log(1-x), \]</div>
+<div class="arithmatex">\[ \psi(x) \coloneqq -\nabla H(x) = \log(x) - \log(1-x)\,, \]</div>
 <p>with inverse <span class="arithmatex">\(\phi : \mathcal{U} \rightarrow \mathcal{X}\)</span>,</p>
-<div class="arithmatex">\[ \phi(u) \coloneqq \psi^{-1}(u) = \frac{1}{1 + \exp(-u)} = \sigma(u). \]</div>
+<div class="arithmatex">\[ \phi(u) \coloneqq \psi^{-1}(u) = \frac{1}{1 + \exp(-u)} = \sigma(u)\,. \]</div>
 <!--
 The entropy induces a Bregman divergence $D_{-H}$, which after some manipulation
 can be written as
@@ -555,7 +555,7 @@ $$D_{-H}(x, y) = x \log \frac{x}{y} - (1-x) \log \frac{1-x}{1-y}. $$
 -->
 
 <p>So, written in terms of the familiar sigmoid, the mirror descent update induced by the negative entropy takes the (remarkable!)&nbsp;form</p>
-<div class="arithmatex">\[ x^{(t+1)} = \sigma(\sigma^{-1}(x^{(t)}) - \alpha_t \nabla f(x^{(t)})). \]</div>
+<div class="arithmatex">\[ x^{(t+1)} = \sigma(\sigma^{-1}(x^{(t)}) - \alpha_t \nabla f(x^{(t)}))\,. \]</div>
 <p>Things are beginning to clear up! We can think of the pair of inverse functions
 <span class="arithmatex">\((\psi, \phi)\)</span> as maps between <span class="arithmatex">\(\mathcal{X}\)</span> and <span class="arithmatex">\(\mathcal{U}\)</span>.  We will call these
 the <strong>primal</strong> and <strong>dual</strong> spaces, respectively. Mirror descent thus
@@ -589,7 +589,7 @@ for an introduction.
 and the <em>metric tensor</em> <span class="arithmatex">\(G: \mathcal{U} \rightarrow \reals^{d \times d}\)</span>
 is a function such that <span class="arithmatex">\(G(u_0)\)</span> is a p.s.d. matrix that induces a 
 squared distance around <span class="arithmatex">\(u_0\)</span>:</p>
-<div class="arithmatex">\[ d^2_{u_0}(u, v) = \frac{1}{2} (u-v)^\top G(u_0) (u - v). \]</div>
+<div class="arithmatex">\[ d^2_{u_0}(u, v) = \frac{1}{2} (u-v)^\top G(u_0) (u - v)\,. \]</div>
 <p>What we observed earlier is in fact a duality between the Riemannian manifolds
 <span class="arithmatex">\((\mathcal{X}, \nabla^2 \Psi)\)</span> and <span class="arithmatex">\((\mathcal{U}, \nabla^2 \Phi),\)</span> 
 where <span class="arithmatex">\(\Phi\)</span> is the antiderivative of <span class="arithmatex">\(\phi\)</span>, i.e., <span class="arithmatex">\(\nabla\Phi=\phi\)</span>.
@@ -601,20 +601,20 @@ Bulletin of the Polish Academy of Sciences, 58(1).&nbsp;</span></p>
 <p>We may now revisit the reparametrization strategy, in light of what we learned
 so far. To reparametrize the constraint away, we work in <strong>dual coordinates</strong>
 <span class="arithmatex">\(u \in \mathcal{U}\)</span>, and&nbsp;update:</p>
-<div class="arithmatex">\[ u^{(t+1)} \leftarrow u^{(t)} - \nabla_u f(\phi(u)). \]</div>
+<div class="arithmatex">\[ u^{(t+1)} \leftarrow u^{(t)} - \nabla_u f(\phi(u))\,. \]</div>
 <p>In our case <span class="arithmatex">\(\mathcal{U}=\reals^2\)</span> and <span class="arithmatex">\(\phi = \sigma\)</span>, but let&#8217;s use the more
 general notation. The update above ignores the geometry of <span class="arithmatex">\(\mathcal{U}\)</span>, in
 other words, operates on the trivial manifold <span class="arithmatex">\((\mathcal{U}, I_d)\)</span> &#8212; the
 metric tensor is the identity matrix everywhere.  When optimizing some function <span class="arithmatex">\(\tilde{f}(u)\)</span>
 over a manifold <span class="arithmatex">\((\mathcal{U}, G)\)</span>, a convenient algorithm is natural gradient, which takes the&nbsp;form</p>
-<div class="arithmatex">\[ u^{(t+1)} \leftarrow u^{(t)} - \alpha_t [G(u)]^{-1} \nabla \tilde{f}(u^{(t)}). \]</div>
+<div class="arithmatex">\[ u^{(t+1)} \leftarrow u^{(t)} - \alpha_t [G(u)]^{-1} \nabla \tilde{f}(u^{(t)})\,. \]</div>
 <details class="note"><summary>Derivation</summary><p>We follow the same steps as for gradient descent, but we use the induced distance
 <span class="arithmatex">\(d_{u^{(t)}}\)</span> to find an update direction. We must solve the&nbsp;problem</p>
 <div class="arithmatex">\[ \argmin_{u\in\mathcal{U}} \DP{u}{\nabla \tilde{f}(u^{(t)})} + \frac{1}{2\alpha_t} 
-{(u - u^{(t)})^\top G(u^{(t)}) (u - u^{(t)}).} \]</div>
+{(u - u^{(t)})^\top G(u^{(t)}) (u - u^{(t)})}\, \]</div>
 <p>Rearranging gives the equivalent&nbsp;problem</p>
 <div class="arithmatex">\[ \argmin_{u\in\mathcal{U}} d^2_{u^{(t)}}
-(u, u^{(t)} - \alpha_t[G(u^{(t)})]^{-1} \nabla \tilde{f}(u^{(t)})).\]</div>
+(u, u^{(t)} - \alpha_t[G(u^{(t)})]^{-1} \nabla \tilde{f}(u^{(t)}))\,.\]</div>
 <p>Assuming no constraints (i.e., <span class="arithmatex">\(\mathcal{U}=\reals^d\)</span>), this yields the
 desired&nbsp;update.</p>
 </details>
@@ -627,7 +627,7 @@ In: <span class="caps">IEEE</span> Transactions on Information Theory, vol. 61, 
 <a href="https://arxiv.org/abs/1310.7780">arXiv:1310.7780</a>.</span>
 means we can get a geometry-aware flavor of the
 <span class="caps">REP</span>&nbsp;algorithm,</p>
-<div class="arithmatex">\[ u^{(t+1)} \leftarrow u^{(t)} - \alpha_t [\nabla^2 \Phi(u)]^{-1} \nabla_u {f}(\phi(u^{(t)})). \]</div>
+<div class="arithmatex">\[ u^{(t+1)} \leftarrow u^{(t)} - \alpha_t [\nabla^2 \Phi(u)]^{-1} \nabla_u {f}(\phi(u^{(t)}))\,. \]</div>
 <p>This algorithm takes the exact same steps as mirror descent, is arguably easier
 to implement, and &#8212; since it maintains iterates in dual space &#8212; is more
 numerically&nbsp;stable.</p>
@@ -651,15 +651,14 @@ numerically&nbsp;stable.</p>
 <p><img alt="quadratic landscape" src="/images/mirror_primal_lr0.010_nat.png"></img></p>
 <p>But let&#8217;s look a bit closer! Since <span class="arithmatex">\(\phi = \nabla\Phi\)</span>, our metric tensor is
 none other&nbsp;than</p>
-<div class="arithmatex">\[ \nabla^2\Phi(u) = \pfrac{\phi(u)}{u}, \]</div>
+<div class="arithmatex">\[ \nabla^2\Phi(u) = \pfrac{\phi(u)}{u}\,, \]</div>
 <p>and, putting the whole update together, we see&nbsp;that</p>
 <div class="arithmatex">\[ [\nabla^2\Phi(u)]^{-1} \nabla_u f(\phi(u)) = 
 {\left(\pfrac{\phi(u)}{u}\right)^{-1}}
 {\pfrac{\phi(u)}{u}}
-{\pfrac{f(x)}{x}\biggr\rvert_{x=\phi(u)}}  \]</div>
-<p>so natural gradient cancels out the Jacobian of <span class="arithmatex">\(\phi\)</span> in the chain rule!
-In our case, this is as if we used a sigmoid nonlinearity that acts as the
-identity in the backward pass! This suggests an alternative implementation,
+{\pfrac{f(x)}{x}\biggr\rvert_{x=\phi(u)}} \]</div>
+<p>Natural gradient cancels out the Jacobian of <span class="arithmatex">\(\phi\)</span> in the chain rule!
+This suggests an alternative implementation,
 reminiscent of <em>straight-through</em> tricks: we use a reparametrization function
 <span class="arithmatex">\(\sigma\)</span> that acts as a sigmoid in the forward pass, but acts as if it were the
 identity function in the backward pass.<label for="sn-14" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-14" class="margin-toggle"/><span class="sidenote">
