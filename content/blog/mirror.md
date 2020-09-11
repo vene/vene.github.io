@@ -520,12 +520,12 @@ distance. Replacing $\frac{1}{2}\|\cdot\|^2$ by $D_\Psi$ in the projected
 gradient algorithm leads to a generalization known as **mirror descent**,
 
 $$
-x^{(t+1)} \leftarrow \arg\min_{x \in \mathcal{X}}  \DP{\nabla f(x^{(t)})}{x} + \frac{1}{\alpha_t}D_\psi(x, x^{(t)}). \tag{MD}
+x^{(t+1)} \leftarrow \arg\min_{x \in \mathcal{X}}  \DP{\nabla f(x^{(t)})}{x} + \frac{1}{\alpha_t}D_\psi(x, x^{(t)}).
 $$
 
 Since $\Psi$ is twice differentiable and strongly convex, it has a gradient
-$\psi = \nabla\Psi$ which is invertible. Solving (MD) gives the update in the
-form of a so-called Bregman projection,[ref]Not technically a projection, 
+$\psi = \nabla\Psi$ which is invertible. Solving for the mirror descent update
+yields a so-called Bregman projection,[ref]Not technically a projection, 
 since iterating it twice need not give the same
 result, but the term emphasizes the parallel to the euclidean case.[/ref]
 
