@@ -327,7 +327,7 @@ optimization.[/ref]
     ``squishing'' nonlinearity.
     We can then perform unconstrained minimiziation on $f \circ \sigma$.
     For $\mathcal{X}=[0,1]^d$, we may use the logistic
-    function[ref]General intervals $[a,b]$ are obtained by affinely
+    function,[ref]General intervals $[a,b]$ are obtained by affinely
     transforming $[0,1]$.[/ref]
 
     $$ \sigma(u) = \frac{1}{1 + \exp(-u)}.$$
@@ -642,9 +642,9 @@ We have seen that different choices of $\Psi$ induce different geometries
 even on top of the same space. (Case in point: entropy vs. $\frac{1}{2}\|\cdot\|^2$).
 To handle this ambiguity, we need a structure that attaches the geometry along
 with the underlying space. This, (with some handwaving), is a *Riemannian
-manifold*: a pair $(\mathcal{U}, G)$ where $\mathcal{X} \subseteq \reals^d$
+manifold*: a pair $(\mathcal{U}, G)$ where $\mathcal{U} \subseteq \reals^d$
 is an underlying space[ref]Riemannian manifolds are more general than this, but
-in this post, for simplicity, we only look at the case where $\mathcal{X}\subseteq \reals^d$.
+in this post, for simplicity, we only look at the case where $\mathcal{U}\subseteq \reals^d$.
 To be fully general, the notation ramps up quickly.
 See [Agustinus Kristiadi's
 post](https://wiseodd.github.io/techblog/2019/02/22/riemannian-geometry/) 
@@ -817,8 +817,7 @@ real tasks. But this was not the main point--
 With this post, I have hopefully stirred your interest into constrained
 optimization and its connections to geometry. 
 Geometric insights have been key to advances in learning over constrained spaces of
-matrices, such as symmetric, low-rank, orthonormal, s.p.d. matrices, etc.
-[ref]
+matrices, such as symmetric, low-rank, orthonormal, s.p.d. matrices, etc.[ref]
 P.-A. Absil, R. Mahoney, and Rodolphe Sepulchre. 2008.
 [Optimization Algorithms on Matrix
 Manifolds](https://press.princeton.edu/absil).
