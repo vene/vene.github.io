@@ -17,7 +17,7 @@ satisfy some constraints, things quickly get more complicated.
 
 Some of the most popular strategies for handling constraints, while seemingly
 very different at first sight, are deeply connected. In this post, we will
-explore these connections and demonstrate them in PyTorch on a friendly example. 
+explore these connections and demonstrate them in PyTorch.
 
 In particular, we show that mirror descent is equivalent to
 gradient descent on a reparametrized objective with straight-through gradients: 
