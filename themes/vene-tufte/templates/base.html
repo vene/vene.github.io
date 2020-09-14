@@ -27,13 +27,31 @@
   {% endif %}
   <link href="//fonts.googleapis.com/css?family=PT+Mono|PT+Serif" rel="stylesheet"> 
 
+  <meta property="og:type" content="website" />
+  <meta property="twitter:creator" content=@vnfrombucharest" />
+  <meta name="twitter:card" content="summary">
+
   <!-- OpenGraph Info -->
   {% block OPEN_GRAPH_INFO %}
   <meta property="og:title" content="{{ SITENAME }}"/>
-  <meta property="og:type" content="website"/>
   <meta property="og:description" content="{{ SITE_DESCRIPTION }}"/>
   <meta property="og:url" content="{{ SITEURL }}"/>
   {% endblock OPEN_GRAPH_INFO %}
+
+  {% if article and article.meta %}
+  <meta name="description" content="{{ article.meta.og_description }}" />
+  <meta name="keywords" content="{{ article.meta.keywords }}" />
+  <meta property="og:title" content="{{ article.meta.og_title }}" />
+  <meta property="og:description" content="{{ article.meta.og_description }}" />
+  <meta property="og:url" content="https:{{ article.meta.og_url }}" />
+
+  {% if article.meta.og_image %}
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta property="og:image" content="https:{{ SITEURL }}/{{ article.meta.og_image }}" />
+  <meta property="og:image:alt" content="{{ article.meta.og_image_alt }}" />
+  {% endif %}
+
+  {% endif %}
 
   <script src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/js/main.js"></script>
 

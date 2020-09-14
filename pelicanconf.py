@@ -56,7 +56,7 @@ MARKDOWN = {
 # Jupyter Notebook plugin
 MARKUP = ('md', 'ipynb', 'rst')
 from pelican_jupyter import markup as nb_markup
-PLUGINS = [nb_markup, "plugins.tufte_footnote"]
+PLUGINS = [nb_markup, "plugins.tufte_footnote", "plugins.extended_meta"]
 IPYNB_IGNORE_CSS = True
 IPYNB_SKIP_CSS = True
 

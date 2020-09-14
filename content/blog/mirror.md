@@ -1,14 +1,19 @@
 Title: Optimizing with constraints: <br>reparametrization and geometry.
-Date: 2020-09-11
+Date: 2020-09-14
 Author: vene
 Category: optimization 
 Slug: mirror-descent
-Status: draft
-Summary:  Gradient methods are popular for training machine learning models.
-    But if we require the weights to satisfy some constraints, things quickly get more complicated.
-    Popular strategies for handling constraints, while seemingly different, are
-    in fact deeply connected. In particular, mirror descent is equivalent to
-    reparametrization with a straight-through gradient.
+Summary: 
+    Some of the most popular strategies for handling constraints in gradient-based 
+    optimization, namely: reparametrization, projected gradient, and mirror descent, 
+    while seemingly very different, are deeply connected. In this post, we will
+    explore these connections.
+    In particular, we show that mirror descent is equivalent to gradient descent on
+    a reparametrized objective with straight-through gradients.
+meta_og_title: Optimizing with constraints: reparametrization and geometry.
+meta_og_image: images/mirror_og.png
+meta_og_image_alt: Optimization trajectories for several constrained optimization algorithms on the unit box.
+meta_og_description: We reveal geometric connections between constrained gradient-based optimization methods: mirror descent, natural gradient, and reparametrization.
 
 When training machine learning models, and deep networks in particular,
 we typically use gradient-based methods. But if we require the weights to
@@ -267,7 +272,9 @@ definiteness guarantess $f(x) > 0$ for any $x \neq x_0$.[/ref]
 But a contour plot shows that the constrained minimum $x^\star$ is not the same as the
 result of clipping the unconstrained minimum to the box.
 
-<img alt="quadratic landscape" src="/images/mirror_quad_landscape.png"></img>
+<img alt="Contour plot of a skewed quadratic function, with three distinct
+points marked: the unconstrained minimizer, the minimizer constrained to the
+0-1 box, and the projection of the unconstrained minimizer." src="/images/mirror_quad_landscape.png"></img>
 
 Constraint handling cannot be left as an afterthought: 
 it needs to be baked into the optimization strategy.[ref]
@@ -390,12 +397,12 @@ continuous *gradient flow*, of which gradient descent is a discretized
 approximation. For more about gradient flows, check out [Francis Bach's post](https://francisbach.com/gradient-flows/).[/ref]
 For comparison, we include the unconstrained trajectory.
 
-<img alt="quadratic landscape" src="/images/mirror_primal_lr0.010_reparam.png"></img>
+<img alt="Optimization trajectory of reparametrized gradient descent, learning rate 0.01." src="/images/mirror_primal_lr0.010_reparam.png"></img>
 
 In practice, we would use a much larger learning rate to accelerate
 optimization:
 
-<img alt="quadratic landscape" src="/images/mirror_primal_lr0.200_reparam.png"></img>
+<img alt="Optimization trajectory of reparametrized gradient descent, learning rate 0.2" src="/images/mirror_primal_lr0.200_reparam.png"></img>
 
 We can see that even with a large learning rate, the reparametrization method
 takes much smaller steps, especially as it gets closer to the boundary of the
@@ -499,13 +506,13 @@ def optim_pg(x_init, lr=.1, max_iter=100):
 Let's visualize the trajectory. From now on, we will zoom in a bit on the region
 of interest.
 
-<img alt="quadratic landscape" src="/images/mirror_primal_lr0.010_pg.png"></img>
+<img alt="Optimization trajectory of projected gradient, learning rate=0.01" src="/images/mirror_primal_lr0.010_pg.png"></img>
 
 It looks like the projected gradient method tends to follow the unconstrained
 trajectory while sticking to the boundary of the domain. Of course, with larger
 steps, the differences become more pronounced.
 
-<img alt="quadratic landscape" src="/images/mirror_primal_lr0.200_pg.png"></img>
+<img alt="Optimization trajectory of projected gradient, learning rate=0.2" src="/images/mirror_primal_lr0.200_pg.png"></img>
 
 In this instance, PG is the clear winner: look how fast it makes progress. With
 less well-behaved and non-convex functions this need not be the case. So we are
@@ -693,17 +700,17 @@ back. Reparametrization rewrites the problem in dual coordinates and performs
 gradient descent: this is not the same, and the trajectories are quite
 different!
 
-<img alt="quadratic landscape" src="/images/mirror_primal_lr0.010_md.png"></img>
+<img alt="Optimization trajectory of mirror descent, learning rate 0.01" src="/images/mirror_primal_lr0.010_md.png"></img>
 
 With a larger step size, we see that mirror descent takes much larger steps than
 reparametrization does.
 
-<img alt="quadratic landscape" src="/images/mirror_primal_lr0.200_md.png"></img>
+<img alt="Optimization trajectory of mirror descent, learning rate 0.2" src="/images/mirror_primal_lr0.200_md.png"></img>
 
 Now that we figured out that we may think about the problem in primal or dual
 coordinates, we may also visualize the optimization trajectory in dual coordinates.
 
-<img alt="quadratic landscape" src="/images/mirror_dual_lr0.010_md.png"></img>
+<img alt="Dual coordinate trajectory of mirror descent, learning rate 0.01" src="/images/mirror_dual_lr0.010_md.png"></img>
 
 Yet, the way that mirror descent leans on moving from $\mathcal{X}$ to
 $\mathcal{U}$ is very familiar to the reparametrization strategy. Is there a
@@ -809,7 +816,8 @@ def optim_rep_natural(u_init, lr=.1, max_iter=100):
 
 and we can visually check that we get exactly the same trajectory as mirror descent.
 
-<img alt="quadratic landscape" src="/images/mirror_primal_lr0.010_nat.png"></img>
+<img alt="Optimization trajectories. Natural gradient matches exactly mirror
+descent." src="/images/mirror_primal_lr0.010_nat.png"></img>
 
 But let's look a bit closer! Since $\phi = \nabla\Phi$, our metric tensor is
 none other than
@@ -935,8 +943,9 @@ This post was inspired by [Anima Anandkumar's
 talk](https://video.ias.edu/machinelearning/2020/0709-AnimaAnandkumar) at the 
 IAS Seminar on Theoretical Machine Learning. Before this talk, I had no idea
 about anything in the second part of this post.
-Thanks to Mathieu Blondel, Caio Corro, and Fabian Pedregosa for feedback on the blog post.
-Blogging is work, so I acknowledge my funding from the European Research Council
+Thanks to Mathieu Blondel, Caio Corro, André Martins, Fabian Pedregosa, and Justine Zhang
+for feedback.
+I am funded by the European Research Council
 StG DeepSPIN 758969 and Fundação para a Ciência e Tecnologia contract UIDB/50008/2020. 
 
 
