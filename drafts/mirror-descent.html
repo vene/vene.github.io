@@ -20,7 +20,15 @@
         rel="alternate" title="Vlad Niculae ALL Atom Feed" />
   <link href="//fonts.googleapis.com/css?family=PT+Mono|PT+Serif" rel="stylesheet"> 
 
+  <meta property="twitter:creator" content=@vnfrombucharest" />
   <!-- OpenGraph Info -->
+
+  <meta name="description" content="We reveal connections between constrained gradient-based optimization methods, including mirror descent, natural gradient, and reparametrization.">
+  <meta name="keywords" content="">
+  <meta property="og:title" content="Optimizing with constraints: <br>reparametrization and&nbsp;geometry.">
+  <meta property="og:description" content="We reveal connections between constrained gradient-based optimization methods, including mirror descent, natural gradient, and reparametrization.">
+  <meta property="og:url" content="//vene.ro///vene.ro/drafts/mirror-descent.html">
+  <meta property="og:image" content="//vene.ro//images/mirror_primal_lr0.010_nat.png">
 
   <script src="//vene.ro/theme/js/main.js"></script>
 
@@ -283,7 +291,9 @@ would be <span class="arithmatex">\(x^\star_\text{unc} = x_0\)</span>.<label for
 definiteness guarantess <span class="arithmatex">\(f(x) &gt; 0\)</span> for any <span class="arithmatex">\(x \neq x_0\)</span>.</span>
 But a contour plot shows that the constrained minimum <span class="arithmatex">\(x^\star\)</span> is not the same as the
 result of clipping the unconstrained minimum to the&nbsp;box.</p>
-<p><img alt="quadratic landscape" src="/images/mirror_quad_landscape.png"></img></p>
+<p><img alt="Contour plot of a skewed quadratic function, with three distinct
+points marked: the unconstrained minimizer, the minimizer constrained to the
+0-1 box, and the projection of the unconstrained minimizer." src="/images/mirror_quad_landscape.png"></img></p>
 <p>Constraint handling cannot be left as an afterthought: 
 it needs to be baked into the optimization strategy.<label for="sn-2" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-2" class="margin-toggle"/><span class="sidenote">
 There is an important special case where (<span class="caps">QP</span>) can be solved exactly: the
@@ -391,9 +401,9 @@ method.<label for="sn-6" class="margin-toggle sidenote-number"></label><input ty
 continuous <em>gradient flow</em>, of which gradient descent is a discretized
 approximation. For more about gradient flows, check out <a href="https://francisbach.com/gradient-flows/">Francis Bach&#8217;s post</a>.</span>
 For comparison, we include the unconstrained&nbsp;trajectory.</p>
-<p><img alt="quadratic landscape" src="/images/mirror_primal_lr0.010_reparam.png"></img></p>
+<p><img alt="Optimization trajectory of reparametrized gradient descent, learning rate 0.01." src="/images/mirror_primal_lr0.010_reparam.png"></img></p>
 <p>In practice, we would use a much larger learning rate to accelerate&nbsp;optimization:</p>
-<p><img alt="quadratic landscape" src="/images/mirror_primal_lr0.200_reparam.png"></img></p>
+<p><img alt="Optimization trajectory of reparametrized gradient descent, learning rate 0.2" src="/images/mirror_primal_lr0.200_reparam.png"></img></p>
 <p>We can see that even with a large learning rate, the reparametrization method
 takes much smaller steps, especially as it gets closer to the boundary of the
 domain. The steps are so small, that we only show the first 20 markers, to avoid
@@ -484,11 +494,11 @@ The implementation&nbsp;follows:</p>
 
 <p>Let&#8217;s visualize the trajectory. From now on, we will zoom in a bit on the region
 of&nbsp;interest.</p>
-<p><img alt="quadratic landscape" src="/images/mirror_primal_lr0.010_pg.png"></img></p>
+<p><img alt="Optimization trajectory of projected gradient, learning rate=0.01" src="/images/mirror_primal_lr0.010_pg.png"></img></p>
 <p>It looks like the projected gradient method tends to follow the unconstrained
 trajectory while sticking to the boundary of the domain. Of course, with larger
 steps, the differences become more&nbsp;pronounced.</p>
-<p><img alt="quadratic landscape" src="/images/mirror_primal_lr0.200_pg.png"></img></p>
+<p><img alt="Optimization trajectory of projected gradient, learning rate=0.2" src="/images/mirror_primal_lr0.200_pg.png"></img></p>
 <p>In this instance, <span class="caps">PG</span> is the clear winner: look how fast it makes progress. With
 less well-behaved and non-convex functions this need not be the case. So we are
 motivated to delve deeper and explore how <span class="caps">PG</span> and <span class="caps">REP</span> relate, despite seeming so&nbsp;different. </p>
@@ -629,13 +639,13 @@ Mirror descent thus
 first moves into dual (unconstrained) space, performs an update there, and then moves
 back. Reparametrization rewrites the problem in dual coordinates and performs
 gradient descent: this is not the same, and the trajectories are quite&nbsp;different!</p>
-<p><img alt="quadratic landscape" src="/images/mirror_primal_lr0.010_md.png"></img></p>
+<p><img alt="Optimization trajectory of mirror descent, learning rate 0.01" src="/images/mirror_primal_lr0.010_md.png"></img></p>
 <p>With a larger step size, we see that mirror descent takes much larger steps than
 reparametrization&nbsp;does.</p>
-<p><img alt="quadratic landscape" src="/images/mirror_primal_lr0.200_md.png"></img></p>
+<p><img alt="Optimization trajectory of mirror descent, learning rate 0.2" src="/images/mirror_primal_lr0.200_md.png"></img></p>
 <p>Now that we figured out that we may think about the problem in primal or dual
 coordinates, we may also visualize the optimization trajectory in dual&nbsp;coordinates.</p>
-<p><img alt="quadratic landscape" src="/images/mirror_dual_lr0.010_md.png"></img></p>
+<p><img alt="Dual coordinate trajectory of mirror descent, learning rate 0.01" src="/images/mirror_dual_lr0.010_md.png"></img></p>
 <p>Yet, the way that mirror descent leans on moving from <span class="arithmatex">\(\mathcal{X}\)</span> to
 <span class="arithmatex">\(\mathcal{U}\)</span> is very familiar to the reparametrization strategy. Is there a
 deeper connection between the two? We illuminate it&nbsp;next.</p>
@@ -720,7 +730,8 @@ A first attempt at implementing natural gradient&nbsp;is:</p>
 
 
 <p>and we can visually check that we get exactly the same trajectory as mirror&nbsp;descent.</p>
-<p><img alt="quadratic landscape" src="/images/mirror_primal_lr0.010_nat.png"></img></p>
+<p><img alt="Optimization trajectories. Natural gradient matches exactly mirror
+descent." src="/images/mirror_primal_lr0.010_nat.png"></img></p>
 <p>But let&#8217;s look a bit closer! Since <span class="arithmatex">\(\phi = \nabla\Phi\)</span>, our metric tensor is
 none other&nbsp;than</p>
 <div class="arithmatex">\[ \nabla^2\Phi(u) = \pfrac{\phi(u)}{u}\,, \]</div>
@@ -829,8 +840,9 @@ Competitive Mirror Descent.
 talk</a> at the 
 <span class="caps">IAS</span> Seminar on Theoretical Machine Learning. Before this talk, I had no idea
 about anything in the second part of this post.
-Thanks to Mathieu Blondel, Caio Corro, and Fabian Pedregosa for feedback on the blog post.
-Blogging is work, so I acknowledge my funding from the European Research Council
+Thanks to Mathieu Blondel, Caio Corro, André Martins, Fabian Pedregosa, and Justine Zhang
+for feedback.
+I am funded by the European Research Council
 StG DeepSPIN 758969 and Fundação para a Ciência e Tecnologia contract <span class="caps">UIDB</span>/50008/2020. </p>
     </div><!-- /.entry-content -->
 
