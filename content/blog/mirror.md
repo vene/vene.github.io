@@ -913,11 +913,11 @@ and the simplex $\mathcal{X} = {\{ x \in \reals^d : x_i \geq 0, \sum_i x_i = 1
 \},}$ for which the negative Shannon entropy $\Psi(x) = {\sum_i x_i \log x_i}$
 yields the softmax reparametrization $\phi(u) = {\frac{1}{Z} \exp(u)}$ with $Z=\sum_i\exp(u_i).$
 The resulting simplex-constrained algorithm is known under many names, including
-"multiplicative weights", "entropic descent", or "exponentiated gradient",[ref]
+"multiplicative weights", "entropic descent", or "exponentiated gradient".[ref]
 J. Kivinen, J and M.K. Warmuth, 1997. 
 [Exponentiated gradient versus gradient descent for linear predictors.](https://users.soe.ucsc.edu/~manfred/pubs/J36.pdf)
 *Information and Computation, 132(1),* 1-63.
-[/ref] which performs the elementwise multiplicative update 
+[/ref] This algorithm performs the elementwise multiplicative update 
 
 $$ x^{(t+1)} \propto x^{(t)} \odot \exp\big(-\alpha^{(t)} \nabla f(x^{(t)})\big)\,.$$
 
@@ -935,7 +935,6 @@ F. Schäfer, A. Anandkumar, H. Owhadi. 2020.
 Competitive Mirror Descent.
 [*arXiv:2006.10179*](https://arxiv.org/abs/2006.10179).
 [/ref]
-
 
 # Acknowledgements.
 
