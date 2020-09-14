@@ -1,5 +1,797 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Vlad Niculae</title><link href="//vene.ro/" rel="alternate"></link><link href="//vene.ro/feeds/all.atom.xml" rel="self"></link><id>//vene.ro/</id><updated>2018-08-21T00:00:00+02:00</updated><entry><title>Rendering 3-d surface plots for social media</title><link href="//vene.ro/blog/rendering-3d-surface-plot-social-media.html" rel="alternate"></link><published>2018-08-21T00:00:00+02:00</published><updated>2018-08-21T00:00:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2018-08-21:/blog/rendering-3d-surface-plot-social-media.html</id><summary type="html">&lt;p&gt;It&amp;#8217;s 2018, and your favorite meme pages on facebook constantly come up with quality 3d-post content. How can we mere researchers even begin to compete in terms of social media presence? What chance do we have at going viral? In this post, I show you how to generate 3-d renders of your or your friends&amp;#8217; cool machine learning&amp;nbsp;research.&lt;/p&gt;</summary><content type="html">&lt;p&gt;It&amp;#8217;s 2018, and your favorite meme pages on facebook constantly come up
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Vlad Niculae</title><link href="//vene.ro/" rel="alternate"></link><link href="//vene.ro/feeds/all.atom.xml" rel="self"></link><id>//vene.ro/</id><updated>2020-09-14T00:00:00+02:00</updated><entry><title>Optimizing with constraints: reparametrization and geometry.</title><link href="//vene.ro/blog/mirror-descent.html" rel="alternate"></link><published>2020-09-14T00:00:00+02:00</published><updated>2020-09-14T00:00:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2020-09-14:/blog/mirror-descent.html</id><summary type="html">&lt;p&gt;Some of the most popular strategies for handling constraints in gradient-based
+optimization, namely: reparametrization, projected gradient, and mirror descent,
+while seemingly very different, are deeply connected. In this post, we will
+explore these connections.
+In particular, we show that mirror descent is equivalent to gradient descent on
+a reparametrized objective with straight-through&amp;nbsp;gradients.&lt;/p&gt;</summary><content type="html">&lt;p&gt;When training machine learning models, and deep networks in particular,
+we typically use gradient-based methods. But if we require the weights to
+satisfy some constraints, things quickly get more&amp;nbsp;complicated.&lt;/p&gt;
+&lt;p&gt;Some of the most popular strategies for handling constraints, while seemingly
+very different at first sight, are deeply connected. In this post, we will
+explore these connections and demonstrate them in&amp;nbsp;PyTorch.&lt;/p&gt;
+&lt;p&gt;In particular, we show that mirror descent is equivalent to gradient descent on
+a reparametrized objective with straight-through gradients: replacing a
+constrained variable &lt;span class="arithmatex"&gt;\(x\)&lt;/span&gt; with some squishing function &lt;span class="arithmatex"&gt;\(\sigma(u)\)&lt;/span&gt;, but treating
+&lt;span class="arithmatex"&gt;\(\sigma\)&lt;/span&gt; as if it were the identity in the backward&amp;nbsp;pass.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Outline.&lt;/strong&gt; &lt;/p&gt;
+&lt;div class="toc"&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#why-are-constraints-challenging"&gt;Why are constraints&amp;nbsp;challenging?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#ways-to-deal-with-constraints"&gt;Ways to deal with constraints.&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#reparametrization"&gt;Reparametrization.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#projected-gradient"&gt;Projected&amp;nbsp;gradient.&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#generalizing-the-projected-gradient-method-with-divergences"&gt;Generalizing the projected gradient method with&amp;nbsp;divergences.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#duality-between-mirror-descent-and-naturalgradient"&gt;Duality between mirror descent and&amp;nbsp;natural&amp;nbsp;gradient.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#conclusions"&gt;Conclusions.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#acknowledgements"&gt;Acknowledgements.&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;script src="https://unpkg.com/d3@3/d3.min.js"&gt;&lt;/script&gt;
+
+&lt;style type="text/css"&gt;
+
+#plotdiv {text-align: center;}
+
+.rules line, .rules path {
+  shape-rendering: crispEdges;
+  stroke: #00000;
+}
+
+.series path {
+  fill: none;
+  stroke: #348;
+}
+
+.labels {
+    font-family: sans-serif;
+    font-size: .7em;
+}
+
+.thick {
+  stroke-width: 4px;
+}
+
+.dashed {
+    stroke-width: 1px;
+}
+
+.unconstr{ fill: gray };
+.constr{ fill: black };
+&lt;/style&gt;
+
+&lt;div class="arithmatex"&gt;\[
+\newcommand\pfrac[2]{\frac{\partial #1}{\partial #2}}
+\newcommand\DP[2]{\left\langle #1, #2 \right\rangle}
+\]&lt;/div&gt;
+&lt;h1 id="why-are-constraints-challenging"&gt;Why are constraints challenging?&lt;a class="headerlink" href="#why-are-constraints-challenging" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;In machine learning, we fit models to data by minimizing an&amp;nbsp;objective,&lt;/p&gt;
+&lt;div class="arithmatex"&gt;\[\min_{x \in \mathcal{X}} f(x)\,. \tag{OPT}\]&lt;/div&gt;
+&lt;p&gt;Here, &lt;span class="arithmatex"&gt;\(x\)&lt;/span&gt; denotes the parameters to be learned, for instance, the neural network weights.
+They typically take values in &lt;span class="arithmatex"&gt;\(\mathcal{X}=\reals\)&lt;/span&gt;, and we train networks by
+some variant of the &lt;em&gt;gradient&lt;/em&gt; method: we choose an initial configuration &lt;span class="arithmatex"&gt;\(x^{(0)}\)&lt;/span&gt;
+and successively applying updates of the&amp;nbsp;form:&lt;/p&gt;
+&lt;div class="arithmatex"&gt;\[
+x^{(t+1)} \leftarrow x^{(t)} - \alpha^{(t)} \nabla f(x^{(t)})\,.
+\]&lt;/div&gt;
+&lt;p&gt;In deep learning, we typically use stochastic flavors that
+nonetheless perform well and are efficient.  Here, we will focus on a relatively
+nice example: a convex quadratic function &lt;span class="arithmatex"&gt;\(f\)&lt;/span&gt;.
+We will see that, even in this case, constraints quickly complicate&amp;nbsp;things.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Why constrain?&lt;/strong&gt;
+For modeling reasons, we might want to impose restrictions on some of the weights
+&lt;span class="arithmatex"&gt;\(x\)&lt;/span&gt;.  Perhaps one of the parameter corresponds to the variance of a
+distribution, so it cannot be negative. Or perhaps a parameter denotes
+some sort of &amp;#8220;gate&amp;#8221;, or mixture between two alternatives &lt;span class="arithmatex"&gt;\(xa_1 + (1-x)a_2\)&lt;/span&gt;. 
+In this case, we would need to constrain &lt;span class="arithmatex"&gt;\(x \in [0, 1]\)&lt;/span&gt;. This is often called a
+&lt;em&gt;box constraint&lt;/em&gt; and it is one of the most friendly types of inequality
+constraint we might deal&amp;nbsp;with.&lt;/p&gt;
+&lt;p&gt;For one-dimensional convex problems, &lt;em&gt;i.e.,&lt;/em&gt; &lt;span class="arithmatex"&gt;\(\mathcal{X} = [a, b] \subset
+\reals\)&lt;/span&gt;, box constraints do not complicate the problem: we can solve the
+unconstrained problem &lt;span class="arithmatex"&gt;\(x_{\text{unc}}^* = \argmin_{x\in\reals} f(x)\)&lt;/span&gt;.  If the
+answer satisfies the constraint, then it must be the solution of the constrained
+problem as well. If not, the answer can be found by &lt;em&gt;clipping&lt;/em&gt; to the&amp;nbsp;interval:&lt;/p&gt;
+&lt;div class="arithmatex"&gt;\[ x^\star = \operatorname{clip}_{[a,b]}(x_\text{unc}^\star)
+\coloneqq \min(a, \max(b, x_\text{unc}^\star))\,.
+\]&lt;/div&gt;
+&lt;details class="note"&gt;&lt;summary&gt;Proof&lt;/summary&gt;&lt;p&gt;We add non-negative dual variables &lt;span class="arithmatex"&gt;\(\mu_a\)&lt;/span&gt; and &lt;span class="arithmatex"&gt;\(\mu_b\)&lt;/span&gt; to handle the inequality
+constraints &lt;span class="arithmatex"&gt;\(x \geq a\)&lt;/span&gt; and &lt;span class="arithmatex"&gt;\(x \leq b\)&lt;/span&gt;, and write the&amp;nbsp;Lagrangian,&lt;/p&gt;
+&lt;div class="arithmatex"&gt;\[\mathcal{L}(x) = f(x) + \mu_a (a-x) + \mu_b(x-b)\,.\]&lt;/div&gt;
+&lt;p&gt;An optimal &lt;span class="arithmatex"&gt;\(x^\star\)&lt;/span&gt; must satisfiy the original constraints &lt;span class="arithmatex"&gt;\((a \leq x^\star \leq b)\)&lt;/span&gt;
+and be a stationary point of the&amp;nbsp;Lagrangian:&lt;/p&gt;
+&lt;div class="arithmatex"&gt;\[ 
+D_x \mathcal{L}(x^\star) = 0 \iff f'(x^\star) = \mu_a - \mu_b\,.
+\tag{F}
+\]&lt;/div&gt;
+&lt;p&gt;The dual variables must be non-negative and satisfy
+complementary&amp;nbsp;slackness:&lt;/p&gt;
+&lt;div class="arithmatex"&gt;\[
+\mu_a (a - x^\star) = 0, \quad\text{and}\quad \mu_b (x^\star - b) = 0\,.
+\]&lt;/div&gt;
+&lt;p&gt;Let &lt;span class="arithmatex"&gt;\(x^\star_\text{unc}\)&lt;/span&gt; be the solution of the unconstrained problem,
+satisfying  &lt;span class="arithmatex"&gt;\(f'(x^\star_\text{unc})=0\)&lt;/span&gt;. If 
+&lt;span class="arithmatex"&gt;\(a \leq x^\star_\text{unc} \leq b\)&lt;/span&gt;, then &lt;span class="arithmatex"&gt;\(x^\star=x^\star_\text{unc}\)&lt;/span&gt;, and
+choosing &lt;span class="arithmatex"&gt;\(\mu_a=\mu_b=0\)&lt;/span&gt; satisfies all&amp;nbsp;conditions.&lt;/p&gt;
+&lt;p&gt;Otherwise, &lt;span class="arithmatex"&gt;\(x^\star_\text{unc}\)&lt;/span&gt; is either too small or too large.
+Assume &lt;span class="arithmatex"&gt;\(x^\star_\text{unc} &amp;gt; a\)&lt;/span&gt; and take &lt;span class="arithmatex"&gt;\(x^\star = a\)&lt;/span&gt;. Then we have &lt;span class="arithmatex"&gt;\(\mu_b=0\)&lt;/span&gt;,
+and from (F) we must have &lt;span class="arithmatex"&gt;\(\mu_a = f'(a)\)&lt;/span&gt;. Is this a valid value for the
+dual variable? We must check that &lt;span class="arithmatex"&gt;\(f'(a) \geq 0\)&lt;/span&gt;. Convex &lt;span class="arithmatex"&gt;\(f\)&lt;/span&gt; satisfies
+&lt;span class="arithmatex"&gt;\( f(a) - f(x) \leq f'(a)(a-x) \)&lt;/span&gt;
+for any &lt;span class="arithmatex"&gt;\(x\)&lt;/span&gt;, including the minimizer &lt;span class="arithmatex"&gt;\(x=x^\star_\text{unc}\)&lt;/span&gt;.
+By assumption, &lt;span class="arithmatex"&gt;\(a-x^\star_\text{unc} &amp;gt; 0\)&lt;/span&gt;, so we may divide by it&amp;nbsp;yielding&lt;/p&gt;
+&lt;div class="arithmatex"&gt;\[ \mu_a = f'(a) \geq \frac{f(a)-f(x^\star_\text{unc})}{a-x^\star_\text{unc}} \geq 0. \]&lt;/div&gt;
+&lt;p&gt;The case &lt;span class="arithmatex"&gt;\( x^\star_\text{unc} &amp;gt; b \)&lt;/span&gt; follows&amp;nbsp;similarly.&lt;/p&gt;
+&lt;/details&gt;
+&lt;p&gt;The following interactive demo might convince you that this is true. We show the
+1-d function &lt;span class="arithmatex"&gt;\(f(x) = (x - x_0)^2 / 2\)&lt;/span&gt; and its minimizer constrained to &lt;span class="arithmatex"&gt;\([0, 1]\)&lt;/span&gt;.
+Drag the slider to change the location of the unconstrained minimizer &lt;span class="arithmatex"&gt;\(x_0\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;div id="plotdiv"&gt;
+  &lt;svg id="onedimplot" preserveAspectRatio="xMinYMin meet" viewBox="0 0 550 150"&gt;&lt;/svg&gt; &lt;br /&gt;
+    &lt;input type="range" min="-1" max="2" step=".001" oninput="plot(this.value)" onchange="plot(this.value)"&gt;
+  &lt;/div&gt;&lt;/p&gt;
+&lt;script&gt;
+var w = 500;
+var h = 100;
+
+var x = d3.scale.linear().domain([-2, 3]).range([0, w]);
+var xint = d3.scale.linear().domain([0, 1]);
+var y = d3.scale.linear().domain([ 0, 1]).range([h, 0]);
+
+//  var svg = d3.select("body").append("svg")
+//  .attr("width", w + 50)
+//  .attr("height", h + 50);
+var svg = d3.select("#onedimplot");
+    var vis = svg.append("svg:g").attr("transform", "translate(25,25)")
+    make_rules();
+
+    plot(0.5);
+
+
+    function plot(x0) {
+        var quadratic = make_quadratic(x0);
+        chart_line(quadratic, x0);
+    }
+
+    function make_quadratic(x0) {
+            return (function(t) {
+                    return 0.5 * (t - x0) * (t - x0) + 0.2;
+            });
+    }
+
+function chart_line(func, x0) {
+            vis.selectAll('.dots').remove();
+            vis.selectAll('.series').remove();
+    var g = vis.append("svg:g").classed("series", true)
+
+    g.append("svg:path")
+        .classed("dashed", true)
+        .attr("d", function(d) { return d3.svg.line()(
+          x.ticks(100).map(function(t) {
+            return [ x(t), y(func(t)) ]
+          })
+         )})
+
+    g.append("svg:path")
+        .classed("thick", true)
+        .attr("d", function(d) { return d3.svg.line()(
+          xint.ticks(100).map(function(t) {
+            return [ x(t), y(func(t)) ]
+          })
+                    )})
+
+
+            vis.append('circle')
+                .classed("dots", true)
+                .classed("unconstr", true)
+                .attr("r", 5)
+                .attr("cx", function(d) { return x(x0); })
+                .attr("cy", function(d) { return y(func(x0)); })
+
+          var xstar = Math.min(Math.max(x0, 0), 1);
+
+            vis.append('circle')
+                .classed("dots", true)
+                .classed("constr", true)
+                .attr("r", 5)
+                .attr("cx", function(d) { return x(xstar); })
+                .attr("cy", function(d) { return y(func(xstar)); })
+}
+
+function make_rules() {
+    var rules = vis.append("svg:g").classed("rules", true)
+
+    function make_x_axis() {
+        return d3.svg.axis()
+                .scale(x)
+                .orient("bottom")
+                .ticks(10)
+    }
+
+
+    rules.append("svg:g").classed("grid x_grid", true)
+            .attr("transform", "translate(0,"+h+")")
+            .call(make_x_axis()
+                .tickSize(0,0,0)
+                .tickFormat("")
+            )
+
+    rules.append("svg:g").classed("labels x_labels", true)
+            .attr("transform", "translate(0,"+h+")")
+            .call(make_x_axis()
+                .tickSize(1)
+            )
+}
+&lt;/script&gt;
+
+&lt;p&gt;However, in dimension two or more, clipping no longer works, because of
+interactions between the variables. We demonstate this on a quadratic problem
+which will become the main focus of the rest of this&amp;nbsp;post,&lt;/p&gt;
+&lt;div class="arithmatex"&gt;\[ \min_{x \in \mathcal{X}} 
+f(x) \coloneqq \frac{1}{2}~(x - x_0)^\top Q (x - x_0)\,.\tag{QP} \]&lt;/div&gt;
+&lt;p&gt;Let us visualize this problem for the specific case of
+the unit square &lt;span class="arithmatex"&gt;\(\mathcal{X} = [0,1] \times [0,1] \subset \reals^2\)&lt;/span&gt;,
+with &lt;span class="arithmatex"&gt;\(x_0 = (1.5, .1)\)&lt;/span&gt;, and 
+&lt;span class="arithmatex"&gt;\(Q = \left(\begin{smallmatrix}3 &amp;amp; 2 \\\\ 2 &amp;amp; 3 \end{smallmatrix}\right)\)&lt;/span&gt;.
+If not for the constraints, since &lt;span class="arithmatex"&gt;\(Q\)&lt;/span&gt; is positive definite, the minimum
+would be &lt;span class="arithmatex"&gt;\(x^\star_\text{unc} = x_0\)&lt;/span&gt;.&lt;label for="sn-1" class="margin-toggle sidenote-number"&gt;&lt;/label&gt;&lt;input type="checkbox" id="sn-1" class="margin-toggle"/&gt;&lt;span class="sidenote"&gt;Because &lt;span class="arithmatex"&gt;\(f(x_0)=0,\)&lt;/span&gt; and positive
+definiteness guarantess &lt;span class="arithmatex"&gt;\(f(x) &amp;gt; 0\)&lt;/span&gt; for any &lt;span class="arithmatex"&gt;\(x \neq x_0\)&lt;/span&gt;.&lt;/span&gt;
+But a contour plot shows that the constrained minimum &lt;span class="arithmatex"&gt;\(x^\star\)&lt;/span&gt; is not the same as the
+result of clipping the unconstrained minimum to the&amp;nbsp;box.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Contour plot of a skewed quadratic function, with three distinct
+points marked: the unconstrained minimizer, the minimizer constrained to the
+0-1 box, and the projection of the unconstrained minimizer." src="/images/mirror_quad_landscape.png"&gt;&lt;/img&gt;&lt;/p&gt;
+&lt;p&gt;Constraint handling cannot be left as an afterthought: 
+it needs to be baked into the optimization strategy.&lt;label for="sn-2" class="margin-toggle sidenote-number"&gt;&lt;/label&gt;&lt;input type="checkbox" id="sn-2" class="margin-toggle"/&gt;&lt;span class="sidenote"&gt;
+There is an important special case where (&lt;span class="caps"&gt;QP&lt;/span&gt;) can be solved exactly: the
+case &lt;span class="arithmatex"&gt;\(Q = I\)&lt;/span&gt;. In this case, the problem becomes
+&lt;span class="arithmatex"&gt;\(\argmin_{x \in \mathcal{X}} \| x - x_0 \|^2_2,\)&lt;/span&gt;
+which is known as the &lt;em&gt;Euclidean projection&lt;/em&gt; of &lt;span class="arithmatex"&gt;\(x_0\)&lt;/span&gt; onto &lt;span class="arithmatex"&gt;\(\mathcal{X}\)&lt;/span&gt;.
+If &lt;span class="arithmatex"&gt;\(\mathcal{X}\)&lt;/span&gt; are box constraints, the projection decomposes into a series of
+independent 1-d projections, which we&amp;#8217;ve seen can be solved by&amp;nbsp;clipping.&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;As a warm up, let us implement our quadratic function
+&lt;span class="arithmatex"&gt;\(f(x) = \frac{1}{2} {(x - x_0)^\top}Q{(x - x_0)}\)&lt;/span&gt; in PyTorch, 
+as well as a minimal gradient descent loop from&amp;nbsp;scratch.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;torch&lt;/span&gt;
+
+&lt;span class="n"&gt;torch&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set_default_dtype&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;torch&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;double&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;x0&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;torch&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;tensor&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="mf"&gt;1.5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;span class="n"&gt;Q&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;torch&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;tensor&lt;/span&gt;&lt;span class="p"&gt;([[&lt;/span&gt;&lt;span class="mf"&gt;3.0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;2.0&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+                  &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mf"&gt;2.0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;3.0&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;f&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;z&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;x0&lt;/span&gt;
+    &lt;span class="n"&gt;Qz&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;z&lt;/span&gt; &lt;span class="o"&gt;@&lt;/span&gt; &lt;span class="n"&gt;Q&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mf"&gt;0.5&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;torch&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sum&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;z&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;Qz&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;dim&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;optim_grad&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x_init&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;lr&lt;/span&gt;&lt;span class="o"&gt;=.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;max_iter&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;x_init&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;clone&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;requires_grad_&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;max_iter&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;backward&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+        &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="o"&gt;-=&lt;/span&gt; &lt;span class="n"&gt;lr&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;grad&lt;/span&gt;
+        &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;grad&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;zero_&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This procedure quickly converges to &lt;span class="arithmatex"&gt;\(x^\star_\text{unc} = (1.5, .1)\)&lt;/span&gt;.&lt;/p&gt;
+&lt;h1 id="ways-to-deal-with-constraints"&gt;Ways to deal with constraints.&lt;a class="headerlink" href="#ways-to-deal-with-constraints" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;When faced with a box-constrained optimization problem, these are the ideas that
+most practitioners would turn to.&lt;label for="sn-3" class="margin-toggle sidenote-number"&gt;&lt;/label&gt;&lt;input type="checkbox" id="sn-3" class="margin-toggle"/&gt;&lt;span class="sidenote"&gt;This turns out to be a handy personality
+quiz to see if somebody resonates more with neural networks or with convex&amp;nbsp;optimization.&lt;/span&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;Reparamtrization (&lt;span class="caps"&gt;REP&lt;/span&gt;).&lt;/em&gt; Circumvent the constraints on &lt;span class="arithmatex"&gt;\(x\)&lt;/span&gt;, 
+    by expressing the function in terms of unconstrained variables &lt;span class="arithmatex"&gt;\(u\)&lt;/span&gt;
+    such that &lt;span class="arithmatex"&gt;\(x_i = \sigma(u_i)\)&lt;/span&gt;, where &lt;span class="arithmatex"&gt;\(\sigma : \reals \to \mathcal{X}\)&lt;/span&gt; is a
+    &amp;#8220;squishing&amp;#8221; nonlinearity.
+    We can then perform unconstrained minimiziation on &lt;span class="arithmatex"&gt;\(f \circ \sigma\)&lt;/span&gt;.
+    For &lt;span class="arithmatex"&gt;\(\mathcal{X}=[0,1]^d\)&lt;/span&gt;, we may use the logistic
+    function,&lt;label for="sn-4" class="margin-toggle sidenote-number"&gt;&lt;/label&gt;&lt;input type="checkbox" id="sn-4" class="margin-toggle"/&gt;&lt;span class="sidenote"&gt;General intervals &lt;span class="arithmatex"&gt;\([a,b]\)&lt;/span&gt; are obtained by affinely
+    transforming &lt;span class="arithmatex"&gt;\([0,1]\)&lt;/span&gt;.&lt;/span&gt;&lt;/p&gt;
+&lt;div class="arithmatex"&gt;\[ \sigma(u) = \frac{1}{1 + \exp(-u)}\,.\]&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;Projected gradient (&lt;span class="caps"&gt;PG&lt;/span&gt;).&lt;/em&gt; Perform unconstrained gradient updates, then
+    project back onto the domain after each&amp;nbsp;update:&lt;/p&gt;
+&lt;div class="arithmatex"&gt;\[
+\begin{aligned}
+x^{(t+½)} &amp;amp;\leftarrow x^{(t)} - \alpha^{(t)} \nabla f(x^{(t)})\,, \\
+x^{(t+1)} &amp;amp;\leftarrow \operatorname{Proj}_\mathcal{X}\big(x^{(t+½)}\big)\,.
+\\
+\end{aligned}
+\]&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;span class="caps"&gt;REP&lt;/span&gt; is convenient when working with neural network libraries like PyTorch,
+because it can be implemented just by changing our model, without requiring
+modifications to the optimization code. However, the resulting problem (after
+reparametrization) is no longer convex in &lt;span class="arithmatex"&gt;\(u\)&lt;/span&gt;, even if the original problem was
+convex in &lt;span class="arithmatex"&gt;\(x\)&lt;/span&gt;. &lt;span class="caps"&gt;PG&lt;/span&gt; directly solves the convex optimization problem (&lt;span class="caps"&gt;QP&lt;/span&gt;), but
+the intermediate iterates &lt;span class="arithmatex"&gt;\(x^{(t+0.5)}\)&lt;/span&gt; can leave &lt;span class="arithmatex"&gt;\(\mathcal{X}\)&lt;/span&gt;,
+leading to a possibly less stable or too aggressive&amp;nbsp;trajectory.&lt;/p&gt;
+&lt;p&gt;In this post, we will explore the connection between the two by studying &lt;em&gt;mirror
+descent&lt;/em&gt; and its information-geometric interpretation as natural gradient
+in a dual space. But first, let&amp;#8217;s explore our two initial&amp;nbsp;ideas.&lt;/p&gt;
+&lt;h3 id="reparametrization"&gt;Reparametrization.&lt;a class="headerlink" href="#reparametrization" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Instead of optimizing w.r.t. the constrained variables &lt;span class="arithmatex"&gt;\(x\)&lt;/span&gt;, we introduce an
+underlying variable &lt;span class="arithmatex"&gt;\(u\)&lt;/span&gt;, such that &lt;span class="arithmatex"&gt;\(x_i = \sigma(u_i)\)&lt;/span&gt;.&lt;label for="sn-5" class="margin-toggle sidenote-number"&gt;&lt;/label&gt;&lt;input type="checkbox" id="sn-5" class="margin-toggle"/&gt;&lt;span class="sidenote"&gt;This seems to be the
+more common method among neural network practitioners; one
+place where it shows up often is &lt;em&gt;neural variational inference&lt;/em&gt;, where we would
+constrain the variance of a learned distribution using a &lt;em&gt;softplus&lt;/em&gt;
+function.&lt;/span&gt;
+In our case, we use a logistic sigmoid reparametrization to get the
+unconstrained non-convex&amp;nbsp;problem&lt;/p&gt;
+&lt;div class="arithmatex"&gt;\[ \min_{u \in \reals^2} f(\sigma(u))\,, \]&lt;/div&gt;
+&lt;p&gt;where &lt;span class="arithmatex"&gt;\(\sigma\)&lt;/span&gt; is applied element-wise.&lt;br /&gt;
+When reparametrizing, &lt;span class="arithmatex"&gt;\(x\)&lt;/span&gt; is no longer a learned parameter, but a function of
+the learned parameter &lt;span class="arithmatex"&gt;\(u\)&lt;/span&gt;. The gradient with respect to &lt;span class="arithmatex"&gt;\(u\)&lt;/span&gt; can be handled
+automatically by PyTorch&amp;nbsp;autodiff:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;optim_reparam&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;u_init&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;lr&lt;/span&gt;&lt;span class="o"&gt;=.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;max_iter&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;u&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;u_init&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;clone&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;requires_grad_&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;max_iter&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;torch&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sigmoid&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;u&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;backward&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;  &lt;span class="c1"&gt;# compute grad wrt u&lt;/span&gt;
+        &lt;span class="n"&gt;u&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="o"&gt;-=&lt;/span&gt; &lt;span class="n"&gt;lr&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;u&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;grad&lt;/span&gt;  &lt;span class="c1"&gt;# take gradient step&lt;/span&gt;
+        &lt;span class="n"&gt;u&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;grad&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;zero_&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;u&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;With a very small learning rate, we get a glimpse into the dynamics of this
+method.&lt;label for="sn-6" class="margin-toggle sidenote-number"&gt;&lt;/label&gt;&lt;input type="checkbox" id="sn-6" class="margin-toggle"/&gt;&lt;span class="sidenote"&gt;As the learning rate goes to zero, we are simulating a
+continuous &lt;em&gt;gradient flow&lt;/em&gt;, of which gradient descent is a discretized
+approximation. For more about gradient flows, check out &lt;a href="https://francisbach.com/gradient-flows/"&gt;Francis Bach&amp;#8217;s post&lt;/a&gt;.&lt;/span&gt;
+For comparison, we include the unconstrained&amp;nbsp;trajectory.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Optimization trajectory of reparametrized gradient descent, learning rate 0.01." src="/images/mirror_primal_lr0.010_reparam.png"&gt;&lt;/img&gt;&lt;/p&gt;
+&lt;p&gt;In practice, we would use a much larger learning rate to accelerate&amp;nbsp;optimization:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Optimization trajectory of reparametrized gradient descent, learning rate 0.2" src="/images/mirror_primal_lr0.200_reparam.png"&gt;&lt;/img&gt;&lt;/p&gt;
+&lt;p&gt;We can see that even with a large learning rate, the reparametrization method
+takes much smaller steps, especially as it gets closer to the boundary of the
+domain. The steps are so small, that we only show the first 20 markers, to avoid
+clutter. Why does this happen? At any point &lt;span class="arithmatex"&gt;\(u\)&lt;/span&gt;, the reparametrized gradient can be written using the
+chain&amp;nbsp;rule:&lt;/p&gt;
+&lt;div class="arithmatex"&gt;\[ \pfrac{}{u} f(\sigma(u)) = 
+\pfrac{\sigma(u)}{u} 
+\pfrac{f(x)}{x}\biggr\rvert_{x=\sigma(u)} \]&lt;/div&gt;
+&lt;p&gt;This is the unconstrained gradient at &lt;span class="arithmatex"&gt;\(x=\sigma(u)\)&lt;/span&gt;, rescaled by the Jacobian of &lt;span class="arithmatex"&gt;\(\sigma\)&lt;/span&gt;.
+Since &lt;span class="arithmatex"&gt;\(\sigma\)&lt;/span&gt; acts elementwise, its Jacobian is a diagonal matrix, with
+&lt;span class="arithmatex"&gt;\(\pfrac{\sigma(u)_i}{u_i}  = \sigma(u_i)(1 - \sigma(u_i)) = x_i (1 - x_i).\)&lt;/span&gt; 
+We can thus see that as &lt;span class="arithmatex"&gt;\(x_i\)&lt;/span&gt; approaches &lt;span class="arithmatex"&gt;\(0\)&lt;/span&gt; or &lt;span class="arithmatex"&gt;\(1\)&lt;/span&gt;, the reparametrization rescales the
+gradient &lt;strong&gt;severely&lt;/strong&gt;, bringing the effective step size toward 0.
+It can help to see the concrete values and shapes of these&amp;nbsp;matrices:&lt;/p&gt;
+&lt;details class="note"&gt;&lt;summary&gt;Calculation&lt;/summary&gt;&lt;p&gt;Let&amp;#8217;s consider two points: first far, then close to the optimum.
+We use that &lt;span class="arithmatex"&gt;\(\nabla_x f(x) = Q(x - x_0)\)&lt;/span&gt;.
+(Note: all vectors below are column&amp;nbsp;vectors.)&lt;/p&gt;
+&lt;p&gt;&lt;div class="wraptable"&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;th&gt; &lt;span class="arithmatex"&gt;\(u\)&lt;/span&gt;
+&lt;/th&gt;
+&lt;th&gt; &lt;span class="arithmatex"&gt;\({x=\sigma(u)}\)&lt;/span&gt;
+&lt;/th&gt;
+&lt;th&gt; &lt;span class="arithmatex"&gt;\(\pfrac{\sigma(u)}{u}\)&lt;/span&gt; 
+&lt;/th&gt;
+&lt;th&gt; &lt;span class="arithmatex"&gt;\(\pfrac{f(x)}{x}\)&lt;/span&gt;
+&lt;/th&gt;
+&lt;th&gt; &lt;span class="arithmatex"&gt;\(\pfrac{f(\sigma(u))}{u}\)&lt;/span&gt; 
+&lt;/th&gt;
+&lt;/thead&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;span class="arithmatex"&gt;\((0, 0)\)&lt;/span&gt;       &lt;br /&gt;
+&lt;/td&gt;
+&lt;td&gt;&lt;span class="arithmatex"&gt;\((.5, .5)\)&lt;/span&gt; 
+&lt;/td&gt;
+&lt;td&gt;&lt;span class="arithmatex"&gt;\(\left(\begin{smallmatrix} .25 &amp;amp; 0 \\\\ 0 &amp;amp; .25 \end{smallmatrix}\right)\)&lt;/span&gt;
+&lt;/td&gt;
+&lt;td&gt;&lt;span class="arithmatex"&gt;\((-2.2, -0.8)\)&lt;/span&gt;
+&lt;/td&gt;
+&lt;td&gt;&lt;span class="arithmatex"&gt;\((-0.55, -0.2)\)&lt;/span&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;span class="arithmatex"&gt;\((4.6, -0.4)\)&lt;/span&gt;
+&lt;/td&gt;
+&lt;td&gt;&lt;span class="arithmatex"&gt;\((.99, .4)\)&lt;/span&gt; 
+&lt;/td&gt;
+&lt;td&gt;&lt;span class="arithmatex"&gt;\(\left(\begin{smallmatrix} .0099 &amp;amp; 0 \\\\ 0 &amp;amp; .24 \end{smallmatrix}\right)\)&lt;/span&gt;
+&lt;/td&gt;
+&lt;td&gt;&lt;span class="arithmatex"&gt;\((-0.93, -0.12)\)&lt;/span&gt;
+&lt;/td&gt;
+&lt;td&gt;&lt;span class="arithmatex"&gt;\((-0.01, -0.03)\)&lt;/span&gt; 
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;&lt;/p&gt;
+&lt;p&gt;Two effects are at play here: the gradient of &lt;span class="arithmatex"&gt;\(f\)&lt;/span&gt; gets smaller as we
+approach the minimum, and the gradient of &lt;span class="arithmatex"&gt;\(\sigma\)&lt;/span&gt; gets vanishingly small as
+we approach the boundary of the&amp;nbsp;domain.&lt;/p&gt;
+&lt;/details&gt;
+&lt;p&gt;Remember, this rescaling
+happens &lt;em&gt;automatically&lt;/em&gt; through the chain rule! But, although slowly, and along a
+slightly winding trajectory, our method finds the right&amp;nbsp;answer.&lt;/p&gt;
+&lt;h3 id="projected-gradient"&gt;Projected gradient.&lt;a class="headerlink" href="#projected-gradient" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;The projected gradient method is particularly well suited to handling &amp;#8220;simple&amp;#8221; constraints
+like the box case, but, unlike reparametrization, requires a different kind of
+expertise to get running in the case of complicated constraints.&lt;label for="sn-7" class="margin-toggle sidenote-number"&gt;&lt;/label&gt;&lt;input type="checkbox" id="sn-7" class="margin-toggle"/&gt;&lt;span class="sidenote"&gt;&lt;span class="caps"&gt;PG&lt;/span&gt;
+is very popular in convex optimization, useful both for theory and for
+practice. However, it does not seem to be so widely used in the pure neural
+network world, perhaps mostly because it is not directly supported by the
+built-in optimizers in major frameworks.&lt;/span&gt;
+For box constraints, the projection can be computed efficiently, since
+&lt;span class="arithmatex"&gt;\(\big[\!\operatorname{Proj}_{[0,1]^d}(x)\big]_i = \operatorname{clip}_{[0,1]}(x_i).\)&lt;/span&gt;
+The implementation&amp;nbsp;follows:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;optim_pg&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x_init&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;lr&lt;/span&gt;&lt;span class="o"&gt;=.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;max_iter&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;x_init&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;clone&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;requires_grad_&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;max_iter&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;backward&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; 
+        &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="o"&gt;-=&lt;/span&gt; &lt;span class="n"&gt;lr&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;grad&lt;/span&gt;  &lt;span class="c1"&gt;# take gradient step&lt;/span&gt;
+        &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;torch&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;clamp&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;min&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;max&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# project&lt;/span&gt;
+        &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;grad&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;zero_&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Let&amp;#8217;s visualize the trajectory. From now on, we will zoom in a bit on the region
+of&amp;nbsp;interest.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Optimization trajectory of projected gradient, learning rate=0.01" src="/images/mirror_primal_lr0.010_pg.png"&gt;&lt;/img&gt;&lt;/p&gt;
+&lt;p&gt;It looks like the projected gradient method tends to follow the unconstrained
+trajectory while sticking to the boundary of the domain. Of course, with larger
+steps, the differences become more&amp;nbsp;pronounced.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Optimization trajectory of projected gradient, learning rate=0.2" src="/images/mirror_primal_lr0.200_pg.png"&gt;&lt;/img&gt;&lt;/p&gt;
+&lt;p&gt;In this instance, &lt;span class="caps"&gt;PG&lt;/span&gt; is the clear winner: look how fast it makes progress. With
+less well-behaved and non-convex functions this need not be the case. So we are
+motivated to delve deeper and explore how &lt;span class="caps"&gt;PG&lt;/span&gt; and &lt;span class="caps"&gt;REP&lt;/span&gt; relate, despite seeming so&amp;nbsp;different. &lt;/p&gt;
+&lt;h1 id="generalizing-the-projected-gradient-method-with-divergences"&gt;Generalizing the projected gradient method with divergences.&lt;a class="headerlink" href="#generalizing-the-projected-gradient-method-with-divergences" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;In the projected gradient method, we take unconstrained steps, which might take
+us outside of &lt;span class="arithmatex"&gt;\(\mathcal{X}\)&lt;/span&gt;, and then move the solution back to &lt;span class="arithmatex"&gt;\(\mathcal{X}\)&lt;/span&gt; by&amp;nbsp;projection:&lt;/p&gt;
+&lt;div class="arithmatex"&gt;\[ x^{(t+1)} \leftarrow \operatorname{Proj}_\mathcal{X}\big(x^{(t+½)}\big)\,. \]&lt;/div&gt;
+&lt;p&gt;Projection finds the point &lt;span class="arithmatex"&gt;\(x \in \mathcal{X}\)&lt;/span&gt; closest to &lt;span class="arithmatex"&gt;\(x^{(t+½)}\)&lt;/span&gt;,&amp;nbsp;i.e.,&lt;/p&gt;
+&lt;div class="arithmatex"&gt;\[ \operatorname{Proj}_\mathcal{X}\big(x^{(t+½)}\big) \coloneqq \argmin_{x \in \mathcal{X}} \| x - x^{(t+½)} \|^2\,. \]&lt;/div&gt;
+&lt;p&gt;The projected gradient update can be interpreted as minimizing a regularized linearization of
+&lt;span class="arithmatex"&gt;\(f\)&lt;/span&gt; around the current&amp;nbsp;iterate,&lt;/p&gt;
+&lt;div class="arithmatex"&gt;\[ x^{(t+1)} \leftarrow \argmin_{x \in \mathcal{X}}  \DP{\nabla f(x^{(t)})}{x} + 
+{\frac{1}{2\alpha_t}\|x - x^{(t)}\|^2}\,.
+\]&lt;/div&gt;
+&lt;details class="note"&gt;&lt;summary&gt;Explanation&lt;/summary&gt;&lt;p&gt;Why does this update make sense, and where does it come from? We are trying to
+minimize a function &lt;span class="arithmatex"&gt;\(f(x)\)&lt;/span&gt;, but we don&amp;#8217;t know what it looks like globally: we only
+have access to its value &lt;span class="arithmatex"&gt;\(f(x)\)&lt;/span&gt; and its gradient &lt;span class="arithmatex"&gt;\(\nabla f(x)\)&lt;/span&gt; at points &lt;span class="arithmatex"&gt;\(x\)&lt;/span&gt;
+that we may query one at a time. At any point &lt;span class="arithmatex"&gt;\(x_0\)&lt;/span&gt;,
+the first-order Taylor expansion&amp;nbsp;is:&lt;/p&gt;
+&lt;div class="arithmatex"&gt;\[ f(x_0 + \delta) = f(x_0) + \DP{\nabla f(x_0)}{\delta} + o(\|\delta\|)\,. \]&lt;/div&gt;
+&lt;p&gt;To get a linear approximation of &lt;span class="arithmatex"&gt;\(f\)&lt;/span&gt; we can plug in &lt;span class="arithmatex"&gt;\(\delta = x - x_0\)&lt;/span&gt;:&lt;/p&gt;
+&lt;div class="arithmatex"&gt;\[ f(x) =  f(x_0) + \DP{\nabla f(x_0)}{x - x_0} + o(\|x - x_0\|)\,. \]&lt;/div&gt;
+&lt;p&gt;So as long as &lt;span class="arithmatex"&gt;\(x\)&lt;/span&gt; is not too far from &lt;span class="arithmatex"&gt;\(x_0\)&lt;/span&gt;, we&amp;nbsp;have &lt;/p&gt;
+&lt;div class="arithmatex"&gt;\[f(x) \approx \tilde{f}_{x_0}(x) \coloneqq f(x_0) + \DP{\nabla f(x_0)}{x - x_0}\,.\]&lt;/div&gt;
+&lt;p&gt;This affine approximation is much easier to
+minimize, but it is only accurate locally, therefore, we use it iteratively,
+taking a small step, then updating the&amp;nbsp;approximation:&lt;/p&gt;
+&lt;div class="arithmatex"&gt;\[ 
+x^{(t+1)} \leftarrow \argmin_{x \in \mathcal{X}} \tilde f_{x^{(t)}}(x) + \frac{1}{2\alpha_t}\|x - x^{(t)}\|^2\,. 
+\]&lt;/div&gt;
+&lt;p&gt;where the term on the right keeps us close to &lt;span class="arithmatex"&gt;\(x^{(t)}\)&lt;/span&gt; to ensure the
+approximation is not too bad. Clearing up the constant terms from inside the
+&lt;span class="arithmatex"&gt;\(\argmin\)&lt;/span&gt; yields the desired&amp;nbsp;expression.&lt;/p&gt;
+&lt;/details&gt;
+&lt;p&gt;Rearranging the terms reveals exactly the projected gradient&amp;nbsp;update,&lt;/p&gt;
+&lt;div class="arithmatex"&gt;\[ x^{(t+1)} \leftarrow \operatorname{Proj}_{\mathcal{X}}\big(
+x^{(t)} - \alpha_t \nabla f(x^{(t)})\big)\,.\]&lt;/div&gt;
+&lt;details class="note"&gt;&lt;summary&gt;Derivation&lt;/summary&gt;&lt;div class="arithmatex"&gt;\[
+\begin{aligned}
+ &amp;amp; \argmin_{x \in \mathcal{X}} \DP{x}{\nabla f(x^{(t)})} + \frac{1}{2\alpha_t} \|x-x^{(t)}\|^2 \\
+=&amp;amp; \argmin_{x \in \mathcal{X}} \DP{x}{\nabla f(x^{(t)})} + \frac{1}{2\alpha_t} \|x\|^2 - \frac{1}{\alpha_t} \DP{x}{x^{(t)}} \\
+=&amp;amp; \argmin_{x \in \mathcal{X}} \alpha_t \DP{x}{\nabla f(x^{(t)})} + \frac{1}{2} \|x\|^2 - \DP{x}{x^{(t)}} \\
+=&amp;amp; \argmin_{x \in \mathcal{X}} \DP{x}{\underbrace{\alpha_t \nabla f(x^{(t)}) - x^{(t)}}_{-x^{(t+½)}}} + \frac{1}{2} \|x\|^2 \\
+=&amp;amp; \argmin_{x \in \mathcal{X}} \frac{1}{2} \| x - x^{(t+½)} \|^2 \textcolor{gray}{ - \frac{1}{2} \|x^{(t+½)}\|} \\
+=&amp;amp; \operatorname{Proj}_{\mathcal{X}} (x^{(t+½)})\,.
+\end{aligned}
+\]&lt;/div&gt;
+&lt;/details&gt;
+&lt;p&gt;Now, let&amp;#8217;s pay special attention to 
+the function &lt;span class="arithmatex"&gt;\(D(x, y) = \| x - y \|^2 = \sum_i (x_i - y_i)^2\)&lt;/span&gt;, the &lt;em&gt;squared Euclidean distance&lt;/em&gt;.
+We employ this function to ensure that each update stays close to &lt;span class="arithmatex"&gt;\(x^{(t)}\)&lt;/span&gt;,
+because the linear approximation is not good if we go to far. But this is not
+the only good measure of closeness:
+here, geometry enters the stage!  Euclidean geometry is
+convenient and comfortable for thinking about spaces like &lt;span class="arithmatex"&gt;\(\reals^d,\)&lt;/span&gt; but
+it is not always the best&amp;nbsp;model.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Bregman divergences&lt;/strong&gt;
+provide a convenient generalization of the squared
+Euclidean distance:&lt;label for="sn-8" class="margin-toggle sidenote-number"&gt;&lt;/label&gt;&lt;input type="checkbox" id="sn-8" class="margin-toggle"/&gt;&lt;span class="sidenote"&gt;
+Divergences measures of dissimilarity between objects, with weaker requirements
+than distance functions: simply that &lt;span class="arithmatex"&gt;\(D(x,y) \geq 0\)&lt;/span&gt; and &lt;span class="arithmatex"&gt;\(D(x,y)=0\)&lt;/span&gt; iff. &lt;span class="arithmatex"&gt;\(x =
+y\)&lt;/span&gt;. &lt;a href="https://en.wikipedia.org/wiki/Bregman_divergence"&gt;Bregman divergences&lt;/a&gt; 
+are an important class of divergences. They are convex in the first argument, but not the second.
+&lt;/span&gt;
+given strictly convex, twice-differentiable &lt;span class="arithmatex"&gt;\(\Psi\)&lt;/span&gt;,&lt;/p&gt;
+&lt;div class="arithmatex"&gt;\[ D_\Psi(x, y) \coloneqq \Psi(x) - \Psi(y) - \DP{\nabla \Psi(y)}{x - y}\,. \]&lt;/div&gt;
+&lt;p&gt;For &lt;span class="arithmatex"&gt;\(\Psi = \frac{1}{2} \| \cdot \|^2\)&lt;/span&gt;, this recovers the squared Euclidean
+distance. Replacing &lt;span class="arithmatex"&gt;\(\frac{1}{2}\|\cdot\|^2\)&lt;/span&gt; by &lt;span class="arithmatex"&gt;\(D_\Psi\)&lt;/span&gt; in the projected
+gradient algorithm leads to a generalization known as &lt;strong&gt;mirror descent&lt;/strong&gt;,&lt;label for="sn-9" class="margin-toggle sidenote-number"&gt;&lt;/label&gt;&lt;input type="checkbox" id="sn-9" class="margin-toggle"/&gt;&lt;span class="sidenote"&gt;
+Introduced in: &lt;br&gt;
+&lt;span class="caps"&gt;A.S.&lt;/span&gt; Nemirovsky and &lt;span class="caps"&gt;D.B.&lt;/span&gt; Yudin,, 1983. Problem complexity and method efficiency in optimization.
+&lt;br&gt;Suggested reading: 
+A. Beck and M. Teboulle, 2003. 
+&lt;a href="https://web.iem.technion.ac.il/images/user-files/becka/papers/3.pdf"&gt;Mirror descent and nonlinear projected subgradient methods for convex optimization.&lt;/a&gt; 
+&lt;em&gt;Operations Research Letters, 31(3).&lt;/em&gt; 167-175.&amp;nbsp;&lt;/span&gt;&lt;/p&gt;
+&lt;div class="arithmatex"&gt;\[
+x^{(t+1)} \leftarrow \argmin_{x \in \mathcal{X}}  \DP{\nabla f(x^{(t)})}{x} + 
+{\frac{1}{\alpha_t}D_\Psi(x, x^{(t)})}\,.
+\]&lt;/div&gt;
+&lt;p&gt;Since &lt;span class="arithmatex"&gt;\(\Psi\)&lt;/span&gt; is twice differentiable and strongly convex, it has a gradient
+&lt;span class="arithmatex"&gt;\(\psi = \nabla\Psi\)&lt;/span&gt; which is invertible. Solving for the mirror descent update
+yields a so-called Bregman projection, or &lt;em&gt;non-linear&lt;/em&gt;&amp;nbsp;projection,&lt;/p&gt;
+&lt;div class="arithmatex"&gt;\[
+\begin{aligned}
+u^{(t+½)} &amp;amp;\leftarrow \psi(x^{(t)}) - \alpha_t \nabla f(x^{(t)})\,, \\ 
+x^{(t+1)} &amp;amp;\leftarrow 
+\argmin_{x \in \mathcal{X}} D_\Psi\big(x,  \psi^{-1}(u^{(t+½)})\big)\,. \\
+\end{aligned}
+\]&lt;/div&gt;
+&lt;p&gt;If &lt;span class="arithmatex"&gt;\(\Psi\)&lt;/span&gt; is carefully chosen such that &lt;span class="arithmatex"&gt;\(\psi^{-1}(u) \in \mathcal{X}\)&lt;/span&gt; for all
+&lt;span class="arithmatex"&gt;\(u \in \mathcal{U}\)&lt;/span&gt;, then the Bregman projection step is trivial,&amp;nbsp;yielding&lt;/p&gt;
+&lt;div class="arithmatex"&gt;\[ x^{(t+1)} \leftarrow \psi^{-1}\big(
+\psi(x^{(t)}) - \alpha_t \nabla f(x^{(t)})
+\big)\,. \]&lt;/div&gt;
+&lt;p&gt;Let&amp;#8217;s make this more&amp;nbsp;concrete.&lt;/p&gt;
+&lt;p&gt;The choice of &lt;span class="arithmatex"&gt;\(\Psi\)&lt;/span&gt; will define the &lt;em&gt;geometry&lt;/em&gt; of our space.
+Values in &lt;span class="arithmatex"&gt;\([0,1]\)&lt;/span&gt; may be interpreted as &lt;em&gt;coin flip&lt;/em&gt; probabilities:
+the higher, the more likely an event is to happen. An important property of a
+binary random variable is its entropy. If &lt;span class="arithmatex"&gt;\(x_i \in [0, 1]\)&lt;/span&gt; denotes the
+probability associated with coin &lt;span class="arithmatex"&gt;\(i\)&lt;/span&gt;, the entropy&amp;nbsp;is&lt;/p&gt;
+&lt;div class="arithmatex"&gt;\[H(x_i) = -x_i \log x_i - (1 - x_i) \log (1 - x_i)\,.\]&lt;/div&gt;
+&lt;p&gt;We may extend this additively to vectors as &lt;span class="arithmatex"&gt;\(H(x) = \sum_i H(x_i)\)&lt;/span&gt;.
+This is sometimes called the Fermi-Dirac entropy.
+On &lt;span class="arithmatex"&gt;\(\mathcal{X}=[0, 1]\)&lt;/span&gt;, entropy is continuously differentiable and strictly
+&lt;strong&gt;concave&lt;/strong&gt;, maximized at &lt;span class="arithmatex"&gt;\(x=0.5\)&lt;/span&gt; and minimized at &lt;span class="arithmatex"&gt;\(x=0\)&lt;/span&gt; and &lt;span class="arithmatex"&gt;\(x=1\)&lt;/span&gt;.&lt;label for="sn-10" class="margin-toggle sidenote-number"&gt;&lt;/label&gt;&lt;input type="checkbox" id="sn-10" class="margin-toggle"/&gt;&lt;span class="sidenote"&gt;&lt;span class="arithmatex"&gt;\(H(0.5) =
+\log 2,\)&lt;/span&gt;&lt;br&gt;&lt;span class="arithmatex"&gt;\(H(0)=H(1)=0\)&lt;/span&gt;.&lt;/span&gt; &lt;/p&gt;
+&lt;p&gt;Let us thus take &lt;span class="arithmatex"&gt;\(\Psi = -H\)&lt;/span&gt;. Its gradient is &lt;span class="arithmatex"&gt;\(\psi : \mathcal{X} \rightarrow \mathcal{U}\)&lt;/span&gt;,&lt;/p&gt;
+&lt;div class="arithmatex"&gt;\[ \psi(x) \coloneqq -\nabla H(x) = \log(x) - \log(1-x)\,, \]&lt;/div&gt;
+&lt;p&gt;with inverse &lt;span class="arithmatex"&gt;\(\phi : \mathcal{U} \rightarrow \mathcal{X}\)&lt;/span&gt;,&lt;/p&gt;
+&lt;div class="arithmatex"&gt;\[ \phi(u) \coloneqq \psi^{-1}(u) = \frac{1}{1 + \exp(-u)} = \sigma(u)\,. \]&lt;/div&gt;
+&lt;!--
+The entropy induces a Bregman divergence $D_{-H}$, which after some manipulation
+can be written as
+
+$$D_{-H}(x, y) = x \log \frac{x}{y} - (1-x) \log \frac{1-x}{1-y}. $$
+--&gt;
+
+&lt;p&gt;So, written in terms of the familiar logistic sigmoid, the mirror descent update induced by the negative entropy takes the (remarkable!)&amp;nbsp;form&lt;/p&gt;
+&lt;div class="arithmatex"&gt;\[ x^{(t+1)} = \sigma(\sigma^{-1}(x^{(t)}) - \alpha_t \nabla f(x^{(t)}))\,. \]&lt;/div&gt;
+&lt;p&gt;Things are beginning to clear up! We can think of the pair of inverse functions
+&lt;span class="arithmatex"&gt;\((\psi, \phi)\)&lt;/span&gt; as maps between &lt;span class="arithmatex"&gt;\(\mathcal{X}\)&lt;/span&gt; and &lt;span class="arithmatex"&gt;\(\mathcal{U}\)&lt;/span&gt;.  We will call these
+the &lt;strong&gt;primal&lt;/strong&gt; and &lt;strong&gt;dual&lt;/strong&gt; spaces, respectively.&lt;label for="sn-11" class="margin-toggle sidenote-number"&gt;&lt;/label&gt;&lt;input type="checkbox" id="sn-11" class="margin-toggle"/&gt;&lt;span class="sidenote"&gt;Duality, and the terms
+&lt;em&gt;primal&lt;/em&gt; and &lt;em&gt;dual&lt;/em&gt;, are fairly strong, scary, and sometimes
+overloaded. 
+Readers familiar with the Fenchel conjugate,
+&lt;span class="arithmatex"&gt;\(\Psi^*(u) \coloneqq {\sup_{x} \{ \DP{u}{x} - \Psi(x) \},}\)&lt;/span&gt;
+should note 
+note that &lt;span class="arithmatex"&gt;\(\Psi^* = \Phi\)&lt;/span&gt;, where &lt;span class="arithmatex"&gt;\(\Phi\)&lt;/span&gt; is such that
+&lt;span class="arithmatex"&gt;\(\nabla\Phi = \phi\)&lt;/span&gt;. 
+(For the Fermi-Dirac entropy, &lt;span class="arithmatex"&gt;\(\Phi(u) =
+{\log(1+\exp(u)).}\)&lt;/span&gt;) 
+The dual construction used here relies on the relationship
+between Bregman divergences and Fenchel conjugates:
+&lt;span class="arithmatex"&gt;\( D_{\Phi^*}(u, v) = D_\Phi(y, x)\)&lt;/span&gt; where
+&lt;span class="arithmatex"&gt;\(u=\psi(x), v=\psi(y)\)&lt;/span&gt; are the dual points corresponding to &lt;span class="arithmatex"&gt;\(x\)&lt;/span&gt; and &lt;span class="arithmatex"&gt;\(y\)&lt;/span&gt;.
+&lt;/span&gt;
+Mirror descent thus
+first moves into dual (unconstrained) space, performs an update there, and then moves
+back. Reparametrization rewrites the problem in dual coordinates and performs
+gradient descent: this is not the same, and the trajectories are quite&amp;nbsp;different!&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Optimization trajectory of mirror descent, learning rate 0.01" src="/images/mirror_primal_lr0.010_md.png"&gt;&lt;/img&gt;&lt;/p&gt;
+&lt;p&gt;With a larger step size, we see that mirror descent takes much larger steps than
+reparametrization&amp;nbsp;does.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Optimization trajectory of mirror descent, learning rate 0.2" src="/images/mirror_primal_lr0.200_md.png"&gt;&lt;/img&gt;&lt;/p&gt;
+&lt;p&gt;Now that we figured out that we may think about the problem in primal or dual
+coordinates, we may also visualize the optimization trajectory in dual&amp;nbsp;coordinates.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Dual coordinate trajectory of mirror descent, learning rate 0.01" src="/images/mirror_dual_lr0.010_md.png"&gt;&lt;/img&gt;&lt;/p&gt;
+&lt;p&gt;Yet, the way that mirror descent leans on moving from &lt;span class="arithmatex"&gt;\(\mathcal{X}\)&lt;/span&gt; to
+&lt;span class="arithmatex"&gt;\(\mathcal{U}\)&lt;/span&gt; is very familiar to the reparametrization strategy. Is there a
+deeper connection between the two? We illuminate it&amp;nbsp;next.&lt;/p&gt;
+&lt;h1 id="duality-between-mirror-descent-and-naturalgradient"&gt;Duality between mirror descent and natural&amp;nbsp;gradient.&lt;a class="headerlink" href="#duality-between-mirror-descent-and-naturalgradient" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;We have seen that different choices of &lt;span class="arithmatex"&gt;\(\Psi\)&lt;/span&gt; induce different geometries
+even on top of the same space. (Case in point: entropy vs. &lt;span class="arithmatex"&gt;\(\frac{1}{2}\|\cdot\|^2\)&lt;/span&gt;).
+To handle this ambiguity, we need a structure that attaches the geometry along
+with the underlying space. This, (with some handwaving), is a &lt;em&gt;Riemannian
+manifold&lt;/em&gt;: a pair &lt;span class="arithmatex"&gt;\((\mathcal{U}, G)\)&lt;/span&gt; where &lt;span class="arithmatex"&gt;\(\mathcal{U} \subseteq \reals^d\)&lt;/span&gt;
+is an underlying space&lt;label for="sn-12" class="margin-toggle sidenote-number"&gt;&lt;/label&gt;&lt;input type="checkbox" id="sn-12" class="margin-toggle"/&gt;&lt;span class="sidenote"&gt;Riemannian manifolds are more general than this, but
+in this post, for simplicity, we only look at the case where &lt;span class="arithmatex"&gt;\(\mathcal{U}\subseteq \reals^d\)&lt;/span&gt;.
+To be fully general, the notation ramps up quickly.
+See &lt;a href="https://wiseodd.github.io/techblog/2019/02/22/riemannian-geometry/"&gt;Agustinus Kristiadi&amp;#8217;s
+post&lt;/a&gt; 
+and &lt;a href="https://arxiv.org/abs/1808.08271"&gt;Frank Nielsen&amp;#8217;s tutorial&lt;/a&gt;
+for an introduction.
+&lt;/span&gt;
+and &lt;span class="arithmatex"&gt;\(G: \mathcal{U} \rightarrow \reals^{d \times d},\)&lt;/span&gt;
+known as the &lt;em&gt;metric tensor&lt;/em&gt;, is a function that takes a point &lt;span class="arithmatex"&gt;\(u_0\)&lt;/span&gt;
+on the manifold
+and returns a positive definite matrix that characterizes the &lt;strong&gt;geometry&lt;/strong&gt; by specifying a custom squared distance
+nearby &lt;span class="arithmatex"&gt;\(u_0\)&lt;/span&gt;:&lt;/p&gt;
+&lt;div class="arithmatex"&gt;\[ d^2_{u_0}(u, v) = \frac{1}{2} (u-v)^\top G(u_0) (u - v)\,. \]&lt;/div&gt;
+&lt;p&gt;What we observed earlier is in fact a duality between the Riemannian manifolds
+&lt;span class="arithmatex"&gt;\((\mathcal{X}, \nabla^2 \Psi)\)&lt;/span&gt; and &lt;span class="arithmatex"&gt;\((\mathcal{U}, \nabla^2 \Phi),\)&lt;/span&gt; 
+where &lt;span class="arithmatex"&gt;\(\Phi\)&lt;/span&gt; is the antiderivative of &lt;span class="arithmatex"&gt;\(\phi\)&lt;/span&gt;, i.e., &lt;span class="arithmatex"&gt;\(\nabla\Phi=\phi\)&lt;/span&gt;.
+This is an important duality studied in the field of information geometry.&lt;label for="sn-13" class="margin-toggle sidenote-number"&gt;&lt;/label&gt;&lt;input type="checkbox" id="sn-13" class="margin-toggle"/&gt;&lt;span class="sidenote"&gt;
+S. Amari, A. Cichocki. 2010. 
+&lt;a href="http://fluid.ippt.gov.pl/bulletin/(58-1)183.pdf"&gt;Information geometry of divergence
+functions.&lt;/a&gt;
+Bulletin of the Polish Academy of Sciences, 58(1).&amp;nbsp;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;We may now revisit the reparametrization strategy, in light of what we learned
+so far. To reparametrize the constraint away, we work in &lt;strong&gt;dual coordinates&lt;/strong&gt;
+&lt;span class="arithmatex"&gt;\(u \in \mathcal{U}\)&lt;/span&gt;, and&amp;nbsp;update:&lt;/p&gt;
+&lt;div class="arithmatex"&gt;\[ u^{(t+1)} \leftarrow u^{(t)} - \nabla_u f(\phi(u))\,. \]&lt;/div&gt;
+&lt;p&gt;In our case &lt;span class="arithmatex"&gt;\(\mathcal{U}=\reals^2\)&lt;/span&gt; and &lt;span class="arithmatex"&gt;\(\phi = \sigma\)&lt;/span&gt;, but let&amp;#8217;s use the more
+general notation. The update above ignores the geometry of &lt;span class="arithmatex"&gt;\(\mathcal{U}\)&lt;/span&gt;, in
+other words, operates on the trivial manifold &lt;span class="arithmatex"&gt;\((\mathcal{U}, I_d)\)&lt;/span&gt; &amp;#8212; the
+metric tensor is the identity matrix everywhere.  When optimizing some function &lt;span class="arithmatex"&gt;\(\tilde{f}(u)\)&lt;/span&gt;
+over a Riemannian manifold &lt;span class="arithmatex"&gt;\((\mathcal{U}, G)\)&lt;/span&gt;,
+a convenient algorithm is natural gradient,&lt;label for="sn-14" class="margin-toggle sidenote-number"&gt;&lt;/label&gt;&lt;input type="checkbox" id="sn-14" class="margin-toggle"/&gt;&lt;span class="sidenote"&gt;S. Amari, 1998.&lt;br /&gt;
+&lt;a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.452.7280&amp;amp;rep=rep1&amp;amp;type=pdf"&gt;Natural gradient works efficiently in learning.&lt;/a&gt;
+&lt;em&gt;Neural computation 10.2&lt;/em&gt;, 251-276.&lt;/span&gt;
+which takes the&amp;nbsp;form&lt;/p&gt;
+&lt;div class="arithmatex"&gt;\[ u^{(t+1)} \leftarrow u^{(t)} - \alpha_t [G(u)]^{-1} \nabla \tilde{f}(u^{(t)})\,. \]&lt;/div&gt;
+&lt;details class="note"&gt;&lt;summary&gt;Derivation&lt;/summary&gt;&lt;p&gt;We follow the same steps as for gradient descent, but we use the induced distance
+&lt;span class="arithmatex"&gt;\(d_{u^{(t)}}\)&lt;/span&gt; to find an update direction. We must solve the&amp;nbsp;problem&lt;/p&gt;
+&lt;div class="arithmatex"&gt;\[ \argmin_{u\in\mathcal{U}} \DP{u}{\nabla \tilde{f}(u^{(t)})} + \frac{1}{2\alpha_t} 
+{(u - u^{(t)})^\top G(u^{(t)}) (u - u^{(t)})}\, \]&lt;/div&gt;
+&lt;p&gt;Rearranging gives the equivalent&amp;nbsp;problem&lt;/p&gt;
+&lt;div class="arithmatex"&gt;\[ \argmin_{u\in\mathcal{U}} d^2_{u^{(t)}}
+(u, u^{(t)} - \alpha_t[G(u^{(t)})]^{-1} \nabla \tilde{f}(u^{(t)}))\,.\]&lt;/div&gt;
+&lt;p&gt;Assuming no constraints (i.e., &lt;span class="arithmatex"&gt;\(\mathcal{U}=\reals^d\)&lt;/span&gt;), this yields the
+desired&amp;nbsp;update.&lt;/p&gt;
+&lt;/details&gt;
+&lt;p&gt;It turns out that for a pair of Bregman dual manifolds
+&lt;span class="arithmatex"&gt;\((\mathcal{X}, \nabla^2 \Psi)\)&lt;/span&gt; and &lt;span class="arithmatex"&gt;\((\mathcal{U}, \nabla^2 \Phi),\)&lt;/span&gt; 
+&lt;strong&gt;mirror descent in the primal space is equivalent to natural gradient in the
+dual space!&lt;/strong&gt; This result, due to Raskutti and Mukherjee (2015),&lt;label for="sn-15" class="margin-toggle sidenote-number"&gt;&lt;/label&gt;&lt;input type="checkbox" id="sn-15" class="margin-toggle"/&gt;&lt;span class="sidenote"&gt;
+G. Raskutti and S. Mukherjee. 2015. &lt;em&gt;The information geometry of mirror descent.&lt;/em&gt;
+In: &lt;span class="caps"&gt;IEEE&lt;/span&gt; Transactions on Information Theory, vol. 61, issue 3.
+&lt;a href="https://arxiv.org/abs/1310.7780"&gt;arXiv:1310.7780&lt;/a&gt;.&lt;/span&gt;
+means we can get a geometry-aware flavor of the
+&lt;span class="caps"&gt;REP&lt;/span&gt;&amp;nbsp;algorithm,&lt;/p&gt;
+&lt;div class="arithmatex"&gt;\[ u^{(t+1)} \leftarrow u^{(t)} - \alpha_t [\nabla^2 \Phi(u)]^{-1} \nabla_u {f}(\phi(u^{(t)}))\,. \]&lt;/div&gt;
+&lt;p&gt;This algorithm produces the exact same iterates as mirror descent, but &amp;#8212; since
+it maintains iterates in dual space &amp;#8212; is more numerically stable.
+A first attempt at implementing natural gradient&amp;nbsp;is:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;optim_rep_natural&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;u_init&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;lr&lt;/span&gt;&lt;span class="o"&gt;=.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;max_iter&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+
+    &lt;span class="n"&gt;u&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;u_init&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;clone&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;requires_grad_&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;max_iter&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;torch&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sigmoid&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;u&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;dsigmoid&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;detach&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;  &lt;span class="c1"&gt;# diagonal of ∇²Φ(u)&lt;/span&gt;
+        &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;backward&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+        &lt;span class="n"&gt;u&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="o"&gt;-=&lt;/span&gt; &lt;span class="n"&gt;lr&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;u&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;grad&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="n"&gt;dsigmoid&lt;/span&gt;
+        &lt;span class="n"&gt;u&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;grad&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;zero_&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;u&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;and we can visually check that we get exactly the same trajectory as mirror&amp;nbsp;descent.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Optimization trajectories. Natural gradient matches exactly mirror
+descent." src="/images/mirror_primal_lr0.010_nat.png"&gt;&lt;/img&gt;&lt;/p&gt;
+&lt;p&gt;But let&amp;#8217;s look a bit closer! Since &lt;span class="arithmatex"&gt;\(\phi = \nabla\Phi\)&lt;/span&gt;, our metric tensor is
+none other&amp;nbsp;than&lt;/p&gt;
+&lt;div class="arithmatex"&gt;\[ \nabla^2\Phi(u) = \pfrac{\phi(u)}{u}\,, \]&lt;/div&gt;
+&lt;p&gt;and, putting the whole update together, we see&amp;nbsp;that&lt;/p&gt;
+&lt;div class="arithmatex"&gt;\[ [\nabla^2\Phi(u)]^{-1} \nabla_u f(\phi(u)) = 
+{\left(\pfrac{\phi(u)}{u}\right)^{-1}}
+{\pfrac{\phi(u)}{u}}
+{\pfrac{f(x)}{x}\biggr\rvert_{x=\phi(u)}} \]&lt;/div&gt;
+&lt;p&gt;Natural gradient cancels out the Jacobian of &lt;span class="arithmatex"&gt;\(\phi\)&lt;/span&gt; in the chain rule!
+This suggests an alternative implementation,
+reminiscent of &lt;em&gt;straight-through&lt;/em&gt; tricks: we use a reparametrization function
+&lt;span class="arithmatex"&gt;\(\sigma\)&lt;/span&gt; that is a sigmoid in the forward pass, but acts as if it were the
+identity in the backward pass.&lt;label for="sn-16" class="margin-toggle sidenote-number"&gt;&lt;/label&gt;&lt;input type="checkbox" id="sn-16" class="margin-toggle"/&gt;&lt;span class="sidenote"&gt;
+Such &amp;#8220;straight-through&amp;#8221; heuristics are very popular for dealing with
+stochastic or piecewise-constant functions (like &lt;em&gt;argmax&lt;/em&gt; or &lt;em&gt;floor&lt;/em&gt; functions.)
+To my knowledge, the idea was introduced by G. Hinton in the Neural Networks for
+Machine Learning online lectures in 2012. For a detailed treatment, see:&lt;br&gt;
+Y. Bengio, N. Léonard, A Courville. 2013. 
+Estimating or Propagating Gradients Through Stochastic Neurons for Conditional Computation.
+&lt;a href="https://arxiv.org/abs/1308.3432"&gt;&lt;em&gt;arXiv:1308.3432.&lt;/em&gt;&lt;/a&gt;&amp;nbsp;&lt;/span&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;SigmoidStraightThrough&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;torch&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;autograd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Function&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+
+    &lt;span class="nd"&gt;@staticmethod&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;forward&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ctx&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;u&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;torch&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sigmoid&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;u&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="nd"&gt;@staticmethod&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;backward&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ctx&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;dx&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;dx&lt;/span&gt;
+
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;sigmoid_straight_through&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;u&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;SigmoidStraightThrough&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;apply&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;u&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;optim_rep_natural_st&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;u_init&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;lr&lt;/span&gt;&lt;span class="o"&gt;=.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;max_iter&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+
+    &lt;span class="n"&gt;u&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;u_init&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;clone&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;requires_grad_&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;max_iter&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sigmoid_straight_through&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;u&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;backward&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+        &lt;span class="n"&gt;u&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="o"&gt;-=&lt;/span&gt; &lt;span class="n"&gt;lr&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;u&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;grad&lt;/span&gt;
+        &lt;span class="n"&gt;u&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;grad&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;zero_&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+        &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;u&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;torch&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sigmoid&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;u&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;u&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;With this &lt;code&gt;sigmoid_straight_through&lt;/code&gt; nonlinearity, we can now use mirror descent
+/ natural gradient to learn constrained parameters without any changes to the
+optimizer, and with improved numerical stability.&lt;label for="sn-17" class="margin-toggle sidenote-number"&gt;&lt;/label&gt;&lt;input type="checkbox" id="sn-17" class="margin-toggle"/&gt;&lt;span class="sidenote"&gt;Instead of cancelling out
+the gradient of &lt;span class="arithmatex"&gt;\(\sigma\)&lt;/span&gt; numerically, we now avoid multiplying by it in the
+first&amp;nbsp;place.&lt;/span&gt; Unlike our initial reparametrization algorithm, this algorithm uses the
+geometry of the dual space &lt;span class="arithmatex"&gt;\((\mathcal{U}, \nabla^2\Phi)\)&lt;/span&gt; and thus avoids taking
+extra small steps while still ensuring that all the iterates remain&amp;nbsp;feasible.&lt;/p&gt;
+&lt;h1 id="conclusions"&gt;Conclusions.&lt;a class="headerlink" href="#conclusions" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;We have explored the two most popular strategies for dealing with simple
+constraints: reparametrization and projected gradient optimization. We have
+looked into an information geometric generalization of projected gradient, which
+turns out to lead to an equivalent &lt;em&gt;dual&lt;/em&gt; algorithm that resembles
+reparametrization, but with a gradient correction that improves its performance.
+(And, if &lt;span class="arithmatex"&gt;\(f\)&lt;/span&gt; is convex, results in a convex optimization procedure, unlike the
+reparametrized&amp;nbsp;case.)&lt;/p&gt;
+&lt;p&gt;Of course, we only looked at a simple quadratic test case, and we did not check
+what happens when using accelerated methods or adaptive learning rates (e.g,.
+Adam). But empirical questions are not the main&amp;nbsp;point. &lt;/p&gt;
+&lt;p&gt;With this post, I have hopefully stirred your interest into constrained
+optimization and its connections to geometry. 
+You may be wondering what other constraints we may handle this way.
+Two important examples are non-negativity constraints &lt;span class="arithmatex"&gt;\(\mathcal{X}=[0,
+\infty)^d,\)&lt;/span&gt; for which we may use 
+&lt;span class="arithmatex"&gt;\(\Psi(x) = \sum_i x_i(\log x_i - 1),\)&lt;/span&gt; giving &lt;span class="arithmatex"&gt;\(\phi(u) = \exp(u)\)&lt;/span&gt;,&lt;label for="sn-18" class="margin-toggle sidenote-number"&gt;&lt;/label&gt;&lt;input type="checkbox" id="sn-18" class="margin-toggle"/&gt;&lt;span class="sidenote"&gt;Another
+interesting choice is &lt;span class="arithmatex"&gt;\(\Psi(x) = x \log(\exp(x)-1) +
+\operatorname{Li}_2(1-\exp(x)),\)&lt;/span&gt; where &lt;span class="arithmatex"&gt;\(\operatorname{Li}_2\)&lt;/span&gt;
+denotes the &lt;a href="https://en.wikipedia.org/wiki/Spence%27s_function"&gt;dilogarithm&lt;/a&gt;.
+This leads to the softplus reparametrization
+&lt;span class="arithmatex"&gt;\(\phi(u) = \log(1+\exp(u))\)&lt;/span&gt;. While the dilogarithm lacks a closed-form
+expression, we only need to evaluate &lt;span class="arithmatex"&gt;\(\phi\)&lt;/span&gt; and &lt;span class="arithmatex"&gt;\(\psi\)&lt;/span&gt;.&lt;/span&gt;
+and the simplex &lt;span class="arithmatex"&gt;\(\mathcal{X} = {\{ x \in \reals^d : x_i \geq 0, \sum_i x_i = 1
+\},}\)&lt;/span&gt; for which the negative Shannon entropy &lt;span class="arithmatex"&gt;\(\Psi(x) = {\sum_i x_i \log x_i}\)&lt;/span&gt;
+yields the softmax reparametrization &lt;span class="arithmatex"&gt;\(\phi(u) = {\frac{1}{Z} \exp(u)}\)&lt;/span&gt; with &lt;span class="arithmatex"&gt;\(Z=\sum_i\exp(u_i).\)&lt;/span&gt;
+The resulting simplex-constrained algorithm is known under many names, including
+&amp;#8220;multiplicative weights&amp;#8221;, &amp;#8220;entropic descent&amp;#8221;, or &amp;#8220;exponentiated gradient&amp;#8221;,&lt;label for="sn-19" class="margin-toggle sidenote-number"&gt;&lt;/label&gt;&lt;input type="checkbox" id="sn-19" class="margin-toggle"/&gt;&lt;span class="sidenote"&gt;
+J. Kivinen, J and &lt;span class="caps"&gt;M.K.&lt;/span&gt; Warmuth, 1997. 
+&lt;a href="https://users.soe.ucsc.edu/~manfred/pubs/J36.pdf"&gt;Exponentiated gradient versus gradient descent for linear predictors.&lt;/a&gt;
+&lt;em&gt;Information and Computation, 132(1),&lt;/em&gt; 1-63.
+&lt;/span&gt; which performs the elementwise multiplicative&amp;nbsp;update &lt;/p&gt;
+&lt;div class="arithmatex"&gt;\[ x^{(t+1)} \propto x^{(t)} \odot \exp\big(-\alpha^{(t)} \nabla f(x^{(t)})\big)\,.\]&lt;/div&gt;
+&lt;p&gt;More interesting constraint examples involve matrices.
+Geometric insights have been key to advances in learning over constrained spaces of
+matrices, such as symmetric, low-rank, orthonormal, positive (semi-)definite matrices, etc.&lt;label for="sn-20" class="margin-toggle sidenote-number"&gt;&lt;/label&gt;&lt;input type="checkbox" id="sn-20" class="margin-toggle"/&gt;&lt;span class="sidenote"&gt;
+P.-A. Absil, R. Mahoney, and Rodolphe Sepulchre. 2008.
+&lt;a href="https://press.princeton.edu/absil"&gt;Optimization Algorithms on Matrix
+Manifolds&lt;/a&gt;.
+Princeton University Press. &lt;span class="caps"&gt;ISBN&lt;/span&gt; 978-0-691-13298-3
+&lt;/span&gt; 
+Schäfer et al. use the duality between mirror descent and natural gradient to derive
+powerful algorithms for minimax problems.&lt;label for="sn-21" class="margin-toggle sidenote-number"&gt;&lt;/label&gt;&lt;input type="checkbox" id="sn-21" class="margin-toggle"/&gt;&lt;span class="sidenote"&gt;
+F. Schäfer, A. Anandkumar, H. Owhadi. 2020.
+Competitive Mirror Descent.
+&lt;a href="https://arxiv.org/abs/2006.10179"&gt;&lt;em&gt;arXiv:2006.10179&lt;/em&gt;&lt;/a&gt;.&amp;nbsp;&lt;/span&gt;&lt;/p&gt;
+&lt;h1 id="acknowledgements"&gt;Acknowledgements.&lt;a class="headerlink" href="#acknowledgements" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;This post was inspired by &lt;a href="https://video.ias.edu/machinelearning/2020/0709-AnimaAnandkumar"&gt;Anima Anandkumar&amp;#8217;s
+talk&lt;/a&gt; at the 
+&lt;span class="caps"&gt;IAS&lt;/span&gt; Seminar on Theoretical Machine Learning. Before this talk, I had no idea
+about anything in the second part of this post.
+Thanks to Mathieu Blondel, Caio Corro, André Martins, Fabian Pedregosa, and Justine Zhang
+for feedback.
+I am funded by the European Research Council
+StG DeepSPIN 758969 and Fundação para a Ciência e Tecnologia contract &lt;span class="caps"&gt;UIDB&lt;/span&gt;/50008/2020. &lt;/p&gt;</content><category term="optimization"></category></entry><entry><title>Rendering 3-d surface plots for social media</title><link href="//vene.ro/blog/rendering-3d-surface-plot-social-media.html" rel="alternate"></link><published>2018-08-21T00:00:00+02:00</published><updated>2018-08-21T00:00:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2018-08-21:/blog/rendering-3d-surface-plot-social-media.html</id><summary type="html">&lt;p&gt;It&amp;#8217;s 2018, and your favorite meme pages on facebook constantly come up with quality 3d-post content. How can we mere researchers even begin to compete in terms of social media presence? What chance do we have at going viral? In this post, I show you how to generate 3-d renders of your or your friends&amp;#8217; cool machine learning&amp;nbsp;research.&lt;/p&gt;</summary><content type="html">&lt;p&gt;It&amp;#8217;s 2018, and your favorite meme pages on facebook constantly come up
 with quality content like this. (If you&amp;#8217;re on mobile, you will need to
 open the below in the Facebook app for the full immersive experience,&amp;nbsp;sadly.)&lt;/p&gt;
 &lt;iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Ftheytheytheytheythey%2Fposts%2F1927754023930143&amp;width=350&amp;show_text=true&amp;height=471" width="350" height="471" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"&gt;&lt;/iframe&gt;
