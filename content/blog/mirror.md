@@ -108,7 +108,7 @@ answer satisfies the constraint, then it must be the solution of the constrained
 problem as well. If not, the answer can be found by *clipping* to the interval:
 
 $$ x^\star = \operatorname{clip}_{[a,b]}(x_\text{unc}^\star)
-\coloneqq \min(a, \max(b, x_\text{unc}^\star))\,.
+\coloneqq \max(a, \min(b, x_\text{unc}^\star))\,.
 $$
 
 ??? note "Proof"
