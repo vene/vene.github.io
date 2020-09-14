@@ -103,6 +103,44 @@ blockquote footer {
   text-align: right;
 }
 
+/* tables */
+
+/* Default Table Style */
+.wraptable {
+  overflow-x: scroll;
+}
+@media only screen and (min-width: 640px) {
+.wraptable {
+  font-size: .77em;
+}
+}
+
+table {
+  color: #333;
+  background: rgba(255,255,255,.05);
+  border: 1px solid grey;
+  border-collapse: collapse;
+}
+table thead th,
+table tfoot th {
+  background: rgba(0,0,0,.05);
+}
+table caption {
+  padding:.5em;
+}
+table th,
+table td {
+  padding: .5em;
+  border: 1px solid lightgrey;
+}
+/* Zebra Table Style */
+[data-table-theme*=zebra] tbody tr:nth-of-type(odd) {
+  background: rgba(0,0,0,.05);
+}
+[data-table-theme*=zebra][data-table-theme*=dark] tbody tr:nth-of-type(odd) {
+  background: rgba(255,255,255,.05);
+}
+
 /* headers */
 h1 a:link {background: none;}
 
