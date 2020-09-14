@@ -153,7 +153,7 @@ unconstrained problem <span class="arithmatex">\(x_{\text{unc}}^* = \argmin_{x\i
 answer satisfies the constraint, then it must be the solution of the constrained
 problem as well. If not, the answer can be found by <em>clipping</em> to the&nbsp;interval:</p>
 <div class="arithmatex">\[ x^\star = \operatorname{clip}_{[a,b]}(x_\text{unc}^\star)
-\coloneqq \min(a, \max(b, x_\text{unc}^\star))\,.
+\coloneqq \max(a, \min(b, x_\text{unc}^\star))\,.
 \]</div>
 <details class="note"><summary>Proof</summary><p>We add non-negative dual variables <span class="arithmatex">\(\mu_a\)</span> and <span class="arithmatex">\(\mu_b\)</span> to handle the inequality
 constraints <span class="arithmatex">\(x \geq a\)</span> and <span class="arithmatex">\(x \leq b\)</span>, and write the&nbsp;Lagrangian,</p>

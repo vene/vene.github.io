@@ -94,7 +94,7 @@ unconstrained problem &lt;span class="arithmatex"&gt;\(x_{\text{unc}}^* = \argmi
 answer satisfies the constraint, then it must be the solution of the constrained
 problem as well. If not, the answer can be found by &lt;em&gt;clipping&lt;/em&gt; to the&amp;nbsp;interval:&lt;/p&gt;
 &lt;div class="arithmatex"&gt;\[ x^\star = \operatorname{clip}_{[a,b]}(x_\text{unc}^\star)
-\coloneqq \min(a, \max(b, x_\text{unc}^\star))\,.
+\coloneqq \max(a, \min(b, x_\text{unc}^\star))\,.
 \]&lt;/div&gt;
 &lt;details class="note"&gt;&lt;summary&gt;Proof&lt;/summary&gt;&lt;p&gt;We add non-negative dual variables &lt;span class="arithmatex"&gt;\(\mu_a\)&lt;/span&gt; and &lt;span class="arithmatex"&gt;\(\mu_b\)&lt;/span&gt; to handle the inequality
 constraints &lt;span class="arithmatex"&gt;\(x \geq a\)&lt;/span&gt; and &lt;span class="arithmatex"&gt;\(x \leq b\)&lt;/span&gt;, and write the&amp;nbsp;Lagrangian,&lt;/p&gt;
