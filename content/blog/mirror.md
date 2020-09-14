@@ -18,11 +18,10 @@ Some of the most popular strategies for handling constraints, while seemingly
 very different at first sight, are deeply connected. In this post, we will
 explore these connections and demonstrate them in PyTorch.
 
-In particular, we show that mirror descent is equivalent to
-gradient descent on a reparametrized objective with straight-through gradients: 
-replacing a constrained variable $x$
-with $\sigma(u)$, but treating $\sigma$ as if it were the identity in the
-backward pass.
+In particular, we show that mirror descent is equivalent to gradient descent on
+a reparametrized objective with straight-through gradients: replacing a
+constrained variable $x$ with some squishing function $\sigma(u)$, but treating
+$\sigma$ as if it were the identity in the backward pass.
 
 **Outline.** 
 
@@ -410,10 +409,64 @@ $$ \pfrac{}{u} f(\sigma(u)) =
 
 This is the unconstrained gradient at $x=\sigma(u)$, rescaled by the Jacobian of $\sigma$.
 Since $\sigma$ acts elementwise, its Jacobian is a diagonal matrix, with
-$\pfrac{\sigma(u)_i}{u_i}  = \sigma(u_i)(1 - \sigma(u_i)) = x_i (1 - x_i).$ We can thus see
-that as $x_i$ approaches $0$ or $1$, the reparametrization rescales the
-gradient **severely**, bringing the effective step size toward 0. Remember, this
-happens *automatically* via the chain rule! But, although slowly, and along a
+$\pfrac{\sigma(u)_i}{u_i}  = \sigma(u_i)(1 - \sigma(u_i)) = x_i (1 - x_i).$ 
+We can thus see that as $x_i$ approaches $0$ or $1$, the reparametrization rescales the
+gradient **severely**, bringing the effective step size toward 0.
+It can help to see the concrete values and shapes of these matrices:
+
+??? note "Calculation"
+
+    Let's consider two points: first far, then close to the optimum.
+    We use that $\nabla_x f(x) = Q(x - x_0)$.
+    (Note: all vectors below are column vectors.)
+
+    <div class="wraptable">
+    <table>
+    <thead>
+    <th> $u$
+    </th>
+    <th> ${x=\sigma(u)}$
+    </th>
+    <th> $\pfrac{\sigma(u)}{u}$ 
+    </th>
+    <th> $\pfrac{f(x)}{x}$
+    </th>
+    <th> $\pfrac{f(\sigma(u))}{u}$ 
+    </th>
+    </thead>
+    <tr>
+    <td>$(0, 0)$         
+    </td>
+    <td>$(.5, .5)$ 
+    </td>
+    <td>$\left(\begin{smallmatrix} .25 & 0 \\\\ 0 & .25 \end{smallmatrix}\right)$
+    </td>
+    <td>$(-2.2, -0.8)$
+    </td>
+    <td>$(-0.55, -0.2)$
+    </td>
+    </tr>
+    <tr>
+    <td>$(4.6, -0.4)$
+    </td>
+    <td>$(.99, .4)$ 
+    </td>
+    <td>$\left(\begin{smallmatrix} .0099 & 0 \\\\ 0 & .24 \end{smallmatrix}\right)$
+    </td>
+    <td>$(-0.93, -0.12)$
+    </td>
+    <td>$(-0.01, -0.03)$ 
+    </td>
+    </tr>
+    </table>
+    </div>
+    
+    Two effects are at play here: the gradient of $f$ gets smaller as we
+    approach the minimum, and the gradient of $\sigma$ gets vanishingly small as
+    we approach the boundary of the domain.
+
+Remember, this rescaling
+happens *automatically* through the chain rule! But, although slowly, and along a
 slightly winding trajectory, our method finds the right answer.
 
 ### Projected gradient.
@@ -548,18 +601,24 @@ $$ D_\Psi(x, y) \coloneqq \Psi(x) - \Psi(y) - \DP{\nabla \Psi(y)}{x - y}\,. $$
 
 For $\Psi = \frac{1}{2} \| \cdot \|^2$, this recovers the squared Euclidean
 distance. Replacing $\frac{1}{2}\|\cdot\|^2$ by $D_\Psi$ in the projected
-gradient algorithm leads to a generalization known as **mirror descent**,
+gradient algorithm leads to a generalization known as **mirror descent**,[ref]
+Introduced in: <br>
+A.S. Nemirovsky and D.B. Yudin,, 1983. Problem complexity and method efficiency in optimization.
+<br>Suggested reading: 
+A. Beck and M. Teboulle, 2003. 
+[Mirror descent and nonlinear projected subgradient methods for convex optimization.](https://web.iem.technion.ac.il/images/user-files/becka/papers/3.pdf) 
+*Operations Research Letters, 31(3).* 167-175.
+[/ref]
+
 
 $$
 x^{(t+1)} \leftarrow \argmin_{x \in \mathcal{X}}  \DP{\nabla f(x^{(t)})}{x} + 
-{\frac{1}{\alpha_t}D_\psi(x, x^{(t)})}\,.
+{\frac{1}{\alpha_t}D_\Psi(x, x^{(t)})}\,.
 $$
 
 Since $\Psi$ is twice differentiable and strongly convex, it has a gradient
 $\psi = \nabla\Psi$ which is invertible. Solving for the mirror descent update
-yields a so-called Bregman projection,[ref]Not technically a projection, 
-since iterating it twice need not give the same
-result, but the term emphasizes the parallel to the Euclidean case.[/ref]
+yields a so-called Bregman projection, or *non-linear* projection,
 
 $$
 \begin{aligned}
@@ -607,13 +666,28 @@ can be written as
 $$D_{-H}(x, y) = x \log \frac{x}{y} - (1-x) \log \frac{1-x}{1-y}. $$
 -->
 
-So, written in terms of the familiar sigmoid, the mirror descent update induced by the negative entropy takes the (remarkable!) form
+So, written in terms of the familiar logistic sigmoid, the mirror descent update induced by the negative entropy takes the (remarkable!) form
 
 $$ x^{(t+1)} = \sigma(\sigma^{-1}(x^{(t)}) - \alpha_t \nabla f(x^{(t)}))\,. $$
 
 Things are beginning to clear up! We can think of the pair of inverse functions
 $(\psi, \phi)$ as maps between $\mathcal{X}$ and $\mathcal{U}$.  We will call these
-the **primal** and **dual** spaces, respectively. Mirror descent thus
+the **primal** and **dual** spaces, respectively.[ref]Duality, and the terms
+*primal* and *dual*, are fairly strong, scary, and sometimes
+overloaded. 
+Readers familiar with the Fenchel conjugate,
+$\Psi^*(u) \coloneqq {\sup_{x} \{ \DP{u}{x} - \Psi(x) \},}$
+should note 
+note that $\Psi^* = \Phi$, where $\Phi$ is such that
+$\nabla\Phi = \phi$. 
+(For the Fermi-Dirac entropy, $\Phi(u) =
+{\log(1+\exp(u)).}$) 
+The dual construction used here relies on the relationship
+between Bregman divergences and Fenchel conjugates:
+$ D_{\Phi^*}(u, v) = D_\Phi(y, x)$ where
+$u=\psi(x), v=\psi(y)$ are the dual points corresponding to $x$ and $y$.
+[/ref]
+Mirror descent thus
 first moves into dual (unconstrained) space, performs an update there, and then moves
 back. Reparametrization rewrites the problem in dual coordinates and performs
 gradient descent: this is not the same, and the trajectories are quite
@@ -650,9 +724,11 @@ post](https://wiseodd.github.io/techblog/2019/02/22/riemannian-geometry/)
 and [Frank Nielsen's tutorial](https://arxiv.org/abs/1808.08271)
 for an introduction.
 [/ref]
-and the *metric tensor* $G: \mathcal{U} \rightarrow \reals^{d \times d}$
-is a function such that $G(u_0)$ is a p.s.d. matrix that induces a 
-squared distance around $u_0$:
+and $G: \mathcal{U} \rightarrow \reals^{d \times d},$
+known as the *metric tensor*, is a function that takes a point $u_0$
+on the manifold
+and returns a positive definite matrix that characterizes the **geometry** by specifying a custom squared distance
+nearby $u_0$:
 
 $$ d^2_{u_0}(u, v) = \frac{1}{2} (u-v)^\top G(u_0) (u - v)\,. $$
 
@@ -676,8 +752,11 @@ In our case $\mathcal{U}=\reals^2$ and $\phi = \sigma$, but let's use the more
 general notation. The update above ignores the geometry of $\mathcal{U}$, in
 other words, operates on the trivial manifold $(\mathcal{U}, I_d)$ -- the
 metric tensor is the identity matrix everywhere.  When optimizing some function $\tilde{f}(u)$
-over a manifold $(\mathcal{U}, G)$, a convenient algorithm is natural gradient, which takes the
-form
+over a Riemannian manifold $(\mathcal{U}, G)$,
+a convenient algorithm is natural gradient,[ref]S. Amari, 1998.  
+[Natural gradient works efficiently in learning.](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.452.7280&rep=rep1&type=pdf)
+*Neural computation 10.2*, 251-276.[/ref]
+which takes the form
 
 $$ u^{(t+1)} \leftarrow u^{(t)} - \alpha_t [G(u)]^{-1} \nabla \tilde{f}(u^{(t)})\,. $$
 
@@ -709,11 +788,9 @@ REP algorithm,
 
 $$ u^{(t+1)} \leftarrow u^{(t)} - \alpha_t [\nabla^2 \Phi(u)]^{-1} \nabla_u {f}(\phi(u^{(t)}))\,. $$
 
-This algorithm takes the exact same steps as mirror descent, is arguably easier
-to implement, and -- since it maintains iterates in dual space -- is more
-numerically stable.
-
-A first attempt at implementing this would be:
+This algorithm produces the exact same iterates as mirror descent, but -- since
+it maintains iterates in dual space -- is more numerically stable.
+A first attempt at implementing natural gradient is:
 
 ```python
 def optim_rep_natural(u_init, lr=.1, max_iter=100):
@@ -749,15 +826,15 @@ $$ [\nabla^2\Phi(u)]^{-1} \nabla_u f(\phi(u)) =
 Natural gradient cancels out the Jacobian of $\phi$ in the chain rule!
 This suggests an alternative implementation,
 reminiscent of *straight-through* tricks: we use a reparametrization function
-$\sigma$ that acts as a sigmoid in the forward pass, but acts as if it were the
-identity function in the backward pass.[ref]
+$\sigma$ that is a sigmoid in the forward pass, but acts as if it were the
+identity in the backward pass.[ref]
 Such ``straight-through'' heuristics are very popular for dealing with
 stochastic or piecewise-constant functions (like *argmax* or *floor* functions.)
 To my knowledge, the idea was introduced by G. Hinton in the Neural Networks for
-Machine Learning online lectures in 2012. For a detailed treatment, see:
+Machine Learning online lectures in 2012. For a detailed treatment, see:<br>
 Y. Bengio, N. Léonard, A Courville. 2013. 
-Estimating or Propagating Gradients Through Stochastic Neurons for Conditional Computation
-[arxiv 1308.3432](https://arxiv.org/abs/1308.3432)
+Estimating or Propagating Gradients Through Stochastic Neurons for Conditional Computation.
+[*arXiv:1308.3432.*](https://arxiv.org/abs/1308.3432)
 [/ref]
 
 ```python
@@ -792,7 +869,9 @@ def optim_rep_natural_st(u_init, lr=.1, max_iter=100):
 
 With this `sigmoid_straight_through` nonlinearity, we can now use mirror descent
 / natural gradient to learn constrained parameters without any changes to the
-optimizer, and with improved numerical stability.  This strategy is aware of the
+optimizer, and with improved numerical stability.[ref]Instead of cancelling out
+the gradient of $\sigma$ numerically, we now avoid multiplying by it in the
+first&nbsp;place.[/ref] Unlike our initial reparametrization algorithm, this algorithm uses the
 geometry of the dual space $(\mathcal{U}, \nabla^2\Phi)$ and thus avoids taking
 extra small steps while still ensuring that all the iterates remain feasible.
 
@@ -808,24 +887,45 @@ reparametrized case.)
 
 Of course, we only looked at a simple quadratic test case, and we did not check
 what happens when using accelerated methods or adaptive learning rates (e.g,.
-Adam).  It would be interesting to see if the drop-in straight-through sigmoid
-can improve performance compared to direct reparametrization in
-real tasks. But this was not the main point--
+Adam). But empirical questions are not the main point. 
 
 With this post, I have hopefully stirred your interest into constrained
 optimization and its connections to geometry. 
+You may be wondering what other constraints we may handle this way.
+Two important examples are non-negativity constraints $\mathcal{X}=[0,
+\infty)^d,$ for which we may use 
+$\Psi(x) = \sum_i x_i(\log x_i - 1),$ giving $\phi(u) = \exp(u)$,[ref]Another
+interesting choice is $\Psi(x) = x \log(\exp(x)-1) +
+\operatorname{Li}_2(1-\exp(x)),$ where $\operatorname{Li}_2$
+denotes the [dilogarithm](https://en.wikipedia.org/wiki/Spence%27s_function).
+This leads to the softplus reparametrization
+$\phi(u) = \log(1+\exp(u))$. While the dilogarithm lacks a closed-form
+expression, we only need to evaluate $\phi$ and $\psi$.[/ref]
+and the simplex $\mathcal{X} = {\{ x \in \reals^d : x_i \geq 0, \sum_i x_i = 1
+\},}$ for which the negative Shannon entropy $\Psi(x) = {\sum_i x_i \log x_i}$
+yields the softmax reparametrization $\phi(u) = {\frac{1}{Z} \exp(u)}$ with $Z=\sum_i\exp(u_i).$
+The resulting simplex-constrained algorithm is known under many names, including
+"multiplicative weights", "entropic descent", or "exponentiated gradient",[ref]
+J. Kivinen, J and M.K. Warmuth, 1997. 
+[Exponentiated gradient versus gradient descent for linear predictors.](https://users.soe.ucsc.edu/~manfred/pubs/J36.pdf)
+*Information and Computation, 132(1),* 1-63.
+[/ref] which performs the elementwise multiplicative update 
+
+$$ x^{(t+1)} \propto x^{(t)} \odot \exp\big(-\alpha^{(t)} \nabla f(x^{(t)})\big)\,.$$
+
+More interesting constraint examples involve matrices.
 Geometric insights have been key to advances in learning over constrained spaces of
-matrices, such as symmetric, low-rank, orthonormal, s.p.d. matrices, etc.[ref]
+matrices, such as symmetric, low-rank, orthonormal, positive (semi-)definite matrices, etc.[ref]
 P.-A. Absil, R. Mahoney, and Rodolphe Sepulchre. 2008.
 [Optimization Algorithms on Matrix
 Manifolds](https://press.princeton.edu/absil).
 Princeton University Press. ISBN 978-0-691-13298-3
 [/ref] 
-Recently, the duality between mirror descent and natural gradient has been used
-to derive powerful algorithms for minimax problems.[ref]
+Schäfer et al. use the duality between mirror descent and natural gradient to derive
+powerful algorithms for minimax problems.[ref]
 F. Schäfer, A. Anandkumar, H. Owhadi. 2020.
 Competitive Mirror Descent.
-[arxiv:2006.10179](https://arxiv.org/abs/2006.10179).
+[*arXiv:2006.10179*](https://arxiv.org/abs/2006.10179).
 [/ref]
 
 
