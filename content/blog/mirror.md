@@ -496,7 +496,7 @@ def optim_pg(x_init, lr=.1, max_iter=100):
 
     for i in range(max_iter):
         f(x).backward() 
-        x.data -= lr * grad  # take gradient step
+        x.data -= lr * x.grad  # take gradient step
         x.data = torch.clamp(x.data, min=0, max=1)  # project
         x.grad.zero_()
 
@@ -943,7 +943,7 @@ talk](https://video.ias.edu/machinelearning/2020/0709-AnimaAnandkumar) at the
 IAS Seminar on Theoretical Machine Learning. Before this talk, I had no idea
 about anything in the second part of this post.
 Thanks to Mathieu Blondel, Caio Corro, André Martins, Fabian Pedregosa, and Justine Zhang
-for feedback.
+for feedback, and to all Twitter users who pointed out typos.
 I am funded by the European Research Council
 StG DeepSPIN 758969 and Fundação para a Ciência e Tecnologia contract UIDB/50008/2020. 
 
