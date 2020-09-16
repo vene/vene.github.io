@@ -491,7 +491,7 @@ The implementation&nbsp;follows:</p>
 
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_iter</span><span class="p">):</span>
         <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span> 
-        <span class="n">x</span><span class="o">.</span><span class="n">data</span> <span class="o">-=</span> <span class="n">lr</span> <span class="o">*</span> <span class="n">grad</span>  <span class="c1"># take gradient step</span>
+        <span class="n">x</span><span class="o">.</span><span class="n">data</span> <span class="o">-=</span> <span class="n">lr</span> <span class="o">*</span> <span class="n">x</span><span class="o">.</span><span class="n">grad</span>  <span class="c1"># take gradient step</span>
         <span class="n">x</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># project</span>
         <span class="n">x</span><span class="o">.</span><span class="n">grad</span><span class="o">.</span><span class="n">zero_</span><span class="p">()</span>
 
@@ -823,11 +823,11 @@ and the simplex <span class="arithmatex">\(\mathcal{X} = {\{ x \in \reals^d : x_
 \},}\)</span> for which the negative Shannon entropy <span class="arithmatex">\(\Psi(x) = {\sum_i x_i \log x_i}\)</span>
 yields the softmax reparametrization <span class="arithmatex">\(\phi(u) = {\frac{1}{Z} \exp(u)}\)</span> with <span class="arithmatex">\(Z=\sum_i\exp(u_i).\)</span>
 The resulting simplex-constrained algorithm is known under many names, including
-&#8220;multiplicative weights&#8221;, &#8220;entropic descent&#8221;, or &#8220;exponentiated gradient&#8221;,<label for="sn-19" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-19" class="margin-toggle"/><span class="sidenote">
+&#8220;multiplicative weights&#8221;, &#8220;entropic descent&#8221;, or &#8220;exponentiated gradient&#8221;.<label for="sn-19" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-19" class="margin-toggle"/><span class="sidenote">
 J. Kivinen, J and <span class="caps">M.K.</span> Warmuth, 1997. 
 <a href="https://users.soe.ucsc.edu/~manfred/pubs/J36.pdf">Exponentiated gradient versus gradient descent for linear predictors.</a>
 <em>Information and Computation, 132(1),</em> 1-63.
-</span> which performs the elementwise multiplicative&nbsp;update </p>
+</span> This algorithm performs the elementwise multiplicative&nbsp;update </p>
 <div class="arithmatex">\[ x^{(t+1)} \propto x^{(t)} \odot \exp\big(-\alpha^{(t)} \nabla f(x^{(t)})\big)\,.\]</div>
 <p>More interesting constraint examples involve matrices.
 Geometric insights have been key to advances in learning over constrained spaces of
@@ -848,7 +848,7 @@ talk</a> at the
 <span class="caps">IAS</span> Seminar on Theoretical Machine Learning. Before this talk, I had no idea
 about anything in the second part of this post.
 Thanks to Mathieu Blondel, Caio Corro, André Martins, Fabian Pedregosa, and Justine Zhang
-for feedback.
+for feedback, and to all Twitter users who pointed out typos.
 I am funded by the European Research Council
 StG DeepSPIN 758969 and Fundação para a Ciência e Tecnologia contract <span class="caps">UIDB</span>/50008/2020. </p>
     </div><!-- /.entry-content -->

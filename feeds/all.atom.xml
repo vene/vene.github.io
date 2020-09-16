@@ -432,7 +432,7 @@ The implementation&amp;nbsp;follows:&lt;/p&gt;
 
     &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;max_iter&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
         &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;backward&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; 
-        &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="o"&gt;-=&lt;/span&gt; &lt;span class="n"&gt;lr&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;grad&lt;/span&gt;  &lt;span class="c1"&gt;# take gradient step&lt;/span&gt;
+        &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="o"&gt;-=&lt;/span&gt; &lt;span class="n"&gt;lr&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;grad&lt;/span&gt;  &lt;span class="c1"&gt;# take gradient step&lt;/span&gt;
         &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;torch&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;clamp&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;min&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;max&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# project&lt;/span&gt;
         &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;grad&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;zero_&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 
@@ -764,11 +764,11 @@ and the simplex &lt;span class="arithmatex"&gt;\(\mathcal{X} = {\{ x \in \reals^
 \},}\)&lt;/span&gt; for which the negative Shannon entropy &lt;span class="arithmatex"&gt;\(\Psi(x) = {\sum_i x_i \log x_i}\)&lt;/span&gt;
 yields the softmax reparametrization &lt;span class="arithmatex"&gt;\(\phi(u) = {\frac{1}{Z} \exp(u)}\)&lt;/span&gt; with &lt;span class="arithmatex"&gt;\(Z=\sum_i\exp(u_i).\)&lt;/span&gt;
 The resulting simplex-constrained algorithm is known under many names, including
-&amp;#8220;multiplicative weights&amp;#8221;, &amp;#8220;entropic descent&amp;#8221;, or &amp;#8220;exponentiated gradient&amp;#8221;,&lt;label for="sn-19" class="margin-toggle sidenote-number"&gt;&lt;/label&gt;&lt;input type="checkbox" id="sn-19" class="margin-toggle"/&gt;&lt;span class="sidenote"&gt;
+&amp;#8220;multiplicative weights&amp;#8221;, &amp;#8220;entropic descent&amp;#8221;, or &amp;#8220;exponentiated gradient&amp;#8221;.&lt;label for="sn-19" class="margin-toggle sidenote-number"&gt;&lt;/label&gt;&lt;input type="checkbox" id="sn-19" class="margin-toggle"/&gt;&lt;span class="sidenote"&gt;
 J. Kivinen, J and &lt;span class="caps"&gt;M.K.&lt;/span&gt; Warmuth, 1997. 
 &lt;a href="https://users.soe.ucsc.edu/~manfred/pubs/J36.pdf"&gt;Exponentiated gradient versus gradient descent for linear predictors.&lt;/a&gt;
 &lt;em&gt;Information and Computation, 132(1),&lt;/em&gt; 1-63.
-&lt;/span&gt; which performs the elementwise multiplicative&amp;nbsp;update &lt;/p&gt;
+&lt;/span&gt; This algorithm performs the elementwise multiplicative&amp;nbsp;update &lt;/p&gt;
 &lt;div class="arithmatex"&gt;\[ x^{(t+1)} \propto x^{(t)} \odot \exp\big(-\alpha^{(t)} \nabla f(x^{(t)})\big)\,.\]&lt;/div&gt;
 &lt;p&gt;More interesting constraint examples involve matrices.
 Geometric insights have been key to advances in learning over constrained spaces of
@@ -789,7 +789,7 @@ talk&lt;/a&gt; at the
 &lt;span class="caps"&gt;IAS&lt;/span&gt; Seminar on Theoretical Machine Learning. Before this talk, I had no idea
 about anything in the second part of this post.
 Thanks to Mathieu Blondel, Caio Corro, André Martins, Fabian Pedregosa, and Justine Zhang
-for feedback.
+for feedback, and to all Twitter users who pointed out typos.
 I am funded by the European Research Council
 StG DeepSPIN 758969 and Fundação para a Ciência e Tecnologia contract &lt;span class="caps"&gt;UIDB&lt;/span&gt;/50008/2020. &lt;/p&gt;</content><category term="optimization"></category></entry><entry><title>Rendering 3-d surface plots for social media</title><link href="//vene.ro/blog/rendering-3d-surface-plot-social-media.html" rel="alternate"></link><published>2018-08-21T00:00:00+02:00</published><updated>2018-08-21T00:00:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2018-08-21:/blog/rendering-3d-surface-plot-social-media.html</id><summary type="html">&lt;p&gt;It&amp;#8217;s 2018, and your favorite meme pages on facebook constantly come up with quality 3d-post content. How can we mere researchers even begin to compete in terms of social media presence? What chance do we have at going viral? In this post, I show you how to generate 3-d renders of your or your friends&amp;#8217; cool machine learning&amp;nbsp;research.&lt;/p&gt;</summary><content type="html">&lt;p&gt;It&amp;#8217;s 2018, and your favorite meme pages on facebook constantly come up
 with quality content like this. (If you&amp;#8217;re on mobile, you will need to
