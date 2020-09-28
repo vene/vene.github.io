@@ -5,18 +5,25 @@ save_as: index.html
 
 <img id="vladpic" class="marginnote" src="vlad-niculae.jpg" alt="Vlad Niculae" />
 
-Hi! I'm Vlad, and I'm a postdoc within [DeepSPIN](https://deep-spin.github.io/)
-at the [Instituto de Telecomunicações](https://www.it.pt), Lisbon, Portugal.
+Hi! I'm Vlad, and I'm an assistant professor in the
+[Informatics Institute (IvI), University of Amsterdam](https://ivi.uva.nl/).
 I research machine learning & natural language processing, focusing on sparsity
 and structure.
 
+I'm proud to be a co-advisor of PhD students [Tsvetomila Mihaylova](https://tsvm.github.io/)
+and [Gonçalo M. Correia](https://goncalomcorreia.github.io/).
+
 I obtained my PhD from [Cornell](http://www.cs.cornell.edu/) in 2018,
-advised by [Claire Cardie](http://www.cs.cornell.edu/home/cardie/).
+advised by [Claire Cardie](http://www.cs.cornell.edu/home/cardie/),
+and then post-docced in the
+[DeepSPIN](https://deep-spin.github.io/) project
+at the [Instituto de Telecomunicações](https://www.it.pt), Lisbon, Portugal.
 I am a [scikit-learn](http://scikit-learn.org) core dev/alum and
 I develop the [polylearn](http://contrib.scikit-learn.org/polylearn)
 library for factorization machines and polynomial networks in Python.
 
 # News
+
   - Jul 29 talk at the IBM Multi-lingual NLP: [*Learning with Sparse Latent Structure*](talks/20-lpsparsemap-ibm.pdf). [(*past talks*)](/talks.html)
 
   - I will be joining the [University of Amsterdam, Informatics Institute](https://ivi.uva.nl/)
@@ -30,9 +37,8 @@ library for factorization machines and polynomial networks in Python.
 # Contact
 You can find me on twitter as
 [@vnfrombucharest](https://www.twitter.com/vnfrombucharest) or on github as
-[@vene](https://www.github.com/vene). I'm also on
-[facebook](https://www.facebook.com/vlad.niculae) and
-[g+](http://gplus.to/vladn).
-Or just e-mail me: vlad<span
-style="display:none">hunter2</span> at vene.ro.
-My public key is available from [Keybase](https://keybase.io/vladn).
+[@vene](https://www.github.com/vene).
+Work e-mail: 
+v.niculae<span style="display:none">dog on wheels</span> at uva.nl.
+Personal e-mail:
+vlad<span style="display:none">hunter2</span> at vene.ro.
