@@ -5,7 +5,7 @@ save_as: index.html
 
 <img id="vladpic" class="marginnote" src="vlad-niculae.jpg" alt="Vlad Niculae" />
 
-Hi! I'm Vlad, and I'm an assistant professor in the
+Hi! I'm Vlad [he/him]. I'm an assistant professor in the
 [Informatics Institute (IvI), University of Amsterdam](https://ivi.uva.nl/).
 I research machine learning & natural language processing, focusing on sparsity
 and structure.
