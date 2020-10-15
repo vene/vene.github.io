@@ -34,6 +34,8 @@ def replace_footnotes(generator):
         all_content.extend(generator.articles)
     if hasattr(generator, "drafts"):
         all_content.extend(generator.drafts)
+    if hasattr(generator, "pages"):
+        all_content.extend(generator.pages)
 
     all_content = [c for c in all_content if c is not None]
     for article in all_content:
@@ -43,4 +45,5 @@ def replace_footnotes(generator):
 
 def register():
     signals.article_generator_finalized.connect(replace_footnotes)
+    signals.page_generator_finalized.connect(replace_footnotes)
 

@@ -6,9 +6,10 @@ Slug: jobs
 I am recruiting one PhD candidate
 in **machine learning for natural language processing**
 at the University of Amsterdam. 
-Apply before Nov 19 2020. Read the details and follow the application
+Apply before Nov 19, 2020. Read the details and follow the application
 instructions
-[here](https://ivi.uva.nl/shared/uva/en/vacancies/2020/10/20-612-phd-position-in-machine-learning-for-natural-language-processing.html).
+[here](https://ivi.uva.nl/shared/uva/en/vacancies/2020/10/20-612-phd-position-in-machine-learning-for-natural-language-processing.html).[ref]The application form has a "number of publications" field. 
+I can't remove it, just leave that field at zero.[/ref]
 
 This is a ML for NLP position with some topic flexibility. Some ideas for linguistic
 phenomena we might study, depending on your interests, are
