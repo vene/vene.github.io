@@ -10,16 +10,23 @@ Apply before Nov 19 2020. Read the details and follow the application
 instructions
 [here](https://ivi.uva.nl/shared/uva/en/vacancies/2020/10/20-612-phd-position-in-machine-learning-for-natural-language-processing.html).
 
-This is an NLP position with some flexibility. My past and present main areas of interests are:
- 
- - Structured prediction;
- - Latent variable models (especially discrete & structured);
- - Convex and constrained optimization;
- - Geometry: machine learning on manifolds.
+This is a ML for NLP position with some topic flexibility. Some ideas for linguistic
+phenomena we might study, depending on your interests, are
 
-**I am not looking for an expert in any of the above.** I only ask for
-ML basics, and excitement for studying some topics like the above,
-together with me, in order to use them in our research.
+ - discourse and argumentation structure;
+ - conversation modelling;
+ - coreference;
+ - syntactic and semantic structure;
+ - generation with constraints;
+ - multilinguality.
+
+We will rely on a selection of machine learning techniques. My research
+gravitates around structured prediction, latent variable models, sparsity,
+convex and constrained optimization, and geometry (machine learning on
+manifolds.) Importantly, **I am not looking for an expert in these ML topics.**
+But if you have ML basics and you are enthusiastic to study one or more of these
+(or related) topics, together with me, in order to apply them in NLP research, 
+you are a perfect fit!
 
 The flavor of my research is to integrate structured and discrete
 representations into the ``soft'' computation of neural networks.
@@ -31,7 +38,7 @@ It's a good idea to be skeptical about working with an advisor who is early in
 their career. Talking to their other students is always good: I am currently co-advising
 [Tsvetomila Mihaylova](https://tsvm.github.io/)
 and [Gonçalo M. Correia](https://goncalomcorreia.github.io/).
-You can also (with a grain of salt) write to me with any questions.
+You can also write to me with any questions.
 
 The PhD is a job, and, [at UvA, PhD students are employees](https://www.uva.nl/en/about-the-uva/working-at-the-uva/terms-of-employment/terms-of-employment.html),
 with the workers' rights
