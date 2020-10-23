@@ -4,13 +4,13 @@ Status: hidden
 
 # Talk schedule
 
-## Upcoming
+<!-- ## Upcoming -->
+
+## Past
 
   - Oct 23, 2020.
   [*Learning with Sparse Latent Structure (v7)*](talks/20-lpsparsemap-dm.pdf),<br/>
   DeepMind.
-
-## Past
 
   - Jul 29, 2020.
   [*Learning with Sparse Latent Structure (v6)*](talks/20-lpsparsemap-ibm.pdf),<br/>
