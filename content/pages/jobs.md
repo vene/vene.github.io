@@ -1,15 +1,10 @@
 Title: Open Positions
 Slug: jobs
 
-# Open PhD Position
+# No open positions at the moment.
 
-I am recruiting one PhD candidate
-in **machine learning for natural language processing**
-at the University of Amsterdam. 
-Apply before Nov 19, 2020. Read the details and follow the application
-instructions
-[here](https://ivi.uva.nl/shared/uva/en/vacancies/2020/10/20-612-phd-position-in-machine-learning-for-natural-language-processing.html).[ref]The application form has a "number of publications" field. 
-I can't remove it. Publications are not required, leave that field at zero.[/ref]
+I have recently advertised a position at the UvA on this page. The application
+deadline ended Nov 19, 2020. Keeping the text below for applicants to consult.
 
 This is a ML for NLP position with some topic flexibility. Some ideas for linguistic
 phenomena we might study, depending on your interests, are

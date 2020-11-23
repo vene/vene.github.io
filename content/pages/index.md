@@ -25,8 +25,6 @@ I develop the [polylearn](http://contrib.scikit-learn.org/polylearn)
 library for factorization machines and polynomial networks in Python.
 
 # News
-  - I am recruiting one [*PhD candidate in ML for NLP*](/jobs.html) at the UvA.
-
   - Jul 29 talk at the IBM Multi-lingual NLP: [*Learning with Sparse Latent Structure*](talks/20-lpsparsemap-ibm.pdf). [(*past talks*)](/talks.html)
 
   - I will be joining the [University of Amsterdam, Informatics Institute](https://ivi.uva.nl/)
