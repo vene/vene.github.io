@@ -12,8 +12,8 @@ and structure.
 
 I'm proud to be a co-advisor of PhD students [Tsvetomila Mihaylova](https://tsvm.github.io/)
 and [Gonçalo M. Correia](https://goncalomcorreia.github.io/).
-<span style="font-weight: bold">
-I am recruiting one [*PhD candidate in ML for NLP.*](/jobs.html)</span>
+<!--<span style="font-weight: bold">
+I am recruiting one [*PhD candidate in ML for NLP.*](/jobs.html)</span>-->
 
 I obtained my PhD from [Cornell](http://www.cs.cornell.edu/) in 2018,
 advised by [Claire Cardie](http://www.cs.cornell.edu/home/cardie/),
@@ -25,11 +25,7 @@ I develop the [polylearn](http://contrib.scikit-learn.org/polylearn)
 library for factorization machines and polynomial networks in Python.
 
 # News
-  - Jul 29 talk at the IBM Multi-lingual NLP: [*Learning with Sparse Latent Structure*](talks/20-lpsparsemap-ibm.pdf). [(*past talks*)](/talks.html)
-
-  - I will be joining the [University of Amsterdam, Informatics Institute](https://ivi.uva.nl/)
-  as assistant professor in September. 
-
+  - Jan 26, [talk at NAVER Labs Europe](https://europe.naverlabs.com/research/seminars/learning-with-sparse-latent-structure/). [*Learning with Sparse Latent Structure*](talks/20-lpsparsemap-naver.pdf). [(*past talks*)](/talks.html)
 
 # Contact
 You can find me on twitter as
