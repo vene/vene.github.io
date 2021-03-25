@@ -1,12 +1,12 @@
 Title: Teaching
 Slug: teaching
 
-# Teaching
-
-  * *Fall 2019*: Co-instructor, [Deep Structured Learning](https://andre-martins.github.io/pages/deep-structured-learning-ist-fall-2019.html) (IST)
-
 
 ## Past teaching
+
+  * *Spring 2021*: [Algorithms and Data Structures](https://studiegids.uva.nl/xmlpages/page/2020-2021/zoek-vak/vak/79921), bachelor AI , UvA.
+
+  * *Fall 2019*: Co-instructor, [Deep Structured Learning](https://andre-martins.github.io/pages/deep-structured-learning-ist-fall-2019.html) (IST)
 
 ### Tutorials
   * ACL 2019 [Tutorial on Latent Structure Models for NLP](https://deep-spin.github.io/tutorial/) 

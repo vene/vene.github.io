@@ -6,7 +6,19 @@ Status: hidden
 
 <!-- ## Upcoming -->
 
+  - Mar 26, 2021.
+  [*marginalize over sparse distributions when training latent variable models*](talks/21-marginalize.pdf),<br/>
+  IRLab lunch seminars, UvA.
+
 ## Past
+
+  - Feb 1, 2021.
+  [*Learning with Sparse Latent Structure (v8)*](talks/20-lpsparsemap-naver.pdf),<br/>
+  IMS Stuttgart.
+
+  - Jan 26, 2020.
+  [*Learning with Sparse Latent Structure (v8)*](talks/20-lpsparsemap-naver.pdf),<br/>
+  Naver Labs Europe.
 
   - Oct 23, 2020.
   [*Learning with Sparse Latent Structure (v7)*](talks/20-lpsparsemap-dm.pdf),<br/>
@@ -25,7 +37,7 @@ Status: hidden
   [AMLAB UvA](http://amlab.science.uva.nl/).
 
   - Nov 19, 2019<br/>
-  [*Learning with Sparse Latent Structure (v4) *](talks/19-limsi.pdf),<br/>
+  [*Learning with Sparse Latent Structure (v4)*](talks/19-limsi.pdf),<br/>
   LIMSI TLP seminar.
 
   - June 28, 2019<br/>
@@ -34,7 +46,7 @@ Status: hidden
   University of Bucharest.
 
   - Mar 21, 2019<br/>
-  [*Learning with Sparse Latent Structure (v3) *](talks/19-priberam.pdf),<br/>
+  [*Learning with Sparse Latent Structure (v3)*](talks/19-priberam.pdf),<br/>
   [NLP Seminar](https://www.sheffield.ac.uk/dcs/research/groups/nlp#tab04),
   University of Sheffield.
 

@@ -10,7 +10,7 @@ Hi! I'm Vlad [he/him]. I'm an assistant professor in the
 I research machine learning & natural language processing, focusing on sparsity
 and structure.
 
-I'm proud to be a co-advisor of PhD students [Tsvetomila Mihaylova](https://tsvm.github.io/)
+I'm proud to be a co-advisor of PhD candidates [Tsvetomila Mihaylova](https://tsvm.github.io/)
 and [Gonçalo M. Correia](https://goncalomcorreia.github.io/).
 <!--<span style="font-weight: bold">
 I am recruiting one [*PhD candidate in ML for NLP.*](/jobs.html)</span>-->
@@ -24,8 +24,9 @@ I am a [scikit-learn](http://scikit-learn.org) core dev/alum and
 I develop the [polylearn](http://contrib.scikit-learn.org/polylearn)
 library for factorization machines and polynomial networks in Python.
 
+
 # News
-  - Jan 26, [talk at NAVER Labs Europe](https://europe.naverlabs.com/research/seminars/learning-with-sparse-latent-structure/). [*Learning with Sparse Latent Structure*](talks/20-lpsparsemap-naver.pdf). [(*past talks*)](/talks.html)
+  - Mar 26, talk at IRLab UvA: [*marginalize over sparse distributions when training latent variable models*](talks/21-marginalize.pdf). [(*past talks*)](/talks.html)
 
 # Contact
 You can find me on twitter as
