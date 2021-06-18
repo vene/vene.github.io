@@ -12,9 +12,10 @@ I research machine learning & natural language processing, focusing on sparsity
 and structure.
 
 I'm proud to be an advisor of some amazing PhD candidates:
- - [Evgeniia Tokarchuk](https://evgeniia.tokarch.uk/)
- - [Tsvetomila Mihaylova](https://tsvm.github.io/)
- - [Gonçalo M. Correia](https://goncalomcorreia.github.io/).
+
+  - [Evgeniia Tokarchuk](https://evgeniia.tokarch.uk/)
+  - [Tsvetomila Mihaylova](https://tsvm.github.io/)
+  - [Gonçalo M. Correia](https://goncalomcorreia.github.io/).
 <!--<span style="font-weight: bold">
 I am recruiting one [*PhD candidate in ML for NLP.*](/jobs.html)</span>-->
 

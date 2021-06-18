@@ -5,12 +5,13 @@ Status: hidden
 # Talk schedule
 
 <!-- ## Upcoming -->
+  No presentations currently scheduled.
+
+## Past
 
   - Mar 26, 2021.
   [*marginalize over sparse distributions when training latent variable models*](talks/21-marginalize.pdf),<br/>
   IRLab lunch seminars, UvA.
-
-## Past
 
   - Feb 1, 2021.
   [*Learning with Sparse Latent Structure (v8)*](talks/20-lpsparsemap-naver.pdf),<br/>
