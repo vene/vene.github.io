@@ -1,11 +1,13 @@
 Title: Teaching
 Slug: teaching
 
+## Upcoming courses.
+
+  * *Spring 2022*: [Algorithms and Data Structures](https://studiegids.uva.nl/xmlpages/page/2021-2022/zoek-vak/vak/89695), bachelor AI , UvA.
 
 ## Past teaching
 
   * *Spring 2021*: [Algorithms and Data Structures](https://studiegids.uva.nl/xmlpages/page/2020-2021/zoek-vak/vak/79921), bachelor AI , UvA.
-
   * *Fall 2019*: Co-instructor, [Deep Structured Learning](https://andre-martins.github.io/pages/deep-structured-learning-ist-fall-2019.html) (IST)
 
 ### Tutorials

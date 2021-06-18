@@ -6,12 +6,15 @@ save_as: index.html
 <img id="vladpic" class="marginnote" src="vlad-niculae.jpg" alt="Vlad Niculae" />
 
 Hi! I'm Vlad [he/him]. I'm an assistant professor in the
+[Language Technology Lab](https://ltl.science.uva.nl), at the
 [Informatics Institute (IvI), University of Amsterdam](https://ivi.uva.nl/).
 I research machine learning & natural language processing, focusing on sparsity
 and structure.
 
-I'm proud to be a co-advisor of PhD candidates [Tsvetomila Mihaylova](https://tsvm.github.io/)
-and [Gonçalo M. Correia](https://goncalomcorreia.github.io/).
+I'm proud to be an advisor of some amazing PhD candidates:
+ - [Evgeniia Tokarchuk](https://evgeniia.tokarch.uk/)
+ - [Tsvetomila Mihaylova](https://tsvm.github.io/)
+ - [Gonçalo M. Correia](https://goncalomcorreia.github.io/).
 <!--<span style="font-weight: bold">
 I am recruiting one [*PhD candidate in ML for NLP.*](/jobs.html)</span>-->
 

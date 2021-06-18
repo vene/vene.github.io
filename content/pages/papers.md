@@ -8,16 +8,17 @@ NLP papers on the [ACL Anthology](https://aclweb.org/anthology/people/vlad-nicul
 
 ## Selected work with students
 
-
 * Tsvetomila Mihaylova, Vlad Niculae, André F. T. Martins.
 Understanding the mechanics of SPIGOT: Surrogate gradients for latent structure
 learning.
-In: Proc. of *EMNLP 2020* (to appear.)
+In: Proc. of *EMNLP 2020*. 
+\[&nbsp;[anthology](https://www.aclweb.org/anthology/2020.emnlp-main.171/)&nbsp;\]
 
 * Gonçalo M. Correia, Vlad Niculae, Wilker Aziz, André F. T. Martins.
 Efficient Marginalization of Discrete and Structured Latent Variables via Sparsity.
-In: Proc. of *NeurIPS 2020* (to appear.)
+In: Proc. of *NeurIPS 2020*.
 \[&nbsp;[arXiv](https://arxiv.org/abs/2007.01919)&nbsp;\]
+\[&nbsp;[code](https://github.com/deep-spin/sparse-marginalization-lvm)&nbsp;\]
 
 * Gonçalo M. Correia, Vlad Niculae, André F. T. Martins.
 Adaptively sparse transformers.
@@ -65,9 +66,20 @@ In: Proc. of *NeurIPS 2017*.
 
 ## Other publications
 
+* Valentina Zantedeschi, Matt J. Kusner, Vlad Niculae.
+Learning binary trees by argmin differentiation.
+In: Proc. of *ICML 2021* (to appear).
+\[&nbsp;[arXiv preprint](https://arxiv.org/abs/2010.04627)&nbsp;\]
+\[&nbsp;[code](https://github.com/vzantedeschi/LatentTrees)&nbsp;\]
+
+* Pedro Henrique Martins, Vlad Niculae, Zita Marinho, André F. T. Martins.
+Sparse and structured visual attention.
+In: Proc. of *ICIP 2021*, IEEE (to appear).
+\[&nbsp;[arXiv preprint](https://arxiv.org/abs/2002.05556)&nbsp;\]
+
 * André F. T. Martins, Marcos Treviso, António Farinhas, Vlad Niculae, Mário A.
 T. Figueiredo, Pedro M. Q. Aguiar.
-Sparse and Continuous Attention Mechanisms. In: Proc. of *NeurIPS 2020* (to appear.)
+Sparse and Continuous Attention Mechanisms. In: Proc. of *NeurIPS 2020*
 \[&nbsp;[arXiv preprint](https://arxiv.org/abs/2006.07214)&nbsp;\]
 
 * Mathieu Blondel, André F. T. Martins, Vlad Niculae.
