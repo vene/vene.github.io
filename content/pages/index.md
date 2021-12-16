@@ -30,6 +30,7 @@ library for factorization machines and polynomial networks in Python.
 
 
 # News
+  - Dec 16. I was awarded a <strong>NWO Veni</strong> grant from the Dutch Research Council, funding my research for the next three years.
   - Mar 26, talk at IRLab UvA: [*marginalize over sparse distributions when training latent variable models*](talks/21-marginalize.pdf). [(*past talks*)](/talks.html)
 
 # Contact
