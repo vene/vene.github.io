@@ -30,7 +30,6 @@ constrained variable &lt;span class="arithmatex"&gt;\(x\)&lt;/span&gt; with some
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;script src="https://unpkg.com/d3@3/d3.min.js"&gt;&lt;/script&gt;
-
 &lt;style type="text/css"&gt;
 
 #plotdiv {text-align: center;}
@@ -96,7 +95,9 @@ problem as well. If not, the answer can be found by &lt;em&gt;clipping&lt;/em&gt
 &lt;div class="arithmatex"&gt;\[ x^\star = \operatorname{clip}_{[a,b]}(x_\text{unc}^\star)
 \coloneqq \max(a, \min(b, x_\text{unc}^\star))\,.
 \]&lt;/div&gt;
-&lt;details class="note"&gt;&lt;summary&gt;Proof&lt;/summary&gt;&lt;p&gt;We add non-negative dual variables &lt;span class="arithmatex"&gt;\(\mu_a\)&lt;/span&gt; and &lt;span class="arithmatex"&gt;\(\mu_b\)&lt;/span&gt; to handle the inequality
+&lt;details class="note"&gt;
+&lt;summary&gt;Proof&lt;/summary&gt;
+&lt;p&gt;We add non-negative dual variables &lt;span class="arithmatex"&gt;\(\mu_a\)&lt;/span&gt; and &lt;span class="arithmatex"&gt;\(\mu_b\)&lt;/span&gt; to handle the inequality
 constraints &lt;span class="arithmatex"&gt;\(x \geq a\)&lt;/span&gt; and &lt;span class="arithmatex"&gt;\(x \leq b\)&lt;/span&gt;, and write the&amp;nbsp;Lagrangian,&lt;/p&gt;
 &lt;div class="arithmatex"&gt;\[\mathcal{L}(x) = f(x) + \mu_a (a-x) + \mu_b(x-b)\,.\]&lt;/div&gt;
 &lt;p&gt;An optimal &lt;span class="arithmatex"&gt;\(x^\star\)&lt;/span&gt; must satisfiy the original constraints &lt;span class="arithmatex"&gt;\((a \leq x^\star \leq b)\)&lt;/span&gt;
@@ -127,10 +128,11 @@ By assumption, &lt;span class="arithmatex"&gt;\(a-x^\star_\text{unc} &amp;gt; 0\
 &lt;p&gt;The following interactive demo might convince you that this is true. We show the
 1-d function &lt;span class="arithmatex"&gt;\(f(x) = (x - x_0)^2 / 2\)&lt;/span&gt; and its minimizer constrained to &lt;span class="arithmatex"&gt;\([0, 1]\)&lt;/span&gt;.
 Drag the slider to change the location of the unconstrained minimizer &lt;span class="arithmatex"&gt;\(x_0\)&lt;/span&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;div id="plotdiv"&gt;
+&lt;div id="plotdiv"&gt;
   &lt;svg id="onedimplot" preserveAspectRatio="xMinYMin meet" viewBox="0 0 550 150"&gt;&lt;/svg&gt; &lt;br /&gt;
     &lt;input type="range" min="-1" max="2" step=".001" oninput="plot(this.value)" onchange="plot(this.value)"&gt;
-  &lt;/div&gt;&lt;/p&gt;
+  &lt;/div&gt;
+
 &lt;script&gt;
 var w = 500;
 var h = 100;
@@ -257,7 +259,7 @@ as well as a minimal gradient descent loop from&amp;nbsp;scratch.&lt;/p&gt;
 
 &lt;span class="n"&gt;torch&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set_default_dtype&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;torch&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;double&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
-&lt;span class="n"&gt;x0&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;torch&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;tensor&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="mf"&gt;1.5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;span class="n"&gt;x0&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;torch&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;tensor&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="mf"&gt;1.5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;.1&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
 &lt;span class="n"&gt;Q&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;torch&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;tensor&lt;/span&gt;&lt;span class="p"&gt;([[&lt;/span&gt;&lt;span class="mf"&gt;3.0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;2.0&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
                   &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mf"&gt;2.0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;3.0&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt;
 
@@ -267,7 +269,7 @@ as well as a minimal gradient descent loop from&amp;nbsp;scratch.&lt;/p&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mf"&gt;0.5&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;torch&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sum&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;z&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;Qz&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;dim&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
 
-&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;optim_grad&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x_init&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;lr&lt;/span&gt;&lt;span class="o"&gt;=.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;max_iter&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;optim_grad&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x_init&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;lr&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;.1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;max_iter&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;x_init&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;clone&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;requires_grad_&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 
     &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;max_iter&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
@@ -277,7 +279,6 @@ as well as a minimal gradient descent loop from&amp;nbsp;scratch.&lt;/p&gt;
 
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
 
 &lt;p&gt;This procedure quickly converges to &lt;span class="arithmatex"&gt;\(x^\star_\text{unc} = (1.5, .1)\)&lt;/span&gt;.&lt;/p&gt;
 &lt;h1 id="ways-to-deal-with-constraints"&gt;Ways to deal with constraints.&lt;a class="headerlink" href="#ways-to-deal-with-constraints" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
@@ -332,7 +333,7 @@ unconstrained non-convex&amp;nbsp;problem&lt;/p&gt;
 When reparametrizing, &lt;span class="arithmatex"&gt;\(x\)&lt;/span&gt; is no longer a learned parameter, but a function of
 the learned parameter &lt;span class="arithmatex"&gt;\(u\)&lt;/span&gt;. The gradient with respect to &lt;span class="arithmatex"&gt;\(u\)&lt;/span&gt; can be handled
 automatically by PyTorch&amp;nbsp;autodiff:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;optim_reparam&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;u_init&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;lr&lt;/span&gt;&lt;span class="o"&gt;=.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;max_iter&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;optim_reparam&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;u_init&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;lr&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;.1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;max_iter&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="n"&gt;u&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;u_init&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;clone&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;requires_grad_&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 
     &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;max_iter&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
@@ -342,7 +343,6 @@ automatically by PyTorch&amp;nbsp;autodiff:&lt;/p&gt;
 
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;u&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
 
 &lt;p&gt;With a very small learning rate, we get a glimpse into the dynamics of this
 method.&lt;label for="sn-6" class="margin-toggle sidenote-number"&gt;&lt;/label&gt;&lt;input type="checkbox" id="sn-6" class="margin-toggle"/&gt;&lt;span class="sidenote"&gt;As the learning rate goes to zero, we are simulating a
@@ -366,7 +366,9 @@ Since &lt;span class="arithmatex"&gt;\(\sigma\)&lt;/span&gt; acts elementwise, i
 We can thus see that as &lt;span class="arithmatex"&gt;\(x_i\)&lt;/span&gt; approaches &lt;span class="arithmatex"&gt;\(0\)&lt;/span&gt; or &lt;span class="arithmatex"&gt;\(1\)&lt;/span&gt;, the reparametrization rescales the
 gradient &lt;strong&gt;severely&lt;/strong&gt;, bringing the effective step size toward 0.
 It can help to see the concrete values and shapes of these&amp;nbsp;matrices:&lt;/p&gt;
-&lt;details class="note"&gt;&lt;summary&gt;Calculation&lt;/summary&gt;&lt;p&gt;Let&amp;#8217;s consider two points: first far, then close to the optimum.
+&lt;details class="note"&gt;
+&lt;summary&gt;Calculation&lt;/summary&gt;
+&lt;p&gt;Let&amp;#8217;s consider two points: first far, then close to the optimum.
 We use that &lt;span class="arithmatex"&gt;\(\nabla_x f(x) = Q(x - x_0)\)&lt;/span&gt;.
 (Note: all vectors below are column&amp;nbsp;vectors.)&lt;/p&gt;
 &lt;p&gt;&lt;div class="wraptable"&gt;
@@ -427,7 +429,7 @@ built-in optimizers in major frameworks.&lt;/span&gt;
 For box constraints, the projection can be computed efficiently, since
 &lt;span class="arithmatex"&gt;\(\big[\!\operatorname{Proj}_{[0,1]^d}(x)\big]_i = \operatorname{clip}_{[0,1]}(x_i).\)&lt;/span&gt;
 The implementation&amp;nbsp;follows:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;optim_pg&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x_init&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;lr&lt;/span&gt;&lt;span class="o"&gt;=.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;max_iter&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;optim_pg&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x_init&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;lr&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;.1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;max_iter&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;x_init&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;clone&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;requires_grad_&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 
     &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;max_iter&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
@@ -438,7 +440,6 @@ The implementation&amp;nbsp;follows:&lt;/p&gt;
 
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
 
 &lt;p&gt;Let&amp;#8217;s visualize the trajectory. From now on, we will zoom in a bit on the region
 of&amp;nbsp;interest.&lt;/p&gt;
@@ -461,7 +462,9 @@ us outside of &lt;span class="arithmatex"&gt;\(\mathcal{X}\)&lt;/span&gt;, and t
 &lt;div class="arithmatex"&gt;\[ x^{(t+1)} \leftarrow \argmin_{x \in \mathcal{X}}  \DP{\nabla f(x^{(t)})}{x} + 
 {\frac{1}{2\alpha_t}\|x - x^{(t)}\|^2}\,.
 \]&lt;/div&gt;
-&lt;details class="note"&gt;&lt;summary&gt;Explanation&lt;/summary&gt;&lt;p&gt;Why does this update make sense, and where does it come from? We are trying to
+&lt;details class="note"&gt;
+&lt;summary&gt;Explanation&lt;/summary&gt;
+&lt;p&gt;Why does this update make sense, and where does it come from? We are trying to
 minimize a function &lt;span class="arithmatex"&gt;\(f(x)\)&lt;/span&gt;, but we don&amp;#8217;t know what it looks like globally: we only
 have access to its value &lt;span class="arithmatex"&gt;\(f(x)\)&lt;/span&gt; and its gradient &lt;span class="arithmatex"&gt;\(\nabla f(x)\)&lt;/span&gt; at points &lt;span class="arithmatex"&gt;\(x\)&lt;/span&gt;
 that we may query one at a time. At any point &lt;span class="arithmatex"&gt;\(x_0\)&lt;/span&gt;,
@@ -484,7 +487,9 @@ approximation is not too bad. Clearing up the constant terms from inside the
 &lt;p&gt;Rearranging the terms reveals exactly the projected gradient&amp;nbsp;update,&lt;/p&gt;
 &lt;div class="arithmatex"&gt;\[ x^{(t+1)} \leftarrow \operatorname{Proj}_{\mathcal{X}}\big(
 x^{(t)} - \alpha_t \nabla f(x^{(t)})\big)\,.\]&lt;/div&gt;
-&lt;details class="note"&gt;&lt;summary&gt;Derivation&lt;/summary&gt;&lt;div class="arithmatex"&gt;\[
+&lt;details class="note"&gt;
+&lt;summary&gt;Derivation&lt;/summary&gt;
+&lt;div class="arithmatex"&gt;\[
 \begin{aligned}
  &amp;amp; \argmin_{x \in \mathcal{X}} \DP{x}{\nabla f(x^{(t)})} + \frac{1}{2\alpha_t} \|x-x^{(t)}\|^2 \\
 =&amp;amp; \argmin_{x \in \mathcal{X}} \DP{x}{\nabla f(x^{(t)})} + \frac{1}{2\alpha_t} \|x\|^2 - \frac{1}{\alpha_t} \DP{x}{x^{(t)}} \\
@@ -639,7 +644,9 @@ a convenient algorithm is natural gradient,&lt;label for="sn-14" class="margin-t
 &lt;em&gt;Neural computation 10.2&lt;/em&gt;, 251-276.&lt;/span&gt;
 which takes the&amp;nbsp;form&lt;/p&gt;
 &lt;div class="arithmatex"&gt;\[ u^{(t+1)} \leftarrow u^{(t)} - \alpha_t [G(u)]^{-1} \nabla \tilde{f}(u^{(t)})\,. \]&lt;/div&gt;
-&lt;details class="note"&gt;&lt;summary&gt;Derivation&lt;/summary&gt;&lt;p&gt;We follow the same steps as for gradient descent, but we use the induced distance
+&lt;details class="note"&gt;
+&lt;summary&gt;Derivation&lt;/summary&gt;
+&lt;p&gt;We follow the same steps as for gradient descent, but we use the induced distance
 &lt;span class="arithmatex"&gt;\(d_{u^{(t)}}\)&lt;/span&gt; to find an update direction. We must solve the&amp;nbsp;problem&lt;/p&gt;
 &lt;div class="arithmatex"&gt;\[ \argmin_{u\in\mathcal{U}} \DP{u}{\nabla \tilde{f}(u^{(t)})} + \frac{1}{2\alpha_t} 
 {(u - u^{(t)})^\top G(u^{(t)}) (u - u^{(t)})}\, \]&lt;/div&gt;
@@ -662,7 +669,7 @@ means we can get a geometry-aware flavor of the
 &lt;p&gt;This algorithm produces the exact same iterates as mirror descent, but &amp;#8212; since
 it maintains iterates in dual space &amp;#8212; is more numerically stable.
 A first attempt at implementing natural gradient&amp;nbsp;is:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;optim_rep_natural&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;u_init&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;lr&lt;/span&gt;&lt;span class="o"&gt;=.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;max_iter&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;optim_rep_natural&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;u_init&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;lr&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;.1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;max_iter&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
 
     &lt;span class="n"&gt;u&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;u_init&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;clone&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;requires_grad_&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 
@@ -675,7 +682,6 @@ A first attempt at implementing natural gradient&amp;nbsp;is:&lt;/p&gt;
 
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;u&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
 
 &lt;p&gt;and we can visually check that we get exactly the same trajectory as mirror&amp;nbsp;descent.&lt;/p&gt;
 &lt;p&gt;&lt;img alt="Optimization trajectories. Natural gradient matches exactly mirror
@@ -715,7 +721,7 @@ Estimating or Propagating Gradients Through Stochastic Neurons for Conditional C
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;SigmoidStraightThrough&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;apply&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;u&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
 
-&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;optim_rep_natural_st&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;u_init&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;lr&lt;/span&gt;&lt;span class="o"&gt;=.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;max_iter&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;optim_rep_natural_st&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;u_init&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;lr&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;.1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;max_iter&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
 
     &lt;span class="n"&gt;u&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;u_init&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;clone&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;requires_grad_&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 
@@ -728,7 +734,6 @@ Estimating or Propagating Gradients Through Stochastic Neurons for Conditional C
 
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;u&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
 
 &lt;p&gt;With this &lt;code&gt;sigmoid_straight_through&lt;/code&gt; nonlinearity, we can now use mirror descent
 / natural gradient to learn constrained parameters without any changes to the
@@ -852,7 +857,6 @@ as a function of &lt;span class="arithmatex"&gt;\(a\)&lt;/span&gt; and &lt;span 
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-
 &lt;p&gt;Now, let&amp;#8217;s define a grid of points. This is more or less the same
 as for making a &lt;a href="https://matplotlib.org/examples/mplot3d/surface3d_demo.html"&gt;3-d surface plot in
 matplotlib&lt;/a&gt;.&lt;/p&gt;
@@ -878,7 +882,6 @@ matplotlib&lt;/a&gt;.&lt;/p&gt;
 &lt;span class="n"&gt;points&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;column_stack&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ravel&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt; &lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ravel&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt; &lt;span class="n"&gt;Z&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ravel&lt;/span&gt;&lt;span class="p"&gt;()])&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-
 &lt;p&gt;The easiest way to copy data between Python and &lt;span class="caps"&gt;JS&lt;/span&gt; is using json.
 Indeed, we can very easily generate a valid &lt;span class="caps"&gt;JS&lt;/span&gt;&amp;nbsp;file:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# generate.py (part 3)&lt;/span&gt;
@@ -901,7 +904,6 @@ Indeed, we can very easily generate a valid &lt;span class="caps"&gt;JS&lt;/span
 &lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;data.js&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;w&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
     &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;template&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
 
 &lt;p&gt;Run this script to obtain a &lt;code&gt;data.js&lt;/code&gt; file describing the point cloud that we
 want to&amp;nbsp;visualize.&lt;/p&gt;
@@ -929,33 +931,32 @@ used. Feel free to try newer versions; new features may&amp;nbsp;appear!&lt;/spa
 &lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;html&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-
 &lt;p&gt;Now it&amp;#8217;s time to do the heavy lifting in &lt;code&gt;plot-glb.js&lt;/code&gt;.
 First thing we must do is construct a three.js scene. This consists of a
 &lt;em&gt;Mesh&lt;/em&gt;, which in turn is described by a &lt;em&gt;Material&lt;/em&gt; and a 
 &lt;em&gt;Geometry&lt;/em&gt; (a set of vertices and faces). The &lt;em&gt;Material&lt;/em&gt; is easy to pick; the
 tricky part is the &lt;em&gt;Geometry&lt;/em&gt;, which we will construct&amp;nbsp;manually.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="nx"&gt;makeScene&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;geometry&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;THREE&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Geometry&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt; 
-    &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;color&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;THREE&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Color&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;tomato&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;geometry&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="ow"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;THREE&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Geometry&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt; 
+    &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;color&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="ow"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;THREE&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Color&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;tomato&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 
     &lt;span class="c1"&gt;// make a long sequence containing our 3-d points&lt;/span&gt;
     &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;nverts&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;n&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="nx"&gt;m&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;k&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nx"&gt;k&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="nx"&gt;nverts&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="nx"&gt;k&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-        &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;newvert&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;THREE&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Vector3&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;k&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;y&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;k&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;z&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;k&lt;/span&gt;&lt;span class="p"&gt;]);&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;k&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mf"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nx"&gt;k&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="nx"&gt;nverts&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="nx"&gt;k&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;newvert&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="ow"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;THREE&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Vector3&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;k&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;y&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;k&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;z&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;k&lt;/span&gt;&lt;span class="p"&gt;]);&lt;/span&gt;
         &lt;span class="nx"&gt;geometry&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;vertices&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;push&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;newvert&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
     &lt;span class="p"&gt;}&lt;/span&gt;
 
 
     &lt;span class="c1"&gt;// build triangular faces (top and bottom) between adjacent points&lt;/span&gt;
-    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;j&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nx"&gt;j&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="nx"&gt;m&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nx"&gt;j&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nx"&gt;i&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="nx"&gt;n&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; 
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;j&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mf"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nx"&gt;j&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="nx"&gt;m&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mf"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nx"&gt;j&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mf"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nx"&gt;i&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="nx"&gt;n&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mf"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; 
             &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;n0&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;j&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="nx"&gt;n&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-            &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;n1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;n0&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-            &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;n2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;j&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="nx"&gt;n&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;i&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-            &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;n3&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;n2&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-            &lt;span class="nx"&gt;face1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;THREE&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Face3&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;n0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;n1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;n2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kc"&gt;undefined&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;color&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-            &lt;span class="nx"&gt;face2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;THREE&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Face3&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;n2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;n3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;n0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kc"&gt;undefined&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;color&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+            &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;n1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;n0&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mf"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+            &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;n2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;j&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="nx"&gt;n&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;i&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mf"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+            &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;n3&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;n2&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mf"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+            &lt;span class="nx"&gt;face1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="ow"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;THREE&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Face3&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;n0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;n1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;n2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kc"&gt;undefined&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;color&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+            &lt;span class="nx"&gt;face2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="ow"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;THREE&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Face3&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;n2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;n3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;n0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kc"&gt;undefined&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;color&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
             &lt;span class="nx"&gt;geometry&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;faces&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;push&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;face1&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
             &lt;span class="nx"&gt;geometry&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;faces&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;push&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;face2&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
         &lt;span class="p"&gt;}&lt;/span&gt;
@@ -966,19 +967,18 @@ tricky part is the &lt;em&gt;Geometry&lt;/em&gt;, which we will construct&amp;nb
     &lt;span class="nx"&gt;geometry&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;computeVertexNormals&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
 
     &lt;span class="c1"&gt;// Give it a pretty material&lt;/span&gt;
-    &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;material&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;THREE&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;MeshLambertMaterial&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;material&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="ow"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;THREE&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;MeshLambertMaterial&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
         &lt;span class="nx"&gt;side&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;THREE&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;DoubleSide&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
         &lt;span class="nx"&gt;color&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mh"&gt;0xffffff&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
         &lt;span class="nx"&gt;vertexColors&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;THREE&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;FaceColors&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
         &lt;span class="nx"&gt;emissive&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mh"&gt;0x111111&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
     &lt;span class="p"&gt;});&lt;/span&gt;
 
-    &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;scene&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;THREE&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Scene&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
-    &lt;span class="nx"&gt;scene&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;THREE&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Mesh&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="nx"&gt;geometry&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;material&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;scene&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="ow"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;THREE&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Scene&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="nx"&gt;scene&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="ow"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;THREE&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Mesh&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="nx"&gt;geometry&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;material&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nx"&gt;scene&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
 
 &lt;p&gt;Normally, the next step would be to add
 &lt;a href="https://threejs.org/docs/index.html#api/cameras/PerspectiveCamera"&gt;cameras&lt;/a&gt;
@@ -993,20 +993,19 @@ handle with a function that modifies our&amp;nbsp;link: &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;// plot-glb.js (part 2)&lt;/span&gt;
 
 &lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="nx"&gt;saveArrayBuffer&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="nx"&gt;buffer&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;filename&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;blob&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;Blob&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt; &lt;span class="nx"&gt;buffer&lt;/span&gt; &lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;type&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;application/octet-stream&amp;#39;&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;blob&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="ow"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;Blob&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt; &lt;span class="nx"&gt;buffer&lt;/span&gt; &lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;type&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;application/octet-stream&amp;#39;&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;
     &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;link&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;document&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;getElementById&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;download&amp;#39;&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;
     &lt;span class="nx"&gt;link&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;href&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;URL&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;createObjectURL&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="nx"&gt;blob&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;
     &lt;span class="nx"&gt;link&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;download&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;filename&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-
 &lt;p&gt;Finally, we use the &lt;code&gt;GLTFExporter&lt;/code&gt; to generate a Facebook-compatible 3-d&amp;nbsp;model.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;// plot-glb.js (part 3)&lt;/span&gt;
 
 &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;scene&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;makeScene&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
 
-&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;exporter&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;THREE&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;GLTFExporter&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;exporter&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="ow"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;THREE&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;GLTFExporter&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
 &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;options&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
     &lt;span class="nx"&gt;trs&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
     &lt;span class="nx"&gt;onlyVisible&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
@@ -1020,7 +1019,6 @@ handle with a function that modifies our&amp;nbsp;link: &lt;/p&gt;
     &lt;span class="nx"&gt;saveArrayBuffer&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="nx"&gt;glb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;scene.glb&amp;#39;&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;
 &lt;span class="p"&gt;},&lt;/span&gt; &lt;span class="nx"&gt;options&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
 
 &lt;p&gt;Now, if you open &lt;code&gt;plot-glb.html&lt;/code&gt; and click the Download link, you should get a
 &lt;code&gt;.glb&lt;/code&gt; file that can be drag-and-dropped onto a new Facebook&amp;nbsp;post.&lt;/p&gt;
@@ -1063,7 +1061,6 @@ pleasing&amp;nbsp;angle! &lt;/p&gt;
 &lt;span class="n"&gt;points&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;rotate3d_x&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;points&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pi&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="mf"&gt;2.5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-
 &lt;p&gt;Above, we used &lt;em&gt;rotation matrices&lt;/em&gt; to rotate the point cloud around.&lt;label for="sn-rotation" class="margin-toggle sidenote-number"&gt;&lt;/label&gt;&lt;input type="checkbox" id="sn-rotation" class="margin-toggle"/&gt;&lt;span class="sidenote"&gt;Rotating a 3-d point is equivalent to multiplying by a
 certain orthogonal matrix. &lt;a href="https://en.wikipedia.org/wiki/Rotation_matrix#Basic_rotations"&gt;The wikipedia article&lt;/a&gt; lists formulas for
 rotation matrices against the canonical axes &lt;span class="arithmatex"&gt;\(x\)&lt;/span&gt;, &lt;span class="arithmatex"&gt;\(y\)&lt;/span&gt;, &lt;span class="arithmatex"&gt;\(z\)&lt;/span&gt;. &lt;/span&gt;&lt;/p&gt;
@@ -1074,7 +1071,8 @@ bring you many&amp;nbsp;likes!&lt;/p&gt;
 &lt;p&gt;&lt;iframe
 src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fvlad.niculae%2Fposts%2F2040960132582962&amp;width=350&amp;show_text=true&amp;height=535"
 width="350" height="535" style="border:none;overflow:hidden" scrolling="no"
-frameborder="0" allowTransparency="true" allow="encrypted-media"&gt;&lt;/iframe&gt;&lt;/p&gt;
+frameborder="0" allowTransparency="true" allow="encrypted-media"&gt;&lt;/iframe&gt;
+&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;&lt;a href="https://github.com/vene/threedposts"&gt;Get code for this&amp;nbsp;post.&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;</content><category term="presentation"></category></entry><entry><title>Winning Arguments and Attitude Change on Reddit</title><link href="//vene.ro/blog/winning-arguments-attitude-change-reddit-cmv.html" rel="alternate"></link><published>2016-03-04T12:00:00+01:00</published><updated>2016-03-04T12:00:00+01:00</updated><author><name>vene &amp; Chenhao Tan</name></author><id>tag:vene.ro,2016-03-04:/blog/winning-arguments-attitude-change-reddit-cmv.html</id><summary type="html">&lt;p&gt;One of the many reasons why people are beautiful and fascinating is the way we change.  I get reminded of how much I have changed everytime I see a photo of myself from high school, and this always triggers memories of how my opinions and attitudes have changed over the years. Some of the beliefs I held most strongly ended up being abandoned completely, while others have not changed much.&amp;nbsp;&amp;#8230;&lt;/p&gt;</summary><content type="html">&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -3435,18 +3433,16 @@ alas, incompatible with recent versions of SocketIO. According to the
 community, the most stable release is SocketIO&amp;nbsp;0.9.16.&lt;/p&gt;
 &lt;h2 id="the-problem-in-a-nutshell"&gt;The problem in a nutshell&lt;a class="headerlink" href="#the-problem-in-a-nutshell" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;When debugging my app locally, I&amp;#8217;d connect with something&amp;nbsp;like&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;var socket = io.connect(&lt;/span&gt;
-&lt;span class="err"&gt;    &amp;#39;http://&amp;#39; + document.domain + &amp;#39;:&amp;#39; + location.port + &amp;#39;/chat&amp;#39;&lt;/span&gt;
-&lt;span class="err"&gt;);&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;var&lt;/span&gt; &lt;span class="n"&gt;socket&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;io&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;connect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="s1"&gt;&amp;#39;http://&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;document&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;domain&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;:&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;location&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;port&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;/chat&amp;#39;&lt;/span&gt;
+&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
 
 &lt;p&gt;When deploying on OpenShift, the &lt;code&gt;location.port&lt;/code&gt; is now different from the
 WebSocket port, so I used a Flask config that determines server-side where it&amp;#8217;s
 running&amp;nbsp;from:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="x"&gt;var wsport = &amp;#39;&lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt; &lt;span class="nv"&gt;config&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;WEBSOCKET_PORT&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="x"&gt;&amp;#39;;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;var&lt;/span&gt; &lt;span class="n"&gt;wsport&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;{{ config[&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;WEBSOCKET_PORT&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;] }}&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
 
 &lt;p&gt;The app now runs great both when debugging locally or on OpenShift, except if
 for some reason the WebSocket connection fails (either if the browser is old
@@ -3466,16 +3462,15 @@ all other traffic over the default port.  This works like a&amp;nbsp;charm!&lt;/
 &lt;p&gt;&lt;a href="https://gist.github.com/vene/c0657d854ae74a4511d2"&gt;My updated SocketIO client is available as a
 gist&lt;/a&gt;, and the client-side
 connection code looks like&amp;nbsp;this:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;var socket = io.connect(&lt;/span&gt;
-&lt;span class="err"&gt;    &amp;#39;http://&amp;#39; + document.domain + &amp;#39;/chat&amp;#39;,&lt;/span&gt;
-&lt;span class="err"&gt;    {&lt;/span&gt;
-&lt;span class="err"&gt;        port: location.port,&lt;/span&gt;
-&lt;span class="err"&gt;        wsport: wsport || location.port,&lt;/span&gt;
-&lt;span class="err"&gt;        &amp;quot;connect timeout&amp;quot;: 5000&lt;/span&gt;
-&lt;span class="err"&gt;    }&lt;/span&gt;
-&lt;span class="err"&gt;);&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;var&lt;/span&gt; &lt;span class="n"&gt;socket&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;io&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;connect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="s1"&gt;&amp;#39;http://&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;document&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;domain&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;/chat&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;port&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;location&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;port&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="n"&gt;wsport&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;wsport&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="n"&gt;location&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;port&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s2"&gt;&amp;quot;connect timeout&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;5000&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
 
 &lt;p&gt;I had to reduce the connection timeout, for a better user experience.  I&amp;#8217;m way
 out of my comfort zone here, so in case I missed a better solution, do let me&amp;nbsp;know!&lt;/p&gt;</content><category term="flask"></category><category term="flask-socketio"></category><category term="flask"></category><category term="socketio"></category><category term="openshift"></category></entry><entry><title>Kemeny-Young Optimal Rank Aggregation in Python</title><link href="//vene.ro/blog/kemeny-young-optimal-rank-aggregation-in-python.html" rel="alternate"></link><published>2014-01-22T18:00:00+01:00</published><updated>2014-01-22T18:00:00+01:00</updated><author><name>vene</name></author><id>tag:vene.ro,2014-01-22:/blog/kemeny-young-optimal-rank-aggregation-in-python.html</id><summary type="html">&lt;p&gt;Rank aggregation is a problem with many important applications and naive approaches to it go wrong in subtle ways. Let&amp;#8217;s say that your national Quidditch league is dominated by five major wizard sports newspapers. Yes, the ones with moving images and everything.  Every week after the games, each of them publishes a ranking of the star players.  For now, let&amp;#8217;s suppose that the set of players under investigation is always the same, as the problem becomes a bit more complicated otherwise.&amp;nbsp;&amp;#8230;&lt;/p&gt;</summary><content type="html">&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
@@ -4626,7 +4621,7 @@ subsamples to estimate the frequencies, but hopefully it will still be
 interesting. The way we are estimating the counts for the &lt;span class="caps"&gt;OEC&lt;/span&gt; is as
 follows: take, for instance, *break a leg*. It was found 70 times, and
 out of a sample of 16, 10 were literal. The expected number of idiomatic
-uses is therefore:
+uses is therefore:  
 
 &lt;center&gt;
 [latex]n = &amp;#92;left ( 1 - &amp;#92;frac{10}{16} &amp;#92;right ) &amp;#92;cdot 70 =
@@ -4638,7 +4633,6 @@ Repeating this computation and skipping a ton of steps leads to the
 following&amp;nbsp;rankings:
 
 &lt;/p&gt;
-
 &lt;div style="float: left; margin-left: 5em;"&gt;
 **In the British National&amp;nbsp;Corpus:**
 
@@ -4655,7 +4649,6 @@ following&amp;nbsp;rankings:
 10. Hitting the books
 
 &lt;/div&gt;
-
 &lt;div style="float: right; margin-right: 5em;"&gt;
 **In the Oxford English&amp;nbsp;Corpus:**
 
@@ -4714,9 +4707,7 @@ approach for the rank aggregation problem&lt;/a&gt;. In: Theoretical Computer
 Science, Volume 359 Issue 1, 14 August 2006. Pages 455 - 461.&lt;br /&gt;
 [&lt;span id="f4"&gt;4&lt;/span&gt;] Liviu P. Dinu, [On the Classification and
 Aggregation of Hierarchies with Different Constitutive Elements][].
-Fundam. Inform. 55(1): 39-50&amp;nbsp;(2003)&lt;/p&gt;
-&lt;p&gt;[On the Classification and Aggregation of Hierarchies with Different
-  Constitutive Elements]:&amp;nbsp;http://dl.acm.org/citation.cfm?id=937465&lt;/p&gt;</content><category term="nlp"></category><category term="bnc"></category><category term="british national corpus"></category><category term="corpus"></category><category term="fixed expression"></category><category term="fixed phrase"></category><category term="idioms"></category><category term="oec"></category><category term="oxford english corpus"></category><category term="corpus linguistics"></category><category term="nlp"></category></entry><entry><title>Scikit-learn-speed: An overview on the final day</title><link href="//vene.ro/blog/scikit-learn-speed-an-overview-on-the-final-day.html" rel="alternate"></link><published>2012-08-20T02:44:00+02:00</published><updated>2012-08-20T02:44:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2012-08-20:/blog/scikit-learn-speed-an-overview-on-the-final-day.html</id><summary type="html">&lt;p&gt;This summer, I was granted the project called &lt;em&gt;scikit-learn-speed&lt;/em&gt;,
+Fundam. Inform. 55(1): 39-50&amp;nbsp;(2003)&lt;/p&gt;</content><category term="nlp"></category><category term="bnc"></category><category term="british national corpus"></category><category term="corpus"></category><category term="fixed expression"></category><category term="fixed phrase"></category><category term="idioms"></category><category term="oec"></category><category term="oxford english corpus"></category><category term="corpus linguistics"></category><category term="nlp"></category></entry><entry><title>Scikit-learn-speed: An overview on the final day</title><link href="//vene.ro/blog/scikit-learn-speed-an-overview-on-the-final-day.html" rel="alternate"></link><published>2012-08-20T02:44:00+02:00</published><updated>2012-08-20T02:44:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2012-08-20:/blog/scikit-learn-speed-an-overview-on-the-final-day.html</id><summary type="html">&lt;p&gt;This summer, I was granted the project called &lt;em&gt;scikit-learn-speed&lt;/em&gt;,
 consisting of developing a benchmarking platform for &lt;em&gt;scikit-learn&lt;/em&gt; and
 using it to find potential speedups, and in the end, make the library go
 faster wherever I&amp;nbsp;can.&lt;/p&gt;
@@ -4860,7 +4851,7 @@ stretched beyond the boundary of the &lt;em&gt;scikit-learn&lt;/em&gt;.&lt;/p&gt
 with its applications, since high school. The inverse of a matrix
 $latex A$, if it exists, is the matrix $latex A\^{-1}$ such that
 $latex &lt;span class="caps"&gt;AA&lt;/span&gt;\^{-1} = A\^{-1}A = I_n$. Based on the requirement that the
-left and …&lt;/p&gt;</summary><content type="html">&lt;p&gt;The matrix inverse is a cornerstone of linear algebra, taught, along
+left …&lt;/p&gt;</summary><content type="html">&lt;p&gt;The matrix inverse is a cornerstone of linear algebra, taught, along
 with its applications, since high school. The inverse of a matrix
 $latex A$, if it exists, is the matrix $latex A\^{-1}$ such that
 $latex &lt;span class="caps"&gt;AA&lt;/span&gt;\^{-1} = A\^{-1}A = I_n$. Based on the requirement that the
@@ -5233,7 +5224,7 @@ historical wall of fame or&amp;nbsp;shame).&lt;/p&gt;</content><category term="s
 &lt;p&gt;This was accomplished by building on what I described in my recent
 posts, specifically the extensions to Fabian&amp;#8217;s [memory_profiler][] that
 you can find in &lt;a href="https://github.com/vene/memory_profiler"&gt;my fork&lt;/a&gt;, but they will be merged upstream soon. The
-key element is the &lt;code&gt;%magic_memit&lt;/code&gt; function whose …&lt;/p&gt;</summary><content type="html">&lt;p&gt;The &lt;a href="https://github.com/vene/scikit-learn-speed"&gt;scikit-learn-speed project&lt;/a&gt; now has memory usage&amp;nbsp;benchmarking!&lt;/p&gt;
+key element is the &lt;code&gt;%magic_memit …&lt;/code&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;The &lt;a href="https://github.com/vene/scikit-learn-speed"&gt;scikit-learn-speed project&lt;/a&gt; now has memory usage&amp;nbsp;benchmarking!&lt;/p&gt;
 &lt;p&gt;This was accomplished by building on what I described in my recent
 posts, specifically the extensions to Fabian&amp;#8217;s [memory_profiler][] that
 you can find in &lt;a href="https://github.com/vene/memory_profiler"&gt;my fork&lt;/a&gt;, but they will be merged upstream soon. The
@@ -5253,10 +5244,7 @@ laptop, which runs &lt;span class="caps"&gt;OS&lt;/span&gt; X Lion, so, under th
 bug&lt;/a&gt;, I hardcoded the &amp;#8216;&lt;code&gt;-i&lt;/code&gt;&lt;span class="quo"&gt;&amp;#8216;&lt;/span&gt; so the memory benchmarks are not
 realistic. Also, the y-range should probably be forced wider, because
 the plots look erratic, showing the very small noise at a&amp;nbsp;large-scale.&lt;/p&gt;
-&lt;p&gt;[A screenshot showing generated output from the scikit-learn-speed
-  project, illustrating memory usage benchmarking.]: http://localhost:8001/wp-content/uploads/2012/07/vbench1.png
-    &amp;#8220;Memory benchmarking in scikit-learn-speed powered by vbench.&amp;#8221;
-  [![A screenshot showing generated output from the scikit-learn-speed
+&lt;p&gt;[![A screenshot showing generated output from the scikit-learn-speed
   project, illustrating memory usage benchmarking.][]]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2012/07/vbench1.png&lt;/p&gt;</content><category term="benchmarking"></category><category term="memit"></category><category term="memory"></category><category term="vbench"></category><category term="python"></category><category term="scikit-learn"></category></entry><entry><title>On why my %memit fails on OSX</title><link href="//vene.ro/blog/on-why-my-memit-fails-on-osx.html" rel="alternate"></link><published>2012-07-04T12:49:00+02:00</published><updated>2012-07-04T12:49:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2012-07-04:/blog/on-why-my-memit-fails-on-osx.html</id><summary type="html">&lt;p&gt;In my &lt;a href="http://localhost:8001/2012/07/02/more-on-memory-benchmarking/" title="More on memory benchmarking"&gt;last post&lt;/a&gt; I mentioned that I&amp;#8217;m not satisfied with the current
 state of &lt;code&gt;%memit&lt;/code&gt;, because some more complicated numerical function
 calls make it crash. I will start this post with a reminder of a pretty
@@ -5349,14 +5337,10 @@ numerical applications. For that reason, I have made &lt;code&gt;%memit&lt;/code
 user when all subprocesses fail, and to suggest the usage of the &lt;code&gt;-i&lt;/code&gt;
 flag.&lt;/p&gt;
 &lt;p&gt;I think that, with this update, &lt;code&gt;%memit&lt;/code&gt; is flexible and usable enough
-for actual use, and therefore for merging into&amp;nbsp;memory_profiler.&lt;/p&gt;
-&lt;p&gt;[On MacOS X (10.7 but maybe more), after forking a new process, there
-  is a segfault in Grand Central Dispatch on the &lt;span class="caps"&gt;BLAS&lt;/span&gt; &lt;span class="caps"&gt;DGEMM&lt;/span&gt; function
-  from Accelerate.]:&amp;nbsp;https://gist.github.com/2027412&lt;/p&gt;</content><category term="benchmarking"></category><category term="IPython"></category><category term="magic"></category><category term="memit"></category><category term="mprun"></category><category term="benchmarking"></category><category term="python"></category></entry><entry><title>More on memory benchmarking</title><link href="//vene.ro/blog/more-on-memory-benchmarking.html" rel="alternate"></link><published>2012-07-02T11:27:00+02:00</published><updated>2012-07-02T11:27:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2012-07-02:/blog/more-on-memory-benchmarking.html</id><summary type="html">&lt;p&gt;Following up on my task to make it easier to benchmark memory usage in
+for actual use, and therefore for merging into&amp;nbsp;memory_profiler.&lt;/p&gt;</content><category term="benchmarking"></category><category term="IPython"></category><category term="magic"></category><category term="memit"></category><category term="mprun"></category><category term="benchmarking"></category><category term="python"></category></entry><entry><title>More on memory benchmarking</title><link href="//vene.ro/blog/more-on-memory-benchmarking.html" rel="alternate"></link><published>2012-07-02T11:27:00+02:00</published><updated>2012-07-02T11:27:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2012-07-02:/blog/more-on-memory-benchmarking.html</id><summary type="html">&lt;p&gt;Following up on my task to make it easier to benchmark memory usage in
 Python, I updated Fabian&amp;#8217;s [memory_profiler][] to include a couple of
 useful IPython magics. While in my &lt;a href="http://localhost:8001/2012/06/30/quick-memory-usage-benchmarking-in-ipython/" title="Quick memory usage benchmarking in IPython"&gt;last post&lt;/a&gt;, I used the new IPython
-0.13 syntax for defining magics, this time I used the
-backwards-compatible …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Following up on my task to make it easier to benchmark memory usage in
+0.13 syntax for defining magics, this time I used the …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Following up on my task to make it easier to benchmark memory usage in
 Python, I updated Fabian&amp;#8217;s [memory_profiler][] to include a couple of
 useful IPython magics. While in my &lt;a href="http://localhost:8001/2012/06/30/quick-memory-usage-benchmarking-in-ipython/" title="Quick memory usage benchmarking in IPython"&gt;last post&lt;/a&gt;, I used the new IPython
 0.13 syntax for defining magics, this time I used the
@@ -5582,7 +5566,7 @@ deal but it could save somebody precious&amp;nbsp;minutes.&lt;/p&gt;
 string. The constructor&amp;#8217;s signature&amp;nbsp;is:  &lt;/p&gt;
 &lt;p&gt;&lt;code&gt;Benchmark(self, code, setup, ncalls=None, repeat=3, cleanup=None, name=None, description=None, start_date=None, logy=False)&lt;/code&gt;.&lt;/p&gt;
 &lt;h2 id="why-generate-benchmarks-dynamically"&gt;Why generate benchmarks dynamically?&lt;a class="headerlink" href="#why-generate-benchmarks-dynamically" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;For most &lt;code&gt;scikit-learn&lt;/code&gt; purposes, the &lt;code&gt;code&lt;/code&gt; string will be …&lt;/p&gt;</summary><content type="html">&lt;p&gt;To construct a &lt;code&gt;vbench&lt;/code&gt; benchmark you need a setup string and a code
+&lt;p&gt;For most &lt;code&gt;scikit-learn&lt;/code&gt; purposes, the &lt;code&gt;code&lt;/code&gt; string will …&lt;/p&gt;</summary><content type="html">&lt;p&gt;To construct a &lt;code&gt;vbench&lt;/code&gt; benchmark you need a setup string and a code
 string. The constructor&amp;#8217;s signature&amp;nbsp;is:  &lt;/p&gt;
 &lt;p&gt;&lt;code&gt;Benchmark(self, code, setup, ncalls=None, repeat=3, cleanup=None, name=None, description=None, start_date=None, logy=False)&lt;/code&gt;.&lt;/p&gt;
 &lt;h2 id="why-generate-benchmarks-dynamically"&gt;Why generate benchmarks dynamically?&lt;a class="headerlink" href="#why-generate-benchmarks-dynamically" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
@@ -5737,7 +5721,7 @@ the outlier and on two other points. For [latex]\epsilon=0[/latex], you
 can see that every point except a non-outlier is highlighted. This is
 actually the perfect solution but very&amp;nbsp;dense.&lt;/p&gt;
 &lt;p&gt;[&lt;img alt="Support vector regression on Anscombe's third dataset with no
-noise" src="" /&gt;][]&lt;/p&gt;
+noise" src="http://localhost:8001/wp-content/uploads/2012/05/svr.gif" title="SVR on Anscombe's dataset with no noise" /&gt;][]&lt;/p&gt;
 &lt;p&gt;Every frame displays the global mean squared error and the true mean
 squared error, &lt;em&gt;i.e.&lt;/em&gt; over the inlying points. If the epsilon size is
 well chosen, &lt;span class="caps"&gt;SVR&lt;/span&gt; can perform robustly with a sparse solution. Since our
@@ -5750,13 +5734,8 @@ zero, the solution is again very dense, very&amp;nbsp;non-parametric.&lt;/p&gt;
 noise" src="http://localhost:8001/wp-content/uploads/2012/05/svr_noise.gif" title="SVR on Anscombe's dataset with noise" /&gt;][]&lt;/p&gt;
 &lt;p&gt;Here is the code you can use to play around with&amp;nbsp;this.&lt;/p&gt;
 &lt;p&gt;[gist&amp;nbsp;id=2815589]&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c"&gt;http://localhost:8001/wp-content/uploads/2012/05/svr.gif&lt;/span&gt;
-&lt;span class="err"&gt;&amp;quot;SVR on Anscombe&amp;#39;s dataset with no noise&amp;quot;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
 &lt;p&gt;[&lt;img alt="Support vector regression on Anscombe's third dataset with no
-  noise" src="" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2012/05/svr.gif&lt;/p&gt;
+  noise" src="http://localhost:8001/wp-content/uploads/2012/05/svr.gif" title="SVR on Anscombe's dataset with no noise" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2012/05/svr.gif&lt;/p&gt;
 &lt;p&gt;[&lt;img alt="Support vector regression on Anscombe's third dataset with
   noise" src="http://localhost:8001/wp-content/uploads/2012/05/svr_noise.gif" title="SVR on Anscombe's dataset with noise" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2012/05/svr_noise.gif&lt;/p&gt;</content><category term="scikit-learn"></category><category term="anscombe"></category><category term="outlier"></category><category term="robust regression"></category><category term="support vector regression"></category><category term="svm"></category><category term="svr"></category><category term="python"></category><category term="scikit-learn"></category></entry><entry><title>GSoC 2012 proposal: Need for scikit-learn speed</title><link href="//vene.ro/blog/gsoc-2012-proposal-need-for-scikit-learn-speed.html" rel="alternate"></link><published>2012-04-16T00:37:00+02:00</published><updated>2012-04-16T00:37:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2012-04-16:/blog/gsoc-2012-proposal-need-for-scikit-learn-speed.html</id><summary type="html">&lt;p&gt;This summer I hope to be able to put in another full-time amount of
 effort into scikit-learn. After a successful Google Summer of Code
@@ -5833,10 +5812,7 @@ longer you pronunce the final &lt;em&gt;a&lt;/em&gt;: I really need some &lt;em&
 for&amp;nbsp;coffee.][]][]&lt;/p&gt;
 &lt;p&gt;Post scriptum: I hope you like the theme: I installed the &lt;a href="http://www.huyng.com/posts/sane-color-scheme-for-matplotlib/" title="www.huyng.com/posts/sane-color-scheme-for-matplotlib"&gt;sane
 matplotlib color scheme&lt;/a&gt; from Huy&amp;nbsp;Nguyen.&lt;/p&gt;
-&lt;p&gt;[Distribution of the length of the final letter in the Romanian word
-  for coffee.]: http://localhost:8001/wp-content/uploads/2012/04/cafeaaa-300x218.png
-    &amp;#8220;cafeaaa&amp;#8221;
-  [![Distribution of the length of the final letter in the Romanian word
+&lt;p&gt;[![Distribution of the length of the final letter in the Romanian word
   for coffee.][]]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2012/04/cafeaaa.png&lt;/p&gt;</content><category term="nlp"></category><category term="Uncategorized"></category><category term="coffee"></category><category term="ngram"></category></entry><entry><title>Nash-Williams theorem on the Hamiltonian property of some regular graphs</title><link href="//vene.ro/blog/nash-williams-theorem-on-the-hamiltonian-property-of-some-regular-graphs.html" rel="alternate"></link><published>2012-01-29T22:31:00+01:00</published><updated>2012-01-29T22:31:00+01:00</updated><author><name>vene</name></author><id>tag:vene.ro,2012-01-29:/blog/nash-williams-theorem-on-the-hamiltonian-property-of-some-regular-graphs.html</id><summary type="html">&lt;p&gt;I have been digging on the internet for the proof of this theorem for
 the last couple of days without success. The result was published by Sir
 Crispin Nash-Williams as &lt;em&gt;Valency Sequences which force graphs to have
@@ -6191,11 +6167,8 @@ this post with permanent&amp;nbsp;links).&lt;/p&gt;
 Windows installers for this release, let&amp;#8217;s hope I do a good job and you
 can think of me and smile when&amp;nbsp;installing!&lt;/p&gt;
 &lt;p&gt;[&lt;img alt="Dictionary learned from Lena patches" src="http://localhost:8001/wp-content/uploads/2011/09/plot_image_denoising_1.png" title="plot_image_denoising_1" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/09/plot_image_denoising_1.png&lt;/p&gt;
-&lt;p&gt;[&lt;img alt="Noisy image for denoising" src="http://localhost:8001/wp-content/uploads/2011/09/plot_image_denoising_24.png" title="plot_image_denoising_24" /&gt;]: http://localhost:8001/wp-content/uploads/2011/09/plot_image_denoising_24.png
-  [Image denoising with Dictionary learning and Orthogonal matching
-  pursuit]: http://localhost:8001/wp-content/uploads/2011/09/plot_image_denoising_44.png
-    &amp;#8220;Image denoising with Dictionary learning and Orthogonal matching pursuit&amp;#8221;
-  [![Image denoising with Dictionary learning and Orthogonal matching
+&lt;p&gt;[&lt;img alt="Noisy image for denoising" src="http://localhost:8001/wp-content/uploads/2011/09/plot_image_denoising_24.png" title="plot_image_denoising_24" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/09/plot_image_denoising_24.png&lt;/p&gt;
+&lt;p&gt;[![Image denoising with Dictionary learning and Orthogonal matching
   pursuit][]]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/09/plot_image_denoising_44.png&lt;/p&gt;</content><category term="scikit-learn"></category><category term="dictionary learning"></category><category term="scikit-learn"></category></entry><entry><title>Long overdue update. EuroScipy and SSLST 2011</title><link href="//vene.ro/blog/long-overdue-update-euroscipy-and-sslst-2011.html" rel="alternate"></link><published>2011-09-05T00:08:00+02:00</published><updated>2011-09-05T00:08:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-09-05:/blog/long-overdue-update-euroscipy-and-sslst-2011.html</id><summary type="html">&lt;p&gt;Anybody reading my blog should have expected me to blog about the end of
 my GSoC. Sorry to disappoint, but I simply did not experience anything
 similar to an ending. On the contrary, I feel like things have barely
@@ -6250,9 +6223,7 @@ this will allow me to attend &lt;a href="http://lml.bas.bg/ranlp2011/start3.php"
 from now, where I will present my poster entitled:&lt;br /&gt;
 &amp;#8220;Can alternations be learned? A machine learning approach to Romanian
 verb conjugation&amp;#8221; by Liviu P. Dinu, Emil Ionescu, Vlad Niculae and
-Octavia-Maria Sulea. See you in&amp;nbsp;Hissar!&lt;/p&gt;
-&lt;p&gt;[computational linguistics and psycholinguistics research center
-  (CLiPS)]:&amp;nbsp;http://www.clips.ua.ac.be/&lt;/p&gt;</content><category term="conferences"></category><category term="Uncategorized"></category></entry><entry><title>Optimizing Orthogonal Matching Pursuit code in Numpy, part 2</title><link href="//vene.ro/blog/optimizing-orthogonal-matching-pursuit-code-in-numpy-part-2.html" rel="alternate"></link><published>2011-08-11T19:39:00+02:00</published><updated>2011-08-11T19:39:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-08-11:/blog/optimizing-orthogonal-matching-pursuit-code-in-numpy-part-2.html</id><summary type="html">&lt;p&gt;&lt;span class="caps"&gt;EDIT&lt;/span&gt;: There was a bug in the final version of the code presented here.
+Octavia-Maria Sulea. See you in&amp;nbsp;Hissar!&lt;/p&gt;</content><category term="conferences"></category><category term="Uncategorized"></category></entry><entry><title>Optimizing Orthogonal Matching Pursuit code in Numpy, part 2</title><link href="//vene.ro/blog/optimizing-orthogonal-matching-pursuit-code-in-numpy-part-2.html" rel="alternate"></link><published>2011-08-11T19:39:00+02:00</published><updated>2011-08-11T19:39:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-08-11:/blog/optimizing-orthogonal-matching-pursuit-code-in-numpy-part-2.html</id><summary type="html">&lt;p&gt;&lt;span class="caps"&gt;EDIT&lt;/span&gt;: There was a bug in the final version of the code presented here.
 It is fixed now, for its backstory, check out &lt;a href="http://venefrombucharest.wordpress.com/2011/11/18/the-nasty-bug-crawling-in-my-orthogonal-matching-pursuit-code/" title="The nasty bug crawling in my Orthogonal Matching Pursuit code"&gt;my blog post on it&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;When we last saw our hero, he was fighting with the dreaded
 implementation of least-angle regression, knowing full well that it was …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;span class="caps"&gt;EDIT&lt;/span&gt;: There was a bug in the final version of the code presented here.
@@ -6674,9 +6645,7 @@ Orthogonal Matching Pursuit][] Technical Report - &lt;span class="caps"&gt;CS&lt
 2008.&lt;br /&gt;
 &lt;span id="footnote-3"&gt;&lt;a href="#footnote-3"&gt;3&lt;/a&gt;&lt;/span&gt; [First thoughts on Orthogonal
 Matching Pursuit][] on this blog.&lt;br /&gt;
-&lt;span id="footnote-4"&gt;&lt;a href="#footnote-4"&gt;4&lt;/a&gt;&lt;/span&gt; &lt;a href="https://github.com/scikit-learn/scikit-learn/blob/master/scikits/learn/linear_model/omp.py"&gt;omp.py&lt;/a&gt; on&amp;nbsp;github.&lt;/p&gt;
-&lt;p&gt;[Efficient Implementation of the K-&lt;span class="caps"&gt;SVD&lt;/span&gt; Algorithm using Batch
-  Orthogonal Matching Pursuit]: http://www.cs.technion.ac.il/~ronrubin/Publications/&lt;span class="caps"&gt;KSVD&lt;/span&gt;-&lt;span class="caps"&gt;OMP&lt;/span&gt;-v2.pdf&lt;/p&gt;</content><category term="scikit-learn"></category><category term="efficient"></category><category term="numpy"></category><category term="omp"></category><category term="orthogonal matching pursuit"></category><category term="scipy"></category><category term="dictionary learning"></category><category term="scikit-learn"></category><category term="python"></category></entry><entry><title>Progress on Orthogonal Matching Pursuit</title><link href="//vene.ro/blog/progress-on-orthogonal-matching-pursuit.html" rel="alternate"></link><published>2011-08-02T16:56:00+02:00</published><updated>2011-08-02T16:56:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-08-02:/blog/progress-on-orthogonal-matching-pursuit.html</id><summary type="html">&lt;p&gt;Since orthogonal matching pursuit (&lt;span class="caps"&gt;OMP&lt;/span&gt;) is an important part of signal
+&lt;span id="footnote-4"&gt;&lt;a href="#footnote-4"&gt;4&lt;/a&gt;&lt;/span&gt; &lt;a href="https://github.com/scikit-learn/scikit-learn/blob/master/scikits/learn/linear_model/omp.py"&gt;omp.py&lt;/a&gt; on&amp;nbsp;github.&lt;/p&gt;</content><category term="scikit-learn"></category><category term="efficient"></category><category term="numpy"></category><category term="omp"></category><category term="orthogonal matching pursuit"></category><category term="scipy"></category><category term="dictionary learning"></category><category term="scikit-learn"></category><category term="python"></category></entry><entry><title>Progress on Orthogonal Matching Pursuit</title><link href="//vene.ro/blog/progress-on-orthogonal-matching-pursuit.html" rel="alternate"></link><published>2011-08-02T16:56:00+02:00</published><updated>2011-08-02T16:56:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-08-02:/blog/progress-on-orthogonal-matching-pursuit.html</id><summary type="html">&lt;p&gt;Since orthogonal matching pursuit (&lt;span class="caps"&gt;OMP&lt;/span&gt;) is an important part of signal
 processing and therefore crucial to the image processing aspect of
 dictionary learning, I am currently focusing on optimizing the &lt;span class="caps"&gt;OMP&lt;/span&gt; code
 and making sure it is stable. &lt;span class="caps"&gt;OMP&lt;/span&gt; is a forward method like least-angle
@@ -6764,12 +6733,10 @@ sampling of image patches, can perform remarkably well for some&amp;nbsp;tasks.&
 [1] [Wikipedia article on K-Means clustering][]
 
 &lt;/div&gt;
-
 &lt;div id="footnote-2"&gt;
 [2] [K-Means Coder example][]
 
 &lt;/div&gt;
-
 &lt;div id="footnote-3"&gt;
 [3] [**The importance of encoding versus training with sparse coding and
 vector quantization**, Adam Coates and Andrew Y. Ng. In Proceedings of
@@ -6777,20 +6744,10 @@ the Twenty-Eighth International Conference on Machine Learning, 2011.][]
 
 &lt;/div&gt;
 
-&lt;p&gt;[Dictionary learned with K-Means on the &lt;span class="caps"&gt;LFW&lt;/span&gt; dataset with whitening
-  &lt;span class="caps"&gt;PCA&lt;/span&gt;]: http://localhost:8001/wp-content/uploads/2011/07/kmeans_w.png?w=250
-    &amp;#8220;K-Means dictionary with whitening &lt;span class="caps"&gt;PCA&lt;/span&gt;&amp;#8221;
-  [![Dictionary learned with K-Means on the &lt;span class="caps"&gt;LFW&lt;/span&gt; dataset with whitening
-  &lt;span class="caps"&gt;PCA&lt;/span&gt;][]]: http://localhost:8001/wp-content/uploads/2011/07/kmeans_w.png
-  [Dictionary learned with K-Means on the &lt;span class="caps"&gt;LFW&lt;/span&gt; dataset without whitening
-  &lt;span class="caps"&gt;PCA&lt;/span&gt;]: http://localhost:8001/wp-content/uploads/2011/07/kmeans_no_w.png?w=250
-    &amp;#8220;K-Means dictionary without whitening &lt;span class="caps"&gt;PCA&lt;/span&gt;&amp;#8221;
-  [![Dictionary learned with K-Means on the &lt;span class="caps"&gt;LFW&lt;/span&gt; dataset without
-  whitening &lt;span class="caps"&gt;PCA&lt;/span&gt;][]]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/07/kmeans_no_w.png&lt;/p&gt;
-&lt;p&gt;[&lt;strong&gt;The importance of encoding versus training with sparse coding and
-  vector quantization&lt;/strong&gt;, Adam Coates and Andrew Y. Ng. In Proceedings of
-  the Twenty-Eighth International Conference on Machine Learning,
-  2011.]:&amp;nbsp;http://ai.stanford.edu/~ang/papers/icml11-EncodingVsTraining.pdf&lt;/p&gt;</content><category term="scikit-learn"></category><category term="dictionary learning"></category><category term="k-means"></category><category term="scikit-learn"></category><category term="vq"></category><category term="Uncategorized"></category></entry><entry><title>Image denoising with dictionary learning</title><link href="//vene.ro/blog/image-denoising-with-dictionary-learning.html" rel="alternate"></link><published>2011-07-07T20:00:00+02:00</published><updated>2011-07-07T20:00:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-07-07:/blog/image-denoising-with-dictionary-learning.html</id><summary type="html">&lt;p&gt;I am presenting an image denoising example that fully runs under my
+&lt;p&gt;[![Dictionary learned with K-Means on the &lt;span class="caps"&gt;LFW&lt;/span&gt; dataset with whitening
+  &lt;span class="caps"&gt;PCA&lt;/span&gt;][]]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/07/kmeans_w.png&lt;/p&gt;
+&lt;p&gt;[![Dictionary learned with K-Means on the &lt;span class="caps"&gt;LFW&lt;/span&gt; dataset without
+  whitening &lt;span class="caps"&gt;PCA&lt;/span&gt;][]]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/07/kmeans_no_w.png&lt;/p&gt;</content><category term="scikit-learn"></category><category term="dictionary learning"></category><category term="k-means"></category><category term="scikit-learn"></category><category term="vq"></category><category term="Uncategorized"></category></entry><entry><title>Image denoising with dictionary learning</title><link href="//vene.ro/blog/image-denoising-with-dictionary-learning.html" rel="alternate"></link><published>2011-07-07T20:00:00+02:00</published><updated>2011-07-07T20:00:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-07-07:/blog/image-denoising-with-dictionary-learning.html</id><summary type="html">&lt;p&gt;I am presenting an image denoising example that fully runs under my
 local scikits-learn fork. Coming soon near&amp;nbsp;you!&lt;/p&gt;
 &lt;p&gt;The 400 square pixels area covering Lena&amp;#8217;s face was distorted by
 additive gaussian noise with a standard deviation of 50 (pixel values
@@ -6830,11 +6787,7 @@ the Twenty-Eighth International Conference on Machine Learning, 2011.][]
 
 &lt;/div&gt;
 
-&lt;p&gt;[&lt;img alt="Lena image denoising using dictionary learning" src="http://localhost:8001/wp-content/uploads/2011/07/denoise3.png" title="Lena denoising" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/07/denoise3.png&lt;/p&gt;
-&lt;p&gt;[&lt;strong&gt;The importance of encoding versus training with sparse coding and
-  vector quantization&lt;/strong&gt;, Adam Coates and Andrew Y. Ng. In Proceedings of
-  the Twenty-Eighth International Conference on Machine Learning,
-  2011.]:&amp;nbsp;http://ai.stanford.edu/~ang/papers/icml11-EncodingVsTraining.pdf&lt;/p&gt;</content><category term="scikit-learn"></category><category term="denoising"></category><category term="dictionary learning"></category><category term="scikit-learn"></category></entry><entry><title>Dictionary learning sneak peek</title><link href="//vene.ro/blog/dictionary-learning-sneak-peek.html" rel="alternate"></link><published>2011-06-24T12:06:00+02:00</published><updated>2011-06-24T12:06:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-06-24:/blog/dictionary-learning-sneak-peek.html</id><summary type="html">&lt;p&gt;Closing in on the goal of integrating J. Mairal&amp;#8217;s dictionary learning in
+&lt;p&gt;[&lt;img alt="Lena image denoising using dictionary learning" src="http://localhost:8001/wp-content/uploads/2011/07/denoise3.png" title="Lena denoising" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/07/denoise3.png&lt;/p&gt;</content><category term="scikit-learn"></category><category term="denoising"></category><category term="dictionary learning"></category><category term="scikit-learn"></category></entry><entry><title>Dictionary learning sneak peek</title><link href="//vene.ro/blog/dictionary-learning-sneak-peek.html" rel="alternate"></link><published>2011-06-24T12:06:00+02:00</published><updated>2011-06-24T12:06:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-06-24:/blog/dictionary-learning-sneak-peek.html</id><summary type="html">&lt;p&gt;Closing in on the goal of integrating J. Mairal&amp;#8217;s dictionary learning in
 the scikit, I stitched together a couple of&amp;nbsp;examples.&lt;/p&gt;
 &lt;p&gt;The code is not yet integrated according to our standards, but here is
 the kind of results you can&amp;nbsp;expect.&lt;/p&gt;

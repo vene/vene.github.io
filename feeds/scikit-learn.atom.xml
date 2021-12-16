@@ -285,7 +285,7 @@ historical wall of fame or&amp;nbsp;shame).&lt;/p&gt;</content><category term="s
 string. The constructor&amp;#8217;s signature&amp;nbsp;is:  &lt;/p&gt;
 &lt;p&gt;&lt;code&gt;Benchmark(self, code, setup, ncalls=None, repeat=3, cleanup=None, name=None, description=None, start_date=None, logy=False)&lt;/code&gt;.&lt;/p&gt;
 &lt;h2 id="why-generate-benchmarks-dynamically"&gt;Why generate benchmarks dynamically?&lt;a class="headerlink" href="#why-generate-benchmarks-dynamically" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;For most &lt;code&gt;scikit-learn&lt;/code&gt; purposes, the &lt;code&gt;code&lt;/code&gt; string will be …&lt;/p&gt;</summary><content type="html">&lt;p&gt;To construct a &lt;code&gt;vbench&lt;/code&gt; benchmark you need a setup string and a code
+&lt;p&gt;For most &lt;code&gt;scikit-learn&lt;/code&gt; purposes, the &lt;code&gt;code&lt;/code&gt; string will …&lt;/p&gt;</summary><content type="html">&lt;p&gt;To construct a &lt;code&gt;vbench&lt;/code&gt; benchmark you need a setup string and a code
 string. The constructor&amp;#8217;s signature&amp;nbsp;is:  &lt;/p&gt;
 &lt;p&gt;&lt;code&gt;Benchmark(self, code, setup, ncalls=None, repeat=3, cleanup=None, name=None, description=None, start_date=None, logy=False)&lt;/code&gt;.&lt;/p&gt;
 &lt;h2 id="why-generate-benchmarks-dynamically"&gt;Why generate benchmarks dynamically?&lt;a class="headerlink" href="#why-generate-benchmarks-dynamically" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
@@ -440,7 +440,7 @@ the outlier and on two other points. For [latex]\epsilon=0[/latex], you
 can see that every point except a non-outlier is highlighted. This is
 actually the perfect solution but very&amp;nbsp;dense.&lt;/p&gt;
 &lt;p&gt;[&lt;img alt="Support vector regression on Anscombe's third dataset with no
-noise" src="" /&gt;][]&lt;/p&gt;
+noise" src="http://localhost:8001/wp-content/uploads/2012/05/svr.gif" title="SVR on Anscombe's dataset with no noise" /&gt;][]&lt;/p&gt;
 &lt;p&gt;Every frame displays the global mean squared error and the true mean
 squared error, &lt;em&gt;i.e.&lt;/em&gt; over the inlying points. If the epsilon size is
 well chosen, &lt;span class="caps"&gt;SVR&lt;/span&gt; can perform robustly with a sparse solution. Since our
@@ -453,13 +453,8 @@ zero, the solution is again very dense, very&amp;nbsp;non-parametric.&lt;/p&gt;
 noise" src="http://localhost:8001/wp-content/uploads/2012/05/svr_noise.gif" title="SVR on Anscombe's dataset with noise" /&gt;][]&lt;/p&gt;
 &lt;p&gt;Here is the code you can use to play around with&amp;nbsp;this.&lt;/p&gt;
 &lt;p&gt;[gist&amp;nbsp;id=2815589]&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c"&gt;http://localhost:8001/wp-content/uploads/2012/05/svr.gif&lt;/span&gt;
-&lt;span class="err"&gt;&amp;quot;SVR on Anscombe&amp;#39;s dataset with no noise&amp;quot;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
 &lt;p&gt;[&lt;img alt="Support vector regression on Anscombe's third dataset with no
-  noise" src="" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2012/05/svr.gif&lt;/p&gt;
+  noise" src="http://localhost:8001/wp-content/uploads/2012/05/svr.gif" title="SVR on Anscombe's dataset with no noise" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2012/05/svr.gif&lt;/p&gt;
 &lt;p&gt;[&lt;img alt="Support vector regression on Anscombe's third dataset with
   noise" src="http://localhost:8001/wp-content/uploads/2012/05/svr_noise.gif" title="SVR on Anscombe's dataset with noise" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2012/05/svr_noise.gif&lt;/p&gt;</content><category term="scikit-learn"></category><category term="anscombe"></category><category term="outlier"></category><category term="robust regression"></category><category term="support vector regression"></category><category term="svm"></category><category term="svr"></category><category term="python"></category><category term="scikit-learn"></category></entry><entry><title>GSoC 2012 proposal: Need for scikit-learn speed</title><link href="//vene.ro/blog/gsoc-2012-proposal-need-for-scikit-learn-speed.html" rel="alternate"></link><published>2012-04-16T00:37:00+02:00</published><updated>2012-04-16T00:37:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2012-04-16:/blog/gsoc-2012-proposal-need-for-scikit-learn-speed.html</id><summary type="html">&lt;p&gt;This summer I hope to be able to put in another full-time amount of
 effort into scikit-learn. After a successful Google Summer of Code
@@ -595,11 +590,8 @@ this post with permanent&amp;nbsp;links).&lt;/p&gt;
 Windows installers for this release, let&amp;#8217;s hope I do a good job and you
 can think of me and smile when&amp;nbsp;installing!&lt;/p&gt;
 &lt;p&gt;[&lt;img alt="Dictionary learned from Lena patches" src="http://localhost:8001/wp-content/uploads/2011/09/plot_image_denoising_1.png" title="plot_image_denoising_1" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/09/plot_image_denoising_1.png&lt;/p&gt;
-&lt;p&gt;[&lt;img alt="Noisy image for denoising" src="http://localhost:8001/wp-content/uploads/2011/09/plot_image_denoising_24.png" title="plot_image_denoising_24" /&gt;]: http://localhost:8001/wp-content/uploads/2011/09/plot_image_denoising_24.png
-  [Image denoising with Dictionary learning and Orthogonal matching
-  pursuit]: http://localhost:8001/wp-content/uploads/2011/09/plot_image_denoising_44.png
-    &amp;#8220;Image denoising with Dictionary learning and Orthogonal matching pursuit&amp;#8221;
-  [![Image denoising with Dictionary learning and Orthogonal matching
+&lt;p&gt;[&lt;img alt="Noisy image for denoising" src="http://localhost:8001/wp-content/uploads/2011/09/plot_image_denoising_24.png" title="plot_image_denoising_24" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/09/plot_image_denoising_24.png&lt;/p&gt;
+&lt;p&gt;[![Image denoising with Dictionary learning and Orthogonal matching
   pursuit][]]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/09/plot_image_denoising_44.png&lt;/p&gt;</content><category term="scikit-learn"></category><category term="dictionary learning"></category><category term="scikit-learn"></category></entry><entry><title>Optimizing Orthogonal Matching Pursuit code in Numpy, part 2</title><link href="//vene.ro/blog/optimizing-orthogonal-matching-pursuit-code-in-numpy-part-2.html" rel="alternate"></link><published>2011-08-11T19:39:00+02:00</published><updated>2011-08-11T19:39:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-08-11:/blog/optimizing-orthogonal-matching-pursuit-code-in-numpy-part-2.html</id><summary type="html">&lt;p&gt;&lt;span class="caps"&gt;EDIT&lt;/span&gt;: There was a bug in the final version of the code presented here.
 It is fixed now, for its backstory, check out &lt;a href="http://venefrombucharest.wordpress.com/2011/11/18/the-nasty-bug-crawling-in-my-orthogonal-matching-pursuit-code/" title="The nasty bug crawling in my Orthogonal Matching Pursuit code"&gt;my blog post on it&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;When we last saw our hero, he was fighting with the dreaded
@@ -1022,9 +1014,7 @@ Orthogonal Matching Pursuit][] Technical Report - &lt;span class="caps"&gt;CS&lt
 2008.&lt;br /&gt;
 &lt;span id="footnote-3"&gt;&lt;a href="#footnote-3"&gt;3&lt;/a&gt;&lt;/span&gt; [First thoughts on Orthogonal
 Matching Pursuit][] on this blog.&lt;br /&gt;
-&lt;span id="footnote-4"&gt;&lt;a href="#footnote-4"&gt;4&lt;/a&gt;&lt;/span&gt; &lt;a href="https://github.com/scikit-learn/scikit-learn/blob/master/scikits/learn/linear_model/omp.py"&gt;omp.py&lt;/a&gt; on&amp;nbsp;github.&lt;/p&gt;
-&lt;p&gt;[Efficient Implementation of the K-&lt;span class="caps"&gt;SVD&lt;/span&gt; Algorithm using Batch
-  Orthogonal Matching Pursuit]: http://www.cs.technion.ac.il/~ronrubin/Publications/&lt;span class="caps"&gt;KSVD&lt;/span&gt;-&lt;span class="caps"&gt;OMP&lt;/span&gt;-v2.pdf&lt;/p&gt;</content><category term="scikit-learn"></category><category term="efficient"></category><category term="numpy"></category><category term="omp"></category><category term="orthogonal matching pursuit"></category><category term="scipy"></category><category term="dictionary learning"></category><category term="scikit-learn"></category><category term="python"></category></entry><entry><title>Progress on Orthogonal Matching Pursuit</title><link href="//vene.ro/blog/progress-on-orthogonal-matching-pursuit.html" rel="alternate"></link><published>2011-08-02T16:56:00+02:00</published><updated>2011-08-02T16:56:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-08-02:/blog/progress-on-orthogonal-matching-pursuit.html</id><summary type="html">&lt;p&gt;Since orthogonal matching pursuit (&lt;span class="caps"&gt;OMP&lt;/span&gt;) is an important part of signal
+&lt;span id="footnote-4"&gt;&lt;a href="#footnote-4"&gt;4&lt;/a&gt;&lt;/span&gt; &lt;a href="https://github.com/scikit-learn/scikit-learn/blob/master/scikits/learn/linear_model/omp.py"&gt;omp.py&lt;/a&gt; on&amp;nbsp;github.&lt;/p&gt;</content><category term="scikit-learn"></category><category term="efficient"></category><category term="numpy"></category><category term="omp"></category><category term="orthogonal matching pursuit"></category><category term="scipy"></category><category term="dictionary learning"></category><category term="scikit-learn"></category><category term="python"></category></entry><entry><title>Progress on Orthogonal Matching Pursuit</title><link href="//vene.ro/blog/progress-on-orthogonal-matching-pursuit.html" rel="alternate"></link><published>2011-08-02T16:56:00+02:00</published><updated>2011-08-02T16:56:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-08-02:/blog/progress-on-orthogonal-matching-pursuit.html</id><summary type="html">&lt;p&gt;Since orthogonal matching pursuit (&lt;span class="caps"&gt;OMP&lt;/span&gt;) is an important part of signal
 processing and therefore crucial to the image processing aspect of
 dictionary learning, I am currently focusing on optimizing the &lt;span class="caps"&gt;OMP&lt;/span&gt; code
 and making sure it is stable. &lt;span class="caps"&gt;OMP&lt;/span&gt; is a forward method like least-angle
@@ -1112,12 +1102,10 @@ sampling of image patches, can perform remarkably well for some&amp;nbsp;tasks.&
 [1] [Wikipedia article on K-Means clustering][]
 
 &lt;/div&gt;
-
 &lt;div id="footnote-2"&gt;
 [2] [K-Means Coder example][]
 
 &lt;/div&gt;
-
 &lt;div id="footnote-3"&gt;
 [3] [**The importance of encoding versus training with sparse coding and
 vector quantization**, Adam Coates and Andrew Y. Ng. In Proceedings of
@@ -1125,20 +1113,10 @@ the Twenty-Eighth International Conference on Machine Learning, 2011.][]
 
 &lt;/div&gt;
 
-&lt;p&gt;[Dictionary learned with K-Means on the &lt;span class="caps"&gt;LFW&lt;/span&gt; dataset with whitening
-  &lt;span class="caps"&gt;PCA&lt;/span&gt;]: http://localhost:8001/wp-content/uploads/2011/07/kmeans_w.png?w=250
-    &amp;#8220;K-Means dictionary with whitening &lt;span class="caps"&gt;PCA&lt;/span&gt;&amp;#8221;
-  [![Dictionary learned with K-Means on the &lt;span class="caps"&gt;LFW&lt;/span&gt; dataset with whitening
-  &lt;span class="caps"&gt;PCA&lt;/span&gt;][]]: http://localhost:8001/wp-content/uploads/2011/07/kmeans_w.png
-  [Dictionary learned with K-Means on the &lt;span class="caps"&gt;LFW&lt;/span&gt; dataset without whitening
-  &lt;span class="caps"&gt;PCA&lt;/span&gt;]: http://localhost:8001/wp-content/uploads/2011/07/kmeans_no_w.png?w=250
-    &amp;#8220;K-Means dictionary without whitening &lt;span class="caps"&gt;PCA&lt;/span&gt;&amp;#8221;
-  [![Dictionary learned with K-Means on the &lt;span class="caps"&gt;LFW&lt;/span&gt; dataset without
-  whitening &lt;span class="caps"&gt;PCA&lt;/span&gt;][]]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/07/kmeans_no_w.png&lt;/p&gt;
-&lt;p&gt;[&lt;strong&gt;The importance of encoding versus training with sparse coding and
-  vector quantization&lt;/strong&gt;, Adam Coates and Andrew Y. Ng. In Proceedings of
-  the Twenty-Eighth International Conference on Machine Learning,
-  2011.]:&amp;nbsp;http://ai.stanford.edu/~ang/papers/icml11-EncodingVsTraining.pdf&lt;/p&gt;</content><category term="scikit-learn"></category><category term="dictionary learning"></category><category term="k-means"></category><category term="scikit-learn"></category><category term="vq"></category><category term="Uncategorized"></category></entry><entry><title>Image denoising with dictionary learning</title><link href="//vene.ro/blog/image-denoising-with-dictionary-learning.html" rel="alternate"></link><published>2011-07-07T20:00:00+02:00</published><updated>2011-07-07T20:00:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-07-07:/blog/image-denoising-with-dictionary-learning.html</id><summary type="html">&lt;p&gt;I am presenting an image denoising example that fully runs under my
+&lt;p&gt;[![Dictionary learned with K-Means on the &lt;span class="caps"&gt;LFW&lt;/span&gt; dataset with whitening
+  &lt;span class="caps"&gt;PCA&lt;/span&gt;][]]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/07/kmeans_w.png&lt;/p&gt;
+&lt;p&gt;[![Dictionary learned with K-Means on the &lt;span class="caps"&gt;LFW&lt;/span&gt; dataset without
+  whitening &lt;span class="caps"&gt;PCA&lt;/span&gt;][]]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/07/kmeans_no_w.png&lt;/p&gt;</content><category term="scikit-learn"></category><category term="dictionary learning"></category><category term="k-means"></category><category term="scikit-learn"></category><category term="vq"></category><category term="Uncategorized"></category></entry><entry><title>Image denoising with dictionary learning</title><link href="//vene.ro/blog/image-denoising-with-dictionary-learning.html" rel="alternate"></link><published>2011-07-07T20:00:00+02:00</published><updated>2011-07-07T20:00:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-07-07:/blog/image-denoising-with-dictionary-learning.html</id><summary type="html">&lt;p&gt;I am presenting an image denoising example that fully runs under my
 local scikits-learn fork. Coming soon near&amp;nbsp;you!&lt;/p&gt;
 &lt;p&gt;The 400 square pixels area covering Lena&amp;#8217;s face was distorted by
 additive gaussian noise with a standard deviation of 50 (pixel values
@@ -1178,11 +1156,7 @@ the Twenty-Eighth International Conference on Machine Learning, 2011.][]
 
 &lt;/div&gt;
 
-&lt;p&gt;[&lt;img alt="Lena image denoising using dictionary learning" src="http://localhost:8001/wp-content/uploads/2011/07/denoise3.png" title="Lena denoising" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/07/denoise3.png&lt;/p&gt;
-&lt;p&gt;[&lt;strong&gt;The importance of encoding versus training with sparse coding and
-  vector quantization&lt;/strong&gt;, Adam Coates and Andrew Y. Ng. In Proceedings of
-  the Twenty-Eighth International Conference on Machine Learning,
-  2011.]:&amp;nbsp;http://ai.stanford.edu/~ang/papers/icml11-EncodingVsTraining.pdf&lt;/p&gt;</content><category term="scikit-learn"></category><category term="denoising"></category><category term="dictionary learning"></category><category term="scikit-learn"></category></entry><entry><title>Summer of Code roadmap, part 1</title><link href="//vene.ro/blog/summer-of-code-roadmap-part-1.html" rel="alternate"></link><published>2011-06-12T14:28:00+02:00</published><updated>2011-06-12T14:28:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-06-12:/blog/summer-of-code-roadmap-part-1.html</id><summary type="html">&lt;p&gt;After a little busy while, I have graduated and entered the summer
+&lt;p&gt;[&lt;img alt="Lena image denoising using dictionary learning" src="http://localhost:8001/wp-content/uploads/2011/07/denoise3.png" title="Lena denoising" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/07/denoise3.png&lt;/p&gt;</content><category term="scikit-learn"></category><category term="denoising"></category><category term="dictionary learning"></category><category term="scikit-learn"></category></entry><entry><title>Summer of Code roadmap, part 1</title><link href="//vene.ro/blog/summer-of-code-roadmap-part-1.html" rel="alternate"></link><published>2011-06-12T14:28:00+02:00</published><updated>2011-06-12T14:28:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-06-12:/blog/summer-of-code-roadmap-part-1.html</id><summary type="html">&lt;p&gt;After a little busy while, I have graduated and entered the summer
 vacation, which means time for serious GSoC&amp;nbsp;work.&lt;/p&gt;
 &lt;p&gt;[&lt;img alt="Me on graduation day" src="http://localhost:8001/wp-content/uploads/2011/06/p1080283.jpg" title="Graduation day" /&gt;][]&lt;/p&gt;
 &lt;p&gt;So we had a little conference in order to discuss what will be done and

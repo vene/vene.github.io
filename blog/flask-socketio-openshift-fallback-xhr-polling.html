@@ -86,18 +86,16 @@ alas, incompatible with recent versions of SocketIO. According to the
 community, the most stable release is SocketIO&nbsp;0.9.16.</p>
 <h2 id="the-problem-in-a-nutshell">The problem in a nutshell<a class="headerlink" href="#the-problem-in-a-nutshell" title="Permanent link">&para;</a></h2>
 <p>When debugging my app locally, I&#8217;d connect with something&nbsp;like</p>
-<div class="highlight"><pre><span></span><code><span class="err">var socket = io.connect(</span>
-<span class="err">    &#39;http://&#39; + document.domain + &#39;:&#39; + location.port + &#39;/chat&#39;</span>
-<span class="err">);</span>
+<div class="highlight"><pre><span></span><code><span class="k">var</span> <span class="n">socket</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
+    <span class="s1">&#39;http://&#39;</span> <span class="o">+</span> <span class="n">document</span><span class="o">.</span><span class="n">domain</span> <span class="o">+</span> <span class="s1">&#39;:&#39;</span> <span class="o">+</span> <span class="n">location</span><span class="o">.</span><span class="n">port</span> <span class="o">+</span> <span class="s1">&#39;/chat&#39;</span>
+<span class="p">);</span>
 </code></pre></div>
-
 
 <p>When deploying on OpenShift, the <code>location.port</code> is now different from the
 WebSocket port, so I used a Flask config that determines server-side where it&#8217;s
 running&nbsp;from:</p>
-<div class="highlight"><pre><span></span><code><span class="x">var wsport = &#39;</span><span class="cp">{{</span> <span class="nv">config</span><span class="o">[</span><span class="s1">&#39;WEBSOCKET_PORT&#39;</span><span class="o">]</span> <span class="cp">}}</span><span class="x">&#39;;</span>
+<div class="highlight"><pre><span></span><code><span class="k">var</span> <span class="n">wsport</span> <span class="o">=</span> <span class="s1">&#39;{{ config[&#39;</span><span class="n">WEBSOCKET_PORT</span><span class="s1">&#39;] }}&#39;</span><span class="p">;</span>
 </code></pre></div>
-
 
 <p>The app now runs great both when debugging locally or on OpenShift, except if
 for some reason the WebSocket connection fails (either if the browser is old
@@ -117,16 +115,15 @@ all other traffic over the default port.  This works like a&nbsp;charm!</p>
 <p><a href="https://gist.github.com/vene/c0657d854ae74a4511d2">My updated SocketIO client is available as a
 gist</a>, and the client-side
 connection code looks like&nbsp;this:</p>
-<div class="highlight"><pre><span></span><code><span class="err">var socket = io.connect(</span>
-<span class="err">    &#39;http://&#39; + document.domain + &#39;/chat&#39;,</span>
-<span class="err">    {</span>
-<span class="err">        port: location.port,</span>
-<span class="err">        wsport: wsport || location.port,</span>
-<span class="err">        &quot;connect timeout&quot;: 5000</span>
-<span class="err">    }</span>
-<span class="err">);</span>
+<div class="highlight"><pre><span></span><code><span class="k">var</span> <span class="n">socket</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
+    <span class="s1">&#39;http://&#39;</span> <span class="o">+</span> <span class="n">document</span><span class="o">.</span><span class="n">domain</span> <span class="o">+</span> <span class="s1">&#39;/chat&#39;</span><span class="p">,</span>
+    <span class="p">{</span>
+        <span class="n">port</span><span class="p">:</span> <span class="n">location</span><span class="o">.</span><span class="n">port</span><span class="p">,</span>
+        <span class="n">wsport</span><span class="p">:</span> <span class="n">wsport</span> <span class="o">||</span> <span class="n">location</span><span class="o">.</span><span class="n">port</span><span class="p">,</span>
+        <span class="s2">&quot;connect timeout&quot;</span><span class="p">:</span> <span class="mi">5000</span>
+    <span class="p">}</span>
+<span class="p">);</span>
 </code></pre></div>
-
 
 <p>I had to reduce the connection timeout, for a better user experience.  I&#8217;m way
 out of my comfort zone here, so in case I missed a better solution, do let me&nbsp;know!</p>

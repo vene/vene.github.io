@@ -124,7 +124,6 @@ as a function of <span class="arithmatex">\(a\)</span> and <span class="arithmat
     <span class="k">return</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 </code></pre></div>
 
-
 <p>Now, let&#8217;s define a grid of points. This is more or less the same
 as for making a <a href="https://matplotlib.org/examples/mplot3d/surface3d_demo.html">3-d surface plot in
 matplotlib</a>.</p>
@@ -150,7 +149,6 @@ matplotlib</a>.</p>
 <span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">([</span><span class="n">X</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">Y</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">Z</span><span class="o">.</span><span class="n">ravel</span><span class="p">()])</span>
 </code></pre></div>
 
-
 <p>The easiest way to copy data between Python and <span class="caps">JS</span> is using json.
 Indeed, we can very easily generate a valid <span class="caps">JS</span>&nbsp;file:</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># generate.py (part 3)</span>
@@ -173,7 +171,6 @@ Indeed, we can very easily generate a valid <span class="caps">JS</span>&nbsp;fi
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;data.js&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>  <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>Run this script to obtain a <code>data.js</code> file describing the point cloud that we
 want to&nbsp;visualize.</p>
@@ -201,33 +198,32 @@ used. Feel free to try newer versions; new features may&nbsp;appear!</span></p>
 <span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
 </code></pre></div>
 
-
 <p>Now it&#8217;s time to do the heavy lifting in <code>plot-glb.js</code>.
 First thing we must do is construct a three.js scene. This consists of a
 <em>Mesh</em>, which in turn is described by a <em>Material</em> and a 
 <em>Geometry</em> (a set of vertices and faces). The <em>Material</em> is easy to pick; the
 tricky part is the <em>Geometry</em>, which we will construct&nbsp;manually.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">function</span> <span class="nx">makeScene</span><span class="p">()</span> <span class="p">{</span>
-    <span class="kd">var</span> <span class="nx">geometry</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">Geometry</span><span class="p">();</span> 
-    <span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">Color</span><span class="p">(</span><span class="s1">&#39;tomato&#39;</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">geometry</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">Geometry</span><span class="p">();</span> 
+    <span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">Color</span><span class="p">(</span><span class="s1">&#39;tomato&#39;</span><span class="p">);</span>
 
     <span class="c1">// make a long sequence containing our 3-d points</span>
     <span class="kd">var</span> <span class="nx">nverts</span> <span class="o">=</span> <span class="nx">n</span> <span class="o">*</span> <span class="nx">m</span><span class="p">;</span>
-    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">k</span> <span class="o">&lt;</span> <span class="nx">nverts</span><span class="p">;</span> <span class="o">++</span><span class="nx">k</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kd">var</span> <span class="nx">newvert</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">Vector3</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">x</span><span class="p">[</span><span class="nx">k</span><span class="p">],</span> <span class="nx">data</span><span class="p">.</span><span class="nx">y</span><span class="p">[</span><span class="nx">k</span><span class="p">],</span> <span class="nx">data</span><span class="p">.</span><span class="nx">z</span><span class="p">[</span><span class="nx">k</span><span class="p">]);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">k</span> <span class="o">=</span> <span class="mf">0</span><span class="p">;</span> <span class="nx">k</span> <span class="o">&lt;</span> <span class="nx">nverts</span><span class="p">;</span> <span class="o">++</span><span class="nx">k</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">newvert</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">Vector3</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">x</span><span class="p">[</span><span class="nx">k</span><span class="p">],</span> <span class="nx">data</span><span class="p">.</span><span class="nx">y</span><span class="p">[</span><span class="nx">k</span><span class="p">],</span> <span class="nx">data</span><span class="p">.</span><span class="nx">z</span><span class="p">[</span><span class="nx">k</span><span class="p">]);</span>
         <span class="nx">geometry</span><span class="p">.</span><span class="nx">vertices</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">newvert</span><span class="p">);</span>
     <span class="p">}</span>
 
 
     <span class="c1">// build triangular faces (top and bottom) between adjacent points</span>
-    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">j</span> <span class="o">&lt;</span> <span class="nx">m</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span> 
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">j</span> <span class="o">=</span> <span class="mf">0</span><span class="p">;</span> <span class="nx">j</span> <span class="o">&lt;</span> <span class="nx">m</span> <span class="o">-</span> <span class="mf">1</span><span class="p">;</span> <span class="nx">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mf">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">n</span> <span class="o">-</span> <span class="mf">1</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span> 
             <span class="kd">var</span> <span class="nx">n0</span> <span class="o">=</span> <span class="nx">j</span> <span class="o">*</span> <span class="nx">n</span> <span class="o">+</span> <span class="nx">i</span><span class="p">;</span>
-            <span class="kd">var</span> <span class="nx">n1</span> <span class="o">=</span> <span class="nx">n0</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
-            <span class="kd">var</span> <span class="nx">n2</span> <span class="o">=</span> <span class="p">(</span><span class="nx">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="nx">n</span> <span class="o">+</span> <span class="nx">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
-            <span class="kd">var</span> <span class="nx">n3</span> <span class="o">=</span> <span class="nx">n2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
-            <span class="nx">face1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">Face3</span><span class="p">(</span><span class="nx">n0</span><span class="p">,</span> <span class="nx">n1</span><span class="p">,</span> <span class="nx">n2</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">,</span> <span class="nx">color</span><span class="p">);</span>
-            <span class="nx">face2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">Face3</span><span class="p">(</span><span class="nx">n2</span><span class="p">,</span> <span class="nx">n3</span><span class="p">,</span> <span class="nx">n0</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">,</span> <span class="nx">color</span><span class="p">);</span>
+            <span class="kd">var</span> <span class="nx">n1</span> <span class="o">=</span> <span class="nx">n0</span> <span class="o">+</span> <span class="mf">1</span><span class="p">;</span>
+            <span class="kd">var</span> <span class="nx">n2</span> <span class="o">=</span> <span class="p">(</span><span class="nx">j</span><span class="o">+</span><span class="mf">1</span><span class="p">)</span> <span class="o">*</span> <span class="nx">n</span> <span class="o">+</span> <span class="nx">i</span> <span class="o">+</span> <span class="mf">1</span><span class="p">;</span>
+            <span class="kd">var</span> <span class="nx">n3</span> <span class="o">=</span> <span class="nx">n2</span> <span class="o">-</span> <span class="mf">1</span><span class="p">;</span>
+            <span class="nx">face1</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">Face3</span><span class="p">(</span><span class="nx">n0</span><span class="p">,</span> <span class="nx">n1</span><span class="p">,</span> <span class="nx">n2</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">,</span> <span class="nx">color</span><span class="p">);</span>
+            <span class="nx">face2</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">Face3</span><span class="p">(</span><span class="nx">n2</span><span class="p">,</span> <span class="nx">n3</span><span class="p">,</span> <span class="nx">n0</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">,</span> <span class="nx">color</span><span class="p">);</span>
             <span class="nx">geometry</span><span class="p">.</span><span class="nx">faces</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">face1</span><span class="p">);</span>
             <span class="nx">geometry</span><span class="p">.</span><span class="nx">faces</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">face2</span><span class="p">);</span>
         <span class="p">}</span>
@@ -238,19 +234,18 @@ tricky part is the <em>Geometry</em>, which we will construct&nbsp;manually.</p>
     <span class="nx">geometry</span><span class="p">.</span><span class="nx">computeVertexNormals</span><span class="p">();</span>
 
     <span class="c1">// Give it a pretty material</span>
-    <span class="kd">var</span> <span class="nx">material</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">MeshLambertMaterial</span><span class="p">(</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">material</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">MeshLambertMaterial</span><span class="p">(</span> <span class="p">{</span>
         <span class="nx">side</span><span class="o">:</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">DoubleSide</span><span class="p">,</span>
         <span class="nx">color</span><span class="o">:</span> <span class="mh">0xffffff</span><span class="p">,</span>
         <span class="nx">vertexColors</span><span class="o">:</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">FaceColors</span><span class="p">,</span>
         <span class="nx">emissive</span><span class="o">:</span> <span class="mh">0x111111</span><span class="p">,</span>
     <span class="p">});</span>
 
-    <span class="kd">var</span> <span class="nx">scene</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">Scene</span><span class="p">();</span>
-    <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span> <span class="k">new</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">Mesh</span><span class="p">(</span> <span class="nx">geometry</span><span class="p">,</span> <span class="nx">material</span> <span class="p">)</span> <span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">scene</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">Scene</span><span class="p">();</span>
+    <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span> <span class="ow">new</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">Mesh</span><span class="p">(</span> <span class="nx">geometry</span><span class="p">,</span> <span class="nx">material</span> <span class="p">)</span> <span class="p">);</span>
     <span class="k">return</span> <span class="nx">scene</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
-
 
 <p>Normally, the next step would be to add
 <a href="https://threejs.org/docs/index.html#api/cameras/PerspectiveCamera">cameras</a>
@@ -265,20 +260,19 @@ handle with a function that modifies our&nbsp;link: </p>
 <div class="highlight"><pre><span></span><code><span class="c1">// plot-glb.js (part 2)</span>
 
 <span class="kd">function</span> <span class="nx">saveArrayBuffer</span><span class="p">(</span> <span class="nx">buffer</span><span class="p">,</span> <span class="nx">filename</span> <span class="p">)</span> <span class="p">{</span>
-    <span class="kd">var</span> <span class="nx">blob</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Blob</span><span class="p">(</span> <span class="p">[</span> <span class="nx">buffer</span> <span class="p">],</span> <span class="p">{</span> <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;application/octet-stream&#39;</span> <span class="p">}</span> <span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">blob</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Blob</span><span class="p">(</span> <span class="p">[</span> <span class="nx">buffer</span> <span class="p">],</span> <span class="p">{</span> <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;application/octet-stream&#39;</span> <span class="p">}</span> <span class="p">);</span>
     <span class="kd">var</span> <span class="nx">link</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span> <span class="s1">&#39;download&#39;</span> <span class="p">);</span>
     <span class="nx">link</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="nx">URL</span><span class="p">.</span><span class="nx">createObjectURL</span><span class="p">(</span> <span class="nx">blob</span> <span class="p">);</span>
     <span class="nx">link</span><span class="p">.</span><span class="nx">download</span> <span class="o">=</span> <span class="nx">filename</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
 
-
 <p>Finally, we use the <code>GLTFExporter</code> to generate a Facebook-compatible 3-d&nbsp;model.</p>
 <div class="highlight"><pre><span></span><code><span class="c1">// plot-glb.js (part 3)</span>
 
 <span class="kd">var</span> <span class="nx">scene</span> <span class="o">=</span> <span class="nx">makeScene</span><span class="p">();</span>
 
-<span class="kd">var</span> <span class="nx">exporter</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">GLTFExporter</span><span class="p">();</span>
+<span class="kd">var</span> <span class="nx">exporter</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">GLTFExporter</span><span class="p">();</span>
 <span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
     <span class="nx">trs</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
     <span class="nx">onlyVisible</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
@@ -292,7 +286,6 @@ handle with a function that modifies our&nbsp;link: </p>
     <span class="nx">saveArrayBuffer</span><span class="p">(</span> <span class="nx">glb</span><span class="p">,</span> <span class="s1">&#39;scene.glb&#39;</span> <span class="p">);</span>
 <span class="p">},</span> <span class="nx">options</span> <span class="p">);</span>
 </code></pre></div>
-
 
 <p>Now, if you open <code>plot-glb.html</code> and click the Download link, you should get a
 <code>.glb</code> file that can be drag-and-dropped onto a new Facebook&nbsp;post.</p>
@@ -335,7 +328,6 @@ pleasing&nbsp;angle! </p>
 <span class="n">points</span> <span class="o">=</span> <span class="n">rotate3d_x</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mf">2.5</span><span class="p">)</span>
 </code></pre></div>
 
-
 <p>Above, we used <em>rotation matrices</em> to rotate the point cloud around.<label for="sn-rotation" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-rotation" class="margin-toggle"/><span class="sidenote">Rotating a 3-d point is equivalent to multiplying by a
 certain orthogonal matrix. <a href="https://en.wikipedia.org/wiki/Rotation_matrix#Basic_rotations">The wikipedia article</a> lists formulas for
 rotation matrices against the canonical axes <span class="arithmatex">\(x\)</span>, <span class="arithmatex">\(y\)</span>, <span class="arithmatex">\(z\)</span>. </span></p>
@@ -346,7 +338,8 @@ bring you many&nbsp;likes!</p>
 <p><iframe
 src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fvlad.niculae%2Fposts%2F2040960132582962&width=350&show_text=true&height=535"
 width="350" height="535" style="border:none;overflow:hidden" scrolling="no"
-frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe></p>
+frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+</p>
 <p><em><a href="https://github.com/vene/threedposts">Get code for this&nbsp;post.</a></em></p>
     </div><!-- /.entry-content -->
     <div class="comments">

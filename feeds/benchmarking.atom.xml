@@ -3,7 +3,7 @@
 with its applications, since high school. The inverse of a matrix
 $latex A$, if it exists, is the matrix $latex A\^{-1}$ such that
 $latex &lt;span class="caps"&gt;AA&lt;/span&gt;\^{-1} = A\^{-1}A = I_n$. Based on the requirement that the
-left and …&lt;/p&gt;</summary><content type="html">&lt;p&gt;The matrix inverse is a cornerstone of linear algebra, taught, along
+left …&lt;/p&gt;</summary><content type="html">&lt;p&gt;The matrix inverse is a cornerstone of linear algebra, taught, along
 with its applications, since high school. The inverse of a matrix
 $latex A$, if it exists, is the matrix $latex A\^{-1}$ such that
 $latex &lt;span class="caps"&gt;AA&lt;/span&gt;\^{-1} = A\^{-1}A = I_n$. Based on the requirement that the
@@ -234,7 +234,7 @@ linalg.pinvh(a))&lt;br /&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
 &lt;p&gt;This was accomplished by building on what I described in my recent
 posts, specifically the extensions to Fabian&amp;#8217;s [memory_profiler][] that
 you can find in &lt;a href="https://github.com/vene/memory_profiler"&gt;my fork&lt;/a&gt;, but they will be merged upstream soon. The
-key element is the &lt;code&gt;%magic_memit&lt;/code&gt; function whose …&lt;/p&gt;</summary><content type="html">&lt;p&gt;The &lt;a href="https://github.com/vene/scikit-learn-speed"&gt;scikit-learn-speed project&lt;/a&gt; now has memory usage&amp;nbsp;benchmarking!&lt;/p&gt;
+key element is the &lt;code&gt;%magic_memit …&lt;/code&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;The &lt;a href="https://github.com/vene/scikit-learn-speed"&gt;scikit-learn-speed project&lt;/a&gt; now has memory usage&amp;nbsp;benchmarking!&lt;/p&gt;
 &lt;p&gt;This was accomplished by building on what I described in my recent
 posts, specifically the extensions to Fabian&amp;#8217;s [memory_profiler][] that
 you can find in &lt;a href="https://github.com/vene/memory_profiler"&gt;my fork&lt;/a&gt;, but they will be merged upstream soon. The
@@ -254,10 +254,7 @@ laptop, which runs &lt;span class="caps"&gt;OS&lt;/span&gt; X Lion, so, under th
 bug&lt;/a&gt;, I hardcoded the &amp;#8216;&lt;code&gt;-i&lt;/code&gt;&lt;span class="quo"&gt;&amp;#8216;&lt;/span&gt; so the memory benchmarks are not
 realistic. Also, the y-range should probably be forced wider, because
 the plots look erratic, showing the very small noise at a&amp;nbsp;large-scale.&lt;/p&gt;
-&lt;p&gt;[A screenshot showing generated output from the scikit-learn-speed
-  project, illustrating memory usage benchmarking.]: http://localhost:8001/wp-content/uploads/2012/07/vbench1.png
-    &amp;#8220;Memory benchmarking in scikit-learn-speed powered by vbench.&amp;#8221;
-  [![A screenshot showing generated output from the scikit-learn-speed
+&lt;p&gt;[![A screenshot showing generated output from the scikit-learn-speed
   project, illustrating memory usage benchmarking.][]]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2012/07/vbench1.png&lt;/p&gt;</content><category term="benchmarking"></category><category term="memit"></category><category term="memory"></category><category term="vbench"></category><category term="python"></category><category term="scikit-learn"></category></entry><entry><title>On why my %memit fails on OSX</title><link href="//vene.ro/blog/on-why-my-memit-fails-on-osx.html" rel="alternate"></link><published>2012-07-04T12:49:00+02:00</published><updated>2012-07-04T12:49:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2012-07-04:/blog/on-why-my-memit-fails-on-osx.html</id><summary type="html">&lt;p&gt;In my &lt;a href="http://localhost:8001/2012/07/02/more-on-memory-benchmarking/" title="More on memory benchmarking"&gt;last post&lt;/a&gt; I mentioned that I&amp;#8217;m not satisfied with the current
 state of &lt;code&gt;%memit&lt;/code&gt;, because some more complicated numerical function
 calls make it crash. I will start this post with a reminder of a pretty
@@ -350,14 +347,10 @@ numerical applications. For that reason, I have made &lt;code&gt;%memit&lt;/code
 user when all subprocesses fail, and to suggest the usage of the &lt;code&gt;-i&lt;/code&gt;
 flag.&lt;/p&gt;
 &lt;p&gt;I think that, with this update, &lt;code&gt;%memit&lt;/code&gt; is flexible and usable enough
-for actual use, and therefore for merging into&amp;nbsp;memory_profiler.&lt;/p&gt;
-&lt;p&gt;[On MacOS X (10.7 but maybe more), after forking a new process, there
-  is a segfault in Grand Central Dispatch on the &lt;span class="caps"&gt;BLAS&lt;/span&gt; &lt;span class="caps"&gt;DGEMM&lt;/span&gt; function
-  from Accelerate.]:&amp;nbsp;https://gist.github.com/2027412&lt;/p&gt;</content><category term="benchmarking"></category><category term="IPython"></category><category term="magic"></category><category term="memit"></category><category term="mprun"></category><category term="benchmarking"></category><category term="python"></category></entry><entry><title>More on memory benchmarking</title><link href="//vene.ro/blog/more-on-memory-benchmarking.html" rel="alternate"></link><published>2012-07-02T11:27:00+02:00</published><updated>2012-07-02T11:27:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2012-07-02:/blog/more-on-memory-benchmarking.html</id><summary type="html">&lt;p&gt;Following up on my task to make it easier to benchmark memory usage in
+for actual use, and therefore for merging into&amp;nbsp;memory_profiler.&lt;/p&gt;</content><category term="benchmarking"></category><category term="IPython"></category><category term="magic"></category><category term="memit"></category><category term="mprun"></category><category term="benchmarking"></category><category term="python"></category></entry><entry><title>More on memory benchmarking</title><link href="//vene.ro/blog/more-on-memory-benchmarking.html" rel="alternate"></link><published>2012-07-02T11:27:00+02:00</published><updated>2012-07-02T11:27:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2012-07-02:/blog/more-on-memory-benchmarking.html</id><summary type="html">&lt;p&gt;Following up on my task to make it easier to benchmark memory usage in
 Python, I updated Fabian&amp;#8217;s [memory_profiler][] to include a couple of
 useful IPython magics. While in my &lt;a href="http://localhost:8001/2012/06/30/quick-memory-usage-benchmarking-in-ipython/" title="Quick memory usage benchmarking in IPython"&gt;last post&lt;/a&gt;, I used the new IPython
-0.13 syntax for defining magics, this time I used the
-backwards-compatible …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Following up on my task to make it easier to benchmark memory usage in
+0.13 syntax for defining magics, this time I used the …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Following up on my task to make it easier to benchmark memory usage in
 Python, I updated Fabian&amp;#8217;s [memory_profiler][] to include a couple of
 useful IPython magics. While in my &lt;a href="http://localhost:8001/2012/06/30/quick-memory-usage-benchmarking-in-ipython/" title="Quick memory usage benchmarking in IPython"&gt;last post&lt;/a&gt;, I used the new IPython
 0.13 syntax for defining magics, this time I used the

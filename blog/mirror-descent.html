@@ -89,7 +89,6 @@ constrained variable <span class="arithmatex">\(x\)</span> with some squishing f
 </ul>
 </div>
 <script src="https://unpkg.com/d3@3/d3.min.js"></script>
-
 <style type="text/css">
 
 #plotdiv {text-align: center;}
@@ -155,7 +154,9 @@ problem as well. If not, the answer can be found by <em>clipping</em> to the&nbs
 <div class="arithmatex">\[ x^\star = \operatorname{clip}_{[a,b]}(x_\text{unc}^\star)
 \coloneqq \max(a, \min(b, x_\text{unc}^\star))\,.
 \]</div>
-<details class="note"><summary>Proof</summary><p>We add non-negative dual variables <span class="arithmatex">\(\mu_a\)</span> and <span class="arithmatex">\(\mu_b\)</span> to handle the inequality
+<details class="note">
+<summary>Proof</summary>
+<p>We add non-negative dual variables <span class="arithmatex">\(\mu_a\)</span> and <span class="arithmatex">\(\mu_b\)</span> to handle the inequality
 constraints <span class="arithmatex">\(x \geq a\)</span> and <span class="arithmatex">\(x \leq b\)</span>, and write the&nbsp;Lagrangian,</p>
 <div class="arithmatex">\[\mathcal{L}(x) = f(x) + \mu_a (a-x) + \mu_b(x-b)\,.\]</div>
 <p>An optimal <span class="arithmatex">\(x^\star\)</span> must satisfiy the original constraints <span class="arithmatex">\((a \leq x^\star \leq b)\)</span>
@@ -186,10 +187,11 @@ By assumption, <span class="arithmatex">\(a-x^\star_\text{unc} &gt; 0\)</span>, 
 <p>The following interactive demo might convince you that this is true. We show the
 1-d function <span class="arithmatex">\(f(x) = (x - x_0)^2 / 2\)</span> and its minimizer constrained to <span class="arithmatex">\([0, 1]\)</span>.
 Drag the slider to change the location of the unconstrained minimizer <span class="arithmatex">\(x_0\)</span>.</p>
-<p><div id="plotdiv">
+<div id="plotdiv">
   <svg id="onedimplot" preserveAspectRatio="xMinYMin meet" viewBox="0 0 550 150"></svg> <br />
     <input type="range" min="-1" max="2" step=".001" oninput="plot(this.value)" onchange="plot(this.value)">
-  </div></p>
+  </div>
+
 <script>
 var w = 500;
 var h = 100;
@@ -316,7 +318,7 @@ as well as a minimal gradient descent loop from&nbsp;scratch.</p>
 
 <span class="n">torch</span><span class="o">.</span><span class="n">set_default_dtype</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">double</span><span class="p">)</span>
 
-<span class="n">x0</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mf">1.5</span><span class="p">,</span> <span class="o">.</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">x0</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">.1</span><span class="p">])</span>
 <span class="n">Q</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">],</span>
                   <span class="p">[</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">]])</span>
 
@@ -326,7 +328,7 @@ as well as a minimal gradient descent loop from&nbsp;scratch.</p>
     <span class="k">return</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">z</span> <span class="o">*</span> <span class="n">Qz</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">optim_grad</span><span class="p">(</span><span class="n">x_init</span><span class="p">,</span> <span class="n">lr</span><span class="o">=.</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">optim_grad</span><span class="p">(</span><span class="n">x_init</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="mf">.1</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">x_init</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span><span class="o">.</span><span class="n">requires_grad_</span><span class="p">()</span>
 
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_iter</span><span class="p">):</span>
@@ -336,7 +338,6 @@ as well as a minimal gradient descent loop from&nbsp;scratch.</p>
 
     <span class="k">return</span> <span class="n">x</span>
 </code></pre></div>
-
 
 <p>This procedure quickly converges to <span class="arithmatex">\(x^\star_\text{unc} = (1.5, .1)\)</span>.</p>
 <h1 id="ways-to-deal-with-constraints">Ways to deal with constraints.<a class="headerlink" href="#ways-to-deal-with-constraints" title="Permanent link">&para;</a></h1>
@@ -391,7 +392,7 @@ unconstrained non-convex&nbsp;problem</p>
 When reparametrizing, <span class="arithmatex">\(x\)</span> is no longer a learned parameter, but a function of
 the learned parameter <span class="arithmatex">\(u\)</span>. The gradient with respect to <span class="arithmatex">\(u\)</span> can be handled
 automatically by PyTorch&nbsp;autodiff:</p>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">optim_reparam</span><span class="p">(</span><span class="n">u_init</span><span class="p">,</span> <span class="n">lr</span><span class="o">=.</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">optim_reparam</span><span class="p">(</span><span class="n">u_init</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="mf">.1</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
     <span class="n">u</span> <span class="o">=</span> <span class="n">u_init</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span><span class="o">.</span><span class="n">requires_grad_</span><span class="p">()</span>
 
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_iter</span><span class="p">):</span>
@@ -401,7 +402,6 @@ automatically by PyTorch&nbsp;autodiff:</p>
 
     <span class="k">return</span> <span class="n">u</span>
 </code></pre></div>
-
 
 <p>With a very small learning rate, we get a glimpse into the dynamics of this
 method.<label for="sn-6" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-6" class="margin-toggle"/><span class="sidenote">As the learning rate goes to zero, we are simulating a
@@ -425,7 +425,9 @@ Since <span class="arithmatex">\(\sigma\)</span> acts elementwise, its Jacobian 
 We can thus see that as <span class="arithmatex">\(x_i\)</span> approaches <span class="arithmatex">\(0\)</span> or <span class="arithmatex">\(1\)</span>, the reparametrization rescales the
 gradient <strong>severely</strong>, bringing the effective step size toward 0.
 It can help to see the concrete values and shapes of these&nbsp;matrices:</p>
-<details class="note"><summary>Calculation</summary><p>Let&#8217;s consider two points: first far, then close to the optimum.
+<details class="note">
+<summary>Calculation</summary>
+<p>Let&#8217;s consider two points: first far, then close to the optimum.
 We use that <span class="arithmatex">\(\nabla_x f(x) = Q(x - x_0)\)</span>.
 (Note: all vectors below are column&nbsp;vectors.)</p>
 <p><div class="wraptable">
@@ -486,7 +488,7 @@ built-in optimizers in major frameworks.</span>
 For box constraints, the projection can be computed efficiently, since
 <span class="arithmatex">\(\big[\!\operatorname{Proj}_{[0,1]^d}(x)\big]_i = \operatorname{clip}_{[0,1]}(x_i).\)</span>
 The implementation&nbsp;follows:</p>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">optim_pg</span><span class="p">(</span><span class="n">x_init</span><span class="p">,</span> <span class="n">lr</span><span class="o">=.</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">optim_pg</span><span class="p">(</span><span class="n">x_init</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="mf">.1</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">x_init</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span><span class="o">.</span><span class="n">requires_grad_</span><span class="p">()</span>
 
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_iter</span><span class="p">):</span>
@@ -497,7 +499,6 @@ The implementation&nbsp;follows:</p>
 
     <span class="k">return</span> <span class="n">x</span>
 </code></pre></div>
-
 
 <p>Let&#8217;s visualize the trajectory. From now on, we will zoom in a bit on the region
 of&nbsp;interest.</p>
@@ -520,7 +521,9 @@ us outside of <span class="arithmatex">\(\mathcal{X}\)</span>, and then move the
 <div class="arithmatex">\[ x^{(t+1)} \leftarrow \argmin_{x \in \mathcal{X}}  \DP{\nabla f(x^{(t)})}{x} + 
 {\frac{1}{2\alpha_t}\|x - x^{(t)}\|^2}\,.
 \]</div>
-<details class="note"><summary>Explanation</summary><p>Why does this update make sense, and where does it come from? We are trying to
+<details class="note">
+<summary>Explanation</summary>
+<p>Why does this update make sense, and where does it come from? We are trying to
 minimize a function <span class="arithmatex">\(f(x)\)</span>, but we don&#8217;t know what it looks like globally: we only
 have access to its value <span class="arithmatex">\(f(x)\)</span> and its gradient <span class="arithmatex">\(\nabla f(x)\)</span> at points <span class="arithmatex">\(x\)</span>
 that we may query one at a time. At any point <span class="arithmatex">\(x_0\)</span>,
@@ -543,7 +546,9 @@ approximation is not too bad. Clearing up the constant terms from inside the
 <p>Rearranging the terms reveals exactly the projected gradient&nbsp;update,</p>
 <div class="arithmatex">\[ x^{(t+1)} \leftarrow \operatorname{Proj}_{\mathcal{X}}\big(
 x^{(t)} - \alpha_t \nabla f(x^{(t)})\big)\,.\]</div>
-<details class="note"><summary>Derivation</summary><div class="arithmatex">\[
+<details class="note">
+<summary>Derivation</summary>
+<div class="arithmatex">\[
 \begin{aligned}
  &amp; \argmin_{x \in \mathcal{X}} \DP{x}{\nabla f(x^{(t)})} + \frac{1}{2\alpha_t} \|x-x^{(t)}\|^2 \\
 =&amp; \argmin_{x \in \mathcal{X}} \DP{x}{\nabla f(x^{(t)})} + \frac{1}{2\alpha_t} \|x\|^2 - \frac{1}{\alpha_t} \DP{x}{x^{(t)}} \\
@@ -698,7 +703,9 @@ a convenient algorithm is natural gradient,<label for="sn-14" class="margin-togg
 <em>Neural computation 10.2</em>, 251-276.</span>
 which takes the&nbsp;form</p>
 <div class="arithmatex">\[ u^{(t+1)} \leftarrow u^{(t)} - \alpha_t [G(u)]^{-1} \nabla \tilde{f}(u^{(t)})\,. \]</div>
-<details class="note"><summary>Derivation</summary><p>We follow the same steps as for gradient descent, but we use the induced distance
+<details class="note">
+<summary>Derivation</summary>
+<p>We follow the same steps as for gradient descent, but we use the induced distance
 <span class="arithmatex">\(d_{u^{(t)}}\)</span> to find an update direction. We must solve the&nbsp;problem</p>
 <div class="arithmatex">\[ \argmin_{u\in\mathcal{U}} \DP{u}{\nabla \tilde{f}(u^{(t)})} + \frac{1}{2\alpha_t} 
 {(u - u^{(t)})^\top G(u^{(t)}) (u - u^{(t)})}\, \]</div>
@@ -721,7 +728,7 @@ means we can get a geometry-aware flavor of the
 <p>This algorithm produces the exact same iterates as mirror descent, but &#8212; since
 it maintains iterates in dual space &#8212; is more numerically stable.
 A first attempt at implementing natural gradient&nbsp;is:</p>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">optim_rep_natural</span><span class="p">(</span><span class="n">u_init</span><span class="p">,</span> <span class="n">lr</span><span class="o">=.</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">optim_rep_natural</span><span class="p">(</span><span class="n">u_init</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="mf">.1</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
 
     <span class="n">u</span> <span class="o">=</span> <span class="n">u_init</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span><span class="o">.</span><span class="n">requires_grad_</span><span class="p">()</span>
 
@@ -734,7 +741,6 @@ A first attempt at implementing natural gradient&nbsp;is:</p>
 
     <span class="k">return</span> <span class="n">u</span>
 </code></pre></div>
-
 
 <p>and we can visually check that we get exactly the same trajectory as mirror&nbsp;descent.</p>
 <p><img alt="Optimization trajectories. Natural gradient matches exactly mirror
@@ -774,7 +780,7 @@ Estimating or Propagating Gradients Through Stochastic Neurons for Conditional C
     <span class="k">return</span> <span class="n">SigmoidStraightThrough</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">optim_rep_natural_st</span><span class="p">(</span><span class="n">u_init</span><span class="p">,</span> <span class="n">lr</span><span class="o">=.</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">optim_rep_natural_st</span><span class="p">(</span><span class="n">u_init</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="mf">.1</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
 
     <span class="n">u</span> <span class="o">=</span> <span class="n">u_init</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span><span class="o">.</span><span class="n">requires_grad_</span><span class="p">()</span>
 
@@ -787,7 +793,6 @@ Estimating or Propagating Gradients Through Stochastic Neurons for Conditional C
 
     <span class="k">return</span> <span class="n">u</span>
 </code></pre></div>
-
 
 <p>With this <code>sigmoid_straight_through</code> nonlinearity, we can now use mirror descent
 / natural gradient to learn constrained parameters without any changes to the
