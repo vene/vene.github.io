@@ -3,10 +3,64 @@ Slug: papers
 
 # Publications
 
-(Full list on [Google Scholar](https://scholar.google.com/citations?user=7_3UAgQAAAAJ), 
-NLP papers on the [ACL Anthology](https://aclweb.org/anthology/people/vlad-niculae).)
+([Google Scholar](https://scholar.google.com/citations?user=7_3UAgQAAAAJ),
+[Semantic Scholar](https://www.semanticscholar.org/author/2114966),
+[ACL Anthology](https://aclweb.org/anthology/people/vlad-niculae) links.)
 
-## Selected work with students
+*My PhD thesis*:
+
+* Vlad Niculae.
+*Learning Deep Models with Linguistically-Inspired Structure.*
+Doctoral dissertation, Cornell University
+\[&nbsp;[open access doi](https://doi.org/10.7298/X4SJ1HVQ)&nbsp;\]
+
+*Papers*:
+
+* Evgeniia Tokarchuk, Vlad Niculae.
+On Target Representation in Continuous-output Neural Machine Translation.
+In: *Repl4NLP 2022: Workshop on Representation Learning for NLP*.
+\[&nbsp;[anthology](https://aclanthology.org/2022.repl4nlp-1.24)&nbsp;\]
+
+* Valentina Zantedeschi, Jean Kaddour, Luca Franceschi, Matt Kusner, Vlad Niculae.
+DAG learning on the Permutahedron.
+In: *ICLR 2022 Workshop on the Elements of Reasoning: Objects, Structure and Causality*.
+\[&nbsp;[pdf](https://openreview.net/pdf?id=S8X8vS_85gc)&nbsp;\]
+
+* Tsvetomila Mihaylova, Vlad Niculae, André F. T. Martins.
+Modeling Structure with Undirected Neural Networks.
+In: Proc. of *ICML 2022*.
+\[&nbsp;[arXiv](https://arxiv.org/abs/2202.03760)&nbsp;\]
+
+*  António Farinhas, Wilker Aziz, Vlad Niculae, André F. T. Martins.
+Sparse Communication via Mixed Distributions.
+In: Proc. of *ICLR 2022*.
+\[&nbsp;[arXiv](https://arxiv.org/abs/2108.02658)&nbsp;\]
+
+* André F. T. Martins, Marcos Treviso, António Farinhas, Pedro M. Q. Aguiar,
+Mário A. T. Figueiredo, Mathieu Blondel, Vlad Niculae.
+Sparse continuous distributions and Fenchel-Young losses. 2021,
+\[&nbsp;[arXiv preprint](https://arxiv.org/abs/2108.01988)&nbsp;\]
+
+* Valentina Zantedeschi, Matt J. Kusner, Vlad Niculae.
+Learning binary trees by argmin differentiation.
+In: Proc. of *ICML 2021* 
+\[&nbsp;[arXiv](https://arxiv.org/abs/2010.04627)&nbsp;\]
+\[&nbsp;[code](https://github.com/vzantedeschi/LatentTrees)&nbsp;\]
+
+* Pedro Henrique Martins, Vlad Niculae, Zita Marinho, André F. T. Martins.
+Sparse and structured visual attention.
+In: Proc. of *ICIP 2021*, IEEE 
+\[&nbsp;[arXiv](https://arxiv.org/abs/2002.05556)&nbsp;\]
+
+* André F. T. Martins, Marcos Treviso, António Farinhas, Vlad Niculae, Mário A.
+T. Figueiredo, Pedro M. Q. Aguiar.
+Sparse and Continuous Attention Mechanisms. In: Proc. of *NeurIPS 2020*
+\[&nbsp;[arXiv](https://arxiv.org/abs/2006.07214)&nbsp;\]
+
+* Mathieu Blondel, André F. T. Martins, Vlad Niculae.
+Learning with Fenchel-Young losses. JMLR *2020*.
+\[&nbsp;[arXiv](https://arxiv.org/abs/1901.02324)&nbsp;\]
+\[&nbsp;[code](https://github.com/mblondel/fenchel-young-losses)&nbsp;\]
 
 * Tsvetomila Mihaylova, Vlad Niculae, André F. T. Martins.
 Understanding the mechanics of SPIGOT: Surrogate gradients for latent structure
@@ -19,6 +73,12 @@ Efficient Marginalization of Discrete and Structured Latent Variables via Sparsi
 In: Proc. of *NeurIPS 2020*.
 \[&nbsp;[arXiv](https://arxiv.org/abs/2007.01919)&nbsp;\]
 \[&nbsp;[code](https://github.com/deep-spin/sparse-marginalization-lvm)&nbsp;\]
+
+* Vlad Niculae and André F. T. Martins.
+*LP-SparseMAP:* Differentiable relaxed optimization for sparse structured
+prediction. In: Proc. of *ICML 2020* (to appear).
+\[&nbsp;[arXiv preprint](https://arxiv.org/abs/2001.04437)&nbsp;\]
+\[&nbsp;[code](https://github.com/deep-spin/lp-sparsemap)&nbsp;\]
 
 * Gonçalo M. Correia, Vlad Niculae, André F. T. Martins.
 Adaptively sparse transformers.
@@ -33,13 +93,13 @@ In: Proc. of *ACL 2019*.
 \[&nbsp;[arXiv](https://arxiv.org/abs/1905.05702)&nbsp;\]
 \[&nbsp;[code](https://github.com/deep-spin/entmax)&nbsp;\]
 
-## Selected first-author work
 
-* Vlad Niculae and André F. T. Martins.
-*LP-SparseMAP:* Differentiable relaxed optimization for sparse structured
-prediction. In: Proc. of *ICML 2020* (to appear).
-\[&nbsp;[arXiv preprint](https://arxiv.org/abs/2001.04437)&nbsp;\]
-\[&nbsp;[code](https://github.com/deep-spin/lp-sparsemap)&nbsp;\]
+* Mathieu Blondel, André F. T. Martins, Vlad Niculae.
+Learning classifiers with Fenchel-Young losses: Generalized entropies, margins,
+and algorithms. In: Proc. of *AISTATS 2019*.
+\[&nbsp;[arXiv](https://arxiv.org/abs/1805.09717)&nbsp;\]
+\[&nbsp;[code](https://github.com/mblondel/fenchel-young-losses)&nbsp;\]
+
 
 * Vlad Niculae, André F. T. Martins, Mathieu Blondel, Claire Cardie.
 *SparseMAP:* Differentiable sparse structured inference.
@@ -64,39 +124,6 @@ In: Proc. of *NeurIPS 2017*.
 \[&nbsp;[arXiv](https://arxiv.org/abs/1705.07704)&nbsp;\]
 \[&nbsp;[code](https://github.com/vene/sparse-structured-attention)&nbsp;\]
 
-## Other publications
-
-* Valentina Zantedeschi, Matt J. Kusner, Vlad Niculae.
-Learning binary trees by argmin differentiation.
-In: Proc. of *ICML 2021* (to appear).
-\[&nbsp;[arXiv preprint](https://arxiv.org/abs/2010.04627)&nbsp;\]
-\[&nbsp;[code](https://github.com/vzantedeschi/LatentTrees)&nbsp;\]
-
-* Pedro Henrique Martins, Vlad Niculae, Zita Marinho, André F. T. Martins.
-Sparse and structured visual attention.
-In: Proc. of *ICIP 2021*, IEEE (to appear).
-\[&nbsp;[arXiv preprint](https://arxiv.org/abs/2002.05556)&nbsp;\]
-
-* André F. T. Martins, Marcos Treviso, António Farinhas, Vlad Niculae, Mário A.
-T. Figueiredo, Pedro M. Q. Aguiar.
-Sparse and Continuous Attention Mechanisms. In: Proc. of *NeurIPS 2020*
-\[&nbsp;[arXiv preprint](https://arxiv.org/abs/2006.07214)&nbsp;\]
-
-* Mathieu Blondel, André F. T. Martins, Vlad Niculae.
-Learning with Fenchel-Young losses. JMLR *2020*.
-\[&nbsp;[arXiv preprint](https://arxiv.org/abs/1901.02324)&nbsp;\]
-\[&nbsp;[code](https://github.com/mblondel/fenchel-young-losses)&nbsp;\]
-
-* Mathieu Blondel, André F. T. Martins, Vlad Niculae.
-Learning classifiers with Fenchel-Young losses: Generalized entropies, margins,
-and algorithms. In: Proc. of *AISTATS 2019*.
-\[&nbsp;[arXiv](https://arxiv.org/abs/1805.09717)&nbsp;\]
-\[&nbsp;[code](https://github.com/mblondel/fenchel-young-losses)&nbsp;\]
-
-* Vlad Niculae.
-*Learning Deep Models with Linguistically-Inspired Structure.*
-Doctoral dissertation, Cornell University
-\[&nbsp;[open access doi](https://doi.org/10.7298/X4SJ1HVQ)&nbsp;\]
 
 * Mathieu Blondel, Vlad Niculae, Takuma Otsuka, Naonori Ueda.
 Multi-output polynomial networks and factorization machines. In: Proc.

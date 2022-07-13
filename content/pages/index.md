@@ -3,7 +3,7 @@ Status: hidden
 URL:
 save_as: index.html
 
-<img id="vladpic" class="marginnote" src="vlad-niculae.jpg" alt="Vlad Niculae" />
+<img id="vladpic" class="marginnote" src="vlad-niculae.jpg" alt="Mirror selfie of Vlad Niculae" />
 
 Hi! I'm Vlad [he/him]. I'm an assistant professor in the
 [Language Technology Lab](https://ltl.science.uva.nl), at the
@@ -16,8 +16,10 @@ I'm proud to be an advisor of some amazing PhD candidates:
   - [Evgeniia Tokarchuk](https://evgeniia.tokarch.uk/)
   - [Tsvetomila Mihaylova](https://tsvm.github.io/)
   - [Gonçalo M. Correia](https://goncalomcorreia.github.io/).
-<!--<span style="font-weight: bold">
-I am recruiting one [*PhD candidate in ML for NLP.*](/jobs.html)</span>-->
+
+<span style="font-weight: bold">
+I am recruiting one [*PhD candidate in ML for NLP.*](/jobs.html)</span>
+
 
 I obtained my PhD from [Cornell](http://www.cs.cornell.edu/) in 2018,
 advised by [Claire Cardie](http://www.cs.cornell.edu/home/cardie/),

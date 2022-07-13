@@ -1,20 +1,35 @@
 Title: Open Positions
 Slug: jobs
 
-# No open positions at the moment.
+# Open PhD position
 
-I have recently advertised a position at the UvA on this page. The application
-deadline ended Nov 19, 2020. Keeping the text below for applicants to consult.
+I have an opening for one PhD candidate in
+Machine Learning for Natural Language Processing.
 
-This is a ML for NLP position with some topic flexibility. Some ideas for linguistic
-phenomena we might study, depending on your interests, are
+The call is at [this link](https://vacatures.uva.nl/UvA/job/PhD-Position-in-Machine-Learning-for-Natural-Language-Processing/750676902/), alongside instructions to apply. Please apply
+via that link by Aug 21 2022. 
 
- - discourse and argumentation structure;
- - conversation modelling;
- - coreference;
- - syntactic and semantic structure;
- - generation with constraints;
- - multilinguality.
+**Emailing me:** Don't email me to apply: you must use the website or else I
+can't consider you. Do email me with any specific questions -- please include
+<tt>[PhD 9665]</tt> in the subject line so my filters can catch your email.
+
+The angle of this position is specifically on
+expressiveness, controllability, transparency, and efficiency of deep generative
+models of language. We will be particularly looking into overcoming the tension 
+between the discreteness of language and the continuity of deep learning and 
+taking cue from recent developments in continuous energy-based models and
+diffusion models.
+
+However, if you are interested in joining the team, perhaps this specific
+listing does not speak to you, but you are interested in:
+
+ - Uncertainty-aware generative models of language / conversations
+ - Explainability methods for language generation and structured prediction
+ - Adaptable, multimodal generation and translation
+ - Use of context in natural language generation problems
+
+then I encourage you to apply anyway, and please mention this in your letter
+clearly.
 
 We will rely on a selection of machine learning techniques. My research
 gravitates around structured prediction, latent variable models, sparsity,
@@ -31,8 +46,9 @@ See this captured in my [recent papers](/papers.html).
 # Advising Statement
 
 It's a good idea to be skeptical about working with an advisor who is early in
-their career. Talking to their other students is always good: I am currently co-advising
-[Tsvetomila Mihaylova](https://tsvm.github.io/)
+their career. Talking to their other students is always good: 
+I am currently advising [Evgeniia Tokarchuk](https://evgeniia.tokarch.uk/) 
+at UvA, and have co-advised [Tsvetomila Mihaylova](https://tsvm.github.io/)
 and [Gonçalo M. Correia](https://goncalomcorreia.github.io/).
 You can also write to me with any questions.
 
