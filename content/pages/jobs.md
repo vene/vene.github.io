@@ -54,7 +54,7 @@ See this captured in my [recent papers](/papers.html).
 
 # FAQ:
 
-- The master's thesis requirement is unfortunately firm, and out of my control.
+- The master's degree requirement is unfortunately firm, and out of my control.
 - We are looking for a starting date of Sept-Dec 2022. Please specify your
   availability in the application.
 - In your letter, focus on **what you want to do** in your PhD, not as much on
