@@ -1,7 +1,7 @@
 Title: Publications
 Slug: papers
-
 # Publications
+
 
 ([Google Scholar](https://scholar.google.com/citations?user=7_3UAgQAAAAJ),
 [Semantic Scholar](https://www.semanticscholar.org/author/2114966),
@@ -15,6 +15,17 @@ Doctoral dissertation, Cornell University
 \[&nbsp;[open access doi](https://doi.org/10.7298/X4SJ1HVQ)&nbsp;\]
 
 *Papers*:
+
+* André F. T. Martins, Marcos Treviso, António Farinhas, Pedro M. Q. Aguiar,
+Mário A. T. Figueiredo, Mathieu Blondel, Vlad Niculae.
+Sparse continuous distributions and Fenchel-Young losses. *JMLR 2022*, to
+appear.
+\[&nbsp;[arXiv preprint](https://arxiv.org/abs/2108.01988)&nbsp;\]
+\[&nbsp;[code](https://github.com/deep-spin/sparse_continuous_distributions/)&nbsp;\]
+
+* Ali Araabi, Christof Monz, Vlad Niculae.
+How Effective is Byte Pair Encoding for Out-Of-Vocabulary Words in Neural Machine Translation?
+In: *AMTA 2022*, to appear.
 
 * Evgeniia Tokarchuk, Vlad Niculae.
 On Target Representation in Continuous-output Neural Machine Translation.
@@ -36,10 +47,6 @@ Sparse Communication via Mixed Distributions.
 In: Proc. of *ICLR 2022*.
 \[&nbsp;[arXiv](https://arxiv.org/abs/2108.02658)&nbsp;\]
 
-* André F. T. Martins, Marcos Treviso, António Farinhas, Pedro M. Q. Aguiar,
-Mário A. T. Figueiredo, Mathieu Blondel, Vlad Niculae.
-Sparse continuous distributions and Fenchel-Young losses. 2021,
-\[&nbsp;[arXiv preprint](https://arxiv.org/abs/2108.01988)&nbsp;\]
 
 * Valentina Zantedeschi, Matt J. Kusner, Vlad Niculae.
 Learning binary trees by argmin differentiation.
