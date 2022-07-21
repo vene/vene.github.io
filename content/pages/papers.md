@@ -164,6 +164,12 @@ on an online strategy game. In: Proc. of *ACL 2015*.
 \[&nbsp;[website](http://snap.stanford.edu/quotus/)&nbsp;\]
 \[&nbsp;[slides](papers/quotus-talk-vlad-web.pdf)&nbsp;\]
 
+* Marcos Zampieri, Alina Maria Ciobanu, Vlad Niculae, Liviu P. Dinu.
+*AMBRA:* A ranking approach to temporal text classification.
+In: Proc. of *Semeval 2015*.
+\[&nbsp;[anthology](https://aclweb.org/anthology/papers/S/S15/S15-2144/)&nbsp;]
+\[&nbsp;[code](http://github.com/vene/ambra)&nbsp;\]
+
 * Vlad Niculae and Cristian Danescu-Niculescu-Mizil.
 *Brighter than Gold:* Figurative language in user generated comparisons.
 In: Proc. of *EMNLP 2014*.
@@ -174,15 +180,6 @@ In: Proc. of *EMNLP 2014*.
 Temporal text ranking and automatic dating of texts. In: Proc. of *EACL 2014*.
 \[&nbsp;[anthology](https://aclweb.org/anthology/papers/W/W13/W13-2714/)&nbsp;\]
 \[ [&nbsp;slides&nbsp;](papers/eacl14-temporal-slides.pdf) \]
-
-## Workshops
-
-* Marcos Zampieri, Alina Maria Ciobanu, Vlad Niculae, Liviu P. Dinu.
-*AMBRA:* A ranking approach to temporal text classification.
-In: Proc. of *Semeval 2015*.
-\[&nbsp;[anthology](https://aclweb.org/anthology/papers/S/S15/S15-2144/)&nbsp;]
-\[&nbsp;[code](http://github.com/vene/ambra)&nbsp;\]
-
 
 * Vlad Niculae. Comparison pattern matching and creative simile recognition. In:
 Proc. of *JSSP 2013*.
