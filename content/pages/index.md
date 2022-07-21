@@ -18,7 +18,7 @@ I'm proud to be an advisor of some amazing PhD candidates:
   - [Gonçalo M. Correia](https://goncalomcorreia.github.io/).
 
 <span style="font-weight: bold">
-I am recruiting one [*PhD candidate in ML for NLP.*](/jobs.html)</span>
+I am recruiting **two** [*PhD candidates in ML for NLP.*](/jobs.html)</span>
 
 
 I obtained my PhD from [Cornell](http://www.cs.cornell.edu/) in 2018,
@@ -32,8 +32,9 @@ library for factorization machines and polynomial networks in Python.
 
 
 # News
+  - Jul 21. [Hiring!](/jobs.html)
   - Dec 16. I was awarded a <strong>NWO Veni</strong> grant from the Dutch Research Council, funding my research for the next three years.
-  - Mar 26, talk at IRLab UvA: [*marginalize over sparse distributions when training latent variable models*](talks/21-marginalize.pdf). [(*past talks*)](/talks.html)
+  - I've been giving [(*some talks*)](/talks.html).
 
 # Contact
 You can find me on twitter as

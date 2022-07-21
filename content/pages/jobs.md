@@ -3,8 +3,13 @@ Slug: jobs
 
 # Open PhD position
 
-I have an opening for one PhD candidate in
+**Update**: There are now **two** positions rather than just one.  Descriptions
+below are updated July 21, and I have also added a FAQ section.
+
+I have an opening for **two** PhD candidates in
 Machine Learning for Natural Language Processing.
+
+Positions are **fully funded** for four years.
 
 The call is at [this link](https://vacatures.uva.nl/UvA/job/PhD-Position-in-Machine-Learning-for-Natural-Language-Processing/750676902/), alongside instructions to apply. Please apply
 via that link by Aug 21 2022. 
@@ -13,28 +18,32 @@ via that link by Aug 21 2022.
 can't consider you. Do email me with any specific questions -- please include
 <tt>[PhD 9665]</tt> in the subject line so my filters can catch your email.
 
-The angle of this position is specifically on
-expressiveness, controllability, transparency, and efficiency of deep generative
-models of language. We will be particularly looking into overcoming the tension 
-between the discreteness of language and the continuity of deep learning and 
-taking cue from recent developments in continuous energy-based models and
-diffusion models.
+Both positions are on deep generative models of language.
 
-However, if you are interested in joining the team, perhaps this specific
-listing does not speak to you, but you are interested in:
+One of the positions, connected to the Hybrid Intelligence project, is oriented
+toward controllability, constraints, and geometry in deep generative models of
+language via continuous representations, taking cue from recent developments in
+continuous energy-based models and diffusion models. We will be particularly
+looking into *continuous* models of language, to overcome the tension between
+the discreteness of language and the continuity of deep learning, taking cue
+from recent developments in continuous energy-based models and diffusion models.
 
- - Uncertainty-aware generative models of language / conversations
- - Explainability methods for language generation and structured prediction
- - Adaptable, multimodal generation and translation
- - Use of context in natural language generation problems
+The other position is in connection with another broader collaborative project,
+also involving [Dr. Wilker Aziz](https://wilkeraziz.github.io/) at the ILLC, and is along the following lines:
 
-then I encourage you to apply anyway, and please mention this in your letter
-clearly.
+ - Representing, quantifying, and using uncertainty in generative models of language, conversations, or other linguistic structures;
+ - Explainability methods for conditional language generation, in particular with long documents and contexts;
+ - Adaptable, multi-modality aware generation, responsive to context, constraints and preferences.
+
+Please pick one or two of these directions and express and justify your interest
+in it in application letter. A strong application should also demonstrate
+awareness of some of the recent work in these directions, and should briefly
+describe research ideas in relationship to existing work.
 
 We will rely on a selection of machine learning techniques. My research
 gravitates around structured prediction, latent variable models, sparsity,
 convex and constrained optimization, and geometry (machine learning on
-manifolds.) Importantly, **I am not looking for an expert in these ML topics.**
+manifolds.) Importantly, **You do not have to already be an expert in these ML topics.**
 But if you have ML basics and you are enthusiastic to study one or more of these
 (or related) topics, together with me, in order to apply them in NLP research, 
 you are a perfect fit!
@@ -42,6 +51,22 @@ you are a perfect fit!
 The flavor of my research is to integrate structured and discrete
 representations into the ``soft'' computation of neural networks.
 See this captured in my [recent papers](/papers.html).
+
+# FAQ:
+
+- The master's thesis requirement is unfortunately firm, and out of my control.
+- We are looking for a starting date of Sept-Dec 2022. Please specify your
+  availability in the application.
+- In your letter, focus on **what you want to do** in your PhD, not as much on
+  what you have done in the past (especially if your past work is not on the
+  very specific topics in this call.) 
+- If you want to do your master's at the UvA and work with me, emailing me does
+  not help; you must apply [to the
+  program](https://www.uva.nl/en/programmes/masters/artificial-intelligence/artificial-intelligence.html).
+  At UvA, master's students usually are not attached to research labs, but me
+  or my LTL colleagues can advise your thesis project in the second year.
+- I don't at the moment have the ability or the capacity to recruit interns or
+  self-funded PhD students.
 
 # Advising Statement
 
