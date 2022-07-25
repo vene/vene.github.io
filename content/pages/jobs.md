@@ -29,7 +29,10 @@ the discreteness of language and the continuity of deep learning, taking cue
 from recent developments in continuous energy-based models and diffusion models.
 
 The other position is in connection with another broader collaborative project,
-also involving [Dr. Wilker Aziz](https://wilkeraziz.github.io/) at the ILLC, and is along the following lines:
+also involving [Dr. Wilker Aziz](https://wilkeraziz.github.io/) at the ILLC, who
+has posted a 
+[related call](https://vacatures.uva.nl/UvA/job/PhD-position-in-machine-learning-for-uncertainty-aware-and-explainable-models-of-natural-language/751458902/),
+and is along the following lines:
 
  - Representing, quantifying, and using uncertainty in generative models of language, conversations, or other linguistic structures;
  - Explainability methods for conditional language generation, in particular with long documents and contexts;
