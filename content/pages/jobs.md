@@ -1,10 +1,11 @@
 Title: Open Positions
 Slug: jobs
 
-# Open PhD position
+# No openings at the moment.
 
-**Update**: There are now **two** positions rather than just one.  Descriptions
-below are updated July 21, and I have also added a FAQ section.
+There was a recent opening for two PhD positions. The application window has
+closed and we cannot accept further applications. Keeping the text below for a
+short time for reference.
 
 I have an opening for **two** PhD candidates in
 Machine Learning for Natural Language Processing.
