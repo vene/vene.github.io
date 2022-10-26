@@ -18,17 +18,18 @@ Doctoral dissertation, Cornell University
 
 * André F. T. Martins, Marcos Treviso, António Farinhas, Pedro M. Q. Aguiar,
 Mário A. T. Figueiredo, Mathieu Blondel, Vlad Niculae.
-Sparse continuous distributions and Fenchel-Young losses. *JMLR 2022*, to
-appear.
+Sparse continuous distributions and Fenchel-Young losses. *JMLR 2022*.
+\[&nbsp;[jmlr abs](https://www.jmlr.org/papers/v23/21-0879.html)&nbsp;\]
 \[&nbsp;[arXiv preprint](https://arxiv.org/abs/2108.01988)&nbsp;\]
 \[&nbsp;[code](https://github.com/deep-spin/sparse_continuous_distributions/)&nbsp;\]
 
 * Ali Araabi, Christof Monz, Vlad Niculae.
-How Effective is Byte Pair Encoding for Out-Of-Vocabulary Words in Neural Machine Translation?
-In: *AMTA 2022*, to appear.
+How effective is Byte Pair Encoding for out-of-vocabulary words in Neural Machine Translation?
+In: *AMTA 2022*.
+\[&nbsp;[anthology](https://aclanthology.org/2022.amta-research.9/)&nbsp;]
 
 * Evgeniia Tokarchuk, Vlad Niculae.
-On Target Representation in Continuous-output Neural Machine Translation.
+On target representation in continuous-output Neural Machine Translation.
 In: *Repl4NLP 2022: Workshop on Representation Learning for NLP*.
 \[&nbsp;[anthology](https://aclanthology.org/2022.repl4nlp-1.24)&nbsp;\]
 
@@ -38,15 +39,14 @@ In: *ICLR 2022 Workshop on the Elements of Reasoning: Objects, Structure and Cau
 \[&nbsp;[pdf](https://openreview.net/pdf?id=S8X8vS_85gc)&nbsp;\]
 
 * Tsvetomila Mihaylova, Vlad Niculae, André F. T. Martins.
-Modeling Structure with Undirected Neural Networks.
+Modeling structure with Undirected Neural Networks.
 In: Proc. of *ICML 2022*.
 \[&nbsp;[arXiv](https://arxiv.org/abs/2202.03760)&nbsp;\]
 
 *  António Farinhas, Wilker Aziz, Vlad Niculae, André F. T. Martins.
-Sparse Communication via Mixed Distributions.
+Sparse communication via mixed distributions.
 In: Proc. of *ICLR 2022*.
 \[&nbsp;[arXiv](https://arxiv.org/abs/2108.02658)&nbsp;\]
-
 
 * Valentina Zantedeschi, Matt J. Kusner, Vlad Niculae.
 Learning binary trees by argmin differentiation.

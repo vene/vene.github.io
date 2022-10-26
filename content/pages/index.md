@@ -17,9 +17,6 @@ I'm proud to be & have been a doctoral advisor of some amazing scientists:
   - [dr. Tsvetomila Mihaylova](https://tsvm.github.io/)
   - [dr. Gonçalo M. Correia](https://goncalomcorreia.github.io/).
 
-<span style="font-weight: bold">
-I am recruiting **two** [*PhD candidates in ML for NLP.*](/jobs.html)</span>
-
 
 I obtained my PhD from [Cornell](http://www.cs.cornell.edu/) in 2018,
 advised by [Claire Cardie](http://www.cs.cornell.edu/home/cardie/),
@@ -32,8 +29,9 @@ library for factorization machines and polynomial networks in Python.
 
 
 # News
-  - Jul 21. [Hiring!](/jobs.html)
-  - Dec 16. I was awarded a <strong>NWO Veni</strong> grant from the Dutch Research Council, funding my research for the next three years.
+  - Oct 25. Serving as Senior Area Chair for EACL 2023.
+  - Oct 1. Coordinating the Horizon Europe UTTER project alongside [Wilker Aziz](https://wilkeraziz.github.io).
+  - Dec 16. Awarded a <strong>NWO Veni</strong> grant from the Dutch Research Council, funding my research for the next three years.
   - I've been giving [(*some talks*)](/talks.html).
 
 # Contact
