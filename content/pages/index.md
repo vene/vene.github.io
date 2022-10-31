@@ -3,7 +3,7 @@ Status: hidden
 URL:
 save_as: index.html
 
-<img id="vladpic" class="marginnote" src="vlad-niculae.jpg" alt="Mirror selfie of Vlad Niculae" />
+<img id="vladpic" class="marginnote" src="vlad-niculae.jpg" alt="Selfie of Vlad Niculae with his cat Orion" />
 <div id="vita" class="marginnote">
 Dr. Vlad Niculae [he/him] <br/>
 Assistant Professor (UD2)<br/> 
