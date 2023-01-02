@@ -69,9 +69,10 @@ PAGE_URL = '{slug}.html'
 PAGE_SAVE_AS = PAGE_URL
 INDEX_SAVE_AS = 'blog/index.html'
 DISPLAY_CATEGORIES_ON_MENU = False
-MENUITEMS = (('Papers', 'papers.html'),
+MENUITEMS = (('Research', 'papers.html'),
              ('Blog', 'blog/'),
-             ('Teaching', 'teaching.html'))
+             ('Teaching', 'teaching.html'),
+             ('Students', 'students.html'))
 
 STATIC_PATHS = ['papers',
                 'talks',

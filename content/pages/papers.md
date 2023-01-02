@@ -1,7 +1,16 @@
-Title: Publications
+Title: Research
 Slug: papers
-# Publications
 
+# My research
+
+## Projects
+I am currently working on the following funded research projects:
+
+ - NWO VI.Veni.212.228 ``Rethinking Natural Language Generation: Bridging the Gap Between Discrete and Continuous Representations''
+ - Horizon Europe 101070631 ``UTTER: Unified Transcription and Translation for
+   Extended Reality''
+
+## Publications
 
 ([Google Scholar](https://scholar.google.com/citations?user=7_3UAgQAAAAJ),
 [Semantic Scholar](https://www.semanticscholar.org/author/2114966),
@@ -19,8 +28,8 @@ Doctoral dissertation, Cornell University
 * André F. T. Martins, Marcos Treviso, António Farinhas, Pedro M. Q. Aguiar,
 Mário A. T. Figueiredo, Mathieu Blondel, Vlad Niculae.
 Sparse continuous distributions and Fenchel-Young losses. *JMLR 2022*.
-\[&nbsp;[jmlr abs](https://www.jmlr.org/papers/v23/21-0879.html)&nbsp;\]
-\[&nbsp;[arXiv preprint](https://arxiv.org/abs/2108.01988)&nbsp;\]
+\[&nbsp;[jmlr&nbsp;abs](https://www.jmlr.org/papers/v23/21-0879.html)&nbsp;\]
+\[&nbsp;[arXiv&nbsp;preprint](https://arxiv.org/abs/2108.01988)&nbsp;\]
 \[&nbsp;[code](https://github.com/deep-spin/sparse_continuous_distributions/)&nbsp;\]
 
 * Ali Araabi, Christof Monz, Vlad Niculae.

@@ -257,12 +257,19 @@ img { width: 100%; }
 #vladpic
 {
   display: block;
-  text-align: center;
+  float: left;
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  margin-left: auto;
-  margin-right: auto;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+}
+
+#vita
+{
+  display: block;
+  float: left;
+  width: 200px;
 }
 
 
@@ -278,7 +285,7 @@ div#container{
   text-transform: uppercase;
   font-weight: bold;
   list-style-type: none;
-  margin-bottom: 1.5rem;
+  margin-bottom: 3rem;
 }
 
 #navmenu li#homelink {
@@ -288,20 +295,12 @@ div#container{
 }
 #navmenu li.menu {
   font-size: 1.33rem;
-  display: inline;
+  display: block;
 }
 
 #navmenu a {
   background: none;
   text-shadow: none;
-}
-
-#navmenu li.menu:after {
-    content: " ⋅ ";
-    /* content: " ⋅ \00B7"; */
-}
-#navmenu li:last-child:after {
-    content: "";
 }
 
 /* Code and notebooks */
@@ -439,23 +438,42 @@ details.no-details:not([open]) summary {
   .katex {
     font-size: 1.21em;
   }
+
 }
 
 @media only screen and (min-width: 860px) {
   #navmenu {
     font-size: 2.11rem;
-    margin-bottom: 3rem;
     line-height: 3rem;
+    margin-bottom: 1rem;
   }
+
   #navmenu li#homelink,
   #navmenu li.menu  {
     display: inline;
-    font-size: inherit;
     line-height: inherit;
     margin: inherit;
   }
 
-  #navmenu li#homelink:after {content: " ⋅ ";}
+  #navmenu li#homelink{
+    font-size: inherit;
+  }
+
+  #navmenu li.menu{
+    font-size: 1.5rem;
+  }
+
+  #navmenu li.menu:after {
+      content: " ⋅ ";
+      /* content: " ⋅ \00B7"; */
+  }
+
+  #navmenu li:last-child:after {
+      content: "";
+  }
+
+
+  /*#navmenu li#homelink:after {content: " ⋅ ";}*/
 
   label.margin-toggle:not(.sidenote-number) { display: none; }
   input.margin-toggle { display: none; }
@@ -470,10 +488,23 @@ details.no-details:not([open]) summary {
   }
 
   #vladpic {
+    float: right;
     width: 200px;
     height: 200px;
     margin-left: 1rem;
     margin-right: -270px;
+  }
+
+  #vita {
+    float: right; 
+    width: 200px;
+    margin-top: 1rem;
+    margin-left: 1rem;
+    margin-right: -270px;
+  }
+
+  #cleartiny {
+    display: none;
   }
 }
 
