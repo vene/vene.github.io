@@ -285,7 +285,7 @@ historical wall of fame or&amp;nbsp;shame).&lt;/p&gt;</content><category term="s
 string. The constructor&amp;#8217;s signature&amp;nbsp;is:  &lt;/p&gt;
 &lt;p&gt;&lt;code&gt;Benchmark(self, code, setup, ncalls=None, repeat=3, cleanup=None, name=None, description=None, start_date=None, logy=False)&lt;/code&gt;.&lt;/p&gt;
 &lt;h2 id="why-generate-benchmarks-dynamically"&gt;Why generate benchmarks dynamically?&lt;a class="headerlink" href="#why-generate-benchmarks-dynamically" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;For most &lt;code&gt;scikit-learn&lt;/code&gt; purposes, the &lt;code&gt;code&lt;/code&gt; string will …&lt;/p&gt;</summary><content type="html">&lt;p&gt;To construct a &lt;code&gt;vbench&lt;/code&gt; benchmark you need a setup string and a code
+&lt;p&gt;For most &lt;code&gt;scikit-learn&lt;/code&gt; purposes, the &lt;code&gt;code&lt;/code&gt; string will be …&lt;/p&gt;</summary><content type="html">&lt;p&gt;To construct a &lt;code&gt;vbench&lt;/code&gt; benchmark you need a setup string and a code
 string. The constructor&amp;#8217;s signature&amp;nbsp;is:  &lt;/p&gt;
 &lt;p&gt;&lt;code&gt;Benchmark(self, code, setup, ncalls=None, repeat=3, cleanup=None, name=None, description=None, start_date=None, logy=False)&lt;/code&gt;.&lt;/p&gt;
 &lt;h2 id="why-generate-benchmarks-dynamically"&gt;Why generate benchmarks dynamically?&lt;a class="headerlink" href="#why-generate-benchmarks-dynamically" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;

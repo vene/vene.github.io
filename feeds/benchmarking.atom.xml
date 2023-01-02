@@ -3,7 +3,7 @@
 with its applications, since high school. The inverse of a matrix
 $latex A$, if it exists, is the matrix $latex A\^{-1}$ such that
 $latex &lt;span class="caps"&gt;AA&lt;/span&gt;\^{-1} = A\^{-1}A = I_n$. Based on the requirement that the
-left …&lt;/p&gt;</summary><content type="html">&lt;p&gt;The matrix inverse is a cornerstone of linear algebra, taught, along
+left and …&lt;/p&gt;</summary><content type="html">&lt;p&gt;The matrix inverse is a cornerstone of linear algebra, taught, along
 with its applications, since high school. The inverse of a matrix
 $latex A$, if it exists, is the matrix $latex A\^{-1}$ such that
 $latex &lt;span class="caps"&gt;AA&lt;/span&gt;\^{-1} = A\^{-1}A = I_n$. Based on the requirement that the
@@ -234,7 +234,7 @@ linalg.pinvh(a))&lt;br /&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
 &lt;p&gt;This was accomplished by building on what I described in my recent
 posts, specifically the extensions to Fabian&amp;#8217;s [memory_profiler][] that
 you can find in &lt;a href="https://github.com/vene/memory_profiler"&gt;my fork&lt;/a&gt;, but they will be merged upstream soon. The
-key element is the &lt;code&gt;%magic_memit …&lt;/code&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;The &lt;a href="https://github.com/vene/scikit-learn-speed"&gt;scikit-learn-speed project&lt;/a&gt; now has memory usage&amp;nbsp;benchmarking!&lt;/p&gt;
+key element is the &lt;code&gt;%magic_memit&lt;/code&gt; function whose …&lt;/p&gt;</summary><content type="html">&lt;p&gt;The &lt;a href="https://github.com/vene/scikit-learn-speed"&gt;scikit-learn-speed project&lt;/a&gt; now has memory usage&amp;nbsp;benchmarking!&lt;/p&gt;
 &lt;p&gt;This was accomplished by building on what I described in my recent
 posts, specifically the extensions to Fabian&amp;#8217;s [memory_profiler][] that
 you can find in &lt;a href="https://github.com/vene/memory_profiler"&gt;my fork&lt;/a&gt;, but they will be merged upstream soon. The
@@ -350,7 +350,8 @@ flag.&lt;/p&gt;
 for actual use, and therefore for merging into&amp;nbsp;memory_profiler.&lt;/p&gt;</content><category term="benchmarking"></category><category term="IPython"></category><category term="magic"></category><category term="memit"></category><category term="mprun"></category><category term="benchmarking"></category><category term="python"></category></entry><entry><title>More on memory benchmarking</title><link href="//vene.ro/blog/more-on-memory-benchmarking.html" rel="alternate"></link><published>2012-07-02T11:27:00+02:00</published><updated>2012-07-02T11:27:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2012-07-02:/blog/more-on-memory-benchmarking.html</id><summary type="html">&lt;p&gt;Following up on my task to make it easier to benchmark memory usage in
 Python, I updated Fabian&amp;#8217;s [memory_profiler][] to include a couple of
 useful IPython magics. While in my &lt;a href="http://localhost:8001/2012/06/30/quick-memory-usage-benchmarking-in-ipython/" title="Quick memory usage benchmarking in IPython"&gt;last post&lt;/a&gt;, I used the new IPython
-0.13 syntax for defining magics, this time I used the …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Following up on my task to make it easier to benchmark memory usage in
+0.13 syntax for defining magics, this time I used the
+backwards-compatible …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Following up on my task to make it easier to benchmark memory usage in
 Python, I updated Fabian&amp;#8217;s [memory_profiler][] to include a couple of
 useful IPython magics. While in my &lt;a href="http://localhost:8001/2012/06/30/quick-memory-usage-benchmarking-in-ipython/" title="Quick memory usage benchmarking in IPython"&gt;last post&lt;/a&gt;, I used the new IPython
 0.13 syntax for defining magics, this time I used the

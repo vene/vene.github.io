@@ -26,16 +26,6 @@
 
   <!-- OpenGraph Info -->
 
-  <meta name="description" content="In document classification and other natural language processing applications, having a good measure of the similarity of two texts can be a valuable..." />
-  <meta name="keywords" content="word-embeddings, text-classification, earth-movers-distance" />
-  <meta property="og:title" content="Word Mover&#8217;s Distance in&nbsp;Python" />
-  <meta property="og:description" content="In document classification and other natural language processing applications, having a good measure of the similarity of two texts can be a valuable..." />
-  <meta property="og:url" content="https://vene.ro/blog/word-movers-distance-in-python.html" />
-
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta property="og:image" content="https://vene.ro///vene.ro/https://vene.ro/images/wmd-obama.png" />
-  <meta property="og:image:alt" content="" />
-
 
   <script src="//vene.ro/theme/js/main.js"></script>
 
@@ -64,9 +54,12 @@
  #<a href="//vene.ro/tag/word-embeddings.html">word embeddings</a> #<a href="//vene.ro/tag/text-classification.html">text classification</a> #<a href="//vene.ro/tag/earth-movers-distance.html">earth mover's distance</a></span></p>    </header>
 
     <div class="entry-content">
-      <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
+      <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><em>A guide to scikit-learn compatible nearest neighbors classification using the recently introduced word mover&#8217;s distance (<span class="caps">WMD</span>). </em>
 Joint post with the awesome <a href="http://matthewkusner.com">Matt Kusner</a>!</p>
 <p><a href="http://nbviewer.jupyter.org/github/vene/vene.github.io/blob/pelican/content/blog/word-movers-distance-in-python.ipynb">Source of this Jupyter&nbsp;notebook.</a></p>
@@ -81,24 +74,31 @@ Joint post with the awesome <a href="http://matthewkusner.com">Matt Kusner</a>!<
 <a href="http://mkusner.github.io/publications/WMD.pdf"><em>From Word Embeddings To Document Distances</em></a>,
 (Matt J. Kusner, Yu Sun, Nicholas I. Kolkin, Kilian Q. Weinberger, <span class="caps">ICML</span> 2015).
 <span class="caps">WMD</span> adapts the <a href="https://en.wikipedia.org/wiki/Earth_mover%27s_distance">earth mover&#8217;s distance</a> to the space of documents: the distance between two texts is given by the total amount of &#8220;mass&#8221; needed to move the words from one side into the other, multiplied by the distance the words need to move. So, starting from a measure of the distance between different words, we can get a principled document-level distance. Here is a visualisation of the idea, from the <span class="caps">ICML</span>&nbsp;slides:</p>
-<p><img src="https://vene.ro/images/wmd-obama.png" alt="WMD example from Matt&#39;s slides"></p>
+<p><img src="https://vene.ro/images/wmd-obama.png" alt="WMD example from Matt's slides" /></p>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Prepare-some-word-embeddings">Prepare some word embeddings<a class="anchor-link" href="#Prepare-some-word-embeddings">&#182;</a></h2><p>The key ingredient in <span class="caps">WMD</span> is a good distance measure between words.  Dense representations of words, also known by the trendier name &#8220;word embeddings&#8221; (because &#8220;distributed word representations&#8221; didn&#8217;t stick), do the trick here.  We could train the embeddings ourselves, but for meaningful results we would need tons of documents, and that might take a while. So let&#8217;s just use the ones from the <a href="https://code.google.com/p/word2vec/"><code>word2vec</code></a> team. <a href="https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit?usp=sharing">(download&nbsp;link)</a></p>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
-<div class="inner_cell">
-    <div class="input_area">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -107,16 +107,19 @@ Joint post with the awesome <a href="http://matthewkusner.com">Matt Kusner</a>!<
 <span class="kn">from</span> <span class="nn">sklearn.cross_validation</span> <span class="kn">import</span> <span class="n">train_test_split</span>
 </pre></div>
 
-    </div>
+     </div>
+</div>
 </div>
 </div>
 
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
-<div class="inner_cell">
-    <div class="input_area">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">&quot;data/embed.dat&quot;</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Caching word embeddings in memmapped format...&quot;</span><span class="p">)</span>
     <span class="kn">from</span> <span class="nn">gensim.models.word2vec</span> <span class="kn">import</span> <span class="n">Word2Vec</span>
@@ -135,36 +138,46 @@ Joint post with the awesome <a href="http://matthewkusner.com">Matt Kusner</a>!<
     <span class="n">vocab_list</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">strip</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">())</span>
 </pre></div>
 
-    </div>
+     </div>
+</div>
 </div>
 </div>
 
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
-<div class="inner_cell">
-    <div class="input_area">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">vocab_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">w</span><span class="p">:</span> <span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">vocab_list</span><span class="p">)}</span>
 </pre></div>
 
-    </div>
+     </div>
+</div>
 </div>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Reproducing-the-demo-above">Reproducing the demo above<a class="anchor-link" href="#Reproducing-the-demo-above">&#182;</a></h2>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[33]:</div>
-<div class="inner_cell">
-    <div class="input_area">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[33]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">d1</span> <span class="o">=</span> <span class="s2">&quot;Obama speaks to the media in Illinois&quot;</span>
 <span class="n">d2</span> <span class="o">=</span> <span class="s2">&quot;The President addresses the press in Chicago&quot;</span>
 
@@ -172,42 +185,52 @@ Joint post with the awesome <a href="http://matthewkusner.com">Matt Kusner</a>!<
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Features:&quot;</span><span class="p">,</span>  <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">vect</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">()))</span>
 </pre></div>
 
-    </div>
+     </div>
 </div>
 </div>
+</div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
 
 
-<div class="output_subarea output_stream output_stdout output_text">
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>Features: addresses, chicago, illinois, media, obama, president, press, speaks
 </pre>
 </div>
 </div>
 
 </div>
+
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>The two documents are completely orthogonal in terms of&nbsp;bag-of-words</p>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[71]:</div>
-<div class="inner_cell">
-    <div class="input_area">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[71]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.spatial.distance</span> <span class="kn">import</span> <span class="n">cosine</span>
 <span class="n">v_1</span><span class="p">,</span> <span class="n">v_2</span> <span class="o">=</span> <span class="n">vect</span><span class="o">.</span><span class="n">transform</span><span class="p">([</span><span class="n">d1</span><span class="p">,</span> <span class="n">d2</span><span class="p">])</span>
 <span class="n">v_1</span> <span class="o">=</span> <span class="n">v_1</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
@@ -216,20 +239,23 @@ Joint post with the awesome <a href="http://matthewkusner.com">Matt Kusner</a>!<
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;cosine(doc_1, doc_2) = </span><span class="si">{:.2f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cosine</span><span class="p">(</span><span class="n">v_1</span><span class="p">,</span> <span class="n">v_2</span><span class="p">)))</span>
 </pre></div>
 
-    </div>
+     </div>
 </div>
 </div>
+</div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
 
 
-<div class="output_subarea output_stream output_stdout output_text">
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>[0 0 1 1 1 0 0 1] [1 1 0 0 0 1 1 0]
 cosine(doc_1, doc_2) = 1.00
 </pre>
@@ -237,14 +263,17 @@ cosine(doc_1, doc_2) = 1.00
 </div>
 
 </div>
-</div>
 
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[58]:</div>
-<div class="inner_cell">
-    <div class="input_area">
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[58]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">euclidean_distances</span>
 <span class="n">W_</span> <span class="o">=</span> <span class="n">W</span><span class="p">[[</span><span class="n">vocab_dict</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">vect</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">()]]</span>
 <span class="n">D_</span> <span class="o">=</span> <span class="n">euclidean_distances</span><span class="p">(</span><span class="n">W_</span><span class="p">)</span>
@@ -252,20 +281,23 @@ cosine(doc_1, doc_2) = 1.00
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;d(addresses, chicago) = </span><span class="si">{:.2f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">D_</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]))</span>
 </pre></div>
 
-    </div>
+     </div>
 </div>
 </div>
+</div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
 
 
-<div class="output_subarea output_stream output_stdout output_text">
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>d(addresses, speaks) = 1.16
 d(addresses, chicago) = 1.37
 </pre>
@@ -273,22 +305,29 @@ d(addresses, chicago) = 1.37
 </div>
 
 </div>
+
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>We will be using <a href="https://github.com/wmayner/pyemd"><code>pyemd</code></a>, a Python wrapper for <a href="http://www.ariel.ac.il/sites/ofirpele/fastemd/">Pele and Werman&#8217;s implementation of the earth mover&#8217;s distance</a>.</p>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[74]:</div>
-<div class="inner_cell">
-    <div class="input_area">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[74]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pyemd</span> <span class="kn">import</span> <span class="n">emd</span>
 
 <span class="c1"># pyemd needs double precision input</span>
@@ -301,116 +340,147 @@ d(addresses, chicago) = 1.37
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;d(doc_1, doc_2) = </span><span class="si">{:.2f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">emd</span><span class="p">(</span><span class="n">v_1</span><span class="p">,</span> <span class="n">v_2</span><span class="p">,</span> <span class="n">D_</span><span class="p">)))</span>
 </pre></div>
 
-    </div>
+     </div>
 </div>
 </div>
+</div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
 
 
-<div class="output_subarea output_stream output_stdout output_text">
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>d(doc_1, doc_2) = 0.74
 </pre>
 </div>
 </div>
 
 </div>
+
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Document-classification">Document classification<a class="anchor-link" href="#Document-classification">&#182;</a></h2><p>We will use the <a href="http://qwone.com/~jason/20Newsgroups/"><em>20 Newsgroups</em></a> classification task.  Because <span class="caps">WMD</span> is an expensive computation, for this demo we just use a subset.  To emphasize the power of the method, we use a larger test size, but train on relatively few&nbsp;samples.</p>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
-<div class="inner_cell">
-    <div class="input_area">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">newsgroups</span> <span class="o">=</span> <span class="n">fetch_20newsgroups</span><span class="p">()</span>
 <span class="n">docs</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">newsgroups</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">newsgroups</span><span class="o">.</span><span class="n">target</span>
 </pre></div>
 
-    </div>
+     </div>
+</div>
 </div>
 </div>
 
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
-<div class="inner_cell">
-    <div class="input_area">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">docs_train</span><span class="p">,</span> <span class="n">docs_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">docs</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span>
                                                           <span class="n">train_size</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
                                                           <span class="n">test_size</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span>
                                                           <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 
-    </div>
+     </div>
+</div>
 </div>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Since the <code>W</code> embedding array is pretty huge, we might as well restrict it to just the words that actually occur in the&nbsp;dataset.</p>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
-<div class="inner_cell">
-    <div class="input_area">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">vect</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">stop_words</span><span class="o">=</span><span class="s2">&quot;english&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">docs_train</span> <span class="o">+</span> <span class="n">docs_test</span><span class="p">)</span>
 <span class="n">common</span> <span class="o">=</span> <span class="p">[</span><span class="n">word</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">vect</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">()</span> <span class="k">if</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">vocab_dict</span><span class="p">]</span>
 <span class="n">W_common</span> <span class="o">=</span> <span class="n">W</span><span class="p">[[</span><span class="n">vocab_dict</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">common</span><span class="p">]]</span>
 </pre></div>
 
-    </div>
+     </div>
+</div>
 </div>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>We can then create a fixed-vocabulary vectorizer using only the words we have embeddings&nbsp;for.</p>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
-<div class="inner_cell">
-    <div class="input_area">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">vect</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">vocabulary</span><span class="o">=</span><span class="n">common</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">double</span><span class="p">)</span>
 <span class="n">X_train</span> <span class="o">=</span> <span class="n">vect</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">docs_train</span><span class="p">)</span>
 <span class="n">X_test</span> <span class="o">=</span> <span class="n">vect</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">docs_test</span><span class="p">)</span>
 </pre></div>
 
-    </div>
+     </div>
+</div>
 </div>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>One way to proceed is to just pre-compute the pairwise distances between all documents, and use them to search for hyperparameters and evaluate the model. However, that would incur some extra computation, and <span class="caps">WMD</span> is expensive. Also, it&#8217;s not the most pleasant user interface. So we define some scikit-learn compatible estimators for computing the <span class="caps">WMD</span>.</p>
 <p><strong><code>WordMoversKNN</code></strong> subclasses from <code>KNeighborsClassifier</code> and overrides the <code>predict</code> function to compute the <span class="caps">WMD</span> between all training and test&nbsp;samples.</p>
 <p>In practice, however, we often don&#8217;t know what is the best <code>n_neighbors</code> to use.  Simply wrapping <code>WordMoversKNN</code> in a <code>GridSearchCV</code> would be rather expensive because of all the distances that would need to be recomputed for every value of <code>n_neighbors</code>. So we introduce <strong><code>WordMoversKNNCV</code></strong>, which, when fitted, performs <em>cross-validation</em> to find the best value of <code>n_neighbors</code> (under any given evaluation metric), while only computing the <span class="caps">WMD</span> once per fold, and only across folds (saving <code>n_folds * fold_size ** 2</code> evaluations).</p>
@@ -418,11 +488,14 @@ d(addresses, chicago) = 1.37
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
-<div class="inner_cell">
-    <div class="input_area">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[16]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&quot;&quot;&quot;%%file word_movers_knn.py&quot;&quot;&quot;</span>
 
 <span class="c1"># Authors: Vlad Niculae, Matt Kusner</span>
@@ -665,54 +738,63 @@ d(addresses, chicago) = 1.37
         <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">WordMoversKNNCV</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 </pre></div>
 
-    </div>
+     </div>
 </div>
 </div>
+</div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
 
 
-<div class="output_subarea output_stream output_stdout output_text">
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>Overwriting word_movers_knn.py
 </pre>
 </div>
 </div>
 
 </div>
-</div>
 
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
-<div class="inner_cell">
-    <div class="input_area">
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">knn_cv</span> <span class="o">=</span> <span class="n">WordMoversKNNCV</span><span class="p">(</span><span class="n">cv</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
                          <span class="n">n_neighbors_try</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span>
                          <span class="n">W_embed</span><span class="o">=</span><span class="n">W_common</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="n">knn_cv</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 </pre></div>
 
-    </div>
+     </div>
 </div>
 </div>
+</div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
 
 
-<div class="output_subarea output_stream output_stderr output_text">
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
 <pre>[Parallel(n_jobs=3)]: Done  12 tasks      | elapsed:   30.8s
 [Parallel(n_jobs=3)]: Done  34 out of  34 | elapsed:  2.0min finished
 [Parallel(n_jobs=3)]: Done  12 tasks      | elapsed:   25.7s
@@ -722,15 +804,14 @@ d(addresses, chicago) = 1.37
 </pre>
 </div>
 </div>
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[10]:</div>
-
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[10]:</div>
 
 
 
-<div class="output_text output_subarea output_execute_result">
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
 <pre>WordMoversKNNCV(W_embed=memmap([[ 0.04283, -0.01124, ..., -0.05679, -0.00763],
        [ 0.02884, -0.05923, ..., -0.04744,  0.06698],
        ...,
@@ -743,62 +824,74 @@ d(addresses, chicago) = 1.37
 </div>
 
 </div>
-</div>
 
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
-<div class="inner_cell">
-    <div class="input_area">
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;CV score: </span><span class="si">{:.2f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">knn_cv</span><span class="o">.</span><span class="n">cv_scores_</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()))</span>
 </pre></div>
 
-    </div>
+     </div>
 </div>
 </div>
+</div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
 
 
-<div class="output_subarea output_stream output_stdout output_text">
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>CV score: 0.38
 </pre>
 </div>
 </div>
 
 </div>
-</div>
 
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
-<div class="inner_cell">
-    <div class="input_area">
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test score: </span><span class="si">{:.2f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">knn_cv</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)))</span>
 </pre></div>
 
-    </div>
+     </div>
 </div>
 </div>
+</div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
 
 
-<div class="output_subarea output_stream output_stderr output_text">
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
 <pre>[Parallel(n_jobs=3)]: Done  12 tasks      | elapsed:   32.2s
 [Parallel(n_jobs=3)]: Done  66 tasks      | elapsed:  4.3min
 [Parallel(n_jobs=3)]: Done 156 tasks      | elapsed: 12.5min
@@ -807,51 +900,60 @@ d(addresses, chicago) = 1.37
 </pre>
 </div>
 </div>
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
-<div class="output_area">
 
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>Test score: 0.31
 </pre>
 </div>
 </div>
 
 </div>
+
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Comparison-with-other-models">Comparison with other models<a class="anchor-link" href="#Comparison-with-other-models">&#182;</a></h2><p>Now let&#8217;s see how <span class="caps">WMD</span> compares with some common approaches, on bag of words features.  The most apples-to-apples comparison would be
 K nearest neighbors with a cosine similarity metric. This approach performs worse than using <span class="caps">WMD</span>. (All scores are&nbsp;accuracies.)</p>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
-<div class="inner_cell">
-    <div class="input_area">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[13]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">LinearSVC</span>
 <span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
 <span class="kn">from</span> <span class="nn">sklearn.grid_search</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
 </pre></div>
 
-    </div>
+     </div>
+</div>
 </div>
 </div>
 
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
-<div class="inner_cell">
-    <div class="input_area">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[21]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">knn_grid</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">metric</span><span class="o">=</span><span class="s1">&#39;cosine&#39;</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="s1">&#39;brute&#39;</span><span class="p">),</span>
                         <span class="nb">dict</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">))),</span>
                         <span class="n">cv</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
@@ -860,20 +962,23 @@ K nearest neighbors with a cosine similarity metric. This approach performs wors
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test score: </span><span class="si">{:.2f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">knn_grid</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)))</span>
 </pre></div>
 
-    </div>
+     </div>
 </div>
 </div>
+</div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
 
 
-<div class="output_subarea output_stream output_stdout output_text">
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>CV score: 0.34
 Test score: 0.22
 </pre>
@@ -881,12 +986,16 @@ Test score: 0.22
 </div>
 
 </div>
+
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Another common method for text classification is the linear support vector machine on bag of words.
 This performs a bit better than vanilla cosine <span class="caps">KNN</span>, but worse than using <span class="caps">WMD</span> in this setting.  In our experience,
 this seems to depend on the amount of training data&nbsp;available.</p>
@@ -894,11 +1003,14 @@ this seems to depend on the amount of training data&nbsp;available.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
-<div class="inner_cell">
-    <div class="input_area">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[17]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">svc_grid</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">LinearSVC</span><span class="p">(),</span>
                         <span class="nb">dict</span><span class="p">(</span><span class="n">C</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="n">base</span><span class="o">=</span><span class="mi">2</span><span class="p">)),</span>
                         <span class="n">cv</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
@@ -907,20 +1019,23 @@ this seems to depend on the amount of training data&nbsp;available.</p>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test score: </span><span class="si">{:.2f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">svc_grid</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)))</span>
 </pre></div>
 
-    </div>
+     </div>
 </div>
 </div>
+</div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
 
 
-<div class="output_subarea output_stream output_stdout output_text">
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>CV score: 0.35
 Test score: 0.27
 </pre>
@@ -928,12 +1043,16 @@ Test score: 0.27
 </div>
 
 </div>
+
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="What-have-we-learned?">What have we learned?<a class="anchor-link" href="#What-have-we-learned?">&#182;</a></h2><p><span class="caps">WMD</span> is much better at capturing semantic similarity between documents than cosine, due to its ability to generalize to unseen words.  The <span class="caps">SVM</span> does somewhat better than cosine <span class="caps">KNN</span>, but still lacks such out-of-vocabulary generalization.   Given enough data, <span class="caps">WMD</span> can probably improve this margin, especially using something like metric learning on&nbsp;top.</p>
 <p>The exact <span class="caps">WMD</span>, as we have used it here, is pretty slow.  This code is not optimized as much as it could be, there is potential through caching and using Cython.
 However, a major limitation remains the cost of actually computing the <span class="caps">EMD</span>. To scale even higher, exactness can be relaxed by using lower bounds. In our next post, we will compare such optimization strategies, as discussed in <a href="http://mkusner.github.io/publications/WMD.pdf">the <span class="caps">WMD</span> paper</a>.</p>
@@ -941,7 +1060,8 @@ However, a major limitation remains the cost of actually computing the <span cla
 </div>
 </div>
 </div>
- 
+</div>
+
 
 
 <script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {

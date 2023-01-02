@@ -26,16 +26,6 @@
 
   <!-- OpenGraph Info -->
 
-  <meta name="description" content="It’s 2018, and your favorite meme pages on facebook constantly come up with quality 3d-post content. How can we mere researchers even begin to compete in..." />
-  <meta name="keywords" content="" />
-  <meta property="og:title" content="Rendering 3-d surface plots for social&nbsp;media" />
-  <meta property="og:description" content="It’s 2018, and your favorite meme pages on facebook constantly come up with quality 3d-post content. How can we mere researchers even begin to compete in..." />
-  <meta property="og:url" content="https://vene.ro/blog/rendering-3d-surface-plot-social-media.html" />
-
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta property="og:image" content="https://vene.ro///vene.ro/https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Scene_kids2.jpg/256px-Scene_kids2.jpg" />
-  <meta property="og:image:alt" content="" />
-
 
   <script src="//vene.ro/theme/js/main.js"></script>
 
@@ -181,7 +171,7 @@ the 3-d object. First, download <a href="https://github.com/mrdoob/three.js/raw/
 <a href="https://raw.githubusercontent.com/mrdoob/three.js/r95/examples/js/exporters/GLTFExporter.js">GLTFExporter.js</a> file.<label for="sn-threejsversion" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-threejsversion" class="margin-toggle"/><span class="sidenote">The links provided are for version r95, the version I
 used. Feel free to try newer versions; new features may&nbsp;appear!</span></p>
 <p>Let&#8217;s make a minimal <span class="caps">HTML</span> file to load the required&nbsp;libraries:</p>
-<div class="highlight"><pre><span></span><code><span class="c">&lt;!-- plot-glb.html --&gt;</span>
+<div class="highlight"><pre><span></span><code><span class="cm">&lt;!-- plot-glb.html --&gt;</span>
 
 <span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
@@ -189,12 +179,12 @@ used. Feel free to try newer versions; new features may&nbsp;appear!</span></p>
 <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">http-equiv</span><span class="o">=</span><span class="s">&quot;content-type&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;text/html; charset=UTF-8&quot;</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;three.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;GLTFExporter.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;data.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>  <span class="c">&lt;!-- generated above --&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;data.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>  <span class="cm">&lt;!-- generated above --&gt;</span>
 <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
 
 <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">a</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;download&quot;</span><span class="p">&gt;</span>Download .glb<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;plot-glb.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span> <span class="c">&lt;!-- we&#39;ll write this file below --&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;plot-glb.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span> <span class="cm">&lt;!-- we&#39;ll write this file below --&gt;</span>
 <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
 </code></pre></div>
