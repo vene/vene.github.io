@@ -55,10 +55,14 @@ MARKDOWN = {
 
 # Jupyter Notebook plugin
 MARKUP = ('md', 'ipynb', 'rst')
+# LIQUID_CONFIGS = (("IPYNB_FIX_CSS", "False", ""),
+                  # ("IPYNB_SKIP_CSS", "False", ""),
+                  # ("IPYNB_EXPORT_TEMPLATE", "base", ""),)
 from pelican_jupyter import markup as nb_markup
 PLUGINS = [nb_markup, "plugins.tufte_footnote", "plugins.extended_meta"]
 IPYNB_IGNORE_CSS = True
 IPYNB_SKIP_CSS = True
+IPYNB_EXPORT_TEMPLATE="base"
 
 AUTHOR_SAVE_AS = ''
 AUTHORS_SAVE_AS = ''

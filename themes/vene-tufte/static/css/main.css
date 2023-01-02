@@ -420,6 +420,12 @@ details.no-details:not([open]) summary {
   display: block;
 }
 
+blockquote.qbox {
+  border: 1px solid gray;
+  border-radius: 5px;
+  padding: 1em;
+}
+
 /* media queries */
 
 @media only screen and (min-width: 640px) {

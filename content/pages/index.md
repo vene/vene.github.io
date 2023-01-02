@@ -25,11 +25,13 @@ advised by [Claire Cardie](http://www.cs.cornell.edu/home/cardie/),
 and post-docced in the
 [Sardine lab](https://sardine-lab.github.io/), Lisbon, Portugal.
 I am a [scikit-learn](http://scikit-learn.org) core dev/alum.
+
 <!--and
 I develop the [polylearn](http://contrib.scikit-learn.org/polylearn)
 library for factorization machines and polynomial networks in Python.-->
 
 # News
+  - Jan 2. [PhD opening available: automatic subtitling](/jobs.html)
   - Oct 25. Serving as Senior Area Chair for EACL 2023.
   - Oct 1. Coordinating the Horizon Europe UTTER project alongside [Wilker Aziz](https://wilkeraziz.github.io).
   - Dec 16. Awarded a <strong>NWO Veni</strong> grant from the Dutch Research Council, funding my research for the next three years.
