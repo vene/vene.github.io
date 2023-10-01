@@ -118,8 +118,8 @@ In: Proc. of *NeurIPS 2020*.
 
 * Vlad Niculae and André F. T. Martins.
 *LP-SparseMAP:* Differentiable relaxed optimization for sparse structured
-prediction. In: Proc. of *ICML 2020* (to appear).
-\[&nbsp;[arXiv preprint](https://arxiv.org/abs/2001.04437)&nbsp;\]
+prediction. In: Proc. of *ICML 2020*
+\[&nbsp;[arXiv](https://arxiv.org/abs/2001.04437)&nbsp;\]
 \[&nbsp;[code](https://github.com/deep-spin/lp-sparsemap)&nbsp;\]
 
 * Gonçalo M. Correia, Vlad Niculae, André F. T. Martins.
