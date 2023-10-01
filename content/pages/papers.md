@@ -9,6 +9,7 @@ I am currently working on the following funded research projects:
  - NWO VI.Veni.212.228 ``Rethinking Natural Language Generation: Bridging the Gap Between Discrete and Continuous Representations''
  - Horizon Europe 101070631 ``UTTER: Unified Transcription and Translation for
    Extended Reality''
+ - Trustworthy AI for Media (TAIM)
 
 ## Publications
 
@@ -16,14 +17,39 @@ I am currently working on the following funded research projects:
 [Semantic Scholar](https://www.semanticscholar.org/author/2114966),
 [ACL Anthology](https://aclweb.org/anthology/people/vlad-niculae) links.)
 
-*My PhD thesis*:
+*Book-like things*:
+
+* Vlad Niculae, Caio F. Corro, Nikita Nangia, Tsvetomila Mihaylova,
+André F. T. Martins. Discrete Latent Structure in Neural Networks. 2023.
+\[&nbsp;[arXiv&nbsp;preprint](https://arxiv.org/abs/2301.07473)&nbsp;\]
 
 * Vlad Niculae.
 *Learning Deep Models with Linguistically-Inspired Structure.*
-Doctoral dissertation, Cornell University
+Doctoral dissertation, Cornell University. 2018.
 \[&nbsp;[open access doi](https://doi.org/10.7298/X4SJ1HVQ)&nbsp;\]
 
 *Papers*:
+
+* Vlad Niculae.
+Two derivations of Principal Component Analysis on datasets of distributions.
+2023.
+\[&nbsp;[arXiv&nbsp;preprint](https://arxiv.org/abs/2306.13503)&nbsp;\]
+
+* Ali Araabi, Vlad Niculae, Christof Monz.
+Joint Dropout: Improving generalizability in 
+low-resource neural machine translation through phrase pair variables.
+In: *MT Summit 2023*.
+\[&nbsp;[arXiv](https://arxiv.org/abs/2307.12835)&nbsp;\]
+
+* David Stap, Vlad Niculae, Christof Monz.
+Viewing knowledge transfer in multilingual machine translation
+through a representational lens. 2023.
+\[&nbsp;[arXiv&nbsp;preprint](https://arxiv.org/abs/2305.11550)&nbsp;\]
+
+* Valentina Zantedeschi, Luca Franceschi, Jean Kaddour, Matt J Kusner, Vlad Niculae.
+DAG learning on the Permutahedron.
+In: *ICLR 2023*.
+\[&nbsp;[arXiv](https://arxiv.org/abs/2301.11898)&nbsp;\]
 
 * André F. T. Martins, Marcos Treviso, António Farinhas, Pedro M. Q. Aguiar,
 Mário A. T. Figueiredo, Mathieu Blondel, Vlad Niculae.

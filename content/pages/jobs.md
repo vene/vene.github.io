@@ -5,7 +5,7 @@ Slug: jobs
 
 Positions are **fully funded** for four years.
 
-The call is at [this link](https://vacatures.uva.nl/UvA/job/PhD-Candidate-in-Natural-Language-Processing-for-Video-Subtitling/761749302/), alongside instructions to apply. Please apply via that link by Jan 25. 
+The call is at [this link](https://vacatures.uva.nl/UvA/job/PhD-Candidate-in-Natural-Language-Processing-for-Video-Subtitling/761749302/), alongside instructions to apply. Please apply via that link by Feb 24 (extended!). 
 
 **Emailing me:** Don't email me to apply: you must use the website or else I
 can't consider you. Do email me with any specific questions -- please include
