@@ -25,7 +25,7 @@ Remaining few videos and slides will be released soon.
 | 6. Attention & Transformers | [slides](/mlsd/lec06_attention.pdf) [vid 1](https://video.uva.nl/media/MLSD+06.1A+AttentionA+Pooling/0_h6vgmb2t/432008) [vid 2](https://video.uva.nl/media/MLSD+06.2A+AttentionA+Hierarchical/0_egmdk5na/432008) [vid 3](https://video.uva.nl/media/MLSD+06.3A+AttentionA+Self-Attention/0_fknmf31u/432008) [vid 4](https://video.uva.nl/media/MLSD+06.4A+AttentionA+Transformers/0_cf283zzu/432008)|
 | 7. Structured Outputs | [slides](/mlsd/lec07_struct_out.pdf) [vid 1](https://video.uva.nl/media/MLSD+07.1A+Structured+OutputsA+Interlude/0_0pkas6u8/432008) [vid 2](https://video.uva.nl/media/MLSD+07.2A+Structured+OutputsA+Probabilistic+Models/0_qy53kg5c/432008)|
 | 8. Dynamic Programming | [slides](/mlsd/lec08_dp.pdf) [vid 1](https://video.uva.nl/media/MLSD+08.1A+Dynamic+ProgrammingA+DAGs/0_p0xo6dg0/432008) [vid 2](https://video.uva.nl/media/MLSD+08.2A+Dynamic+ProgammingA+Optimal+Paths/0_dm9nwgul/432008) [vid 3](https://video.uva.nl/media/MLSD+08.3A+Dynamic+ProgrammingA+Probabilities/0_2sqn0cl7/432008) [vid 4](https://video.uva.nl/media/MLSD+08.4A+Dynamic+ProgrammingA+Sampling/0_g57013su/432008)|
-| 9. Sequence Tagging | [slides](/mlsd/lec09_sequence_tagging.pdf)|
+| 9. Sequence Tagging | [slides](/mlsd/lec09_sequence_tagging.pdf) [vid 1](https://video.uva.nl/media/MLSD+09.1A+Sequence+TaggingA+Overview/0_d0k9672y/432008) [vid 2](https://video.uva.nl/media/MLSD+09.2A+Sequence+TaggingA+Scoring/0_25x3crgn) [vid 3](https://video.uva.nl/media/MLSD+09.3A+Sequence+TaggingA+Algorithms/0_untlv3ld) |
 | 10. Segmentation | [slides](/mlsd/lec10_segment.pdf) |
 | 11. Alignments | [slides](/mlsd/lec11_alignments.pdf) |
 | 12. Matchings and ILP | |
