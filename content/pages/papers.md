@@ -30,6 +30,18 @@ Doctoral dissertation, Cornell University. 2018.
 
 *Papers*:
 
+* Sergey Troshin, Vlad Niculae.
+Wrapped β-Gaussians with compact support for exact probabilistic modeling on manifolds.
+*TMLR 2023*.
+\[&nbsp;[pdf](https://openreview.net/pdf?id=KrequDpWzt)&nbsp;\]
+\[&nbsp;[code](https://github.com/ltl-uva/wbg)&nbsp;\]
+\[&nbsp;[openreview](https://openreview.net/forum?id=KrequDpWzt)&nbsp;\]
+
+* Evgeniia Tokarchuk, Vlad Niculae.
+The unreasonable effectiveness of random target embeddings for 
+continuous-output neural machine translation. 2023.
+\[&nbsp;[arXiv&nbsp;preprint](https://arxiv.org/abs/2310.20620)&nbsp;\]
+
 * Vlad Niculae.
 Two derivations of Principal Component Analysis on datasets of distributions.
 2023.
@@ -39,12 +51,13 @@ Two derivations of Principal Component Analysis on datasets of distributions.
 Joint Dropout: Improving generalizability in 
 low-resource neural machine translation through phrase pair variables.
 In: *MT Summit 2023*.
+\[&nbsp;[anthology](https://aclanthology.org/2023.mtsummit-research.2/)&nbsp;\]
 \[&nbsp;[arXiv](https://arxiv.org/abs/2307.12835)&nbsp;\]
 
 * David Stap, Vlad Niculae, Christof Monz.
 Viewing knowledge transfer in multilingual machine translation
-through a representational lens. 2023.
-\[&nbsp;[arXiv&nbsp;preprint](https://arxiv.org/abs/2305.11550)&nbsp;\]
+through a representational lens. Findings of the ACL, 2023.
+\[&nbsp;[arXiv](https://arxiv.org/abs/2305.11550)&nbsp;\]
 
 * Valentina Zantedeschi, Luca Franceschi, Jean Kaddour, Matt J Kusner, Vlad Niculae.
 DAG learning on the Permutahedron.
