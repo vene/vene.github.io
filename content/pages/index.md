@@ -6,7 +6,7 @@ save_as: index.html
 <img id="vladpic" class="marginnote" src="vlad-niculae.jpg" alt="Selfie of Vlad Niculae with his cat Orion" />
 <div id="vita" class="marginnote">
 Dr. Vlad Niculae [he/him] <br/>
-Assistant Professor (UD2)<br/> 
+Assistant Professor (UD1, tenured)<br/> 
 <a href="https://ltl.science.uva.nl">Language Technology Lab</a><br/>
 <a href="https://ivi.uva.nl/">Informatics Institute</a><br/>
 <a href="https://uva.nl/">University of Amsterdam</a>.
