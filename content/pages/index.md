@@ -30,9 +30,14 @@ I develop the [polylearn](http://contrib.scikit-learn.org/polylearn)
 library for factorization machines and polynomial networks in Python.-->
 
 # News
-  - Jan 18. A preprint of our tutorial book ``[Discrete Latent Structure in Neural Networks](https://arxiv.org/abs/2301.07473)'' is now available on arXiv!
-  - Oct 25. Serving as Senior Area Chair for EACL 2023.
-  - Oct 1. Coordinating the Horizon Europe UTTER project alongside [Wilker Aziz](https://wilkeraziz.github.io).
+  - Mar 20, 2024. New [papers](/papers.html) from over the last few months, with
+    [PhD candidates](/students.html) Evgeniia, Wafaa, and Sergey.
+  - Jan 25, 2024. Serving as Senior Area Chair for ACL 2024.
+  - Jan 18, 2023. A preprint of our tutorial book ``[Discrete Latent Structure in Neural Networks](https://arxiv.org/abs/2301.07473)'' is now available on arXiv!
+  - [(*Past talks*)](/talks.html).
+<!--
+  - Oct 25, 2022. Serving as Senior Area Chair for EACL 2023.
+  - Oct 1, 2022. Coordinating the Horizon Europe UTTER project alongside [Wilker Aziz](https://wilkeraziz.github.io).
   - Dec 16. Awarded a <strong>NWO Veni</strong> grant from the Dutch Research Council, funding my research for the next three years.
-  - I've been giving [(*some talks*)](/talks.html).
+-->
 

@@ -30,17 +30,24 @@ Doctoral dissertation, Cornell University. 2018.
 
 *Papers*:
 
+* Evgeniia Tokarchuk, Vlad Niculae.
+The unreasonable effectiveness of random target embeddings for 
+continuous-output neural machine translation. 
+*NAACL, 2024 (to appear)*.
+\[&nbsp;[arXiv&nbsp;preprint](https://arxiv.org/abs/2310.20620)&nbsp;\]
+
+* Wafaa Mohammed, Vlad Niculae.
+On measuring context utilization in document-level MT systems.
+*EACL Findings, 2024*.
+\[&nbsp;[anthology](https://aclanthology.org/2024.findings-eacl.113/)&nbsp;\]
+\[&nbsp;[arXiv](https://arxiv.org/abs/2402.01404)&nbsp;\]
+
 * Sergey Troshin, Vlad Niculae.
 Wrapped β-Gaussians with compact support for exact probabilistic modeling on manifolds.
 *TMLR 2023*.
 \[&nbsp;[pdf](https://openreview.net/pdf?id=KrequDpWzt)&nbsp;\]
 \[&nbsp;[code](https://github.com/ltl-uva/wbg)&nbsp;\]
 \[&nbsp;[openreview](https://openreview.net/forum?id=KrequDpWzt)&nbsp;\]
-
-* Evgeniia Tokarchuk, Vlad Niculae.
-The unreasonable effectiveness of random target embeddings for 
-continuous-output neural machine translation. 2023.
-\[&nbsp;[arXiv&nbsp;preprint](https://arxiv.org/abs/2310.20620)&nbsp;\]
 
 * Vlad Niculae.
 Two derivations of Principal Component Analysis on datasets of distributions.
