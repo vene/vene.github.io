@@ -37,7 +37,7 @@ processing community has introduced over the years many such
 dictionaries, for examples wavelets. These are used, for example, in the
 &lt;span class="caps"&gt;JPEG2000&lt;/span&gt; compression&amp;nbsp;standard.&lt;/p&gt;
 &lt;p&gt;A very useful represenation is when the dictionary is &lt;em&gt;overcomplete&lt;/em&gt;
-([latex] r &gt; d[/latex]). The wavelets are an example of this. Given
+([latex] r &amp;gt; d[/latex]). The wavelets are an example of this. Given
 such a dictionary, we are interested in an efficient encoding of a
 vector [latex] x[/latex], in the sense of sparseness: we want to use as
 few dictionary components as possible in our representation. Such a

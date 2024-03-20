@@ -24,7 +24,7 @@ constrained variable &lt;span class="arithmatex"&gt;\(x\)&lt;/span&gt; with some
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;a href="#generalizing-the-projected-gradient-method-with-divergences"&gt;Generalizing the projected gradient method with&amp;nbsp;divergences.&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#duality-between-mirror-descent-and-naturalgradient"&gt;Duality between mirror descent and&amp;nbsp;natural&amp;nbsp;gradient.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#duality-between-mirror-descent-and-natural-gradient"&gt;Duality between mirror descent and&amp;nbsp;natural&amp;nbsp;gradient.&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#conclusions"&gt;Conclusions.&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#acknowledgements"&gt;Acknowledgements.&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -602,7 +602,7 @@ coordinates, we may also visualize the optimization trajectory in dual&amp;nbsp;
 &lt;p&gt;Yet, the way that mirror descent leans on moving from &lt;span class="arithmatex"&gt;\(\mathcal{X}\)&lt;/span&gt; to
 &lt;span class="arithmatex"&gt;\(\mathcal{U}\)&lt;/span&gt; is very familiar to the reparametrization strategy. Is there a
 deeper connection between the two? We illuminate it&amp;nbsp;next.&lt;/p&gt;
-&lt;h1 id="duality-between-mirror-descent-and-naturalgradient"&gt;Duality between mirror descent and natural&amp;nbsp;gradient.&lt;a class="headerlink" href="#duality-between-mirror-descent-and-naturalgradient" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
+&lt;h1 id="duality-between-mirror-descent-and-natural-gradient"&gt;Duality between mirror descent and natural&amp;nbsp;gradient.&lt;a class="headerlink" href="#duality-between-mirror-descent-and-natural-gradient" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;We have seen that different choices of &lt;span class="arithmatex"&gt;\(\Psi\)&lt;/span&gt; induce different geometries
 even on top of the same space. (Case in point: entropy vs. &lt;span class="arithmatex"&gt;\(\frac{1}{2}\|\cdot\|^2\)&lt;/span&gt;).
 To handle this ambiguity, we need a structure that attaches the geometry along

@@ -39,7 +39,7 @@ cannot be adjacent to all the others, since in [latex]G[/latex] it has
 degree [latex]n[/latex] and it already has [latex]2[/latex] outgoing
 edges. So there is at least one vertex [latex]v_i, i \&amp;lt; n[/latex] that
 isn&amp;#8217;t adjacent to it, which means [latex]v_i[/latex] is adjacent to
-some [latex]v_j, j &gt; n[/latex], thus forming a Hamiltonian&amp;nbsp;cycle.&lt;/p&gt;
+some [latex]v_j, j &amp;gt; n[/latex], thus forming a Hamiltonian&amp;nbsp;cycle.&lt;/p&gt;
 &lt;p&gt;In the second case, we have a vertex [latex]v_i, 2 \leq i \leq 2n -
 1[/latex] such that [latex]v_0v_i \notin E[/latex] and
 [latex]v_0v_{i+1} \in E[/latex]. This also means that

@@ -26,6 +26,16 @@
 
   <!-- OpenGraph Info -->
 
+  <meta name="description" content="One year ago I had the chance to take a class on Monte Carlo simulation with prof. Ion Văduva, and my assignment for the class was to implement exactly..." />
+  <meta name="keywords" content="monte-carlo, numpy, random-sampling, ratio-of-uniforms, scipy, python" />
+  <meta property="og:title" content="Sampling Gamma random variates through the ratio-of-uniforms&nbsp;method" />
+  <meta property="og:description" content="One year ago I had the chance to take a class on Monte Carlo simulation with prof. Ion Văduva, and my assignment for the class was to implement exactly..." />
+  <meta property="og:url" content="https://vene.ro/blog/sampling-gamma-random-variates-through-the-ratio-of-uniforms-method.html" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta property="og:image" content="https://vene.ro/http://localhost:8001/wp-content/uploads/2011/10/regiunea.png" />
+  <meta property="og:image:alt" content="" />
+
 
   <script src="//vene.ro/theme/js/main.js"></script>
 
@@ -64,12 +74,12 @@ functions. Essentially, given a density function over [latex]
 \mathbb{R}\^m[/latex], [latex] f(x) = \frac{h(x)}{H}[/latex] where
 [latex]H[/latex] is a normalization constant (ie. [latex] h(x) \geq
 0[/latex], [latex] H = \int h(x)dX[/latex]). Given a parameter [latex]
-c > 0 [/latex] and a parametrization [latex]\phi[/latex] from [latex]
+c &gt; 0 [/latex] and a parametrization [latex]\phi[/latex] from [latex]
 \mathbb{R}\^{m+1}[/latex] to [latex] \mathbb{R}\^{m}[/latex] expressed
 as: $$ \phi(v_0, v_1, &#8230;, v_m) = \left ( \frac{v_1}{v_0\^c},
 \frac{v_2}{v_0\^c}, &#8230;, \frac{v_m}{v_0\^c} \right )$$<br />
 Define the set [latex] \mathcal{C} = \{\mathbf{v} \big |
-\gamma(\mathbf{v}) \leq 0, v_0 > 0\} \in
+\gamma(\mathbf{v}) \leq 0, v_0 &gt; 0\} \in
 \mathbb{R}\^{m+1}[/latex] where<br />
 $$\gamma(\mathbf{v}) = \log v_0 - \frac{\log h(\phi(v_0,
 v_1, &#8230;, v_m))}{mc + 1}$$ If [latex] \mathcal{C}[/latex] is
@@ -92,7 +102,7 @@ by: $$ f(x; \nu, \theta) = \frac{x\^{\mu - 1}
 \nu[/latex] is the shape parameter and [latex] \theta[/latex] is the
 scale parameter.<br />
 But because of the property that if [latex] X \sim \text{Gamma}(\nu,
-\theta)[/latex], then for any [latex] k > 0[/latex], [latex] kX \sim
+\theta)[/latex], then for any [latex] k &gt; 0[/latex], [latex] kX \sim
 \text{Gamma}(\nu, k\theta)[/latex], we conclude that we can fix
 [latex] \theta[/latex] to 1 without loss of generality. Replacing in
 the style of the definition in the previous section, we have [latex]

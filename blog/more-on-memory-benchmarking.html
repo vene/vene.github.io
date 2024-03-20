@@ -26,6 +26,13 @@
 
   <!-- OpenGraph Info -->
 
+  <meta name="description" content="Following up on my task to make it easier to benchmark memory usage in Python, I updated Fabian’s [memory_profiler][] to include a couple of useful IPython..." />
+  <meta name="keywords" content="ipython, magic, memit, memory, memory_profiler, mprun, benchmarking, python" />
+  <meta property="og:title" content="More on memory&nbsp;benchmarking" />
+  <meta property="og:description" content="Following up on my task to make it easier to benchmark memory usage in Python, I updated Fabian’s [memory_profiler][] to include a couple of useful IPython..." />
+  <meta property="og:url" content="https://vene.ro/blog/more-on-memory-benchmarking.html" />
+
+
 
   <script src="//vene.ro/theme/js/main.js"></script>
 
@@ -73,7 +80,7 @@ reports, without having to go in and add the <code>@profile</code> decorator.</p
 <p>In [3]: X, y = np.array([[1, 2], [3, 4], [5, 6]]), np.array([2, 4,&nbsp;6])</p>
 <p>In [4]: %mprun -f ridge_regression ridge_regression(X, y,&nbsp;1.0)</p>
 <p>(&#8230;)</p>
-<p>109 41.6406 <span class="caps">MB</span> 0.0000 <span class="caps">MB</span> if n_features > n_samples or \<br />
+<p>109 41.6406 <span class="caps">MB</span> 0.0000 <span class="caps">MB</span> if n_features &gt; n_samples or \<br />
 110 41.6406 <span class="caps">MB</span> 0.0000 <span class="caps">MB</span> isinstance(sample_weight, np.ndarray) or \<br />
 111 41.6406 <span class="caps">MB</span> 0.0000 <span class="caps">MB</span> sample_weight != 1.0:<br />
 112<br />

@@ -26,6 +26,13 @@
 
   <!-- OpenGraph Info -->
 
+  <meta name="description" content="After intense code optimization work, my implementation of OMP finally beat least-angle regression! This was the primary issue discussed during the pull..." />
+  <meta name="keywords" content="efficient, numpy, omp, orthogonal-matching-pursuit, scipy, dictionary-learning, scikit-learn, python" />
+  <meta property="og:title" content="Optimizing Orthogonal Matching Pursuit code in Numpy, part&nbsp;1" />
+  <meta property="og:description" content="After intense code optimization work, my implementation of OMP finally beat least-angle regression! This was the primary issue discussed during the pull..." />
+  <meta property="og:url" content="https://vene.ro/blog/optimizing-orthogonal-matching-pursuit-code-in-numpy-part-1.html" />
+
+
 
   <script src="//vene.ro/theme/js/main.js"></script>
 
@@ -225,7 +232,7 @@ L = np.empty((max_features, max_features), dtype=X.dtype)<br />
 L[0, 0] =&nbsp;1.</p>
 <p>while 1:<br />
 lam = np.abs(np.dot(X.T, residual)).argmax()<br />
-if lam \&lt; n_active or alpha[lam] ** 2 > min_float:<br />
+if lam \&lt; n_active or alpha[lam] ** 2 &gt; min_float:<br />
 # atom already selected or inner product too small<br />
 warn(&#8220;Stopping early&#8221;)<br />
 break<br />

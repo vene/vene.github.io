@@ -370,7 +370,7 @@ reports, without having to go in and add the &lt;code&gt;@profile&lt;/code&gt; d
 &lt;p&gt;In [3]: X, y = np.array([[1, 2], [3, 4], [5, 6]]), np.array([2, 4,&amp;nbsp;6])&lt;/p&gt;
 &lt;p&gt;In [4]: %mprun -f ridge_regression ridge_regression(X, y,&amp;nbsp;1.0)&lt;/p&gt;
 &lt;p&gt;(&amp;#8230;)&lt;/p&gt;
-&lt;p&gt;109 41.6406 &lt;span class="caps"&gt;MB&lt;/span&gt; 0.0000 &lt;span class="caps"&gt;MB&lt;/span&gt; if n_features &gt; n_samples or \&lt;br /&gt;
+&lt;p&gt;109 41.6406 &lt;span class="caps"&gt;MB&lt;/span&gt; 0.0000 &lt;span class="caps"&gt;MB&lt;/span&gt; if n_features &amp;gt; n_samples or \&lt;br /&gt;
 110 41.6406 &lt;span class="caps"&gt;MB&lt;/span&gt; 0.0000 &lt;span class="caps"&gt;MB&lt;/span&gt; isinstance(sample_weight, np.ndarray) or \&lt;br /&gt;
 111 41.6406 &lt;span class="caps"&gt;MB&lt;/span&gt; 0.0000 &lt;span class="caps"&gt;MB&lt;/span&gt; sample_weight != 1.0:&lt;br /&gt;
 112&lt;br /&gt;

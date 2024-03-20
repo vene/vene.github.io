@@ -109,7 +109,7 @@ is written:&lt;br /&gt;
 cutoff = cond*np.maximum.reduce(s)&lt;br /&gt;
 psigma = np.zeros((m, n), t)&lt;br /&gt;
 for i in range(len(s)):&lt;br /&gt;
-if s[i] &gt; cutoff:&lt;br /&gt;
+if s[i] &amp;gt; cutoff:&lt;br /&gt;
 psigma[i,i] = 1.0/np.conjugate(s[i])&lt;br /&gt;
 return np.transpose(np.conjugate(np.dot(np.dot(u,psigma),vh)))&lt;br /&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;psigma&lt;/code&gt; is a diagonal matrix, and some time and memory can be saved
@@ -117,7 +117,7 @@ with simple vectorization. However, this part of the code dominated by
 an above call to &lt;code&gt;svd&lt;/code&gt;. The profiler output would say that we shouldn&amp;#8217;t
 bother, but is it really a bother? Look at Jake&amp;#8217;s new&amp;nbsp;version:&lt;/p&gt;
 &lt;p&gt;[sourcecode lang=&amp;#8221;python&amp;#8221;]&lt;br /&gt;
-above_cutoff = (s &gt; cond * np.max(s))&lt;br /&gt;
+above_cutoff = (s &amp;gt; cond * np.max(s))&lt;br /&gt;
 psigma_diag = np.zeros_like(s)&lt;br /&gt;
 psigma_diag[above_cutoff] = 1.0 /&amp;nbsp;s[above_cutoff]&lt;/p&gt;
 &lt;p&gt;return np.transpose(np.conjugate(np.dot(u * psigma_diag, vh)))&lt;br /&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
@@ -959,7 +959,7 @@ L = np.empty((max_features, max_features), dtype=X.dtype)&lt;br /&gt;
 L[0, 0] =&amp;nbsp;1.&lt;/p&gt;
 &lt;p&gt;while 1:&lt;br /&gt;
 lam = np.abs(np.dot(X.T, residual)).argmax()&lt;br /&gt;
-if lam \&amp;lt; n_active or alpha[lam] ** 2 &gt; min_float:&lt;br /&gt;
+if lam \&amp;lt; n_active or alpha[lam] ** 2 &amp;gt; min_float:&lt;br /&gt;
 # atom already selected or inner product too small&lt;br /&gt;
 warn(&amp;#8220;Stopping early&amp;#8221;)&lt;br /&gt;
 break&lt;br /&gt;

@@ -26,6 +26,16 @@
 
   <!-- OpenGraph Info -->
 
+  <meta name="description" content="This summer, I was granted the project called scikit-learn-speed, consisting of developing a benchmarking platform for scikit-learn and using it to find..." />
+  <meta name="keywords" content="gsoc, optimization, scikit-learn-speed, speedup, summary, vbench, benchmarking, python, scikit-learn" />
+  <meta property="og:title" content="Scikit-learn-speed: An overview on the final&nbsp;day" />
+  <meta property="og:description" content="This summer, I was granted the project called scikit-learn-speed, consisting of developing a benchmarking platform for scikit-learn and using it to find..." />
+  <meta property="og:url" content="https://vene.ro/blog/scikit-learn-speed-an-overview-on-the-final-day.html" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta property="og:image" content="https://vene.ro/http://localhost:8001/wp-content/uploads/2012/08/skl-speed-300x163.png" />
+  <meta property="og:image:alt" content="" />
+
 
   <script src="//vene.ro/theme/js/main.js"></script>
 
@@ -160,7 +170,7 @@ is written:<br />
 cutoff = cond*np.maximum.reduce(s)<br />
 psigma = np.zeros((m, n), t)<br />
 for i in range(len(s)):<br />
-if s[i] > cutoff:<br />
+if s[i] &gt; cutoff:<br />
 psigma[i,i] = 1.0/np.conjugate(s[i])<br />
 return np.transpose(np.conjugate(np.dot(np.dot(u,psigma),vh)))<br />&nbsp;[/sourcecode]</p>
 <p><code>psigma</code> is a diagonal matrix, and some time and memory can be saved
@@ -168,7 +178,7 @@ with simple vectorization. However, this part of the code dominated by
 an above call to <code>svd</code>. The profiler output would say that we shouldn&#8217;t
 bother, but is it really a bother? Look at Jake&#8217;s new&nbsp;version:</p>
 <p>[sourcecode lang=&#8221;python&#8221;]<br />
-above_cutoff = (s > cond * np.max(s))<br />
+above_cutoff = (s &gt; cond * np.max(s))<br />
 psigma_diag = np.zeros_like(s)<br />
 psigma_diag[above_cutoff] = 1.0 /&nbsp;s[above_cutoff]</p>
 <p>return np.transpose(np.conjugate(np.dot(u * psigma_diag, vh)))<br />&nbsp;[/sourcecode]</p>
