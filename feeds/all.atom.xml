@@ -3452,7 +3452,7 @@ connection code looks like&amp;nbsp;this:&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;I had to reduce the connection timeout, for a better user experience.  I&amp;#8217;m way
-out of my comfort zone here, so in case I missed a better solution, do let me&amp;nbsp;know!&lt;/p&gt;</content><category term="flask"></category><category term="flask-socketio"></category><category term="flask"></category><category term="socketio"></category><category term="openshift"></category></entry><entry><title>Kemeny-Young Optimal Rank Aggregation in Python</title><link href="//vene.ro/blog/kemeny-young-optimal-rank-aggregation-in-python.html" rel="alternate"></link><published>2014-01-22T18:00:00+01:00</published><updated>2014-01-22T18:00:00+01:00</updated><author><name>vene</name></author><id>tag:vene.ro,2014-01-22:/blog/kemeny-young-optimal-rank-aggregation-in-python.html</id><summary type="html">&lt;p&gt;Rank aggregation is a problem with many important applications and naive approaches to it go wrong in subtle ways. Let&amp;#8217;s say that your national Quidditch league is dominated by five major wizard sports newspapers. Yes, the ones with moving images and everything.  Every week after the games, each of them publishes a ranking of the star players.  For now, let&amp;#8217;s suppose that the set of players under investigation is always the same, as the problem becomes a bit more complicated otherwise.&amp;nbsp;&amp;#8230;&lt;/p&gt;</summary><content type="html">&lt;div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=334212b7"&gt;
+out of my comfort zone here, so in case I missed a better solution, do let me&amp;nbsp;know!&lt;/p&gt;</content><category term="flask"></category><category term="flask-socketio"></category><category term="flask"></category><category term="socketio"></category><category term="openshift"></category></entry><entry><title>Kemeny-Young Optimal Rank Aggregation in Python</title><link href="//vene.ro/blog/kemeny-young-optimal-rank-aggregation-in-python.html" rel="alternate"></link><published>2014-01-22T18:00:00+01:00</published><updated>2014-01-22T18:00:00+01:00</updated><author><name>vene</name></author><id>tag:vene.ro,2014-01-22:/blog/kemeny-young-optimal-rank-aggregation-in-python.html</id><summary type="html">&lt;p&gt;Rank aggregation is a problem with many important applications and naive approaches to it go wrong in subtle ways. Let&amp;#8217;s say that your national Quidditch league is dominated by five major wizard sports newspapers. Yes, the ones with moving images and everything.  Every week after the games, each of them publishes a ranking of the star players.  For now, let&amp;#8217;s suppose that the set of players under investigation is always the same, as the problem becomes a bit more complicated otherwise.&amp;nbsp;&amp;#8230;&lt;/p&gt;</summary><content type="html">&lt;div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=4feb03f3"&gt;
 &lt;div class="jp-Cell-inputWrapper"&gt;
 &lt;div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser"&gt;
 &lt;/div&gt;
@@ -3472,7 +3472,7 @@ out of my comfort zone here, so in case I missed a better solution, do let me&am
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=bf38aa97"&gt;
+&lt;/div&gt;&lt;div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=da411ed6"&gt;
 &lt;div class="jp-Cell-inputWrapper"&gt;
 &lt;div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser"&gt;
 &lt;/div&gt;
@@ -3497,7 +3497,7 @@ out of my comfort zone here, so in case I missed a better solution, do let me&am
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=9a93f03a"&gt;
+&lt;div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=10d93a00"&gt;
 &lt;div class="jp-Cell-inputWrapper"&gt;
 &lt;div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser"&gt;
 &lt;/div&gt;
@@ -3507,7 +3507,7 @@ out of my comfort zone here, so in case I missed a better solution, do let me&am
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=535a4e68"&gt;
+&lt;/div&gt;&lt;div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=b18d1797"&gt;
 &lt;div class="jp-Cell-inputWrapper"&gt;
 &lt;div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser"&gt;
 &lt;/div&gt;
@@ -3528,7 +3528,7 @@ out of my comfort zone here, so in case I missed a better solution, do let me&am
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=094ff22b"&gt;
+&lt;div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0b268ee1"&gt;
 &lt;div class="jp-Cell-inputWrapper"&gt;
 &lt;div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser"&gt;
 &lt;/div&gt;
@@ -3538,7 +3538,7 @@ out of my comfort zone here, so in case I missed a better solution, do let me&am
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=442c699f"&gt;
+&lt;/div&gt;&lt;div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=ef9121b8"&gt;
 &lt;div class="jp-Cell-inputWrapper"&gt;
 &lt;div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser"&gt;
 &lt;/div&gt;
@@ -3565,7 +3565,7 @@ out of my comfort zone here, so in case I missed a better solution, do let me&am
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=802e200a"&gt;
+&lt;div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6cf9ac63"&gt;
 &lt;div class="jp-Cell-inputWrapper"&gt;
 &lt;div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser"&gt;
 &lt;/div&gt;
@@ -3575,7 +3575,7 @@ out of my comfort zone here, so in case I missed a better solution, do let me&am
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=c9211716"&gt;
+&lt;/div&gt;&lt;div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=e4593858"&gt;
 &lt;div class="jp-Cell-inputWrapper"&gt;
 &lt;div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser"&gt;
 &lt;/div&gt;
@@ -3605,7 +3605,7 @@ d(athletic_wizard, seeker) = 5
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=7b0affb9"&gt;
+&lt;div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=bfd99f04"&gt;
 &lt;div class="jp-Cell-inputWrapper"&gt;
 &lt;div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser"&gt;
 &lt;/div&gt;
@@ -3619,7 +3619,7 @@ $$ \sum_i d(\hat\tau, \tau_i) \leq \sum_i d(\tau, \tau_i) \text{ for all } \tau&
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=8eb7dd68"&gt;
+&lt;/div&gt;&lt;div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=fbd34d86"&gt;
 &lt;div class="jp-Cell-inputWrapper"&gt;
 &lt;div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser"&gt;
 &lt;/div&gt;
@@ -3642,7 +3642,7 @@ $$ \sum_i d(\hat\tau, \tau_i) \leq \sum_i d(\tau, \tau_i) \text{ for all } \tau&
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=8d5eb3f4"&gt;
+&lt;/div&gt;&lt;div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=0ffff74f"&gt;
 &lt;div class="jp-Cell-inputWrapper"&gt;
 &lt;div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser"&gt;
 &lt;/div&gt;
@@ -3673,7 +3673,7 @@ $$ \sum_i d(\hat\tau, \tau_i) \leq \sum_i d(\tau, \tau_i) \text{ for all } \tau&
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0aecba41"&gt;
+&lt;div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=a9055b0e"&gt;
 &lt;div class="jp-Cell-inputWrapper"&gt;
 &lt;div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser"&gt;
 &lt;/div&gt;
@@ -3692,7 +3692,7 @@ $$ \sum_i d(\hat\tau, \tau_i) \leq \sum_i d(\tau, \tau_i) \text{ for all } \tau&
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=60deaa58"&gt;
+&lt;/div&gt;&lt;div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=3185ebf7"&gt;
 &lt;div class="jp-Cell-inputWrapper"&gt;
 &lt;div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser"&gt;
 &lt;/div&gt;
@@ -3737,7 +3737,7 @@ $$ \sum_i d(\hat\tau, \tau_i) \leq \sum_i d(\tau, \tau_i) \text{ for all } \tau&
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=2998d986"&gt;
+&lt;div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=54bb575a"&gt;
 &lt;div class="jp-Cell-inputWrapper"&gt;
 &lt;div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser"&gt;
 &lt;/div&gt;
@@ -3747,7 +3747,7 @@ $$ \sum_i d(\hat\tau, \tau_i) \leq \sum_i d(\tau, \tau_i) \text{ for all } \tau&
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=08c77912"&gt;
+&lt;/div&gt;&lt;div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=4afd3527"&gt;
 &lt;div class="jp-Cell-inputWrapper"&gt;
 &lt;div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser"&gt;
 &lt;/div&gt;
@@ -3801,7 +3801,7 @@ $$ \sum_i d(\hat\tau, \tau_i) \leq \sum_i d(\tau, \tau_i) \text{ for all } \tau&
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=7433a10e"&gt;
+&lt;/div&gt;&lt;div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=a3aa6a22"&gt;
 &lt;div class="jp-Cell-inputWrapper"&gt;
 &lt;div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser"&gt;
 &lt;/div&gt;
@@ -3833,7 +3833,7 @@ $$ \sum_i d(\hat\tau, \tau_i) \leq \sum_i d(\tau, \tau_i) \text{ for all } \tau&
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=fde8e9a6"&gt;
+&lt;div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=baf5856d"&gt;
 &lt;div class="jp-Cell-inputWrapper"&gt;
 &lt;div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser"&gt;
 &lt;/div&gt;
@@ -3843,7 +3843,7 @@ $$ \sum_i d(\hat\tau, \tau_i) \leq \sum_i d(\tau, \tau_i) \text{ for all } \tau&
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=e90ae918"&gt;
+&lt;/div&gt;&lt;div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=69f8b821"&gt;
 &lt;div class="jp-Cell-inputWrapper"&gt;
 &lt;div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser"&gt;
 &lt;/div&gt;
@@ -3892,7 +3892,7 @@ $$ \sum_i d(\hat\tau, \tau_i) \leq \sum_i d(\tau, \tau_i) \text{ for all } \tau&
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=d75b86cb"&gt;
+&lt;/div&gt;&lt;div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=4b8a2cc5"&gt;
 &lt;div class="jp-Cell-inputWrapper"&gt;
 &lt;div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser"&gt;
 &lt;/div&gt;
@@ -4351,7 +4351,7 @@ EEIIIYQQQgghhBBCCCGEEEIIIYQQQgghhBBCCDEP/D/tC1tkXuJ7LgAAAABJRU5ErkJggg==
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=dd39d0a6"&gt;
+&lt;div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=61b45096"&gt;
 &lt;div class="jp-Cell-inputWrapper"&gt;
 &lt;div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser"&gt;
 &lt;/div&gt;
