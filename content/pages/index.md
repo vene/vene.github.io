@@ -30,6 +30,7 @@ I develop the [polylearn](http://contrib.scikit-learn.org/polylearn)
 library for factorization machines and polynomial networks in Python.-->
 
 # News
+  - Sep 21, 2024. Teaching [Structure Prediction](/talks/24-athnlp-vn-struct.pdf) at [AthNLP](https://athnlp.github.io/2024/).
   - Mar 20, 2024. New [papers](/papers.html) from over the last few months, with
     [PhD candidates](/students.html) Evgeniia, Wafaa, and Sergey.
   - Jan 25, 2024. Serving as Senior Area Chair for ACL 2024.
