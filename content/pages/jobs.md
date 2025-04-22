@@ -1,15 +1,19 @@
 Title: Open Positions
 Slug: jobs
 
-# Job opening: PhD position in automatic video subtitling
+# Job opening: PhD position on interpretable and verifiable communication of NLP assistant decisions.
 
 Positions are **fully funded** for four years.
 
-The call is at [this link](https://vacatures.uva.nl/UvA/job/PhD-Candidate-in-Natural-Language-Processing-for-Video-Subtitling/761749302/), alongside instructions to apply. Please apply via that link by Feb 24 (extended!). 
+The call is at [this link](
+https://werkenbij.uva.nl/en/vacancies/phd-position-on-interpretable-and-verifiable-communication-of-nlp-assistant-decisions-netherlands-13973), alongside instructions to apply. Please apply via that link 
+by May 18. 
+
+This is a fairly specific project connected (and funded through) the [Hybrid Intelligence Centre](https://www.hybrid-intelligence-centre.nl/): we will work on NLP assistants for scientific tasks, with a focus on adapting the assistant's communication with the human expert, to make sure the expert performs best. 
 
 **Emailing me:** Don't email me to apply: you must use the website or else I
 can't consider you. Do email me with any specific questions -- please include
-<tt>[PhD 11053]</tt> in the subject line so my filters can catch your email.
+<tt>[PhD 13973]</tt> in the subject line so my filters can catch your email.
 
 The most important part of your application is by far the motivation letter.
 Please read my [advice for writing a motivation letter for me](/mletter.html).
@@ -26,8 +30,8 @@ See this captured in my [recent papers](/papers.html).
 
 # Answers to frequent questions:
 
-- The master's degree requirement is unfortunately firm, and out of my control.
-- We are looking for a starting date of around March 2023. Please specify your
+- The master's degree (and thesis) requirement is unfortunately firm, and out of my control.
+- We are looking for a starting date of Fall 2025. Please specify your
   availability in the application.
 - If you want to do your master's at the UvA and work with me, emailing me does
   not help; you must apply [to the
@@ -36,15 +40,16 @@ See this captured in my [recent papers](/papers.html).
   or my LTL colleagues can advise your thesis project in the second year.
 - I don't at the moment have the ability or the capacity to recruit interns or
   self-funded PhD students.
+- If in doubt about applying I encourage e-mailing me, but please try to keep
+  the e-mail brief and with clearly marked questions, otherwise I might not find time
+  to process it. In particular there is nothing to gain from e-mailing me
+  your application, just apply through the system.
 
 # Advising statement
 
-It's a good idea to be skeptical about working with an advisor who is early in
-their career. Talking to their other students is always good: 
-I am currently advising [Evgeniia Tokarchuk](https://evgeniia.tokarch.uk/) 
-at UvA, and have co-advised [Tsvetomila Mihaylova](https://tsvm.github.io/)
-and [Gonçalo M. Correia](https://goncalomcorreia.github.io/).
-You can also write to me with any questions.
+I generally recommend talking to other students of a potential PhD
+advisor; you may find my current and previous advisees on [this
+page](/students.html).
 
 The PhD is a job, and, [at UvA, PhD students are employees](https://www.uva.nl/en/about-the-uva/working-at-the-uva/terms-of-employment/terms-of-employment.html),
 with the workers' rights
