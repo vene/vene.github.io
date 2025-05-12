@@ -28,12 +28,36 @@ André F. T. Martins. Discrete Latent Structure in Neural Networks. 2023.
 Doctoral dissertation, Cornell University. 2018.
 \[&nbsp;[open access doi](https://doi.org/10.7298/X4SJ1HVQ)&nbsp;\]
 
+*Preprints*:
+
+* Sergey Troshin, Vlad Niculae, Antske Fokkens.
+Efficient Controlled Language Generation with Low-Rank Autoregressive Reward Models
+\[&nbsp;[arXiv](https://arxiv.org/abs/2407.04615)&nbsp;\]
+
+* Evgeniia Tokarchuk, Hua Chang Bakker, Vlad Niculae.
+Keep your distance: learning dispersed embeddings on 𝕊<sub>m</sub>.
+\[&nbsp;[arXiv](https://arxiv.org/abs/2502.08231)&nbsp;\]
+
+
 *Papers*:
+
+* Maya K. Nachesa, Vlad Niculae.
+kNN for Whisper and its effect on bias and speaker adaptation.
+*NAACL Findings, 2025.*
+\[&nbsp;[anthology](https://aclanthology.org/2025.findings-naacl.369/)&nbsp;\]
+
+* Saul Santos, Vlad Niculae, Daniel McNamee, André F. T. Martins.
+Sparse and structured Hopfield networks.
+*ICML, 2024 (Spotlight).*
+\[&nbsp;[PMLR](https://proceedings.mlr.press/v235/santos24a.html)&nbsp;\]
+\[&nbsp;[arXiv](https://arxiv.org/abs/2402.13725)&nbsp;\]
+\[&nbsp;[code](https://github.com/deep-spin/SSHN)&nbsp;\]
 
 * Evgeniia Tokarchuk, Vlad Niculae.
 The unreasonable effectiveness of random target embeddings for 
 continuous-output neural machine translation. 
-*NAACL, 2024 (to appear)*.
+*NAACL, 2024.*
+\[&nbsp;[anthology](https://aclanthology.org/2024.naacl-short.56/)&nbsp;\]
 \[&nbsp;[arXiv&nbsp;preprint](https://arxiv.org/abs/2310.20620)&nbsp;\]
 
 * Wafaa Mohammed, Vlad Niculae.
@@ -41,6 +65,11 @@ On measuring context utilization in document-level MT systems.
 *EACL Findings, 2024*.
 \[&nbsp;[anthology](https://aclanthology.org/2024.findings-eacl.113/)&nbsp;\]
 \[&nbsp;[arXiv](https://arxiv.org/abs/2402.01404)&nbsp;\]
+
+* Ali Araabi, Vlad Niculae, Christof Monz.
+Entropy– and Distance-Regularized Attention Improves Low-Resource Neural Machine Translation
+*AMTA, 2024*.
+\[&nbsp;[anthology](https://aclanthology.org/2024.amta-research.13/)&nbsp;\]
 
 * Sergey Troshin, Vlad Niculae.
 Wrapped β-Gaussians with compact support for exact probabilistic modeling on manifolds.
@@ -57,13 +86,14 @@ Two derivations of Principal Component Analysis on datasets of distributions.
 * Ali Araabi, Vlad Niculae, Christof Monz.
 Joint Dropout: Improving generalizability in 
 low-resource neural machine translation through phrase pair variables.
-In: *MT Summit 2023*.
+*MT Summit, 2023*.
 \[&nbsp;[anthology](https://aclanthology.org/2023.mtsummit-research.2/)&nbsp;\]
 \[&nbsp;[arXiv](https://arxiv.org/abs/2307.12835)&nbsp;\]
 
 * David Stap, Vlad Niculae, Christof Monz.
 Viewing knowledge transfer in multilingual machine translation
-through a representational lens. Findings of the ACL, 2023.
+through a representational lens. 
+*ACL Findings, 2023.*
 \[&nbsp;[arXiv](https://arxiv.org/abs/2305.11550)&nbsp;\]
 
 * Valentina Zantedeschi, Luca Franceschi, Jean Kaddour, Matt J Kusner, Vlad Niculae.
