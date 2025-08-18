@@ -30,9 +30,8 @@ I develop the [polylearn](http://contrib.scikit-learn.org/polylearn)
 library for factorization machines and polynomial networks in Python.-->
 
 # News
-  - Apr 22, 2025. **Job opening**, [PhD Position on Interpretable and Verifiable
-    Communication of NLP Assistant Decisions](/jobs.html).
-  - Sep 21, 2024. Teaching [Structure Prediction](/talks/24-athnlp-vn-struct.pdf) at [AthNLP](https://athnlp.github.io/2024/).
+  - Aug, 2025. Teaching [Structure Prediction](/talks/24-athnlp-vn-struct.pdf) at [AthNLP](https://athnlp.github.io/2025/).
+  - Apr 22, 2025. PhD Job opening (now closed).
   - [(*Past talks*)](/talks.html).
 <!--
   - Jan 18, 2023. A preprint of our tutorial book ``[Discrete Latent Structure in Neural Networks](https://arxiv.org/abs/2301.07473)'' is now available on arXiv!

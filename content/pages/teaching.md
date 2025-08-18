@@ -14,12 +14,16 @@ hesitate to contact me if you are an interested UvA student.
 ## Machine Learning for Structured Data
 UvA Bachelor AI elective, year 3. [**course materials**](/mlsd)
 
+  - [*Fall 2025*](https://studiegids.uva.nl/xmlpages/page/2025-2026/zoek-vak/vak/129832)
+  - [*Fall 2024*](https://studiegids.uva.nl/xmlpages/page/2024-2025/zoek-vak/vak/119815)
   - [*Fall 2023*](https://studiegids.uva.nl/xmlpages/page/2023-2024/zoek-vak/vak/110309)
   - [*Fall 2022*](https://studiegids.uva.nl/xmlpages/page/2022-2023/zoek-vak/vak/99051)
 
 ## Algorithms and Data Structures
 UvA Bachelor AI, mandatory, year 2.
 
+  - [*Fall 2025*](https://studiegids.uva.nl/xmlpages/page/2025-2026/zoek-vak/vak/129828)
+  - [*Spring 2025*](https://studiegids.uva.nl/xmlpages/page/2024-2025/zoek-vak/vak/119359)
   - [*Spring 2024*](https://studiegids.uva.nl/xmlpages/page/2023-2024/zoek-vak/vak/109810)
   - [*Spring 2023*](https://studiegids.uva.nl/xmlpages/page/2022-2023/zoek-vak/vak/99040)
   - [*Spring 2022*](https://studiegids.uva.nl/xmlpages/page/2021-2022/zoek-vak/vak/89695)

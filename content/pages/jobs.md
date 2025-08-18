@@ -1,19 +1,9 @@
 Title: Open Positions
 Slug: jobs
 
-# Job opening: PhD position on interpretable and verifiable communication of NLP assistant decisions.
+# No openings at the moment.
 
-Positions are **fully funded** for four years.
-
-The call is at [this link](
-https://werkenbij.uva.nl/en/vacancies/phd-position-on-interpretable-and-verifiable-communication-of-nlp-assistant-decisions-netherlands-13973), alongside instructions to apply. Please apply via that link 
-by May 18. 
-
-This is a fairly specific project connected (and funded through) the [Hybrid Intelligence Centre](https://www.hybrid-intelligence-centre.nl/): we will work on NLP assistants for scientific tasks, with a focus on adapting the assistant's communication with the human expert, to make sure the expert performs best. 
-
-**Emailing me:** Don't email me to apply: you must use the website or else I
-can't consider you. Do email me with any specific questions -- please include
-<tt>[PhD 13973]</tt> in the subject line so my filters can catch your email.
+General advice below left for reference.
 
 The most important part of your application is by far the motivation letter.
 Please read my [advice for writing a motivation letter for me](/mletter.html).

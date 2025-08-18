@@ -10,6 +10,7 @@ I am currently working on the following funded research projects:
  - Horizon Europe 101070631 ``UTTER: Unified Transcription and Translation for
    Extended Reality''
  - Trustworthy AI for Media (TAIM)
+ - Hybrid Intelligence
 
 ## Publications
 
@@ -20,8 +21,11 @@ I am currently working on the following funded research projects:
 *Book-like things*:
 
 * Vlad Niculae, Caio F. Corro, Nikita Nangia, Tsvetomila Mihaylova,
-André F. T. Martins. Discrete Latent Structure in Neural Networks. 2023.
+André F. T. Martins.
+*Discrete Latent Structure in Neural Networks.*
+Foundations and Trends® in Signal Processing 19 (2), 99-211 2025.
 \[&nbsp;[arXiv&nbsp;preprint](https://arxiv.org/abs/2301.07473)&nbsp;\]
+\[&nbsp;[publisher page](https://www.nowpublishers.com/article/Details/SIG-134)&nbsp;\]
 
 * Vlad Niculae.
 *Learning Deep Models with Linguistically-Inspired Structure.*
@@ -30,16 +34,28 @@ Doctoral dissertation, Cornell University. 2018.
 
 *Preprints*:
 
+* Emmanouil Zaranis, António Farinhas, Saul Santos, Beatriz Canaverde, Miguel Moura Ramos, [...], V. Niculae, [...]
+Movie Facts and Fibs (MF<sup>2</sup>): A Benchmark for Long Movie Understanding.
+\[&nbsp;[arXiv](https://arxiv.org/abs/2506.06275)&nbsp;\]
+<!--, Aditya K Surikuchi, André Viveiros, Baohao Liao, Elena Bueno-Benito, Nithin Sivakumaran, Pavlo Vasylenko, Shoubin Yu, Sonal Sannigrahi, Wafaa Mohammed, Ben Peters, Danae Sánchez Villegas, Elias Stengel-Eskin, Giuseppe Attanasio, Jaehong Yoon, Stella Frank, Alessandro Suglia, Chrysoula Zerva, Desmond Elliott, Mariella Dimiccoli, Mohit Bansal, Oswald Lanz, Raffaella Bernardi, Raquel Fernández, Sandro Pezzelle, Vlad Niculae, André FT Martins.-->
+
 * Sergey Troshin, Vlad Niculae, Antske Fokkens.
 Efficient Controlled Language Generation with Low-Rank Autoregressive Reward Models
 \[&nbsp;[arXiv](https://arxiv.org/abs/2407.04615)&nbsp;\]
 
-* Evgeniia Tokarchuk, Hua Chang Bakker, Vlad Niculae.
-Keep your distance: learning dispersed embeddings on 𝕊<sub>m</sub>.
-\[&nbsp;[arXiv](https://arxiv.org/abs/2502.08231)&nbsp;\]
-
 
 *Papers*:
+
+* Evgeniia Tokarchuk, Hua Chang Bakker, Vlad Niculae.
+Keep your distance: learning dispersed embeddings on 𝕊<sub>m</sub>.
+*TMLR, 2025.*
+\[&nbsp;[openreview](https://openreview.net/pdf?id=5JIQE6HcTd)&nbsp;\]
+\[&nbsp;[arXiv](https://arxiv.org/abs/2502.08231)&nbsp;\]
+
+* Wafaa Mohammed, Vlad Niculae.
+Context-aware or context-insensitive? Assessing LLMs' performance in document-level translation.
+*MT Summit, 2025.*
+\[&nbsp;[arXiv](https://arxiv.org/abs/2410.14391)&nbsp;\]
 
 * Maya K. Nachesa, Vlad Niculae.
 kNN for Whisper and its effect on bias and speaker adaptation.
