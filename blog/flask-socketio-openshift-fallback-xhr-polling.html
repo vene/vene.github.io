@@ -26,10 +26,10 @@
 
   <!-- OpenGraph Info -->
 
-  <meta name="description" content="TL; DR¶ I hacked the SocketIO client 0.9.16 to support specifying a special port (wsport) to use only for the WebSocket protocol, while keeping all other..." />
+  <meta name="description" content="TL; DR¶ I hacked the SocketIO client 0.9.16 to support specifying a special port (wsport) to use only for the WebSocket protocol, while keeping all other..." />
   <meta name="keywords" content="flask-socketio, flask, socketio, openshift" />
   <meta property="og:title" content="Flask-SocketIO on OpenShift: fallback on another&nbsp;port" />
-  <meta property="og:description" content="TL; DR¶ I hacked the SocketIO client 0.9.16 to support specifying a special port (wsport) to use only for the WebSocket protocol, while keeping all other..." />
+  <meta property="og:description" content="TL; DR¶ I hacked the SocketIO client 0.9.16 to support specifying a special port (wsport) to use only for the WebSocket protocol, while keeping all other..." />
   <meta property="og:url" content="https://vene.ro/blog/flask-socketio-openshift-fallback-xhr-polling.html" />
 
 
@@ -64,10 +64,9 @@
       <h2 id="tl-dr"><span class="caps">TL</span>; <span class="caps">DR</span><a class="headerlink" href="#tl-dr" title="Permanent link">&para;</a></h2>
 <p>I hacked the <a href="https://gist.github.com/vene/c0657d854ae74a4511d2">SocketIO client
 0.9.16</a> to support
-specifying a special port (<code>wsport</code>) to use only for the WebSocket protocol,
+specifying a special port&nbsp;(<code>wsport</code>) to use only for the WebSocket protocol,
 while keeping all other traffic on the default port. This is required by setups
-such as OpenShift which require WebSocket traffic to come over a different port
-(say <code>8000</code> rather than <code>80</code>).</p>
+such as OpenShift which require WebSocket traffic to come over a different port&nbsp;(say <code>8000</code> rather&nbsp;than <code>80</code>).</p>
 <h2 id="the-current-state-of-affairs">The current state of affairs<a class="headerlink" href="#the-current-state-of-affairs" title="Permanent link">&para;</a></h2>
 <p>I&#8217;ve been trying to host an interactive web app with WebSockets on
 <a href="https://www.openshift.com/">OpenShift</a>. Since I&#8217;m a poor student and this
@@ -75,7 +74,7 @@ is a research app, I wanted a reasonably powerful free hosting&nbsp;option.</p>
 <p><a href="https://blog.openshift.com/paas-websockets/">OpenShift added WebSockets support over 2 years
 ago.</a> But because of some
 internal limitations, the WebSocket traffic needs to go over different ports
-than usual (<code>8000</code> for unsecured and <code>8443</code> for secured&nbsp;connections).</p>
+than usual&nbsp;(<code>8000</code> for unsecured&nbsp;and <code>8443</code> for secured&nbsp;connections).</p>
 <p><a href="http://socket.io/">SocketIO</a> is a cool library that allows event-driven
 bidirectional traffic in web apps.  It tries to use WebSockets if available,
 and falls back to other transport protocols (such as <a href="https://en.wikipedia.org/wiki/Push_technology#Long_polling"><span class="caps">XHR</span> Long
@@ -92,7 +91,7 @@ community, the most stable release is SocketIO&nbsp;0.9.16.</p>
 <span class="p">);</span>
 </code></pre></div>
 
-<p>When deploying on OpenShift, the <code>location.port</code> is now different from the
+<p>When deploying on OpenShift,&nbsp;the <code>location.port</code> is now different from the
 WebSocket port, so I used a Flask config that determines server-side where it&#8217;s
 running&nbsp;from:</p>
 <div class="highlight"><pre><span></span><code><span class="k">var</span><span class="w"> </span><span class="n">wsport</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;{{ config[&#39;</span><span class="n">WEBSOCKET_PORT</span><span class="s1">&#39;] }}&#39;</span><span class="p">;</span>
@@ -107,10 +106,10 @@ OpenShift-specific&nbsp;one.</p>
 <p>My first thought was to work around it by <a href="http://stackoverflow.com/questions/8588689/node-js-socket-io-client-connect-failed-event">manually implementing the fallback
 client-side</a>.  This, surprisingly, failed: it turns out that
 SocketIO 0.9.16 first attempts a handshake to find out what transports the
-server supports. If the initial connection is on port <code>8000</code>, then the
-handshake will be attempted also on port <code>8000</code>, so the <code>connect_failed</code> event
+server supports. If the initial connection is on&nbsp;port <code>8000</code>, then the
+handshake will be attempted also on&nbsp;port <code>8000</code>, so&nbsp;the <code>connect_failed</code> event
 won&#8217;t even be triggered.  The second cleanest solution I could think of was to
-add another parameter to the SocketIO options, <code>wsport</code>, allowing the user to
+add another parameter to the SocketIO&nbsp;options, <code>wsport</code>, allowing the user to
 specify a different port over which to do WebSocket connections, while keeping
 all other traffic over the default port.  This works like a&nbsp;charm!</p>
 <p><a href="https://gist.github.com/vene/c0657d854ae74a4511d2">My updated SocketIO client is available as a

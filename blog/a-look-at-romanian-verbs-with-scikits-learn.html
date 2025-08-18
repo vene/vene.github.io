@@ -85,9 +85,9 @@ determined by the context in which certain characters&nbsp;appear.</p>
 <p>This leads to the idea of analyzing the verbs from a machine learning
 point of view: what can we find out by looking at n-gram representation
 of the&nbsp;infinitives?</p>
-<p>This is easy to do within scikits.learn. The <code>feature_extraction.text</code>
-package contains all the necessary tools: the <code>CharNGramExtractor</code>,
-which builds all the n-grams of a string, for n in an interval. Then, a
+<p>This is easy to do within scikits.learn.&nbsp;The <code>feature_extraction.text</code>
+package contains all the necessary tools:&nbsp;the <code>CharNGramExtractor</code>,
+which builds all the n-grams of a string, for n in an interval. Then,&nbsp;a
 <code>CountVectorizer</code> is built on top of the extractor. Its purpose is to
 extract the features out of a list of documents and transform them into
 a matrix representation of token counts. By postprocessing this matrix

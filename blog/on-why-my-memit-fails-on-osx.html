@@ -26,10 +26,10 @@
 
   <!-- OpenGraph Info -->
 
-  <meta name="description" content="In my last post I mentioned that I’m not satisfied with the current state of %memit, because some more complicated numerical function calls make it crash...." />
+  <meta name="description" content="In my last post I mentioned that I’m not satisfied with the current state of %memit, because some more complicated numerical function calls make it crash...." />
   <meta name="keywords" content="ipython, magic, memit, mprun, benchmarking, python" />
   <meta property="og:title" content="On why my %memit fails on <span class="caps">OSX</span>" />
-  <meta property="og:description" content="In my last post I mentioned that I’m not satisfied with the current state of %memit, because some more complicated numerical function calls make it crash...." />
+  <meta property="og:description" content="In my last post I mentioned that I’m not satisfied with the current state of %memit, because some more complicated numerical function calls make it crash...." />
   <meta property="og:url" content="https://vene.ro/blog/on-why-my-memit-fails-on-osx.html" />
 
 
@@ -62,7 +62,7 @@
 
     <div class="entry-content">
       <p>In my <a href="http://localhost:8001/2012/07/02/more-on-memory-benchmarking/" title="More on memory benchmarking">last post</a> I mentioned that I&#8217;m not satisfied with the current
-state of <code>%memit</code>, because some more complicated numerical function
+state&nbsp;of <code>%memit</code>, because some more complicated numerical function
 calls make it crash. I will start this post with a reminder of a pretty
 important&nbsp;bug:</p>
 <p><strong>[On MacOS X (10.7 but maybe more), after forking a new process, there
@@ -76,7 +76,7 @@ but there was, as of the date of this post, no&nbsp;reaction.</p>
 <p><strong><span class="caps">EDIT</span> 2:</strong> MinRK <a href="https://twitter.com/minrk/status/228265246819774464" title="Min's tweet">confirms</a>, and I verified shortly after, that this
 bug is fixed in Mountain Lion (10.8). Still not sure how far back it
 goes, though, so feedback is&nbsp;welcome.</p>
-<p>When I first tried to make the <code>%memit</code> magic, I thought about simply
+<p>When I first tried to make&nbsp;the <code>%memit</code> magic, I thought about simply
 measuring the current memory, running the command, and measuring the
 memory again. The problem is the results are not consistent, because
 Python <a href="http://effbot.org/pyfaq/why-doesnt-python-release-the-memory-when-i-delete-a-large-object.htm">tries to reuse already allocated memory whenever it can</a>.</p>
@@ -100,9 +100,9 @@ Filename:&nbsp;mem_test.py</p>
 10 32.4688 <span class="caps">MB</span> 7.6055 <span class="caps">MB</span> make_a_large_array()<br />
 11 32.4688 <span class="caps">MB</span> 0.0000 <span class="caps">MB</span> make_a_large_array()<br />&nbsp;[/sourcecode]</p>
 <p>If this was in an IPython environment, and one would like to see how
-much memory <code>make_a_large_array()</code> uses, you could say we can simply run
+much&nbsp;memory <code>make_a_large_array()</code> uses, you could say we can simply run
 it a few times and take the maximum. However, if you happened to
-accidentally call <code>main()</code> once before, you will no longer get a good&nbsp;result:</p>
+accidentally&nbsp;call <code>main()</code> once before, you will no longer get a good&nbsp;result:</p>
 <p>[sourcecode lang=&#8221;python&#8221;]<br />
 In [3]: %mprun -f mem_test.main mem_test.main()<br />
 Filename:&nbsp;mem_test.py</p>
@@ -129,7 +129,7 @@ maximum of 3: 8.054688 <span class="caps">MB</span> per&nbsp;loop</p>
 maximum of 3: 8.058594 <span class="caps">MB</span> per&nbsp;loop</p>
 <p>In [10]: %memit X = mem_test.make_a_large_array()<br />
 maximum of 3: 8.058594 <span class="caps">MB</span> per loop<br />&nbsp;[/sourcecode]</p>
-<p>If we don&#8217;t spawn a subprocess, <code>del</code> doesn&#8217;t help, but allocating new
+<p>If we don&#8217;t spawn a&nbsp;subprocess, <code>del</code> doesn&#8217;t help, but allocating new
 variables does:<br />
 [sourcecode lang=&#8221;python&#8221;]<br />
 In [11]: %memit -i X = mem_test.make_a_large_array()<br />
@@ -142,13 +142,13 @@ maximum of 3: 7.632812 <span class="caps">MB</span> per&nbsp;loop</p>
 <p>In [15]: %memit -i Z = mem_test.make_a_large_array()<br />
 maximum of 3: 7.632812 <span class="caps">MB</span> per loop<br />&nbsp;[/sourcecode]</p>
 <p>Now, the problem is that when the function that you are benchmarking
-contains calls to <code>np.dot</code> (matrix multiplication), the subprocess will
+contains calls&nbsp;to <code>np.dot</code> (matrix multiplication), the subprocess will
 consistently fail with <span class="caps">SIGSEGV</span> on affected <span class="caps">OS</span> X systems. These are
-actually pretty much all the functions that I intended <code>%memit</code> for:
-numerical applications. For that reason, I have made <code>%memit</code> notify the
-user when all subprocesses fail, and to suggest the usage of the <code>-i</code>
+actually pretty much all the functions that I&nbsp;intended <code>%memit</code> for:
+numerical applications. For that reason, I have&nbsp;made <code>%memit</code> notify the
+user when all subprocesses fail, and to suggest the usage of&nbsp;the <code>-i</code>
 flag.</p>
-<p>I think that, with this update, <code>%memit</code> is flexible and usable enough
+<p>I think that, with this&nbsp;update, <code>%memit</code> is flexible and usable enough
 for actual use, and therefore for merging into&nbsp;memory_profiler.</p>
     </div><!-- /.entry-content -->
     <div class="comments">

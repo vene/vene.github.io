@@ -69,7 +69,7 @@ regression, so it is natural to bench them against one&nbsp;another.</p>
 <p>This has helped find a couple of bottlenecks. Time has been gained by
 preallocating the array to store the Cholesky decomposition. Also, using
 the <span class="caps">LAPACK</span> <code>potrs</code> function in order to solve a system of the shape
-$latex <span class="caps">LL</span>&#8217;x=y$ is faster than using <code>solve_triangular</code> twice.</p>
+$latex <span class="caps">LL</span>&#8217;x=y$ is faster than&nbsp;using <code>solve_triangular</code> twice.</p>
 <p>I am still trying to optimize the code. We are working hard to make sure
 that scikits.learn contributions are up to standards before&nbsp;merging.</p>
     </div><!-- /.entry-content -->

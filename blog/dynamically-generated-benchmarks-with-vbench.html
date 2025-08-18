@@ -26,10 +26,10 @@
 
   <!-- OpenGraph Info -->
 
-  <meta name="description" content="To construct a vbench benchmark you need a setup string and a code string. The constructor’s signature is: Benchmark(self, code, setup, ncalls=None,..." />
+  <meta name="description" content="To construct a vbench benchmark you need a setup string and a code string. The constructor’s signature is: Benchmark(self, code, setup, ncalls=None,..." />
   <meta name="keywords" content="gsoc, vbench, benchmarking, python" />
   <meta property="og:title" content="Dynamically generated benchmarks with&nbsp;vbench" />
-  <meta property="og:description" content="To construct a vbench benchmark you need a setup string and a code string. The constructor’s signature is: Benchmark(self, code, setup, ncalls=None,..." />
+  <meta property="og:description" content="To construct a vbench benchmark you need a setup string and a code string. The constructor’s signature is: Benchmark(self, code, setup, ncalls=None,..." />
   <meta property="og:url" content="https://vene.ro/blog/dynamically-generated-benchmarks-with-vbench.html" />
 
 
@@ -61,12 +61,11 @@
  #<a href="//vene.ro/tag/gsoc.html">gsoc</a> #<a href="//vene.ro/tag/vbench.html">vbench</a> #<a href="//vene.ro/tag/benchmarking.html">benchmarking</a> #<a href="//vene.ro/tag/python.html">python</a></span></p>    </header>
 
     <div class="entry-content">
-      <p>To construct a <code>vbench</code> benchmark you need a setup string and a code
+      <p>To construct&nbsp;a <code>vbench</code> benchmark you need a setup string and a code
 string. The constructor&#8217;s signature&nbsp;is:  </p>
 <p><code>Benchmark(self, code, setup, ncalls=None, repeat=3, cleanup=None, name=None, description=None, start_date=None, logy=False)</code>.</p>
 <h2 id="why-generate-benchmarks-dynamically">Why generate benchmarks dynamically?<a class="headerlink" href="#why-generate-benchmarks-dynamically" title="Permanent link">&para;</a></h2>
-<p>For most <code>scikit-learn</code> purposes, the <code>code</code> string will be very close
-to <code>"algorithm.fit(X, y)"</code>, <code>"algorithm.transform(X)"</code> or
+<p>For&nbsp;most <code>scikit-learn</code> purposes,&nbsp;the <code>code</code> string will be very close&nbsp;to <code>"algorithm.fit(X, y)"</code>, <code>"algorithm.transform(X)"</code> or
 <code>"algorithm.predict(X)"</code>. We can generate a lot of benchmarks by
 changing what the algorithm is, and changing what the data is or the way
 it is&nbsp;generated.</p>
@@ -99,7 +98,7 @@ for name, kwargs in&nbsp;_configurations})</p>
 <p>[/sourcecode]</p>
 <p>It works perfectly, but I don&#8217;t like having to hack the globals to make
 the benchmarks detectable. This is because of the way the vbench suite
-gathers benchmarks. In <code>__init__.py</code> we have to do
+gathers benchmarks.&nbsp;In <code>__init__.py</code> we have to&nbsp;do
 <code>from linear_regression import *</code>. With a small update to the detection
 method, we could replace the hacky part with a public lists of Benchmark&nbsp;objects.</p>
 <h2 id="exposed-issues">Exposed issues<a class="headerlink" href="#exposed-issues" title="Permanent link">&para;</a></h2>

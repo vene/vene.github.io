@@ -131,14 +131,14 @@ legends about numerical computation of least squares problems. You might
 have heard the following unwritten&nbsp;rules:</p>
 <ol>
 <li>Never compute $latex A\^{-1}$, solve the system&nbsp;directly</li>
-<li>If you really need $latex A\^{-1}$, use <code>pinv</code> and not <code>inv</code></li>
+<li>If you really need $latex A\^{-1}$,&nbsp;use <code>pinv</code> and&nbsp;not <code>inv</code></li>
 </ol>
 <p>The first of these rules is based on some misguided beliefs, but is
 still good advice. If your goal is a one-shot answer to a system,
 there&#8217;s no use in explicitly computing a possibly large inverse, when
 all you need is $latex x$. But <a href="http://arxiv.org/abs/1201.6035">this paper</a> shows that computing the
 inverse is not necessarily a bad thing. The key to this is conditional
-accuracy, and as long as the <code>inv</code> function used has good conditional
+accuracy, and as long as&nbsp;the <code>inv</code> function used has good conditional
 bounds, you will get as good results as with a least squares&nbsp;solver.</p>
 <p>The second rule comes from numerical stability, and will definitely bite
 you if misunderstood. If $latex A$ is a square matrix with a row full
@@ -179,12 +179,12 @@ zeroes. In other words, when singular values are very low, set them to&nbsp;0.</
 <p>How do you set the threshold? This is actually a delicate issue, being
 discussed on <a href="http://thread.gmane.org/gmane.comp.python.numeric.general/50396/focus=50912">the numeric Python mailing list</a>.</p>
 <h2 id="scipy-implementations">Scipy implementations<a class="headerlink" href="#scipy-implementations" title="Permanent link">&para;</a></h2>
-<p>Scipy exposes <code>inv</code>, <code>pinv</code> and <code>pinv2</code>. <code>inv</code> secretly invokes <span class="caps">LAPACK</span>,
+<p>Scipy&nbsp;exposes <code>inv</code>, <code>pinv</code> and <code>pinv2</code>. <code>inv</code> secretly invokes <span class="caps">LAPACK</span>,
 that ancient but crazy robust code that&#8217;s been used since the 70s, to
 first compute a pivoted <span class="caps">LU</span> decomposition that is then used to compute
-the inverse. <code>pinv</code> also uses <span class="caps">LAPACK</span>, but for computing the
-least-squares solution to the system $latex <span class="caps">AX</span> = I$. <code>pinv2</code> computes
-the <span class="caps">SVD</span> and transposes everything like shown above. Both <code>pinv</code> and
+the&nbsp;inverse. <code>pinv</code> also uses <span class="caps">LAPACK</span>, but for computing the
+least-squares solution to the system $latex <span class="caps">AX</span> =&nbsp;I$. <code>pinv2</code> computes
+the <span class="caps">SVD</span> and transposes everything like shown above.&nbsp;Both <code>pinv</code> and
 <code>pinv2</code> expose <code>cond</code> and <code>rcond</code> arguments to handle the treatment of
 very small singular values, but (<em>attention!</em>) they behave&nbsp;differently!</p>
 <p>The different implementations also lead to different speed. Let&#8217;s look
@@ -219,7 +219,7 @@ array([[ 0.03636918, 0.01641725, 0.00736503],<br />
 <p>In [10]: np.testing.assert_array_almost_equal(linalg.inv(a),&nbsp;linalg.pinv(a))</p>
 <p>In [11]: np.testing.assert_array_almost_equal(linalg.inv(a),
 linalg.pinv2(a))<br />&nbsp;[/sourcecode]</p>
-<p>Looks good! This is because we got lucky, though, and <code>a</code> was invertible
+<p>Looks good! This is because we got lucky, though,&nbsp;and <code>a</code> was invertible
 to start with. Let&#8217;s look at its&nbsp;spectrum:</p>
 <p>[sourcecode lang=&#8221;python&#8221;]<br />
 In [12]: _, s, _ =&nbsp;linalg.svd(a)</p>
@@ -246,11 +246,11 @@ In [18]: np.sum(s \&lt; 1e-10)<br />
 Out[18]: 950<br />&nbsp;[/sourcecode]</p>
 <p>How do our functions behave in this case? Instead of just looking at a
 corner, let&#8217;s use our gift of sight:[<img alt="" src="http://localhost:8001/wp-content/uploads/2012/08/pseudoinverses-300x218.png" title="Pseudoinverses" />]<a href="http://localhost:8001/wp-content/uploads/2012/08/pseudoinverses-300x218.png" title="Pseudoinverses"></a></p>
-<p>The small eigenvalues are large enough that <code>inv</code> thinks the matrix is
-full rank. <code>pinv</code> does better but it still fails, you can see a group of
-high-amplitude noisy columns. <code>pinv2</code> is faster and it also gives us a
+<p>The small eigenvalues are large enough&nbsp;that <code>inv</code> thinks the matrix is
+full&nbsp;rank. <code>pinv</code> does better but it still fails, you can see a group of
+high-amplitude noisy&nbsp;columns. <code>pinv2</code> is faster and it also gives us a
 useful result in this&nbsp;case.</p>
-<p>Wait, does this mean that <code>pinv2</code> is simply better, and <code>pinv</code> is&nbsp;useless?</p>
+<p>Wait, does this mean&nbsp;that <code>pinv2</code> is simply better,&nbsp;and <code>pinv</code> is&nbsp;useless?</p>
 <p>Not quite. Remember, we are now trying to actually invert matrices, and
 degrade gracefully in case of rank deficiency. But what if we need the
 pseudoinverse to solve an actual non-square, wide or tall&nbsp;system?</p>
@@ -264,14 +264,14 @@ In [19]: a = np.random.randn(1000,&nbsp;50)</p>
 10 loops, best of 3: 114 ms per&nbsp;loop</p>
 <p>In [23]: timeit linalg.pinv2(a.T)<br />
 10 loops, best of 3: 126 ms per loop<br />&nbsp;[/sourcecode]</p>
-<p>Huge victory for <code>pinv</code> in the wide case! Hurray! With all this insight,
+<p>Huge victory&nbsp;for <code>pinv</code> in the wide case! Hurray! With all this insight,
 we can draw a line and see what we&nbsp;learned.</p>
 <ul>
-<li>If you are 100% sure that your matrix is invertible, use <code>inv</code> for a
-    huge speed gain. The implementation of <code>inv</code> from Scipy is based on
+<li>If you are 100% sure that your matrix is invertible,&nbsp;use <code>inv</code> for a
+    huge speed gain. The implementation&nbsp;of <code>inv</code> from Scipy is based on
     <span class="caps">LAPACK</span>&#8217;s <code>*getrf</code> + <code>*getri</code>, known to have good&nbsp;bounds.</li>
-<li>If you are trying to solve a tall or wide system, use <code>pinv</code>.</li>
-<li>If your matrix is square but might be rank deficient, use <code>pinv2</code>
+<li>If you are trying to solve a tall or wide system,&nbsp;use <code>pinv</code>.</li>
+<li>If your matrix is square but might be rank deficient,&nbsp;use <code>pinv2</code>
     for speed and numerical&nbsp;gain.</li>
 </ul>
 <h2 id="improving-the-symmetric-case">Improving the symmetric case<a class="headerlink" href="#improving-the-symmetric-case" title="Permanent link">&para;</a></h2>
@@ -280,10 +280,10 @@ can&#8217;t we make use of that to speed up the computation even more?
 Clearly, if $latex A$ is symmetric, in its <span class="caps">SVD</span> $latex A = <span class="caps">USV</span>\^T$,
 we must have $latex U = V$. But this is exactly the eigendecomposition
 of a symmetric matrix $latex A$. The eigendecomposition can be
-computed cheaper than the <span class="caps">SVD</span> using Scipy <code>eigh</code>, that uses <span class="caps">LAPACK</span>&#8217;s
+computed cheaper than the <span class="caps">SVD</span> using&nbsp;Scipy <code>eigh</code>, that uses <span class="caps">LAPACK</span>&#8217;s
 <code>*evr</code>. As part of my GSoC this year, with help from <a href="http://jakevdp.github.com/">Jake
-VanderPlas</a>, we made a <a href="https://github.com/scipy/scipy/pull/289">pull request to Scipy</a> containing a <code>pinvh</code>
-function that is equivalent to <code>pinv2</code> but faster for symmetric&nbsp;matrices.</p>
+VanderPlas</a>, we made a <a href="https://github.com/scipy/scipy/pull/289">pull request to Scipy</a> containing&nbsp;a <code>pinvh</code>
+function that is equivalent&nbsp;to <code>pinv2</code> but faster for symmetric&nbsp;matrices.</p>
 <p>[sourcecode lang=&#8221;python&#8221;]<br />
 In [24]: timeit linalg.pinv2(a)<br />
 1 loops, best of 3: 1.54 s per&nbsp;loop</p>

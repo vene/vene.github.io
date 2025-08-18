@@ -71,12 +71,12 @@ cases that would have broken the naive implementation, and also it was
 orders of magnitude faster than said implementation. However, our
 benchmark [<a href="#footnote-1">1</a>] showed that it was a couple of times slower than
 least-angle&nbsp;regression.</p>
-<p>By poking around the <code>scikits.learn</code> codebase, I noticed that there is a
-triangular system solver in <code>scikits.learn.utils.arrayfuncs</code>. Unlike the
+<p>By poking around&nbsp;the <code>scikits.learn</code> codebase, I noticed that there is a
+triangular system solver&nbsp;in <code>scikits.learn.utils.arrayfuncs</code>. Unlike&nbsp;the
 <code>scipy.linalg</code> one, this one only works with lower triangular arrays,
-and it forcefully overwrites <code>b</code>. Even though if weren&#8217;t faster, it
-should still be used: <code>scikits.learn</code> aims to be as backwards-compatible
-with SciPy as possible, and <code>linalg.solve_triangular</code> was added in
+and it forcefully&nbsp;overwrites <code>b</code>. Even though if weren&#8217;t faster, it
+should still be&nbsp;used: <code>scikits.learn</code> aims to be as backwards-compatible
+with SciPy as possible,&nbsp;and <code>linalg.solve_triangular</code> was added in
 0.9.0. Anyway, let&#8217;s just see whether it&#8217;s&nbsp;faster:</p>
 <p>[sourcecode language=&#8221;python&#8221;]<br />
 In <a href="#footnote-1">1</a>: import numpy as&nbsp;np</p>
@@ -97,20 +97,20 @@ let&#8217;s do the change! Notice that we can just copy [latex]
 \mathbf{v}[/latex] into the appropriate place in [latex] L[/latex] and
 then solve in&nbsp;place.</p>
 <p>But whoops! When solving the [latex] <span class="caps">LL</span>&#8217;[/latex] system, we take
-advantage of the <code>transpose</code> attribute in <code>linalg.solve_triangular</code>,
-which the <code>scikits.learn</code> version does not expose. We could think of a
+advantage of&nbsp;the <code>transpose</code> attribute&nbsp;in <code>linalg.solve_triangular</code>,
+which&nbsp;the <code>scikits.learn</code> version does not expose. We could think of a
 solution, but here&#8217;s a better idea: Shouldn&#8217;t there be some way to
 directly solve the entire system in one&nbsp;go?</p>
-<p>Well, there is. It is an <span class="caps">LAPACK</span> function by the name of <code>potrs</code>. If you
+<p>Well, there is. It is an <span class="caps">LAPACK</span> function by the name&nbsp;of <code>potrs</code>. If you
 are not aware, <span class="caps">LAPACK</span> is a Fortran library with solvers for various
 types of linear systems and eigenproblems. <span class="caps">LAPACK</span> along with <span class="caps">BLAS</span> (on
 which it is based) pretty much powers all the scientific computation
 that happens. <span class="caps">BLAS</span> is an <span class="caps">API</span> with multiple implementations dating from
 1979, while <span class="caps">LAPACK</span> dates from 1992. If you ever used Matlab, this is
 what was called behind the scenes. SciPy, again, provides a high-level
-wrapper around this, the <code>linalg.cho_solve</code> function.</p>
+wrapper around this,&nbsp;the <code>linalg.cho_solve</code> function.</p>
 <p>But SciPy also gives us the possibility to import functions directly
-from <span class="caps">LAPACK</span>, through the use of <code>linalg.lapack.get_lapack_funcs</code>. Let&#8217;s
+from <span class="caps">LAPACK</span>, through the use&nbsp;of <code>linalg.lapack.get_lapack_funcs</code>. Let&#8217;s
 see how the low-level <span class="caps">LAPACK</span> function compares to the SciPy wrapper, for
 our use&nbsp;case:</p>
 <p>[sourcecode language=&#8221;python&#8221;]<br />
@@ -163,20 +163,20 @@ return gamma, idx<br />&nbsp;[/sourcecode]</p>
 <p>Woohoo! But we still lag behind. Now that we delegated the trickiest
 parts of the code to fast and reliable solvers, it&#8217;s time to use a
 profiler and see what the bottleneck is now. Python has excellent tools
-for this purpose. What solved the problem in this case was
+for this purpose. What solved the problem in this case&nbsp;was
 <code>line_profiler</code> [<a href="#footnote-2">2</a>]. There is a great article by Olivier Grisel here
-<a href="#footnote-2">2</a> regarding how to use these profilers. I&#8217;m just going to say that
+<a href="#footnote-2">2</a> regarding how to use these profilers. I&#8217;m just going to say&nbsp;that
 <code>line_profiler</code><span class="quo">&#8216;</span>s output is very helpful, basically printing the time
 taken by each line of code next to that&nbsp;line.</p>
 <p>Running the profiler on this code, we found that 58% of the time is
 spent on line 14, 20.5% on line 21, and 20.5% on line 32, with the rest
-being insignificant (<code>potrs</code> takes 0.1%!). The code is clearly dominated
+being insignificant&nbsp;(<code>potrs</code> takes 0.1%!). The code is clearly dominated
 by the matrix multiplications. By running some more timings with
-IPython, I found that multiplying such column-wise views of the data as
+IPython, I found that multiplying such column-wise views of the data&nbsp;as
 <code>X[:, idx]</code> is considerably slower then multiplying a contiguous array.
-The least-angle regression code in <code>scikits.learn</code> avoids this by
+The least-angle regression code&nbsp;in <code>scikits.learn</code> avoids this by
 swapping columns towards the front of the array as they are chosen, so
-we can replace <code>X[:, idx]</code> with <code>X[:, :n_active]</code>. The nice part is that
+we can&nbsp;replace <code>X[:, idx]</code> with <code>X[:, :n_active]</code>. The nice part is that
 if the array is stored in Fortran-contiguous order (ie. column
 contiguous order, as opposed to row contiguous order, as in C), swapping
 two columns is a very fast operation!. Let&#8217;s see some more&nbsp;benchmarks!</p>
@@ -199,7 +199,7 @@ In [23]: X[:, a], X[:, b] = X[:, b], X[:,&nbsp;a]</p>
 <p>In [25]:<br />&nbsp;[/sourcecode]</p>
 <p>However this trick works great for swapping elements of one-dimensional&nbsp;arrays.</p>
 <p>Another small optimization that we can do: I found that on my system,
-it&#8217;s slightly faster to compute the norm using the <span class="caps">BLAS</span> function <code>nrm2</code>.
+it&#8217;s slightly faster to compute the norm using the <span class="caps">BLAS</span>&nbsp;function <code>nrm2</code>.
 So by putting all of these together, we end up with the final version of
 our&nbsp;code:</p>
 <p>[sourcecode language=&#8221;python&#8221;]<br />

@@ -84,11 +84,11 @@ run on my machine. These are the key points I got from this&nbsp;experience.</p>
     day, and running the benchmark with it. Of course, it is trivial to
     patch it into getting just one&nbsp;commit.</li>
 <li>The <em>code-as-strings</em> approach is not ideal. The first thought is
-    that it should be replaced with reading <code>.py</code> files into strings,
+    that it should be replaced with&nbsp;reading <code>.py</code> files into strings,
     but there are two issues with this:<ol>
 <li>One benchmark file can have a lot of setup code and several key
     lines that need to actually be benched. This can be fixed using
-    convensions (ie. setup functions and <code>bench_*</code> functions) in the
+    convensions (ie. setup functions&nbsp;and <code>bench_*</code> functions) in the
     spirit of testing suites, or using&nbsp;decorators.</li>
 <li>I would like to be able to run bench files as python scripts,
     but the vbench import system breaks this. This can be fixed by
@@ -104,7 +104,7 @@ would only be comparable to the numbers he gets on his own machine
 before his changes, but a developer shouldn&#8217;t wait for the daily
 benchmark for knowing if he made an&nbsp;improvement.</p>
 <p>On the other hand there is <a href="http://code.google.com/p/unladen-swallow/">unladen-swallow</a>&#8216;s <a href="http://code.google.com/p/unladen-swallow/wiki/Benchmarks">benchmark system</a>
-using the [<code>perf.py</code>]<a href="http://localhost:8001/wp-content/uploads/2012/05/P5280194-300x225.jpg" title="GSoC swag"></a> file. I didn&#8217;t try it out yet, so I would like
+using the&nbsp;[<code>perf.py</code>]<a href="http://localhost:8001/wp-content/uploads/2012/05/P5280194-300x225.jpg" title="GSoC swag"></a> file. I didn&#8217;t try it out yet, so I would like
 feedback, but there are some key things that can be taken from&nbsp;them:</p>
 <ul>
 <li>Memory usage&nbsp;benchmarking</li>
@@ -120,7 +120,7 @@ feedback, but there are some key things that can be taken from&nbsp;them:</p>
 </ul>
 <p>At a first glance, it seems that a very good system can be obtained by
 combining these two excellent projects (or rather, improving vbench with
-features from <code>perf.py</code>). While I continue exploring this, I would like
+features&nbsp;from <code>perf.py</code>). While I continue exploring this, I would like
 to hear feedback from people who had to do with similar issues. As for
 the GSoC timeline, I plan to join forces with Immanuel and design a
 solid benchmark suite for the linear models over the next 2&nbsp;weeks.</p>

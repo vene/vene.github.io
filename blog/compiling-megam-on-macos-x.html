@@ -69,14 +69,13 @@ had to do some tricks that I would like to document here. It&#8217;s no big
 deal but it could save somebody precious&nbsp;minutes.</p>
 <ol>
 <li>Download and unpack the gzip&nbsp;archive.</li>
-<li>Install ocaml using macports: <code>sudo port install ocaml</code>. <em>Note:</em>
+<li>Install ocaml using&nbsp;macports: <code>sudo port install ocaml</code>. <em>Note:</em>
     this installed version 3.12.1_5, <span class="caps">YMMV</span> with newer versions&nbsp;later.</li>
-<li>Point the compiler to the correct headers. First run <code>ocamlc -where</code>
-    to find out the correct path. On my system it&#8217;s
-    <code>/opt/local/lib/ocaml/caml</code>. Change the <code>WITHCLIBS</code> line (#73) in
+<li>Point the compiler to the correct headers. First&nbsp;run <code>ocamlc -where</code>
+    to find out the correct path. On my system&nbsp;it&#8217;s
+    <code>/opt/local/lib/ocaml/caml</code>. Change&nbsp;the <code>WITHCLIBS</code> line (#73) in
     the Makefile to point&nbsp;there.</li>
-<li>As of OCaml 3.12.0, the <code>-lstr</code> compiler flag should be replaced
-    with <code>-lcamlstr</code>. It occurs on line #62 within the definition of
+<li>As of OCaml 3.12.0,&nbsp;the <code>-lstr</code> compiler flag should be replaced&nbsp;with <code>-lcamlstr</code>. It occurs on line #62 within the definition&nbsp;of
     <code>WITHSTR</code>.</li>
 <li>Run <code>make</code> or <code>make opt</code> and&nbsp;enjoy.</li>
 </ol>

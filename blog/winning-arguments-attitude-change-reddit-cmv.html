@@ -581,7 +581,7 @@ rkJggg==
 </blockquote>
 <p>Earlier studies, however, suggest a lot more nuance. For instance, individuals who <a href="https://en.wikipedia.org/wiki/Self-affirmation"><em>affirm their self</em></a> were <a href="https://ed.stanford.edu/sites/default/files/when_beliefs_yield.pdf">found</a> to be more likely to be persuaded by evidence.  Studying opinion change <em>in the wild</em> can be difficult.  Many times, people change their mind slowly and subtly, over a number of years, making it difficult to pinpoint the exact moment or cause of the change.  Also, a change of opinion on a minor, inconsequential topic may not be worth&nbsp;discussing.</p>
 <p>We contributed to these efforts by studying <a href="http://reddit.com/r/changemyview"><code>/r/ChangeMyView</code></a> (<span class="caps">CMV</span>), an online forum of civil, open-minded discussion where people invite other members to challenge their more controversial views.  If you&#8217;ve never visited <span class="caps">CMV</span>, the concept that people can debate hot topics without getting into flame wars on the internet might be hard to believe.  Or, if you read a lot of Youtube comments, you might be inclined to believe <em>the backfire effect</em>, and doubt that graceful concession is even possible online.  But a quick trip to this great subreddit will undoubtably make you a&nbsp;believer.</p>
-<h2 id="What-makes-/r/ChangeMyView-special?">What makes <code>/r/ChangeMyView</code> special?<a class="anchor-link" href="#What-makes-/r/ChangeMyView-special?">¶</a></h2><p>Some of the more interesting reasons why <span class="caps">CMV</span> is a cool lens for the study of persuasion&nbsp;is:</p>
+<h2 id="What-makes-/r/ChangeMyView-special?">What&nbsp;makes <code>/r/ChangeMyView</code> special?<a class="anchor-link" href="#What-makes-/r/ChangeMyView-special?">¶</a></h2><p>Some of the more interesting reasons why <span class="caps">CMV</span> is a cool lens for the study of persuasion&nbsp;is:</p>
 <ul>
 <li><p>Original posters (<span class="caps">OP</span>) select views that are important to them and controversial, but, by posting them there, manifest a <em>de facto</em> openness to&nbsp;counterarguments.</p>
 </li>
@@ -593,7 +593,7 @@ rkJggg==
 </li>
 </ul>
 <h2 id="Taking-a-look-at-the-dataset">Taking a look at the dataset<a class="anchor-link" href="#Taking-a-look-at-the-dataset">¶</a></h2><p>I know what you&#8217;re thinking, a little less conversation, let&#8217;s actually look at some examples.  Sure, our pleasure! Let&#8217;s download the dataset that we&nbsp;compiled.</p>
-<p><strong>Warning:</strong> If you&#8217;re following along at home, and you don&#8217;t already have it, this will download the 321M file <code>cmv.tar.bz2</code>.  We kept the code simple, but the downside is that your Jupyter kernel will be busy until the file is downloaded.  If, by any chance, your connection drops or you interrupt it, you will have to remove the partial file, otherwise the rest of the notebook might not&nbsp;work.</p>
+<p><strong>Warning:</strong> If you&#8217;re following along at home, and you don&#8217;t already have it, this will download the 321M&nbsp;file <code>cmv.tar.bz2</code>.  We kept the code simple, but the downside is that your Jupyter kernel will be busy until the file is downloaded.  If, by any chance, your connection drops or you interrupt it, you will have to remove the partial file, otherwise the rest of the notebook might not&nbsp;work.</p>
 </div>
 </div>
 </div>
@@ -666,7 +666,7 @@ rkJggg==
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>The archive we just downloaded contains all the data we used in our experiments.  We invite you to explore the other files in there: you can use the <code>pair_task</code> folder to study pairs of similar argumentative threads made in reply to the same original post, one successful and one not (more details in Section 4 of the paper).  We also provide you with the full, non-processed data in the <code>all</code> subfolder, so that you can design new interesting&nbsp;tasks.</p>
+<p>The archive we just downloaded contains all the data we used in our experiments.  We invite you to explore the other files in there: you can use&nbsp;the <code>pair_task</code> folder to study pairs of similar argumentative threads made in reply to the same original post, one successful and one not (more details in Section 4 of the paper).  We also provide you with the full, non-processed data in&nbsp;the <code>all</code> subfolder, so that you can design new interesting&nbsp;tasks.</p>
 <p>In this blog post, we are going to focus on the original posts, rather than the arguments made in response to them.  In the final part of our paper, we explored <em>resistance to persuasion</em>: recognizing whether an <span class="caps">OP</span> is likely to be persuaded or not, given how they express their view.  We insist on this because we think it&#8217;s interesting and we know there&#8217;s plenty more work to be done on this task: we merely scratched the surface! So, hopefully, this quick tour will make you want to work on&nbsp;this.</p>
 </div>
 </div>
@@ -770,7 +770,7 @@ In my opinion, this would create a voluntary political system where individual r
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>This poster has not been successfully persuaded! And just in case you have any doubts that no attempts were made or something, (we checked, trust us), we could go take a look at all comments and discussion by following the <code>post_id</code> to the original post on&nbsp;Reddit:</p>
+<p>This poster has not been successfully persuaded! And just in case you have any doubts that no attempts were made or something, (we checked, trust us), we could go take a look at all comments and discussion by following&nbsp;the <code>post_id</code> to the original post on&nbsp;Reddit:</p>
 </div>
 </div>
 </div>
@@ -1705,7 +1705,7 @@ rkJggg==
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>We will use a simple term-frequency vectorizer with no <span class="caps">IDF</span> and no data-dependent thresholds. This allows us to vectorize all of the training data once, and then do efficient model selection using LogisticRegressionCV, without having to vectorize again for each cross-validation&nbsp;fold.</p>
-<p><em>Side note: *This is important!  Imagine we wanted to throw away rare words, to avoid overfitting to them. We could use, for example, <code>min_df=10</code>.  This would keep all words that appear 10 times in the *training data</em>.  But, in a moment, we will be doing 3-fold cross-validation.  Consider the first cross-validation split: what if we encounter a word that occurs 5 times in the train fold and 5 times in the validation fold?  If we vectorized <em>outside</em> of the <span class="caps">CV</span> loop, we would keep this word, and assign it a weight estimated from very few observations.  This could lead us to overestimate our validation&nbsp;performance.</p>
+<p><em>Side note: *This is important!  Imagine we wanted to throw away rare words, to avoid overfitting to them. We could use, for&nbsp;example, <code>min_df=10</code>.  This would keep all words that appear 10 times in the *training data</em>.  But, in a moment, we will be doing 3-fold cross-validation.  Consider the first cross-validation split: what if we encounter a word that occurs 5 times in the train fold and 5 times in the validation fold?  If we vectorized <em>outside</em> of the <span class="caps">CV</span> loop, we would keep this word, and assign it a weight estimated from very few observations.  This could lead us to overestimate our validation&nbsp;performance.</p>
 </div>
 </div>
 </div>
@@ -1882,7 +1882,7 @@ rkJggg==
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Much of the social interaction we do online these days can prove useful for research.  In our work, we investigated persuasion and attitude change on <code>/r/ChangeMyView</code>.  In this post, we walked through part of the data that we collected and made available.  Hoping that this sparks some inspiration, we are looking forward to hearing what cool new things you will&nbsp;discover!</p>
+<p>Much of the social interaction we do online these days can prove useful for research.  In our work, we investigated persuasion and attitude change&nbsp;on <code>/r/ChangeMyView</code>.  In this post, we walked through part of the data that we collected and made available.  Hoping that this sparks some inspiration, we are looking forward to hearing what cool new things you will&nbsp;discover!</p>
 <hr/>
 </div>
 </div>

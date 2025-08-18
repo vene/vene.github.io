@@ -71,11 +71,10 @@ changeset. We made running the benchmark suite tons simpler by adding a
 friendly Makefile. You can read more about its usage in the guide. But
 by far, our coolest new toy&nbsp;is:</p>
 <h2 id="multi-step-benchmarks">Multi-step benchmarks<a class="headerlink" href="#multi-step-benchmarks" title="Permanent link">&para;</a></h2>
-<p>A standard vbench benchmark has three units of code, represented as
-strings: <code>code</code>, <code>setup</code> and <code>cleanup</code>. With the original timeit-based
+<p>A standard vbench benchmark has three units of code, represented as&nbsp;strings: <code>code</code>, <code>setup</code> and <code>cleanup</code>. With the original timeit-based
 benchmarks, this means that for every run, the setup would be executed
-once. Then, the main loop runs <code>repeat</code> times, and within each
-iteration, the <code>code</code> is run <code>ncalls</code> times. Then <code>cleanup</code> happens, the
+once. Then, the main loop&nbsp;runs <code>repeat</code> times, and within each
+iteration,&nbsp;the <code>code</code> is&nbsp;run <code>ncalls</code> times.&nbsp;Then <code>cleanup</code> happens, the
 best time is returned, and everybody is&nbsp;happy.</p>
 <p>In scikit-learn, most of our interesting objects go through a state
 change called <em>fitting</em>. This metaphor is right at home in the machine
@@ -89,9 +88,9 @@ complicated algorithms to fit them, but evaluation is a simple
 matrix-vector product that Numpy handles&nbsp;perfectly.</p>
 <p>But many of scikit-learn&#8217;s estimators have both steps interesting. Let&#8217;s
 take Non-negative Matrix Factorization. It has three interesting
-functions: The <code>fit</code> that computes $latex X = <span class="caps">WH</span> $, the <code>transform</code>
-that computes a non-negative projection on the components learned in
-<code>fit</code>, and <code>fit_transform</code> that takes advantage of the observation that
+functions:&nbsp;The <code>fit</code> that computes $latex X = <span class="caps">WH</span> $,&nbsp;the <code>transform</code>
+that computes a non-negative projection on the components learned&nbsp;in
+<code>fit</code>,&nbsp;and <code>fit_transform</code> that takes advantage of the observation that
 when fitting, we also get the transformed $latex X $ for&nbsp;free.</p>
 <p>When benchmarking <span class="caps">NMF</span>, we initially had to design 3&nbsp;benchmarks:</p>
 <ul>
@@ -102,15 +101,15 @@ when fitting, we also get the transformed $latex X $ for&nbsp;free.</p>
 <h2 id="how-much-time-were-we-wasting">How much time were we wasting?<a class="headerlink" href="#how-much-time-were-we-wasting" title="Permanent link">&para;</a></h2>
 <p>Let&#8217;s say it takes 10 seconds. For every benchmark, we time the code by
 running it 3 times. We run it once more to measure memory usage, once
-more for <code>cProfile</code> and one last time for <code>line_profiler</code>. This is a
+more&nbsp;for <code>cProfile</code> and one last time&nbsp;for <code>line_profiler</code>. This is a
 total of 6 times per benchmark. We need to multiply this by 2 again for
-running on two datasets. So when benchmarking <code>NMF</code>, because we need to
+running on two datasets. So when&nbsp;benchmarking <code>NMF</code>, because we need to
 fit before predicting, we do it 12 extra times. If a fit takes 5
 seconds, this means one minute wasted on benchmarking just one
-estimator. <em>Wouldn&#8217;t it be nice to <code>fit</code>, <code>fit_transform</code> and
+estimator. <em>Wouldn&#8217;t it be nice&nbsp;to <code>fit</code>, <code>fit_transform</code> and
 <code>transform</code> in a&nbsp;sequence?</em></p>
 <h2 id="behind-the-scenes">Behind the scenes<a class="headerlink" href="#behind-the-scenes" title="Permanent link">&para;</a></h2>
-<p>We made the <code>PythonBenchmark code</code> parameter also support getting a
+<p>We made&nbsp;the <code>PythonBenchmark code</code> parameter also support getting a
 sequence of strings, instead of just a string. On the database side,
 every benchmark result entry gets an extra component in the primary key,
 the number of the step it&nbsp;measures.</p>
@@ -123,12 +122,12 @@ the number of the step it&nbsp;measures.</p>
 &#8216;statements&#8217;: (&#8216;fit_unsup&#8217;, &#8216;transform_unsup&#8217;, &#8216;fit_transform&#8217;)<br />
 },<br />&nbsp;[/sourcecode]</p>
 <p>But before, we would take the cartesian product of datasets and
-statements, and build a <code>Benchmark</code> object for every pairing. Now, we
+statements, and build&nbsp;a <code>Benchmark</code> object for every pairing. Now, we
 just pass the tuple as it is, and vbench is smart enough to do the right
 thing.<br />
-We avoided the extra calls to <code>fit</code> in a lot of benchmarks. The whole
+We avoided the extra calls&nbsp;to <code>fit</code> in a lot of benchmarks. The whole
 suite now takes almost half the time to&nbsp;run!</p>
-<p><em>Note:</em> This trick is currently hosted in the
+<p><em>Note:</em> This trick is currently hosted in&nbsp;the
 <code>abstract_multistep_benchmarks</code> vbench branch in my&nbsp;fork.</p>
     </div><!-- /.entry-content -->
     <div class="comments">

@@ -88,13 +88,13 @@ Also, three.js supports exporting to <a href="https://en.wikipedia.org/wiki/GlTF
 the format required to <a href="https://developers.facebook.com/docs/sharing/3d-posts/">upload 3-d posts</a>.</p>
 <p>The strategy used by Graphulus uses the three.js
 <a href="https://threejs.org/docs/index.html#api/geometries/ParametricGeometry">ParametricGeometry</a>:
-a 3-d geometry defined by a function <code>z = f(x, y)</code>. This seems to be exactly
-what we want! If we can implement <code>f</code> easily in <span class="caps">JS</span>, we are&nbsp;done! </p>
-<p>In most cases, <code>f</code> is complicated and took months to implement, using Python or
+a 3-d geometry defined by a&nbsp;function <code>z = f(x, y)</code>. This seems to be exactly
+what we want! If we can&nbsp;implement <code>f</code> easily in <span class="caps">JS</span>, we are&nbsp;done! </p>
+<p>In most&nbsp;cases, <code>f</code> is complicated and took months to implement, using Python or
 C++, so we might not be able (or willing) to rewrite it in <span class="caps">JS</span>. I see two
 possible paths to take&nbsp;here:</p>
 <ol>
-<li>Building a web app, and implementing <code>f</code> as an <span class="caps">API</span>&nbsp;call.</li>
+<li>Building a web app, and&nbsp;implementing <code>f</code> as an <span class="caps">API</span>&nbsp;call.</li>
 <li>Finding a way to draw a three.js surface plot from precomputed&nbsp;values.</li>
 </ol>
 <p>Five years ago I would have been eager to take approach 1 and build an
@@ -104,12 +104,12 @@ example</a>
 of building a 3-d plot in three.js from a grid of points. In the rest of this
 blog, I will walk through the resulting&nbsp;method.</p>
 <h1 id="computing-the-function-values">Computing the function values<a class="headerlink" href="#computing-the-function-values" title="Permanent link">&para;</a></h1>
-<p>First thing to do is to compute the value of <code>f</code> on a grid of points. To keep
-things simple, we will plot <span class="arithmatex">\(\operatorname{softmax}([x, y, 0])_2\)</span>
-as a function of <span class="arithmatex">\(a\)</span> and <span class="arithmatex">\(b\)</span>. Recall that
-<span class="arithmatex">\(\operatorname{softmax}(\boldsymbol{\theta}) = \boldsymbol{p}\)</span>, where
+<p>First thing to do is to compute the value&nbsp;of <code>f</code> on a grid of points. To keep
+things simple, we will&nbsp;plot <span class="arithmatex">\(\operatorname{softmax}([x, y, 0])_2\)</span>
+as a function&nbsp;of <span class="arithmatex">\(a\)</span> and <span class="arithmatex">\(b\)</span>. Recall&nbsp;that
+<span class="arithmatex">\(\operatorname{softmax}(\boldsymbol{\theta}) = \boldsymbol{p}\)</span>,&nbsp;where
 <span class="arithmatex">\(p_i = \frac{\exp(\theta_i)}{\sum_j \exp(\theta_j)}\)</span>.</p>
-<p>We can implement <code>f(x, y)</code> easily:</p>
+<p>We can&nbsp;implement <code>f(x, y)</code> easily:</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># generate.py</span>
 
 <span class="kn">import</span> <span class="nn">math</span>
@@ -173,7 +173,7 @@ Indeed, we can very easily generate a valid <span class="caps">JS</span>&nbsp;fi
     <span class="nb">print</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
 </code></pre></div>
 
-<p>Run this script to obtain a <code>data.js</code> file describing the point cloud that we
+<p>Run this script to obtain&nbsp;a <code>data.js</code> file describing the point cloud that we
 want to&nbsp;visualize.</p>
 <h1 id="constructing-the-3-d-surface">Constructing the 3-d surface<a class="headerlink" href="#constructing-the-3-d-surface" title="Permanent link">&para;</a></h1>
 <p>Once we have the 3-d points, it&#8217;s time to use three.js to construct
@@ -199,7 +199,7 @@ used. Feel free to try newer versions; new features may&nbsp;appear!</span></p>
 <span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
 </code></pre></div>
 
-<p>Now it&#8217;s time to do the heavy lifting in <code>plot-glb.js</code>.
+<p>Now it&#8217;s time to do the heavy lifting&nbsp;in <code>plot-glb.js</code>.
 First thing we must do is construct a three.js scene. This consists of a
 <em>Mesh</em>, which in turn is described by a <em>Material</em> and a 
 <em>Geometry</em> (a set of vertices and faces). The <em>Material</em> is easy to pick; the
@@ -254,7 +254,7 @@ and <a href="https://threejs.org/docs/index.html#api/lights/SpotLight">lights</a
 some <a href="https://threejs.org/docs/index.html#api/helpers/ArrowHelper">axes</a> and
 descriptive
 <a href="https://threejs.org/docs/index.html#manual/introduction/Creating-text">text</a>,
-and render to a <code>&lt;div&gt;</code>. But our goal is to make a Facebook 3-d post, so we can
+and render to&nbsp;a <code>&lt;div&gt;</code>. But our goal is to make a Facebook 3-d post, so we can
 simply export the current scene as a binary <span class="caps">GLB</span>&nbsp;file. </p>
 <p>The <span class="caps">GLTF</span> exporter will give us a byte buffer that we need to download. We can
 handle with a function that modifies our&nbsp;link: </p>
@@ -268,7 +268,7 @@ handle with a function that modifies our&nbsp;link: </p>
 <span class="p">}</span>
 </code></pre></div>
 
-<p>Finally, we use the <code>GLTFExporter</code> to generate a Facebook-compatible 3-d&nbsp;model.</p>
+<p>Finally, we use&nbsp;the <code>GLTFExporter</code> to generate a Facebook-compatible 3-d&nbsp;model.</p>
 <div class="highlight"><pre><span></span><code><span class="c1">// plot-glb.js (part 3)</span>
 
 <span class="kd">var</span><span class="w"> </span><span class="nx">scene</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">makeScene</span><span class="p">();</span>
@@ -288,7 +288,7 @@ handle with a function that modifies our&nbsp;link: </p>
 <span class="p">},</span><span class="w"> </span><span class="nx">options</span><span class="w"> </span><span class="p">);</span>
 </code></pre></div>
 
-<p>Now, if you open <code>plot-glb.html</code> and click the Download link, you should get a
+<p>Now, if you&nbsp;open <code>plot-glb.html</code> and click the Download link, you should get&nbsp;a
 <code>.glb</code> file that can be drag-and-dropped onto a new Facebook&nbsp;post.</p>
 <h1 id="but-it-shows-up-seen-from-above-and-looks-ugly">But it shows up seen from above and looks ugly!<a class="headerlink" href="#but-it-shows-up-seen-from-above-and-looks-ugly" title="Permanent link">&para;</a></h1>
 <p>Indeed, there seems to be no way to specify the camera angle in a Facebook post.
@@ -331,9 +331,9 @@ pleasing&nbsp;angle! </p>
 
 <p>Above, we used <em>rotation matrices</em> to rotate the point cloud around.<label for="sn-rotation" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-rotation" class="margin-toggle"/><span class="sidenote">Rotating a 3-d point is equivalent to multiplying by a
 certain orthogonal matrix. <a href="https://en.wikipedia.org/wiki/Rotation_matrix#Basic_rotations">The wikipedia article</a> lists formulas for
-rotation matrices against the canonical axes <span class="arithmatex">\(x\)</span>, <span class="arithmatex">\(y\)</span>, <span class="arithmatex">\(z\)</span>. </span></p>
+rotation matrices against the canonical&nbsp;axes <span class="arithmatex">\(x\)</span>, <span class="arithmatex">\(y\)</span>, <span class="arithmatex">\(z\)</span>. </span></p>
 <p>The result should look just like the 3-d post I made below.
-Of course, in <code>generate.py</code> we can do arbitrary complicated calculations in <code>f</code>,
+Of course,&nbsp;in <code>generate.py</code> we can do arbitrary complicated calculations&nbsp;in <code>f</code>,
 including numerical optimization, so this approach is quite powerful. May it
 bring you many&nbsp;likes!</p>
 <p><iframe

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Vlad Niculae - presentation</title><link href="//vene.ro/" rel="alternate"></link><link href="//vene.ro/feeds/presentation.atom.xml" rel="self"></link><id>//vene.ro/</id><updated>2018-08-21T00:00:00+02:00</updated><entry><title>Rendering 3-d surface plots for social media</title><link href="//vene.ro/blog/rendering-3d-surface-plot-social-media.html" rel="alternate"></link><published>2018-08-21T00:00:00+02:00</published><updated>2018-08-21T00:00:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2018-08-21:/blog/rendering-3d-surface-plot-social-media.html</id><summary type="html">&lt;p&gt;It&amp;#8217;s 2018, and your favorite meme pages on facebook constantly come up with quality 3d-post content. How can we mere researchers even begin to compete in terms of social media presence? What chance do we have at going viral? In this post, I show you how to generate 3-d renders of your or your friends&amp;#8217; cool machine learning&amp;nbsp;research.&lt;/p&gt;</summary><content type="html">&lt;p&gt;It&amp;#8217;s 2018, and your favorite meme pages on facebook constantly come up
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Vlad Niculae - presentation</title><link href="//vene.ro/" rel="alternate"/><link href="//vene.ro/feeds/presentation.atom.xml" rel="self"/><id>//vene.ro/</id><updated>2018-08-21T00:00:00+02:00</updated><entry><title>Rendering 3-d surface plots for social media</title><link href="//vene.ro/blog/rendering-3d-surface-plot-social-media.html" rel="alternate"/><published>2018-08-21T00:00:00+02:00</published><updated>2018-08-21T00:00:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2018-08-21:/blog/rendering-3d-surface-plot-social-media.html</id><summary type="html">&lt;p&gt;It&amp;#8217;s 2018, and your favorite meme pages on facebook constantly come up with quality 3d-post content. How can we mere researchers even begin to compete in terms of social media presence? What chance do we have at going viral? In this post, I show you how to generate 3-d renders of your or your friends&amp;#8217; cool machine learning&amp;nbsp;research.&lt;/p&gt;</summary><content type="html">&lt;p&gt;It&amp;#8217;s 2018, and your favorite meme pages on facebook constantly come up
 with quality content like this. (If you&amp;#8217;re on mobile, you will need to
 open the below in the Facebook app for the full immersive experience,&amp;nbsp;sadly.)&lt;/p&gt;
 &lt;iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Ftheytheytheytheythey%2Fposts%2F1927754023930143&amp;width=350&amp;show_text=true&amp;height=471" width="350" height="471" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"&gt;&lt;/iframe&gt;
@@ -23,13 +23,13 @@ Also, three.js supports exporting to &lt;a href="https://en.wikipedia.org/wiki/G
 the format required to &lt;a href="https://developers.facebook.com/docs/sharing/3d-posts/"&gt;upload 3-d posts&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;The strategy used by Graphulus uses the three.js
 &lt;a href="https://threejs.org/docs/index.html#api/geometries/ParametricGeometry"&gt;ParametricGeometry&lt;/a&gt;:
-a 3-d geometry defined by a function &lt;code&gt;z = f(x, y)&lt;/code&gt;. This seems to be exactly
-what we want! If we can implement &lt;code&gt;f&lt;/code&gt; easily in &lt;span class="caps"&gt;JS&lt;/span&gt;, we are&amp;nbsp;done! &lt;/p&gt;
-&lt;p&gt;In most cases, &lt;code&gt;f&lt;/code&gt; is complicated and took months to implement, using Python or
+a 3-d geometry defined by a&amp;nbsp;function &lt;code&gt;z = f(x, y)&lt;/code&gt;. This seems to be exactly
+what we want! If we can&amp;nbsp;implement &lt;code&gt;f&lt;/code&gt; easily in &lt;span class="caps"&gt;JS&lt;/span&gt;, we are&amp;nbsp;done! &lt;/p&gt;
+&lt;p&gt;In most&amp;nbsp;cases, &lt;code&gt;f&lt;/code&gt; is complicated and took months to implement, using Python or
 C++, so we might not be able (or willing) to rewrite it in &lt;span class="caps"&gt;JS&lt;/span&gt;. I see two
 possible paths to take&amp;nbsp;here:&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;Building a web app, and implementing &lt;code&gt;f&lt;/code&gt; as an &lt;span class="caps"&gt;API&lt;/span&gt;&amp;nbsp;call.&lt;/li&gt;
+&lt;li&gt;Building a web app, and&amp;nbsp;implementing &lt;code&gt;f&lt;/code&gt; as an &lt;span class="caps"&gt;API&lt;/span&gt;&amp;nbsp;call.&lt;/li&gt;
 &lt;li&gt;Finding a way to draw a three.js surface plot from precomputed&amp;nbsp;values.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;Five years ago I would have been eager to take approach 1 and build an
@@ -39,12 +39,12 @@ example&lt;/a&gt;
 of building a 3-d plot in three.js from a grid of points. In the rest of this
 blog, I will walk through the resulting&amp;nbsp;method.&lt;/p&gt;
 &lt;h1 id="computing-the-function-values"&gt;Computing the function values&lt;a class="headerlink" href="#computing-the-function-values" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
-&lt;p&gt;First thing to do is to compute the value of &lt;code&gt;f&lt;/code&gt; on a grid of points. To keep
-things simple, we will plot &lt;span class="arithmatex"&gt;\(\operatorname{softmax}([x, y, 0])_2\)&lt;/span&gt;
-as a function of &lt;span class="arithmatex"&gt;\(a\)&lt;/span&gt; and &lt;span class="arithmatex"&gt;\(b\)&lt;/span&gt;. Recall that
-&lt;span class="arithmatex"&gt;\(\operatorname{softmax}(\boldsymbol{\theta}) = \boldsymbol{p}\)&lt;/span&gt;, where
+&lt;p&gt;First thing to do is to compute the value&amp;nbsp;of &lt;code&gt;f&lt;/code&gt; on a grid of points. To keep
+things simple, we will&amp;nbsp;plot &lt;span class="arithmatex"&gt;\(\operatorname{softmax}([x, y, 0])_2\)&lt;/span&gt;
+as a function&amp;nbsp;of &lt;span class="arithmatex"&gt;\(a\)&lt;/span&gt; and &lt;span class="arithmatex"&gt;\(b\)&lt;/span&gt;. Recall&amp;nbsp;that
+&lt;span class="arithmatex"&gt;\(\operatorname{softmax}(\boldsymbol{\theta}) = \boldsymbol{p}\)&lt;/span&gt;,&amp;nbsp;where
 &lt;span class="arithmatex"&gt;\(p_i = \frac{\exp(\theta_i)}{\sum_j \exp(\theta_j)}\)&lt;/span&gt;.&lt;/p&gt;
-&lt;p&gt;We can implement &lt;code&gt;f(x, y)&lt;/code&gt; easily:&lt;/p&gt;
+&lt;p&gt;We can&amp;nbsp;implement &lt;code&gt;f(x, y)&lt;/code&gt; easily:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# generate.py&lt;/span&gt;
 
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;math&lt;/span&gt;
@@ -108,7 +108,7 @@ Indeed, we can very easily generate a valid &lt;span class="caps"&gt;JS&lt;/span
     &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;template&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Run this script to obtain a &lt;code&gt;data.js&lt;/code&gt; file describing the point cloud that we
+&lt;p&gt;Run this script to obtain&amp;nbsp;a &lt;code&gt;data.js&lt;/code&gt; file describing the point cloud that we
 want to&amp;nbsp;visualize.&lt;/p&gt;
 &lt;h1 id="constructing-the-3-d-surface"&gt;Constructing the 3-d surface&lt;a class="headerlink" href="#constructing-the-3-d-surface" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;Once we have the 3-d points, it&amp;#8217;s time to use three.js to construct
@@ -134,7 +134,7 @@ used. Feel free to try newer versions; new features may&amp;nbsp;appear!&lt;/spa
 &lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;html&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Now it&amp;#8217;s time to do the heavy lifting in &lt;code&gt;plot-glb.js&lt;/code&gt;.
+&lt;p&gt;Now it&amp;#8217;s time to do the heavy lifting&amp;nbsp;in &lt;code&gt;plot-glb.js&lt;/code&gt;.
 First thing we must do is construct a three.js scene. This consists of a
 &lt;em&gt;Mesh&lt;/em&gt;, which in turn is described by a &lt;em&gt;Material&lt;/em&gt; and a 
 &lt;em&gt;Geometry&lt;/em&gt; (a set of vertices and faces). The &lt;em&gt;Material&lt;/em&gt; is easy to pick; the
@@ -189,7 +189,7 @@ and &lt;a href="https://threejs.org/docs/index.html#api/lights/SpotLight"&gt;lig
 some &lt;a href="https://threejs.org/docs/index.html#api/helpers/ArrowHelper"&gt;axes&lt;/a&gt; and
 descriptive
 &lt;a href="https://threejs.org/docs/index.html#manual/introduction/Creating-text"&gt;text&lt;/a&gt;,
-and render to a &lt;code&gt;&amp;lt;div&amp;gt;&lt;/code&gt;. But our goal is to make a Facebook 3-d post, so we can
+and render to&amp;nbsp;a &lt;code&gt;&amp;lt;div&amp;gt;&lt;/code&gt;. But our goal is to make a Facebook 3-d post, so we can
 simply export the current scene as a binary &lt;span class="caps"&gt;GLB&lt;/span&gt;&amp;nbsp;file. &lt;/p&gt;
 &lt;p&gt;The &lt;span class="caps"&gt;GLTF&lt;/span&gt; exporter will give us a byte buffer that we need to download. We can
 handle with a function that modifies our&amp;nbsp;link: &lt;/p&gt;
@@ -203,7 +203,7 @@ handle with a function that modifies our&amp;nbsp;link: &lt;/p&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Finally, we use the &lt;code&gt;GLTFExporter&lt;/code&gt; to generate a Facebook-compatible 3-d&amp;nbsp;model.&lt;/p&gt;
+&lt;p&gt;Finally, we use&amp;nbsp;the &lt;code&gt;GLTFExporter&lt;/code&gt; to generate a Facebook-compatible 3-d&amp;nbsp;model.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;// plot-glb.js (part 3)&lt;/span&gt;
 
 &lt;span class="kd"&gt;var&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;scene&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;makeScene&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
@@ -223,7 +223,7 @@ handle with a function that modifies our&amp;nbsp;link: &lt;/p&gt;
 &lt;span class="p"&gt;},&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;options&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Now, if you open &lt;code&gt;plot-glb.html&lt;/code&gt; and click the Download link, you should get a
+&lt;p&gt;Now, if you&amp;nbsp;open &lt;code&gt;plot-glb.html&lt;/code&gt; and click the Download link, you should get&amp;nbsp;a
 &lt;code&gt;.glb&lt;/code&gt; file that can be drag-and-dropped onto a new Facebook&amp;nbsp;post.&lt;/p&gt;
 &lt;h1 id="but-it-shows-up-seen-from-above-and-looks-ugly"&gt;But it shows up seen from above and looks ugly!&lt;a class="headerlink" href="#but-it-shows-up-seen-from-above-and-looks-ugly" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;Indeed, there seems to be no way to specify the camera angle in a Facebook post.
@@ -266,9 +266,9 @@ pleasing&amp;nbsp;angle! &lt;/p&gt;
 
 &lt;p&gt;Above, we used &lt;em&gt;rotation matrices&lt;/em&gt; to rotate the point cloud around.&lt;label for="sn-rotation" class="margin-toggle sidenote-number"&gt;&lt;/label&gt;&lt;input type="checkbox" id="sn-rotation" class="margin-toggle"/&gt;&lt;span class="sidenote"&gt;Rotating a 3-d point is equivalent to multiplying by a
 certain orthogonal matrix. &lt;a href="https://en.wikipedia.org/wiki/Rotation_matrix#Basic_rotations"&gt;The wikipedia article&lt;/a&gt; lists formulas for
-rotation matrices against the canonical axes &lt;span class="arithmatex"&gt;\(x\)&lt;/span&gt;, &lt;span class="arithmatex"&gt;\(y\)&lt;/span&gt;, &lt;span class="arithmatex"&gt;\(z\)&lt;/span&gt;. &lt;/span&gt;&lt;/p&gt;
+rotation matrices against the canonical&amp;nbsp;axes &lt;span class="arithmatex"&gt;\(x\)&lt;/span&gt;, &lt;span class="arithmatex"&gt;\(y\)&lt;/span&gt;, &lt;span class="arithmatex"&gt;\(z\)&lt;/span&gt;. &lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;The result should look just like the 3-d post I made below.
-Of course, in &lt;code&gt;generate.py&lt;/code&gt; we can do arbitrary complicated calculations in &lt;code&gt;f&lt;/code&gt;,
+Of course,&amp;nbsp;in &lt;code&gt;generate.py&lt;/code&gt; we can do arbitrary complicated calculations&amp;nbsp;in &lt;code&gt;f&lt;/code&gt;,
 including numerical optimization, so this approach is quite powerful. May it
 bring you many&amp;nbsp;likes!&lt;/p&gt;
 &lt;p&gt;&lt;iframe
@@ -276,4 +276,4 @@ src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.c
 width="350" height="535" style="border:none;overflow:hidden" scrolling="no"
 frameborder="0" allowTransparency="true" allow="encrypted-media"&gt;&lt;/iframe&gt;
 &lt;/p&gt;
-&lt;p&gt;&lt;em&gt;&lt;a href="https://github.com/vene/threedposts"&gt;Get code for this&amp;nbsp;post.&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;</content><category term="presentation"></category></entry></feed>
+&lt;p&gt;&lt;em&gt;&lt;a href="https://github.com/vene/threedposts"&gt;Get code for this&amp;nbsp;post.&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;</content><category term="presentation"/></entry></feed>

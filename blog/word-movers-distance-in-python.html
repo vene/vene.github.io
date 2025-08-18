@@ -376,7 +376,7 @@ d(addresses, chicago) = 1.37
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Since the <code>W</code> embedding array is pretty huge, we might as well restrict it to just the words that actually occur in the&nbsp;dataset.</p>
+<p>Since&nbsp;the <code>W</code> embedding array is pretty huge, we might as well restrict it to just the words that actually occur in the&nbsp;dataset.</p>
 </div>
 </div>
 </div>
@@ -431,8 +431,8 @@ d(addresses, chicago) = 1.37
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>One way to proceed is to just pre-compute the pairwise distances between all documents, and use them to search for hyperparameters and evaluate the model. However, that would incur some extra computation, and <span class="caps">WMD</span> is expensive. Also, it&#8217;s not the most pleasant user interface. So we define some scikit-learn compatible estimators for computing the <span class="caps">WMD</span>.</p>
-<p><strong><code>WordMoversKNN</code></strong> subclasses from <code>KNeighborsClassifier</code> and overrides the <code>predict</code> function to compute the <span class="caps">WMD</span> between all training and test&nbsp;samples.</p>
-<p>In practice, however, we often don&#8217;t know what is the best <code>n_neighbors</code> to use.  Simply wrapping <code>WordMoversKNN</code> in a <code>GridSearchCV</code> would be rather expensive because of all the distances that would need to be recomputed for every value of <code>n_neighbors</code>. So we introduce <strong><code>WordMoversKNNCV</code></strong>, which, when fitted, performs <em>cross-validation</em> to find the best value of <code>n_neighbors</code> (under any given evaluation metric), while only computing the <span class="caps">WMD</span> once per fold, and only across folds (saving <code>n_folds * fold_size ** 2</code> evaluations).</p>
+<p><strong><code>WordMoversKNN</code></strong> subclasses&nbsp;from <code>KNeighborsClassifier</code> and overrides&nbsp;the <code>predict</code> function to compute the <span class="caps">WMD</span> between all training and test&nbsp;samples.</p>
+<p>In practice, however, we often don&#8217;t know what is the&nbsp;best <code>n_neighbors</code> to use.  Simply&nbsp;wrapping <code>WordMoversKNN</code> in&nbsp;a <code>GridSearchCV</code> would be rather expensive because of all the distances that would need to be recomputed for every value&nbsp;of <code>n_neighbors</code>. So we introduce <strong><code>WordMoversKNNCV</code></strong>, which, when fitted, performs <em>cross-validation</em> to find the best value&nbsp;of <code>n_neighbors</code> (under any given evaluation metric), while only computing the <span class="caps">WMD</span> once per fold, and only across folds&nbsp;(saving <code>n_folds * fold_size ** 2</code> evaluations).</p>
 </div>
 </div>
 </div>

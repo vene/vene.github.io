@@ -81,7 +81,7 @@ features (ie. features indicating the number of times an n-gram occurs
 in a string) with binary features (ie. indicating only whether the
 n-gram occurs in the string or not). It looked to me like, for such a
 low-level text analysis task, using counts only adds&nbsp;noise.</p>
-<p>For this reason, the <code>feature_extraction.text.CountVectorizer</code> was not
+<p>For this reason,&nbsp;the <code>feature_extraction.text.CountVectorizer</code> was not
 enough for me. It only returns count features. There was also another
 thing that needed to be adjusted: by default, its analyzer uses a
 preprocessor that strips accented characters, and I had strong reasons
@@ -90,14 +90,14 @@ task. So, I needed to extend the&nbsp;vectorizer.</p>
 <h2 id="the-solution">The solution<a class="headerlink" href="#the-solution" title="Permanent link">&para;</a></h2>
 <p>The code I came up with is <a href="https://github.com/vene/misc-nlp/blob/master/conjugation/grid_search_example/preprocess.py">here</a>. I tried to build a class that would
 be as specific to my needs as possible. It is important to retain the
-full <span class="caps">API</span>, however. Note the <code>y=None</code> parameter in the fit functions. Its
+full <span class="caps">API</span>, however. Note&nbsp;the <code>y=None</code> parameter in the fit functions. Its
 necessity will become clear in a&nbsp;moment.</p>
-<p>Another tricky part was exposing the <code>max_n</code> parameter from the inner
+<p>Another tricky part was exposing&nbsp;the <code>max_n</code> parameter from the inner
 analyzer. This was not really natural, but it simplified the
 constructions later&nbsp;on.</p>
 <p>My <code>InfinitivesExtractor</code> class builds a data matrix from a list of
 strings. After using it, the data needs to be passed to the classifier,
-an instance of <code>svm.LinearSVC</code>. The <code>pipeline</code>module in scikits.learn
+an instance&nbsp;of <code>svm.LinearSVC</code>.&nbsp;The <code>pipeline</code>module in scikits.learn
 allows us to plug components into eachother in order to build a more
 complex object. In this case, we would like a classifier that receives a
 string as input, and directly outputs its label. We wouldn&#8217;t want the
@@ -110,7 +110,7 @@ prefixing them with the name of that component. For example, the support
 vector machine&#8217;s C parameter can be accessed as&nbsp;pipeline.svc__C.</p>
 <p>All that is left now is to see whether this is a good model, and what
 combination of parameters makes it work the best. Scikits.learn provides
-a great tool for choosing the parameters: the <code>grid_search</code> module. When
+a great tool for choosing the parameters:&nbsp;the <code>grid_search</code> module. When
 working with models like support vector machines, model parameters (such
 as the radial basis kernel width) usually need to be chosen by cross
 validation, because intuition doesn&#8217;t help much when dealing with high

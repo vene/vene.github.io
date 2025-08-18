@@ -77,7 +77,7 @@ lessons to be&nbsp;learned.</p>
 <a href="http://scikit-learn.org"><em>scikit-learn</em></a> library. It has the following&nbsp;features:</p>
 <ul>
 <li><em>vbench</em>-powered integration with&nbsp;Git</li>
-<li>Easily triggered build and report generation: just type <code>make</code></li>
+<li>Easily triggered build and report generation: just&nbsp;type <code>make</code></li>
 <li>Easily readable and writeable template for benchmarks:
     <p>
     [sourcecode lang=&#8221;python&#8221;]<br />
@@ -89,7 +89,7 @@ lessons to be&nbsp;learned.</p>
     }, &#8230;<br />&nbsp;[/sourcecode]</li>
 <li>Many attributes recorded: time (w/ estimated standard deviation),
     memory usage, cProfiler output, line_profiler output,&nbsp;tracebacks</li>
-<li>Multi-step benchmarks: i.e. <code>fit</code> followed by <code>predict</code></li>
+<li>Multi-step benchmarks:&nbsp;i.e. <code>fit</code> followed&nbsp;by <code>predict</code></li>
 </ul>
 <p>What were the lessons I learned&nbsp;here?</p>
 <h3 id="make-your-work-reusable-the-trade-off-between-good-design-and-get-it-working-now">Make your work reusable: the trade-off between good design and get-it-working-now<a class="headerlink" href="#make-your-work-reusable-the-trade-off-between-good-design-and-get-it-working-now" title="Permanent link">&para;</a></h3>
@@ -132,24 +132,24 @@ the profiler output with one click. I jumped on the following&nbsp;speed-ups:</p
     <p>
     Some of them proved trickier than expected, so I didn&#8217;t implement it
     for all the module yet, but it is ready for some&nbsp;estimators.</li>
-<li>Less callable functions passed around in <code>FastICA</code> (<a href="https://github.com/scikit-learn/scikit-learn/pull/927">merged</a>)</li>
-<li>Speed up <code>euclidean_distances</code> by rewriting in Cython. (<a href="https://github.com/scikit-learn/scikit-learn/pull/1006"><span class="caps">PR</span></a>)
+<li>Less callable functions passed around&nbsp;in <code>FastICA</code> (<a href="https://github.com/scikit-learn/scikit-learn/pull/927">merged</a>)</li>
+<li>Speed&nbsp;up <code>euclidean_distances</code> by rewriting in Cython. (<a href="https://github.com/scikit-learn/scikit-learn/pull/1006"><span class="caps">PR</span></a>)
     <p>
-    This meant making more operations support an <code>out</code> argument, for
+    This meant making more operations support&nbsp;an <code>out</code> argument, for
     passing preallocated memory. This touches many<br />
     different objects in the codebase: clustering, manifold learning,
     nearest neighbour&nbsp;methods.</li>
-<li><a href="http://localhost:8001/2012/08/18/inverses-pseudoinverses-numerical-issues-speed-symmetry/" title="Inverses and pseudoinverses. Numerical issues, speed, symmetry.">Insight into inverse and pseudoinverse computation</a>, new <code>pinvh</code>
+<li><a href="http://localhost:8001/2012/08/18/inverses-pseudoinverses-numerical-issues-speed-symmetry/" title="Inverses and pseudoinverses. Numerical issues, speed, symmetry.">Insight into inverse and pseudoinverse computation</a>,&nbsp;new <code>pinvh</code>
     function for inverting symmetric/hermitian matrices. (<a href="https://github.com/scikit-learn/scikit-learn/pull/1015"><span class="caps">PR</span></a>)
     <p>
-    This speeds up the covariance module (especially <code>MinCovDet</code>),
+    This speeds up the covariance module&nbsp;(especially <code>MinCovDet</code>),
     <code>ARDRegression</code> and the mixture models. It also lead to an <a href="https://github.com/scipy/scipy/pull/289">upstream
     contribution to&nbsp;Scipy</a></li>
 <li><code>OrthogonalMatchingPursuit</code> forward stepwise path for
     cross-validation (<a href="https://github.com/scikit-learn/scikit-learn/pull/1042"><span class="caps">PR</span></a>)
     <p>
     This is only halfway finished, but it will lead to faster and easier
-    optimization of the <code>OMP</code> sparsity&nbsp;parameter.</li>
+    optimization of&nbsp;the <code>OMP</code> sparsity&nbsp;parameter.</li>
 </ul>
 <p>Lessons? These will be pretty&nbsp;obvious.</p>
 <h3 id="write-tests-tests-tests">Write tests, tests, tests!<a class="headerlink" href="#write-tests-tests-tests" title="Permanent link">&para;</a></h3>
@@ -164,7 +164,7 @@ and you shouldn&#8217;t focus on speeding up stuff that is dominated by other
 computations that are orders of magnitude slower. However, there is an
 elephant in the room: the assumption that making code faster invariably
 makes it less clear, and takes a lot of&nbsp;effort.</p>
-<p>The following code is a part of scipy&#8217;s <code>pinv2</code> function as it currently
+<p>The following code is a part of&nbsp;scipy&#8217;s <code>pinv2</code> function as it currently
 is written:<br />
 [sourcecode lang=&#8221;python&#8221;]<br />
 cutoff = cond*np.maximum.reduce(s)<br />
@@ -175,7 +175,7 @@ psigma[i,i] = 1.0/np.conjugate(s[i])<br />
 return np.transpose(np.conjugate(np.dot(np.dot(u,psigma),vh)))<br />&nbsp;[/sourcecode]</p>
 <p><code>psigma</code> is a diagonal matrix, and some time and memory can be saved
 with simple vectorization. However, this part of the code dominated by
-an above call to <code>svd</code>. The profiler output would say that we shouldn&#8217;t
+an above call&nbsp;to <code>svd</code>. The profiler output would say that we shouldn&#8217;t
 bother, but is it really a bother? Look at Jake&#8217;s new&nbsp;version:</p>
 <p>[sourcecode lang=&#8221;python&#8221;]<br />
 above_cutoff = (s &gt; cond * np.max(s))<br />

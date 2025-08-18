@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Vlad Niculae - benchmarking</title><link href="//vene.ro/" rel="alternate"></link><link href="//vene.ro/feeds/benchmarking.atom.xml" rel="self"></link><id>//vene.ro/</id><updated>2012-08-18T19:41:00+02:00</updated><entry><title>Inverses and pseudoinverses. Numerical issues, speed, symmetry.</title><link href="//vene.ro/blog/inverses-pseudoinverses-numerical-issues-speed-symmetry.html" rel="alternate"></link><published>2012-08-18T19:41:00+02:00</published><updated>2012-08-18T19:41:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2012-08-18:/blog/inverses-pseudoinverses-numerical-issues-speed-symmetry.html</id><summary type="html">&lt;p&gt;The matrix inverse is a cornerstone of linear algebra, taught, along
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Vlad Niculae - benchmarking</title><link href="//vene.ro/" rel="alternate"/><link href="//vene.ro/feeds/benchmarking.atom.xml" rel="self"/><id>//vene.ro/</id><updated>2012-08-18T19:41:00+02:00</updated><entry><title>Inverses and pseudoinverses. Numerical issues, speed, symmetry.</title><link href="//vene.ro/blog/inverses-pseudoinverses-numerical-issues-speed-symmetry.html" rel="alternate"/><published>2012-08-18T19:41:00+02:00</published><updated>2012-08-18T19:41:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2012-08-18:/blog/inverses-pseudoinverses-numerical-issues-speed-symmetry.html</id><summary type="html">&lt;p&gt;The matrix inverse is a cornerstone of linear algebra, taught, along
 with its applications, since high school. The inverse of a matrix
 $latex A$, if it exists, is the matrix $latex A\^{-1}$ such that
 $latex &lt;span class="caps"&gt;AA&lt;/span&gt;\^{-1} = A\^{-1}A = I_n$. Based on the requirement that the
@@ -70,14 +70,14 @@ legends about numerical computation of least squares problems. You might
 have heard the following unwritten&amp;nbsp;rules:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Never compute $latex A\^{-1}$, solve the system&amp;nbsp;directly&lt;/li&gt;
-&lt;li&gt;If you really need $latex A\^{-1}$, use &lt;code&gt;pinv&lt;/code&gt; and not &lt;code&gt;inv&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;If you really need $latex A\^{-1}$,&amp;nbsp;use &lt;code&gt;pinv&lt;/code&gt; and&amp;nbsp;not &lt;code&gt;inv&lt;/code&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;The first of these rules is based on some misguided beliefs, but is
 still good advice. If your goal is a one-shot answer to a system,
 there&amp;#8217;s no use in explicitly computing a possibly large inverse, when
 all you need is $latex x$. But &lt;a href="http://arxiv.org/abs/1201.6035"&gt;this paper&lt;/a&gt; shows that computing the
 inverse is not necessarily a bad thing. The key to this is conditional
-accuracy, and as long as the &lt;code&gt;inv&lt;/code&gt; function used has good conditional
+accuracy, and as long as&amp;nbsp;the &lt;code&gt;inv&lt;/code&gt; function used has good conditional
 bounds, you will get as good results as with a least squares&amp;nbsp;solver.&lt;/p&gt;
 &lt;p&gt;The second rule comes from numerical stability, and will definitely bite
 you if misunderstood. If $latex A$ is a square matrix with a row full
@@ -118,12 +118,12 @@ zeroes. In other words, when singular values are very low, set them to&amp;nbsp;
 &lt;p&gt;How do you set the threshold? This is actually a delicate issue, being
 discussed on &lt;a href="http://thread.gmane.org/gmane.comp.python.numeric.general/50396/focus=50912"&gt;the numeric Python mailing list&lt;/a&gt;.&lt;/p&gt;
 &lt;h2 id="scipy-implementations"&gt;Scipy implementations&lt;a class="headerlink" href="#scipy-implementations" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;Scipy exposes &lt;code&gt;inv&lt;/code&gt;, &lt;code&gt;pinv&lt;/code&gt; and &lt;code&gt;pinv2&lt;/code&gt;. &lt;code&gt;inv&lt;/code&gt; secretly invokes &lt;span class="caps"&gt;LAPACK&lt;/span&gt;,
+&lt;p&gt;Scipy&amp;nbsp;exposes &lt;code&gt;inv&lt;/code&gt;, &lt;code&gt;pinv&lt;/code&gt; and &lt;code&gt;pinv2&lt;/code&gt;. &lt;code&gt;inv&lt;/code&gt; secretly invokes &lt;span class="caps"&gt;LAPACK&lt;/span&gt;,
 that ancient but crazy robust code that&amp;#8217;s been used since the 70s, to
 first compute a pivoted &lt;span class="caps"&gt;LU&lt;/span&gt; decomposition that is then used to compute
-the inverse. &lt;code&gt;pinv&lt;/code&gt; also uses &lt;span class="caps"&gt;LAPACK&lt;/span&gt;, but for computing the
-least-squares solution to the system $latex &lt;span class="caps"&gt;AX&lt;/span&gt; = I$. &lt;code&gt;pinv2&lt;/code&gt; computes
-the &lt;span class="caps"&gt;SVD&lt;/span&gt; and transposes everything like shown above. Both &lt;code&gt;pinv&lt;/code&gt; and
+the&amp;nbsp;inverse. &lt;code&gt;pinv&lt;/code&gt; also uses &lt;span class="caps"&gt;LAPACK&lt;/span&gt;, but for computing the
+least-squares solution to the system $latex &lt;span class="caps"&gt;AX&lt;/span&gt; =&amp;nbsp;I$. &lt;code&gt;pinv2&lt;/code&gt; computes
+the &lt;span class="caps"&gt;SVD&lt;/span&gt; and transposes everything like shown above.&amp;nbsp;Both &lt;code&gt;pinv&lt;/code&gt; and
 &lt;code&gt;pinv2&lt;/code&gt; expose &lt;code&gt;cond&lt;/code&gt; and &lt;code&gt;rcond&lt;/code&gt; arguments to handle the treatment of
 very small singular values, but (&lt;em&gt;attention!&lt;/em&gt;) they behave&amp;nbsp;differently!&lt;/p&gt;
 &lt;p&gt;The different implementations also lead to different speed. Let&amp;#8217;s look
@@ -158,7 +158,7 @@ array([[ 0.03636918, 0.01641725, 0.00736503],&lt;br /&gt;
 &lt;p&gt;In [10]: np.testing.assert_array_almost_equal(linalg.inv(a),&amp;nbsp;linalg.pinv(a))&lt;/p&gt;
 &lt;p&gt;In [11]: np.testing.assert_array_almost_equal(linalg.inv(a),
 linalg.pinv2(a))&lt;br /&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
-&lt;p&gt;Looks good! This is because we got lucky, though, and &lt;code&gt;a&lt;/code&gt; was invertible
+&lt;p&gt;Looks good! This is because we got lucky, though,&amp;nbsp;and &lt;code&gt;a&lt;/code&gt; was invertible
 to start with. Let&amp;#8217;s look at its&amp;nbsp;spectrum:&lt;/p&gt;
 &lt;p&gt;[sourcecode lang=&amp;#8221;python&amp;#8221;]&lt;br /&gt;
 In [12]: _, s, _ =&amp;nbsp;linalg.svd(a)&lt;/p&gt;
@@ -185,11 +185,11 @@ In [18]: np.sum(s \&amp;lt; 1e-10)&lt;br /&gt;
 Out[18]: 950&lt;br /&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
 &lt;p&gt;How do our functions behave in this case? Instead of just looking at a
 corner, let&amp;#8217;s use our gift of sight:[&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2012/08/pseudoinverses-300x218.png" title="Pseudoinverses" /&gt;]&lt;a href="http://localhost:8001/wp-content/uploads/2012/08/pseudoinverses-300x218.png" title="Pseudoinverses"&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;The small eigenvalues are large enough that &lt;code&gt;inv&lt;/code&gt; thinks the matrix is
-full rank. &lt;code&gt;pinv&lt;/code&gt; does better but it still fails, you can see a group of
-high-amplitude noisy columns. &lt;code&gt;pinv2&lt;/code&gt; is faster and it also gives us a
+&lt;p&gt;The small eigenvalues are large enough&amp;nbsp;that &lt;code&gt;inv&lt;/code&gt; thinks the matrix is
+full&amp;nbsp;rank. &lt;code&gt;pinv&lt;/code&gt; does better but it still fails, you can see a group of
+high-amplitude noisy&amp;nbsp;columns. &lt;code&gt;pinv2&lt;/code&gt; is faster and it also gives us a
 useful result in this&amp;nbsp;case.&lt;/p&gt;
-&lt;p&gt;Wait, does this mean that &lt;code&gt;pinv2&lt;/code&gt; is simply better, and &lt;code&gt;pinv&lt;/code&gt; is&amp;nbsp;useless?&lt;/p&gt;
+&lt;p&gt;Wait, does this mean&amp;nbsp;that &lt;code&gt;pinv2&lt;/code&gt; is simply better,&amp;nbsp;and &lt;code&gt;pinv&lt;/code&gt; is&amp;nbsp;useless?&lt;/p&gt;
 &lt;p&gt;Not quite. Remember, we are now trying to actually invert matrices, and
 degrade gracefully in case of rank deficiency. But what if we need the
 pseudoinverse to solve an actual non-square, wide or tall&amp;nbsp;system?&lt;/p&gt;
@@ -203,14 +203,14 @@ In [19]: a = np.random.randn(1000,&amp;nbsp;50)&lt;/p&gt;
 10 loops, best of 3: 114 ms per&amp;nbsp;loop&lt;/p&gt;
 &lt;p&gt;In [23]: timeit linalg.pinv2(a.T)&lt;br /&gt;
 10 loops, best of 3: 126 ms per loop&lt;br /&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
-&lt;p&gt;Huge victory for &lt;code&gt;pinv&lt;/code&gt; in the wide case! Hurray! With all this insight,
+&lt;p&gt;Huge victory&amp;nbsp;for &lt;code&gt;pinv&lt;/code&gt; in the wide case! Hurray! With all this insight,
 we can draw a line and see what we&amp;nbsp;learned.&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;If you are 100% sure that your matrix is invertible, use &lt;code&gt;inv&lt;/code&gt; for a
-    huge speed gain. The implementation of &lt;code&gt;inv&lt;/code&gt; from Scipy is based on
+&lt;li&gt;If you are 100% sure that your matrix is invertible,&amp;nbsp;use &lt;code&gt;inv&lt;/code&gt; for a
+    huge speed gain. The implementation&amp;nbsp;of &lt;code&gt;inv&lt;/code&gt; from Scipy is based on
     &lt;span class="caps"&gt;LAPACK&lt;/span&gt;&amp;#8217;s &lt;code&gt;*getrf&lt;/code&gt; + &lt;code&gt;*getri&lt;/code&gt;, known to have good&amp;nbsp;bounds.&lt;/li&gt;
-&lt;li&gt;If you are trying to solve a tall or wide system, use &lt;code&gt;pinv&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;If your matrix is square but might be rank deficient, use &lt;code&gt;pinv2&lt;/code&gt;
+&lt;li&gt;If you are trying to solve a tall or wide system,&amp;nbsp;use &lt;code&gt;pinv&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;If your matrix is square but might be rank deficient,&amp;nbsp;use &lt;code&gt;pinv2&lt;/code&gt;
     for speed and numerical&amp;nbsp;gain.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id="improving-the-symmetric-case"&gt;Improving the symmetric case&lt;a class="headerlink" href="#improving-the-symmetric-case" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
@@ -219,10 +219,10 @@ can&amp;#8217;t we make use of that to speed up the computation even more?
 Clearly, if $latex A$ is symmetric, in its &lt;span class="caps"&gt;SVD&lt;/span&gt; $latex A = &lt;span class="caps"&gt;USV&lt;/span&gt;\^T$,
 we must have $latex U = V$. But this is exactly the eigendecomposition
 of a symmetric matrix $latex A$. The eigendecomposition can be
-computed cheaper than the &lt;span class="caps"&gt;SVD&lt;/span&gt; using Scipy &lt;code&gt;eigh&lt;/code&gt;, that uses &lt;span class="caps"&gt;LAPACK&lt;/span&gt;&amp;#8217;s
+computed cheaper than the &lt;span class="caps"&gt;SVD&lt;/span&gt; using&amp;nbsp;Scipy &lt;code&gt;eigh&lt;/code&gt;, that uses &lt;span class="caps"&gt;LAPACK&lt;/span&gt;&amp;#8217;s
 &lt;code&gt;*evr&lt;/code&gt;. As part of my GSoC this year, with help from &lt;a href="http://jakevdp.github.com/"&gt;Jake
-VanderPlas&lt;/a&gt;, we made a &lt;a href="https://github.com/scipy/scipy/pull/289"&gt;pull request to Scipy&lt;/a&gt; containing a &lt;code&gt;pinvh&lt;/code&gt;
-function that is equivalent to &lt;code&gt;pinv2&lt;/code&gt; but faster for symmetric&amp;nbsp;matrices.&lt;/p&gt;
+VanderPlas&lt;/a&gt;, we made a &lt;a href="https://github.com/scipy/scipy/pull/289"&gt;pull request to Scipy&lt;/a&gt; containing&amp;nbsp;a &lt;code&gt;pinvh&lt;/code&gt;
+function that is equivalent&amp;nbsp;to &lt;code&gt;pinv2&lt;/code&gt; but faster for symmetric&amp;nbsp;matrices.&lt;/p&gt;
 &lt;p&gt;[sourcecode lang=&amp;#8221;python&amp;#8221;]&lt;br /&gt;
 In [24]: timeit linalg.pinv2(a)&lt;br /&gt;
 1 loops, best of 3: 1.54 s per&amp;nbsp;loop&lt;/p&gt;
@@ -230,15 +230,15 @@ In [24]: timeit linalg.pinv2(a)&lt;br /&gt;
 1 loops, best of 3: 621 ms per&amp;nbsp;loop&lt;/p&gt;
 &lt;p&gt;In [26]: np.testing.assert_array_almost_equal(linalg.pinv2(a),
 linalg.pinvh(a))&lt;br /&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
-&lt;p&gt;[&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2012/08/pseudoinverses-300x218.png" title="Pseudoinverses" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2012/08/pseudoinverses.png&lt;/p&gt;</content><category term="benchmarking"></category><category term="inv"></category><category term="matrix inverse"></category><category term="numerical analysis"></category><category term="numerical methods"></category><category term="pinv"></category><category term="pinvh"></category><category term="positive semidefinite"></category><category term="pseudoinverse"></category><category term="symmetric"></category><category term="benchmarking"></category><category term="python"></category></entry><entry><title>Memory benchmarking with vbench</title><link href="//vene.ro/blog/memory-benchmarking-with-vbench.html" rel="alternate"></link><published>2012-07-05T12:38:00+02:00</published><updated>2012-07-05T12:38:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2012-07-05:/blog/memory-benchmarking-with-vbench.html</id><summary type="html">&lt;p&gt;The &lt;a href="https://github.com/vene/scikit-learn-speed"&gt;scikit-learn-speed project&lt;/a&gt; now has memory usage&amp;nbsp;benchmarking!&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2012/08/pseudoinverses-300x218.png" title="Pseudoinverses" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2012/08/pseudoinverses.png&lt;/p&gt;</content><category term="benchmarking"/><category term="inv"/><category term="matrix inverse"/><category term="numerical analysis"/><category term="numerical methods"/><category term="pinv"/><category term="pinvh"/><category term="positive semidefinite"/><category term="pseudoinverse"/><category term="symmetric"/><category term="benchmarking"/><category term="python"/></entry><entry><title>Memory benchmarking with vbench</title><link href="//vene.ro/blog/memory-benchmarking-with-vbench.html" rel="alternate"/><published>2012-07-05T12:38:00+02:00</published><updated>2012-07-05T12:38:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2012-07-05:/blog/memory-benchmarking-with-vbench.html</id><summary type="html">&lt;p&gt;The &lt;a href="https://github.com/vene/scikit-learn-speed"&gt;scikit-learn-speed project&lt;/a&gt; now has memory usage&amp;nbsp;benchmarking!&lt;/p&gt;
 &lt;p&gt;This was accomplished by building on what I described in my recent
 posts, specifically the extensions to Fabian&amp;#8217;s [memory_profiler][] that
 you can find in &lt;a href="https://github.com/vene/memory_profiler"&gt;my fork&lt;/a&gt;, but they will be merged upstream soon. The
-key element is the &lt;code&gt;%magic_memit&lt;/code&gt; function whose …&lt;/p&gt;</summary><content type="html">&lt;p&gt;The &lt;a href="https://github.com/vene/scikit-learn-speed"&gt;scikit-learn-speed project&lt;/a&gt; now has memory usage&amp;nbsp;benchmarking!&lt;/p&gt;
+key element is&amp;nbsp;the &lt;code&gt;%magic_memit&lt;/code&gt; function whose …&lt;/p&gt;</summary><content type="html">&lt;p&gt;The &lt;a href="https://github.com/vene/scikit-learn-speed"&gt;scikit-learn-speed project&lt;/a&gt; now has memory usage&amp;nbsp;benchmarking!&lt;/p&gt;
 &lt;p&gt;This was accomplished by building on what I described in my recent
 posts, specifically the extensions to Fabian&amp;#8217;s [memory_profiler][] that
 you can find in &lt;a href="https://github.com/vene/memory_profiler"&gt;my fork&lt;/a&gt;, but they will be merged upstream soon. The
-key element is the &lt;code&gt;%magic_memit&lt;/code&gt; function whose development I blogged
+key element is&amp;nbsp;the &lt;code&gt;%magic_memit&lt;/code&gt; function whose development I blogged
 about &lt;a href="http://localhost:8001/2012/06/30/quick-memory-usage-benchmarking-in-ipython/" title="Quick memory usage benchmarking in IPython"&gt;on&lt;/a&gt; &lt;a href="http://localhost:8001/2012/07/02/more-on-memory-benchmarking/" title="More on memory benchmarking"&gt;several&lt;/a&gt; &lt;a href="http://localhost:8001/2012/07/04/on-why-my-memit-fails-on-osx/" title="On why my %memit fails on OSX"&gt;occasions&lt;/a&gt;. I plugged this into &lt;a href="http://wesmckinney.com/blog/?p=373"&gt;vbench&lt;/a&gt;
 in a similar way to how the timings are computed, all with great&amp;nbsp;success.&lt;/p&gt;
 &lt;p&gt;Here is a screenshot of the way a simple benchmark looks now, with just
@@ -251,16 +251,16 @@ scikit-learn-speed powered by&amp;nbsp;vbench.[/caption]&lt;/p&gt;
 need to use the vbench from the &lt;a href="https://github.com/vene/vbench/tree/memory"&gt;memory branch on my fork&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Of course, there are some important caveats. I am running this on my
 laptop, which runs &lt;span class="caps"&gt;OS&lt;/span&gt; X Lion, so, under the effect of &lt;a href="http://localhost:8001/2012/07/04/on-why-my-memit-fails-on-osx/" title="On why my %memit fails on OSX"&gt;this
-bug&lt;/a&gt;, I hardcoded the &amp;#8216;&lt;code&gt;-i&lt;/code&gt;&lt;span class="quo"&gt;&amp;#8216;&lt;/span&gt; so the memory benchmarks are not
+bug&lt;/a&gt;, I hardcoded the&amp;nbsp;&amp;#8216;&lt;code&gt;-i&lt;/code&gt;&lt;span class="quo"&gt;&amp;#8216;&lt;/span&gt; so the memory benchmarks are not
 realistic. Also, the y-range should probably be forced wider, because
 the plots look erratic, showing the very small noise at a&amp;nbsp;large-scale.&lt;/p&gt;
 &lt;p&gt;[![A screenshot showing generated output from the scikit-learn-speed
-  project, illustrating memory usage benchmarking.][]]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2012/07/vbench1.png&lt;/p&gt;</content><category term="benchmarking"></category><category term="memit"></category><category term="memory"></category><category term="vbench"></category><category term="python"></category><category term="scikit-learn"></category></entry><entry><title>On why my %memit fails on OSX</title><link href="//vene.ro/blog/on-why-my-memit-fails-on-osx.html" rel="alternate"></link><published>2012-07-04T12:49:00+02:00</published><updated>2012-07-04T12:49:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2012-07-04:/blog/on-why-my-memit-fails-on-osx.html</id><summary type="html">&lt;p&gt;In my &lt;a href="http://localhost:8001/2012/07/02/more-on-memory-benchmarking/" title="More on memory benchmarking"&gt;last post&lt;/a&gt; I mentioned that I&amp;#8217;m not satisfied with the current
-state of &lt;code&gt;%memit&lt;/code&gt;, because some more complicated numerical function
+  project, illustrating memory usage benchmarking.][]]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2012/07/vbench1.png&lt;/p&gt;</content><category term="benchmarking"/><category term="memit"/><category term="memory"/><category term="vbench"/><category term="python"/><category term="scikit-learn"/></entry><entry><title>On why my %memit fails on OSX</title><link href="//vene.ro/blog/on-why-my-memit-fails-on-osx.html" rel="alternate"/><published>2012-07-04T12:49:00+02:00</published><updated>2012-07-04T12:49:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2012-07-04:/blog/on-why-my-memit-fails-on-osx.html</id><summary type="html">&lt;p&gt;In my &lt;a href="http://localhost:8001/2012/07/02/more-on-memory-benchmarking/" title="More on memory benchmarking"&gt;last post&lt;/a&gt; I mentioned that I&amp;#8217;m not satisfied with the current
+state&amp;nbsp;of &lt;code&gt;%memit&lt;/code&gt;, because some more complicated numerical function
 calls make it crash. I will start this post with a reminder of a pretty
 important&amp;nbsp;bug:&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;[On MacOS X (10.7 but maybe more), after forking …&lt;/strong&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;In my &lt;a href="http://localhost:8001/2012/07/02/more-on-memory-benchmarking/" title="More on memory benchmarking"&gt;last post&lt;/a&gt; I mentioned that I&amp;#8217;m not satisfied with the current
-state of &lt;code&gt;%memit&lt;/code&gt;, because some more complicated numerical function
+state&amp;nbsp;of &lt;code&gt;%memit&lt;/code&gt;, because some more complicated numerical function
 calls make it crash. I will start this post with a reminder of a pretty
 important&amp;nbsp;bug:&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;[On MacOS X (10.7 but maybe more), after forking a new process, there
@@ -274,7 +274,7 @@ but there was, as of the date of this post, no&amp;nbsp;reaction.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;&lt;span class="caps"&gt;EDIT&lt;/span&gt; 2:&lt;/strong&gt; MinRK &lt;a href="https://twitter.com/minrk/status/228265246819774464" title="Min's tweet"&gt;confirms&lt;/a&gt;, and I verified shortly after, that this
 bug is fixed in Mountain Lion (10.8). Still not sure how far back it
 goes, though, so feedback is&amp;nbsp;welcome.&lt;/p&gt;
-&lt;p&gt;When I first tried to make the &lt;code&gt;%memit&lt;/code&gt; magic, I thought about simply
+&lt;p&gt;When I first tried to make&amp;nbsp;the &lt;code&gt;%memit&lt;/code&gt; magic, I thought about simply
 measuring the current memory, running the command, and measuring the
 memory again. The problem is the results are not consistent, because
 Python &lt;a href="http://effbot.org/pyfaq/why-doesnt-python-release-the-memory-when-i-delete-a-large-object.htm"&gt;tries to reuse already allocated memory whenever it can&lt;/a&gt;.&lt;/p&gt;
@@ -298,9 +298,9 @@ Filename:&amp;nbsp;mem_test.py&lt;/p&gt;
 10 32.4688 &lt;span class="caps"&gt;MB&lt;/span&gt; 7.6055 &lt;span class="caps"&gt;MB&lt;/span&gt; make_a_large_array()&lt;br /&gt;
 11 32.4688 &lt;span class="caps"&gt;MB&lt;/span&gt; 0.0000 &lt;span class="caps"&gt;MB&lt;/span&gt; make_a_large_array()&lt;br /&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
 &lt;p&gt;If this was in an IPython environment, and one would like to see how
-much memory &lt;code&gt;make_a_large_array()&lt;/code&gt; uses, you could say we can simply run
+much&amp;nbsp;memory &lt;code&gt;make_a_large_array()&lt;/code&gt; uses, you could say we can simply run
 it a few times and take the maximum. However, if you happened to
-accidentally call &lt;code&gt;main()&lt;/code&gt; once before, you will no longer get a good&amp;nbsp;result:&lt;/p&gt;
+accidentally&amp;nbsp;call &lt;code&gt;main()&lt;/code&gt; once before, you will no longer get a good&amp;nbsp;result:&lt;/p&gt;
 &lt;p&gt;[sourcecode lang=&amp;#8221;python&amp;#8221;]&lt;br /&gt;
 In [3]: %mprun -f mem_test.main mem_test.main()&lt;br /&gt;
 Filename:&amp;nbsp;mem_test.py&lt;/p&gt;
@@ -327,7 +327,7 @@ maximum of 3: 8.054688 &lt;span class="caps"&gt;MB&lt;/span&gt; per&amp;nbsp;loo
 maximum of 3: 8.058594 &lt;span class="caps"&gt;MB&lt;/span&gt; per&amp;nbsp;loop&lt;/p&gt;
 &lt;p&gt;In [10]: %memit X = mem_test.make_a_large_array()&lt;br /&gt;
 maximum of 3: 8.058594 &lt;span class="caps"&gt;MB&lt;/span&gt; per loop&lt;br /&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
-&lt;p&gt;If we don&amp;#8217;t spawn a subprocess, &lt;code&gt;del&lt;/code&gt; doesn&amp;#8217;t help, but allocating new
+&lt;p&gt;If we don&amp;#8217;t spawn a&amp;nbsp;subprocess, &lt;code&gt;del&lt;/code&gt; doesn&amp;#8217;t help, but allocating new
 variables does:&lt;br /&gt;
 [sourcecode lang=&amp;#8221;python&amp;#8221;]&lt;br /&gt;
 In [11]: %memit -i X = mem_test.make_a_large_array()&lt;br /&gt;
@@ -340,14 +340,14 @@ maximum of 3: 7.632812 &lt;span class="caps"&gt;MB&lt;/span&gt; per&amp;nbsp;loo
 &lt;p&gt;In [15]: %memit -i Z = mem_test.make_a_large_array()&lt;br /&gt;
 maximum of 3: 7.632812 &lt;span class="caps"&gt;MB&lt;/span&gt; per loop&lt;br /&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
 &lt;p&gt;Now, the problem is that when the function that you are benchmarking
-contains calls to &lt;code&gt;np.dot&lt;/code&gt; (matrix multiplication), the subprocess will
+contains calls&amp;nbsp;to &lt;code&gt;np.dot&lt;/code&gt; (matrix multiplication), the subprocess will
 consistently fail with &lt;span class="caps"&gt;SIGSEGV&lt;/span&gt; on affected &lt;span class="caps"&gt;OS&lt;/span&gt; X systems. These are
-actually pretty much all the functions that I intended &lt;code&gt;%memit&lt;/code&gt; for:
-numerical applications. For that reason, I have made &lt;code&gt;%memit&lt;/code&gt; notify the
-user when all subprocesses fail, and to suggest the usage of the &lt;code&gt;-i&lt;/code&gt;
+actually pretty much all the functions that I&amp;nbsp;intended &lt;code&gt;%memit&lt;/code&gt; for:
+numerical applications. For that reason, I have&amp;nbsp;made &lt;code&gt;%memit&lt;/code&gt; notify the
+user when all subprocesses fail, and to suggest the usage of&amp;nbsp;the &lt;code&gt;-i&lt;/code&gt;
 flag.&lt;/p&gt;
-&lt;p&gt;I think that, with this update, &lt;code&gt;%memit&lt;/code&gt; is flexible and usable enough
-for actual use, and therefore for merging into&amp;nbsp;memory_profiler.&lt;/p&gt;</content><category term="benchmarking"></category><category term="IPython"></category><category term="magic"></category><category term="memit"></category><category term="mprun"></category><category term="benchmarking"></category><category term="python"></category></entry><entry><title>More on memory benchmarking</title><link href="//vene.ro/blog/more-on-memory-benchmarking.html" rel="alternate"></link><published>2012-07-02T11:27:00+02:00</published><updated>2012-07-02T11:27:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2012-07-02:/blog/more-on-memory-benchmarking.html</id><summary type="html">&lt;p&gt;Following up on my task to make it easier to benchmark memory usage in
+&lt;p&gt;I think that, with this&amp;nbsp;update, &lt;code&gt;%memit&lt;/code&gt; is flexible and usable enough
+for actual use, and therefore for merging into&amp;nbsp;memory_profiler.&lt;/p&gt;</content><category term="benchmarking"/><category term="IPython"/><category term="magic"/><category term="memit"/><category term="mprun"/><category term="benchmarking"/><category term="python"/></entry><entry><title>More on memory benchmarking</title><link href="//vene.ro/blog/more-on-memory-benchmarking.html" rel="alternate"/><published>2012-07-02T11:27:00+02:00</published><updated>2012-07-02T11:27:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2012-07-02:/blog/more-on-memory-benchmarking.html</id><summary type="html">&lt;p&gt;Following up on my task to make it easier to benchmark memory usage in
 Python, I updated Fabian&amp;#8217;s [memory_profiler][] to include a couple of
 useful IPython magics. While in my &lt;a href="http://localhost:8001/2012/06/30/quick-memory-usage-benchmarking-in-ipython/" title="Quick memory usage benchmarking in IPython"&gt;last post&lt;/a&gt;, I used the new IPython
 0.13 syntax for defining magics, this time I used the
@@ -360,9 +360,9 @@ backwards-compatible one from the previous&amp;nbsp;version.&lt;/p&gt;
 memory_profiler][] from where you can trace it to my GitHub repo.
 Here&amp;#8217;s what you can do with&amp;nbsp;it:&lt;/p&gt;
 &lt;h2 id="mprun"&gt;%mprun&lt;a class="headerlink" href="#mprun" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;Copying the spirit of &lt;code&gt;%lprun&lt;/code&gt;, since imitation is the most sincere form
+&lt;p&gt;Copying the spirit&amp;nbsp;of &lt;code&gt;%lprun&lt;/code&gt;, since imitation is the most sincere form
 of flattery, you can use %mprun to easily view line-by-line memory usage
-reports, without having to go in and add the &lt;code&gt;@profile&lt;/code&gt; decorator.&lt;/p&gt;
+reports, without having to go in and add&amp;nbsp;the &lt;code&gt;@profile&lt;/code&gt; decorator.&lt;/p&gt;
 &lt;p&gt;For&amp;nbsp;example:&lt;/p&gt;
 &lt;p&gt;[sourcecode&amp;nbsp;lang=&amp;#8221;python&amp;#8221;]&lt;/p&gt;
 &lt;p&gt;In [1]: import numpy as&amp;nbsp;np&lt;/p&gt;
@@ -390,14 +390,14 @@ tol)&lt;br /&gt;
 125 41.7344 &lt;span class="caps"&gt;MB&lt;/span&gt; 0.0000 &lt;span class="caps"&gt;MB&lt;/span&gt; return&amp;nbsp;coef.T&lt;/p&gt;
 &lt;p&gt;[/sourcecode]&lt;/p&gt;
 &lt;h2 id="memit"&gt;%memit&lt;a class="headerlink" href="#memit" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;As described in my previous post, this is a &lt;code&gt;%timeit&lt;/code&gt;-like magic for
+&lt;p&gt;As described in my previous post, this is&amp;nbsp;a &lt;code&gt;%timeit&lt;/code&gt;-like magic for
 quickly seeing how much memory a Python command uses.&lt;br /&gt;
 Unlike %timeit, however, the command needs to be executed in a fresh
 process. I have to dig in some more to debug this, but if the command is
 run in the current process, very often the difference in memory usage
 will be insignificant, I assume because preallocated memory is used. The
 problem is that when running in a new process, some functions that I
-tried to bench crash with &lt;code&gt;SIGSEGV&lt;/code&gt;. For a lot of stuff, though,
+tried to bench crash&amp;nbsp;with &lt;code&gt;SIGSEGV&lt;/code&gt;. For a lot of stuff,&amp;nbsp;though,
 &lt;code&gt;%memit&lt;/code&gt; is currently&amp;nbsp;usable:&lt;/p&gt;
 &lt;p&gt;[sourcecode lang=&amp;#8221;python&amp;#8221;]&lt;br /&gt;
 In [1]: import numpy as&amp;nbsp;np&lt;/p&gt;
@@ -414,7 +414,7 @@ copying and what does&amp;nbsp;not.&lt;/p&gt;
 &lt;h2 id="installation-instructions"&gt;Installation instructions&lt;a class="headerlink" href="#installation-instructions" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;First, you have to get the source code of this version of
 memory_profiler. Then, it depends on your version of IPython. If you
-have 0.10, you have to edit &lt;code&gt;~/.ipython/ipy_user_conf.py&lt;/code&gt; like this:
+have 0.10, you have to&amp;nbsp;edit &lt;code&gt;~/.ipython/ipy_user_conf.py&lt;/code&gt; like this:
 (once again, instructions &lt;em&gt;borrowed&lt;/em&gt; from&amp;nbsp;[line_profiler][])&lt;/p&gt;
 &lt;p&gt;[sourcecode lang=&amp;#8221;python&amp;#8221;]&lt;br /&gt;
 # These two lines are standard and probably already there.&lt;br /&gt;
@@ -429,15 +429,15 @@ create a configuration profile:&lt;br /&gt;
 [sourcecode lang=&amp;#8221;bash&amp;#8221;]&lt;br /&gt;
 $ ipython profile create&lt;br /&gt;
 [/sourcecode]&lt;br /&gt;
-Then create a file named &lt;code&gt;~/.ipython/extensions/memory_profiler_ext.py&lt;/code&gt;
+Then create a file&amp;nbsp;named &lt;code&gt;~/.ipython/extensions/memory_profiler_ext.py&lt;/code&gt;
 with the following&amp;nbsp;content:&lt;/p&gt;
 &lt;p&gt;[sourcecode lang=&amp;#8221;python&amp;#8221;]&lt;br /&gt;
 import&amp;nbsp;memory_profiler&lt;/p&gt;
 &lt;p&gt;def load_ipython_extension(ip):&lt;br /&gt;
 ip.define_magic(&amp;#8216;mprun&amp;#8217;, memory_profiler.magic_mprun)&lt;br /&gt;
 ip.define_magic(&amp;#8216;memit&amp;#8217;, memory_profiler.magic_memit)&lt;br /&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
-&lt;p&gt;Then register it in &lt;code&gt;~/.ipython/profile_default/ipython_config.py&lt;/code&gt;, like
-this. Of course, if you already have other extensions such as
+&lt;p&gt;Then register it&amp;nbsp;in &lt;code&gt;~/.ipython/profile_default/ipython_config.py&lt;/code&gt;, like
+this. Of course, if you already have other extensions such&amp;nbsp;as
 &lt;code&gt;line_profiler_ext&lt;/code&gt;, just add the new one to the&amp;nbsp;list.&lt;/p&gt;
 &lt;p&gt;[sourcecode lang=&amp;#8221;python&amp;#8221;]&lt;br /&gt;
 c.TerminalIPythonApp.extensions = [&lt;br /&gt;
@@ -446,19 +446,18 @@ c.TerminalIPythonApp.extensions = [&lt;br /&gt;
 c.InteractiveShellApp.extensions = [&lt;br /&gt;
 &amp;#8216;memory_profiler_ext&amp;#8217;,&lt;br /&gt;
 ]&lt;br /&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
-&lt;p&gt;Now launch IPython and you can use the new magics like in the examples&amp;nbsp;above.&lt;/p&gt;</content><category term="benchmarking"></category><category term="IPython"></category><category term="magic"></category><category term="memit"></category><category term="memory"></category><category term="memory_profiler"></category><category term="mprun"></category><category term="benchmarking"></category><category term="python"></category></entry><entry><title>Quick memory usage benchmarking in IPython</title><link href="//vene.ro/blog/quick-memory-usage-benchmarking-in-ipython.html" rel="alternate"></link><published>2012-06-30T08:53:00+02:00</published><updated>2012-06-30T08:53:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2012-06-30:/blog/quick-memory-usage-benchmarking-in-ipython.html</id><summary type="html">&lt;p&gt;Everybody loves &lt;code&gt;%timeit&lt;/code&gt;, there&amp;#8217;s no doubt about it. So why not have
+&lt;p&gt;Now launch IPython and you can use the new magics like in the examples&amp;nbsp;above.&lt;/p&gt;</content><category term="benchmarking"/><category term="IPython"/><category term="magic"/><category term="memit"/><category term="memory"/><category term="memory_profiler"/><category term="mprun"/><category term="benchmarking"/><category term="python"/></entry><entry><title>Quick memory usage benchmarking in IPython</title><link href="//vene.ro/blog/quick-memory-usage-benchmarking-in-ipython.html" rel="alternate"/><published>2012-06-30T08:53:00+02:00</published><updated>2012-06-30T08:53:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2012-06-30:/blog/quick-memory-usage-benchmarking-in-ipython.html</id><summary type="html">&lt;p&gt;Everybody&amp;nbsp;loves &lt;code&gt;%timeit&lt;/code&gt;, there&amp;#8217;s no doubt about it. So why not have
 something like that, but for measuring how much memory your line takes?
 Well, now you can; grab a hold of the script in the following gist and
 run it like in the&amp;nbsp;example.&lt;/p&gt;
 &lt;p&gt;[gist&amp;nbsp;id=3022718]&lt;/p&gt;
-&lt;p&gt;Instead …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Everybody loves &lt;code&gt;%timeit&lt;/code&gt;, there&amp;#8217;s no doubt about it. So why not have
+&lt;p&gt;Instead …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Everybody&amp;nbsp;loves &lt;code&gt;%timeit&lt;/code&gt;, there&amp;#8217;s no doubt about it. So why not have
 something like that, but for measuring how much memory your line takes?
 Well, now you can; grab a hold of the script in the following gist and
 run it like in the&amp;nbsp;example.&lt;/p&gt;
 &lt;p&gt;[gist&amp;nbsp;id=3022718]&lt;/p&gt;
 &lt;p&gt;Instead of taking care of the dirty process inspection stuff myself, I
-decided to delegate this to Fabian&amp;#8217;s simple but very good
-[&lt;code&gt;memory_profiler&lt;/code&gt;][]. There is also &lt;a href="http://guppy-pe.sourceforge.net/"&gt;Guppy&lt;/a&gt; available, but its design
+decided to delegate this to Fabian&amp;#8217;s simple but very good&amp;nbsp;[&lt;code&gt;memory_profiler&lt;/code&gt;][]. There is also &lt;a href="http://guppy-pe.sourceforge.net/"&gt;Guppy&lt;/a&gt; available, but its design
 seems a bit and overkill for this&amp;nbsp;task.&lt;/p&gt;
 &lt;p&gt;Please contact me if you find problems with this implementation, this is
-a preliminary, quick hack-y version.&amp;nbsp;:)&lt;/p&gt;</content><category term="benchmarking"></category><category term="benchmark"></category><category term="IPython"></category><category term="magic"></category><category term="memory"></category><category term="memory_profiler"></category><category term="profiling"></category><category term="benchmarking"></category><category term="python"></category></entry></feed>
+a preliminary, quick hack-y version.&amp;nbsp;:)&lt;/p&gt;</content><category term="benchmarking"/><category term="benchmark"/><category term="IPython"/><category term="magic"/><category term="memory"/><category term="memory_profiler"/><category term="profiling"/><category term="benchmarking"/><category term="python"/></entry></feed>

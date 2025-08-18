@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Vlad Niculae - scikit-learn</title><link href="//vene.ro/" rel="alternate"></link><link href="//vene.ro/feeds/scikit-learn.atom.xml" rel="self"></link><id>//vene.ro/</id><updated>2012-08-20T02:44:00+02:00</updated><entry><title>Scikit-learn-speed: An overview on the final day</title><link href="//vene.ro/blog/scikit-learn-speed-an-overview-on-the-final-day.html" rel="alternate"></link><published>2012-08-20T02:44:00+02:00</published><updated>2012-08-20T02:44:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2012-08-20:/blog/scikit-learn-speed-an-overview-on-the-final-day.html</id><summary type="html">&lt;p&gt;This summer, I was granted the project called &lt;em&gt;scikit-learn-speed&lt;/em&gt;,
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Vlad Niculae - scikit-learn</title><link href="//vene.ro/" rel="alternate"/><link href="//vene.ro/feeds/scikit-learn.atom.xml" rel="self"/><id>//vene.ro/</id><updated>2012-08-20T02:44:00+02:00</updated><entry><title>Scikit-learn-speed: An overview on the final day</title><link href="//vene.ro/blog/scikit-learn-speed-an-overview-on-the-final-day.html" rel="alternate"/><published>2012-08-20T02:44:00+02:00</published><updated>2012-08-20T02:44:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2012-08-20:/blog/scikit-learn-speed-an-overview-on-the-final-day.html</id><summary type="html">&lt;p&gt;This summer, I was granted the project called &lt;em&gt;scikit-learn-speed&lt;/em&gt;,
 consisting of developing a benchmarking platform for &lt;em&gt;scikit-learn&lt;/em&gt; and
 using it to find potential speedups, and in the end, make the library go
 faster wherever I&amp;nbsp;can.&lt;/p&gt;
@@ -16,7 +16,7 @@ lessons to be&amp;nbsp;learned.&lt;/p&gt;
 &lt;a href="http://scikit-learn.org"&gt;&lt;em&gt;scikit-learn&lt;/em&gt;&lt;/a&gt; library. It has the following&amp;nbsp;features:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;em&gt;vbench&lt;/em&gt;-powered integration with&amp;nbsp;Git&lt;/li&gt;
-&lt;li&gt;Easily triggered build and report generation: just type &lt;code&gt;make&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Easily triggered build and report generation: just&amp;nbsp;type &lt;code&gt;make&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;Easily readable and writeable template for benchmarks:
     &lt;p&gt;
     [sourcecode lang=&amp;#8221;python&amp;#8221;]&lt;br /&gt;
@@ -28,7 +28,7 @@ lessons to be&amp;nbsp;learned.&lt;/p&gt;
     }, &amp;#8230;&lt;br /&gt;&amp;nbsp;[/sourcecode]&lt;/li&gt;
 &lt;li&gt;Many attributes recorded: time (w/ estimated standard deviation),
     memory usage, cProfiler output, line_profiler output,&amp;nbsp;tracebacks&lt;/li&gt;
-&lt;li&gt;Multi-step benchmarks: i.e. &lt;code&gt;fit&lt;/code&gt; followed by &lt;code&gt;predict&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Multi-step benchmarks:&amp;nbsp;i.e. &lt;code&gt;fit&lt;/code&gt; followed&amp;nbsp;by &lt;code&gt;predict&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;What were the lessons I learned&amp;nbsp;here?&lt;/p&gt;
 &lt;h3 id="make-your-work-reusable-the-trade-off-between-good-design-and-get-it-working-now"&gt;Make your work reusable: the trade-off between good design and get-it-working-now&lt;a class="headerlink" href="#make-your-work-reusable-the-trade-off-between-good-design-and-get-it-working-now" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h3&gt;
@@ -71,24 +71,24 @@ the profiler output with one click. I jumped on the following&amp;nbsp;speed-ups
     &lt;p&gt;
     Some of them proved trickier than expected, so I didn&amp;#8217;t implement it
     for all the module yet, but it is ready for some&amp;nbsp;estimators.&lt;/li&gt;
-&lt;li&gt;Less callable functions passed around in &lt;code&gt;FastICA&lt;/code&gt; (&lt;a href="https://github.com/scikit-learn/scikit-learn/pull/927"&gt;merged&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;Speed up &lt;code&gt;euclidean_distances&lt;/code&gt; by rewriting in Cython. (&lt;a href="https://github.com/scikit-learn/scikit-learn/pull/1006"&gt;&lt;span class="caps"&gt;PR&lt;/span&gt;&lt;/a&gt;)
+&lt;li&gt;Less callable functions passed around&amp;nbsp;in &lt;code&gt;FastICA&lt;/code&gt; (&lt;a href="https://github.com/scikit-learn/scikit-learn/pull/927"&gt;merged&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Speed&amp;nbsp;up &lt;code&gt;euclidean_distances&lt;/code&gt; by rewriting in Cython. (&lt;a href="https://github.com/scikit-learn/scikit-learn/pull/1006"&gt;&lt;span class="caps"&gt;PR&lt;/span&gt;&lt;/a&gt;)
     &lt;p&gt;
-    This meant making more operations support an &lt;code&gt;out&lt;/code&gt; argument, for
+    This meant making more operations support&amp;nbsp;an &lt;code&gt;out&lt;/code&gt; argument, for
     passing preallocated memory. This touches many&lt;br /&gt;
     different objects in the codebase: clustering, manifold learning,
     nearest neighbour&amp;nbsp;methods.&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://localhost:8001/2012/08/18/inverses-pseudoinverses-numerical-issues-speed-symmetry/" title="Inverses and pseudoinverses. Numerical issues, speed, symmetry."&gt;Insight into inverse and pseudoinverse computation&lt;/a&gt;, new &lt;code&gt;pinvh&lt;/code&gt;
+&lt;li&gt;&lt;a href="http://localhost:8001/2012/08/18/inverses-pseudoinverses-numerical-issues-speed-symmetry/" title="Inverses and pseudoinverses. Numerical issues, speed, symmetry."&gt;Insight into inverse and pseudoinverse computation&lt;/a&gt;,&amp;nbsp;new &lt;code&gt;pinvh&lt;/code&gt;
     function for inverting symmetric/hermitian matrices. (&lt;a href="https://github.com/scikit-learn/scikit-learn/pull/1015"&gt;&lt;span class="caps"&gt;PR&lt;/span&gt;&lt;/a&gt;)
     &lt;p&gt;
-    This speeds up the covariance module (especially &lt;code&gt;MinCovDet&lt;/code&gt;),
+    This speeds up the covariance module&amp;nbsp;(especially &lt;code&gt;MinCovDet&lt;/code&gt;),
     &lt;code&gt;ARDRegression&lt;/code&gt; and the mixture models. It also lead to an &lt;a href="https://github.com/scipy/scipy/pull/289"&gt;upstream
     contribution to&amp;nbsp;Scipy&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;OrthogonalMatchingPursuit&lt;/code&gt; forward stepwise path for
     cross-validation (&lt;a href="https://github.com/scikit-learn/scikit-learn/pull/1042"&gt;&lt;span class="caps"&gt;PR&lt;/span&gt;&lt;/a&gt;)
     &lt;p&gt;
     This is only halfway finished, but it will lead to faster and easier
-    optimization of the &lt;code&gt;OMP&lt;/code&gt; sparsity&amp;nbsp;parameter.&lt;/li&gt;
+    optimization of&amp;nbsp;the &lt;code&gt;OMP&lt;/code&gt; sparsity&amp;nbsp;parameter.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Lessons? These will be pretty&amp;nbsp;obvious.&lt;/p&gt;
 &lt;h3 id="write-tests-tests-tests"&gt;Write tests, tests, tests!&lt;a class="headerlink" href="#write-tests-tests-tests" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h3&gt;
@@ -103,7 +103,7 @@ and you shouldn&amp;#8217;t focus on speeding up stuff that is dominated by othe
 computations that are orders of magnitude slower. However, there is an
 elephant in the room: the assumption that making code faster invariably
 makes it less clear, and takes a lot of&amp;nbsp;effort.&lt;/p&gt;
-&lt;p&gt;The following code is a part of scipy&amp;#8217;s &lt;code&gt;pinv2&lt;/code&gt; function as it currently
+&lt;p&gt;The following code is a part of&amp;nbsp;scipy&amp;#8217;s &lt;code&gt;pinv2&lt;/code&gt; function as it currently
 is written:&lt;br /&gt;
 [sourcecode lang=&amp;#8221;python&amp;#8221;]&lt;br /&gt;
 cutoff = cond*np.maximum.reduce(s)&lt;br /&gt;
@@ -114,7 +114,7 @@ psigma[i,i] = 1.0/np.conjugate(s[i])&lt;br /&gt;
 return np.transpose(np.conjugate(np.dot(np.dot(u,psigma),vh)))&lt;br /&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;psigma&lt;/code&gt; is a diagonal matrix, and some time and memory can be saved
 with simple vectorization. However, this part of the code dominated by
-an above call to &lt;code&gt;svd&lt;/code&gt;. The profiler output would say that we shouldn&amp;#8217;t
+an above call&amp;nbsp;to &lt;code&gt;svd&lt;/code&gt;. The profiler output would say that we shouldn&amp;#8217;t
 bother, but is it really a bother? Look at Jake&amp;#8217;s new&amp;nbsp;version:&lt;/p&gt;
 &lt;p&gt;[sourcecode lang=&amp;#8221;python&amp;#8221;]&lt;br /&gt;
 above_cutoff = (s &amp;gt; cond * np.max(s))&lt;br /&gt;
@@ -139,7 +139,7 @@ large number of speed-ups, but a few considerable ones nonetheless. And
 I venture the claim that the &lt;em&gt;scikit-learn-speed&lt;/em&gt; tool will prove useful
 over time, and that the efforts deployed during this project have
 stretched beyond the boundary of the &lt;em&gt;scikit-learn&lt;/em&gt;.&lt;/p&gt;
-&lt;p&gt;[&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2012/08/skl-speed-300x163.png" title="skl-speed" /&gt;]:&amp;nbsp;http://jenkins-scikit-learn.github.com/scikit-learn-speed/&lt;/p&gt;</content><category term="scikit-learn"></category><category term="gsoc"></category><category term="optimization"></category><category term="scikit-learn-speed"></category><category term="speedup"></category><category term="summary"></category><category term="vbench"></category><category term="benchmarking"></category><category term="python"></category><category term="scikit-learn"></category></entry><entry><title>The scikit-learn-speed ship has set sail! Faster than ever, with multi-step benchmarks!</title><link href="//vene.ro/blog/the-scikit-learn-speed-ship-has-set-sail-faster-than-ever-with-multi-step-benchmarks.html" rel="alternate"></link><published>2012-08-11T17:32:00+02:00</published><updated>2012-08-11T17:32:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2012-08-11:/blog/the-scikit-learn-speed-ship-has-set-sail-faster-than-ever-with-multi-step-benchmarks.html</id><summary type="html">&lt;p&gt;I am pleased to announce that last night at 2:03 &lt;span class="caps"&gt;AM&lt;/span&gt;, the first fully
+&lt;p&gt;[&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2012/08/skl-speed-300x163.png" title="skl-speed" /&gt;]:&amp;nbsp;http://jenkins-scikit-learn.github.com/scikit-learn-speed/&lt;/p&gt;</content><category term="scikit-learn"/><category term="gsoc"/><category term="optimization"/><category term="scikit-learn-speed"/><category term="speedup"/><category term="summary"/><category term="vbench"/><category term="benchmarking"/><category term="python"/><category term="scikit-learn"/></entry><entry><title>The scikit-learn-speed ship has set sail! Faster than ever, with multi-step benchmarks!</title><link href="//vene.ro/blog/the-scikit-learn-speed-ship-has-set-sail-faster-than-ever-with-multi-step-benchmarks.html" rel="alternate"/><published>2012-08-11T17:32:00+02:00</published><updated>2012-08-11T17:32:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2012-08-11:/blog/the-scikit-learn-speed-ship-has-set-sail-faster-than-ever-with-multi-step-benchmarks.html</id><summary type="html">&lt;p&gt;I am pleased to announce that last night at 2:03 &lt;span class="caps"&gt;AM&lt;/span&gt;, the first fully
 automated run of the scikit-learn-speed test suite has run on our
 Jenkins instance! You can admire it at &lt;a href="http://jenkins-scikit-learn.github.com/scikit-learn-speed/"&gt;its temporary home&lt;/a&gt; for now.
 As soon as we verify that everything is good, we will move …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I am pleased to announce that last night at 2:03 &lt;span class="caps"&gt;AM&lt;/span&gt;, the first fully
@@ -152,11 +152,10 @@ changeset. We made running the benchmark suite tons simpler by adding a
 friendly Makefile. You can read more about its usage in the guide. But
 by far, our coolest new toy&amp;nbsp;is:&lt;/p&gt;
 &lt;h2 id="multi-step-benchmarks"&gt;Multi-step benchmarks&lt;a class="headerlink" href="#multi-step-benchmarks" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;A standard vbench benchmark has three units of code, represented as
-strings: &lt;code&gt;code&lt;/code&gt;, &lt;code&gt;setup&lt;/code&gt; and &lt;code&gt;cleanup&lt;/code&gt;. With the original timeit-based
+&lt;p&gt;A standard vbench benchmark has three units of code, represented as&amp;nbsp;strings: &lt;code&gt;code&lt;/code&gt;, &lt;code&gt;setup&lt;/code&gt; and &lt;code&gt;cleanup&lt;/code&gt;. With the original timeit-based
 benchmarks, this means that for every run, the setup would be executed
-once. Then, the main loop runs &lt;code&gt;repeat&lt;/code&gt; times, and within each
-iteration, the &lt;code&gt;code&lt;/code&gt; is run &lt;code&gt;ncalls&lt;/code&gt; times. Then &lt;code&gt;cleanup&lt;/code&gt; happens, the
+once. Then, the main loop&amp;nbsp;runs &lt;code&gt;repeat&lt;/code&gt; times, and within each
+iteration,&amp;nbsp;the &lt;code&gt;code&lt;/code&gt; is&amp;nbsp;run &lt;code&gt;ncalls&lt;/code&gt; times.&amp;nbsp;Then &lt;code&gt;cleanup&lt;/code&gt; happens, the
 best time is returned, and everybody is&amp;nbsp;happy.&lt;/p&gt;
 &lt;p&gt;In scikit-learn, most of our interesting objects go through a state
 change called &lt;em&gt;fitting&lt;/em&gt;. This metaphor is right at home in the machine
@@ -170,9 +169,9 @@ complicated algorithms to fit them, but evaluation is a simple
 matrix-vector product that Numpy handles&amp;nbsp;perfectly.&lt;/p&gt;
 &lt;p&gt;But many of scikit-learn&amp;#8217;s estimators have both steps interesting. Let&amp;#8217;s
 take Non-negative Matrix Factorization. It has three interesting
-functions: The &lt;code&gt;fit&lt;/code&gt; that computes $latex X = &lt;span class="caps"&gt;WH&lt;/span&gt; $, the &lt;code&gt;transform&lt;/code&gt;
-that computes a non-negative projection on the components learned in
-&lt;code&gt;fit&lt;/code&gt;, and &lt;code&gt;fit_transform&lt;/code&gt; that takes advantage of the observation that
+functions:&amp;nbsp;The &lt;code&gt;fit&lt;/code&gt; that computes $latex X = &lt;span class="caps"&gt;WH&lt;/span&gt; $,&amp;nbsp;the &lt;code&gt;transform&lt;/code&gt;
+that computes a non-negative projection on the components learned&amp;nbsp;in
+&lt;code&gt;fit&lt;/code&gt;,&amp;nbsp;and &lt;code&gt;fit_transform&lt;/code&gt; that takes advantage of the observation that
 when fitting, we also get the transformed $latex X $ for&amp;nbsp;free.&lt;/p&gt;
 &lt;p&gt;When benchmarking &lt;span class="caps"&gt;NMF&lt;/span&gt;, we initially had to design 3&amp;nbsp;benchmarks:&lt;/p&gt;
 &lt;ul&gt;
@@ -183,15 +182,15 @@ when fitting, we also get the transformed $latex X $ for&amp;nbsp;free.&lt;/p&gt
 &lt;h2 id="how-much-time-were-we-wasting"&gt;How much time were we wasting?&lt;a class="headerlink" href="#how-much-time-were-we-wasting" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Let&amp;#8217;s say it takes 10 seconds. For every benchmark, we time the code by
 running it 3 times. We run it once more to measure memory usage, once
-more for &lt;code&gt;cProfile&lt;/code&gt; and one last time for &lt;code&gt;line_profiler&lt;/code&gt;. This is a
+more&amp;nbsp;for &lt;code&gt;cProfile&lt;/code&gt; and one last time&amp;nbsp;for &lt;code&gt;line_profiler&lt;/code&gt;. This is a
 total of 6 times per benchmark. We need to multiply this by 2 again for
-running on two datasets. So when benchmarking &lt;code&gt;NMF&lt;/code&gt;, because we need to
+running on two datasets. So when&amp;nbsp;benchmarking &lt;code&gt;NMF&lt;/code&gt;, because we need to
 fit before predicting, we do it 12 extra times. If a fit takes 5
 seconds, this means one minute wasted on benchmarking just one
-estimator. &lt;em&gt;Wouldn&amp;#8217;t it be nice to &lt;code&gt;fit&lt;/code&gt;, &lt;code&gt;fit_transform&lt;/code&gt; and
+estimator. &lt;em&gt;Wouldn&amp;#8217;t it be nice&amp;nbsp;to &lt;code&gt;fit&lt;/code&gt;, &lt;code&gt;fit_transform&lt;/code&gt; and
 &lt;code&gt;transform&lt;/code&gt; in a&amp;nbsp;sequence?&lt;/em&gt;&lt;/p&gt;
 &lt;h2 id="behind-the-scenes"&gt;Behind the scenes&lt;a class="headerlink" href="#behind-the-scenes" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;We made the &lt;code&gt;PythonBenchmark code&lt;/code&gt; parameter also support getting a
+&lt;p&gt;We made&amp;nbsp;the &lt;code&gt;PythonBenchmark code&lt;/code&gt; parameter also support getting a
 sequence of strings, instead of just a string. On the database side,
 every benchmark result entry gets an extra component in the primary key,
 the number of the step it&amp;nbsp;measures.&lt;/p&gt;
@@ -204,13 +203,13 @@ the number of the step it&amp;nbsp;measures.&lt;/p&gt;
 &amp;#8216;statements&amp;#8217;: (&amp;#8216;fit_unsup&amp;#8217;, &amp;#8216;transform_unsup&amp;#8217;, &amp;#8216;fit_transform&amp;#8217;)&lt;br /&gt;
 },&lt;br /&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
 &lt;p&gt;But before, we would take the cartesian product of datasets and
-statements, and build a &lt;code&gt;Benchmark&lt;/code&gt; object for every pairing. Now, we
+statements, and build&amp;nbsp;a &lt;code&gt;Benchmark&lt;/code&gt; object for every pairing. Now, we
 just pass the tuple as it is, and vbench is smart enough to do the right
 thing.&lt;br /&gt;
-We avoided the extra calls to &lt;code&gt;fit&lt;/code&gt; in a lot of benchmarks. The whole
+We avoided the extra calls&amp;nbsp;to &lt;code&gt;fit&lt;/code&gt; in a lot of benchmarks. The whole
 suite now takes almost half the time to&amp;nbsp;run!&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Note:&lt;/em&gt; This trick is currently hosted in the
-&lt;code&gt;abstract_multistep_benchmarks&lt;/code&gt; vbench branch in my&amp;nbsp;fork.&lt;/p&gt;</content><category term="scikit-learn"></category><category term="multi-step"></category><category term="multistep"></category><category term="vbench"></category><category term="benchmarking"></category><category term="python"></category><category term="scikit-learn"></category></entry><entry><title>Profiler output, benchmark standard deviation and other goodies in scikit-learn-speed</title><link href="//vene.ro/blog/profiler-output-benchmark-standard-deviation-and-other-goodies-in-scikit-learn-speed.html" rel="alternate"></link><published>2012-07-27T11:01:00+02:00</published><updated>2012-07-27T11:01:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2012-07-27:/blog/profiler-output-benchmark-standard-deviation-and-other-goodies-in-scikit-learn-speed.html</id><summary type="html">&lt;p&gt;This post is about the &lt;a href="http://scikit-learn.org"&gt;scikit-learn&lt;/a&gt;benchmarking project that I am
+&lt;p&gt;&lt;em&gt;Note:&lt;/em&gt; This trick is currently hosted in&amp;nbsp;the
+&lt;code&gt;abstract_multistep_benchmarks&lt;/code&gt; vbench branch in my&amp;nbsp;fork.&lt;/p&gt;</content><category term="scikit-learn"/><category term="multi-step"/><category term="multistep"/><category term="vbench"/><category term="benchmarking"/><category term="python"/><category term="scikit-learn"/></entry><entry><title>Profiler output, benchmark standard deviation and other goodies in scikit-learn-speed</title><link href="//vene.ro/blog/profiler-output-benchmark-standard-deviation-and-other-goodies-in-scikit-learn-speed.html" rel="alternate"/><published>2012-07-27T11:01:00+02:00</published><updated>2012-07-27T11:01:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2012-07-27:/blog/profiler-output-benchmark-standard-deviation-and-other-goodies-in-scikit-learn-speed.html</id><summary type="html">&lt;p&gt;This post is about the &lt;a href="http://scikit-learn.org"&gt;scikit-learn&lt;/a&gt;benchmarking project that I am
 working on, called &lt;a href="https://github.com/vene/scikit-learn-speed"&gt;scikit-learn-speed&lt;/a&gt;. This is a continuous
 benchmarking suite that runs and generates &lt;span class="caps"&gt;HTML&lt;/span&gt; reports using Wes
 McKinney&amp;#8217;s &lt;a href="http://wesmckinney.com/blog/?p=373"&gt;vbench&lt;/a&gt; framework, to which I had to make some (useful, I
@@ -236,20 +235,18 @@ Here&amp;#8217;s a list in order of&amp;nbsp;obviousness:&lt;/p&gt;
 &lt;/ul&gt;
 &lt;h2 id="what-made-this-possible"&gt;What made this possible&lt;a class="headerlink" href="#what-made-this-possible" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;I have done some more refactoring in my vbench fork, because I didn&amp;#8217;t
-want to have a huge, monolithic &lt;code&gt;Benchmark&lt;/code&gt; class that was specific to
+want to have a huge,&amp;nbsp;monolithic &lt;code&gt;Benchmark&lt;/code&gt; class that was specific to
 what we want in scikit-learn-speed. So on this branch, I set up a
 mixin/multiple inheritance hierarchy of benchmark&amp;nbsp;classes.&lt;/p&gt;
 &lt;p&gt;The &lt;code&gt;Benchmark&lt;/code&gt; class in vbench is now an abstract base class, with some
-common functionality and structure.&lt;br /&gt;
-Our &lt;code&gt;SklBenchmark&lt;/code&gt; class is defined in scikit-learn-speed&amp;nbsp;as:&lt;/p&gt;
+common functionality and structure.&lt;br /&gt;&amp;nbsp;Our &lt;code&gt;SklBenchmark&lt;/code&gt; class is defined in scikit-learn-speed&amp;nbsp;as:&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;class SklBenchmark(CProfileBenchmarkMixin,  MemoryBenchmarkMixin, PythonBenchmark):&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;Let&amp;#8217;s read this from right to&amp;nbsp;left:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;PythonBenchmark&lt;/code&gt;: This class stores &lt;code&gt;code&lt;/code&gt;, &lt;code&gt;setup&lt;/code&gt; and &lt;code&gt;cleanup&lt;/code&gt;
+&lt;li&gt;&lt;code&gt;PythonBenchmark&lt;/code&gt;: This class&amp;nbsp;stores &lt;code&gt;code&lt;/code&gt;, &lt;code&gt;setup&lt;/code&gt; and &lt;code&gt;cleanup&lt;/code&gt;
     Python code as strings, and implements simple timing mechanisms
-    using the &lt;code&gt;time&lt;/code&gt; module.&lt;/li&gt;
-&lt;li&gt;Bonus: &lt;code&gt;TimeitBenchmark&lt;/code&gt;: This class extends &lt;code&gt;PythonBenchmark&lt;/code&gt; with
-    the &lt;code&gt;timeit&lt;/code&gt; micro-benchmark timing method previously used in
+    using&amp;nbsp;the &lt;code&gt;time&lt;/code&gt; module.&lt;/li&gt;
+&lt;li&gt;Bonus: &lt;code&gt;TimeitBenchmark&lt;/code&gt;: This class&amp;nbsp;extends &lt;code&gt;PythonBenchmark&lt;/code&gt; with&amp;nbsp;the &lt;code&gt;timeit&lt;/code&gt; micro-benchmark timing method previously used in
     vbench. We turned this off in&amp;nbsp;scikit-learn-speed.&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;MemoryBenchmarkMixin&lt;/code&gt;: This adds memory benchmarking using&amp;nbsp;[memory_profiler][].&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;CProfileBenchmarkMixin&lt;/code&gt;: This runs the code through &lt;a href="http://docs.python.org/library/profile.html#module-cProfile"&gt;cProfile&lt;/a&gt;
@@ -257,7 +254,7 @@ Our &lt;code&gt;SklBenchmark&lt;/code&gt; class is defined in scikit-learn-speed
 &lt;/ul&gt;
 &lt;p&gt;The database is not flexible enough to adapt to arbitrary benchmark
 structure right now, so if anybody would like to help the effort, it
-would be very&amp;nbsp;appreciated.&lt;/p&gt;</content><category term="scikit-learn"></category><category term="gsoc"></category><category term="memory_profiler"></category><category term="scikit-learn-speed"></category><category term="vbench"></category><category term="benchmarking"></category><category term="python"></category><category term="scikit-learn"></category></entry><entry><title>Scikit-learn-speed HTML reports teaser</title><link href="//vene.ro/blog/scikit-learn-speed-html-reports-teaser.html" rel="alternate"></link><published>2012-07-20T14:40:00+02:00</published><updated>2012-07-20T14:40:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2012-07-20:/blog/scikit-learn-speed-html-reports-teaser.html</id><summary type="html">&lt;p&gt;&lt;span class="caps"&gt;EDIT&lt;/span&gt;: I made the plots a little more readable, check it&amp;nbsp;out!&lt;/p&gt;
+would be very&amp;nbsp;appreciated.&lt;/p&gt;</content><category term="scikit-learn"/><category term="gsoc"/><category term="memory_profiler"/><category term="scikit-learn-speed"/><category term="vbench"/><category term="benchmarking"/><category term="python"/><category term="scikit-learn"/></entry><entry><title>Scikit-learn-speed HTML reports teaser</title><link href="//vene.ro/blog/scikit-learn-speed-html-reports-teaser.html" rel="alternate"/><published>2012-07-20T14:40:00+02:00</published><updated>2012-07-20T14:40:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2012-07-20:/blog/scikit-learn-speed-html-reports-teaser.html</id><summary type="html">&lt;p&gt;&lt;span class="caps"&gt;EDIT&lt;/span&gt;: I made the plots a little more readable, check it&amp;nbsp;out!&lt;/p&gt;
 &lt;p&gt;Last time, I teased you with a screenshot of local output. Now, I will
 tease you with the benchmarks run on a couple of recent commits, along
 with some from earlier this&amp;nbsp;year.&lt;/p&gt;
@@ -281,16 +278,15 @@ One is the possibility to overlay related benchmarks on the same plot
 this could be useful to spot patterns. A second one is some query /
 sorting support: see what are the most expensive benchmarks, see what
 benchmarks show the biggest jump in performance (but this could become a
-historical wall of fame or&amp;nbsp;shame).&lt;/p&gt;</content><category term="scikit-learn"></category><category term="gsoc"></category><category term="scikit-learn-speed"></category><category term="vbench"></category><category term="benchmarking"></category><category term="python"></category><category term="scikit-learn"></category></entry><entry><title>Dynamically generated benchmarks with vbench</title><link href="//vene.ro/blog/dynamically-generated-benchmarks-with-vbench.html" rel="alternate"></link><published>2012-06-07T01:57:00+02:00</published><updated>2012-06-07T01:57:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2012-06-07:/blog/dynamically-generated-benchmarks-with-vbench.html</id><summary type="html">&lt;p&gt;To construct a &lt;code&gt;vbench&lt;/code&gt; benchmark you need a setup string and a code
+historical wall of fame or&amp;nbsp;shame).&lt;/p&gt;</content><category term="scikit-learn"/><category term="gsoc"/><category term="scikit-learn-speed"/><category term="vbench"/><category term="benchmarking"/><category term="python"/><category term="scikit-learn"/></entry><entry><title>Dynamically generated benchmarks with vbench</title><link href="//vene.ro/blog/dynamically-generated-benchmarks-with-vbench.html" rel="alternate"/><published>2012-06-07T01:57:00+02:00</published><updated>2012-06-07T01:57:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2012-06-07:/blog/dynamically-generated-benchmarks-with-vbench.html</id><summary type="html">&lt;p&gt;To construct&amp;nbsp;a &lt;code&gt;vbench&lt;/code&gt; benchmark you need a setup string and a code
 string. The constructor&amp;#8217;s signature&amp;nbsp;is:  &lt;/p&gt;
 &lt;p&gt;&lt;code&gt;Benchmark(self, code, setup, ncalls=None, repeat=3, cleanup=None, name=None, description=None, start_date=None, logy=False)&lt;/code&gt;.&lt;/p&gt;
 &lt;h2 id="why-generate-benchmarks-dynamically"&gt;Why generate benchmarks dynamically?&lt;a class="headerlink" href="#why-generate-benchmarks-dynamically" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;For most &lt;code&gt;scikit-learn&lt;/code&gt; purposes, the &lt;code&gt;code&lt;/code&gt; string will be …&lt;/p&gt;</summary><content type="html">&lt;p&gt;To construct a &lt;code&gt;vbench&lt;/code&gt; benchmark you need a setup string and a code
+&lt;p&gt;For&amp;nbsp;most &lt;code&gt;scikit-learn&lt;/code&gt; purposes,&amp;nbsp;the &lt;code&gt;code&lt;/code&gt; string will be …&lt;/p&gt;</summary><content type="html">&lt;p&gt;To construct&amp;nbsp;a &lt;code&gt;vbench&lt;/code&gt; benchmark you need a setup string and a code
 string. The constructor&amp;#8217;s signature&amp;nbsp;is:  &lt;/p&gt;
 &lt;p&gt;&lt;code&gt;Benchmark(self, code, setup, ncalls=None, repeat=3, cleanup=None, name=None, description=None, start_date=None, logy=False)&lt;/code&gt;.&lt;/p&gt;
 &lt;h2 id="why-generate-benchmarks-dynamically"&gt;Why generate benchmarks dynamically?&lt;a class="headerlink" href="#why-generate-benchmarks-dynamically" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;For most &lt;code&gt;scikit-learn&lt;/code&gt; purposes, the &lt;code&gt;code&lt;/code&gt; string will be very close
-to &lt;code&gt;"algorithm.fit(X, y)"&lt;/code&gt;, &lt;code&gt;"algorithm.transform(X)"&lt;/code&gt; or
+&lt;p&gt;For&amp;nbsp;most &lt;code&gt;scikit-learn&lt;/code&gt; purposes,&amp;nbsp;the &lt;code&gt;code&lt;/code&gt; string will be very close&amp;nbsp;to &lt;code&gt;"algorithm.fit(X, y)"&lt;/code&gt;, &lt;code&gt;"algorithm.transform(X)"&lt;/code&gt; or
 &lt;code&gt;"algorithm.predict(X)"&lt;/code&gt;. We can generate a lot of benchmarks by
 changing what the algorithm is, and changing what the data is or the way
 it is&amp;nbsp;generated.&lt;/p&gt;
@@ -323,7 +319,7 @@ for name, kwargs in&amp;nbsp;_configurations})&lt;/p&gt;
 &lt;p&gt;[/sourcecode]&lt;/p&gt;
 &lt;p&gt;It works perfectly, but I don&amp;#8217;t like having to hack the globals to make
 the benchmarks detectable. This is because of the way the vbench suite
-gathers benchmarks. In &lt;code&gt;__init__.py&lt;/code&gt; we have to do
+gathers benchmarks.&amp;nbsp;In &lt;code&gt;__init__.py&lt;/code&gt; we have to&amp;nbsp;do
 &lt;code&gt;from linear_regression import *&lt;/code&gt;. With a small update to the detection
 method, we could replace the hacky part with a public lists of Benchmark&amp;nbsp;objects.&lt;/p&gt;
 &lt;h2 id="exposed-issues"&gt;Exposed issues&lt;a class="headerlink" href="#exposed-issues" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
@@ -348,7 +344,7 @@ lr = LinearRegression()&lt;br /&gt;
 string. But man, was it hard to debug! Also, in this example, the bug
 led to a refactoring that made the whole thing nicer and more direct.
 Hopefully, my experience with vbench will lead to some improvements to
-this cool and highly useful piece of&amp;nbsp;software.&lt;/p&gt;</content><category term="scikit-learn"></category><category term="gsoc"></category><category term="vbench"></category><category term="benchmarking"></category><category term="python"></category></entry><entry><title>First contact with vbench</title><link href="//vene.ro/blog/first-contact-with-vbench.html" rel="alternate"></link><published>2012-05-29T12:57:00+02:00</published><updated>2012-05-29T12:57:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2012-05-29:/blog/first-contact-with-vbench.html</id><summary type="html">&lt;p&gt;With a slight delay caused by going to lovely lovely Istanbul for the
+this cool and highly useful piece of&amp;nbsp;software.&lt;/p&gt;</content><category term="scikit-learn"/><category term="gsoc"/><category term="vbench"/><category term="benchmarking"/><category term="python"/></entry><entry><title>First contact with vbench</title><link href="//vene.ro/blog/first-contact-with-vbench.html" rel="alternate"/><published>2012-05-29T12:57:00+02:00</published><updated>2012-05-29T12:57:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2012-05-29:/blog/first-contact-with-vbench.html</id><summary type="html">&lt;p&gt;With a slight delay caused by going to lovely lovely Istanbul for the
 &lt;span class="caps"&gt;LREC&lt;/span&gt; conference where I presented a &lt;a href="http://vene.ro/papers/lrec12-poster.pdf"&gt;poster&lt;/a&gt;, I am back to work on the
 Google Summer of Code project. By the way, this year&amp;#8217;s logo and swag
 looks a lot nicer than last year&amp;#8217;s, thank …&lt;/p&gt;</summary><content type="html">&lt;p&gt;With a slight delay caused by going to lovely lovely Istanbul for the
@@ -371,11 +367,11 @@ run on my machine. These are the key points I got from this&amp;nbsp;experience.
     day, and running the benchmark with it. Of course, it is trivial to
     patch it into getting just one&amp;nbsp;commit.&lt;/li&gt;
 &lt;li&gt;The &lt;em&gt;code-as-strings&lt;/em&gt; approach is not ideal. The first thought is
-    that it should be replaced with reading &lt;code&gt;.py&lt;/code&gt; files into strings,
+    that it should be replaced with&amp;nbsp;reading &lt;code&gt;.py&lt;/code&gt; files into strings,
     but there are two issues with this:&lt;ol&gt;
 &lt;li&gt;One benchmark file can have a lot of setup code and several key
     lines that need to actually be benched. This can be fixed using
-    convensions (ie. setup functions and &lt;code&gt;bench_*&lt;/code&gt; functions) in the
+    convensions (ie. setup functions&amp;nbsp;and &lt;code&gt;bench_*&lt;/code&gt; functions) in the
     spirit of testing suites, or using&amp;nbsp;decorators.&lt;/li&gt;
 &lt;li&gt;I would like to be able to run bench files as python scripts,
     but the vbench import system breaks this. This can be fixed by
@@ -391,7 +387,7 @@ would only be comparable to the numbers he gets on his own machine
 before his changes, but a developer shouldn&amp;#8217;t wait for the daily
 benchmark for knowing if he made an&amp;nbsp;improvement.&lt;/p&gt;
 &lt;p&gt;On the other hand there is &lt;a href="http://code.google.com/p/unladen-swallow/"&gt;unladen-swallow&lt;/a&gt;&amp;#8216;s &lt;a href="http://code.google.com/p/unladen-swallow/wiki/Benchmarks"&gt;benchmark system&lt;/a&gt;
-using the [&lt;code&gt;perf.py&lt;/code&gt;]&lt;a href="http://localhost:8001/wp-content/uploads/2012/05/P5280194-300x225.jpg" title="GSoC swag"&gt;&lt;/a&gt; file. I didn&amp;#8217;t try it out yet, so I would like
+using the&amp;nbsp;[&lt;code&gt;perf.py&lt;/code&gt;]&lt;a href="http://localhost:8001/wp-content/uploads/2012/05/P5280194-300x225.jpg" title="GSoC swag"&gt;&lt;/a&gt; file. I didn&amp;#8217;t try it out yet, so I would like
 feedback, but there are some key things that can be taken from&amp;nbsp;them:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Memory usage&amp;nbsp;benchmarking&lt;/li&gt;
@@ -407,11 +403,11 @@ feedback, but there are some key things that can be taken from&amp;nbsp;them:&lt
 &lt;/ul&gt;
 &lt;p&gt;At a first glance, it seems that a very good system can be obtained by
 combining these two excellent projects (or rather, improving vbench with
-features from &lt;code&gt;perf.py&lt;/code&gt;). While I continue exploring this, I would like
+features&amp;nbsp;from &lt;code&gt;perf.py&lt;/code&gt;). While I continue exploring this, I would like
 to hear feedback from people who had to do with similar issues. As for
 the GSoC timeline, I plan to join forces with Immanuel and design a
 solid benchmark suite for the linear models over the next 2&amp;nbsp;weeks.&lt;/p&gt;
-&lt;p&gt;[&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2012/05/P5280194-300x225.jpg" title="GSoC swag" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2012/05/P5280194.jpg&lt;/p&gt;</content><category term="scikit-learn"></category><category term="benchmarks"></category><category term="perf.py"></category><category term="performance"></category><category term="vbench"></category><category term="scikit-learn"></category></entry><entry><title>Support vector regression on Anscombe’s dataset</title><link href="//vene.ro/blog/support-vector-regression-on-anscombes-dataset.html" rel="alternate"></link><published>2012-05-27T21:59:00+02:00</published><updated>2012-05-27T21:59:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2012-05-27:/blog/support-vector-regression-on-anscombes-dataset.html</id><summary type="html">&lt;p&gt;&lt;a href="http://en.wikipedia.org/wiki/Anscombe's_quartet" title="Anscombe's quartet"&gt;Anscombe&amp;#8217;s quartet&lt;/a&gt; is a set of four toy datasets that look very
+&lt;p&gt;[&lt;img alt="" src="http://localhost:8001/wp-content/uploads/2012/05/P5280194-300x225.jpg" title="GSoC swag" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2012/05/P5280194.jpg&lt;/p&gt;</content><category term="scikit-learn"/><category term="benchmarks"/><category term="perf.py"/><category term="performance"/><category term="vbench"/><category term="scikit-learn"/></entry><entry><title>Support vector regression on Anscombe’s dataset</title><link href="//vene.ro/blog/support-vector-regression-on-anscombes-dataset.html" rel="alternate"/><published>2012-05-27T21:59:00+02:00</published><updated>2012-05-27T21:59:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2012-05-27:/blog/support-vector-regression-on-anscombes-dataset.html</id><summary type="html">&lt;p&gt;&lt;a href="http://en.wikipedia.org/wiki/Anscombe's_quartet" title="Anscombe's quartet"&gt;Anscombe&amp;#8217;s quartet&lt;/a&gt; is a set of four toy datasets that look very
 different, but many of their statistics coincide. They were developed by
 Francis Anscombe as a striking visual to show that even for small
 datasets, blindly examining their statistical properties without
@@ -456,7 +452,7 @@ noise" src="http://localhost:8001/wp-content/uploads/2012/05/svr_noise.gif" titl
 &lt;p&gt;[&lt;img alt="Support vector regression on Anscombe's third dataset with no
   noise" src="http://localhost:8001/wp-content/uploads/2012/05/svr.gif" title="SVR on Anscombe's dataset with no noise" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2012/05/svr.gif&lt;/p&gt;
 &lt;p&gt;[&lt;img alt="Support vector regression on Anscombe's third dataset with
-  noise" src="http://localhost:8001/wp-content/uploads/2012/05/svr_noise.gif" title="SVR on Anscombe's dataset with noise" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2012/05/svr_noise.gif&lt;/p&gt;</content><category term="scikit-learn"></category><category term="anscombe"></category><category term="outlier"></category><category term="robust regression"></category><category term="support vector regression"></category><category term="svm"></category><category term="svr"></category><category term="python"></category><category term="scikit-learn"></category></entry><entry><title>GSoC 2012 proposal: Need for scikit-learn speed</title><link href="//vene.ro/blog/gsoc-2012-proposal-need-for-scikit-learn-speed.html" rel="alternate"></link><published>2012-04-16T00:37:00+02:00</published><updated>2012-04-16T00:37:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2012-04-16:/blog/gsoc-2012-proposal-need-for-scikit-learn-speed.html</id><summary type="html">&lt;p&gt;This summer I hope to be able to put in another full-time amount of
+  noise" src="http://localhost:8001/wp-content/uploads/2012/05/svr_noise.gif" title="SVR on Anscombe's dataset with noise" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2012/05/svr_noise.gif&lt;/p&gt;</content><category term="scikit-learn"/><category term="anscombe"/><category term="outlier"/><category term="robust regression"/><category term="support vector regression"/><category term="svm"/><category term="svr"/><category term="python"/><category term="scikit-learn"/></entry><entry><title>GSoC 2012 proposal: Need for scikit-learn speed</title><link href="//vene.ro/blog/gsoc-2012-proposal-need-for-scikit-learn-speed.html" rel="alternate"/><published>2012-04-16T00:37:00+02:00</published><updated>2012-04-16T00:37:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2012-04-16:/blog/gsoc-2012-proposal-need-for-scikit-learn-speed.html</id><summary type="html">&lt;p&gt;This summer I hope to be able to put in another full-time amount of
 effort into scikit-learn. After a successful Google Summer of Code
 project last year on dictionary learning, I now plan to do some
 low-level work. The title of my proposal is: &amp;#8220;Need for scikit-learn
@@ -487,7 +483,7 @@ the scikit. Of course there is a lot of code that can&amp;#8217;t reasonably be
 made any faster (I have a feeling that SGDClassifier is at the moment
 such a case, but we can&amp;#8217;t know for sure without heavy profiling). But
 generally there are many speed fixes that could weigh a lot: for
-example, a &lt;a href="http://cython.org/"&gt;Cython&lt;/a&gt; implementation of the &lt;code&gt;euclidean_distances&lt;/code&gt;
+example, a &lt;a href="http://cython.org/"&gt;Cython&lt;/a&gt; implementation of&amp;nbsp;the &lt;code&gt;euclidean_distances&lt;/code&gt;
 function that is able to use preallocated memory will improve the
 performance of raw NearestNeighbours queries as well as of the KMeans
 and hierarchical clustering&amp;nbsp;algorithms.&lt;/p&gt;
@@ -517,7 +513,7 @@ clustering section&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Since the scikit is reaching a state where many well-known algorithms
 are available, the &lt;strong&gt;1.0&lt;/strong&gt; release is slowly approaching. My Google
 Summer of Code project should bring the scikit significantly closer to
-that&amp;nbsp;milestone.&lt;/p&gt;</content><category term="scikit-learn"></category><category term="gsoc"></category><category term="proposal"></category><category term="scikit-learn"></category></entry><entry><title>The nasty bug crawling in my Orthogonal Matching Pursuit code</title><link href="//vene.ro/blog/the-nasty-bug-crawling-in-my-orthogonal-matching-pursuit-code.html" rel="alternate"></link><published>2011-11-18T20:51:00+01:00</published><updated>2011-11-18T20:51:00+01:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-11-18:/blog/the-nasty-bug-crawling-in-my-orthogonal-matching-pursuit-code.html</id><summary type="html">&lt;p&gt;A while back, Bob L. Sturm blogged about a &lt;a href="http://media.aau.dk/null_space_pursuits/2011/10/efficient-omp.html"&gt;similar implementation of
+that&amp;nbsp;milestone.&lt;/p&gt;</content><category term="scikit-learn"/><category term="gsoc"/><category term="proposal"/><category term="scikit-learn"/></entry><entry><title>The nasty bug crawling in my Orthogonal Matching Pursuit code</title><link href="//vene.ro/blog/the-nasty-bug-crawling-in-my-orthogonal-matching-pursuit-code.html" rel="alternate"/><published>2011-11-18T20:51:00+01:00</published><updated>2011-11-18T20:51:00+01:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-11-18:/blog/the-nasty-bug-crawling-in-my-orthogonal-matching-pursuit-code.html</id><summary type="html">&lt;p&gt;A while back, Bob L. Sturm blogged about a &lt;a href="http://media.aau.dk/null_space_pursuits/2011/10/efficient-omp.html"&gt;similar implementation of
 &lt;span class="caps"&gt;OMP&lt;/span&gt;&lt;/a&gt; to the one in scikit-learn. Instead of using the Cholesky
 decomposition like we did, his Matlab code uses the &lt;span class="caps"&gt;QR&lt;/span&gt; decomposition, to
 a similar (or maybe even identical) outcome, in theory. So lucky that
@@ -569,7 +565,7 @@ assert_equal(np.flatnonzero(gamma_hat), [0, 21])&lt;br /&gt;
 assert_equal(np.flatnonzero(gamma_hat_gram), [0, 21])&lt;br /&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
 &lt;p&gt;Note that this bug has been fixed for a while, but I didn&amp;#8217;t get the free
 time to write this post until now. Good news is: we fixed it, and did so
-very quickly after the report. So you can still trust me, I&amp;nbsp;guess!&lt;/p&gt;</content><category term="scikit-learn"></category><category term="bug"></category><category term="omp"></category><category term="orthogonal matching pursuit"></category><category term="dictionary learning"></category><category term="scikit-learn"></category></entry><entry><title>Dictionary learning in scikit-learn 0.9</title><link href="//vene.ro/blog/dictionary-learning-in-scikit-learn-0-9.html" rel="alternate"></link><published>2011-09-19T19:15:00+02:00</published><updated>2011-09-19T19:15:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-09-19:/blog/dictionary-learning-in-scikit-learn-0-9.html</id><summary type="html">&lt;p&gt;Thanks to Olivier, Gaël and Alex, who reviewed the code heavily the last
+very quickly after the report. So you can still trust me, I&amp;nbsp;guess!&lt;/p&gt;</content><category term="scikit-learn"/><category term="bug"/><category term="omp"/><category term="orthogonal matching pursuit"/><category term="dictionary learning"/><category term="scikit-learn"/></entry><entry><title>Dictionary learning in scikit-learn 0.9</title><link href="//vene.ro/blog/dictionary-learning-in-scikit-learn-0-9.html" rel="alternate"/><published>2011-09-19T19:15:00+02:00</published><updated>2011-09-19T19:15:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-09-19:/blog/dictionary-learning-in-scikit-learn-0-9.html</id><summary type="html">&lt;p&gt;Thanks to Olivier, Gaël and Alex, who reviewed the code heavily the last
 couple of days, and with apologies for my lack of activity during a
 sequence of conferences, Dictionary learning has officially been merged
 into scikit-learn master, and just in time for the new scikit-learn 0.9
@@ -592,7 +588,7 @@ can think of me and smile when&amp;nbsp;installing!&lt;/p&gt;
 &lt;p&gt;[&lt;img alt="Dictionary learned from Lena patches" src="http://localhost:8001/wp-content/uploads/2011/09/plot_image_denoising_1.png" title="plot_image_denoising_1" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/09/plot_image_denoising_1.png&lt;/p&gt;
 &lt;p&gt;[&lt;img alt="Noisy image for denoising" src="http://localhost:8001/wp-content/uploads/2011/09/plot_image_denoising_24.png" title="plot_image_denoising_24" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/09/plot_image_denoising_24.png&lt;/p&gt;
 &lt;p&gt;[![Image denoising with Dictionary learning and Orthogonal matching
-  pursuit][]]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/09/plot_image_denoising_44.png&lt;/p&gt;</content><category term="scikit-learn"></category><category term="dictionary learning"></category><category term="scikit-learn"></category></entry><entry><title>Optimizing Orthogonal Matching Pursuit code in Numpy, part 2</title><link href="//vene.ro/blog/optimizing-orthogonal-matching-pursuit-code-in-numpy-part-2.html" rel="alternate"></link><published>2011-08-11T19:39:00+02:00</published><updated>2011-08-11T19:39:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-08-11:/blog/optimizing-orthogonal-matching-pursuit-code-in-numpy-part-2.html</id><summary type="html">&lt;p&gt;&lt;span class="caps"&gt;EDIT&lt;/span&gt;: There was a bug in the final version of the code presented here.
+  pursuit][]]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/09/plot_image_denoising_44.png&lt;/p&gt;</content><category term="scikit-learn"/><category term="dictionary learning"/><category term="scikit-learn"/></entry><entry><title>Optimizing Orthogonal Matching Pursuit code in Numpy, part 2</title><link href="//vene.ro/blog/optimizing-orthogonal-matching-pursuit-code-in-numpy-part-2.html" rel="alternate"/><published>2011-08-11T19:39:00+02:00</published><updated>2011-08-11T19:39:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-08-11:/blog/optimizing-orthogonal-matching-pursuit-code-in-numpy-part-2.html</id><summary type="html">&lt;p&gt;&lt;span class="caps"&gt;EDIT&lt;/span&gt;: There was a bug in the final version of the code presented here.
 It is fixed now, for its backstory, check out &lt;a href="http://venefrombucharest.wordpress.com/2011/11/18/the-nasty-bug-crawling-in-my-orthogonal-matching-pursuit-code/" title="The nasty bug crawling in my Orthogonal Matching Pursuit code"&gt;my blog post on it&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;When we last saw our hero, he was fighting with the dreaded
 implementation of least-angle regression, knowing full well that it was …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;span class="caps"&gt;EDIT&lt;/span&gt;: There was a bug in the final version of the code presented here.
@@ -605,12 +601,12 @@ cases that would have broken the naive implementation, and also it was
 orders of magnitude faster than said implementation. However, our
 benchmark [&lt;a href="#footnote-1"&gt;1&lt;/a&gt;] showed that it was a couple of times slower than
 least-angle&amp;nbsp;regression.&lt;/p&gt;
-&lt;p&gt;By poking around the &lt;code&gt;scikits.learn&lt;/code&gt; codebase, I noticed that there is a
-triangular system solver in &lt;code&gt;scikits.learn.utils.arrayfuncs&lt;/code&gt;. Unlike the
+&lt;p&gt;By poking around&amp;nbsp;the &lt;code&gt;scikits.learn&lt;/code&gt; codebase, I noticed that there is a
+triangular system solver&amp;nbsp;in &lt;code&gt;scikits.learn.utils.arrayfuncs&lt;/code&gt;. Unlike&amp;nbsp;the
 &lt;code&gt;scipy.linalg&lt;/code&gt; one, this one only works with lower triangular arrays,
-and it forcefully overwrites &lt;code&gt;b&lt;/code&gt;. Even though if weren&amp;#8217;t faster, it
-should still be used: &lt;code&gt;scikits.learn&lt;/code&gt; aims to be as backwards-compatible
-with SciPy as possible, and &lt;code&gt;linalg.solve_triangular&lt;/code&gt; was added in
+and it forcefully&amp;nbsp;overwrites &lt;code&gt;b&lt;/code&gt;. Even though if weren&amp;#8217;t faster, it
+should still be&amp;nbsp;used: &lt;code&gt;scikits.learn&lt;/code&gt; aims to be as backwards-compatible
+with SciPy as possible,&amp;nbsp;and &lt;code&gt;linalg.solve_triangular&lt;/code&gt; was added in
 0.9.0. Anyway, let&amp;#8217;s just see whether it&amp;#8217;s&amp;nbsp;faster:&lt;/p&gt;
 &lt;p&gt;[sourcecode language=&amp;#8221;python&amp;#8221;]&lt;br /&gt;
 In &lt;a href="#footnote-1"&gt;1&lt;/a&gt;: import numpy as&amp;nbsp;np&lt;/p&gt;
@@ -631,20 +627,20 @@ let&amp;#8217;s do the change! Notice that we can just copy [latex]
 \mathbf{v}[/latex] into the appropriate place in [latex] L[/latex] and
 then solve in&amp;nbsp;place.&lt;/p&gt;
 &lt;p&gt;But whoops! When solving the [latex] &lt;span class="caps"&gt;LL&lt;/span&gt;&amp;#8217;[/latex] system, we take
-advantage of the &lt;code&gt;transpose&lt;/code&gt; attribute in &lt;code&gt;linalg.solve_triangular&lt;/code&gt;,
-which the &lt;code&gt;scikits.learn&lt;/code&gt; version does not expose. We could think of a
+advantage of&amp;nbsp;the &lt;code&gt;transpose&lt;/code&gt; attribute&amp;nbsp;in &lt;code&gt;linalg.solve_triangular&lt;/code&gt;,
+which&amp;nbsp;the &lt;code&gt;scikits.learn&lt;/code&gt; version does not expose. We could think of a
 solution, but here&amp;#8217;s a better idea: Shouldn&amp;#8217;t there be some way to
 directly solve the entire system in one&amp;nbsp;go?&lt;/p&gt;
-&lt;p&gt;Well, there is. It is an &lt;span class="caps"&gt;LAPACK&lt;/span&gt; function by the name of &lt;code&gt;potrs&lt;/code&gt;. If you
+&lt;p&gt;Well, there is. It is an &lt;span class="caps"&gt;LAPACK&lt;/span&gt; function by the name&amp;nbsp;of &lt;code&gt;potrs&lt;/code&gt;. If you
 are not aware, &lt;span class="caps"&gt;LAPACK&lt;/span&gt; is a Fortran library with solvers for various
 types of linear systems and eigenproblems. &lt;span class="caps"&gt;LAPACK&lt;/span&gt; along with &lt;span class="caps"&gt;BLAS&lt;/span&gt; (on
 which it is based) pretty much powers all the scientific computation
 that happens. &lt;span class="caps"&gt;BLAS&lt;/span&gt; is an &lt;span class="caps"&gt;API&lt;/span&gt; with multiple implementations dating from
 1979, while &lt;span class="caps"&gt;LAPACK&lt;/span&gt; dates from 1992. If you ever used Matlab, this is
 what was called behind the scenes. SciPy, again, provides a high-level
-wrapper around this, the &lt;code&gt;linalg.cho_solve&lt;/code&gt; function.&lt;/p&gt;
+wrapper around this,&amp;nbsp;the &lt;code&gt;linalg.cho_solve&lt;/code&gt; function.&lt;/p&gt;
 &lt;p&gt;But SciPy also gives us the possibility to import functions directly
-from &lt;span class="caps"&gt;LAPACK&lt;/span&gt;, through the use of &lt;code&gt;linalg.lapack.get_lapack_funcs&lt;/code&gt;. Let&amp;#8217;s
+from &lt;span class="caps"&gt;LAPACK&lt;/span&gt;, through the use&amp;nbsp;of &lt;code&gt;linalg.lapack.get_lapack_funcs&lt;/code&gt;. Let&amp;#8217;s
 see how the low-level &lt;span class="caps"&gt;LAPACK&lt;/span&gt; function compares to the SciPy wrapper, for
 our use&amp;nbsp;case:&lt;/p&gt;
 &lt;p&gt;[sourcecode language=&amp;#8221;python&amp;#8221;]&lt;br /&gt;
@@ -697,20 +693,20 @@ return gamma, idx&lt;br /&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
 &lt;p&gt;Woohoo! But we still lag behind. Now that we delegated the trickiest
 parts of the code to fast and reliable solvers, it&amp;#8217;s time to use a
 profiler and see what the bottleneck is now. Python has excellent tools
-for this purpose. What solved the problem in this case was
+for this purpose. What solved the problem in this case&amp;nbsp;was
 &lt;code&gt;line_profiler&lt;/code&gt; [&lt;a href="#footnote-2"&gt;2&lt;/a&gt;]. There is a great article by Olivier Grisel here
-&lt;a href="#footnote-2"&gt;2&lt;/a&gt; regarding how to use these profilers. I&amp;#8217;m just going to say that
+&lt;a href="#footnote-2"&gt;2&lt;/a&gt; regarding how to use these profilers. I&amp;#8217;m just going to say&amp;nbsp;that
 &lt;code&gt;line_profiler&lt;/code&gt;&lt;span class="quo"&gt;&amp;#8216;&lt;/span&gt;s output is very helpful, basically printing the time
 taken by each line of code next to that&amp;nbsp;line.&lt;/p&gt;
 &lt;p&gt;Running the profiler on this code, we found that 58% of the time is
 spent on line 14, 20.5% on line 21, and 20.5% on line 32, with the rest
-being insignificant (&lt;code&gt;potrs&lt;/code&gt; takes 0.1%!). The code is clearly dominated
+being insignificant&amp;nbsp;(&lt;code&gt;potrs&lt;/code&gt; takes 0.1%!). The code is clearly dominated
 by the matrix multiplications. By running some more timings with
-IPython, I found that multiplying such column-wise views of the data as
+IPython, I found that multiplying such column-wise views of the data&amp;nbsp;as
 &lt;code&gt;X[:, idx]&lt;/code&gt; is considerably slower then multiplying a contiguous array.
-The least-angle regression code in &lt;code&gt;scikits.learn&lt;/code&gt; avoids this by
+The least-angle regression code&amp;nbsp;in &lt;code&gt;scikits.learn&lt;/code&gt; avoids this by
 swapping columns towards the front of the array as they are chosen, so
-we can replace &lt;code&gt;X[:, idx]&lt;/code&gt; with &lt;code&gt;X[:, :n_active]&lt;/code&gt;. The nice part is that
+we can&amp;nbsp;replace &lt;code&gt;X[:, idx]&lt;/code&gt; with &lt;code&gt;X[:, :n_active]&lt;/code&gt;. The nice part is that
 if the array is stored in Fortran-contiguous order (ie. column
 contiguous order, as opposed to row contiguous order, as in C), swapping
 two columns is a very fast operation!. Let&amp;#8217;s see some more&amp;nbsp;benchmarks!&lt;/p&gt;
@@ -733,7 +729,7 @@ In [23]: X[:, a], X[:, b] = X[:, b], X[:,&amp;nbsp;a]&lt;/p&gt;
 &lt;p&gt;In [25]:&lt;br /&gt;&amp;nbsp;[/sourcecode]&lt;/p&gt;
 &lt;p&gt;However this trick works great for swapping elements of one-dimensional&amp;nbsp;arrays.&lt;/p&gt;
 &lt;p&gt;Another small optimization that we can do: I found that on my system,
-it&amp;#8217;s slightly faster to compute the norm using the &lt;span class="caps"&gt;BLAS&lt;/span&gt; function &lt;code&gt;nrm2&lt;/code&gt;.
+it&amp;#8217;s slightly faster to compute the norm using the &lt;span class="caps"&gt;BLAS&lt;/span&gt;&amp;nbsp;function &lt;code&gt;nrm2&lt;/code&gt;.
 So by putting all of these together, we end up with the final version of
 our&amp;nbsp;code:&lt;/p&gt;
 &lt;p&gt;[sourcecode language=&amp;#8221;python&amp;#8221;]&lt;br /&gt;
@@ -784,7 +780,7 @@ elif n_active == max_features:&lt;br /&gt;&amp;nbsp;break&lt;/p&gt;
 &lt;p&gt;Now, the benchmark at [&lt;a href="#footnote-1"&gt;1&lt;/a&gt;] indicates victory over least-angle
 regression! I hope you have enjoyed this short tour. See you next&amp;nbsp;time!&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://github.com/scikit-learn/scikit-learn/blob/master/benchmarks/bench_plot_omp_lars.py" title="Orthogonal matching pursuit versus least-angle regression"&gt;&lt;span id="footnote-1"&gt;1&lt;/span&gt;&lt;/a&gt;[]&lt;br /&gt;
-&lt;a href="http://scikit-learn.sourceforge.net/dev/developers/performance.html#profiling-python-code" title="Profiling Python code"&gt;&lt;span id="footnote-2"&gt;2&lt;/span&gt;&lt;/a&gt;[]&lt;/p&gt;</content><category term="scikit-learn"></category><category term="blas"></category><category term="efficient"></category><category term="lapack"></category><category term="numpy"></category><category term="omp"></category><category term="orthogonal matching pursuit"></category><category term="potrs"></category><category term="scipy"></category><category term="dictionary learning"></category><category term="python"></category><category term="scikit-learn"></category></entry><entry><title>Optimizing Orthogonal Matching Pursuit code in Numpy, part 1</title><link href="//vene.ro/blog/optimizing-orthogonal-matching-pursuit-code-in-numpy-part-1.html" rel="alternate"></link><published>2011-08-07T20:50:00+02:00</published><updated>2011-08-07T20:50:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-08-07:/blog/optimizing-orthogonal-matching-pursuit-code-in-numpy-part-1.html</id><summary type="html">&lt;p&gt;After intense code optimization work, my implementation of &lt;span class="caps"&gt;OMP&lt;/span&gt; finally
+&lt;a href="http://scikit-learn.sourceforge.net/dev/developers/performance.html#profiling-python-code" title="Profiling Python code"&gt;&lt;span id="footnote-2"&gt;2&lt;/span&gt;&lt;/a&gt;[]&lt;/p&gt;</content><category term="scikit-learn"/><category term="blas"/><category term="efficient"/><category term="lapack"/><category term="numpy"/><category term="omp"/><category term="orthogonal matching pursuit"/><category term="potrs"/><category term="scipy"/><category term="dictionary learning"/><category term="python"/><category term="scikit-learn"/></entry><entry><title>Optimizing Orthogonal Matching Pursuit code in Numpy, part 1</title><link href="//vene.ro/blog/optimizing-orthogonal-matching-pursuit-code-in-numpy-part-1.html" rel="alternate"/><published>2011-08-07T20:50:00+02:00</published><updated>2011-08-07T20:50:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-08-07:/blog/optimizing-orthogonal-matching-pursuit-code-in-numpy-part-1.html</id><summary type="html">&lt;p&gt;After intense code optimization work, my implementation of &lt;span class="caps"&gt;OMP&lt;/span&gt; finally
 beat least-angle regression! This was the primary issue discussed during
 the pull request, so once performance was taken care of, the code was
 ready for merge. Orthogonal matching pursuit is now available in
@@ -910,7 +906,7 @@ sparse coded against the same dictionary [latex] X[/latex]. A lot of
 speed is gained because two large matrix multiplications are avoided at
 each iteration, but for many datasets, the cost of the precomputations
 dominates the procedure. I will not insist on Gram &lt;span class="caps"&gt;OMP&lt;/span&gt; in this post, it
-can be found in the &lt;code&gt;scikits.learn&lt;/code&gt; repository [&lt;a href="#footnote-4"&gt;4&lt;/a&gt;].&lt;/p&gt;
+can be found in&amp;nbsp;the &lt;code&gt;scikits.learn&lt;/code&gt; repository [&lt;a href="#footnote-4"&gt;4&lt;/a&gt;].&lt;/p&gt;
 &lt;p&gt;Now, the problems with this are a bit more subtle. At this point, I
 moved on to code other things, since &lt;span class="caps"&gt;OMP&lt;/span&gt; was passing tests and the
 signal recovery example was working. The following issues popped up
@@ -931,14 +927,14 @@ the same number of nonzero&amp;nbsp;coefficients.&lt;/p&gt;
 first time I encountered such an error, I wrongfully assumed that given
 that the diagonal of [latex] X_\text{idx}&amp;#8217;X_\text{idx}[/latex] was
 unit, then [latex] L[/latex] should also have a unit diagonal, so I
-passed the parameter &lt;code&gt;unit_diagonal=True&lt;/code&gt; to &lt;code&gt;linalg.solve_triangular&lt;/code&gt;,
+passed the&amp;nbsp;parameter &lt;code&gt;unit_diagonal=True&lt;/code&gt; to &lt;code&gt;linalg.solve_triangular&lt;/code&gt;,
 and the plethora of NaN&amp;#8217;s along the diagonal were simply ignored. Let
 this show what happens when you don&amp;#8217;t pay attention when&amp;nbsp;coding.&lt;/p&gt;
-&lt;p&gt;When I realized my mistake, I first did something I saw in &lt;code&gt;lars_path&lt;/code&gt;
-from the scikit: take the absolute value of the argument of &lt;code&gt;sqrt&lt;/code&gt;, and
+&lt;p&gt;When I realized my mistake, I first did something I saw&amp;nbsp;in &lt;code&gt;lars_path&lt;/code&gt;
+from the scikit: take the absolute value of the argument&amp;nbsp;of &lt;code&gt;sqrt&lt;/code&gt;, and
 also ensure it is practically larger than zero. However, tests started
 failing randomly. Confusion ensued until the nature of the issue,
-discussed above, was discovered. It&amp;#8217;s just not right to take the &lt;code&gt;abs&lt;/code&gt;:
+discussed above, was discovered. It&amp;#8217;s just not right to take&amp;nbsp;the &lt;code&gt;abs&lt;/code&gt;:
 if that argument ends up less than zero, &lt;span class="caps"&gt;OMP&lt;/span&gt; simply cannot proceed and
 must stop due to malformed data. The reference implementation from the
 website of the authors of [&lt;a href="#footnote-2"&gt;2&lt;/a&gt;] includes explicit &lt;em&gt;early stopping&lt;/em&gt;
@@ -996,12 +992,12 @@ insignificant vector gets picked. The other criterion for early stopping
 is if the chosen atom is orthogonal to y, which would make it
 uninformative and would again mean that there are no better ones left,
 so we might as well quit&amp;nbsp;looking.&lt;/p&gt;
-&lt;p&gt;Also, we now make sure that [latex] L[/latex] is preallocated. Note that
-&lt;code&gt;np.empty&lt;/code&gt; is marginally faster than &lt;code&gt;np.zeros&lt;/code&gt; because it does not
+&lt;p&gt;Also, we now make sure that [latex] L[/latex] is preallocated. Note&amp;nbsp;that
+&lt;code&gt;np.empty&lt;/code&gt; is marginally faster&amp;nbsp;than &lt;code&gt;np.zeros&lt;/code&gt; because it does not
 initialize the array to zero after allocating, so the untouched parts of
 the array will contain whatever happened to be in memory before. In our
 case, this means only the values above the main diagonal: everything on
-and beneath is initialized before access. Luckily, the
+and beneath is initialized before access. Luckily,&amp;nbsp;the
 &lt;code&gt;linalg.solve_triangular&lt;/code&gt; function ignores what it doesn&amp;#8217;t&amp;nbsp;need.&lt;/p&gt;
 &lt;p&gt;This is a robust implementation, but still a couple of times slower than
 least-angle regression. In the next part of the article we will see how
@@ -1014,7 +1010,7 @@ Orthogonal Matching Pursuit][] Technical Report - &lt;span class="caps"&gt;CS&lt
 2008.&lt;br /&gt;
 &lt;span id="footnote-3"&gt;&lt;a href="#footnote-3"&gt;3&lt;/a&gt;&lt;/span&gt; [First thoughts on Orthogonal
 Matching Pursuit][] on this blog.&lt;br /&gt;
-&lt;span id="footnote-4"&gt;&lt;a href="#footnote-4"&gt;4&lt;/a&gt;&lt;/span&gt; &lt;a href="https://github.com/scikit-learn/scikit-learn/blob/master/scikits/learn/linear_model/omp.py"&gt;omp.py&lt;/a&gt; on&amp;nbsp;github.&lt;/p&gt;</content><category term="scikit-learn"></category><category term="efficient"></category><category term="numpy"></category><category term="omp"></category><category term="orthogonal matching pursuit"></category><category term="scipy"></category><category term="dictionary learning"></category><category term="scikit-learn"></category><category term="python"></category></entry><entry><title>Progress on Orthogonal Matching Pursuit</title><link href="//vene.ro/blog/progress-on-orthogonal-matching-pursuit.html" rel="alternate"></link><published>2011-08-02T16:56:00+02:00</published><updated>2011-08-02T16:56:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-08-02:/blog/progress-on-orthogonal-matching-pursuit.html</id><summary type="html">&lt;p&gt;Since orthogonal matching pursuit (&lt;span class="caps"&gt;OMP&lt;/span&gt;) is an important part of signal
+&lt;span id="footnote-4"&gt;&lt;a href="#footnote-4"&gt;4&lt;/a&gt;&lt;/span&gt; &lt;a href="https://github.com/scikit-learn/scikit-learn/blob/master/scikits/learn/linear_model/omp.py"&gt;omp.py&lt;/a&gt; on&amp;nbsp;github.&lt;/p&gt;</content><category term="scikit-learn"/><category term="efficient"/><category term="numpy"/><category term="omp"/><category term="orthogonal matching pursuit"/><category term="scipy"/><category term="dictionary learning"/><category term="scikit-learn"/><category term="python"/></entry><entry><title>Progress on Orthogonal Matching Pursuit</title><link href="//vene.ro/blog/progress-on-orthogonal-matching-pursuit.html" rel="alternate"/><published>2011-08-02T16:56:00+02:00</published><updated>2011-08-02T16:56:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-08-02:/blog/progress-on-orthogonal-matching-pursuit.html</id><summary type="html">&lt;p&gt;Since orthogonal matching pursuit (&lt;span class="caps"&gt;OMP&lt;/span&gt;) is an important part of signal
 processing and therefore crucial to the image processing aspect of
 dictionary learning, I am currently focusing on optimizing the &lt;span class="caps"&gt;OMP&lt;/span&gt; code
 and making sure it is stable. &lt;span class="caps"&gt;OMP&lt;/span&gt; is a forward method like least-angle
@@ -1026,28 +1022,27 @@ regression, so it is natural to bench them against one&amp;nbsp;another.&lt;/p&g
 &lt;p&gt;This has helped find a couple of bottlenecks. Time has been gained by
 preallocating the array to store the Cholesky decomposition. Also, using
 the &lt;span class="caps"&gt;LAPACK&lt;/span&gt; &lt;code&gt;potrs&lt;/code&gt; function in order to solve a system of the shape
-$latex &lt;span class="caps"&gt;LL&lt;/span&gt;&amp;#8217;x=y$ is faster than using &lt;code&gt;solve_triangular&lt;/code&gt; twice.&lt;/p&gt;
+$latex &lt;span class="caps"&gt;LL&lt;/span&gt;&amp;#8217;x=y$ is faster than&amp;nbsp;using &lt;code&gt;solve_triangular&lt;/code&gt; twice.&lt;/p&gt;
 &lt;p&gt;I am still trying to optimize the code. We are working hard to make sure
-that scikits.learn contributions are up to standards before&amp;nbsp;merging.&lt;/p&gt;</content><category term="scikit-learn"></category><category term="omp"></category><category term="orthogonal matching pursuit"></category><category term="scikit-learn"></category></entry><entry><title>SparsePCA in scikits.learn-git</title><link href="//vene.ro/blog/sparsepca-in-scikits-learn-git.html" rel="alternate"></link><published>2011-07-19T12:01:00+02:00</published><updated>2011-07-19T12:01:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-07-19:/blog/sparsepca-in-scikits-learn-git.html</id><summary type="html">&lt;p&gt;I am happy to announce that the Sparse &lt;span class="caps"&gt;PCA&lt;/span&gt; code has been reviewed and
-merged into the main &lt;code&gt;scikits.learn&lt;/code&gt; repository.&lt;/p&gt;
-&lt;p&gt;You can use it if you install the bleeding edge &lt;code&gt;scikits.learn&lt;/code&gt; git
+that scikits.learn contributions are up to standards before&amp;nbsp;merging.&lt;/p&gt;</content><category term="scikit-learn"/><category term="omp"/><category term="orthogonal matching pursuit"/><category term="scikit-learn"/></entry><entry><title>SparsePCA in scikits.learn-git</title><link href="//vene.ro/blog/sparsepca-in-scikits-learn-git.html" rel="alternate"/><published>2011-07-19T12:01:00+02:00</published><updated>2011-07-19T12:01:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-07-19:/blog/sparsepca-in-scikits-learn-git.html</id><summary type="html">&lt;p&gt;I am happy to announce that the Sparse &lt;span class="caps"&gt;PCA&lt;/span&gt; code has been reviewed and
+merged into the&amp;nbsp;main &lt;code&gt;scikits.learn&lt;/code&gt; repository.&lt;/p&gt;
+&lt;p&gt;You can use it if you install the bleeding&amp;nbsp;edge &lt;code&gt;scikits.learn&lt;/code&gt; git
 version, by first downloading the source code as explained in the
 &lt;a href="http://scikit-learn.sourceforge.net/stable/developers/index.html#git-repo" title="installation user's guide"&gt;user&amp;#8217;s guide&lt;/a&gt;, and then …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I am happy to announce that the Sparse &lt;span class="caps"&gt;PCA&lt;/span&gt; code has been reviewed and
-merged into the main &lt;code&gt;scikits.learn&lt;/code&gt; repository.&lt;/p&gt;
-&lt;p&gt;You can use it if you install the bleeding edge &lt;code&gt;scikits.learn&lt;/code&gt; git
+merged into the&amp;nbsp;main &lt;code&gt;scikits.learn&lt;/code&gt; repository.&lt;/p&gt;
+&lt;p&gt;You can use it if you install the bleeding&amp;nbsp;edge &lt;code&gt;scikits.learn&lt;/code&gt; git
 version, by first downloading the source code as explained in the
-&lt;a href="http://scikit-learn.sourceforge.net/stable/developers/index.html#git-repo" title="installation user's guide"&gt;user&amp;#8217;s guide&lt;/a&gt;, and then running &lt;code&gt;python setup.py install&lt;/code&gt;.&lt;br /&gt;
+&lt;a href="http://scikit-learn.sourceforge.net/stable/developers/index.html#git-repo" title="installation user's guide"&gt;user&amp;#8217;s guide&lt;/a&gt;, and then&amp;nbsp;running &lt;code&gt;python setup.py install&lt;/code&gt;.&lt;br /&gt;
 [caption id=&amp;#8221;&amp;#8221; align=&amp;#8221;aligncenter&amp;#8221; width=&amp;#8221;400&amp;#8221; caption=&amp;#8221;Sparse &lt;span class="caps"&gt;PCA&lt;/span&gt; on
 images of the digit 3&amp;#8221;][&lt;img alt="" src="http://scikit-learn.sourceforge.net/dev/_images/plot_digits_decomposition_4.png" title="Sparse PCA on images of the digit 3" /&gt;]&lt;a href="http://scikit-learn.sourceforge.net/dev/_images/plot_digits_decomposition_4.png" title="Sparse PCA on images of the digit 3"&gt;&lt;/a&gt;[/caption]&lt;br /&gt;
-To see what code is needed to produce an image such as the one above,
-using &lt;code&gt;scikits.learn&lt;/code&gt;. check out this cool &lt;a href="http://scikit-learn.sourceforge.net/dev/auto_examples/decomposition/plot_digits_decomposition.html" title="decomposition example"&gt;decomposition example&lt;/a&gt;
+To see what code is needed to produce an image such as the one above,&amp;nbsp;using &lt;code&gt;scikits.learn&lt;/code&gt;. check out this cool &lt;a href="http://scikit-learn.sourceforge.net/dev/auto_examples/decomposition/plot_digits_decomposition.html" title="decomposition example"&gt;decomposition example&lt;/a&gt;
 that compares the results of most matrix decomposition models
 implemented at the&amp;nbsp;moment.&lt;/p&gt;
 &lt;p&gt;There are other new cool things that have been recently merged by other
 contributors, such as support for sparse matrices in &lt;a href="http://scikit-learn.sourceforge.net/dev/modules/clustering.html#mini-batch-k-means" title="minibatch K-means"&gt;minibatch
 K-means&lt;/a&gt;, and the &lt;a href="http://scikit-learn.sourceforge.net/dev/modules/mixture.html#infinite-gaussian-mixtures-dpgmm-classifier" title="variational infinite gaussian mixture model"&gt;variational infinite gaussian mixture model&lt;/a&gt;, so
 I invite you to take a&amp;nbsp;look!&lt;/p&gt;
-&lt;p&gt;[&lt;img alt="" src="http://scikit-learn.sourceforge.net/dev/_images/plot_digits_decomposition_4.png" title="Sparse PCA on images of the digit 3" /&gt;]:&amp;nbsp;http://scikit-learn.sourceforge.net/dev/_images/plot_digits_decomposition_4.png&lt;/p&gt;</content><category term="scikit-learn"></category><category term="pca"></category><category term="principal components analysis"></category><category term="scikit-learn"></category><category term="sparse pca"></category><category term="SparsePCA"></category><category term="spca"></category></entry><entry><title>K-Means for dictionary learning</title><link href="//vene.ro/blog/k-means-for-dictionary-learning.html" rel="alternate"></link><published>2011-07-10T14:27:00+02:00</published><updated>2011-07-10T14:27:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-07-10:/blog/k-means-for-dictionary-learning.html</id><summary type="html">&lt;p&gt;[![Dictionary learned with K-Means on the &lt;span class="caps"&gt;LFW&lt;/span&gt; dataset with whitening
+&lt;p&gt;[&lt;img alt="" src="http://scikit-learn.sourceforge.net/dev/_images/plot_digits_decomposition_4.png" title="Sparse PCA on images of the digit 3" /&gt;]:&amp;nbsp;http://scikit-learn.sourceforge.net/dev/_images/plot_digits_decomposition_4.png&lt;/p&gt;</content><category term="scikit-learn"/><category term="pca"/><category term="principal components analysis"/><category term="scikit-learn"/><category term="sparse pca"/><category term="SparsePCA"/><category term="spca"/></entry><entry><title>K-Means for dictionary learning</title><link href="//vene.ro/blog/k-means-for-dictionary-learning.html" rel="alternate"/><published>2011-07-10T14:27:00+02:00</published><updated>2011-07-10T14:27:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-07-10:/blog/k-means-for-dictionary-learning.html</id><summary type="html">&lt;p&gt;[![Dictionary learned with K-Means on the &lt;span class="caps"&gt;LFW&lt;/span&gt; dataset with whitening
 &lt;span class="caps"&gt;PCA&lt;/span&gt;][]][][![Dictionary learned with K-Means on the &lt;span class="caps"&gt;LFW&lt;/span&gt; dataset without
 whitening &lt;span class="caps"&gt;PCA&lt;/span&gt;][]][]&lt;/p&gt;
 &lt;p&gt;One of the simplest, and yet most heavily constrained form of matrix
@@ -1087,8 +1082,7 @@ which is subsequently moved to the center of the points assigned to&amp;nbsp;it.
 work-in-progress dictionary learning toolkit can learn a dictionary from
 image patches using the K-Means algorithm, with optional local contrast
 normalization and a &lt;span class="caps"&gt;PCA&lt;/span&gt; whitening transform. Using a trained object to
-transform data points with orthogonal matching pursuit, with the
-parameter &lt;code&gt;n_atoms=1&lt;/code&gt; is equivalent to gain-shape &lt;span class="caps"&gt;VQ&lt;/span&gt;. Of course you are
+transform data points with orthogonal matching pursuit, with the&amp;nbsp;parameter &lt;code&gt;n_atoms=1&lt;/code&gt; is equivalent to gain-shape &lt;span class="caps"&gt;VQ&lt;/span&gt;. Of course you are
 free to use any method of sparse coding such as &lt;span class="caps"&gt;LARS&lt;/span&gt;. The code used to
 produce the example images on top of this post can be found in [&lt;a href="#footnote-2"&gt;2&lt;/a&gt;].&lt;/p&gt;
 &lt;p&gt;Using K-Means for learning the dictionary does not optimize over linear
@@ -1116,7 +1110,7 @@ the Twenty-Eighth International Conference on Machine Learning, 2011.][]
 &lt;p&gt;[![Dictionary learned with K-Means on the &lt;span class="caps"&gt;LFW&lt;/span&gt; dataset with whitening
   &lt;span class="caps"&gt;PCA&lt;/span&gt;][]]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/07/kmeans_w.png&lt;/p&gt;
 &lt;p&gt;[![Dictionary learned with K-Means on the &lt;span class="caps"&gt;LFW&lt;/span&gt; dataset without
-  whitening &lt;span class="caps"&gt;PCA&lt;/span&gt;][]]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/07/kmeans_no_w.png&lt;/p&gt;</content><category term="scikit-learn"></category><category term="dictionary learning"></category><category term="k-means"></category><category term="scikit-learn"></category><category term="vq"></category><category term="Uncategorized"></category></entry><entry><title>Image denoising with dictionary learning</title><link href="//vene.ro/blog/image-denoising-with-dictionary-learning.html" rel="alternate"></link><published>2011-07-07T20:00:00+02:00</published><updated>2011-07-07T20:00:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-07-07:/blog/image-denoising-with-dictionary-learning.html</id><summary type="html">&lt;p&gt;I am presenting an image denoising example that fully runs under my
+  whitening &lt;span class="caps"&gt;PCA&lt;/span&gt;][]]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/07/kmeans_no_w.png&lt;/p&gt;</content><category term="scikit-learn"/><category term="dictionary learning"/><category term="k-means"/><category term="scikit-learn"/><category term="vq"/><category term="Uncategorized"/></entry><entry><title>Image denoising with dictionary learning</title><link href="//vene.ro/blog/image-denoising-with-dictionary-learning.html" rel="alternate"/><published>2011-07-07T20:00:00+02:00</published><updated>2011-07-07T20:00:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-07-07:/blog/image-denoising-with-dictionary-learning.html</id><summary type="html">&lt;p&gt;I am presenting an image denoising example that fully runs under my
 local scikits-learn fork. Coming soon near&amp;nbsp;you!&lt;/p&gt;
 &lt;p&gt;The 400 square pixels area covering Lena&amp;#8217;s face was distorted by
 additive gaussian noise with a standard deviation of 50 (pixel values
@@ -1156,7 +1150,7 @@ the Twenty-Eighth International Conference on Machine Learning, 2011.][]
 
 &lt;/div&gt;
 
-&lt;p&gt;[&lt;img alt="Lena image denoising using dictionary learning" src="http://localhost:8001/wp-content/uploads/2011/07/denoise3.png" title="Lena denoising" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/07/denoise3.png&lt;/p&gt;</content><category term="scikit-learn"></category><category term="denoising"></category><category term="dictionary learning"></category><category term="scikit-learn"></category></entry><entry><title>Summer of Code roadmap, part 1</title><link href="//vene.ro/blog/summer-of-code-roadmap-part-1.html" rel="alternate"></link><published>2011-06-12T14:28:00+02:00</published><updated>2011-06-12T14:28:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-06-12:/blog/summer-of-code-roadmap-part-1.html</id><summary type="html">&lt;p&gt;After a little busy while, I have graduated and entered the summer
+&lt;p&gt;[&lt;img alt="Lena image denoising using dictionary learning" src="http://localhost:8001/wp-content/uploads/2011/07/denoise3.png" title="Lena denoising" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/07/denoise3.png&lt;/p&gt;</content><category term="scikit-learn"/><category term="denoising"/><category term="dictionary learning"/><category term="scikit-learn"/></entry><entry><title>Summer of Code roadmap, part 1</title><link href="//vene.ro/blog/summer-of-code-roadmap-part-1.html" rel="alternate"/><published>2011-06-12T14:28:00+02:00</published><updated>2011-06-12T14:28:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-06-12:/blog/summer-of-code-roadmap-part-1.html</id><summary type="html">&lt;p&gt;After a little busy while, I have graduated and entered the summer
 vacation, which means time for serious GSoC&amp;nbsp;work.&lt;/p&gt;
 &lt;p&gt;[&lt;img alt="Me on graduation day" src="http://localhost:8001/wp-content/uploads/2011/06/p1080283.jpg" title="Graduation day" /&gt;][]&lt;/p&gt;
 &lt;p&gt;So we had a little conference in order to discuss what will be done and
@@ -1192,7 +1186,7 @@ this will depend on more factors. As long as the pull requests are up,
 the code review system will push it forward towards the merge. The focus
 is on teamwork and on feedback cycles as short as possible, as opposed
 to falling into the trap of delaying work until the night before the&amp;nbsp;deadline.&lt;/p&gt;
-&lt;p&gt;[&lt;img alt="Me on graduation day" src="http://localhost:8001/wp-content/uploads/2011/06/p1080283.jpg" title="Graduation day" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/06/p1080283.jpg&lt;/p&gt;</content><category term="scikit-learn"></category><category term="gsoc"></category><category term="Uncategorized"></category></entry><entry><title>First thoughts on Orthogonal Matching Pursuit</title><link href="//vene.ro/blog/first-thoughts-on-orthogonal-matching-pursuit.html" rel="alternate"></link><published>2011-05-30T13:02:00+02:00</published><updated>2011-05-30T13:02:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-05-30:/blog/first-thoughts-on-orthogonal-matching-pursuit.html</id><summary type="html">&lt;p&gt;I am working on implementing the Orthogonal Matching Pursuit (&lt;span class="caps"&gt;OMP&lt;/span&gt;)
+&lt;p&gt;[&lt;img alt="Me on graduation day" src="http://localhost:8001/wp-content/uploads/2011/06/p1080283.jpg" title="Graduation day" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/06/p1080283.jpg&lt;/p&gt;</content><category term="scikit-learn"/><category term="gsoc"/><category term="Uncategorized"/></entry><entry><title>First thoughts on Orthogonal Matching Pursuit</title><link href="//vene.ro/blog/first-thoughts-on-orthogonal-matching-pursuit.html" rel="alternate"/><published>2011-05-30T13:02:00+02:00</published><updated>2011-05-30T13:02:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-05-30:/blog/first-thoughts-on-orthogonal-matching-pursuit.html</id><summary type="html">&lt;p&gt;I am working on implementing the Orthogonal Matching Pursuit (&lt;span class="caps"&gt;OMP&lt;/span&gt;)
 algorithm for the scikit. It is an elegant algorithm (that almost writes
 itself in Numpy!) to compute a greedy approximation to the solution of a
 sparse coding&amp;nbsp;problem:&lt;/p&gt;
@@ -1236,7 +1230,7 @@ the implementation is robust and ready for use, I will make some&amp;nbsp;benchm
 [1]
 http://www.cs.technion.ac.il/\~ronrubin/Publications/&lt;span class="caps"&gt;KSVD&lt;/span&gt;-&lt;span class="caps"&gt;OMP&lt;/span&gt;-v2.pdf&lt;/p&gt;
 &lt;p&gt;[&lt;img alt="Stem plot for sparse signals recovered by OMP" src="http://localhost:8001/wp-content/uploads/2011/06/omp.png" title="Orthogonal Matching Pursuit sparse signal recovery" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/06/omp.png&lt;/p&gt;
-&lt;p&gt;[&lt;img alt="Orthogonal Matching Pursuit benchmark" src="http://localhost:8001/wp-content/uploads/2011/06/omp_bench.png" title="OMP benchmark, time and error" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/06/omp_bench.png&lt;/p&gt;</content><category term="scikit-learn"></category><category term="Uncategorized"></category><category term="dictionary learning"></category><category term="omp"></category><category term="orthogonal matching pursuit"></category></entry><entry><title>Sparse PCA</title><link href="//vene.ro/blog/sparse-pca.html" rel="alternate"></link><published>2011-05-23T15:19:00+02:00</published><updated>2011-05-23T15:19:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-05-23:/blog/sparse-pca.html</id><summary type="html">&lt;p&gt;I have been working on the integration into the scikits.learn codebase
+&lt;p&gt;[&lt;img alt="Orthogonal Matching Pursuit benchmark" src="http://localhost:8001/wp-content/uploads/2011/06/omp_bench.png" title="OMP benchmark, time and error" /&gt;]:&amp;nbsp;http://localhost:8001/wp-content/uploads/2011/06/omp_bench.png&lt;/p&gt;</content><category term="scikit-learn"/><category term="Uncategorized"/><category term="dictionary learning"/><category term="omp"/><category term="orthogonal matching pursuit"/></entry><entry><title>Sparse PCA</title><link href="//vene.ro/blog/sparse-pca.html" rel="alternate"/><published>2011-05-23T15:19:00+02:00</published><updated>2011-05-23T15:19:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-05-23:/blog/sparse-pca.html</id><summary type="html">&lt;p&gt;I have been working on the integration into the scikits.learn codebase
 of a sparse principal components analysis (SparsePCA) algorithm coded by
 Gaël and Alexandre and based on [[1]][]. Because the name &amp;#8220;sparse &lt;span class="caps"&gt;PCA&lt;/span&gt;&amp;#8221;
 has some inherent ambiguity, I will describe in greater depth what
@@ -1276,7 +1270,7 @@ This is a batch adaptation of an online algorithm proposed by Mairal et
 al. in&amp;nbsp;[[1]][].&lt;/p&gt;
 &lt;h1 id="sparse-pca-as-a-transformer"&gt;Sparse &lt;span class="caps"&gt;PCA&lt;/span&gt; as a transformer&lt;a class="headerlink" href="#sparse-pca-as-a-transformer" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;Of course, in order to be of practical use, the code needs to be
-refactored into a scikits.learn transformer object, just like
+refactored into a scikits.learn transformer object, just&amp;nbsp;like
 &lt;code&gt;scikits.learn.decomposition.pca&lt;/code&gt;. This means that the optimization
 problem described above corresponds to the fitting stage. The post-fit
 state of the transformer is given by the learned components (the matrix
@@ -1307,7 +1301,7 @@ to see the results: one is related to &lt;a href="http://venefrombucharest.wordp
 n-gram components. The other task is to plug it in as feature extractor
 for handwritten digit classification, for my undergraduate&amp;nbsp;thesis.&lt;/p&gt;
 &lt;p&gt;&lt;span id="footnote_1"&gt;[1] &lt;a href="http://www.di.ens.fr/sierra/pdfs/icml09.pdf"&gt;http://www.di.ens.fr/sierra/pdfs/icml09.pdf&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;[[1]]:&amp;nbsp;#footnote_1&lt;/p&gt;</content><category term="scikit-learn"></category><category term="dictionary learning"></category><category term="pca"></category><category term="sparse pca"></category><category term="SparsePCA"></category><category term="spca"></category><category term="scikit-learn"></category></entry><entry><title>Customizing scikits.learn for a specific text analysis task</title><link href="//vene.ro/blog/customizing-scikits-learn-for-a-specific-text-analysis-task.html" rel="alternate"></link><published>2011-04-29T14:33:00+02:00</published><updated>2011-04-29T14:33:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-04-29:/blog/customizing-scikits-learn-for-a-specific-text-analysis-task.html</id><summary type="html">&lt;p&gt;Scikits.learn is a great general library, but machine learning has so
+&lt;p&gt;[[1]]:&amp;nbsp;#footnote_1&lt;/p&gt;</content><category term="scikit-learn"/><category term="dictionary learning"/><category term="pca"/><category term="sparse pca"/><category term="SparsePCA"/><category term="spca"/><category term="scikit-learn"/></entry><entry><title>Customizing scikits.learn for a specific text analysis task</title><link href="//vene.ro/blog/customizing-scikits-learn-for-a-specific-text-analysis-task.html" rel="alternate"/><published>2011-04-29T14:33:00+02:00</published><updated>2011-04-29T14:33:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-04-29:/blog/customizing-scikits-learn-for-a-specific-text-analysis-task.html</id><summary type="html">&lt;p&gt;Scikits.learn is a great general library, but machine learning has so
 many different application, that it is often very helpful to be able to
 extend its &lt;span class="caps"&gt;API&lt;/span&gt; to better integrate with your code. With scikits.learn,
 this is extremely easy to do using inheritance and using the pipeline&amp;nbsp;module …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Scikits.learn is a great general library, but machine learning has so
@@ -1330,7 +1324,7 @@ features (ie. features indicating the number of times an n-gram occurs
 in a string) with binary features (ie. indicating only whether the
 n-gram occurs in the string or not). It looked to me like, for such a
 low-level text analysis task, using counts only adds&amp;nbsp;noise.&lt;/p&gt;
-&lt;p&gt;For this reason, the &lt;code&gt;feature_extraction.text.CountVectorizer&lt;/code&gt; was not
+&lt;p&gt;For this reason,&amp;nbsp;the &lt;code&gt;feature_extraction.text.CountVectorizer&lt;/code&gt; was not
 enough for me. It only returns count features. There was also another
 thing that needed to be adjusted: by default, its analyzer uses a
 preprocessor that strips accented characters, and I had strong reasons
@@ -1339,14 +1333,14 @@ task. So, I needed to extend the&amp;nbsp;vectorizer.&lt;/p&gt;
 &lt;h2 id="the-solution"&gt;The solution&lt;a class="headerlink" href="#the-solution" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;The code I came up with is &lt;a href="https://github.com/vene/misc-nlp/blob/master/conjugation/grid_search_example/preprocess.py"&gt;here&lt;/a&gt;. I tried to build a class that would
 be as specific to my needs as possible. It is important to retain the
-full &lt;span class="caps"&gt;API&lt;/span&gt;, however. Note the &lt;code&gt;y=None&lt;/code&gt; parameter in the fit functions. Its
+full &lt;span class="caps"&gt;API&lt;/span&gt;, however. Note&amp;nbsp;the &lt;code&gt;y=None&lt;/code&gt; parameter in the fit functions. Its
 necessity will become clear in a&amp;nbsp;moment.&lt;/p&gt;
-&lt;p&gt;Another tricky part was exposing the &lt;code&gt;max_n&lt;/code&gt; parameter from the inner
+&lt;p&gt;Another tricky part was exposing&amp;nbsp;the &lt;code&gt;max_n&lt;/code&gt; parameter from the inner
 analyzer. This was not really natural, but it simplified the
 constructions later&amp;nbsp;on.&lt;/p&gt;
 &lt;p&gt;My &lt;code&gt;InfinitivesExtractor&lt;/code&gt; class builds a data matrix from a list of
 strings. After using it, the data needs to be passed to the classifier,
-an instance of &lt;code&gt;svm.LinearSVC&lt;/code&gt;. The &lt;code&gt;pipeline&lt;/code&gt;module in scikits.learn
+an instance&amp;nbsp;of &lt;code&gt;svm.LinearSVC&lt;/code&gt;.&amp;nbsp;The &lt;code&gt;pipeline&lt;/code&gt;module in scikits.learn
 allows us to plug components into eachother in order to build a more
 complex object. In this case, we would like a classifier that receives a
 string as input, and directly outputs its label. We wouldn&amp;#8217;t want the
@@ -1359,7 +1353,7 @@ prefixing them with the name of that component. For example, the support
 vector machine&amp;#8217;s C parameter can be accessed as&amp;nbsp;pipeline.svc__C.&lt;/p&gt;
 &lt;p&gt;All that is left now is to see whether this is a good model, and what
 combination of parameters makes it work the best. Scikits.learn provides
-a great tool for choosing the parameters: the &lt;code&gt;grid_search&lt;/code&gt; module. When
+a great tool for choosing the parameters:&amp;nbsp;the &lt;code&gt;grid_search&lt;/code&gt; module. When
 working with models like support vector machines, model parameters (such
 as the radial basis kernel width) usually need to be chosen by cross
 validation, because intuition doesn&amp;#8217;t help much when dealing with high
@@ -1382,7 +1376,7 @@ for dimensionality reduction before classification. It would only
 require an extra item in the pipeline constructor. A call from a
 web-based frontend, for example, would be very short and simple. Because
 of the consistency in the scikits.learn classes, we can write cleaner
-and better code, and therefore work with greater&amp;nbsp;efficiency.&lt;/p&gt;</content><category term="scikit-learn"></category><category term="nlp"></category><category term="scikit-learn"></category></entry><entry><title>My first scikits.learn coding sprint</title><link href="//vene.ro/blog/my-first-scikits-learn-coding-sprint.html" rel="alternate"></link><published>2011-04-02T20:12:00+02:00</published><updated>2011-04-02T20:12:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-04-02:/blog/my-first-scikits-learn-coding-sprint.html</id><summary type="html">&lt;p&gt;The fifth &lt;a href="http://scikit-learn.sourceforge.net/" title="scikits.learn"&gt;scikits.learn&lt;/a&gt; coding sprint took place Friday, April 1st
+and better code, and therefore work with greater&amp;nbsp;efficiency.&lt;/p&gt;</content><category term="scikit-learn"/><category term="nlp"/><category term="scikit-learn"/></entry><entry><title>My first scikits.learn coding sprint</title><link href="//vene.ro/blog/my-first-scikits-learn-coding-sprint.html" rel="alternate"/><published>2011-04-02T20:12:00+02:00</published><updated>2011-04-02T20:12:00+02:00</updated><author><name>vene</name></author><id>tag:vene.ro,2011-04-02:/blog/my-first-scikits-learn-coding-sprint.html</id><summary type="html">&lt;p&gt;The fifth &lt;a href="http://scikit-learn.sourceforge.net/" title="scikits.learn"&gt;scikits.learn&lt;/a&gt; coding sprint took place Friday, April 1st
 2011. For anyone who is not familiar with it, scikits.learn is a fast
 and easy to use machine learning toolkit for the pylab environment
 (Python, NumPy, SciPy,&amp;nbsp;Matplotlib.)&lt;/p&gt;
@@ -1436,4 +1430,4 @@ what he did to make it look so good. But I&amp;#8217;ll figure it out soon, I&am
 &lt;p&gt;I also learned a lot more about the intricacies of the scikits.learn
 APIs, the philosophy of ease of use, and the project tree in&amp;nbsp;general.&lt;/p&gt;
 &lt;p&gt;In short, the coding sprint has been a great and rewarding experience,
-for which I thank all of you guys&amp;nbsp;there!&lt;/p&gt;</content><category term="scikit-learn"></category><category term="coding sprint"></category><category term="scikit-learn"></category></entry></feed>
+for which I thank all of you guys&amp;nbsp;there!&lt;/p&gt;</content><category term="scikit-learn"/><category term="coding sprint"/><category term="scikit-learn"/></entry></feed>

@@ -81,20 +81,18 @@ Here&#8217;s a list in order of&nbsp;obviousness:</p>
 </ul>
 <h2 id="what-made-this-possible">What made this possible<a class="headerlink" href="#what-made-this-possible" title="Permanent link">&para;</a></h2>
 <p>I have done some more refactoring in my vbench fork, because I didn&#8217;t
-want to have a huge, monolithic <code>Benchmark</code> class that was specific to
+want to have a huge,&nbsp;monolithic <code>Benchmark</code> class that was specific to
 what we want in scikit-learn-speed. So on this branch, I set up a
 mixin/multiple inheritance hierarchy of benchmark&nbsp;classes.</p>
 <p>The <code>Benchmark</code> class in vbench is now an abstract base class, with some
-common functionality and structure.<br />
-Our <code>SklBenchmark</code> class is defined in scikit-learn-speed&nbsp;as:</p>
+common functionality and structure.<br />&nbsp;Our <code>SklBenchmark</code> class is defined in scikit-learn-speed&nbsp;as:</p>
 <p><code>class SklBenchmark(CProfileBenchmarkMixin,  MemoryBenchmarkMixin, PythonBenchmark):</code></p>
 <p>Let&#8217;s read this from right to&nbsp;left:</p>
 <ul>
-<li><code>PythonBenchmark</code>: This class stores <code>code</code>, <code>setup</code> and <code>cleanup</code>
+<li><code>PythonBenchmark</code>: This class&nbsp;stores <code>code</code>, <code>setup</code> and <code>cleanup</code>
     Python code as strings, and implements simple timing mechanisms
-    using the <code>time</code> module.</li>
-<li>Bonus: <code>TimeitBenchmark</code>: This class extends <code>PythonBenchmark</code> with
-    the <code>timeit</code> micro-benchmark timing method previously used in
+    using&nbsp;the <code>time</code> module.</li>
+<li>Bonus: <code>TimeitBenchmark</code>: This class&nbsp;extends <code>PythonBenchmark</code> with&nbsp;the <code>timeit</code> micro-benchmark timing method previously used in
     vbench. We turned this off in&nbsp;scikit-learn-speed.</li>
 <li><code>MemoryBenchmarkMixin</code>: This adds memory benchmarking using&nbsp;[memory_profiler][].</li>
 <li><code>CProfileBenchmarkMixin</code>: This runs the code through <a href="http://docs.python.org/library/profile.html#module-cProfile">cProfile</a>

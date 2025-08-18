@@ -183,7 +183,7 @@ sparse coded against the same dictionary [latex] X[/latex]. A lot of
 speed is gained because two large matrix multiplications are avoided at
 each iteration, but for many datasets, the cost of the precomputations
 dominates the procedure. I will not insist on Gram <span class="caps">OMP</span> in this post, it
-can be found in the <code>scikits.learn</code> repository [<a href="#footnote-4">4</a>].</p>
+can be found in&nbsp;the <code>scikits.learn</code> repository [<a href="#footnote-4">4</a>].</p>
 <p>Now, the problems with this are a bit more subtle. At this point, I
 moved on to code other things, since <span class="caps">OMP</span> was passing tests and the
 signal recovery example was working. The following issues popped up
@@ -204,14 +204,14 @@ the same number of nonzero&nbsp;coefficients.</p>
 first time I encountered such an error, I wrongfully assumed that given
 that the diagonal of [latex] X_\text{idx}&#8217;X_\text{idx}[/latex] was
 unit, then [latex] L[/latex] should also have a unit diagonal, so I
-passed the parameter <code>unit_diagonal=True</code> to <code>linalg.solve_triangular</code>,
+passed the&nbsp;parameter <code>unit_diagonal=True</code> to <code>linalg.solve_triangular</code>,
 and the plethora of NaN&#8217;s along the diagonal were simply ignored. Let
 this show what happens when you don&#8217;t pay attention when&nbsp;coding.</p>
-<p>When I realized my mistake, I first did something I saw in <code>lars_path</code>
-from the scikit: take the absolute value of the argument of <code>sqrt</code>, and
+<p>When I realized my mistake, I first did something I saw&nbsp;in <code>lars_path</code>
+from the scikit: take the absolute value of the argument&nbsp;of <code>sqrt</code>, and
 also ensure it is practically larger than zero. However, tests started
 failing randomly. Confusion ensued until the nature of the issue,
-discussed above, was discovered. It&#8217;s just not right to take the <code>abs</code>:
+discussed above, was discovered. It&#8217;s just not right to take&nbsp;the <code>abs</code>:
 if that argument ends up less than zero, <span class="caps">OMP</span> simply cannot proceed and
 must stop due to malformed data. The reference implementation from the
 website of the authors of [<a href="#footnote-2">2</a>] includes explicit <em>early stopping</em>
@@ -269,12 +269,12 @@ insignificant vector gets picked. The other criterion for early stopping
 is if the chosen atom is orthogonal to y, which would make it
 uninformative and would again mean that there are no better ones left,
 so we might as well quit&nbsp;looking.</p>
-<p>Also, we now make sure that [latex] L[/latex] is preallocated. Note that
-<code>np.empty</code> is marginally faster than <code>np.zeros</code> because it does not
+<p>Also, we now make sure that [latex] L[/latex] is preallocated. Note&nbsp;that
+<code>np.empty</code> is marginally faster&nbsp;than <code>np.zeros</code> because it does not
 initialize the array to zero after allocating, so the untouched parts of
 the array will contain whatever happened to be in memory before. In our
 case, this means only the values above the main diagonal: everything on
-and beneath is initialized before access. Luckily, the
+and beneath is initialized before access. Luckily,&nbsp;the
 <code>linalg.solve_triangular</code> function ignores what it doesn&#8217;t&nbsp;need.</p>
 <p>This is a robust implementation, but still a couple of times slower than
 least-angle regression. In the next part of the article we will see how

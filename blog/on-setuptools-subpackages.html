@@ -26,10 +26,10 @@
 
   <!-- OpenGraph Info -->
 
-  <meta name="description" content="Today, I spent more than two hours trying to figure out why, despite things working out fine in my development scikits.learn folder, python setup.py..." />
+  <meta name="description" content="Today, I spent more than two hours trying to figure out why, despite things working out fine in my development scikits.learn folder, python setup.py..." />
   <meta name="keywords" content="python, setuptools" />
   <meta property="og:title" content="On setuptools&nbsp;subpackages" />
-  <meta property="og:description" content="Today, I spent more than two hours trying to figure out why, despite things working out fine in my development scikits.learn folder, python setup.py..." />
+  <meta property="og:description" content="Today, I spent more than two hours trying to figure out why, despite things working out fine in my development scikits.learn folder, python setup.py..." />
   <meta property="og:url" content="https://vene.ro/blog/on-setuptools-subpackages.html" />
 
 
@@ -62,27 +62,26 @@
 
     <div class="entry-content">
       <p>Today, I spent more than two hours trying to figure out why, despite
-things working out fine in my development scikits.learn folder,
+things working out fine in my development scikits.learn&nbsp;folder,
 <code>python setup.py install</code> would completely ignore the module I
 refactored into a&nbsp;subpackage.</p>
-<p>I imagined that simply adding it to the parent <code>__init__.py __all__</code>
+<p>I imagined that simply adding it to the&nbsp;parent <code>__init__.py __all__</code>
 attribute would do, I kind of thought that setuptools automatically
 finds the&nbsp;subpackages.</p>
-<p>At first I thought of looking in <code>setup.py</code>, but I only examined the one
+<p>At first I thought of looking&nbsp;in <code>setup.py</code>, but I only examined the one
 in the topmost directory, which, in the case of scikits.learn, is two
 degrees of separation away from the actual setup.py that takes care of
-subpackages (ie. I was looking at <code>/setup.py</code> instead of
+subpackages (ie. I was looking&nbsp;at <code>/setup.py</code> instead&nbsp;of
 <code>/scikits/learn/setup.py</code>).  This had me fooled for a&nbsp;while.</p>
 <p>The steps to add a working and installable module to a python
 setuptools-based project are as&nbsp;follows:</p>
 <ol>
-<li>Add a <code>__init__.py</code> file in the folder (ie.
+<li>Add&nbsp;a <code>__init__.py</code> file in the folder&nbsp;(ie.
     <code>/scikits/learn/decomposition/__init__.py</code>)</li>
-<li>If the module requires compiling or any special attention, add an
-    appropriate  <code>__setup__.py</code> file in the&nbsp;folder.</li>
-<li>Update the <code>__init__.py __all__</code> attribute in the parent folder (ie.
+<li>If the module requires compiling or any special attention, add an&nbsp;appropriate  <code>__setup__.py</code> file in the&nbsp;folder.</li>
+<li>Update&nbsp;the <code>__init__.py __all__</code> attribute in the parent folder&nbsp;(ie.
     <code>/scikits/learn/__init__.py</code>)</li>
-<li>Update the <code>setup.py</code> in the parent folder (ie.
+<li>Update&nbsp;the <code>setup.py</code> in the parent folder&nbsp;(ie.
     <code>/scikits/learn/setup.py</code>) by adding something like:<br />
 <code>config.add_subpackage('decomposition')</code></li>
 </ol>

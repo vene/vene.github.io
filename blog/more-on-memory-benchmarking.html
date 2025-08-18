@@ -70,9 +70,9 @@ backwards-compatible one from the previous&nbsp;version.</p>
 memory_profiler][] from where you can trace it to my GitHub repo.
 Here&#8217;s what you can do with&nbsp;it:</p>
 <h2 id="mprun">%mprun<a class="headerlink" href="#mprun" title="Permanent link">&para;</a></h2>
-<p>Copying the spirit of <code>%lprun</code>, since imitation is the most sincere form
+<p>Copying the spirit&nbsp;of <code>%lprun</code>, since imitation is the most sincere form
 of flattery, you can use %mprun to easily view line-by-line memory usage
-reports, without having to go in and add the <code>@profile</code> decorator.</p>
+reports, without having to go in and add&nbsp;the <code>@profile</code> decorator.</p>
 <p>For&nbsp;example:</p>
 <p>[sourcecode&nbsp;lang=&#8221;python&#8221;]</p>
 <p>In [1]: import numpy as&nbsp;np</p>
@@ -100,14 +100,14 @@ tol)<br />
 125 41.7344 <span class="caps">MB</span> 0.0000 <span class="caps">MB</span> return&nbsp;coef.T</p>
 <p>[/sourcecode]</p>
 <h2 id="memit">%memit<a class="headerlink" href="#memit" title="Permanent link">&para;</a></h2>
-<p>As described in my previous post, this is a <code>%timeit</code>-like magic for
+<p>As described in my previous post, this is&nbsp;a <code>%timeit</code>-like magic for
 quickly seeing how much memory a Python command uses.<br />
 Unlike %timeit, however, the command needs to be executed in a fresh
 process. I have to dig in some more to debug this, but if the command is
 run in the current process, very often the difference in memory usage
 will be insignificant, I assume because preallocated memory is used. The
 problem is that when running in a new process, some functions that I
-tried to bench crash with <code>SIGSEGV</code>. For a lot of stuff, though,
+tried to bench crash&nbsp;with <code>SIGSEGV</code>. For a lot of stuff,&nbsp;though,
 <code>%memit</code> is currently&nbsp;usable:</p>
 <p>[sourcecode lang=&#8221;python&#8221;]<br />
 In [1]: import numpy as&nbsp;np</p>
@@ -124,7 +124,7 @@ copying and what does&nbsp;not.</p>
 <h2 id="installation-instructions">Installation instructions<a class="headerlink" href="#installation-instructions" title="Permanent link">&para;</a></h2>
 <p>First, you have to get the source code of this version of
 memory_profiler. Then, it depends on your version of IPython. If you
-have 0.10, you have to edit <code>~/.ipython/ipy_user_conf.py</code> like this:
+have 0.10, you have to&nbsp;edit <code>~/.ipython/ipy_user_conf.py</code> like this:
 (once again, instructions <em>borrowed</em> from&nbsp;[line_profiler][])</p>
 <p>[sourcecode lang=&#8221;python&#8221;]<br />
 # These two lines are standard and probably already there.<br />
@@ -139,15 +139,15 @@ create a configuration profile:<br />
 [sourcecode lang=&#8221;bash&#8221;]<br />
 $ ipython profile create<br />
 [/sourcecode]<br />
-Then create a file named <code>~/.ipython/extensions/memory_profiler_ext.py</code>
+Then create a file&nbsp;named <code>~/.ipython/extensions/memory_profiler_ext.py</code>
 with the following&nbsp;content:</p>
 <p>[sourcecode lang=&#8221;python&#8221;]<br />
 import&nbsp;memory_profiler</p>
 <p>def load_ipython_extension(ip):<br />
 ip.define_magic(&#8216;mprun&#8217;, memory_profiler.magic_mprun)<br />
 ip.define_magic(&#8216;memit&#8217;, memory_profiler.magic_memit)<br />&nbsp;[/sourcecode]</p>
-<p>Then register it in <code>~/.ipython/profile_default/ipython_config.py</code>, like
-this. Of course, if you already have other extensions such as
+<p>Then register it&nbsp;in <code>~/.ipython/profile_default/ipython_config.py</code>, like
+this. Of course, if you already have other extensions such&nbsp;as
 <code>line_profiler_ext</code>, just add the new one to the&nbsp;list.</p>
 <p>[sourcecode lang=&#8221;python&#8221;]<br />
 c.TerminalIPythonApp.extensions = [<br />

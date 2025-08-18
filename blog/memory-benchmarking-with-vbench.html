@@ -65,7 +65,7 @@
 <p>This was accomplished by building on what I described in my recent
 posts, specifically the extensions to Fabian&#8217;s [memory_profiler][] that
 you can find in <a href="https://github.com/vene/memory_profiler">my fork</a>, but they will be merged upstream soon. The
-key element is the <code>%magic_memit</code> function whose development I blogged
+key element is&nbsp;the <code>%magic_memit</code> function whose development I blogged
 about <a href="http://localhost:8001/2012/06/30/quick-memory-usage-benchmarking-in-ipython/" title="Quick memory usage benchmarking in IPython">on</a> <a href="http://localhost:8001/2012/07/02/more-on-memory-benchmarking/" title="More on memory benchmarking">several</a> <a href="http://localhost:8001/2012/07/04/on-why-my-memit-fails-on-osx/" title="On why my %memit fails on OSX">occasions</a>. I plugged this into <a href="http://wesmckinney.com/blog/?p=373">vbench</a>
 in a similar way to how the timings are computed, all with great&nbsp;success.</p>
 <p>Here is a screenshot of the way a simple benchmark looks now, with just
@@ -78,7 +78,7 @@ scikit-learn-speed powered by&nbsp;vbench.[/caption]</p>
 need to use the vbench from the <a href="https://github.com/vene/vbench/tree/memory">memory branch on my fork</a>.</p>
 <p>Of course, there are some important caveats. I am running this on my
 laptop, which runs <span class="caps">OS</span> X Lion, so, under the effect of <a href="http://localhost:8001/2012/07/04/on-why-my-memit-fails-on-osx/" title="On why my %memit fails on OSX">this
-bug</a>, I hardcoded the &#8216;<code>-i</code><span class="quo">&#8216;</span> so the memory benchmarks are not
+bug</a>, I hardcoded the&nbsp;&#8216;<code>-i</code><span class="quo">&#8216;</span> so the memory benchmarks are not
 realistic. Also, the y-range should probably be forced wider, because
 the plots look erratic, showing the very small noise at a&nbsp;large-scale.</p>
 <p>[![A screenshot showing generated output from the scikit-learn-speed

@@ -88,7 +88,7 @@ the scikit. Of course there is a lot of code that can&#8217;t reasonably be
 made any faster (I have a feeling that SGDClassifier is at the moment
 such a case, but we can&#8217;t know for sure without heavy profiling). But
 generally there are many speed fixes that could weigh a lot: for
-example, a <a href="http://cython.org/">Cython</a> implementation of the <code>euclidean_distances</code>
+example, a <a href="http://cython.org/">Cython</a> implementation of&nbsp;the <code>euclidean_distances</code>
 function that is able to use preallocated memory will improve the
 performance of raw NearestNeighbours queries as well as of the KMeans
 and hierarchical clustering&nbsp;algorithms.</p>
