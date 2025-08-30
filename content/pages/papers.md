@@ -39,18 +39,27 @@ Movie Facts and Fibs (MF<sup>2</sup>): A Benchmark for Long Movie Understanding.
 \[&nbsp;[arXiv](https://arxiv.org/abs/2506.06275)&nbsp;\]
 <!--, Aditya K Surikuchi, André Viveiros, Baohao Liao, Elena Bueno-Benito, Nithin Sivakumaran, Pavlo Vasylenko, Shoubin Yu, Sonal Sannigrahi, Wafaa Mohammed, Ben Peters, Danae Sánchez Villegas, Elias Stengel-Eskin, Giuseppe Attanasio, Jaehong Yoon, Stella Frank, Alessandro Suglia, Chrysoula Zerva, Desmond Elliott, Mariella Dimiccoli, Mohit Bansal, Oswald Lanz, Raffaella Bernardi, Raquel Fernández, Sandro Pezzelle, Vlad Niculae, André FT Martins.-->
 
-* Sergey Troshin, Vlad Niculae, Antske Fokkens.
-Efficient Controlled Language Generation with Low-Rank Autoregressive Reward Models
-\[&nbsp;[arXiv](https://arxiv.org/abs/2407.04615)&nbsp;\]
-
 
 *Papers*:
+
+* Evgeniia Tokarchuk, Sergey Troshin, Vlad Niculae.
+Angular dispersion accelerates *k*-nearest neighbors machine translation.
+In: *EMNLP Findings, 2025.*
+(coming soon)
+
+* Sergey Troshin, Vlad Niculae, Antske Fokkens.
+On the low-rank parametrization of reward models for controlled language generation.
+*TMLR, 2025.*
+\[&nbsp;[openreview](https://openreview.net/pdf?id=cjRsEGLT8B)&nbsp;\]
+\[&nbsp;[arXiv](https://arxiv.org/abs/2407.04615)&nbsp;\]
+\[&nbsp;[code](https://github.com/serjtroshin/rad-q)&nbsp;\]
 
 * Evgeniia Tokarchuk, Hua Chang Bakker, Vlad Niculae.
 Keep your distance: learning dispersed embeddings on 𝕊<sub>m</sub>.
 *TMLR, 2025.*
 \[&nbsp;[openreview](https://openreview.net/pdf?id=5JIQE6HcTd)&nbsp;\]
 \[&nbsp;[arXiv](https://arxiv.org/abs/2502.08231)&nbsp;\]
+\[&nbsp;[code](https://github.com/ltl-uva/ledoh-torch)&nbsp;\]
 
 * Wafaa Mohammed, Vlad Niculae.
 Context-aware or context-insensitive? Assessing LLMs' performance in document-level translation.
