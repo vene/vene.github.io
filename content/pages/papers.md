@@ -47,7 +47,7 @@ Angular dispersion accelerates *k*-nearest neighbors machine translation.
 *EMNLP Findings, 2025.*
 (coming soon)
 
-* Sergey Troshin*, Wafaa Mohammed*, Yan Meng*, Christof Monz,
+* Sergey Troshin,\* Wafaa Mohammed,\* Yan Meng,\* Christof Monz,
 Antske Fokkens, Vlad Niculae.
 Control the temperature: Selective sampling for diverse and
 high-quality LLM outputs.
