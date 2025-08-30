@@ -24,8 +24,8 @@ I am currently working on the following funded research projects:
 André F. T. Martins.
 *Discrete Latent Structure in Neural Networks.*
 Foundations and Trends® in Signal Processing 19 (2), 99-211 2025.
-\[&nbsp;[arXiv&nbsp;preprint](https://arxiv.org/abs/2301.07473)&nbsp;\]
 \[&nbsp;[publisher page](https://www.nowpublishers.com/article/Details/SIG-134)&nbsp;\]
+\[&nbsp;[arXiv&nbsp;preprint](https://arxiv.org/abs/2301.07473)&nbsp;\]
 
 * Vlad Niculae.
 *Learning Deep Models with Linguistically-Inspired Structure.*
@@ -44,20 +44,27 @@ Movie Facts and Fibs (MF<sup>2</sup>): A Benchmark for Long Movie Understanding.
 
 * Evgeniia Tokarchuk, Sergey Troshin, Vlad Niculae.
 Angular dispersion accelerates *k*-nearest neighbors machine translation.
-In: *EMNLP Findings, 2025.*
+*EMNLP Findings, 2025.*
 (coming soon)
+
+* Sergey Troshin*, Wafaa Mohammed*, Yan Meng*, Christof Monz,
+Antske Fokkens, Vlad Niculae.
+Control the temperature: Selective sampling for diverse and
+high-quality LLM outputs.
+*COLM, 2025*.
+\[&nbsp;[pdf](https://openreview.net/pdf?id=IyOC5GCzv4)&nbsp;\]
 
 * Sergey Troshin, Vlad Niculae, Antske Fokkens.
 On the low-rank parametrization of reward models for controlled language generation.
 *TMLR, 2025.*
-\[&nbsp;[openreview](https://openreview.net/pdf?id=cjRsEGLT8B)&nbsp;\]
+\[&nbsp;[pdf](https://openreview.net/pdf?id=cjRsEGLT8B)&nbsp;\]
 \[&nbsp;[arXiv](https://arxiv.org/abs/2407.04615)&nbsp;\]
 \[&nbsp;[code](https://github.com/serjtroshin/rad-q)&nbsp;\]
 
 * Evgeniia Tokarchuk, Hua Chang Bakker, Vlad Niculae.
 Keep your distance: learning dispersed embeddings on 𝕊<sub>m</sub>.
 *TMLR, 2025.*
-\[&nbsp;[openreview](https://openreview.net/pdf?id=5JIQE6HcTd)&nbsp;\]
+\[&nbsp;[pdf](https://openreview.net/pdf?id=5JIQE6HcTd)&nbsp;\]
 \[&nbsp;[arXiv](https://arxiv.org/abs/2502.08231)&nbsp;\]
 \[&nbsp;[code](https://github.com/ltl-uva/ledoh-torch)&nbsp;\]
 
@@ -83,7 +90,7 @@ The unreasonable effectiveness of random target embeddings for
 continuous-output neural machine translation. 
 *NAACL, 2024.*
 \[&nbsp;[anthology](https://aclanthology.org/2024.naacl-short.56/)&nbsp;\]
-\[&nbsp;[arXiv&nbsp;preprint](https://arxiv.org/abs/2310.20620)&nbsp;\]
+\[&nbsp;[arXiv](https://arxiv.org/abs/2310.20620)&nbsp;\]
 
 * Wafaa Mohammed, Vlad Niculae.
 On measuring context utilization in document-level MT systems.
