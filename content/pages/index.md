@@ -30,7 +30,7 @@ I develop the [polylearn](http://contrib.scikit-learn.org/polylearn)
 library for factorization machines and polynomial networks in Python.-->
 
 # News
-  - Aug, 2025. Teaching [Structure Prediction](/talks/24-athnlp-vn-struct.pdf) at [AthNLP](https://athnlp.github.io/2025/).
+  - Aug, 2025. Teaching [Structure Prediction](/talks/25-athnlp-vn-struct.pdf) at [AthNLP](https://athnlp.github.io/2025/).
   - Apr 22, 2025. PhD Job opening (now closed).
   - [(*Past talks*)](/talks.html).
 <!--
