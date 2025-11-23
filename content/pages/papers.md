@@ -45,7 +45,7 @@ Movie Facts and Fibs (MF<sup>2</sup>): A Benchmark for Long Movie Understanding.
 * Evgeniia Tokarchuk, Sergey Troshin, Vlad Niculae.
 Angular dispersion accelerates *k*-nearest neighbors machine translation.
 *EMNLP Findings, 2025.*
-(coming soon)
+\[&nbsp;[anthology](https://aclanthology.org/2025.findings-emnlp.759/)&nbsp;\]
 
 * Sergey Troshin,\* Wafaa Mohammed,\* Yan Meng,\* Christof Monz,
 Antske Fokkens, Vlad Niculae.
