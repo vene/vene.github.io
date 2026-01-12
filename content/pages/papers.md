@@ -42,6 +42,14 @@ Movie Facts and Fibs (MF<sup>2</sup>): A Benchmark for Long Movie Understanding.
 
 *Papers*:
 
+* Wafaa Mohammed, Vlad Niculae, Chrysoula Zerva.
+Unlocking Latent Discourse Translation in LLMs Through Quality-Aware Decoding.
+*EACL, 2026*.
+
+* Evgeniia Tokarchuk, Maya Nachesa, Sergey Troshin, Vlad Niculae.
+Representation Collapse in Machine Translation Through the Lens of Angular Dispersion
+*EACL Findings, 2026.*
+
 * Evgeniia Tokarchuk, Sergey Troshin, Vlad Niculae.
 Angular dispersion accelerates *k*-nearest neighbors machine translation.
 *EMNLP Findings, 2025.*
