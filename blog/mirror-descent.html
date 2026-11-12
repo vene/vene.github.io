@@ -26,16 +26,6 @@
 
   <!-- OpenGraph Info -->
 
-  <meta name="description" content="We reveal geometric connections between constrained gradient-based optimization methods: mirror descent, natural gradient, and reparametrization." />
-  <meta name="keywords" content="" />
-  <meta property="og:title" content="Optimizing with constraints: reparametrization and geometry." />
-  <meta property="og:description" content="We reveal geometric connections between constrained gradient-based optimization methods: mirror descent, natural gradient, and reparametrization." />
-  <meta property="og:url" content="https://vene.ro/blog/mirror-descent.html" />
-
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta property="og:image" content="https://vene.ro/images/mirror_og.png" />
-  <meta property="og:image:alt" content="Optimization trajectories for several constrained optimization algorithms on the unit box." />
-
 
   <script src="//vene.ro/theme/js/main.js"></script>
 
@@ -308,7 +298,7 @@ independent 1-d projections, which we&#8217;ve seen can be solved by&nbsp;clippi
 <p>As a warm up, let us implement our quadratic&nbsp;function
 <span class="arithmatex">\(f(x) = \frac{1}{2} {(x - x_0)^\top}Q{(x - x_0)}\)</span> in PyTorch, 
 as well as a minimal gradient descent loop from&nbsp;scratch.</p>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">torch</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
 
 <span class="n">torch</span><span class="o">.</span><span class="n">set_default_dtype</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">double</span><span class="p">)</span>
 
@@ -316,13 +306,13 @@ as well as a minimal gradient descent loop from&nbsp;scratch.</p>
 <span class="n">Q</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">],</span>
                   <span class="p">[</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">]])</span>
 
-<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="n">z</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">x0</span>
     <span class="n">Qz</span> <span class="o">=</span> <span class="n">z</span> <span class="o">@</span> <span class="n">Q</span>
     <span class="k">return</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">z</span> <span class="o">*</span> <span class="n">Qz</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">optim_grad</span><span class="p">(</span><span class="n">x_init</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="mf">.1</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">optim_grad</span><span class="p">(</span><span class="n">x_init</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="mf">.1</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">x_init</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span><span class="o">.</span><span class="n">requires_grad_</span><span class="p">()</span>
 
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_iter</span><span class="p">):</span>
@@ -384,7 +374,7 @@ unconstrained non-convex&nbsp;problem</p>
 When&nbsp;reparametrizing, <span class="arithmatex">\(x\)</span> is no longer a learned parameter, but a function of
 the learned&nbsp;parameter <span class="arithmatex">\(u\)</span>. The gradient with respect&nbsp;to <span class="arithmatex">\(u\)</span> can be handled
 automatically by PyTorch&nbsp;autodiff:</p>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">optim_reparam</span><span class="p">(</span><span class="n">u_init</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="mf">.1</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">optim_reparam</span><span class="p">(</span><span class="n">u_init</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="mf">.1</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
     <span class="n">u</span> <span class="o">=</span> <span class="n">u_init</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span><span class="o">.</span><span class="n">requires_grad_</span><span class="p">()</span>
 
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_iter</span><span class="p">):</span>
@@ -479,7 +469,7 @@ built-in optimizers in major frameworks.</span>
 For box constraints, the projection can be computed efficiently,&nbsp;since
 <span class="arithmatex">\(\big[\!\operatorname{Proj}_{[0,1]^d}(x)\big]_i = \operatorname{clip}_{[0,1]}(x_i).\)</span>
 The implementation&nbsp;follows:</p>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">optim_pg</span><span class="p">(</span><span class="n">x_init</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="mf">.1</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">optim_pg</span><span class="p">(</span><span class="n">x_init</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="mf">.1</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">x_init</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span><span class="o">.</span><span class="n">requires_grad_</span><span class="p">()</span>
 
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_iter</span><span class="p">):</span>
@@ -716,7 +706,7 @@ means we can get a geometry-aware flavor of the
 <p>This algorithm produces the exact same iterates as mirror descent, but &#8212; since
 it maintains iterates in dual space &#8212; is more numerically stable.
 A first attempt at implementing natural gradient&nbsp;is:</p>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">optim_rep_natural</span><span class="p">(</span><span class="n">u_init</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="mf">.1</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">optim_rep_natural</span><span class="p">(</span><span class="n">u_init</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="mf">.1</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
 
     <span class="n">u</span> <span class="o">=</span> <span class="n">u_init</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span><span class="o">.</span><span class="n">requires_grad_</span><span class="p">()</span>
 
@@ -753,22 +743,22 @@ Machine Learning online lectures in 2012. For a detailed treatment, see:<br>
 Y. Bengio, N. Léonard, A Courville. 2013. 
 Estimating or Propagating Gradients Through Stochastic Neurons for Conditional Computation.
 <a href="https://arxiv.org/abs/1308.3432"><em>arXiv:1308.3432.</em></a>&nbsp;</span></p>
-<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">SigmoidStraightThrough</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">autograd</span><span class="o">.</span><span class="n">Function</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">SigmoidStraightThrough</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">autograd</span><span class="o">.</span><span class="n">Function</span><span class="p">):</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">u</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">u</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">backward</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">dx</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">backward</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">dx</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">dx</span>
 
 
-<span class="k">def</span> <span class="nf">sigmoid_straight_through</span><span class="p">(</span><span class="n">u</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">sigmoid_straight_through</span><span class="p">(</span><span class="n">u</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">SigmoidStraightThrough</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">optim_rep_natural_st</span><span class="p">(</span><span class="n">u_init</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="mf">.1</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">optim_rep_natural_st</span><span class="p">(</span><span class="n">u_init</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="mf">.1</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
 
     <span class="n">u</span> <span class="o">=</span> <span class="n">u_init</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span><span class="o">.</span><span class="n">requires_grad_</span><span class="p">()</span>
 

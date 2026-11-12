@@ -26,16 +26,6 @@
 
   <!-- OpenGraph Info -->
 
-  <meta name="description" content="In document classification and other natural language processing applications, having a good measure of the similarity of two texts can be a valuable..." />
-  <meta name="keywords" content="word-embeddings, text-classification, earth-movers-distance" />
-  <meta property="og:title" content="Word Mover&#8217;s Distance in&nbsp;Python" />
-  <meta property="og:description" content="In document classification and other natural language processing applications, having a good measure of the similarity of two texts can be a valuable..." />
-  <meta property="og:url" content="https://vene.ro/blog/word-movers-distance-in-python.html" />
-
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta property="og:image" content="https://vene.ro///vene.ro/https://vene.ro/images/wmd-obama.png" />
-  <meta property="og:image:alt" content="" />
-
 
   <script src="//vene.ro/theme/js/main.js"></script>
 
@@ -107,12 +97,12 @@ Joint post with the awesome <a href="http://matthewkusner.com">Matt Kusner</a>!<
 <div class="jp-InputPrompt jp-InputArea-prompt">In [1]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">fetch_20newsgroups</span>
-<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">CountVectorizer</span>
-<span class="kn">from</span> <span class="nn">sklearn.cross_validation</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">fetch_20newsgroups</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.feature_extraction.text</span><span class="w"> </span><span class="kn">import</span> <span class="n">CountVectorizer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.cross_validation</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
 </pre></div>
 </div>
 </div>
@@ -128,7 +118,7 @@ Joint post with the awesome <a href="http://matthewkusner.com">Matt Kusner</a>!<
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">"data/embed.dat"</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">"Caching word embeddings in memmapped format..."</span><span class="p">)</span>
-    <span class="kn">from</span> <span class="nn">gensim.models.word2vec</span> <span class="kn">import</span> <span class="n">Word2Vec</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">gensim.models.word2vec</span><span class="w"> </span><span class="kn">import</span> <span class="n">Word2Vec</span>
     <span class="n">wv</span> <span class="o">=</span> <span class="n">Word2Vec</span><span class="o">.</span><span class="n">load_word2vec_format</span><span class="p">(</span>
         <span class="s2">"data/GoogleNews-vectors-negative300.bin.gz"</span><span class="p">,</span>
         <span class="n">binary</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -222,7 +212,7 @@ Joint post with the awesome <a href="http://matthewkusner.com">Matt Kusner</a>!<
 <div class="jp-InputPrompt jp-InputArea-prompt">In [71]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.spatial.distance</span> <span class="kn">import</span> <span class="n">cosine</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.spatial.distance</span><span class="w"> </span><span class="kn">import</span> <span class="n">cosine</span>
 <span class="n">v_1</span><span class="p">,</span> <span class="n">v_2</span> <span class="o">=</span> <span class="n">vect</span><span class="o">.</span><span class="n">transform</span><span class="p">([</span><span class="n">d1</span><span class="p">,</span> <span class="n">d2</span><span class="p">])</span>
 <span class="n">v_1</span> <span class="o">=</span> <span class="n">v_1</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
 <span class="n">v_2</span> <span class="o">=</span> <span class="n">v_2</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
@@ -255,7 +245,7 @@ cosine(doc_1, doc_2) = 1.00
 <div class="jp-InputPrompt jp-InputArea-prompt">In [58]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">euclidean_distances</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">euclidean_distances</span>
 <span class="n">W_</span> <span class="o">=</span> <span class="n">W</span><span class="p">[[</span><span class="n">vocab_dict</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">vect</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">()]]</span>
 <span class="n">D_</span> <span class="o">=</span> <span class="n">euclidean_distances</span><span class="p">(</span><span class="n">W_</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"d(addresses, speaks) = </span><span class="si">{:.2f}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">D_</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">7</span><span class="p">]))</span>
@@ -298,7 +288,7 @@ d(addresses, chicago) = 1.37
 <div class="jp-InputPrompt jp-InputArea-prompt">In [74]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pyemd</span> <span class="kn">import</span> <span class="n">emd</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyemd</span><span class="w"> </span><span class="kn">import</span> <span class="n">emd</span>
 
 <span class="c1"># pyemd needs double precision input</span>
 <span class="n">v_1</span> <span class="o">=</span> <span class="n">v_1</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">double</span><span class="p">)</span>
@@ -449,19 +439,19 @@ d(addresses, chicago) = 1.37
 <span class="c1"># Authors: Vlad Niculae, Matt Kusner</span>
 <span class="c1"># License: Simplified BSD</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">euclidean_distances</span>
-<span class="kn">from</span> <span class="nn">sklearn.externals.joblib</span> <span class="kn">import</span> <span class="n">Parallel</span><span class="p">,</span> <span class="n">delayed</span>
-<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
-<span class="kn">from</span> <span class="nn">sklearn.utils</span> <span class="kn">import</span> <span class="n">check_array</span>
-<span class="kn">from</span> <span class="nn">sklearn.cross_validation</span> <span class="kn">import</span> <span class="n">check_cv</span>
-<span class="kn">from</span> <span class="nn">sklearn.metrics.scorer</span> <span class="kn">import</span> <span class="n">check_scoring</span>
-<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">normalize</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">euclidean_distances</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.externals.joblib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Parallel</span><span class="p">,</span> <span class="n">delayed</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.neighbors</span><span class="w"> </span><span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">check_array</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.cross_validation</span><span class="w"> </span><span class="kn">import</span> <span class="n">check_cv</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics.scorer</span><span class="w"> </span><span class="kn">import</span> <span class="n">check_scoring</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">normalize</span>
 
-<span class="kn">from</span> <span class="nn">pyemd</span> <span class="kn">import</span> <span class="n">emd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyemd</span><span class="w"> </span><span class="kn">import</span> <span class="n">emd</span>
 
 
-<span class="k">class</span> <span class="nc">WordMoversKNN</span><span class="p">(</span><span class="n">KNeighborsClassifier</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">WordMoversKNN</span><span class="p">(</span><span class="n">KNeighborsClassifier</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""K nearest neighbors classifier using the Word Mover's Distance.</span>
 
 <span class="sd">    Parameters</span>
@@ -492,13 +482,13 @@ d(addresses, chicago) = 1.37
 <span class="sd">    """</span>
     <span class="n">_pairwise</span> <span class="o">=</span> <span class="kc">False</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">W_embed</span><span class="p">,</span> <span class="n">n_neighbors</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">W_embed</span><span class="p">,</span> <span class="n">n_neighbors</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">W_embed</span> <span class="o">=</span> <span class="n">W_embed</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="n">verbose</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">WordMoversKNN</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="n">n_neighbors</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">,</span>
                                             <span class="n">metric</span><span class="o">=</span><span class="s1">'precomputed'</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="s1">'brute'</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_wmd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">X_train</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_wmd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">X_train</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">"""Compute the WMD between training sample i and given test row.</span>
 <span class="sd">        </span>
 <span class="sd">        Assumes that `row` and train samples are sparse BOW vectors summing to 1.</span>
@@ -510,7 +500,7 @@ d(addresses, chicago) = 1.37
         <span class="n">bow_j</span> <span class="o">=</span> <span class="n">row</span><span class="p">[:,</span> <span class="n">union_idx</span><span class="p">]</span><span class="o">.</span><span class="n">A</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">emd</span><span class="p">(</span><span class="n">bow_i</span><span class="p">,</span> <span class="n">bow_j</span><span class="p">,</span> <span class="n">W_dist</span><span class="p">)</span>
     
-    <span class="k">def</span> <span class="nf">_wmd_row</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">X_train</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_wmd_row</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">X_train</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">"""Wrapper to compute the WMD of a row with all training samples.</span>
 <span class="sd">        </span>
 <span class="sd">        Assumes that `row` and train samples are sparse BOW vectors summing to 1.</span>
@@ -519,7 +509,7 @@ d(addresses, chicago) = 1.37
         <span class="n">n_samples_train</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_wmd</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">X_train</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_samples_train</span><span class="p">)]</span>
 
-    <span class="k">def</span> <span class="nf">_pairwise_wmd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">X_train</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_pairwise_wmd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">X_train</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">"""Computes the word mover's distance between all train and test points.</span>
 <span class="sd">        </span>
 <span class="sd">        Parallelized over rows of X_test.</span>
@@ -551,7 +541,7 @@ d(addresses, chicago) = 1.37
 
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">dist</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">"""Fit the model using X as training data and y as target values</span>
 
 <span class="sd">        Parameters</span>
@@ -567,7 +557,7 @@ d(addresses, chicago) = 1.37
         <span class="n">X</span> <span class="o">=</span> <span class="n">normalize</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="s1">'l1'</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">WordMoversKNN</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">"""Predict the class labels for the provided data</span>
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -585,7 +575,7 @@ d(addresses, chicago) = 1.37
         <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">WordMoversKNN</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">dist</span><span class="p">)</span>
     
     
-<span class="k">class</span> <span class="nc">WordMoversKNNCV</span><span class="p">(</span><span class="n">WordMoversKNN</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">WordMoversKNNCV</span><span class="p">(</span><span class="n">WordMoversKNN</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Cross-validated KNN classifier using the Word Mover's Distance.</span>
 
 <span class="sd">    Parameters</span>
@@ -636,7 +626,7 @@ d(addresses, chicago) = 1.37
 <span class="sd">    http://mkusner.github.io/publications/WMD.pdf</span>
 <span class="sd">    </span>
 <span class="sd">    """</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">W_embed</span><span class="p">,</span> <span class="n">n_neighbors_try</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">W_embed</span><span class="p">,</span> <span class="n">n_neighbors_try</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
                  <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cv</span> <span class="o">=</span> <span class="n">cv</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">n_neighbors_try</span> <span class="o">=</span> <span class="n">n_neighbors_try</span>
@@ -646,7 +636,7 @@ d(addresses, chicago) = 1.37
                                               <span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">,</span>
                                               <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">"""Fit KNN model by choosing the best `n_neighbors`.</span>
 <span class="sd">        </span>
 <span class="sd">        Parameters</span>
@@ -834,9 +824,9 @@ K nearest neighbors with a cosine similarity metric. This approach performs wors
 <div class="jp-InputPrompt jp-InputArea-prompt">In [13]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">LinearSVC</span>
-<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
-<span class="kn">from</span> <span class="nn">sklearn.grid_search</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.svm</span><span class="w"> </span><span class="kn">import</span> <span class="n">LinearSVC</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.neighbors</span><span class="w"> </span><span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.grid_search</span><span class="w"> </span><span class="kn">import</span> <span class="n">GridSearchCV</span>
 </pre></div>
 </div>
 </div>

@@ -26,16 +26,6 @@
 
   <!-- OpenGraph Info -->
 
-  <meta name="description" content="It’s 2018, and your favorite meme pages on facebook constantly come up with quality 3d-post content. How can we mere researchers even begin to compete in..." />
-  <meta name="keywords" content="" />
-  <meta property="og:title" content="Rendering 3-d surface plots for social&nbsp;media" />
-  <meta property="og:description" content="It’s 2018, and your favorite meme pages on facebook constantly come up with quality 3d-post content. How can we mere researchers even begin to compete in..." />
-  <meta property="og:url" content="https://vene.ro/blog/rendering-3d-surface-plot-social-media.html" />
-
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta property="og:image" content="https://vene.ro///vene.ro/https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Scene_kids2.jpg/256px-Scene_kids2.jpg" />
-  <meta property="og:image:alt" content="" />
-
 
   <script src="//vene.ro/theme/js/main.js"></script>
 
@@ -112,9 +102,9 @@ as a function&nbsp;of <span class="arithmatex">\(a\)</span> and <span class="ari
 <p>We can&nbsp;implement <code>f(x, y)</code> easily:</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># generate.py</span>
 
-<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
 
-<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;computes p[1] where p = softmax([x, y, 0])</span>
 
 <span class="sd">    (it&#39;s p[1], not p[2], because in math we index from 1</span>
@@ -130,7 +120,7 @@ as for making a <a href="https://matplotlib.org/examples/mplot3d/surface3d_demo.
 matplotlib</a>.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># generate.py (part 2)</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
 <span class="n">n</span> <span class="o">=</span> <span class="mi">111</span> 
 <span class="n">m</span> <span class="o">=</span> <span class="mi">111</span> 
@@ -155,7 +145,7 @@ Indeed, we can very easily generate a valid <span class="caps">JS</span>&nbsp;fi
 <div class="highlight"><pre><span></span><code><span class="c1"># generate.py (part 3)</span>
 <span class="c1"># output points to a javascript file</span>
 
-<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
 
 <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
@@ -305,7 +295,7 @@ the plot, we can simply rotate our point cloud to get to a more aesthetically
 pleasing&nbsp;angle! </p>
 <div class="highlight"><pre><span></span><code><span class="c1"># generate.py (part 2.5)</span>
 
-<span class="k">def</span> <span class="nf">rotate3d_x</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">rotate3d_x</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
     <span class="n">c</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
     <span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
 
@@ -315,7 +305,7 @@ pleasing&nbsp;angle! </p>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">R</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">rotate3d_z</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">rotate3d_z</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
     <span class="n">c</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
     <span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
 
