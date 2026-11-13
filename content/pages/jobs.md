@@ -5,6 +5,8 @@ Slug: jobs
 
 More details and apply via [link](https://werkenbij.uva.nl/en/vacancies/2-phds-in-nlp-llm-reasoning-for-uncertainty-communication-and-explanation-in-healthcare-netherlands-15645)
 
+There are two positions: apply *once*, and indicate in the latter which one you want.
+
 Two openings are available at UvA; co-supervised with [Wilker Aziz](https://probabll.github.io/),
 in the context of an upcoming large project about LLM and language technologies for healthcare applications.
 The two positions are on uncertainty representation and evidence-grounded explanation.
