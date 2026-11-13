@@ -29,6 +29,8 @@ I develop the [polylearn](http://contrib.scikit-learn.org/polylearn)
 library for factorization machines and polynomial networks in Python.-->
 
 # News
+  - Nov 2026. PhD job opening on [LLM Uncertainty and Explanations for Healthcare](/jobs.html)
+  - Oct 2026. Awarded a <strong>NWO Vidi</strong> grant from the Dutch Research Council, details soon.
   - Jan 14, 2026. Invited talk on [continuous representation for efficient language models](/talks/26-bam.pdf) at Bamberg BamNLP.
   - Aug, 2025. Teaching [Structure Prediction](/talks/25-athnlp-vn-struct.pdf) at [AthNLP](https://athnlp.github.io/2025/).
   - [(*Past talks*)](/talks.html).

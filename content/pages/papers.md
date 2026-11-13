@@ -4,13 +4,17 @@ Slug: papers
 # My research
 
 ## Projects
-I am currently working on the following funded research projects:
+
+**Current** funded projects.
+
+ - Trustworthy AI for Media (TAIM)
+ - Hybrid Intelligence
+
+**Completed** projects.
 
  - NWO VI.Veni.212.228 ``Rethinking Natural Language Generation: Bridging the Gap Between Discrete and Continuous Representations''
  - Horizon Europe 101070631 ``UTTER: Unified Transcription and Translation for
    Extended Reality''
- - Trustworthy AI for Media (TAIM)
- - Hybrid Intelligence
 
 ## Publications
 
@@ -32,15 +36,30 @@ Foundations and Trends® in Signal Processing 19 (2), 99-211 2025.
 Doctoral dissertation, Cornell University. 2018.
 \[&nbsp;[open access doi](https://doi.org/10.7298/X4SJ1HVQ)&nbsp;\]
 
-*Preprints*:
-
-* Emmanouil Zaranis, António Farinhas, Saul Santos, Beatriz Canaverde, Miguel Moura Ramos, [...], V. Niculae, [...]
-Movie Facts and Fibs (MF<sup>2</sup>): A Benchmark for Long Movie Understanding.
-\[&nbsp;[arXiv](https://arxiv.org/abs/2506.06275)&nbsp;\]
-<!--, Aditya K Surikuchi, André Viveiros, Baohao Liao, Elena Bueno-Benito, Nithin Sivakumaran, Pavlo Vasylenko, Shoubin Yu, Sonal Sannigrahi, Wafaa Mohammed, Ben Peters, Danae Sánchez Villegas, Elias Stengel-Eskin, Giuseppe Attanasio, Jaehong Yoon, Stella Frank, Alessandro Suglia, Chrysoula Zerva, Desmond Elliott, Mariella Dimiccoli, Mohit Bansal, Oswald Lanz, Raffaella Bernardi, Raquel Fernández, Sandro Pezzelle, Vlad Niculae, André FT Martins.-->
-
-
 *Papers*:
+
+* Maya K. Nachesa, Vlad Niculae, Vagrant Gautam.
+You Have a Face for Radio: Bias in Multimodal Speech Recognition Models.
+*EMNLP, 2026*.
+\[&nbsp;[anthology](https://aclanthology.org/2026.emnlp-main.2681/)&nbsp;\]
+
+* 
+Di Wu,  Sergey Troshin, Christof Monz, Antske Fokkens, Vlad Niculae.
+Ladders in Chaos: When, How, (and Perhaps Why) Does Test-Time Scaling Improve LLM Machine Translation.
+*EMNLP Findings, 2026*.
+\[&nbsp;[anthology](https://aclanthology.org/2026.findings-emnlp.2415/)&nbsp;\]
+
+* 
+Wafaa Mohammed, Kata Naszadi, Vlad Niculae.
+How Far Can Machine Translation Quality Take You? Extrinsic Discourse Evaluation in Goal-Oriented Setups.
+*EMNLP Findings, 2026*.
+\[&nbsp;[anthology](https://aclanthology.org/2026.findings-emnlp.2410/)&nbsp;\]
+
+* Nuno Gonçalves, Hugo Pitorro, Vlad Niculae, Edoardo Ponti, Lei Li, Andre Martins, Marcos Treviso.
+Adasplash-2: Faster differentiable sparse attention.
+*ICML, 2026*.
+\[&nbsp; [openreview](https://openreview.net/forum?id=7qpvff2gWI) &nbsp;\]
+\[&nbsp; [code](https://github.com/deep-spin/adasplash) &nbsp;\]
 
 * Wafaa Mohammed, Vlad Niculae, Chrysoula Zerva.
 Unlocking Latent Discourse Translation in LLMs Through Quality-Aware Decoding.

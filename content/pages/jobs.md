@@ -1,28 +1,21 @@
 Title: Open Positions
 Slug: jobs
 
-# No openings at the moment.
+# PhD position in NLP: LLM Reasoning for Uncertainty Communication and Explanation in Healthcare
 
-General advice below left for reference.
+More details and apply via [link](https://werkenbij.uva.nl/en/vacancies/2-phds-in-nlp-llm-reasoning-for-uncertainty-communication-and-explanation-in-healthcare-netherlands-15645)
+
+Two openings are available at UvA; co-supervised with [Wilker Aziz](https://probabll.github.io/),
+in the context of an upcoming large project about LLM and language technologies for healthcare applications.
+The two positions are on uncertainty representation and evidence-grounded explanation.
 
 The most important part of your application is by far the motivation letter.
 Please read my [advice for writing a motivation letter for me](/mletter.html).
 
-In general my research gravitates around structured prediction, latent variable models,
-sparsity, convex and constrained optimization, and geometry (machine learning on
-manifolds.) Importantly, **You do not have to already be an expert in these ML topics.**
-But if you have ML basics and you are enthusiastic to study one or more of these (or
-related) topics, together with me, in order to apply them in NLP research, do apply!
-
-The flavor of my research is to integrate structured and discrete
-representations into the ``soft'' computation of neural networks.
-See this captured in my [recent papers](/papers.html).
 
 # Answers to frequent questions:
 
 - The master's degree (and thesis) requirement is unfortunately firm, and out of my control.
-- We are looking for a starting date of Fall 2025. Please specify your
-  availability in the application.
 - If you want to do your master's at the UvA and work with me, emailing me does
   not help; you must apply [to the
   program](https://www.uva.nl/en/programmes/masters/artificial-intelligence/artificial-intelligence.html).
@@ -30,8 +23,8 @@ See this captured in my [recent papers](/papers.html).
   or my LTL colleagues can advise your thesis project in the second year.
 - I don't at the moment have the ability or the capacity to recruit interns or
   self-funded PhD students.
-- If in doubt about applying I encourage e-mailing me, but please try to keep
-  the e-mail brief and with clearly marked questions, otherwise I might not find time
+- If in doubt about applying I encourage e-mailing me (vacancy number in subject),
+- but please try to keep tthe e-mail brief and with clearly marked questions, otherwise I might not find time
   to process it. In particular there is nothing to gain from e-mailing me
   your application, just apply through the system.
 

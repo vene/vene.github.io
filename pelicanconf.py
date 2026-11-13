@@ -9,9 +9,10 @@ SITEURL = ''
 PATH = 'content'
 
 TIMEZONE = 'Europe/Paris'
+DATE_FORMATS = {'en': ('en_US.UTF-8', '%a, %d %b %Y')}
+#LOCALE=('en_US.UTF-8', 'en', 'usa')
+LOCALE = 'en_US.UTF-8'
 DEFAULT_LANG = 'en'
-DATE_FORMATS = {'en': ('en_US.utf8', '%a, %d %b %Y')}
-LOCALE=('en_US.utf8', 'en', 'usa')
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
@@ -59,7 +60,10 @@ MARKUP = ('md', 'ipynb', 'rst')
                   # ("IPYNB_SKIP_CSS", "False", ""),
                   # ("IPYNB_EXPORT_TEMPLATE", "base", ""),)
 from pelican_jupyter import markup as nb_markup
-PLUGINS = [nb_markup, "plugins.tufte_footnote", "plugins.extended_meta"]
+
+PLUGIN_PATHS = ["plugins"]
+# PLUGINS = [nb_markup, "tufte_footnote", "extended_meta"]
+PLUGINS = [nb_markup, "tufte_footnote"]
 IPYNB_IGNORE_CSS = True
 IPYNB_SKIP_CSS = True
 IPYNB_EXPORT_TEMPLATE="base"
@@ -85,13 +89,13 @@ STATIC_PATHS = ['papers',
                 'constructive',
                 'mlsd',
                 'images',
-                'extras/favicon.ico',
+                'extras/favicon.svg',
                 'extras/vlad-niculae.jpg',
                 'extras/README.rst',
                 'extras/CNAME']
 
 EXTRA_PATH_METADATA = {
-    'extras/favicon.ico': {'path': 'favicon.ico'},
+    'extras/favicon.svg': {'path': 'favicon.svg'},
     'extras/README.rst': {'path': 'README.rst'},
     'extras/vlad-niculae.jpg': {'path': 'vlad-niculae.jpg'},
     'extras/CNAME': {'path': 'CNAME'}}
